@@ -28,6 +28,6 @@
     },
     "plugins": ["react", "import"],
     "rules": {
-        "prettier/prettier": ["error", { "lf": "off" }]
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
     }
 }
