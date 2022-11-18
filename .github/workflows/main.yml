@@ -1,0 +1,63 @@
+# .github/workflows/main.yml
+name: CI/CD Docker
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  Integration:
+    timeout-minutes: 3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Create env file
+        env:
+          SQLALCHEMY_DATABASE_URL: ${{ secrets.SQLALCHEMY_DATABASE_URL }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+        run: |
+          mkdir env
+          touch ./env/.env
+          echo SQLALCHEMY_DATABASE_URL="$SQLALCHEMY_DATABASE_URL" >> ./env/.env
+          ls -a
+          cat env/.env
+          touch ./env/mysql.env
+          echo MYSQL_USER="$MYSQL_USER" >> ./env/mysql.env
+          echo MYSQL_PASSWORD="$MYSQL_PASSWORD" >> ./env/mysql.env
+          echo MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" >> ./env/mysql.env
+          echo MYSQL_DATABASE="$MYSQL_DATABASE" >> ./env/mysql.env
+          ls -a
+          cat env/mysql.env
+        shell: bash
+      - name: Start containers
+        run: docker-compose up -d
+
+  Deployment:
+    needs: Integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Git pull
+        env:
+          AWS_EC2_PEM: ${{ secrets.AWS_EC2_PEM  }}
+          AWS_EC2_PUBLIC_IP: ${{ secrets.AWS_EC2_PUBLIC_IP  }}
+          AWS_EC2_USERNAME: ${{ secrets.AWS_EC2_USERNAME  }}
+        run: |
+          pwd
+          echo "$AWS_EC2_PEM" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${AWS_EC2_USERNAME}@${AWS_EC2_PUBLIC_IP} '
+            cd {/investment.web} &&
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main &&
+            docker-compose up -d --build
+          '
