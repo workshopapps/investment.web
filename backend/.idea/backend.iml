@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/api/database" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/api/models" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/api/schemas" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/api/routes" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
