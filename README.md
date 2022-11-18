@@ -8,8 +8,9 @@ run `cd frontend`
 Install your packages and dependencies:
 run `yarn install`
 
-Starting the server: 
+Starting the server:
 run `yarn start`
 
 ### For more instructions for the Frontend Dev
+
 Check `frontend/README.md`
