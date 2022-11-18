@@ -6,8 +6,9 @@ from sqlalchemy.sql import func
 # from fastapi_utils.guid_type import GUID, GUID_DEFAULT_SQLITE
 
 import datetime
+import enum
 
-from database import Base
+from database.database import Base
 
 class Company(Base):
     __tablename__ = "company"
