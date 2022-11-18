@@ -5,12 +5,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import IndexPage from './pages/index';
 import ErrorPage from './pages/error';
 import Help from './pages/Help/Help';
+import AboutPage from './pages/about';
 
 // Define Page Routes
 const router = createBrowserRouter([
     {
         path: '/',
         element: <IndexPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/about',
+        element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
