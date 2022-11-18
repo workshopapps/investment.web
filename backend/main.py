@@ -1,15 +1,13 @@
 from fastapi import FastAPI
 import uvicorn
-import os
-
-from api.database import database
+from api.models import models
+from api.database.database import engine
+from api.routes import rankings
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-# testing the database models
-
-database.Base.metadata.drop_all(database.engine)  # just for testing here
-database.Base.metadata.create_all(database.engine)
+app.include_router(rankings.router)
 
 
 @app.get('/')
