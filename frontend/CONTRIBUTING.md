@@ -75,3 +75,6 @@ Commit messages should include concise messages about what was done and what has
   - Always do a git fetch or pull of the main branch before you write code and before making your pull request
   - Your pull request must not change the work of others
   - Your work should be pixel perfect
+
+#### Here's a video on on React unit testing for writing your tests
+[React Unit Testing Video](https://www.youtube.com/watch?v=3e1GHCA3GP0)

@@ -14,5 +14,3 @@ run `yarn start`
 ### For more instructions for the Frontend Dev
 Check `frontend/CONTRIBUTING.md`
 
-### Watch this youtube video on React unit testing 
-[React Unit Testing Video](https://www.youtube.com/watch?v=3e1GHCA3GP0)
