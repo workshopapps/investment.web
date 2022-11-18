@@ -6,8 +6,9 @@ from sqlalchemy.sql import func
 from fastapi_utils.guid_type import GUID, GUID_DEFAULT_SQLITE
 
 import datetime
+import enum
 
-from database import Base
+from database.database import Base
 
 class Company(Base):
     __tablename__ = "company"
@@ -36,7 +37,7 @@ class StockPrice(Base):
     date = Column(DateTime(timezone=True), server_default=func.now())
     annual_stock_return = Column(Float, index=True)
     average_volume = Column(Float, index=True)
-    volume = Column(, index=True)
+    volume = Column(Float, index=True)
     exchange_platform = Column(String, max_length=100)
     price_risk = Column(Float, index=True)
     pe_ratio = Column(Float, index=True)
@@ -68,14 +69,14 @@ class Ticker(Base):
     exchange_name = Column(String, max_length=200)
     exchange_symbol = Column(String, max_length=200)
     exchange_website = Column(String, max_length=200)
-    isin = Column(Integer, index=True)
+    isin = Column(String, index=True)
 
     tick = relationship("Company", data_populates="ticker_value")
 
 class Financial(Base):
     __tablename__ = "financials"
 
-    financial_id = pasColumn(GUID, primary_key=True, index=True, default=GUID_DEFAULT_SQLITE)s
+    financial_id = Column(GUID, primary_key=True, index=True, default=GUID_DEFAULT_SQLITE)s
     company = Column(String, ForeignKey("comapny.name", on_delete="CASCADE"))
     date = Column(DateTime(timezone=True), server_default=func.now())
     equity = Column(Float, index=True)
@@ -87,7 +88,7 @@ class Financial(Base):
     operating_cost = Column(Float, index=True)
     gross_profit = Column(Float, index=True)
     income_statement = Column(Float, index=True)
-    income_statement_type = Column(ENUM(pass)) # this should contain a particular argument as required by the PM
+    income_statement_type = Column(Enum(pass)) # this should contain a particular argument as required by the PM
 
     finance = relationship("Company", data_populates="financial_value")
     
