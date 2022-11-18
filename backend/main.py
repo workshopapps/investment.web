@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import uvicorn
 import os
 
-import database
+from api.database import database
 
 app = FastAPI()
 
@@ -10,6 +10,7 @@ app = FastAPI()
 
 database.Base.metadata.drop_all(database.engine)  # just for testing here
 database.Base.metadata.create_all(database.engine)
+
 
 @app.get('/')
 async def get_root():

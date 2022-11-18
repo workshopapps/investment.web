@@ -1,19 +1,24 @@
 from pydantic import BaseModel
 from datetime import date, datetime
 
+from sqlalchemy import Enum
+
+
 class CompanyBase(BaseModel):
     name: str
     location: str
     description: str
-    
+
+
 class Company(CompanyBase):
     company_id: str
     sector: str
     category: str
     ticker: str
 
-    class config():
+    class Config:
         orm_mode = True
+
 
 class StockPriceBase(BaseModel):
     market_cap: float
@@ -28,17 +33,20 @@ class StockPriceBase(BaseModel):
     peg_ratio: float
     total_price_value: float
 
+
 class StockPrice(StockPriceBase):
     stock_price_id: str
     company: str
 
-    class Config():
+    class Config:
         orm_mode = True
+
 
 class RankingBase(BaseModel):
     score: float
-    methodology: pass # what this entails
+    methodology: str
     created_at: date = datetime.now().date()
+
 
 class Ranking(RankingBase):
     ranking_id: str
@@ -47,12 +55,14 @@ class Ranking(RankingBase):
     class Config:
         orm_mode = True
 
+
 class Sector(BaseModel):
     sector_id: str
     industry: str
 
     class Config:
         orm_mode = True
+
 
 class Ticker(BaseModel):
     ticker_id: str
@@ -64,6 +74,7 @@ class Ticker(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class FinancialBase(BaseModel):
     date: date = datetime.now().date()
@@ -78,12 +89,14 @@ class FinancialBase(BaseModel):
     income_statement: float
     income_statement_type: Enum
 
+
 class Financial(FinancialBase):
     financial_id: str
     company: str
 
     class Config:
         orm_mode = True
+
 
 class Category(BaseModel):
     category_id: str
