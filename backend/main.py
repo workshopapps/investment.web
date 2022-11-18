@@ -2,8 +2,14 @@ from fastapi import FastAPI
 import uvicorn
 import os
 
+import database
+
 app = FastAPI()
 
+# testing the database models
+
+database.Base.metadata.drop_all(database.engine)  # just for testing here
+database.Base.metadata.create_all(database.engine)
 
 @app.get('/')
 async def get_root():
