@@ -5,7 +5,7 @@
 import React, { useEffect } from 'react';
 import MenuLink from './MenuLink';
 import NavBtn from './NavBtn';
-import Close from './../../assets/header/close.svg';
+import Close from './../../Assets/header/close.svg';
 
 // eslint-disable-next-line react/prop-types
 const MobileMenu = ({ toggleMenu }) => {
