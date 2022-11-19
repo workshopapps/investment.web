@@ -9,6 +9,7 @@ import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
+import Blog from './pages/Blog/Blog';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/blog',
+        element: <Blog />,
         errorElement: <ErrorPage />
     }
 ]);
