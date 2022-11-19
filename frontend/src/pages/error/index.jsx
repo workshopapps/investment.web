@@ -15,11 +15,11 @@ const ErrorPage = () => {
                             You seem to have stumbled on a wrong page
                         </p>
                         <div className="flex flex-col w-full gap-4 md:flex-row md:justify-center">
-                            <button className="bg-green-500 text-base h-12 rounded-md text-white font-HauoraLight md:w-56">
+                            <button className="bg-green-500 text-base h-12 rounded-md text-white font-HauoraBold md:w-56">
                                 <Link to={'/'}>Go home</Link>
                             </button>
-                            <button className="bg-text text-base h-12 rounded-md text-green-500 font-HauoraLight border border-1 border-green-500 md:w-56">
-                                <Link to={'/'}>Contact us</Link>
+                            <button className="bg-text text-base h-12 rounded-md text-green-500 font-HauoraBold border border-1 border-green-500 md:w-56">
+                                <Link to={'/contact'}>Contact us</Link>
                             </button>
                         </div>
                     </div>
