@@ -1,11 +1,15 @@
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI
 import uvicorn
-import os
+from api.models import models
+from api.database.database import engine
+from api.routes import rankings, company_category
+models.Base.metadata.create_all(bind=engine)
 
-# from .api.database.database import get_db
-from sqlalchemy.orm import Session
 
 app = FastAPI()
+
+app.include_router(rankings.router)
+app.include_router(company_category.router)
 
 
 @app.get('/')
@@ -16,11 +20,6 @@ async def get_root():
     }
 
 
-@app.get('/company/ranks/{category}')
-# async def get_company_catagory(request: Request, category: str, db: Session = Depends(get_db)):
-async def get_company_catagory(request: Request, category: str):
-    # companies = db.query(models.Company).filter(models.Company.category == category)
-    return {"category": category}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)
