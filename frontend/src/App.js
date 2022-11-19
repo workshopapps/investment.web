@@ -7,6 +7,7 @@ import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
+import CompanyProfilePage from './pages/companyProfile';
 import DownloadPage from './pages/download';
 
 // Define Page Routes
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <AboutPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/company-profile',
+        element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     }
 ]);
