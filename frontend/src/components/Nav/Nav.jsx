@@ -5,8 +5,10 @@ import React from 'react';
 import Logo from './../../assets/header/logo.png.svg';
 import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
+import Menu from './../../assets/header/menu.svg';
 
-const Nav = () => {
+// eslint-disable-next-line react/prop-types
+const Nav = ({ openMenu }) => {
     const navStyle = {
         background: "#000718",
         color: "white",
@@ -22,7 +24,7 @@ const Nav = () => {
             <div>
                 <img src={Logo} alt="" />
             </div>
-            <div className="nav-items max-w-xs w-full">
+            <div className="hidden md:block nav-items max-w-xs w-full">
                 <MenuLinks />
             </div>
             <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
@@ -32,6 +34,9 @@ const Nav = () => {
                         return <NavBtn name={name} background={background} key={index} />
                     })
                 }
+            </div>
+            <div className="ham-menu block md:hidden" onClick={() => openMenu(true)}>
+                <img src={Menu} alt="" />
             </div>
         </div>
     </nav>

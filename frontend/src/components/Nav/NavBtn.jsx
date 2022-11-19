@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { type } from '@testing-library/user-event/dist/type'
 import React from 'react'
 
-const NavBtn = ({name, background}) => {
+const NavBtn = ({name, background, color}) => {
     const btnStyle = {
         background: `${background}`,
         padding: "16px",
         border: "none",
-        display: "inline-block"
+        display: "inline-block",
+        color: `${color}`
     }
   return (
     <button type='button' style={btnStyle} className="rounded">
