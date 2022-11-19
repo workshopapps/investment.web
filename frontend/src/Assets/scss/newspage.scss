@@ -1,5 +1,6 @@
 .news__page-container {
     padding: 0 2rem;
+    background: #cecccc;
     h1 {
         font-style: normal;
         font-weight: 700;
@@ -14,10 +15,30 @@
             color: #000000;
         }
     }
-    .main__body{
+    .main__body-container {
+        margin-top: 3rem;
+        button {
+            width: 146px;
+            height: 40px;
+            left: 648px;
+            top: 1979px;
+            color: white;
+            margin: auto;
+            display: block;
+            background: #1bd47b;
+            border-radius: 4px;
+        }
+    }
+
+    .main__body {
         margin: 2rem 0;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2%;
+        @media (max-width: 550px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     }
 }

@@ -14,13 +14,18 @@ const NewsPage = () => {
             <h1>Today&apos;s financial news</h1>
             <div className="financialflex">
                 <Topnews />
-                <div className="main__body">
-                    <Localmarket />
-                    <Worldmarket />
-                    <Longcap />
-                    <Midcap />
-                    <Smallcap />
-                    <Industry />
+                <div className="main__body-container">
+                    <h1>For You</h1>
+                    <p>Recommended based on your interests</p>
+                    <div className="main__body">
+                        <Localmarket />
+                        <Worldmarket />
+                        <Longcap />
+                        <Midcap />
+                        <Smallcap />
+                        <Industry />
+                    </div>
+                    <button className="main__body-btn">show more news</button>
                 </div>
             </div>
         </div>
