@@ -30,7 +30,7 @@ export const contactData = [
     },
     {
         key: 'cd3',
-        title: `${title}`,
+        title: title,
         text1: 'business@mystockplug.com'
     }
 ];
