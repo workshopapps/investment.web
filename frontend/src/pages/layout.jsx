@@ -1,12 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
-import Footer from '../../components/Footer/Footer';
-import { Outlet } from 'react-router-dom';
-import Nav from '../../components/Nav/Nav';
+/* eslint-disable react/prop-types */
+import Footer from '../components/Footer/Footer';
+// import { Outlet } from 'react-router-dom';
+import Nav from '../components/Nav/Nav';
 import { useState, useEffect } from 'react';
-import MobileMenu from '../../components/Nav/MobileMenu';
+import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
 
-const IndexPage = () => {
+const PageLayout = ({ children }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(true);
     const pathName = useLocation();
     useEffect(() => {
@@ -21,9 +22,7 @@ const IndexPage = () => {
                 <Nav openMenu={setOpenMobileMenu} />
             </div>
             {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-            <div className="page-content grow">
-                <Outlet />
-            </div>
+            <div className="page-content lg:mx-[100px] grow">{children}</div>
             <div className="footer flex-none">
                 <Footer />
             </div>
@@ -31,4 +30,4 @@ const IndexPage = () => {
     );
 };
 
-export default IndexPage;
+export default PageLayout;
