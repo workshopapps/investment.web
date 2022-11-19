@@ -18,22 +18,22 @@ jobs:
         uses: actions/checkout@v1
       - name: Create env file
         env:
-          SQLALCHEMY_DATABASE_URL: ${{ secrets.SQLALCHEMY_DATABASE_URL }}
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST}}
+          DATABASE_USER: ${{ secrets.DATABASE_USER }}
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
           mkdir env
           touch ./env/.env
           echo SQLALCHEMY_DATABASE_URL="$SQLALCHEMY_DATABASE_URL" >> ./env/.env
           ls -a
           cat env/.env
-          touch ./env/mysql.env
-          echo MYSQL_USER="$MYSQL_USER" >> ./env/mysql.env
-          echo MYSQL_PASSWORD="$MYSQL_PASSWORD" >> ./env/mysql.env
-          echo MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" >> ./env/mysql.env
-          echo MYSQL_DATABASE="$MYSQL_DATABASE" >> ./env/mysql.env
+          touch ./env/.env
+          echo MYSQL_USER="$MYSQL_USER" >> ./env/.env
+          echo MYSQL_PASSWORD="$MYSQL_PASSWORD" >> ./env/.env
+          echo MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" >> ./env/.env
+          echo MYSQL_DATABASE="$MYSQL_DATABASE" >> ./env/.env
           ls -a
           cat env/mysql.env
         shell: bash
