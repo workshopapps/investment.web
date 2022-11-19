@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import dropdown from './dropdown.svg';
 
-function faq({ question, answer }) {
+function faq({ question, answer, link }) {
     const [isFaqToggle, setIsFaqToggle] = useState(false);
     return (
         <div className="w-full text-xs sm:text-sm lg:text-base text-[#0A0B0D]">
@@ -24,10 +25,17 @@ function faq({ question, answer }) {
                 className={`px-2 py-3 md:px-3 lg:px-4 lg:py-4 w-full h-fit  bg-[#F4F5F6]  ${
                     isFaqToggle ? 'block' : 'hidden'
                 }`}>
-                <p className="w-full h-full text-[#000C1A]">{answer}</p>
+                <p className="w-full h-full text-[#000C1A]">
+                    {answer}{' '}
+                    <a href="#" className=" underline text-[#0078D4]">
+                        {link}
+                    </a>
+                </p>
             </div>
         </div>
     );
 }
+
+faq.propTypes = { answer: PropTypes.string, question: PropTypes.string, link: PropTypes.string };
 
 export default faq;

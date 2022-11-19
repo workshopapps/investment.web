@@ -27,7 +27,8 @@ function Help() {
             },
             {
                 question: 'How can I access the platform?',
-                answer: 'MyStockPlug is available as a website and a desktop application. This means you can access it on your mobile, as you go. And also on any computer, whether laptop or desktop. [Button to download on mobile and pc]'
+                answer: 'MyStockPlug is available as a website and a desktop application. This means you can access it on your mobile, as you go. And also on any computer, whether laptop or desktop.',
+                link: 'Download for Desktop'
             }
         ],
         popular_questions: [
@@ -57,6 +58,7 @@ function Help() {
             }
         ]
     };
+    console.log(faqs);
     return (
         <div className="py-8 sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
             <h1 className="font-bold sm:text-3xl md:text-4xl text-xl lg:text-[40px]  lg:font-semibold mb-4  text-[#0A0B0D]">
@@ -79,7 +81,12 @@ function Help() {
                 </h2>
                 <div className="w-full ">
                     {faqs.faq.map((faq, index) => (
-                        <Faq key={index} question={faq.question} answer={faq.answer} />
+                        <Faq
+                            key={index}
+                            question={faq.question}
+                            answer={faq.answer}
+                            link={faq.link}
+                        />
                     ))}
                 </div>
             </div>
