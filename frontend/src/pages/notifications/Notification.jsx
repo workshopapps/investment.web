@@ -38,7 +38,8 @@ const Notification = () => {
                             onClick={() => setActive(true)}
                             className={`text-[#19C170]  ${
                                 active ? 'bg-[#B8F2D6]' : ''
-                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}>
+                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
+                        >
                             General
                             <span className="ml-1 h-[17px] w-[17px] sm:h-[28px] sm:w-[28px] inline-flex rounded-full text-white bg-[#19C170] items-center justify-center">
                                 8
@@ -48,7 +49,8 @@ const Notification = () => {
                             onClick={() => setActive(false)}
                             className={`text-[#19C170]  ${
                                 !active ? 'bg-[#B8F2D6]' : ''
-                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}>
+                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
+                        >
                             Archived
                             <span className="ml-1 h-[17px] sm:h-[28px] w-[17px] sm:w-[28px] inline-flex rounded-full text-white bg-[#19C170] items-center justify-center">
                                 0

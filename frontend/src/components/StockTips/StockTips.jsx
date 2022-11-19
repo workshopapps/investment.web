@@ -76,7 +76,8 @@ const StockTips = () => {
                         // backgroundImage: `url(${charles})`
                         backgroundImage: `url(require${charles})`
                     }}
-                    className="p-6 text-center text-xl text-white font-bold">
+                    className="p-6 text-center text-xl text-white font-bold"
+                >
                     <h2>MyStockPlug</h2>
                     <h1>STOCK TIPS FOR ABSOLUTE BEGINNERS</h1>
                 </div>
@@ -89,7 +90,8 @@ const StockTips = () => {
                             return (
                                 <div
                                     key={feature.image}
-                                    className="col-span-3 md:col-span-4 grid gap-1">
+                                    className="col-span-3 md:col-span-4 grid gap-1"
+                                >
                                     <img src={feature.image} alt="" className="w-full " />
                                     <div>Stock tips Update</div>
                                     <a href="http://" className="font-bold text-xs">
@@ -114,7 +116,8 @@ const StockTips = () => {
                             return (
                                 <div
                                     key={Stock.image}
-                                    className="col-span-3 md:col-span-4 grid gap-1">
+                                    className="col-span-3 md:col-span-4 grid gap-1"
+                                >
                                     <img src={Stock.image} alt="" className="w-full " />
                                     <div>Stock tips Update</div>
                                     <a href="http://" className="font-bold text-xs">
