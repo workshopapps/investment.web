@@ -42,7 +42,8 @@ const Footer = () => {
     return (
         <footer
             style={footerStyle}
-            className="p-4 flex flex-col items-center justify-center w-full">
+            className="p-4 flex flex-col items-center justify-center w-full"
+        >
             <div className="flex w-full flex-wrap justify-between items-start max-w-screen-xl gap-8 border-b border-white pb-12 mb-8 md:mt-12">
                 <div className="w-60 pb-8 md:pb-0">
                     <img src={logo} alt="" />
