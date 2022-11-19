@@ -5,13 +5,14 @@ from api.models import models
 
 from api.database import database
 from api.database.database import engine
-from api.routes import rankings
+from api.routers import company_metrics
 
 database.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(rankings.router)
+
+app.include_router(company_metrics.router)
 
 
 @app.get('/')
