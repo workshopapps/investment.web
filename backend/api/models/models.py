@@ -1,20 +1,22 @@
-from sqlalchemy import (Boolean, Column, ForeignKey, 
-                            Integer, String, Float, DateTime)
-from sqlalchemy.orm import relationship
 from uuid import uuid4
+
+from sqlalchemy import (Column, ForeignKey,
+                        String, Float, DateTime)
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from api.database.database import Base
 
 
 class Company(Base):
     __tablename__ = "company"
 
-    company_id = Column(String(64), primary_key=True, index=True, default=uuid4())
+    company_id = Column("company_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
-    description = Column(String(1000))
+    description = Column(String(10000))
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
-    category = Column(String(64), ForeignKey("categories.category_id", on_delete="CASCADE"))
+    category = Column(String(64), ForeignKey("categories.category_id"))
     ticker = Column(String(64), ForeignKey("tickers.ticker_id"))
 
     sect_value = relationship("Sector", back_populates="sect")
@@ -22,41 +24,53 @@ class Company(Base):
     ticker_value = relationship("Ticker", back_populates="tick")
     stock_price_value = relationship("StockPrice", back_populates="company_value")
     financial_value = relationship("Financial", back_populates="finance")
+    ranks_value = relationship("Ranking", back_populates="comp_ranks")
 
 
 class StockPrice(Base):
     __tablename__ = "stock_prices"
 
-    stock_price_id = Column(String(64), primary_key=True, index=True, default=uuid4())
-    company = Column(String(64), ForeignKey("company.company_id", on_delete="CASCADE"))
-    market_cap = Column(Float)
-    stock_price = Column(Float)
+    stock_price_id = Column("stock_price_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company = Column(String(64), ForeignKey("company.company_id"))
+    market_cap = Column(Float, nullable=True)
+    stock_price = Column(Float, nullable=True)
     date = Column(DateTime(timezone=True), server_default=func.now())
-    annual_stock_return = Column(Float)
-    average_volume = Column(Float)
-    volume = Column(Float)
+    annual_stock_return = Column(Float, nullable=True)
+    average_volume = Column(Float, nullable=True)
+    volume = Column(Float, nullable=True)
     exchange_platform = Column(String(30))
-    price_risk = Column(Float)
-    pe_ratio = Column(Float)
-    peg_ratio = Column(Float)
-    total_price_value = Column(Float)
+    price_risk = Column(Float, nullable=True)
+    pe_ratio = Column(Float, nullable=True)
+    peg_ratio = Column(Float, nullable=True)
+    total_price_value = Column(Float, nullable=True)
+    de_ratio = Column(Float, nullable=True)
+    current_ratio = Column(Float, nullable=True)
+    roe_ratio = Column(Float, nullable=True)
+    quick_ratio = Column(Float, nullable=True)
+    pb_ratio = Column(Float, nullable=True)
+    ps_ratio = Column(Float, nullable=True)
+    gross_profit_margin = Column(Float, nullable=True)
+    dividend_yield = Column(Float, nullable=True)
 
     company_value = relationship("Company", back_populates="stock_price_value")
 
 
 class Ranking(Base):
     __tablename__ = 'rankings'
-    ranking_id = Column(String(64), primary_key=True, index=True, default=uuid4())
-    company = Column(String(64), ForeignKey("company.company_id", on_delete="CASCADE"))
+
+    ranking_id = Column("ranking_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company = Column(String(64), ForeignKey("company.company_id"))
     score = Column(Float)
-    methodology = Column(String(1000))
+    methodology = Column(String(1000), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now() )
+
+    comp_ranks = relationship("Company", back_populates='ranks_value')
 
 
 class Sector(Base):
     __tablename__ = "sectors"
 
-    sector_id = Column(String(64), primary_key=True, index=True, default=uuid4())
+    sector_id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     industry = Column(String(64))
 
     sect = relationship("Company", back_populates="sect_value")
@@ -65,12 +79,12 @@ class Sector(Base):
 class Ticker(Base):
     __tablename__ = "tickers"
     
-    ticker_id = Column(String(64), primary_key=True, index=True, default=uuid4())
-    symbol = Column(String(10), max_length=20)
-    exchange_name = Column(String(30), max_length=200)
-    exchange_symbol = Column(String(10), max_length=200)
-    exchange_website = Column(String(30), max_length=200)
-    isin = Column(Integer)
+    ticker_id = Column("ticker_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    symbol = Column(String(10))
+    exchange_name = Column(String(30))
+    exchange_symbol = Column(String(10))
+    exchange_website = Column(String(30), nullable=True)
+    isin = Column(String(30), nullable=True)
 
     tick = relationship("Company", back_populates="ticker_value")
 
@@ -78,18 +92,17 @@ class Ticker(Base):
 class Financial(Base):
     __tablename__ = "financials"
 
-    financial_id = Column(String(64), primary_key=True, index=True, default=uuid4())
-    company = Column(String(64), ForeignKey("company.company_id", on_delete="CASCADE"))
+    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company = Column(String(64), ForeignKey("company.company_id"))
     date = Column(DateTime(timezone=True), server_default=func.now())
-    equity = Column(Float)
-    dividend_per_stock = Column(Float)
-    earnings_per_share = Column(Float)
-    growth_rate = Column(Float)
-    total_revenue = Column(Float)
-    ttm = Column(Float)
-    operating_cost = Column(Float)
-    gross_profit = Column(Float)
-    income_statement = Column(Float)
+    equity = Column(Float, nullable=True)
+    dividend_per_stock = Column(Float, nullable=True)
+    earnings_per_share = Column(Float, nullable=True)
+    growth_rate = Column(Float, nullable=True)
+    total_revenue = Column(Float, nullable=True)
+    ttm = Column(Float, nullable=True)
+    operating_cost = Column(Float, nullable=True)
+    income_statement = Column(Float, nullable=True)
     income_statement_type = Column(String(30))
 
     finance = relationship("Company", back_populates="financial_value")
@@ -98,8 +111,8 @@ class Financial(Base):
 class Category(Base):
     __tablename__ = "categories"
 
-    category_id = Column(String(64), primary_key=True, index=True, default=uuid4())
+    category_id = Column("category_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     market_cap = Column(Float)
-    name = Column(String(30), max_length=100)
+    name = Column(String(30))
 
     cat = relationship("Company", back_populates="cat_value")
