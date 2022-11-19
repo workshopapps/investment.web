@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import IndexPage from './pages/index';
 import ErrorPage from './pages/error';
 import AboutPage from './pages/about';
+import NewsPage from './pages/News/NewsPage';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -16,6 +17,11 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <AboutPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/news',
+        element: <NewsPage />,
         errorElement: <ErrorPage />
     }
 ]);

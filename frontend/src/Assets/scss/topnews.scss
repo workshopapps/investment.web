@@ -1,0 +1,114 @@
+.topNews__section {
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+    // flex-wrap: wrap;
+    @media (max-width: 550px) {
+        flex-direction: column;
+    }
+
+    .top__news {
+        border: 1px solid red;
+        background: #ffffff;
+        border-radius: 8px;
+        flex-basis: 60%;
+        img {
+            width: 174px;
+            height: 141px;
+            object-fit: cover;
+            border-radius: 8px;
+            @media (max-width: 550px) {
+                width: 100px;
+                height: 81px;
+            }
+        }
+        .icon_span {
+            display: flex;
+            align-items: center;
+            font-family: sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            padding: 0.5rem;
+            line-height: 33px;
+            color: #1bd47b;
+            @media (max-width: 550px) {
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+    }
+    .topNews__second {
+      
+        background: #ffffff;
+        border-radius: 8px;
+        border: 1px solid red;
+        @media (max-width: 550px) {
+            margin: 1rem 0;
+        }
+        img {
+            width: 100px;
+            height: 81px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .icon_span {
+            display: flex;
+            align-items: center;
+            font-family: sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 33px;
+            padding: 0.5rem;
+            color: #1bd47b;
+            @media (max-width: 550px) {
+                font-size: 12px;
+                line-height: 18px;
+            }
+        }
+    }
+}
+
+.top__news-first {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    align-items: flex-start;
+    align-self: start;
+    gap: 9%;
+    border: 1px solid #e0e2e5;
+    aside p {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #66717e;
+        margin: 0.3rem 0;
+        @media (max-width: 550px) {
+            font-size: 9.68006px;
+            line-height: 10px;
+        }
+    }
+    aside h3 {
+        font-family: sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 30px;
+        color: #1b1105;
+        @media (max-width: 550px) {
+            font-size: 8.35007px;
+            line-height: 13px;
+        }
+    }
+}
+.topNews__second aside p {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 22px;
+    @media (max-width: 550px) {
+        font-size: 9.68006px;
+        line-height: 10px;
+    }
+}
