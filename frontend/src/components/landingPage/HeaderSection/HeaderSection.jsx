@@ -1,10 +1,16 @@
 import React from 'react';
-import Frame1 from '../../../Assets/index/landing-frame1.png';
+// import Frame1 from '../../../assets/index/landing-frame1.png';
+
+import Frame1 from '../../../assets/landingPage/landing-frame1.png';
+import Partner1 from '../../../assets/landingPage/partners/Binance.png';
+import Partner2 from '../../../assets/landingPage/partners/Google.png';
+import Partner3 from '../../../assets/landingPage/partners/BridgerPay.png';
+import Partner4 from '../../../assets/landingPage/partners/StockX.png';
 
 const HeaderSection = () => {
     return (
         <React.Fragment>
-            <div className="flex lg:flex-row flex-col-reverse mx-auto align-right justify-between w-full p-10 py-20">
+            <div className="flex lg:flex-row flex-col-reverse align-right justify-between py-20 lg:mx-[100px] mx-[16px]">
                 <div className="flex flex-col gap-4">
                     <span className="text-[#8A8D95] tracking-[0.25px] md:mt-0 mt-10 font-semibold font-HauoraLight">
                         Let&apos;s unlock your financial future
@@ -30,7 +36,18 @@ const HeaderSection = () => {
                     <img className="min-h-full" src={Frame1} alt="frame1" />
                 </div>
             </div>
-            <hr />
+
+            <div className="flex flex-col text-center justify-center w-full bg-[#000718] h-auto">
+                <span className="text-[#1BD47B] text-2xl font-HauoraLight py-6">Our Partners</span>
+
+                <div className="flex md:flex-row flex-col justify-between lg:mx-[100px] mx-[16px] pb-6">
+                    <img className="md:mx-0 md:py-0 mx-[30%] py-4" src={Partner1} alt="partner1" />
+                    <img className="md:mx-0 md:py-0 mx-[30%] py-4" src={Partner2} alt="partner2" />
+                    <img className="md:mx-0 md:py-0 mx-[30%] py-4" src={Partner4} alt="partner3" />
+                    <img className="md:mx-0 md:py-0 mx-[30%] py-4" src={Partner3} alt="partner4" />
+                    <img className="md:mx-0 md:py-0 mx-[30%] py-4" src={Partner4} alt="partner5" />
+                </div>
+            </div>
         </React.Fragment>
     );
 };

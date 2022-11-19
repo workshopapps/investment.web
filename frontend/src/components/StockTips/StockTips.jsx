@@ -1,25 +1,25 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import charles from '../../Assets/Stock/images/Pexels Photo by Charles Parker.png';
-import image1 from '../../Assets/Stock/images/Rectangle 35.png';
-import image2 from '../../Assets/Stock/images/Rectangle 36.png';
-import image3 from '../../Assets/Stock/images/Rectangle 37.png';
-import image4 from '../../Assets/Stock/images/Rectangle 43.png';
-import image5 from '../../Assets/Stock/images/Rectangle 44.png';
-import image6 from '../../Assets/Stock/images/Rectangle 45.png';
-import StockImage1 from '../../Assets/Stock/images/Rectangle 38.png';
-import StockImage2 from '../../Assets/Stock/images/Rectangle 39.png';
-import StockImage3 from '../../Assets/Stock/images/Rectangle 40.png';
-import TrendingStocks1 from '../../Assets/Stock/images/Rectangle 4718.png';
-import TrendingStocks2 from '../../Assets/Stock/images/Rectangle 4718 (1).png';
-import TrendingStocks3 from '../../Assets/Stock/images/Rectangle 4718 (2).png';
-import TrendingStocks4 from '../../Assets/Stock/images/Rectangle 4718 (3).png';
-import TrendingStocks5 from '../../Assets/Stock/images/Rectangle 4718 (4).png';
-import TrendingStocks6 from '../../Assets/Stock/images/Rectangle 4718 (5).png';
-import ManSpeaker from '../../Assets/Stock/images/Group 1000006312.png';
-import arrow from '../../Assets/Stock/images/arrow-right.png';
-import bell from '../../Assets/Stock/images/Bell Angle 1.png';
+import charles from '../../assets/Stock/images/Pexels Photo by Charles Parker.png';
+import image1 from '../../assets/Stock/images/Rectangle 35.png';
+import image2 from '../../assets/Stock/images/Rectangle 36.png';
+import image3 from '../../assets/Stock/images/Rectangle 37.png';
+import image4 from '../../assets/Stock/images/Rectangle 43.png';
+import image5 from '../../assets/Stock/images/Rectangle 44.png';
+import image6 from '../../assets/Stock/images/Rectangle 45.png';
+import StockImage1 from '../../assets/Stock/images/Rectangle 38.png';
+import StockImage2 from '../../assets/Stock/images/Rectangle 39.png';
+import StockImage3 from '../../assets/Stock/images/Rectangle 40.png';
+import TrendingStocks1 from '../../assets/Stock/images/Rectangle 4718.png';
+import TrendingStocks2 from '../../assets/Stock/images/Rectangle 4718 (1).png';
+import TrendingStocks3 from '../../assets/Stock/images/Rectangle 4718 (2).png';
+import TrendingStocks4 from '../../assets/Stock/images/Rectangle 4718 (3).png';
+import TrendingStocks5 from '../../assets/Stock/images/Rectangle 4718 (4).png';
+import TrendingStocks6 from '../../assets/Stock/images/Rectangle 4718 (5).png';
+import ManSpeaker from '../../assets/Stock/images/Group 1000006312.png';
+import arrow from '../../assets/Stock/images/arrow-right.png';
+import bell from '../../assets/Stock/images/Bell Angle 1.png';
 const StockTips = () => {
     const featured = [
         {

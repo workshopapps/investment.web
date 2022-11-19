@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-key */
 import React from 'react';
-import logo from '../../Assets/header/logo.png.svg';
+import logo from '../../assets/header/logo.png.svg';
 import NavLinks from './NavLinks';
 
 const Footer = () => {

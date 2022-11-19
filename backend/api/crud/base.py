@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
+
+from api.database import database
 from api.models import models
 from api.schemas import schemas
+
 
 def get_db():
     """Gets the database from the local session"""

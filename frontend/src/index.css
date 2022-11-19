@@ -33,7 +33,7 @@ body {
         url('fonts/web/Hauora-Light.woff') format('woff');
 }
 #charles {
-    background-image: url(./Assets/Stock/images/Pexels\ Photo\ by\ Charles\ Parker.png);
+    background-image: url(./assets/Stock/images/Pexels\ Photo\ by\ Charles\ Parker.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

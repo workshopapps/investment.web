@@ -2,7 +2,8 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
-import IndexPage from './pages/index/index'; // Landing Page Component
+import IndexPage from './pages/index';
+import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
@@ -18,6 +19,7 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 // import CompanyProfilePage from './pages/companyprofile';
+import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -27,32 +29,37 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/landing',
+        element: <LandingPage />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/contact',
         element: <Contact />,
         errorElement: <ErrorPage />
     },
 
     {
-        path: 'notification',
+        path: '/notification',
         element: <Notification />
     },
     {
-        path: 'StockTips',
+        path: '/StockTips',
         element: <StockPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'about',
+        path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'news',
+        path: '/news',
         element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'topstories',
+        path: '/topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
     },
@@ -83,7 +90,11 @@ const router = createBrowserRouter([
     },
     {
         path: 'Local',
-        element: <Local />,
+        element: <Local />
+    },
+    {
+        path: '/company-profile',
+        element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     }
     // {
