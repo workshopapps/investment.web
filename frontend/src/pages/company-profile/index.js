@@ -86,7 +86,7 @@ const index = () => {
                                     &uarr; 7.65%
                                 </span>
                             </h3>
-                            <p className="text-[#66717E] text-base font-semibold pt-2 pb-[45px]">
+                            <p className="text-[#667lang;17E] text-base font-semibold pt-2 pb-[45px]">
                                 Nov 11, 8:00:00 PM UTC-5 · USD · NASDAQ
                             </p>
                         </div>
