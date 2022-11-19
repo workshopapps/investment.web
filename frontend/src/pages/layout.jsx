@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
 
-const PageLayout = ({ children }) => {
+const PageLayout = (children) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(true);
     const pathName = useLocation();
 
