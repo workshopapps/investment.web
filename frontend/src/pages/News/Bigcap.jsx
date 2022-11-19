@@ -5,12 +5,12 @@ import '../../index.css';
 // import Picks from '../../components/NewsComponent/Picks';
 import { newFeed } from '../../components/reusabledata';
 import PageLayout from '../layout';
-const Small = () => {
+const Bigcap = () => {
     return (
         <PageLayout>
             <section className="usable__container">
                 <div>
-                    <span className="top__span">Small cap</span>
+                    <span className="top__span">Mid cap</span>
 
                     {newFeed.map((data) => {
                         return (
@@ -35,4 +35,4 @@ const Small = () => {
     );
 };
 
-export default Small;
+export default Bigcap;
