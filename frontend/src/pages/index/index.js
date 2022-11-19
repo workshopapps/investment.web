@@ -1,7 +1,13 @@
 import React from 'react';
+import PageLayout from '../layout';
+import HeaderSection from '../../components/index/HeaderSection/HeaderSection';
 
 const IndexPage = () => {
-    return <span>MyStockPlug</span>;
+    return (
+        <PageLayout>
+            <HeaderSection />
+        </PageLayout>
+    );
 };
 
 export default IndexPage;

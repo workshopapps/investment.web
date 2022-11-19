@@ -1,1 +1,4 @@
 .DS_Store
+backend/.idea/backend.iml
+.env
+.env.example
