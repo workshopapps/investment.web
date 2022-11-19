@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Only Page Components Rendered Here
 import IndexPage from './pages/index/index'; // Landing Page Component
 import ErrorPage from './pages/error';
+// eslint-disable-next-line import/namespace
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
