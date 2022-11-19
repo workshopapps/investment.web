@@ -48,7 +48,7 @@ const MobileMenu = ({ toggleMenu }) => {
                         {
                             navLinks.map((item, index) => {
                                 const { link, url } = item;
-                                return <MenuLink link={link} url={url} key={index}  />
+                                return <MenuLink link={link} url={url} key={index} />
                             })
                         }
                     </ul>
