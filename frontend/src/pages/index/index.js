@@ -1,7 +1,7 @@
 import React from 'react';
 
-const IndexPage = () => {
-    return <span>MyStockPlug</span>;
+const index = () => {
+    return <div>My Stock plug</div>;
 };
 
-export default IndexPage;
+export default index;
