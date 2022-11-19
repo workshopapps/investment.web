@@ -1,8 +1,10 @@
-from sqlalchemy import (Boolean, Column, ForeignKey, 
-                            Integer, String, Float, DateTime)
-from sqlalchemy.orm import relationship
 from uuid import uuid4
+
+from sqlalchemy import (Column, ForeignKey,
+                        String, Float, DateTime)
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from api.database.database import Base
 
 
@@ -47,6 +49,8 @@ class StockPrice(Base):
     quick_ratio = Column(Float, nullable=True)
     pb_ratio = Column(Float, nullable=True)
     ps_ratio = Column(Float, nullable=True)
+    gross_profit_margin = Column(Float, nullable=True)
+    dividend_yield = Column(Float, nullable=True)
 
     company_value = relationship("Company", back_populates="stock_price_value")
 
@@ -98,10 +102,8 @@ class Financial(Base):
     total_revenue = Column(Float, nullable=True)
     ttm = Column(Float, nullable=True)
     operating_cost = Column(Float, nullable=True)
-    gross_profit_margin = Column(Float, nullable=True)
     income_statement = Column(Float, nullable=True)
     income_statement_type = Column(String(30))
-    dividend_yield = Column(Float, nullable=True)
 
     finance = relationship("Company", back_populates="financial_value")
 

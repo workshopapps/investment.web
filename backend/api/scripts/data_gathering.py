@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from sqlalchemy.orm import Session
 
 from api.crud.base import get_db
-from api.models.models import Company, Ticker, Sector, Category
+from api.models.models import Company, Ticker, Sector, Category, StockPrice, Financial
 
 load_dotenv()
 
@@ -65,6 +65,29 @@ async def create_company(company: dict, db: Session):
     db.commit()
 
 
+async def create_or_update_stock_price(ratio: dict, stock_price_id: str, company_id: str, db: Session):
+    insert_stock = StockPrice(stock_price_id=stock_price_id, company=company_id,
+                              stock_price=ratio['priceFairValue'], pe_ratio=ratio['priceEarningsRatio'],
+                              peg_ratio=ratio['priceEarningsToGrowthRatio'],
+                              de_ratio=ratio['debtEquityRatio'], current_ratio=ratio['currentRatio'],
+                              roe_ratio=ratio['returnOnEquity'], quick_ratio=ratio['quickRatio'],
+                              pb_ratio=ratio['priceToBookRatio'], ps_ratio=ratio['priceToSalesRatio'],
+                              gross_profit_margin=ratio['grossProfitMargin'],
+                              dividend_yield=ratio['dividendYield'])
+    db.add(insert_stock)
+    db.commit()
+    return insert_stock
+
+
+async def create_or_update_financial(financial: dict, financial_id: str, company_id: str, db: Session):
+    insert_financial = Financial(financial_id=financial_id, company=company_id,
+                                 growth_rate=financial['revenueGrowth'],
+                                 income_statement_type='Annual')
+    db.add(insert_financial)
+    db.commit()
+    return insert_financial
+
+
 async def pick_four_random_companies():
     # get companies
     data = await call_api('available-traded/list', {'query': 'USD'})
@@ -74,15 +97,15 @@ async def pick_four_random_companies():
 
     # pick four companies
     companies = []
-
     for company in data:
         if len(companies) == 4:
             break
 
+        # Only use companies trading in the US (this is a limitation of the free plan)
         if company['exchangeShortName'] == 'NYSE':
             companies.append(company)
 
-    # Insert new companies to the database
+    # for each company, get its profile, financials and stock prices
     db: Session = next(get_db())
     for company in companies:
         symbol = company['symbol']
@@ -95,5 +118,18 @@ async def pick_four_random_companies():
         ratios = await call_api(f"ratios/{symbol}")
         financial_growth = await call_api(f"financial-growth/{symbol}")
 
+        stock_prices = []
         for ratio in ratios:
-            stock_price_id = f"{symbol}"
+            stock_price_id = f"{symbol}-{ratio['date']}"
+            stock = await create_or_update_stock_price(ratio, stock_price_id, symbol, db)
+            stock_prices.append(stock)
+        company['stock_prices'] = stock_prices
+
+        financials = []
+        for financial in financial_growth:
+            financial_id = f"{symbol}-{financial['date']}"
+            financial_data = await create_or_update_financial(financial, financial_id, symbol, db)
+            financials.append(financial_data)
+        company['financials'] = financials
+
+    return companies
