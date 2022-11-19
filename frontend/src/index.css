@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 @font-face {
     font-family: 'Hauora-Bold';
     src: url('fonts/otf/Hauora-Bold.otf');
@@ -24,4 +31,10 @@
     src: url('fonts/ttf/Hauora-Light.ttf') format('truetype'),
         url('fonts/web/Hauora-Light.woff2') format('woff2'),
         url('fonts/web/Hauora-Light.woff') format('woff');
+}
+#charles {
+    background-image: url(./assets/Stock/images/Pexels\ Photo\ by\ Charles\ Parker.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
