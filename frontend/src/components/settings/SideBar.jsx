@@ -5,18 +5,19 @@ import notificationicon from '../../assets/settings/notificationicon.svg';
 import payementicon from '../../assets/settings/paymenticon.svg';
 import privacyicon from '../../assets/settings/privacyicon.svg';
 import logouticon from '../../assets/settings/logouticon.svg';
+import passwordicon from '../../assets/settings/passwordicon.svg';
 import { Link } from 'react-router-dom';
 
 const links = [
     {
         name: 'profile',
         icon: profileicon,
-        link: '/settings/account'
+        link: '/profilesettings'
     },
     {
         name: 'notification',
         icon: notificationicon,
-        link: '/settings/notifications'
+        link: '/settings'
     },
     {
         name: 'payment',
@@ -27,6 +28,11 @@ const links = [
         name: 'privacy',
         icon: privacyicon,
         link: '/settings/privacy'
+    },
+    {
+        name: 'password',
+        icon: passwordicon,
+        link: '/password'
     }
 ];
 
@@ -53,7 +59,7 @@ export default function index() {
                     </div>
                     <Link
                         to="/settings/logout"
-                        className="flex flex-row items-center w-full h-10 mt-10 text-base font-semibold">
+                        className="flex flex-row items-center w-full h-10 mt-11 text-base font-semibold">
                         <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
                         <h1 className="ml-4 text-[#E84E4E]">Logout</h1>
                     </Link>
