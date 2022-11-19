@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import IndexPage from './pages/index/index'; // Landing Page Component
 import ErrorPage from './pages/error';
 import AboutPage from './pages/about';
+import HelpPage from './pages/help';
 import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/help',
+        element: <HelpPage />,
         errorElement: <ErrorPage />
     }
 ]);
