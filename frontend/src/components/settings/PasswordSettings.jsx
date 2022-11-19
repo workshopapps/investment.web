@@ -3,7 +3,7 @@ import React from 'react';
 export default function PasswordSettings() {
     return (
         <div className="flex">
-            <div className="flex flex-col w-full h-full pl-10 pr-[100px] pt-[56px] pb-[100px]">
+            <div className="flex flex-col w-full h-full pl-1 md:pl-10 pr-3 md:pr-[100px]  pt-[56px] pb-[100px]">
                 <div className="flex flex-col w-full h-full mb-6 font-semibold text-base text-black">
                     <h1 className="text-4xl">Reset Password</h1>
                 </div>
