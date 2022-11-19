@@ -36,7 +36,7 @@ CompanyCard.propTypes = {
     status: PropTypes.string
 };
 
-const index = () => {
+const CompanyProfilePage = () => {
     return (
         <div className="bg-[#f5f5f5] font-Hauora">
             <Header />
@@ -129,4 +129,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default CompanyProfilePage;
