@@ -2,7 +2,8 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
-import IndexPage from './pages/index/index'; // Landing Page Component
+import IndexPage from './pages/index';
+import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
@@ -13,49 +14,17 @@ import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 
-import HelpPage from './pages/help/';
-
 // Define Page Routes
 const router = createBrowserRouter([
     {
         path: '/',
         element: <IndexPage />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: 'contact',
-                element: <Contact />
-            },
-            {
-                path: 'notification',
-                element: <Notification />
-            },
-            {
-                path: 'StockTips',
-                element: <StockPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'about',
-                element: <AboutPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'news',
-                element: <NewsPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'topstories',
-                element: <Topstories />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'company-profile',
-                element: <CompanyProfilePage />,
-                errorElement: <ErrorPage />
-            }
-        ]
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/landing',
+        element: <LandingPage />,
+        errorElement: <ErrorPage />
     },
     {
         path: '/contact',
@@ -64,31 +33,31 @@ const router = createBrowserRouter([
     },
 
     {
-        path: 'notification',
+        path: '/notification',
         element: <Notification />
     },
     {
-        path: 'StockTips',
+        path: '/StockTips',
         element: <StockPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'about',
+        path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'news',
+        path: '/news',
         element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'topstories',
+        path: '/topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'company-profile',
+        path: '/company-profile',
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     },
