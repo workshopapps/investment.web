@@ -6,6 +6,7 @@ import ArrowIcons from './assets/icons/arrow-right.png'
 import Shield from './assets/icons/shield-tick.png'
 import Stripe from './assets/icons/stripe.png'
 import './assets/css/style.css'
+import Nav from '../../components/Nav/Nav';
 
 
 
@@ -25,7 +26,7 @@ const Payment = () => {
     return (
         <div>
             <nav>
-                <Header />
+                <Nav />
             </nav>
 
             <section className="h-auto max-w-full flex flex-wrap bg-white">
