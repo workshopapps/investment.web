@@ -13,6 +13,8 @@ import Topstories from './pages/News/Topstories';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
+import PolicyPage from './pages/privacy-statement';
+import TermsAndConditionPage from './pages/terms-of-use';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -59,6 +61,16 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/policy',
+        element: <PolicyPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/terms',
+        element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
     }
 ]);
