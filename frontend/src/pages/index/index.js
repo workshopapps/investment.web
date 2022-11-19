@@ -1,5 +1,40 @@
 import React from 'react';
 import { Header, Footer } from '../../components';
+import { cardsData } from '../../cardsData';
+import PropTypes from 'prop-types';
+
+// Company details card
+const CompanyCard = ({ title, calculation, determinant, text, status }) => {
+    return (
+        <div className="mx-[100px] mt-6">
+            <div className="flex justify-between pt-[17px] pb-[18px] px-[30px] bg-white">
+                <h3 className="text-[#1F2226] text-2xl font-semibold">{title}</h3>
+                <h4 className="bg-[#139757] rounded text-[#1F2226] text-base font-semibold px-[17px] py-[5px]">
+                    {status}
+                </h4>
+            </div>
+            <div className="bg-white/50 px-[30px]">
+                <div className="opacity-[0.74] pt-[23px]">
+                    Calculation:
+                    <span className="font-semibold pl-1">{calculation}</span>
+                </div>
+                <div className="opacity-[0.8] pt-[11px]">
+                    Determinant:
+                    <span className="font-semibold pl-1">{determinant}</span>
+                </div>
+                <div className="text-justify text-xs opacity-50 pt-[33px] pb-[15px]">{text}</div>
+            </div>
+        </div>
+    );
+};
+
+CompanyCard.propTypes = {
+    title: PropTypes.string,
+    calculation: PropTypes.string,
+    determinant: PropTypes.string,
+    text: PropTypes.string,
+    status: PropTypes.string
+};
 
 const index = () => {
     return (
@@ -75,72 +110,21 @@ const index = () => {
                 </div>
 
                 <div className="mx-[100px] mt-6">
-                    <div className="flex justify-between pt-[17px] pb-[18px] px-[30px] bg-white">
-                        <h3 className="text-[#1F2226] text-2xl font-semibold">
-                            Gross Domestic Margin
-                        </h3>
-                        <h4 className="bg-[#139757] rounded text-[#1F2226] text-base font-semibold px-[17px] py-[5px]">
-                            Very Good
-                        </h4>
-                    </div>
-                    <div className="bg-white/50 px-[30px]">
-                        <div className="opacity-[0.74] pt-[23px]">
-                            Calculation:
-                            <span className="font-semibold pl-1">
-                                {' '}
-                                Gross Profit Margin = (Revenue - Cost of Sales) / Revenue * 100 =
-                                850{' '}
-                            </span>
-                        </div>
-                        <div className="opacity-[0.8] pt-[11px]">
-                            Determinant:
-                            <span className="font-semibold pl-1">The Higher, the better.</span>
-                        </div>
-                        <div className="text-justify text-xs opacity-50 pt-[33px] pb-[15px]">
-                            A profitability ratio that measures what percentage of revenue is left
-                            after subtracting the cost of goods sold. The &quot;cost of goods sold
-                            {''}&quot; refers to the direct cost of production and does not include
-                            operating expenses, interest, or taxes. In other words, the gross profit
-                            margin is a measure of profitability, specifically for a product or item
-                            line, without accounting for overheads.
-                        </div>
+                    <div>
+                        {cardsData.map((item) => (
+                            <CompanyCard
+                                key={item.key}
+                                title={item.title}
+                                calculation={item.calculation}
+                                determinant={item.determinant}
+                                text={item.text}
+                                status={item.remark}
+                            />
+                        ))}
                     </div>
                 </div>
-
-                <div className="mx-[100px] mt-6">
-                    <div className="flex justify-between pt-[17px] pb-[18px] px-[30px] bg-white">
-                        <h3 className="text-[#1F2226] text-2xl font-semibold">
-                            Gross Domestic Margin
-                        </h3>
-                        <h4 className="bg-[#139757] rounded text-[#1F2226] text-base font-semibold px-[17px] py-[5px]">
-                            Very Good
-                        </h4>
-                    </div>
-                    <div className="bg-white/50 px-[30px]">
-                        <div className="opacity-[0.74] pt-[23px]">
-                            Calculation:
-                            <span className="font-semibold pl-1">
-                                {' '}
-                                Gross Profit Margin = (Revenue - Cost of Sales) / Revenue * 100 =
-                                850{' '}
-                            </span>
-                        </div>
-                        <div className="opacity-[0.8] pt-[11px]">
-                            Determinant:
-                            <span className="font-semibold pl-1">The Higher, the better.</span>
-                        </div>
-                        <div className="text-justify text-xs opacity-50 pt-[33px] pb-[15px]">
-                            A profitability ratio that measures what percentage of revenue is left
-                            after subtracting the cost of goods sold. The &quot;cost of goods sold
-                            {''}&quot; refers to the direct cost of production and does not include
-                            operating expenses, interest, or taxes. In other words, the gross profit
-                            margin is a measure of profitability, specifically for a product or item
-                            line, without accounting for overheads.
-                        </div>
-                    </div>
-                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
     );
 };
