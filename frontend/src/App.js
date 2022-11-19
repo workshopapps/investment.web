@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import IndexPage from './pages/index/index'; // Landing Page Component
 import ErrorPage from './pages/error';
 import AboutPage from './pages/about';
-import CompanyProfilePage from './pages/companyprofile';
+import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
 const router = createBrowserRouter([
