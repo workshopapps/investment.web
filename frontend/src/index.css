@@ -2,14 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@font-face {
+    font-family: 'Hauora-Bold';
+    src: url('fonts/otf/Hauora-Bold.otf');
+    src: url('fonts/ttf/Hauora-Bold.ttf') format('truetype'),
+        url('fonts/web/Hauora-Bold.woff2') format('woff2'),
+        url('fonts/web/Hauora-Bold.woff') format('woff');
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+@font-face {
+    font-family: 'Hauora-Regular';
+    src: url('fonts/otf/Hauora-Regular.otf');
+    src: url('fonts/ttf/Hauora-Regular.ttf') format('truetype'),
+        url('fonts/web/Hauora-Regular.woff2') format('woff2'),
+        url('fonts/web/Hauora-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Hauora-Light';
+    src: url('fonts/otf/Hauora-Light.otf');
+    src: url('fonts/ttf/Hauora-Light.ttf') format('truetype'),
+        url('fonts/web/Hauora-Light.woff2') format('woff2'),
+        url('fonts/web/Hauora-Light.woff') format('woff');
 }
