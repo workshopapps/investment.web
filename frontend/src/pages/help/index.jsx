@@ -1,6 +1,7 @@
 import React from 'react';
 import Faq from '../../components/Help/Faq';
 import searchIcon from '../../assets/help/search.svg';
+import PageLayout from '../layout';
 
 function HelpPage() {
     const faqs = {
@@ -60,47 +61,49 @@ function HelpPage() {
     };
     console.log(faqs);
     return (
-        <div className="py-8 font-Hauora sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
-            <h1 className="font-bold sm:text-3xl md:text-4xl text-xl lg:text-[40px]  lg:font-semibold mb-4  text-[#0A0B0D]">
-                How Can We Help You?
-            </h1>
-            <div className="flex items-center h-12 lg:h-14 border pl-3 lg:pl-4 focus-within:border-black border-[#A3AAB2] rounded">
-                <input
-                    className="placeholder:text-xs h-6 md:sm:placeholder:text-sm lg:placeholder:text-base placeholder:font-normal placeholder:text-[#A3AAB2] w-full focus:outline-0 "
-                    type="text"
-                    placeholder="Ask Your Question"
-                />
-                <button className="w-12 lg:w-14 h-full flex items-center justify-center">
-                    <img src={searchIcon} className="w-6 h-6" alt="search" />
-                </button>
-            </div>
+        <PageLayout>
+            <div className="py-8 font-Hauora sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
+                <h1 className="font-bold sm:text-3xl md:text-4xl text-xl lg:text-[40px]  lg:font-semibold mb-4  text-[#0A0B0D]">
+                    How Can We Help You?
+                </h1>
+                <div className="flex items-center h-12 lg:h-14 border pl-3 lg:pl-4 focus-within:border-black border-[#A3AAB2] rounded">
+                    <input
+                        className="placeholder:text-xs h-6 md:sm:placeholder:text-sm lg:placeholder:text-base placeholder:font-normal placeholder:text-[#A3AAB2] w-full focus:outline-0 "
+                        type="text"
+                        placeholder="Ask Your Question"
+                    />
+                    <button className="w-12 lg:w-14 h-full flex items-center justify-center">
+                        <img src={searchIcon} className="w-6 h-6" alt="search" />
+                    </button>
+                </div>
 
-            <div className="mt-6 sm:mt-8 lg:mt-10">
-                <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0A0B0D] mb-8">
-                    Frequently Asked Questions
-                </h2>
-                <div className="w-full ">
-                    {faqs.faq.map((faq, index) => (
-                        <Faq
-                            key={index}
-                            question={faq.question}
-                            answer={faq.answer}
-                            link={faq.link}
-                        />
+                <div className="mt-6 sm:mt-8 lg:mt-10">
+                    <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0A0B0D] mb-8">
+                        Frequently Asked Questions
+                    </h2>
+                    <div className="w-full ">
+                        {faqs.faq.map((faq, index) => (
+                            <Faq
+                                key={index}
+                                question={faq.question}
+                                answer={faq.answer}
+                                link={faq.link}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="mt-6 sm:mt-8 lg:mt-10">
+                    <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0A0B0D] mb-8">
+                        Popular Questions
+                    </h2>
+
+                    {faqs.popular_questions.map((faq, index) => (
+                        <Faq key={index} question={faq.question} answer={faq.answer} />
                     ))}
                 </div>
             </div>
-
-            <div className="mt-6 sm:mt-8 lg:mt-10">
-                <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0A0B0D] mb-8">
-                    Popular Questions
-                </h2>
-
-                {faqs.popular_questions.map((faq, index) => (
-                    <Faq key={index} question={faq.question} answer={faq.answer} />
-                ))}
-            </div>
-        </div>
+        </PageLayout>
     );
 }
 

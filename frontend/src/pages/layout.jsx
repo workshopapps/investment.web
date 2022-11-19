@@ -22,7 +22,7 @@ const PageLayout = ({ children }) => {
                 <Nav openMenu={setOpenMobileMenu} />
             </div>
             {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-            <div className="page-content lg:mx-[100px] grow">{children}</div>
+            <div className="page-content grow">{children}</div>
             <div className="footer flex-none">
                 <Footer />
             </div>
