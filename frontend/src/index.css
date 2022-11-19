@@ -38,3 +38,26 @@ body {
     background-size: cover;
     background-position: center;
 }
+.accordian_open {
+    @apply text-white text-[20px] border border-b-0 border-[#0B5934] rounded-b-[0px] bg-[#0B5934];
+}
+.policy_card_reverse {
+    @apply max-sm:rounded-t-[24px] sm:rounded-l-[24px] md:rounded-l-[24px] h-full;
+}
+.policy_card_div_reverse {
+    @apply flex max-sm:flex-col-reverse max-md:flex-row mt-10 bg-white max-sm:rounded-t-[24px] sm:rounded-[24px] md:rounded-[24px] max-md:items-center;
+}
+.policy_card_div {
+    @apply flex max-sm:flex-col max-md:flex-row mt-10 bg-white max-sm:rounded-t-[24px] sm:rounded-[24px] md:rounded-[24px] max-md:items-center;
+}
+
+.policy_card {
+    @apply max-sm:rounded-t-[24px] sm:rounded-r-[24px] md:rounded-r-[24px] h-full;
+}
+.policy_card_text_reverse {
+    @apply text-left p-3 mb-6 max-md:text-center max-md:p-5 pl-20 self-center order-2;
+}
+.policy_card_text {
+    @apply text-left p-3 mb-6 pr-20 max-md:text-center max-md:p-5 self-center;
+}
+
