@@ -1,0 +1,16 @@
+version: "3"
+services:
+  frontend:
+      image: frontend
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - backend
+  backend:
+    image: backend
+    environment:
+      MYSQL_USERNAME: $MYSQL_USERNAME
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_DB: $MYSQL_DB
+      MYSQL_HOST: $MYSQL_HOST
