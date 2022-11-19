@@ -187,22 +187,19 @@ const StockTips = () => {
                     </button>
                 </div>
             </div>
-            <div className="bg-white h-2/4 p-12">
-                <div className="flex w-full items-center justify-center gap-12">
-                    <h1>Subscribe for latest Stock Tips Update</h1>
-                    <img src={bell} alt="" className=" float-right" />
-                </div>
-                <div className="flex flex-col md:flex-row p-2 gap-2 justify-between md:gap-12 md:text-xl text-xs bg-gray-300 w-11/12 md:w-full h-3/4 mx-auto rounded-lg">
-                    <p className="text-center p-2 md:px-6">
-                        Never miss out on anything about stock, by joining our Mailing List
-                    </p>
-                    <span className="flex justify-between bg-white p-2 rounded-lg w-auto md:w-2/4 mx-auto">
-                        <input type="email" name="" id="" placeholder="Enter your email" />
-                        <button className="flex items-center p-2 gap-2 bg-green-600 text-white  rounded-lg">
-                            Start Investing
-                            <img src={arrow} alt="" />
-                        </button>
-                    </span>
+            <div className="flex w-full items-center justify-center">
+                <h1>Subscribe for latest Stock Tips Update</h1>
+                <img src={bell} alt="" className=" float-right" />
+            </div>
+            <div className="flex gap-4 items-center">
+                <div>Never miss out on anything about stock, by joining our Mailing List</div>
+                <div className="">
+                    {' '}
+                    <input type="email" name="" id="" placeholder="Enter your email" />
+                    <button className="flex items-center gap-2 mx-auto bg-green-600 text-white p-4 ">
+                        Subscribe
+                        <img src={arrow} alt="" />
+                    </button>
                 </div>
             </div>
         </div>
