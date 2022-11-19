@@ -1,12 +1,13 @@
 import os
-import asyncio
+import random
+from uuid import uuid4
+
 import httpx
 from dotenv import load_dotenv
-import random
-from api.crud.base import get_db
 from sqlalchemy.orm import Session
+
+from api.crud.base import get_db
 from api.models.models import Company, Ticker, Sector, Category
-from uuid import uuid4
 
 load_dotenv()
 
@@ -84,15 +85,15 @@ async def pick_four_random_companies():
     # Insert new companies to the database
     db: Session = next(get_db())
     for company in companies:
-        query_result = db.query(Company).filter(Company.company_id == company['symbol']).first()
+        symbol = company['symbol']
+        query_result = db.query(Company).filter(Company.company_id == symbol).first()
         if not query_result:
             # create the company since it doesn't exist yet
             await create_company(company, db)
 
+        # get ratios and financial growth from API
+        ratios = await call_api(f"ratios/{symbol}")
+        financial_growth = await call_api(f"financial-growth/{symbol}")
 
-
-
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(pick_four_random_companies())
-loop.close()
+        for ratio in ratios:
+            stock_price_id = f"{symbol}"
