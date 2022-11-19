@@ -11,4 +11,4 @@ The data gathering script is the first script that runs. Its main job is to fetc
 - The final stage is to fetch all financial records of each company from the API. It also inserts new records and updates existing records.
 
 ### How to run
-The script is configured in the `main.py` to startup automatically as soon as the application boots. To execute the script, just run 'python main.py' to startup the application.
+The script is configured in the `main.py` to startup automatically as soon as the application boots. To execute the script, just run ```python main.py``` to startup the application.
