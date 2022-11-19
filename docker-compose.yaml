@@ -9,8 +9,4 @@ services:
         - backend
   backend:
     image: habibo1234/investment-be:4.0
-    environment:
-      MYSQL_USERNAME: $MYSQL_USERNAME
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_DB: $MYSQL_DB
-      MYSQL_HOST: $MYSQL_HOST
+    restart: always
