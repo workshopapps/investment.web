@@ -27,31 +27,31 @@ const router = createBrowserRouter([
     },
 
     {
-        path: 'notification',
+        path: '/notification',
         element: <Notification />
     },
     {
-        path: 'StockTips',
+        path: '/StockTips',
         element: <StockPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'about',
+        path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'news',
+        path: '/news',
         element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'topstories',
+        path: '/topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'company-profile',
+        path: '/company-profile',
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     }
