@@ -5,7 +5,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import saturn from './../../components/assets/error/saturn.png'
-import './../../pages/error/error.css';
 
 
 const ErrorPage = () => {
