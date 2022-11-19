@@ -7,27 +7,12 @@ router = APIRouter()
 
 
 #edikan
-        
- #get all companies ranking 
-@router.get('/company/ranks')
-async def get_company_ranks(db: Session = Depends(get_db)):
-    companies = db.query(models.Company).all()
-    if companies:
-        return companies
-    raise HTTPException(404, f'There are no companies with the ranking detail provided.')
-
-#get all companies ranking history  
-@router.get('/company/ranks/history')
-async def get_company_ranks_history(db: Session = Depends(get_db)):
-    companies = db.query(models.Company).all()
-    if companies:
-        return companies
-    raise HTTPException(404, f'There are no companies with the ranking detail provided.')
 
 # get all companies ranking history by company id
-@router.get('/company/ranks/history/{company_id}')
-async def get_company_ranks_history_by_id(company_id: str, db: Session = Depends(get_db)):
-    companies = db.query(models.Company).filter(models.Company.company_id == company_id).all()
-    if companies:
-        return companies
+@router.get('/company/{id}/ranking/history')
+async def get_company_ranks_history_by_id(id: str, db: Session = Depends(get_db)):
+    rankings = db.query(models.Ranking).filter(models.Ranking.id == id).all()
+    if rankings:
+        return rankings
     raise HTTPException(404, f'There are no companies with the ranking detail provided.')
+
