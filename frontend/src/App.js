@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
-import IndexPage from './pages/index/index'; // Landing Page Component
+import IndexPage from './pages/index'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
@@ -16,7 +16,7 @@ import CompanyProfilePage from './pages/companyProfile';
 // Define Page Routes
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/landing',
         element: <IndexPage />,
         errorElement: <ErrorPage />
     },
