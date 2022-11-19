@@ -10,12 +10,14 @@ import { useLocation } from 'react-router-dom';
 const PageLayout = ({ children }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(true);
     const pathName = useLocation();
+
     useEffect(() => {
         setOpenMobileMenu(false);
         return () => {
             setOpenMobileMenu(true);
         };
     }, [pathName]);
+
     return (
         <div className="flex flex-col h-screen relative ">
             <div className="nav-bar flex-none">

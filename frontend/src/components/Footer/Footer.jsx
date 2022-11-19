@@ -9,15 +9,20 @@ const Footer = () => {
         {
             name: 'Get To Know Us',
             navLinks: [
-                { link: 'About MyStockPlug' },
-                { link: 'Careers' },
-                { link: 'Stock Tips' },
-                { link: 'Contact Us' }
+                { link: 'About MyStockPlug', to: '/about' },
+                { link: 'Careers', to: '#' },
+                { link: 'Stock Tips', to: '/StockTips' },
+                { link: 'Contact Us', to: '/contact' }
             ]
         },
         {
             name: 'Support',
-            navLinks: [{ link: 'Help' }, { link: 'FAQ' }, { link: 'News' }, { link: 'Blog' }]
+            navLinks: [
+                { link: 'Help', to: '#' },
+                { link: 'FAQ', to: '#' },
+                { link: 'News', to: 'news' },
+                { link: 'Blog', to: '#' }
+            ]
         },
         {
             name: 'Legal',
