@@ -12,6 +12,10 @@ module.exports = {
             borderColor : {
                 primarygreen : '#1BD47B'
             },
+            width : {
+                272: '272px',
+                510: '510px'
+            }
         }
     },
     plugins: []
