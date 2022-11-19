@@ -9,8 +9,8 @@ services:
         - backend
   backend:
     image: investment-be
-    Volumes 
-   -/nginx/nginx-setup.config:/etc/nginx/conf.d/default.conf:ro
+    Volumes:
+      -/nginx/nginx-setup.config:/etc/nginx/conf.d/default.conf:ro
     environment:
       MYSQL_USERNAME: $MYSQL_USERNAME
       MYSQL_PASSWORD: $MYSQL_PASSWORD
