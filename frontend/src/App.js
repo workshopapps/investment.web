@@ -11,7 +11,7 @@ import Topstories from './pages/News/Topstories';
 import About from './pages/index/About';
 import Stock from './pages/index/Stock';
 import Help from './pages/index/Help';
-import Contact from './pages/index/Contact';
+import Contact from './pages/contact/Contact';
 import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
