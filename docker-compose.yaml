@@ -1,14 +1,14 @@
 version: "3"
 services:
   frontend:
-      image: frontend
+      image: habibo1234/investment-fe:1.0
       ports:
           - 8080:8080
       restart: always
       depends_on:
         - backend
   backend:
-    image: investment-be
+    image: habibo1234/investment-be:4.0
     Volumes:
       -/nginx/nginx-setup.config:/etc/nginx/conf.d/default.conf:ro
     environment:
