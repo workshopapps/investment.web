@@ -13,3 +13,9 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+#charles {
+    background-image: url(./assets/Stock/images/Pexels\ Photo\ by\ Charles\ Parker.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
