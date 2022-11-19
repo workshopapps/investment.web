@@ -9,7 +9,7 @@ import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
-
+import Picked from './pages/News/Picked';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import World from './pages/News/World';
@@ -64,33 +64,37 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: 'World',
+        path: '/World',
         element: <World />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'Small',
+        path: '/Small',
         element: <Small />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'long',
+        path: '/long',
         element: <Long />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'industry',
+        path: '/industry',
         element: <Industry />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'mid',
+        path: '/mid',
         element: <Bigcap />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'Local',
+        path: '/Local',
         element: <Local />
+    },
+    {
+        path: '/picked',
+        element: <Picked />
     },
     {
         path: '/company-profile',
