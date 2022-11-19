@@ -6,8 +6,9 @@ import Nav from '../components/Nav/Nav';
 import { useState, useEffect } from 'react';
 import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
+import StockTips from '../components/StockTips/StockTips';
 
-const PageLayout = ({ children }) => {
+const PageLayout = () => {
     const [openMobileMenu, setOpenMobileMenu] = useState(true);
     const pathName = useLocation();
     useEffect(() => {
@@ -22,7 +23,10 @@ const PageLayout = ({ children }) => {
                 <Nav openMenu={setOpenMobileMenu} />
             </div>
             {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-            <div className="page-content lg:mx-[100px] grow">{children}</div>
+            {/* <div className="page-content lg:mx-[100px] grow">{children}</div> */}
+            <div className="page-content lg:mx-[100px] grow">
+                <StockTips />
+            </div>
             <div className="footer flex-none">
                 <Footer />
             </div>
