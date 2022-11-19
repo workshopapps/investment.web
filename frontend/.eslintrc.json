@@ -27,5 +27,7 @@
         }
     },
     "plugins": ["react", "import"],
-    "rules": {}
+    "rules": {
+        "prettier/prettier": ["error", { "lf": "off" }]
+    }
 }
