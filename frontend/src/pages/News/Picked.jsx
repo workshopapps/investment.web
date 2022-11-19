@@ -8,7 +8,7 @@ const Picked = () => {
     return (
         <section className="usable__container">
             <div>
-                <span className="top__span">Top stories</span>
+                <span className="top__span">Picks For you</span>
 
                 {newFeed.map((data) => {
                     return (

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Longcap = () => {
     return (
         <div className="topNews__second top-components">
-            <Link to="long">
+            <Link to="/long">
                 <span className="icon_span">
                     Long cap <BsChevronRight />
                 </span>
