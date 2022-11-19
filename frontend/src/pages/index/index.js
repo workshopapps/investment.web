@@ -2,12 +2,12 @@ import React from 'react';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 
-import AccessImg from '../../assets/access.png';
-import FirstBankImg from '../../assets/first_bank.png';
-import GTImg from '../../assets/gtbank.png';
-import MtnImg from '../../assets/mtn.png';
-import NestleImg from '../../assets/nestle.png';
-import TranscorpImg from '../../assets/transcorp.png';
+import AccessImg from '../../Assets/access.png';
+import FirstBankImg from '../../Assets/first_bank.png';
+import GTImg from '../../Assets/gtbank.png';
+import MtnImg from '../../Assets/mtn.png';
+import NestleImg from '../../Assets/nestle.png';
+import TranscorpImg from '../../Assets/transcorp.png';
 
 const IndexPage = () => {
     return (

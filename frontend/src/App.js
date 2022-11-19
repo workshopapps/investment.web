@@ -11,7 +11,7 @@ import Topstories from './pages/News/Topstories';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
-import CompanyProfilePage from './pages/companyprofile';
+// import CompanyProfilePage from './pages/companyprofile';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -49,12 +49,12 @@ const router = createBrowserRouter([
         path: 'topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
-    },
-    {
-        path: 'company-profile',
-        element: <CompanyProfilePage />,
-        errorElement: <ErrorPage />
     }
+    // {
+    //     path: 'company-profile',
+    //     element: <CompanyProfilePage />,
+    //     errorElement: <ErrorPage />
+    // }
 ]);
 
 function App() {
