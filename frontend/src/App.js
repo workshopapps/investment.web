@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Only Page Components Rendered Here
 import IndexPage from './pages/index/index'; // Landing Page Component
 import ErrorPage from './pages/error';
+import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/StockTips',
+        element: <StockPage />,
+        errorElement: <ErrorPage />
+     },
+     {
         path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
