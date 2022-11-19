@@ -27,8 +27,8 @@ const Footer = () => {
         {
             name: 'Legal',
             navLinks: [
-                { link: 'Terms of Use' },
-                { link: 'Privacy Policy' },
+                { link: 'Terms of Use', to: '/terms' },
+                { link: 'Privacy Policy', to: '/policy' },
                 { link: 'Disclaimer' },
                 { link: 'Cookies Policy' }
             ]
@@ -42,8 +42,7 @@ const Footer = () => {
     return (
         <footer
             style={footerStyle}
-            className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full"
-        >
+            className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full">
             <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
                 <div className="w-60 pb-8 md:pb-0">
                     <img src={logo} alt="" />
