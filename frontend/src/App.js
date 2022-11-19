@@ -18,42 +18,42 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <IndexPage />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: 'contact',
-                element: <Contact />
-            },
-            {
-                path: 'notification',
-                element: <Notification />
-            },
-            {
-                path: 'StockTips',
-                element: <StockPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'about',
-                element: <AboutPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'news',
-                element: <NewsPage />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'topstories',
-                element: <Topstories />,
-                errorElement: <ErrorPage />
-            },
-            {
-                path: 'company-profile',
-                element: <CompanyProfilePage />,
-                errorElement: <ErrorPage />
-            }
-        ]
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/contact',
+        element: <Contact />,
+        errorElement: <ErrorPage />
+    },
+
+    {
+        path: 'notification',
+        element: <Notification />
+    },
+    {
+        path: 'StockTips',
+        element: <StockPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'about',
+        element: <AboutPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'news',
+        element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'topstories',
+        element: <Topstories />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'company-profile',
+        element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
     }
 ]);
 

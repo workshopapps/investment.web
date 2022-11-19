@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../Assets/scss/topnews.scss';
+import '../../assets/scss/topnews.scss';
 import { BsChevronRight } from 'react-icons/bs';
 // import newimage from '../../Assets/images/Rectangle 4745.png';
 import Picks from './Picks';
