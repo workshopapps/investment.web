@@ -31,32 +31,31 @@ const Footer = () => {
     ];
 
     const footerStyle = {
-        background: "#000718",
-        color: "white"
-    }
+        background: '#000718',
+        color: 'white'
+    };
     return (
-        <footer style={footerStyle} className="p-4 flex flex-col items-center justify-center w-full">
-            <div className='flex w-full flex-wrap justify-between items-start max-w-screen-xl gap-8 border-b border-white pb-12 mb-8 md:mt-12'>
-                <div className='w-60 pb-8 md:pb-0'>
+        <footer
+            style={footerStyle}
+            className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full"
+        >
+            <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
+                <div className="w-60 pb-8 md:pb-0">
                     <img src={Logo} alt="" />
                 </div>
-                <div className='flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full'>
-                    {
-                        navItems.map((item, index) => {
-                            const { name, navLinks } = item;
-                            return (
-                                <div key={index} className="w-36">
-                                    <p className="mb-8 ">{name}</p>
-                                    <NavLinks navLinks={navLinks} />
-                                </div>
-                            );
-                        })
-                    }
+                <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">
+                    {navItems.map((item, index) => {
+                        const { name, navLinks } = item;
+                        return (
+                            <div key={index} className="w-36">
+                                <p className="mb-8 ">{name}</p>
+                                <NavLinks navLinks={navLinks} />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
-            <div className='text-center'>
-                2022  MyStockPlug
-            </div>
+            <div className="text-center pb-10">2022 MyStockPlug</div>
         </footer>
     );
 };
