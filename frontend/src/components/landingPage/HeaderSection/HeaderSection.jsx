@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Frame1 from '../../../assets/index/landing-frame1.png';
-import Partner1 from '../../../assets/index/partners/Binance.png';
-import Partner2 from '../../../assets/index/partners/Google.png';
-import Partner3 from '../../../assets/index/partners/BridgerPay.png';
-import Partner4 from '../../../assets/index/partners/StockX.png';
+import Frame1 from '../../../assets/landingPage/landing-frame1.png';
+import Partner1 from '../../../assets/landingPage/partners/Binance.png';
+import Partner2 from '../../../assets/landingPage/partners/Google.png';
+import Partner3 from '../../../assets/landingPage/partners/BridgerPay.png';
+import Partner4 from '../../../assets/landingPage/partners/StockX.png';
 
 const HeaderSection = () => {
     return (

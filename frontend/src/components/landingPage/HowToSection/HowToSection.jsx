@@ -1,9 +1,9 @@
 import React from 'react';
 import CardItem from './Card/CardItem';
 
-import Icon1 from '../../../assets/index/icons/icon1.svg';
-import Icon2 from '../../../assets/index/icons/icon2.svg';
-import Icon3 from '../../../assets/index/icons/icon3.svg';
+import Icon1 from '../../../assets/landingPage/icons/icon1.svg';
+import Icon2 from '../../../assets/landingPage/icons/icon2.svg';
+import Icon3 from '../../../assets/landingPage/icons/icon3.svg';
 
 const HowToSection = () => {
     return (

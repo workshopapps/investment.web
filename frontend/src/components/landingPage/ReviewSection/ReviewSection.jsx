@@ -1,7 +1,7 @@
 import React from 'react';
-import Iamge1 from '../../../assets/index/laptopFrame.png';
-import GooglePlay from '../../../assets/index/googleplay.png';
-import AppStore from '../../../assets/index/appstore.png';
+import Iamge1 from '../../../assets/landingPage/laptopFrame.png';
+import GooglePlay from '../../../assets/landingPage/googleplay.png';
+import AppStore from '../../../assets/landingPage/appstore.png';
 import ReviewItem from './Card/ReviewCard';
 
 const ReviewSection = () => {
