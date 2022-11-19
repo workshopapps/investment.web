@@ -14,6 +14,8 @@ import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 
+import HelpPage from './pages/help/';
+
 // Define Page Routes
 const router = createBrowserRouter([
     {
