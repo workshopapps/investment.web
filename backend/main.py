@@ -2,12 +2,14 @@ from fastapi import FastAPI
 import uvicorn
 from api.models import models
 from api.database.database import engine
-from api.routes import rankings
+from api.routes import rankings, company_category
 models.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
 app.include_router(rankings.router)
+app.include_router(company_category.router)
 
 
 @app.get('/')
@@ -16,6 +18,7 @@ async def get_root():
         "message": "welcome to investment web",
         "url": "http://localhost:8000/docs"
     }
+
 
 
 if __name__ == "__main__":
