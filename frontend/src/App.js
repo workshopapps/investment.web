@@ -8,11 +8,10 @@ import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
-import About from './pages/index/About';
-import Stock from './pages/index/Stock';
-import Help from './pages/index/Help';
-import Contact from './pages/index/Contact';
-import CompanyProfilePage from './pages/companyProfile';
+
+import Contact from './pages/contact/Contact';
+import Notification from './pages/notifications/Notification';
+import CompanyProfilePage from './pages/companyprofile';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -29,31 +28,35 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <AboutPage />,
+======= errorElement: <ErrorPage />
+     }
+     {  path: '/contact',
+        element: <Contact />,
+        errorElement: <ErrorPage />
+    },
+
+    {
+        path: 'notification',
+        element: <Notification />
+    },
+    {
+        path: 'StockTips',
+        element: <StockPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: '/news',
+        path: 'about',
+        element: <AboutPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'news',
         element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: '/topstories',
+        path: 'topstories',
         element: <Topstories />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
@@ -85,7 +88,7 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: '/company-profile',
+        path: 'company-profile',
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     }

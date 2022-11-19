@@ -1,11 +1,12 @@
 import React from 'react';
 import Section from '../../components/about/MiddleSection';
+import PageLayout from '../layout';
 
 const AboutPage = () => {
     return (
-        <div className="bg-[#000000]">
+        <PageLayout>
             <Section />
-        </div>
+        </PageLayout>
     );
 };
 

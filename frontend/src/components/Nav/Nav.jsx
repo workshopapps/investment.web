@@ -2,10 +2,11 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import Logo from './../../Assets/header/logo.png.svg';
+import Logo from '../../assets/header/logo.png.svg';
 import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
-import Menu from './../../Assets/header/menu.svg';
+import Menu from '../../assets/header/menu.svg';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
@@ -18,10 +19,13 @@ const Nav = ({ openMenu }) => {
         { name: 'Login', background: 'transparent' },
         { name: 'Get Started', background: '#1BD47B' }
     ];
+
+    const navigate = useNavigate();
+
     return (
         <nav style={navStyle} className="flex justify-center items-center p-4 h-20">
             <div className="w-full flex items-center justify-between lg:mx-[100px] mx-[16px]">
-                <div>
+                <div onClick={() => navigate('/')} className="cursor-pointer">
                     <img src={Logo} alt="" />
                 </div>
                 <div className="hidden md:block nav-items max-w-xs w-full">
