@@ -11,7 +11,7 @@ import Topstories from './pages/News/Topstories';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
-import CompanyProfilePage from './pages/companyprofile';
+import CompanyProfilePage from './pages/companyProfile/index';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
 
