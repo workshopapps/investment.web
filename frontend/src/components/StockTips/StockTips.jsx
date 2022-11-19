@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import charles from '../../assets/Stock/images/Pexels Photo by Charles Parker.png';
 import image1 from '../../assets/Stock/images/Rectangle 35.png';

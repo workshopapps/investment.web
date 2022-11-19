@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { notificationData } from '../../store/notificationData/notificationData';
@@ -36,9 +37,8 @@ const Notification = () => {
                     <div className="flex gap-8">
                         <h4
                             onClick={() => setActive(true)}
-                            className={`text-[#19C170]  ${
-                                active ? 'bg-[#B8F2D6]' : ''
-                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
+                            className={`text-[#19C170]  ${active ? 'bg-[#B8F2D6]' : ''
+                                } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
                         >
                             General
                             <span className="ml-1 h-[17px] w-[17px] sm:h-[28px] sm:w-[28px] inline-flex rounded-full text-white bg-[#19C170] items-center justify-center">
@@ -47,9 +47,8 @@ const Notification = () => {
                         </h4>
                         <h4
                             onClick={() => setActive(false)}
-                            className={`text-[#19C170]  ${
-                                !active ? 'bg-[#B8F2D6]' : ''
-                            } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
+                            className={`text-[#19C170]  ${!active ? 'bg-[#B8F2D6]' : ''
+                                } font-semibold text-sm rounded-md px-4 sm:px-6 py-2 w-fit cursor-pointer`}
                         >
                             Archived
                             <span className="ml-1 h-[17px] sm:h-[28px] w-[17px] sm:w-[28px] inline-flex rounded-full text-white bg-[#19C170] items-center justify-center">
