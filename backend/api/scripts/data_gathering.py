@@ -92,6 +92,7 @@ async def pick_four_random_companies():
 
 
 
+
 loop = asyncio.get_event_loop()
 loop.run_until_complete(pick_four_random_companies())
 loop.close()
