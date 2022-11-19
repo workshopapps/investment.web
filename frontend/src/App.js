@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
@@ -10,7 +11,7 @@ import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
 import Blog from './pages/Blog/Blog';
-
+import Article from './pages/Blog/Article';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
     {
         path: '/blog',
         element: <Blog />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/articles',
+        element: <Article />,
         errorElement: <ErrorPage />
     }
 ]);

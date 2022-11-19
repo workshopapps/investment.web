@@ -3,7 +3,7 @@ import arrow from '../../assets/blog/arrow-right-black.svg';
 import newsletter from '../../assets/blog/newsletter.png';
 const Newsletter = () => {
     return (
-        <div className=" bg-[#F5F5F5] flex justify-between py-10 lg:px-32 px-8 gap-16 flex-wrap ">
+        <div className=" bg-[#F5F5F5] flex justify-between py-10 lg:px-32 px-8 gap-16 flex-wrap mb-8 ">
             <div className="w-full  md:block hidden flex-1">
                 <img src={newsletter} alt="newsletter image" />
             </div>

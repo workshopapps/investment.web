@@ -2,7 +2,7 @@ import React from 'react';
 import rect from '../../assets/blog/arrow-right-black.svg';
 const Headline = () => {
     return (
-        <div className="headline text-white bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center mx-0 my-12 lg:p-40 py-20 px-10  text-center gap-6">
+        <div className='headline text-white bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center mx-0 my-12 lg:p-40 py-20 px-10  text-center gap-6 bg-[url("./assets/blog/Rectangle.png")]'>
             <div className="font-bold lg:text-6xl text-2xl ">
                 U.S. Inflation to Remain a Pain in Granny Retail&#39;s Side
             </div>

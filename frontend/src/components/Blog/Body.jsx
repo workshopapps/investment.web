@@ -12,6 +12,7 @@ import xlinkedin from '../../assets/blog/uim_linkedin-alt.svg';
 import pic1 from '../../assets/blog/pic1.png';
 import pic2 from '../../assets/blog/pic2.png';
 import pic3 from '../../assets/blog/pic3.png';
+import profile from '../../assets/blog/Ellipse 462 (1).png';
 const Body = () => {
     const CardData = [
         {
@@ -43,11 +44,7 @@ const Body = () => {
         <div className="mt-6 ">
             <div className="lg:flex gap-8 items-center">
                 <div className="flex lg:flex-col lg:items-center text-center gap-4 lg:gap-6 p-6 bg-[#F5F5F5] w-72 sm:w-96 mx-auto lg:w-1/4  ">
-                    <img
-                        src="../src/assets/blog/Ellipse 462 (1).png"
-                        alt=""
-                        className=" object-contain"
-                    />
+                    <img src={profile} alt="" className=" object-contain" />
                     <div className="flex flex-col gap-1 lg:gap-2">
                         <div className="text-xl font-bold">Mish Schneider</div>
                         <div className="text-xs mb-1">Author</div>

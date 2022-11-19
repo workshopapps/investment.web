@@ -2,6 +2,7 @@
 import React from 'react';
 import arrowright from '../../assets/blog/arrow-right.svg';
 import circle from '../../assets/blog/Ellipse 1.svg';
+import { Link } from 'react-router-dom';
 
 const Card = ({ item }) => {
     return (
@@ -18,7 +19,9 @@ const Card = ({ item }) => {
                 </div>
                 <div className="card-details-main text-sm lg:text-base">{item.description}</div>
                 <div className="read-article text-[#1BD47B] flex font-semibold mt-4 gap-2 items-center">
-                    <span>Read article</span> <img src={arrowright} alt="" className="mt-1" />
+                    <Link to="/articles" className="flex gap-1">
+                        <span>Read article</span> <img src={arrowright} alt="" className="mt-1" />
+                    </Link>
                 </div>
             </div>
         </div>

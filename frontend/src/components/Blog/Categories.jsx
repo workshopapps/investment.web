@@ -17,7 +17,7 @@ const Categories = () => {
             <select
                 name=""
                 id=""
-                className='w-full rounded border-solid border flex justify-end lg:p-4 text-center border-[#66717E] bg-[url("./assets/blog/arrow-down.svg")] bg-no-repeat bg-contain bg-right px-4 mb-6 lg:mb-10 appearance-none outline-none '>
+                className="w-full rounded border-solid border lg:hidden flex justify-end lg:p-4 text-center border-[#66717E]  bg-no-repeat bg-contain bg-right px-4 mb-6 lg:mb-10  outline-none ">
                 <option className="" value="">
                     All
                 </option>
