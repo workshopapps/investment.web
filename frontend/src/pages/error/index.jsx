@@ -5,7 +5,7 @@ const ErrorPage = () => {
     return (
         <PageLayout>
             <span className="align-center justify-center font-HauoraBold text-center text-8xl">
-                Error page
+                Error page to be done
             </span>
         </PageLayout>
     );
