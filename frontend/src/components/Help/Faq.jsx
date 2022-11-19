@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import dropdown from './dropdown.svg';
+import dropdown from '../../assets/help/dropdown.svg';
 
 function faq({ question, answer, link }) {
     const [isFaqToggle, setIsFaqToggle] = useState(false);
