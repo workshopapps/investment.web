@@ -2,20 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from api.crud import base
 from api.models import models
 from api.schemas import schemas
+from api.crud.base import get_db
 
 from sqlalchemy.orm import Session
 
 from api.database import database
 
 router = APIRouter()
-
-def get_db():
-    """Gets the database from the local session"""
-    db = database.SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.get('/company/{company_id}', tags=["company"], response_model=schemas.Company)
 async def metrics_data(company_id: str, db: Session = Depends(get_db)):
