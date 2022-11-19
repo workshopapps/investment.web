@@ -18,6 +18,8 @@ import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
 
 import HelpPage from './pages/help/';
+import PolicyPage from './pages/privacy-statement';
+import TermsAndConditionPage from './pages/terms-of-use';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -84,7 +86,13 @@ const router = createBrowserRouter([
     {
         path: '/passwordsettings',
         element: <PasswordSettingsPage />,
-
+        path: '/policy',
+        element: <PolicyPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/terms',
+        element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
     }
 ]);
