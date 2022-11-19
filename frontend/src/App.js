@@ -8,6 +8,7 @@ import About from './pages/index/About';
 import Stock from './pages/index/Stock';
 import Help from './pages/index/Help';
 import Contact from './pages/contact/Contact';
+import Notification from './pages/notifications/Notification';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: 'contact',
                 element: <Contact />
+            },
+            {
+                path: 'notification',
+                element: <Notification />
             }
         ]
     }
