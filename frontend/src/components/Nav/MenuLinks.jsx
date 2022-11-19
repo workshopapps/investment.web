@@ -1,32 +1,32 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
-import NavLink from './NavLink'
+import MenuLink from './MenuLink';
 
-const NavLinks = () => {
+const MenuLinks = () => {
     const navLinks = [
         {
             link: "Stock",
-            url: '#'
+            url: '/'
         },
         {
             link: "About Us",
-            url: '#'
+            url: 'about'
         },
         {
             link: "Help",
-            url: '#'
+            url: 'help'
         },
     ]
   return (
-    <ul>
+    <ul className="w-full flex justify-between items center">
         {
             navLinks.map((item, index) => {
                 const {link, url} = item;
-                return <NavLink link={link} url={url} key={index}  />
+                return <MenuLink link={link} url={url} key={index}  />
             })
         }
     </ul>
   )
 }
 
-export default NavLinks
+export default MenuLinks

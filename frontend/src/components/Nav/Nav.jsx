@@ -4,6 +4,7 @@
 import React from 'react';
 import Logo from './../../assets/header/logo.png.svg';
 import NavBtn from './NavBtn';
+import MenuLinks from './MenuLinks';
 
 const Nav = () => {
     const navStyle = {
@@ -16,15 +17,13 @@ const Nav = () => {
         {name: "Get Started", background: "#1BD47B"}
     ]
   return (
-    <nav style={navStyle} className="flex justify-center items-center p-4 h-5/6">
+    <nav style={navStyle} className="flex justify-center items-center p-4 h-20">
         <div className='w-full flex items-center justify-between max-w-screen-xl'>
             <div>
                 <img src={Logo} alt="" />
             </div>
-            <div id="nav-items">
-                {
-
-                }
+            <div className="nav-items max-w-xs w-full">
+                <MenuLinks />
             </div>
             <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                 {
