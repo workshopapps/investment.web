@@ -2,10 +2,10 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import Logo from '../../assets/header/logo.png.svg';
+import Logo from '../../Assets/header/logo.png.svg';
 import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
-import Menu from '../../assets/header/menu.svg';
+import Menu from '../../Assets/header/menu.svg';
 import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types

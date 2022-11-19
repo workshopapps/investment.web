@@ -1,5 +1,5 @@
 import React from 'react';
-import Frame1 from '../../../assets/index/landing-frame1.png';
+import Frame1 from '../../../Assets/index/landing-frame1.png';
 
 const HeaderSection = () => {
     return (
