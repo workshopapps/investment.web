@@ -60,7 +60,7 @@ function Help() {
     };
     console.log(faqs);
     return (
-        <div className="py-8 sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
+        <div className="py-8 font-Hauora sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
             <h1 className="font-bold sm:text-3xl md:text-4xl text-xl lg:text-[40px]  lg:font-semibold mb-4  text-[#0A0B0D]">
                 How Can We Help You?
             </h1>

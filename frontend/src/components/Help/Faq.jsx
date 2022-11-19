@@ -5,7 +5,7 @@ import dropdown from '../../assets/help/dropdown.svg';
 function faq({ question, answer, link }) {
     const [isFaqToggle, setIsFaqToggle] = useState(false);
     return (
-        <div className="w-full text-xs sm:text-sm lg:text-base text-[#0A0B0D]">
+        <div className="w-full font-Hauora text-xs sm:text-sm lg:text-base text-[#0A0B0D]">
             <div
                 onClick={() => setIsFaqToggle(!isFaqToggle)}
                 className=" h-[42px] sm:h-12 lg:h-14 cursor-pointer flex border-b border-b-[#A3AAB2] justify-between items-center">
