@@ -16,22 +16,23 @@ app = FastAPI()
 app.include_router(company_metrics.router)
 app.include_router(company_category.router)
 
-async def test():
+
+async def update_script_task():
+    print('Running update script...')
     await pick_four_random_companies()
 
+
 @app.on_event("startup")
-@repeat_every(seconds=15)
+@repeat_every(seconds=60 * 60) # run every hour
 async def run_cron():
-    print('blah blah')
-    await test()
+    await update_script_task()
+
 
 @app.get('/')
 async def get_root():
     return {
-        "message": "welcome to investment web",
-        "url": "http://localhost:8000/docs"
+        "message": "My Stock Plug",
     }
-
 
 
 if __name__ == "__main__":
