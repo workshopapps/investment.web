@@ -22,17 +22,17 @@ const links = [
     {
         name: 'payment',
         icon: payementicon,
-        link: '/settings/payment'
+        link: '/settings'
     },
     {
         name: 'privacy',
         icon: privacyicon,
-        link: '/settings/privacy'
+        link: '/settings'
     },
     {
         name: 'password',
         icon: passwordicon,
-        link: '/password'
+        link: '/passwordsettings'
     }
 ];
 
@@ -51,7 +51,7 @@ export default function index() {
                             <Link
                                 to={link.link}
                                 key={link.name}
-                                className="flex flex-row items-center w-full h-10 mb-4">
+                                className="flex flex-row items-center w-full h-10 mb-4 hover:text-green-400 ">
                                 <img src={link.icon} alt="settingsicon" className="w-5 h-5" />
                                 <h1 className="ml-4">{link.name}</h1>
                             </Link>

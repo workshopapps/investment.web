@@ -7,7 +7,7 @@ import ErrorPage from './pages/error';
 import AboutPage from './pages/about';
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
-import PasswordSettings from './components/settings/PasswordSettings';
+import PasswordSettingsPage from './pages/passwordsettingspage';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -30,6 +30,12 @@ const router = createBrowserRouter([
     {
         path: '/profilesettings',
         element: <ProfileSettingsPage />,
+        errorElement: <ErrorPage />
+    },
+
+    {
+        path: '/passwordsettings',
+        element: <PasswordSettingsPage />,
         errorElement: <ErrorPage />
     }
 ]);
