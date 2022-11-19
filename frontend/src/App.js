@@ -12,6 +12,9 @@ import Topstories from './pages/News/Topstories';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
+import SettingsPage from './pages/settingsPage';
+import ProfileSettingsPage from './pages/profilesettings';
+import PasswordSettingsPage from './pages/passwordsettingspage';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -53,6 +56,21 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/settings',
+        element: <SettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/profilesettings',
+        element: <ProfileSettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/passwordsettings',
+        element: <PasswordSettingsPage />,
         errorElement: <ErrorPage />
     }
 ]);
