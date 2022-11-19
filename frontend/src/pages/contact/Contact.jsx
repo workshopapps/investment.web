@@ -32,7 +32,7 @@ const Contact = () => {
     return (
         <div className="font-Hauora flex flex-col justify-center items-center py-20 px-4 md:px-[5rem] 2xl:px-[10rem]">
             <div className="flex flex-col gap-10 md:gap-14 md:justify-center md:items-center w-full">
-                <h4 className="font-semibold text-xl">Contact Us</h4>
+                <h4 className="font-semibold text-2xl md:text-4xl">Contact Us</h4>
                 <div className="flex flex-col gap-8 w-full">
                     <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center">
                         Got any concerns you want <br />
@@ -65,7 +65,7 @@ const Contact = () => {
                 <div className="flex flex-col gap-4 md:w-full">
                     <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center md:w-1/2 md:text-center">
                         Get practical tips and insider secrets to help you make the right
-                        investments. .
+                        investments.
                     </h4>
                     <div className=" md:self-center flex flex-col ">
                         <form action="" onSubmit={formHandler} className="flex flex-col gap-4">
