@@ -12,5 +12,5 @@ Starting the server:
 run `yarn start`
 
 ### For more instructions for the Frontend Dev
+Check `frontend/CONTRIBUTING.md`
 
-Check `frontend/README.md`
