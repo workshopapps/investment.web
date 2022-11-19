@@ -26,7 +26,6 @@ async def call_api(url: str, queries=None):
     data = result.json()
     return data
 
-
 def sort_categories(category: Category):
     return category.market_cap
 
