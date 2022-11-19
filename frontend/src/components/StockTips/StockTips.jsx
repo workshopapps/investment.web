@@ -70,7 +70,7 @@ const StockTips = () => {
     ];
     return (
         <div>
-            <div id="charles" className="bg-gray-500">
+            <div id="charles" className="bg-gray-500 pt-24">
                 <div
                     style={{
                         // backgroundImage: `url(${charles})`
