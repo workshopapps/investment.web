@@ -8,80 +8,52 @@ import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
-import About from './pages/index/About';
-import Stock from './pages/index/Stock';
-import Help from './pages/index/Help';
+
 import Contact from './pages/contact/Contact';
-import CompanyProfilePage from './pages/companyProfile';
+import Notification from './pages/notifications/Notification';
+import CompanyProfilePage from './pages/companyProfile/index';
 
 // Define Page Routes
 const router = createBrowserRouter([
     {
         path: '/',
         element: <IndexPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/StockTips',
-        element: <StockPage />,
-        errorElement: <ErrorPage />
-     },
-     {
-        path: '/about',
-        element: <AboutPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/topstories',
-        element: <Topstories />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/news',
-        element: <NewsPage />,
         errorElement: <ErrorPage />,
-
         children: [
-            {
-                path: 'about',
-                element: <About />
-            },
-            {
-                element: <Stock />,
-                index: true
-            },
-            {
-                path: 'help',
-                element: <Help />
-            },
             {
                 path: 'contact',
                 element: <Contact />
+            },
+            {
+                path: 'notification',
+                element: <Notification />
+            },
+            {
+                path: 'StockTips',
+                element: <StockPage />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: 'about',
+                element: <AboutPage />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: 'news',
+                element: <NewsPage />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: 'topstories',
+                element: <Topstories />,
+                errorElement: <ErrorPage />
+            },
+            {
+                path: 'company-profile',
+                element: <CompanyProfilePage />,
+                errorElement: <ErrorPage />
             }
         ]
-        path: '/company-profile',
-        element: <CompanyProfilePage />,
-        errorElement: <ErrorPage />
     }
 ]);
 
