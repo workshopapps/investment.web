@@ -184,7 +184,7 @@ const StockTips = () => {
                         </button>
                     </div>
                 </div>
-                <div className="flex w-full items-center justify-center">
+                <div className="flex w-full items-center justify-center gap-12">
                     <h1>Subscribe for latest Stock Tips Update</h1>
                     <img src={bell} alt="" className=" float-right" />
                 </div>
