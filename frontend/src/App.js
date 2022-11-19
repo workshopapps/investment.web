@@ -11,7 +11,7 @@ import Topstories from './pages/News/Topstories';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
-import CompanyProfilePage from './pages/companyprofile';
+import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
 const router = createBrowserRouter([
