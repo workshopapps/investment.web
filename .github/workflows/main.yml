@@ -10,17 +10,9 @@ on:
       - staging
 
 jobs:
-  Integration:
-    timeout-minutes: 3
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Start containers
-        run: docker-compose up -d
+
 
   Deployment:
-    needs: Integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
