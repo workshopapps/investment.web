@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 import uvicorn
+
 from api.models import models
+
+from api.database import database
 from api.database.database import engine
 from api.routes import rankings
-models.Base.metadata.create_all(bind=engine)
+
+database.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
