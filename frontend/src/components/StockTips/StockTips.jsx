@@ -175,16 +175,18 @@ const StockTips = () => {
                 <h1>Subscribe for latest Stock Tips Update</h1>
                 <img src={bell} alt="" className=" float-right" />
             </div>
-            <div className="flex gap-4 items-center">
-                <div>Never miss out on anything about stock, by joining our Mailing List</div>
-                <div className="">
-                    {' '}
+            <div className="flex p-2 gap-2 justify-between text-xs bg-gray-300 w-11/12 mx-auto rounded-lg">
+                <p>Never miss out on anything about stock, by joining our Mailing List</p>
+                <span className="flex justify-between">
                     <input type="email" name="" id="" placeholder="Enter your email" />
-                    <button className="flex items-center gap-2 mx-auto bg-green-600 text-white p-4 ">
-                        Subscribe
+                    <button className="flex items-center gap-2 bg-green-600 text-white  rounded-lg">
+                        Start Investing
                         <img src={arrow} alt="" />
                     </button>
-                </div>
+                </span>
+            </div>
+            <div>
+                <h1>mock foooter</h1>
             </div>
         </div>
     );
