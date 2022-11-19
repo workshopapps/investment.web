@@ -9,7 +9,7 @@ from api.database.database import Base
 class Company(Base):
     __tablename__ = "company"
 
-    company_id = Column(String(64), primary_key=True, index=True, default=uuid4())
+    company_id = Column(String(64), primary_key=True, index=True, default=str(uuid4()))
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
     description = Column(String(1000))

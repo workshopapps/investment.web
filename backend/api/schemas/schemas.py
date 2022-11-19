@@ -9,6 +9,8 @@ class CompanyBase(BaseModel):
     location: str
     description: str
 
+    # class Config:
+    #     orm_mode = True
 
 class Company(CompanyBase):
     company_id: str
