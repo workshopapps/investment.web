@@ -1,11 +1,11 @@
-import rectImage from '../Assets/images/Rectangle 4745.png';
-import rectImage1 from '../Assets/images/Rectangle 4746.png';
-import rectImage2 from '../Assets/images/Rectangle 4747.png';
-import rectImage3 from '../Assets/images/Rectangle 4748.png';
-import rectImage4 from '../Assets/images/Rectangle 4749.png';
-import rectImage5 from '../Assets/images/Rectangle 4750.png';
-import rectImage6 from '../Assets/images/Rectangle 4751.png';
-import rectImage7 from '../Assets/images/Rectangle 4752.png';
+import rectImage from '../assets/images/Rectangle 4745.png';
+import rectImage1 from '../assets/images/Rectangle 4746.png';
+import rectImage2 from '../assets/images/Rectangle 4747.png';
+import rectImage3 from '../assets/images/Rectangle 4748.png';
+import rectImage4 from '../assets/images/Rectangle 4749.png';
+import rectImage5 from '../assets/images/Rectangle 4750.png';
+import rectImage6 from '../assets/images/Rectangle 4751.png';
+import rectImage7 from '../assets/images/Rectangle 4752.png';
 
 export const newFeed = [
     {
