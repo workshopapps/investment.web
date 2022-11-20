@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 const AboutNav = () => {
@@ -15,12 +16,14 @@ const AboutNav = () => {
             <div className=" space-x-2 md:space-x-9">
                 <a
                     className="hover:border-b-2 font-bold text-[#605E5E] hover:border-[#1BD47B] pb-1"
-                    href="#services">
+                    href="#services"
+                >
                     Our Services
                 </a>
                 <a
                     className="hover:border-b-2 font-bold text-[#605E5E] hover:border-[#1BD47B] pb-1"
-                    href="#team">
+                    href="#team"
+                >
                     Our Team
                 </a>
             </div>
