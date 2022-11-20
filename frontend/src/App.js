@@ -42,6 +42,7 @@ import Position from './pages/careers/Position';
 import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
+import Subscription from './pages/subscriptionPage/Subscription';
 
 // Define Page Routes
 const router = createBrowserRouter([
