@@ -8,9 +8,6 @@ import Section5 from './sections/Section5';
 import Section6 from './sections/Section6';
 import Section7 from './sections/Section7';
 
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
-
 export default function Career() {
     return (
         <div className="font-Hauora">
