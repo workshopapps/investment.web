@@ -15,6 +15,10 @@ import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 import Payment from './pages/paymentPage/Payment';
 
+import HelpPage from './pages/help/';
+import PolicyPage from './pages/privacy-statement';
+import TermsAndConditionPage from './pages/terms-of-use';
+
 // Define Page Routes
 const router = createBrowserRouter([
     {
@@ -60,11 +64,6 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/payment',
-        element: <Payment />,
         errorElement: <ErrorPage />
     }
 ]);
