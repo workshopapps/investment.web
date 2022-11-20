@@ -22,6 +22,10 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
+import LargeCap from './pages/cap/LargeCap';
+import SmallCap from './pages/cap/SmallCap';
+import MidCap from './pages/cap/MidCap';
+import CapIndustry from './pages/cap/Industry';
 
 import Payment from './pages/paymentPage/Payment';
 
@@ -176,30 +180,27 @@ const router = createBrowserRouter([
         path: '/plugger',
         element: <Plugger />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: '/largecap',
+        element: <LargeCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/smallcap',
+        element: <SmallCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/industrycap',
+        element: <CapIndustry />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Midcap',
+        element: <MidCap />,
+        errorElement: <ErrorPage />
     }
-    // ,
-    // {
-    //     path: '/largecap',
-    //     element: <LargeCap />,
-    //     errorElement: <ErrorPage />
-    // }
-    // ,
-    // {
-    //     path: '/smallcap',
-    //     element: <SmallCap />,
-    //     errorElement: <ErrorPage />
-    // },
-    // {
-    //     path: '/industry',
-    //     element: <Industry />,
-    //     errorElement: <ErrorPage />
-    // }
-    // ,
-    // {
-    //     path: '/Midcap',
-    //     element: <MidCap />,
-    //     errorElement: <ErrorPage />
-    // }
 ]);
 
 function App() {
