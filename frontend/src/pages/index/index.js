@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 
@@ -51,20 +52,24 @@ const IndexPage = () => {
                             </button>
                         </div>
                         <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            <CapCard
-                                logo={AccessImg}
-                                abbr="ACCESS"
-                                name="Access Holding PLC"
-                                score={89}
-                                verdict="Very Safe"
-                            />
-                            <CapCard
-                                logo={MtnImg}
-                                abbr="MTN"
-                                name="MTN Nigeria PLC"
-                                score={85}
-                                verdict="Very Safe"
-                            />
+                            <Link to="/company-profile">
+                                <CapCard
+                                    logo={AccessImg}
+                                    abbr="ACCESS"
+                                    name="Access Holding PLC"
+                                    score={89}
+                                    verdict="Very Safe"
+                                />
+                            </Link>
+                            <Link to="/company-profile">
+                                <CapCard
+                                    logo={MtnImg}
+                                    abbr="MTN"
+                                    name="MTN Nigeria PLC"
+                                    score={85}
+                                    verdict="Very Safe"
+                                />
+                            </Link>
                             <CapCard
                                 logo={NestleImg}
                                 abbr="NESTLE"

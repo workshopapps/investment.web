@@ -1,34 +1,26 @@
-from fastapi import FastAPI, BackgroundTasks
 import uvicorn
-
-from api.models import models
+from fastapi import FastAPI
+from fastapi_utils.tasks import repeat_every
 
 from api.database import database
 from api.database.database import engine
-
-
-
-from api.routers import company_metrics, company_category, company_timeframe
-from api.scripts.data_gathering import pick_four_random_companies
-from fastapi_utils.tasks import repeat_every
-
+from api.routes import routes
+from api.scripts.ranking import run_process_scripts
 
 database.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(company_metrics.router)
-app.include_router(company_category.router)
-app.include_router(company_timeframe.router)
+app.include_router(routes.router)
 
 
 async def update_script_task():
     print('Running update script...')
-    await pick_four_random_companies()
+    await run_process_scripts()
 
 
 @app.on_event("startup")
-@repeat_every(seconds=60 * 60) # run every hour
+@repeat_every(seconds=30)  # run every hour
 async def run_cron():
     await update_script_task()
 

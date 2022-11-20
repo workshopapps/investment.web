@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from datetime import date as date_type
-
-from sqlalchemy import Enum
+from typing import Optional
 
 
 class CompanyBase(BaseModel):
