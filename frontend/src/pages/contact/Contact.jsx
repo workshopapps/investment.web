@@ -44,7 +44,8 @@ const Contact = () => {
         // <PageLayout>
         <div
             data-testid={'contact-test'}
-            className="font-Hauora flex flex-col justify-center items-center py-20 px-4 md:px-[5rem] 2xl:px-[10rem]">
+            className="font-Hauora flex flex-col justify-center items-center py-20 px-4 md:px-[5rem] 2xl:px-[10rem]"
+        >
             <div className="flex flex-col gap-10 md:gap-14 md:justify-center md:items-center w-full">
                 <h4 className="font-semibold text-2xl md:text-4xl">Contact Us</h4>
                 <div className="flex flex-col gap-8 w-full">
