@@ -13,6 +13,7 @@ import Topstories from './pages/News/Topstories';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
+import Payment from './pages/paymentPage/Payment';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -59,6 +60,11 @@ const router = createBrowserRouter([
     {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/payment',
+        element: <Payment />,
         errorElement: <ErrorPage />
     }
 ]);
