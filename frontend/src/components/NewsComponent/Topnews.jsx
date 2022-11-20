@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../assets/scss/topnews.scss';
 import { BsChevronRight } from 'react-icons/bs';
-// import newimage from '../../Assets/images/Rectangle 4745.png';
+// import newimage from '../../assets/images/Rectangle 4745.png';
 import Picks from './Picks';
 import { newFeed } from '../reusabledata';
 import { Link } from 'react-router-dom';
