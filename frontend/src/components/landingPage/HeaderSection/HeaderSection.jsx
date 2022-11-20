@@ -10,7 +10,7 @@ const HeaderSection = () => {
     return (
         <React.Fragment>
             <div className="flex lg:flex-row flex-col-reverse align-right justify-between py-20 lg:mx-[100px] mx-[16px]">
-                <div className="flex flex-col gap-4">
+                <div role="test-section" className="flex flex-col gap-4">
                     <span className="text-[#8A8D95] tracking-[0.25px] md:mt-0 mt-10 font-semibold font-HauoraLight">
                         Let&apos;s unlock your financial future
                     </span>
@@ -32,7 +32,7 @@ const HeaderSection = () => {
                 </div>
 
                 <div>
-                    <img className="min-h-full" src={Frame1} alt="frame1" />
+                    <img role="section-img" className="min-h-full" src={Frame1} alt="frame1" />
                 </div>
             </div>
 
