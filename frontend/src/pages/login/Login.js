@@ -3,17 +3,42 @@ import PageLayout from '../layout';
 import mobileImage from './../../assets/login/login-mobile.png';
 import eyeIcon from './../../assets/login/eye-icon.png';
 import desktopImage from './../../assets/login/login-desktop.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = () => {
+    const navigate = useNavigate();
 
-    const handleChange =()=>{
+    const [loginForm, setLoginForm] = useState({
+        email: '',
+        password: '',
+        checkbox: false
+    });
 
-    }
+    // console.log(loginForm);
 
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-    }
+    const handleChange = (event) => {
+        const { type, name, value, checked } = event.target;
+        setLoginForm((prevState) => {
+            return {
+                ...prevState,
+                [name]: type === 'checkbox' ? checked : value
+            };
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
+            setInterval(
+                () => {
+                    navigate('/landing');
+                },
+                1,
+                500
+            );
+        }
+    };
 
     return (
         <PageLayout>
@@ -33,13 +58,18 @@ const Login = () => {
                             Log in to your account - enjoy exclusive features and more
                         </p>
                     </div>
-                    <form className="flex flex-col gap-3 mt-7 md:w-4/5 md:justify-center">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-3 mt-7 md:w-4/5 md:justify-center">
                         <div className="flex flex-col gap-1">
                             <label className="font-HauoraBold">Email</label>
                             <input
-                                type={'text'}
+                                type={'email'}
                                 placeholder={'Enter your email...'}
-                                className="border border-gray-400 px-3 h-12 rounded-md text-base"
+                                className="border border-gray-400 px-3 h-12 rounded-md text-base focus:outline-green-400 focus:shadow"
+                                onChange={handleChange}
+                                value={loginForm.email}
+                                name={'email'}
                             />
                         </div>
                         <div className="flex flex-col gap-1 relative">
@@ -47,7 +77,10 @@ const Login = () => {
                             <input
                                 type={'password'}
                                 placeholder={'Enter your password...'}
-                                className="border border-gray-400 px-3 h-12 rounded-md text-base"
+                                className="border border-gray-400 px-3 h-12 rounded-md text-base  focus:outline-green-400 focus:shadow"
+                                onChange={handleChange}
+                                value={loginForm.password}
+                                name={'password'}
                             />
                             <div className="absolute right-5 bottom-3 cursor-pointer">
                                 {' '}
@@ -56,7 +89,12 @@ const Login = () => {
                         </div>
                         <div className="flex flex-row w-full justify-between items-center">
                             <div className="flex flex-row gap-1 items-center">
-                                <input type={'checkbox'} />
+                                <input
+                                    type={'checkbox'}
+                                    onChange={handleChange}
+                                    name={'checkbox'}
+                                    value={loginForm.checkbox}
+                                />
                                 <p className="text-sm">Remember me</p>
                             </div>
                             <Link to={'/forgotpassword'} className="text-sm">
