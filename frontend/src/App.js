@@ -18,7 +18,6 @@ import Long from './pages/News/Long';
 import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
-// import CompanyProfilePage from './pages/companyprofile';
 import CompanyProfilePage from './pages/companyProfile';
 
 // Define Page Routes
@@ -101,11 +100,6 @@ const router = createBrowserRouter([
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     }
-    // {
-    //     path: 'company-profile',
-    //     element: <CompanyProfilePage />,
-    //     errorElement: <ErrorPage />
-    // }
 ]);
 
 function App() {
