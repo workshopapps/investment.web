@@ -86,6 +86,9 @@ const router = createBrowserRouter([
     {
         path: '/passwordsettings',
         element: <PasswordSettingsPage />,
+        errorElement: <ErrorPage />
+   },
+   {
         path: '/policy',
         element: <PolicyPage />,
         errorElement: <ErrorPage />
