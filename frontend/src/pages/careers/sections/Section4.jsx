@@ -21,8 +21,8 @@ export default function Section4() {
                     <Button title="View Positions" />
                 </Link>
             </div>
-            <div className="w-4/5">
-                <img src={Frame2} alt="frame 2" className="ml-20" />
+            <div className="md:w-4/5 w-full ml-4 my-4">
+                <img src={Frame2} alt="frame 2" className="md:ml-20" />
                 <div className="bg-[#0F7544] py-2 w-3/4 ml-4">
                     <p className="text-white py-1 text-sm text-bold text-center">
                         Rosemary Okemute

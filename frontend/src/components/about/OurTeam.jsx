@@ -5,7 +5,7 @@ import img3 from './../../assets/about/team-3.png';
 
 const OurTeam = () => {
     return (
-        <div className="p-5 md:pl-[50px] md:pr-[50px] lg:pl-[100px] lg:pr-[100px]">
+        <div id="team" className="p-5 md:pl-[50px] md:pr-[50px] lg:pl-[100px] lg:pr-[100px]">
             <h1 className="font-semibold text-center mb-8 pt-12 text-2xl md:text-4xl">
                 Meet Our Team
             </h1>

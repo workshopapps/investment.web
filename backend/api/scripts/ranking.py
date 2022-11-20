@@ -18,9 +18,9 @@ def rank_companies():
 
     for company in companies:
         stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id).order_by(
-            models.StockPrice.date.asc()).limit(2).all()
+            models.StockPrice.date.desc()).limit(2).all()
         financials = db.query(models.Financial).filter(models.Financial.company == company.company_id).order_by(
-            models.Financial.date.asc()).limit(2).all()
+            models.Financial.date.desc()).limit(2).all()
 
         if not stock_prices or not financials:
             continue
@@ -61,6 +61,5 @@ def rank_companies():
 
 
 async def run_process_scripts():
-    # await data_gathering.pick_four_random_companies()
-    # rank_companies()
-    pass
+    await data_gathering.pick_four_random_companies()
+    rank_companies()
