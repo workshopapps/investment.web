@@ -40,6 +40,7 @@ import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
+import Login from './pages/login/Login';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -205,6 +206,11 @@ const router = createBrowserRouter([
     {
         path: '/subscription',
         element: <Subscription />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/login',
+        element: <Login />,
         errorElement: <ErrorPage />
     }
 ]);
