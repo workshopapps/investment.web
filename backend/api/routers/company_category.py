@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.get('/company/ranks/{category}')
-async def get_company_catagory(category: str, db: Session = Depends(get_db)):
+async def get_company_category(category: str, db: Session = Depends(get_db)):
     companies = db.query(models.Company).filter(models.Company.description == category).all()
     
     if companies:
