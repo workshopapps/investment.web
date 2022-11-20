@@ -1,9 +1,14 @@
-// END TO END TEST
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import IndexPage from '../index';
+import { createRoot } from 'react-dom/client';
+import IndexPage from './index';
 
-test('renders without crashing', () => {
-    // render(<IndexPage />);
-    // expect(screen.getByText(/Our Partners/i)).toBeInTheDocument();
+import { cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom';
+
+afterEach(cleanup);
+
+it('renders without Crashing', () => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    root.render(<IndexPage />);
 });
