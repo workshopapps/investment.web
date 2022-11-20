@@ -1,18 +1,18 @@
-import React from 'react';
+// import React from 'react';
 
-let title = (
-    <span>
-        Media, Business development <br /> and partnerships:
-    </span>
-);
-let text1 = <span>https://twitter.com/mechteamplug?t=Axl-sd4ytSaCoV8bYlj-SA&s=08</span>;
-let text2 = (
-    <span>
-        https://www.instagram.com
-        <br />
-        /mechteamplug/
-    </span>
-);
+// let title = (
+//     <span>
+//         Media, Business development <br /> and partnerships:
+//     </span>
+// );
+// let text1 = <span>https://twitter.com/mechteamplug?t=Axl-sd4ytSaCoV8bYlj-SA&s=08</span>;
+// let text1 = (
+//     <span>
+//         https://www.instagram.com
+//         <br />
+//         /mechteamplug/
+//     </span>
+// );
 
 export const contactData = [
     {
@@ -30,7 +30,8 @@ export const contactData = [
     },
     {
         key: 'cd3',
-        title: title,
+        title: 'Media, Business development',
+        title2: 'and partnerships:',
         text1: 'business@mystockplug.com'
     }
 ];
@@ -38,12 +39,14 @@ export const socialData = [
     {
         key: 'sd1',
         title: 'Instagram',
-        text1: text2
+        text1: 'https://www.instagram.com',
+        text1a: '/mechteamplug/'
     },
     {
         key: 'sd2',
         title: 'Twitter',
-        text1: text1
+        // text1: text1
+        text1: 'https://twitter.com/mechteamplug?t=Axl-sd4ytSaCoV8bYlj-SA&s=08'
     },
     {
         key: 'sd3',
