@@ -27,7 +27,8 @@ const Accordian = ({ data }) => {
                 type="button"
                 id={data.id}
                 className={`button-${data.id} flex items-center justify-between w-full p-4 font-[400] text-left text-[#525A65] text-[20px] border border-[#525A65] rounded-[8px]`}
-                onClick={habdleDropDown}>
+                onClick={habdleDropDown}
+            >
                 <span className="max-sm:text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]">
                     {data.title}
                 </span>
@@ -36,11 +37,13 @@ const Accordian = ({ data }) => {
                     className={`w-6 h-6 shrink-0 accordian-icon-${data.id} transition duration-300 ease-in`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
+                    xmlns="http://www.w3.org/2000/svg"
+                >
                     <path
                         fillRule="evenodd"
                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"></path>
+                        clipRule="evenodd"
+                    ></path>
                 </svg>
             </button>
 
