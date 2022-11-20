@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from datetime import date as date_type
-
-from sqlalchemy import Enum
+from typing import Optional
 
 
 class CompanyBase(BaseModel):
@@ -34,6 +33,14 @@ class StockPriceBase(BaseModel):
     pe_ratio: float
     peg_ratio: float
     total_price_value: float
+    de_ratio: float
+    current_ratio: float
+    roe_ratio: float
+    quick_ratio: float
+    pb_ratio: float
+    ps_ratio: float
+    gross_profit_margin: float
+    dividend_yield: float
 
 
 class StockPrice(StockPriceBase):
@@ -104,3 +111,11 @@ class Category(BaseModel):
     category_id: str
     market_cap: float
     name: str
+
+class User(BaseModel):
+    user_id: str
+    email: str
+    name: str
+    
+    class Config:
+        orm_mode = True

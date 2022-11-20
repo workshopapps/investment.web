@@ -60,7 +60,8 @@ async def create_company(company: dict, db: Session):
     # insert the company
     insert_company = Company(company_id=company['symbol'], name=company['name'],
                              location=company_profile['country'], description=company_profile['description'],
-                             sector=sector_id, category=company_category.category_id, ticker=ticker_id)
+                             sector=sector_id, category=company_category.category_id, ticker=ticker_id,
+                             market_cap=company_profile['mktCap'])
     db.add(insert_company)
     db.commit()
 
@@ -73,7 +74,7 @@ async def create_or_update_stock_price(ratio: dict, stock_price_id: str, company
                               roe_ratio=ratio['returnOnEquity'], quick_ratio=ratio['quickRatio'],
                               pb_ratio=ratio['priceToBookRatio'], ps_ratio=ratio['priceToSalesRatio'],
                               gross_profit_margin=ratio['grossProfitMargin'],
-                              dividend_yield=ratio['dividendYield'])
+                              dividend_yield=ratio['dividendYield'], date=ratio['date'])
     db.add(insert_stock)
     db.commit()
     return insert_stock
@@ -82,7 +83,7 @@ async def create_or_update_stock_price(ratio: dict, stock_price_id: str, company
 async def create_or_update_financial(financial: dict, financial_id: str, company_id: str, db: Session):
     insert_financial = Financial(financial_id=financial_id, company=company_id,
                                  growth_rate=financial['revenueGrowth'],
-                                 income_statement_type='Annual')
+                                 income_statement_type='Annual', date=financial['date'])
     db.add(insert_financial)
     db.commit()
     return insert_financial

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 
@@ -12,7 +13,7 @@ import TranscorpImg from '../../assets/index/transcorp.png';
 const IndexPage = () => {
     return (
         <PageLayout>
-            <section className="bg-black">
+            <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center">
                 <div className="max-w-[792px] h-[300px] lg:h-[516px] flex flex-col justify-center xl:ml-[107px] p-5 sm:px-10 xl:p-0">
                     <h1 className="text-xl sm:text-3xl xl:text-[50px] xl:leading-[50px] font-bold text-white mb-5 lg:mb-11">
                         We Track, Analyse & Recommend the best stocks for you.
@@ -51,20 +52,24 @@ const IndexPage = () => {
                             </button>
                         </div>
                         <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            <CapCard
-                                logo={AccessImg}
-                                abbr="ACCESS"
-                                name="Access Holding PLC"
-                                score={89}
-                                verdict="Very Safe"
-                            />
-                            <CapCard
-                                logo={MtnImg}
-                                abbr="MTN"
-                                name="MTN Nigeria PLC"
-                                score={85}
-                                verdict="Very Safe"
-                            />
+                            <Link to="/company-profile">
+                                <CapCard
+                                    logo={AccessImg}
+                                    abbr="ACCESS"
+                                    name="Access Holding PLC"
+                                    score={89}
+                                    verdict="Very Safe"
+                                />
+                            </Link>
+                            <Link to="/company-profile">
+                                <CapCard
+                                    logo={MtnImg}
+                                    abbr="MTN"
+                                    name="MTN Nigeria PLC"
+                                    score={85}
+                                    verdict="Very Safe"
+                                />
+                            </Link>
                             <CapCard
                                 logo={NestleImg}
                                 abbr="NESTLE"

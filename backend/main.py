@@ -1,34 +1,37 @@
-from fastapi import FastAPI, BackgroundTasks
 import uvicorn
+from starlette.middleware.sessions import SessionMiddleware
 
-from api.models import models
+from dotenv import load_dotenv
+import os
+
+from fastapi import FastAPI
+from fastapi_utils.tasks import repeat_every
 
 from api.database import database
 from api.database.database import engine
+from api.routes import routes, social_login
+from api.scripts.ranking import run_process_scripts
 
-
-
-from api.routers import company_metrics, company_category, company_timeframe
-from api.scripts.data_gathering import pick_four_random_companies
-from fastapi_utils.tasks import repeat_every
-
+load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
 
-app.include_router(company_metrics.router)
-app.include_router(company_category.router)
-app.include_router(company_timeframe.router)
+app = FastAPI()
+SECRET_KEY = os.getenv('SECRET_KEY')
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+
+app.include_router(social_login.router)
+app.include_router(routes.router)
 
 
 async def update_script_task():
     print('Running update script...')
-    await pick_four_random_companies()
+    await run_process_scripts()
 
 
 @app.on_event("startup")
-@repeat_every(seconds=60 * 60) # run every hour
+@repeat_every(seconds=60 * 60)  # run every hour
 async def run_cron():
     await update_script_task()
 
@@ -36,7 +39,7 @@ async def run_cron():
 @app.get('/')
 async def get_root():
     return {
-        "message": "My Stock Plug",
+        "message": "My Stock Plug API",
     }
 
 

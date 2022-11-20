@@ -5,12 +5,6 @@
 Navigate to the frontend folder in your terminal:
 run `cd frontend`
 
-Install your packages and dependencies:
-run `yarn install`
-
-Starting the server:
-run `yarn start`
-
-### For more instructions for the Frontend Dev
+### For other instructions for the Frontend Devs
 Check `frontend/CONTRIBUTING.md`
 

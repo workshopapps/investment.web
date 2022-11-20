@@ -10,7 +10,7 @@ const HeaderSection = () => {
     return (
         <React.Fragment>
             <div className="flex lg:flex-row flex-col-reverse align-right justify-between py-20 lg:mx-[100px] mx-[16px]">
-                <div className="flex flex-col gap-4">
+                <div role="test-section" className="flex flex-col gap-4">
                     <span className="text-[#8A8D95] tracking-[0.25px] md:mt-0 mt-10 font-semibold font-HauoraLight">
                         Let&apos;s unlock your financial future
                     </span>
@@ -26,13 +26,13 @@ const HeaderSection = () => {
                         investment guidance.
                     </span>
 
-                    <button className="rounded-[8px] text-[16px] lg:w-1/5 w-full font-semibold bg-[#1BD47B] p-4 font-Hauora">
+                    <button className="rounded-[8px] text-[16px] lg:w-1/5 w-2/4 md:ml-0 mx-[25%] font-semibold bg-[#1BD47B] p-4 font-Hauora">
                         Get Started
                     </button>
                 </div>
 
                 <div>
-                    <img className="min-h-full" src={Frame1} alt="frame1" />
+                    <img role="section-img" className="min-h-full" src={Frame1} alt="frame1" />
                 </div>
             </div>
 

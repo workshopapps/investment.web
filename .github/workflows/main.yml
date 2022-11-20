@@ -10,38 +10,7 @@ on:
       - staging
 
 jobs:
-  Integration:
-    timeout-minutes: 3
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Create env file
-        env:
-          SQLALCHEMY_DATABASE_URL: ${{ secrets.SQLALCHEMY_DATABASE_URL }}
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-        run: |
-          mkdir env
-          touch ./env/.env
-          echo SQLALCHEMY_DATABASE_URL="$SQLALCHEMY_DATABASE_URL" >> ./env/.env
-          ls -a
-          cat env/.env
-          touch ./env/mysql.env
-          echo MYSQL_USER="$MYSQL_USER" >> ./env/mysql.env
-          echo MYSQL_PASSWORD="$MYSQL_PASSWORD" >> ./env/mysql.env
-          echo MYSQL_ROOT_PASSWORD="$MYSQL_ROOT_PASSWORD" >> ./env/mysql.env
-          echo MYSQL_DATABASE="$MYSQL_DATABASE" >> ./env/mysql.env
-          ls -a
-          cat env/mysql.env
-        shell: bash
-      - name: Start containers
-        run: docker-compose up -d
-
   Deployment:
-    needs: Integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
