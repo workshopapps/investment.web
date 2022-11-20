@@ -10,7 +10,7 @@ export default function Dropdown() {
                 className=" shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
                 <option
                     value="all"
-                    selected="selected"
+                    defaultValue
                     className="bg-white border-b border-slate-100 dark:border-slate-700 active:bg-primary102">
                     All Categories
                 </option>
@@ -49,7 +49,7 @@ export default function Dropdown() {
                 name="communte"
                 id="communte"
                 className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
-                <option value="commute" selected="selected">
+                <option value="commute" defaultValue>
                     All Commute Type
                 </option>
                 <option
@@ -72,7 +72,7 @@ export default function Dropdown() {
                 name="employment"
                 id="employment"
                 className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
-                <option value="employment" selected="selected" className="hover:bg-primary102">
+                <option value="employment" defaultValue className="hover:bg-primary102">
                     All Employment Type
                 </option>
                 <option
