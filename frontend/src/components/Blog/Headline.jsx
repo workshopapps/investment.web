@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import rect from '../../assets/blog/arrow-right-black.svg';
 import circle from '../../assets/blog/Ellipse 1 (1).svg';
 const Headline = () => {
@@ -18,10 +19,12 @@ const Headline = () => {
                 </div>
             </div>
             <div>
-                <button className="bg-[#1BD47B] rounded-lg flex justify-center font-semibold text-center w-full  text-black p-2 sm:p-4 gap-2 text-sm sm:text-sm">
-                    Read article
-                    <img src={rect} alt="" />
-                </button>
+                <Link to="/articles">
+                    <button className="bg-[#1BD47B] rounded-lg flex justify-center font-semibold text-center w-full  text-black p-2 sm:p-4 gap-2 text-sm sm:text-sm">
+                        Read article
+                        <img src={rect} alt="" />
+                    </button>
+                </Link>
             </div>
         </div>
     );
