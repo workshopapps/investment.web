@@ -50,7 +50,7 @@ export default function Form() {
                 <br />
                 <textarea
                     type="text"
-                    rows="15"
+                    rows="10"
                     name="message"
                     required
                     placeholder="Tell us about yourself"

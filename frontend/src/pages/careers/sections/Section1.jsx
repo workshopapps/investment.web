@@ -16,7 +16,7 @@ export default function Section1() {
                     If you love working smart, taking on big challenges and making impacts, then
                     join amazing people at mystockplug.
                 </p>
-                <Link to="/plugger">
+                <Link to="/position">
                     <Button title="View Positions" />
                 </Link>
             </div>

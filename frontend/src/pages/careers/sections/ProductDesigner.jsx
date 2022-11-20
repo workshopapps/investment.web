@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function ProductDesigner() {
     return (
-        <div className="border border-shade100 p-6 m-10 rounded-md shadow sm:bg-shade100 md:bg-shade100">
-            <div className="md:block sm:block flex justify-evenly content-center gap-4 md:mb-2 sm:mb-2 my-4 mx-6 p-4 w-full">
-                <div className="">
-                    <p className="font-medium text-xl leading-8 tracking-widest text-primary102">
+        <div className="border border-shade100 p-8 m-10 rounded-md shadow bg-shade100 md:bg-white ">
+            <div className="grid grid-cols-2  w-full mx-4  place-content-center gap-6">
+                <div className="w-3/4">
+                    <p className="font-medium text-xl leading-8 tracking-widest text-primary102 w-full">
                         Product Designer
                     </p>
-                    <p className="font-normal text-sm leading-6 tracking-widest w-1/2">
+                    <p className="font-normal text-sm leading-6 tracking-widest w-full mt-3">
                         We are seeking a Product Designer with a passion for finding solutions that
                         allow customers to intuitively use our products. The ideal candidate will be
                         skilled at each stage of the design process but always focused on the needs
@@ -17,7 +17,7 @@ export default function ProductDesigner() {
                         to make informed decisions.
                     </p>
                 </div>
-                <div>
+                <div className="mt-6">
                     <ul className="font-normal text-sm leading-6 tracking-widest mt-5 w-full">
                         <li>
                             {' '}
@@ -36,7 +36,7 @@ export default function ProductDesigner() {
                             </svg>
                             Full-time
                         </li>
-                        <li>
+                        <li className="my-2">
                             {' '}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -73,26 +73,28 @@ export default function ProductDesigner() {
                 </div>
             </div>
 
-            <div className=" md:block sm:block flex justify-evenly content-center gap-4 my-4 md:my-2 sm:my-2 mx-6 p-4 w-full">
-                <div className="w-1/2">
-                    <p className="font-medium text-base leading-8 tracking-widest text-primary102">
+            <div className=" grid grid-cols-2 mx-4 my-8 w-full">
+                <div className="w-3/4">
+                    <p className="font-medium text-xl leading-8 tracking-widest text-primary102">
                         Job Responsibilities
                     </p>
-                    <ul className="font-normal text-sm leading-6  list-disc w-full text-justify">
-                        <li>Identify opportunities for new products</li>
-                        <li>
-                            Analyze how a new product ties in with market needs and consumer
-                            preferences
-                        </li>
-                        <li>
-                            Set design requirements based on briefs from internal teams and external
-                            partners
-                        </li>
-                        <li>Research materials and techniques</li>
-                    </ul>
+                    <div className="w-full ">
+                        <ul className="font-normal text-sm leading-6  list-disc text-justify mt-2">
+                            <li>Identify opportunities for new products</li>
+                            <li>
+                                Analyze how a new product ties in with market needs and consumer
+                                preferences
+                            </li>
+                            <li>
+                                Set design requirements based on briefs from internal teams and
+                                external partners
+                            </li>
+                            <li>Research materials and techniques</li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="w-1/2">
-                    <ul className="font-normal text-sm leading-6  list-disc w-full text-justify">
+                <div className="w-full">
+                    <ul className="font-normal text-sm leading-6  ml-4 list-disc w-full text-justify mt-6">
                         <li>Sketch drafts on paper or digitally (for example, using CAD)</li>
                         <li>Use 3D modeling software to design products and components</li>
                         <li>Produce prototypes and test functionality</li>
@@ -101,32 +103,34 @@ export default function ProductDesigner() {
                     </ul>
                 </div>
             </div>
-            <div className=" md:block sm:block flex justify-evenly content-center gap-4 my-4 mx-6 md:my-2 sm:my-2 p-4 w-full">
-                <div className="w-1/2">
+            <div className="grid grid-cols-2 mx-4 w-full">
+                <div className="w-3/4">
                     <p className="font-medium text-xl leading-8  text-primary102 tracking-widest">
                         Job Requirement
                     </p>
-                    <ul className="font-normal text-sm leading-6  list-disc w-full text-justify">
-                        <li>
-                            Proven experience in all phases of the design process including user
-                            research, copywriting, wireframing, prototyping, visual design,
-                            interaction design, and usability testing
-                        </li>
-                        <li>An intuitive eye for customer needs beyond the obvious</li>
-                        <li>Excellent attention to detail</li>
-                        <li>Ability to collaborate with cross-functional team members</li>
-                        <li>
-                            Ability to collect and interpret both qualitative and quantitative
-                            feedback
-                        </li>
-                        <li>
-                            A well-rounded portfolio of client work, demonstrating a strong
-                            understanding of client objectives
-                        </li>
-                    </ul>
+                    <div className="w-full ml-10">
+                        <ul className="font-normal text-sm leading-6  list-disc text-justify mt-2">
+                            <li>
+                                Proven experience in all phases of the design process including user
+                                research, copywriting, wireframing, prototyping, visual design,
+                                interaction design, and usability testing
+                            </li>
+                            <li>An intuitive eye for customer needs beyond the obvious</li>
+                            <li>Excellent attention to detail</li>
+                            <li>Ability to collaborate with cross-functional team members</li>
+                            <li>
+                                Ability to collect and interpret both qualitative and quantitative
+                                feedback
+                            </li>
+                            <li>
+                                A well-rounded portfolio of client work, demonstrating a strong
+                                understanding of client objectives
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="w-1/2">
-                    <ul className="font-normal text-sm leading-6  list-disc w-full mt-8 md:mt-0 sm:mt-0 text-justify">
+                <div className="w-3/4 ml-4">
+                    <ul className="font-normal text-sm leading-6  list-disc w-full mt-6  text-justify">
                         <li>
                             Ability to effectively communicate and persuade around design concepts
                         </li>

@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Box from '../../../components/careers/Box/Box';
 import Button from '../../../components/careers/Buttons/Button';
 
 export default function Section3() {
     return (
-        <div className="m-8">
+        <div className="m-12">
             <p className="text-primary102 pb-2 text-3xl">Open Positions</p>
             <p className="text-primaryGray text-sm">
                 These are some of the the most recent open positions:
@@ -45,7 +46,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Product & Design</p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box position="Product & Design" employment="Full Time" commute="Remote" />
@@ -58,7 +63,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Finance </p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box
@@ -77,7 +86,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Sales & Marketing</p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box position="Growth Manager" employment="Full Time" commute="Remote" />
@@ -96,7 +109,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Engineering </p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box
@@ -113,7 +130,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Legal </p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box position="Privacy Analyst" employment="Full Time" commute="Remote" />
@@ -126,7 +147,11 @@ export default function Section3() {
                                 <p className="text-primary102 text-sm">Finance </p>
                             </div>
                             <div>
-                                <span className="ml-3 text-xs text-primary102">See All &gt;</span>
+                                <Link to="/position">
+                                    <span className="ml-3 text-xs text-primary102 cursor-pointer">
+                                        See All &gt;
+                                    </span>
+                                </Link>
                             </div>
                         </div>
                         <Box

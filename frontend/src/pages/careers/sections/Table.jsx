@@ -6,16 +6,16 @@ export default function Table() {
         <table className="border-collapse table-auto w-11/12 text-sm overflow-hidden mt-6">
             <thead>
                 <tr>
-                    <th className="border-b-3 dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3  text-primary104 text-left">
+                    <th className="border-b-4 dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3  text-primary104 text-left">
                         Positions
                     </th>
-                    <th className="border-b-3 dark:border-slate-600 font-medium p-4 pt-0 pb-3  text-primary104 text-left">
+                    <th className="border-b-4 dark:borde-slate-600 font-medium p-4 pt-0 pb-3  text-primary104 text-left">
                         Category
                     </th>
-                    <th className="border-b-3 dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3  text-primary104 text-left">
+                    <th className="border-b-4 dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3  text-primary104 text-left">
                         Commute Type
                     </th>
-                    <th className="border-b-3 dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3  text-primary104 text-left">
+                    <th className="border-b-4 dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3  text-primary104 text-left">
                         Employment Type
                     </th>
                 </tr>
