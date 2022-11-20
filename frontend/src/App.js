@@ -33,6 +33,9 @@ import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
 import Careers from './pages/careers/Careers';
+
+import Login from './pages/login/Login';
+
 import Plugger from './pages/careers/Plugger';
 import Position from './pages/careers/Position';
 
@@ -199,6 +202,11 @@ const router = createBrowserRouter([
     {
         path: '/Midcap',
         element: <MidCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/login',
+        element: <Login />,
         errorElement: <ErrorPage />
     }
 ]);
