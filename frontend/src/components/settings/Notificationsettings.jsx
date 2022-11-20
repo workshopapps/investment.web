@@ -19,7 +19,7 @@ export default function Notificationsettings() {
     return (
         <div className="flex flex-col w-full pb-[100px] ">
             <div className="flex flex-col w-full h-full py-10">
-                <div className="flex flex-col w-full h-full py-2 px-[80px] font-semibold text-base text-black">
+                <div className="flex flex-col w-full h-full py-2 px-2 md:px-[30px] font-semibold text-base text-black">
                     <h1 className="text-4xl">Notifications</h1>
                     <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-black ">
                         <div className="flex justify-between items-center py-6">
@@ -137,7 +137,7 @@ export default function Notificationsettings() {
                         </div>
                         <hr />
                     </div>
-                    <div className="flex flex-col ml-auto mr-4 mt-[70px]">
+                    <div className="flex flex-col md:ml-auto mr-4 mt-[70px]">
                         <button className="bg-[#19C170] text-black  font-semibold text-base py-4 px-8 rounded-md">
                             Update Notification
                         </button>

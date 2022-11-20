@@ -6,7 +6,7 @@ import profileimg from '../../assets/settings/profileimg.png';
 export default function ProfileSection() {
     return (
         <div className="flex">
-            <div className="flex flex-col w-full h-full pl-10 pr-[100px] pt-[56px] pb-[100px]">
+            <div className="flex flex-col w-full h-full mx-2 md:pl-10 md:pr-[100px] pt-[56px] pb-[100px]">
                 <div className="flex flex-col w-full h-full mb-6 font-semibold text-base text-black">
                     <h1 className="text-4xl">Profile</h1>
                 </div>
@@ -48,7 +48,7 @@ export default function ProfileSection() {
                             />
                         </div>
                     </form>
-                    <div className="flex flex-col ml-auto mt-[70px]">
+                    <div className="flex flex-col md:ml-auto mt-[70px]">
                         <button className="bg-[#19C170] text-black  font-semibold text-base py-4 px-[54px] rounded-md">
                             Save Profile
                         </button>
