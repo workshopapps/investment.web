@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CardItem = ({ title, subTitle, icon }) => {
     return (
-        <div className="md:w-1/3 flex flex-col py-10 justify-items-center">
+        <div className="md:w-1/3 flex flex-col py-10 justify-items-center shadow-md">
             <span className="mx-auto justify-center">
                 <img src={icon} alt="icon"></img>
             </span>
@@ -13,7 +13,6 @@ const CardItem = ({ title, subTitle, icon }) => {
             <span className="text-[#8A8D95] md:mx-[25%] mx-[10%] tracking-[0.25px] md:mt-0 mb-10 font-semibold font-HauoraLight">
                 {subTitle}
             </span>
-            <hr className="md:hidden" />
         </div>
     );
 };
