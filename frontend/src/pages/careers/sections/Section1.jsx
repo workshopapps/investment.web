@@ -5,7 +5,9 @@ import Button from '../../../components/careers/Buttons/Button';
 
 export default function Section1() {
     return (
-        <div className=" container bg-center mx-auto my-10 md:p-4 grid md:grid-cols-2 grid-cols-1 w-full p-2 flex-col ">
+        <div
+            data-testid="section1"
+            className=" container bg-center mx-auto my-10 md:p-4 grid md:grid-cols-2 grid-cols-1 w-full p-2 flex-col ">
             <div className="h-1/2 px-2 py-20 w-full">
                 <span className="text-primary101 py-2 text-sm font-bold">Careers</span>
                 <h1 className="text-bold text-3xl tracking-widest leading-7">

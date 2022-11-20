@@ -4,12 +4,12 @@ import Button from '../../../components/careers/Buttons/Button';
 export default function OpenPositions() {
     return (
         <div className="mt-7 mb-4 mx-6">
-            <p className="text-primary102 px-2 text-xl">
+            <p className="text-primary102 px-2 text-2xl">
                 {' '}
                 <span className="w-3 h-3 p-2 mx-2 bg-primary102"></span> All Open Postions
             </p>
 
-            <form className="flex justify-center content-center gap-4">
+            <form className="flex justify-center content-center gap-4 mt-3">
                 <input
                     type="text"
                     placeholder="Search positions,category"

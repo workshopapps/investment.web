@@ -73,12 +73,12 @@ export default function ProductDesigner() {
                 </div>
             </div>
 
-            <div className=" grid md:grid-cols-2  gap-2 grid-cols-1 mx-4 my-8 w-full">
-                <div className="w-3/4">
-                    <p className="font-medium text-xl leading-8 tracking-widest text-primary102">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-2  my-6 w-full ml-4">
+                <div className="w-3/4 ">
+                    <p className="font-medium text-xl leading-8  text-primary102 tracking-widest">
                         Job Responsibilities
                     </p>
-                    <div className="w-full ">
+                    <div className="w-full md:ml-10 ml-2">
                         <ul className="font-normal text-sm leading-6  list-disc text-justify mt-2">
                             <li>Identify opportunities for new products</li>
                             <li>
@@ -93,8 +93,8 @@ export default function ProductDesigner() {
                         </ul>
                     </div>
                 </div>
-                <div className="w-full">
-                    <ul className="font-normal text-sm leading-6  md:ml-4 ml-0 list-disc w-full text-justify md:mt-6 mt-1">
+                <div className="w-3/4 md:ml-4 ml-1">
+                    <ul className="font-normal text-sm leading-6  md:ml-4 ml-0 list-disc w-full text-justify md:mt-6 mt-0">
                         <li>Sketch drafts on paper or digitally (for example, using CAD)</li>
                         <li>Use 3D modeling software to design products and components</li>
                         <li>Produce prototypes and test functionality</li>
@@ -103,8 +103,9 @@ export default function ProductDesigner() {
                     </ul>
                 </div>
             </div>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-2  mx-4 w-full">
-                <div className="w-3/4">
+
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-2  w-full ml-4">
+                <div className="w-3/4 ">
                     <p className="font-medium text-xl leading-8  text-primary102 tracking-widest">
                         Job Requirement
                     </p>

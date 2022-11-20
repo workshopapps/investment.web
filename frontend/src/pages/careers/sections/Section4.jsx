@@ -5,7 +5,9 @@ import Button from '../../../components/careers/Buttons/Button';
 
 export default function Section4() {
     return (
-        <div className="block p-6 lg:flex md:flex sm:flex content-center justify-center bg-shade500 my-4 ">
+        <div
+            className="block p-6 lg:flex md:flex sm:flex content-center justify-center bg-shade500 my-4 "
+            data-testid="section4">
             <div className="ml-6 flex justify-center content-center flex-col">
                 <ul className="flex content-center text-primaryGray gap-6  text-bold list-disc px-4 py-2 ">
                     <li>Belong</li>

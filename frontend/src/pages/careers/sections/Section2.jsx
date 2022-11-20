@@ -2,7 +2,9 @@ import React from 'react';
 
 export default function Section2() {
     return (
-        <div className="w-full bg-secondaryBlack text-center p-6 rounded-sm">
+        <div
+            data-test-id="section2"
+            className="w-full bg-secondaryBlack text-center p-6 rounded-sm">
             <p className="text-primary102 pb-2 text-3xl text-bold">Plug Into Your Dreams</p>
             <div className="flex content-center justify-center">
                 <p className="p-4 text-white text-center tracking  leading-7 text-base md:w-3/4 w-full ">

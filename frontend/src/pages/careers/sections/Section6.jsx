@@ -3,7 +3,9 @@ import Frame7 from '../../../assets/careers/frame7.png';
 
 export default function Section6() {
     return (
-        <div className="container bg-center mx-auto my-10 p-4 lg:flex md:flex sm:flex content-center justify-center w-full gap-x-8 block">
+        <div
+            className="container bg-center mx-auto my-10 p-4 lg:flex md:flex sm:flex content-center justify-center w-full gap-x-8 block"
+            data-tesid="section6">
             <div className="w-full">
                 <img src={Frame7} alt="frame7" className="w-full h-full object-cover rounded-lg" />
             </div>

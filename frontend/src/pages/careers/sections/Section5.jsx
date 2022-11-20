@@ -6,7 +6,9 @@ import Frame6 from '../../../assets/careers/frame6.png';
 
 export default function Section5() {
     return (
-        <div className="my-8 container flex justify-center content-center flex-col mx-6 ">
+        <div
+            className="my-8 container flex justify-center content-center flex-col mx-6 "
+            data-testid="section4">
             <p className="font-semibold text-xl leading-7 text-primary101 pt-4">
                 Perks &amp; Benefits
             </p>

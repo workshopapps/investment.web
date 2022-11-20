@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function Dropdown() {
     return (
-        <div className="flex flex-col  w-2/4 md:w-full h-full gap-4 ml-10 my-5 md:justify-center md:content-center">
-            <p className="py-5 text-secondaryBlack font-normal text-base leading-8">Filters</p>
+        <div className="flex flex-col  md:w-3/4 w-full h-full gap-4 ml-10 my-10 md:justify-start">
+            <p className="py-5 text-secondaryBlack font-normal text-lg leading-8">Filters</p>
             <select
                 name="category"
                 id="category"
-                className=" shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
+                className=" shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-normal">
                 <option
                     value="all"
                     defaultValue
@@ -48,7 +48,7 @@ export default function Dropdown() {
             <select
                 name="communte"
                 id="communte"
-                className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
+                className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-normal">
                 <option value="commute" defaultValue>
                     All Commute Type
                 </option>
@@ -71,7 +71,7 @@ export default function Dropdown() {
             <select
                 name="employment"
                 id="employment"
-                className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-semibold">
+                className="shadow-md overflow-hidden relative border-2 border-shade100  p-3 rounded-lg outline-none cursor-pointer bg-transparent text-normal leading-5 font-normal">
                 <option value="employment" defaultValue className="hover:bg-primary102">
                     All Employment Type
                 </option>
