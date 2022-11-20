@@ -111,7 +111,7 @@ async def get_company_category(category: str):
 
 
 @router.get('/company/{company_id}/interval', tags=["Company"], )
-async def get_company_metrics_for_interval(company_id: str, startDateTimestamp: str, endDateTimestamp: str,
+async def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: str,
                                            db: Session = Depends(get_db)):
     """
     This gets the metrics of a company within a specified interval
@@ -121,12 +121,12 @@ async def get_company_metrics_for_interval(company_id: str, startDateTimestamp: 
         raise HTTPException(status_code=404, detail="Company info not available")
 
     stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
-                                                      models.StockPrice.date >= startDateTimestamp,
-                                                      models.StockPrice.date <= endDateTimestamp
+                                                      models.StockPrice.date >= startDate,
+                                                      models.StockPrice.date <= endDate
                                                       ).order_by(models.StockPrice.date.asc()).all()
     financials = db.query(models.Financial).filter(models.Financial.company == company_id,
-                                                   models.Financial.date >= startDateTimestamp,
-                                                   models.Financial.date <= endDateTimestamp
+                                                   models.Financial.date >= startDate,
+                                                   models.Financial.date <= endDate
                                                    ).order_by(models.Financial.date.asc()).all()
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
