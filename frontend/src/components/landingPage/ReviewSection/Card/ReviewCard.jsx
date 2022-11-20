@@ -20,7 +20,8 @@ const ReviewItem = ({ name, description }) => {
 
             <span
                 role="item-desc"
-                className="text-[#545964] lg:text-md text-sm tracking-[0.25px] font-semibold my-4 font-Hauora">
+                className="text-[#545964] lg:text-md text-sm tracking-[0.25px] font-semibold my-4 font-Hauora"
+            >
                 {description}
             </span>
         </div>
