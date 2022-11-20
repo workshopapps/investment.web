@@ -1,17 +1,13 @@
 import React from 'react';
 import Button from '../Buttons/Button';
 import useForm from './useForm';
+import validate from './LoginRules';
 
 export default function Form() {
-    const initialState = { email: '', fullName: '', message: '' };
-    const { values, errors, handleChange, handleSubmit } = useForm(initialState, validations);
-    const validations = [
-        ({ fullName }) => isRequired(fullName) || { fullName: 'Full name is required' },
-        ({ email }) => isRequired(email) || { email: 'E-mail is required' },
-        ({ message }) => isRequired(message) || { message: 'Message is required' }
-    ];
-    function isRequired(value) {
-        return value != null && value.trim().length > 0;
+    const { values, errors, handleChange, handleSubmit } = useForm(login, validate);
+
+    function login() {
+        console.log('No errors, submit callback called!');
     }
     return (
         <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
@@ -22,7 +18,7 @@ export default function Form() {
                 <br />
                 <input
                     type="text"
-                    value={values.fullName}
+                    value={values.fullName || ''}
                     name="fullName"
                     required
                     placeholder="Enter your full name"
@@ -40,7 +36,7 @@ export default function Form() {
                     type="text"
                     required
                     name="email"
-                    value={values.email}
+                    value={values.email || ''}
                     placeholder="Enter your email address"
                     className="{`' '${errors.email && 'border-red-200'}`}bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
                     onChange={handleChange}
@@ -59,7 +55,7 @@ export default function Form() {
                     required
                     placeholder="Tell us about yourself"
                     className="{`' '${errors.fullName && 'border-red-200'}` bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
-                    value={values.message}
+                    value={values.message || ''}
                     onChange={handleChange}
                 />
                 {errors.message && <p className="text-red text-xs">{errors.message}</p>}
