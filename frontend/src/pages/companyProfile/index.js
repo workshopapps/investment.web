@@ -2,13 +2,14 @@ import React from 'react';
 import { cardsData } from '../../store/cardsData';
 import PropTypes from 'prop-types';
 import PageLayout from '../layout';
+import './company-profile.css';
 
 // Company details card
 const CompanyCard = ({ title, calculation, determinant, text, status }) => {
     return (
-        <div className="mx-[100px] mt-6">
+        <div className="mx-0 md:mx-[100px] mt-6">
             <div className="flex justify-between pt-[17px] pb-[18px] px-[30px] bg-white">
-                <h3 className="text-[#1F2226] text-2xl font-semibold">{title}</h3>
+                <h3 className="text-[#1F2226] text-[1rem] md:text-2xl font-semibold">{title}</h3>
                 <h4 className="bg-[#139757] rounded text-[#1F2226] text-base font-semibold px-[17px] py-[5px]">
                     {status}
                 </h4>
@@ -41,17 +42,17 @@ const CompanyProfilePage = () => {
         <PageLayout>
             <div className="bg-[#f5f5f5] font-Hauora">
                 <div>
-                    <div className="flex bg-white mt-7 pt-5 pb-[30px] text-[32px] px-[98px]">
+                    <div className="company-breadcrumb flex bg-white mt-7 pt-5 pb-[30px] text-[2rem] px-[98px]">
                         Company Profile / Summary of Analysis
                     </div>
-                    <div className="px-[6.25rem]">
+                    <div className="md:px-[6.25rem] px-[2rem]">
                         <h3 className="text-[40px] text-[#3D444C] font-semibold opacity-50 pt-10 pb-[34px]">
                             Fundamental Analysis
                         </h3>
                         <h5 className="text-xl text-[#525A65] pb-6 "> About the Company </h5>
                     </div>
                     <div className="bg-white">
-                        <p className="text-base font-semibold opacity-50 pt-[39px] pb-4 px-[6.25rem]">
+                        <p className="text-base font-semibold opacity-50 pt-[39px] pb-4 md:px-[6.25rem] px-[2rem]">
                             Amazon.com is an American tech multinational whose business interests
                             include e-commerce, cloud computing, digital streaming, and artificial
                             intelligence. A Fortune 100 mainstay, Amazon.com is also one of the Big
@@ -68,7 +69,7 @@ const CompanyProfilePage = () => {
                         </p>
                     </div>
                     <div className="text-xl text-[#525A65] pt-6 pb-4 px-[100px]">Our Analysis</div>
-                    <div className="flex flex-col bg-white px-[130px]">
+                    <div className="flex flex-col bg-white px-[2rem] md:px-[130px]">
                         <div>
                             <h3 className="text-2xl text-[#000616] font-semibold pt-[45px] pb-6 ">
                                 {' '}
@@ -79,7 +80,7 @@ const CompanyProfilePage = () => {
                                 </span>
                             </h3>
                         </div>
-                        <div className="flex justify-between">
+                        <div className="flex flex-col md:flex-row justify-between">
                             <div>
                                 <h3 className="py-2 font-bold text-[#66717E] text-2xl">
                                     $282.75{''}
@@ -103,14 +104,14 @@ const CompanyProfilePage = () => {
                                         </span>{' '}
                                     </p>
                                 </div>
-                                <div className="bg-[#139757] text-white font-bold text-[57px] flex items-center h-16 px-4">
+                                <div className="bg-[#139757] text-white font-bold text-[0.75rem] md:text-[57px] flex items-center h-[30px] md:h-16 px-4">
                                     89
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="mx-[100px] mt-6">
+                    <div className="mx-[0] md:mx-[100px] px-[2rem] md:px-[0] my-6">
                         <div>
                             {cardsData.map((item) => (
                                 <CompanyCard

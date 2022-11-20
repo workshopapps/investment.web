@@ -2,16 +2,30 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
-import IndexPage from './pages/index/index'; // Landing Page Component
+import IndexPage from './pages/index';
+import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
-
+import Picked from './pages/News/Picked';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
-import CompanyProfilePage from './pages/companyProfile/index';
+import World from './pages/News/World';
+import Small from './pages/News/Small';
+import Long from './pages/News/Long';
+import Industry from './pages/News/Industry';
+import Local from './pages/News/Local';
+import Bigcap from './pages/News/Bigcap';
+import CompanyProfilePage from './pages/companyProfile';
+import SettingsPage from './pages/settingsPage';
+import ProfileSettingsPage from './pages/profilesettings';
+import PasswordSettingsPage from './pages/passwordsettingspage';
+
+import HelpPage from './pages/help';
+import PolicyPage from './pages/privacy-statement';
+import TermsAndConditionPage from './pages/terms-of-use';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -21,38 +35,106 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/landing',
+        element: <LandingPage />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/contact',
         element: <Contact />,
         errorElement: <ErrorPage />
     },
 
     {
-        path: 'notification',
+        path: '/notification',
         element: <Notification />
     },
     {
-        path: 'StockTips',
+        path: '/StockTips',
         element: <StockPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'about',
+        path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'news',
+        path: '/news',
         element: <NewsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'topstories',
+        path: '/topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
     },
     {
-        path: 'company-profile',
+        path: '/World',
+        element: <World />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Small',
+        element: <Small />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/long',
+        element: <Long />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/industry',
+        element: <Industry />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/mid',
+        element: <Bigcap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Local',
+        element: <Local />
+    },
+    {
+        path: '/picked',
+        element: <Picked />
+    },
+    {
+        path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/help',
+        element: <HelpPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/settings',
+        element: <SettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/profilesettings',
+        element: <ProfileSettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/passwordsettings',
+        element: <PasswordSettingsPage />,
+        errorElement: <ErrorPage />
+   },
+   {
+        path: '/policy',
+        element: <PolicyPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/terms',
+        element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
     }
 ]);

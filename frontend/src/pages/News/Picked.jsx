@@ -1,14 +1,13 @@
 import React from 'react';
-import '../../Assets/scss/topnews.scss';
+import '../../assets/scss/topnews.scss';
 import '../../index.css';
-// import newimage from '../../Assets/images/Rectangle 4745.png';
-// import Picks from '../../components/NewsComponent/Picks';
+
 import { newFeed } from '../../components/reusabledata';
 const Picked = () => {
     return (
         <section className="usable__container">
             <div>
-                <span className="top__span">Top stories</span>
+                <span className="top__span">Picks For you</span>
 
                 {newFeed.map((data) => {
                     return (
