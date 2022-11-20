@@ -14,7 +14,7 @@ import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 
-import HelpPage from './pages/help/';
+import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
 
