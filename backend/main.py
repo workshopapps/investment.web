@@ -12,10 +12,6 @@ from api.database.database import engine
 from api.routes import routes, social_login
 from api.scripts.ranking import run_process_scripts
 
-from fastapi import FastAPI, BackgroundTasks, HTTPException, status
-#from api.scripts.email import send_email_background, send_email_async
-from sqlalchemy.testing import db
-
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
@@ -45,32 +41,6 @@ async def get_root():
     return {
         "message": "My Stock Plug API",
     }
-
-# @app.get('/send-email/asynchronous')
-# async def send_email_asynchronous():
-#     user = await db["users"].find_one({"email": user_email.email})
-#     print(user)
-#     if user is not None:
-#         await send_email_async('Hello World', 'someemail@gmail.com', {
-#             'title': 'Hello World',
-#             'name': 'user["name"],'
-#         })
-#         return 'Success'
-#     else:
-#         raise HTTPException(
-#             status_code=status.HTTP_404_NOT_FOUND,
-#             detail="Your details not found, invalid email address"
-#         )
-
-
-# @app.get('/send-email/backgroundtasks')
-# def send_email_backgroundtasks(background_tasks: BackgroundTasks):
-#     send_email_background(background_tasks, 'Hello ', 'someemail@gmail.com', {
-#         'title': 'Mystock plug',
-#         'name': 'user'
-#     })
-#     return 'Success'
-#
 
 
 if __name__ == "__main__":
