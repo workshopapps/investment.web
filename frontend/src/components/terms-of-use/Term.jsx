@@ -15,8 +15,7 @@ const Term = ({ data }) => {
             </h1>
             <div
                 className="custom-content max-sm:text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px]"
-                ref={contentRef}
-            ></div>
+                ref={contentRef}></div>
         </div>
     );
 };
