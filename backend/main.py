@@ -7,13 +7,15 @@ from api.models import models
 from api.database import database
 from api.database.database import engine
 from api.routers import company_metrics, company_category, social_login
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 database.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
-
-app.add_middleware(SessionMiddleware, secret_key="SECRET KEY")
+SECRET_KEY = os.getenv('SECRET_KEY')
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 app.include_router(company_metrics.router)
 app.include_router(company_category.router)
