@@ -51,8 +51,14 @@ const Footer = () => {
                     <div className="w-60 pb-8 md:pb-0">
                         <img src={logo} alt="" />
                     </div>
-                    <div className={`${pathname=='/' || pathname =="/company-profile"? "hidden lg:flex pt-4": "hidden"}`}>
-                        <img src={downloadImage} alt="download image" className="w-full"/>
+                    <div
+                        className={`${
+                            pathname == '/' || pathname == '/company-profile'
+                                ? 'hidden lg:flex pt-4'
+                                : 'hidden'
+                        }`}
+                    >
+                        <img src={downloadImage} alt="download image" className="w-full" />
                     </div>
                 </div>
                 <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">

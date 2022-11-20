@@ -21,10 +21,12 @@ export default function Section3() {
                         name="category"
                         id="category"
                         required
-                        className="h-11 w- 10 mt-5 border-2 border-shade100 bg-white rounded-lg text-xs outline-none">
+                        className="h-11 w- 10 mt-5 border-2 border-shade100 bg-white rounded-lg text-xs outline-none"
+                    >
                         <option
                             value="all"
-                            className="bg-white border-b border-slate-100 dark:border-slate-700">
+                            className="bg-white border-b border-slate-100 dark:border-slate-700"
+                        >
                             All Categories
                         </option>
                         <option value="engineering">Engineering</option>

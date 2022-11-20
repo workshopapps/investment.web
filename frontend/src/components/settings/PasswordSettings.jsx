@@ -13,8 +13,9 @@ export default function PasswordSettings() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="currentpassword"
-                                className="text-base font-semibold text-[#000000]">Current
-                                Password
+                                className="text-base font-semibold text-[#000000]"
+                            >
+                                Current Password
                             </label>
                             <input
                                 type="password"
@@ -28,7 +29,9 @@ export default function PasswordSettings() {
                             <label
                                 htmlFor="newpassword"
                                 className="text-base font-semibold text-[#000000]"
-                            > New Password
+                            >
+                                {' '}
+                                New Password
                             </label>
                             <input
                                 type="password"

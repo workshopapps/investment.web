@@ -19,7 +19,8 @@ export default function Section6() {
                             viewBox="0 0 24 24"
                             strokeWidth={1}
                             stroke="#fff"
-                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4">
+                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -42,7 +43,8 @@ export default function Section6() {
                             viewBox="0 0 24 24"
                             strokeWidth={1}
                             stroke="#fff"
-                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4">
+                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -64,7 +66,8 @@ export default function Section6() {
                             viewBox="0 0 24 24"
                             strokeWidth={1}
                             stroke="#fff"
-                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4">
+                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -86,7 +89,8 @@ export default function Section6() {
                             viewBox="0 0 24 24"
                             strokeWidth={1}
                             stroke="#fff"
-                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4">
+                            className="inline bg-primary102 rounded-full w-8 h-8 mr-4"
+                        >
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
