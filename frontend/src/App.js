@@ -7,6 +7,9 @@ import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
+
+import Contact from './pages/contact/Contact';
+import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 import DownloadPage from './pages/download';
 

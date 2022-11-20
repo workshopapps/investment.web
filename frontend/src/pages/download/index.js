@@ -2,10 +2,11 @@ import React from 'react';
 import downloadImage from '../../assets/downloadImage/desktopImg.png';
 import loosingChartImg from '../../assets/downloadImage/loosingChartImg.png';
 import tabLinkingImg from '../../assets/downloadImage/tabLinkingImg.png';
+import PageLayout from '../layout';
 
 const DownloadPage = () => {
     return (
-        <div>
+        <PageLayout>
             <div className="container flex flex-col md:flex-row items-center  mx-auto mt-10 space-y-0 md:space-y-0flex bg-[#F5F5F5] py-16 px-16">
                 <div className="mx-auto w-34">
                     <h1 className="text-[#1BD47B] text-5xl my-15 md:text-left">MyStockPlug</h1>
@@ -78,7 +79,7 @@ const DownloadPage = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </PageLayout>
     );
 };
 export default DownloadPage;
