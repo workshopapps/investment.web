@@ -22,6 +22,7 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
+import Payment from './pages/paymentPage/Payment';
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
@@ -111,6 +112,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/payment',
+        element: <Payment />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/blog',
         element: <Blog />,
         errorElement: <ErrorPage />
@@ -139,8 +145,8 @@ const router = createBrowserRouter([
         path: '/passwordsettings',
         element: <PasswordSettingsPage />,
         errorElement: <ErrorPage />
-   },
-   {
+    },
+    {
         path: '/policy',
         element: <PolicyPage />,
         errorElement: <ErrorPage />

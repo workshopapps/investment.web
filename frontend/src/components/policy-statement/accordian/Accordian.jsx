@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 

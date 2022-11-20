@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 export default function PasswordSettings() {
@@ -12,7 +13,8 @@ export default function PasswordSettings() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="currentpassword"
-                                className="text-base font-semibold text-[#000000]">
+                                className="text-base font-semibold text-[#000000]"
+                            >
                                 Current Password
                             </label>
                             <input
@@ -26,7 +28,8 @@ export default function PasswordSettings() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="newpassword"
-                                className="text-base font-semibold text-[#000000]">
+                                className="text-base font-semibold text-[#000000]"
+                            >
                                 New Password
                             </label>
                             <input
