@@ -13,7 +13,7 @@ import TranscorpImg from '../../assets/index/transcorp.png';
 const IndexPage = () => {
     return (
         <PageLayout>
-            <section className="bg-black">
+            <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center">
                 <div className="max-w-[792px] h-[300px] lg:h-[516px] flex flex-col justify-center xl:ml-[107px] p-5 sm:px-10 xl:p-0">
                     <h1 className="text-xl sm:text-3xl xl:text-[50px] xl:leading-[50px] font-bold text-white mb-5 lg:mb-11">
                         We Track, Analyse & Recommend the best stocks for you.

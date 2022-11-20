@@ -118,3 +118,12 @@ class Category(Base):
     name = Column(String(30))
 
     cat = relationship("Company", back_populates="cat_value")
+
+class User(Base):
+    __tablename__ = "user"
+
+    id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    email = Column(String(30))
+    name = Column(String(30))
+
+    

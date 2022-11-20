@@ -8,6 +8,10 @@ module.exports = {
                 Hauora: ['Hauora-Regular'],
                 HauoraBold: ['Hauora-Bold']
             },
+            backgroundImage: {
+                'hero-desktop': "url('./assets/index/header-desktop.svg')",
+                'hero-mobile': "url('./assets/index/header-mobile.svg')"
+            },
             colors: {
                 primary101: '#0B5934',
                 primary102: '#1BD47B',

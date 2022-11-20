@@ -1,16 +1,27 @@
 import uvicorn
+from starlette.middleware.sessions import SessionMiddleware
+
+from dotenv import load_dotenv
+import os
+
 from fastapi import FastAPI
 from fastapi_utils.tasks import repeat_every
 
 from api.database import database
 from api.database.database import engine
-from api.routes import routes
+from api.routes import routes, social_login
 from api.scripts.ranking import run_process_scripts
+
+load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
 
+app = FastAPI()
+SECRET_KEY = os.getenv('SECRET_KEY')
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+
+app.include_router(social_login.router)
 app.include_router(routes.router)
 
 
@@ -28,7 +39,7 @@ async def run_cron():
 @app.get('/')
 async def get_root():
     return {
-        "message": "My Stock Plug",
+        "message": "My Stock Plug API",
     }
 
 
