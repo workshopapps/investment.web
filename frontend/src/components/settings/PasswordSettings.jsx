@@ -46,10 +46,10 @@ export default function PasswordSettings() {
                         </div>
                     </form>
                     <div className="flex flex-col md:ml-auto mt-[70px]">
-                        <button 
+                        <button
                             type="submit"
                             onClick={handleSubmit}
-                         className="bg-[#19C170] text-black  font-semibold text-base py-4 px-[54px] rounded-md">
+                            className="bg-[#19C170] text-black  font-semibold text-base py-4 px-[54px] rounded-md">
                             Reset Password
                         </button>
                     </div>

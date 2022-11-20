@@ -5,16 +5,16 @@ import img3 from './../../assets/about/box.png';
 
 export const Section = () => {
     return (
-        <>
+        <div id="services">
             <div className='bg-[#fafaff] flex flex-col md:flex-row gap-8 pt-9 justify-center bg-[url("/src/assets/about/bg-vec.png")] bg-no-repeat bg-right-bottom pb-24'>
                 <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
                     <h3 className="font-bold text-xl mb-2 text-center md:text-left">Who We Are</h3>
                     <p className="text-[#66717E] text-center md:text-left">
                         MyStockPlug is a stock advisory platform offering guidance to prospective
-                        investors, new or seasoned alike with our free and premium services it is
-                        simple, straightforward, and interfac e is very user-intuitive, with
-                        up-to-date valuations on growth potential, and market value of top companies
-                        or stocks to invest in.
+                        investors, new or seasoned alike. We offer free and premium services with a
+                        simple, straightforward, and user-intuitive interface, with up-to-date
+                        valuations on growth potential, and market value of top companies or stocks
+                        to invest in.
                     </p>
                 </div>
                 <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
@@ -23,8 +23,7 @@ export const Section = () => {
                         MyStockPlug guides individuals and businesses who need help knowing what
                         stocks to invest in to make better and well-informed decisions on what
                         stocks to purchase. We bring the best to you after analyzing each of these
-                        companies based on various metrics. Here is how we help you make educated
-                        decisions;
+                        companies based on various metrics.
                     </p>
                 </div>
             </div>
@@ -72,7 +71,7 @@ export const Section = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
