@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import OpenPositions from './sections/OpenPositions';
 import Section8 from './sections/Section8';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import Frame7 from '../../../assets/careers/frame7.png';
 
