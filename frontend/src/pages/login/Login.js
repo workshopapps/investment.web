@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../layout';
 import mobileImage from './../../assets/login/login-mobile.png';
 import eyeIcon from './../../assets/login/eye-icon.png';
 // import eyeIconOpen from './../../assets/login/eye-icon-2.png';
 import desktopImage from './../../assets/login/login-desktop.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 const Login = () => {
     const navigate = useNavigate();
