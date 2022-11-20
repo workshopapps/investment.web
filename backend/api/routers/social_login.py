@@ -40,7 +40,7 @@ async def auth(request: Request):
                         'name':username['name']}
     google_user = schemas.User
 
-    #check whwther user already exists
+    #check whether user already exists
     user_data = db.query(models.User).filter(models.User.id == username['sub']).first() 
     if user_data: 
         old_user_type_data = {'user_type': 'old user'}

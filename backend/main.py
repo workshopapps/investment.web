@@ -13,7 +13,7 @@ database.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.add_middleware(SessionMiddleware, secret_key="secret-string")
+app.add_middleware(SessionMiddleware, secret_key="SECRET KEY")
 
 app.include_router(company_metrics.router)
 app.include_router(company_category.router)
