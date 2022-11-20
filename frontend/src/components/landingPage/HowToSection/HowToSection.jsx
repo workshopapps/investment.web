@@ -15,7 +15,8 @@ const HowToSection = () => {
 
                 <span
                     role="title"
-                    className="text-[#000718] text-2xl tracking-[0.25px] py-4 font-light font-HauoraLight">
+                    className="text-[#000718] text-2xl tracking-[0.25px] py-4 font-light font-HauoraLight"
+                >
                     How It Works
                 </span>
 
