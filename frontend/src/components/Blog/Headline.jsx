@@ -1,5 +1,6 @@
 import React from 'react';
 import rect from '../../assets/blog/arrow-right-black.svg';
+import circle from '../../assets/blog/Ellipse 1 (1).svg';
 const Headline = () => {
     return (
         <div className='headline text-white bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center mx-0 my-12 lg:p-40 py-20 px-10  text-center gap-6 bg-[url("./assets/blog/Rectangle.png")]'>
@@ -12,7 +13,7 @@ const Headline = () => {
                 (XRT).{' '}
                 <div className=" flex gap-2">
                     <span>Cameron Williamson</span>
-                    <img src="./assets/blog/Ellipse 1 (1).svg" alt="" />
+                    <img src={circle} alt="" />
                     <span>11 November 2022</span>
                 </div>
             </div>
