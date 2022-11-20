@@ -7,7 +7,7 @@ export default function Section6() {
             <div className="w-full">
                 <img src={Frame7} alt="frame7" className="w-full h-full object-cover rounded-lg" />
             </div>
-            <div>
+            <div className="pt-6 md:pt-1">
                 <p className="font-medium text-4xl leading-8 text-primary101 py-2">
                     Our Work Values
                 </p>

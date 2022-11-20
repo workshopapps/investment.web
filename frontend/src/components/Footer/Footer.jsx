@@ -23,7 +23,8 @@ const Footer = () => {
                 { link: 'Help', to: '/help' },
                 { link: 'FAQ', to: '#' },
                 { link: 'News', to: 'news' },
-                { link: 'Blog', to: '/blog' }
+                { link: 'Blog', to: '/blog' },
+                { link: 'Settings', to: '/settings' }
             ]
         },
         {
@@ -44,8 +45,7 @@ const Footer = () => {
     return (
         <footer
             style={footerStyle}
-            className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full"
-        >
+            className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full">
             <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
                 <div>
                     <div className="w-60 pb-8 md:pb-0">
@@ -73,7 +73,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 MyStockPlug</div>
+            <div className="text-center pb-10">2022 MyStockPlug </div>
         </footer>
     );
 };

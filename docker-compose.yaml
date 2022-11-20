@@ -2,7 +2,7 @@ version: "3"
 
 services:
   frontend:
-      image: habibo1234/investment-fe:1.0
+      image: habibo1234/investment-fe:2.0
       container_name: frontend
       ports:
           - 3000:3000
@@ -11,13 +11,9 @@ services:
         - backend
 
   backend:
-    image: habibo1234/investment-be:4.0
+    image: habibo1234/investment-be:6.0
     container_name: backend
     restart: always
     command: uvicorn main:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
-networks:
-  default:
-  name:
-  external:

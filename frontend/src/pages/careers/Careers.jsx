@@ -10,8 +10,8 @@ import Section7 from './sections/Section7';
 
 export default function Career() {
     return (
-        <PageLayout>
-            <div className="font-Hauora">
+        <div className="font-Hauora">
+            <PageLayout>
                 <Section1 />
                 <Section2 />
                 <Section3 />
@@ -19,7 +19,7 @@ export default function Career() {
                 <Section5 />
                 <Section6 />
                 <Section7 />
-            </div>
-        </PageLayout>
+            </PageLayout>
+        </div>
     );
 }

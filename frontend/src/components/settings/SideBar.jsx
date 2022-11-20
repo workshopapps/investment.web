@@ -40,9 +40,9 @@ const links = [
 
 export default function index() {
     return (
-        <div className="flex pl-[40px] py-4 w-1/5 h-full bg-[ #FFFFFF]">
+        <div className="flex pl-[0px] md:pl-[30px] py-4 h-full bg-[ #FFFFFF]">
             <div className="flex flex-col  w-full ">
-                <div className="flex flex-col w-full py-11">
+                <div className="flex flex-col w-full pl-4 md:pl-0 py-11">
                     <div className="flex flex-row md:flex-row items-center w-full h-10 mb-4">
                         <img src={settingsicon} alt="settingsicon" className="w-5 h-5" />
                         <span className="hidden md:flex text-[#0A0B0D] font-medium text-2xl ml-4">
@@ -63,7 +63,7 @@ export default function index() {
                         ))}
                     </div>
                     <Link
-                        to="/settings/logout"
+                        to="/"
                         className="flex flex-row items-center w-full h-10 mt-10 text-base font-semibold"
                     >
                         <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
