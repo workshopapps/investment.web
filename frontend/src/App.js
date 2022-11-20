@@ -22,10 +22,19 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
+import LargeCap from './pages/cap/LargeCap';
+import SmallCap from './pages/cap/SmallCap';
+import MidCap from './pages/cap/MidCap';
+import CapIndustry from './pages/cap/Industry';
+
 import Payment from './pages/paymentPage/Payment';
+
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
+import Careers from './pages/careers/Careers';
+import Plugger from './pages/careers/Plugger';
+import Position from './pages/careers/Position';
 
 import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
@@ -144,6 +153,7 @@ const router = createBrowserRouter([
     {
         path: '/passwordsettings',
         element: <PasswordSettingsPage />,
+
         errorElement: <ErrorPage />
     },
     {
@@ -155,30 +165,42 @@ const router = createBrowserRouter([
         path: '/terms',
         element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: '/careers',
+        element: <Careers />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/position',
+        element: <Position />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/plugger',
+        element: <Plugger />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/largecap',
+        element: <LargeCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/smallcap',
+        element: <SmallCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/industrycap',
+        element: <CapIndustry />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Midcap',
+        element: <MidCap />,
+        errorElement: <ErrorPage />
     }
-    // ,
-    // {
-    //     path: '/largecap',
-    //     element: <LargeCap />,
-    //     errorElement: <ErrorPage />
-    // }
-    // ,
-    // {
-    //     path: '/smallcap',
-    //     element: <SmallCap />,
-    //     errorElement: <ErrorPage />
-    // },
-    // {
-    //     path: '/industry',
-    //     element: <Industry />,
-    //     errorElement: <ErrorPage />
-    // }
-    // ,
-    // {
-    //     path: '/Midcap',
-    //     element: <MidCap />,
-    //     errorElement: <ErrorPage />
-    // }
 ]);
 
 function App() {

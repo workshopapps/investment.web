@@ -10,7 +10,7 @@ const Footer = () => {
             name: 'Get To Know Us',
             navLinks: [
                 { link: 'About MyStockPlug', to: '/about' },
-                { link: 'Careers', to: '#' },
+                { link: 'Careers', to: '/careers' },
                 { link: 'Stock Tips', to: '/StockTips' },
                 { link: 'Contact Us', to: '/contact' }
             ]

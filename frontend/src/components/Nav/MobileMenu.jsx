@@ -16,11 +16,11 @@ const MobileMenu = ({ toggleMenu }) => {
         },
         {
             link: 'About Us',
-            url: 'about'
+            url: '/about'
         },
         {
             link: 'Help',
-            url: 'help'
+            url: '/help'
         }
     ];
     const btns = [

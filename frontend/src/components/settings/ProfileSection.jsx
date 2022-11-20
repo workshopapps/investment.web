@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+
 import React from 'react';
 import profileimg from '../../assets/settings/profileimg.png';
 
@@ -36,7 +37,7 @@ export default function ProfileSection() {
                                 htmlFor="location"
                                 className="text-base font-semibold text-[#0074FF]"
                             >
-                                Location
+                                 Location
                             </label>
                             <input
                                 type="text"

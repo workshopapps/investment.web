@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+
 import { React } from 'react';
 import settingsicon from '../../assets/settings/settingsicon.svg';
 import profileicon from '../../assets/settings/profileicon.svg';
@@ -63,8 +64,7 @@ export default function index() {
                     </div>
                     <Link
                         to="/settings/logout"
-                        className="flex flex-row items-center w-full h-10 mt-10 text-base font-semibold"
-                    >
+                        className="flex flex-row items-center w-full h-10 mt-10 text-base font-semibold">
                         <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
                         <h1 className="hidden md:flex ml-4 text-[#E84E4E]">Logout</h1>
                     </Link>

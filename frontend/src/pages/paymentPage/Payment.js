@@ -65,7 +65,7 @@ const Payment = () => {
                 {/* left side ends here */}
 
                 {/* right side start from here */}
-                <div className=" w-full md:w-full lg:w-1/2 flex flex-col justify-center theRightSide items-center lg:w-1/2 md:w-1 sm:w-1 mt-16">
+                <div className=" w-full lg:w-1/2 flex flex-col justify-center theRightSide items-center md:w-1 sm:w-1 mt-16">
                     <div className="w-[95%] relative p-5 border-[#1BD47B] border-solid border-2 rounded-md flex justify-around items-center">
                         <div className="ml-4">
                             <input
