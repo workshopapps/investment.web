@@ -2,6 +2,7 @@ import React from 'react';
 import PageLayout from '../layout';
 import mobileImage from './../../assets/login/login-mobile.png';
 import eyeIcon from './../../assets/login/eye-icon.png';
+// import eyeIconOpen from './../../assets/login/eye-icon-2.png';
 import desktopImage from './../../assets/login/login-desktop.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -9,14 +10,20 @@ import { useState } from 'react';
 const Login = () => {
     const navigate = useNavigate();
 
+    //form
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: '',
         checkbox: false
     });
 
-    // console.log(loginForm);
+    //password toggle
+    // const [passwordToggle, setPasswordToggle] = useState(false);
 
+    const [passwordType, setPasswordType] = useState('password');
+    // console.log(passwordRef.current.type);
+
+    //track changes in form
     const handleChange = (event) => {
         const { type, name, value, checked } = event.target;
         setLoginForm((prevState) => {
@@ -37,6 +44,14 @@ const Login = () => {
                 1,
                 500
             );
+        }
+    };
+
+    const togglePassword = () => {
+        if (passwordType === 'password') {
+            setPasswordType('text');
+        } else {
+            setPasswordType('password');
         }
     };
 
@@ -75,14 +90,16 @@ const Login = () => {
                         <div className="flex flex-col gap-1 relative">
                             <label className="font-HauoraBold">Password</label>
                             <input
-                                type={'password'}
+                                type={passwordType}
                                 placeholder={'Enter your password...'}
                                 className="border border-gray-400 px-3 h-12 rounded-md text-base  focus:outline-green-400 focus:shadow"
                                 onChange={handleChange}
                                 value={loginForm.password}
                                 name={'password'}
                             />
-                            <div className="absolute right-5 bottom-3 cursor-pointer">
+                            <div
+                                className="absolute right-5 bottom-3 cursor-pointer"
+                                onClick={togglePassword}>
                                 {' '}
                                 <img src={eyeIcon} />
                             </div>
