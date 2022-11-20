@@ -21,7 +21,7 @@ const Footer = () => {
                 { link: 'Help', to: '#' },
                 { link: 'FAQ', to: '#' },
                 { link: 'News', to: 'news' },
-                { link: 'Blog', to: '#' }
+                { link: 'Blog', to: '/blog' }
             ]
         },
         {
