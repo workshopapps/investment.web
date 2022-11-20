@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import PageLayout from '../layout';
 import Back from '../../assets/company-profile/back-arrow-icon.svg';
 
-import './company-profile.css';
-
 // Company details card
 const CompanyCard = ({ title, calculation, determinant, text, status }) => {
     return (
