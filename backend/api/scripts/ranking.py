@@ -61,6 +61,6 @@ def rank_companies():
 
 
 async def run_process_scripts():
-    # await data_gathering.pick_four_random_companies()
-    # rank_companies()
+    await data_gathering.pick_four_random_companies()
+    rank_companies()
     pass
