@@ -3,9 +3,15 @@
     justify-content: space-between;
     gap: 2%;
     // flex-wrap: wrap;
-    @media (max-width: 550px) {
+    @media (max-width: 900px) {
         flex-direction: column;
     }
+}
+.top__news{
+    @media (max-width: 900px) {
+        margin: 2rem 0;
+    }
+   
 }
 .topNews__second {
     height: 500px;

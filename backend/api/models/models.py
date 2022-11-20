@@ -11,7 +11,7 @@ from api.database.database import Base
 class Company(Base):
     __tablename__ = "company"
 
-    id = Column("company_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company_id = Column("company_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
     description = Column(String(10000))
@@ -30,7 +30,7 @@ class Company(Base):
 class StockPrice(Base):
     __tablename__ = "stock_prices"
 
-    id = Column("stock_price_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    stock_price_id = Column("stock_price_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     company = Column(String(64), ForeignKey("company.company_id"))
     market_cap = Column(Float, nullable=True)
     stock_price = Column(Float, nullable=True)
@@ -58,7 +58,7 @@ class StockPrice(Base):
 class Ranking(Base):
     __tablename__ = 'rankings'
 
-    id = Column("ranking_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    ranking_id = Column("ranking_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     company = Column(String(64), ForeignKey("company.company_id"))
     score = Column(Float)
     methodology = Column(String(1000), nullable=True)
@@ -70,7 +70,7 @@ class Ranking(Base):
 class Sector(Base):
     __tablename__ = "sectors"
 
-    id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    sector_id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     industry = Column(String(64))
 
     sect = relationship("Company", back_populates="sect_value")
@@ -79,7 +79,7 @@ class Sector(Base):
 class Ticker(Base):
     __tablename__ = "tickers"
     
-    id = Column("ticker_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    ticker_id = Column("ticker_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     symbol = Column(String(10))
     exchange_name = Column(String(30))
     exchange_symbol = Column(String(10))
@@ -92,7 +92,7 @@ class Ticker(Base):
 class Financial(Base):
     __tablename__ = "financials"
 
-    id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     company = Column(String(64), ForeignKey("company.company_id"))
     date = Column(DateTime(timezone=True), server_default=func.now())
     equity = Column(Float, nullable=True)
@@ -111,7 +111,7 @@ class Financial(Base):
 class Category(Base):
     __tablename__ = "categories"
 
-    id = Column("category_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    category_id = Column("category_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     market_cap = Column(Float)
     name = Column(String(30))
 

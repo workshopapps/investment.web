@@ -10,11 +10,11 @@ const MenuLinks = () => {
         },
         {
             link: 'About Us',
-            url: 'about'
+            url: '/about'
         },
         {
             link: 'Help',
-            url: 'help'
+            url: '/help'
         }
     ];
     return (
