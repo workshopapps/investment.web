@@ -37,6 +37,7 @@ import Plugger from './pages/careers/Plugger';
 import Position from './pages/careers/Position';
 
 import HelpPage from './pages/help';
+import DownloadPage from './pages/download';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
@@ -155,6 +156,11 @@ const router = createBrowserRouter([
         path: '/passwordsettings',
         element: <PasswordSettingsPage />,
 
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/download',
+        element: <DownloadPage />,
         errorElement: <ErrorPage />
     },
     {
