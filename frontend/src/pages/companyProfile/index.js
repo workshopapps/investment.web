@@ -1,16 +1,18 @@
+/* eslint-disable */
 import React from 'react';
-import { cardsData } from '../../store/cardsData';
+import { Link } from 'react-router-dom';
+import { cardsData } from '../../store/cardsData/cardsData';
 import PropTypes from 'prop-types';
 import PageLayout from '../layout';
-import './company-profile.css';
+import Back from '../../assets/company-profile/back-arrow-icon.svg';
 
 // Company details card
 const CompanyCard = ({ title, calculation, determinant, text, status }) => {
     return (
         <div className="mx-0 md:mx-[100px] mt-6">
-            <div className="flex justify-between pt-[17px] pb-[18px] px-[30px] bg-white">
+            <div className="flex justify-between pt-[17px] pb-[18px] px-4 md:px-[30px] bg-white">
                 <h3 className="text-[#1F2226] text-[1rem] md:text-2xl font-semibold">{title}</h3>
-                <h4 className="bg-[#139757] rounded text-[#1F2226] text-base font-semibold px-[17px] py-[5px]">
+                <h4 className="bg-[#139757] rounded text-white text-base font-semibold px-[17px] py-[5px]">
                     {status}
                 </h4>
             </div>
@@ -42,9 +44,12 @@ const CompanyProfilePage = () => {
         <PageLayout>
             <div className="bg-[#f5f5f5] font-Hauora">
                 <div>
-                    <div className="company-breadcrumb flex bg-white mt-7 pt-5 pb-[30px] text-[2rem] px-[98px]">
-                        Company Profile / Summary of Analysis
-                    </div>
+                    <Link to="/">
+                        <div className="flex bg-white mt-0 md:mt-7 pt-5 pb-[10px] md:pb-[30px] text-[1rem] md:text-[2rem] px-5 md:px-[98px]">
+                            <img src={Back} alt="back" className="w-2 md:w-3 mr-2 md:mr-4" />{' '}
+                            Company Profile / Summary of Analysis
+                        </div>
+                    </Link>
                     <div className="md:px-[6.25rem] px-[2rem]">
                         <h3 className="text-[40px] text-[#3D444C] font-semibold opacity-50 pt-10 pb-[34px]">
                             Fundamental Analysis
@@ -68,7 +73,9 @@ const CompanyProfilePage = () => {
                             conditions.
                         </p>
                     </div>
-                    <div className="text-xl text-[#525A65] pt-6 pb-4 px-[100px]">Our Analysis</div>
+                    <div className="text-xl text-[#525A65] pt-6 pb-4 px-5 md:px-[100px]">
+                        Our Analysis
+                    </div>
                     <div className="flex flex-col bg-white px-[2rem] md:px-[130px]">
                         <div>
                             <h3 className="text-2xl text-[#000616] font-semibold pt-[45px] pb-6 ">
@@ -130,5 +137,4 @@ const CompanyProfilePage = () => {
         </PageLayout>
     );
 };
-
 export default CompanyProfilePage;

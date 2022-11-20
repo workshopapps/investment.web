@@ -1,0 +1,100 @@
+{
+    "elems":[
+        {
+            "position": "Account Manager",
+            "category": "Finance",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Application Security Engineer",
+            "category": "Engineering",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Associate Customer Success",
+            "category": "Sales/Manager",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Business Development Manager",
+            "category": "Engineering",
+            "commute": "Hybrid",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Cloud Architecture",
+            "category": "Engineering",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Customer Success Manger",
+            "category": "Engineering",
+            "commute": "Remote",
+            "employment": "Contract"
+        },
+        {
+            "position": "Cyberscurity Expert",
+            "category": "Engineering",
+            "commute": "Remote",
+            "employment": "Part Time"
+        },
+        {
+            "position": "Chief Financial Officer",
+            "category": "Management",
+            "commute": "In-person",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Chief Marketing Officer",
+            "category": "Management",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Data Scientist",
+            "category": "Engineering",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Financial Analyst",
+            "category": "Finance",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Human Resource Manager",
+            "category": "Management",
+            "commute": "In-person",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Junior Product Designer",
+            "category": "Product & Design",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Product Designer Lead",
+            "category": "Product & Design",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Product Manager",
+            "category": "Product & Design",
+            "commute": "Remote",
+            "employment": "Full Time"
+        },
+        {
+            "position": "Risk Control Manager",
+            "category": "Finance",
+            "commute": "hybrid",
+            "employment": "Full Time"
+        }
+    ]
+}

@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 import uvicorn
 from starlette.middleware.sessions import SessionMiddleware
 
@@ -6,10 +5,19 @@ from api.models import models
 
 from api.database import database
 from api.database.database import engine
-from api.routers import company_metrics, company_category, social_login
 from dotenv import load_dotenv
 import os
+
+from fastapi import FastAPI
+from fastapi_utils.tasks import repeat_every
+
+from api.database import database
+from api.database.database import engine
+from api.routes import routes, social_login
+from api.scripts.ranking import run_process_scripts
+
 load_dotenv()
+
 database.Base.metadata.create_all(bind=engine)
 
 
@@ -17,18 +25,26 @@ app = FastAPI()
 SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
-app.include_router(company_metrics.router)
-app.include_router(company_category.router)
 app.include_router(social_login.router)
+app.include_router(routes.routes)
+
+
+async def update_script_task():
+    print('Running update script...')
+    await run_process_scripts()
+
+
+@app.on_event("startup")
+@repeat_every(seconds=30)  # run every hour
+async def run_cron():
+    await update_script_task()
 
 
 @app.get('/')
 async def get_root():
     return {
-        "message": "welcome to investment web",
-        "url": "http://localhost:8000/docs"
+        "message": "My Stock Plug",
     }
-
 
 
 if __name__ == "__main__":
