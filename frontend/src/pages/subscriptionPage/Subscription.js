@@ -81,7 +81,8 @@ const Subscription = () => {
                             <div className="mt-10 md:mt-10 lg:mt-52 mb-10 md:mb-10 lg:mb-10 flex justify-center">
                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
-                                    type="button">
+                                    type="button"
+                                >
                                     <span>Subscribe</span>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
                                     <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
@@ -130,7 +131,8 @@ const Subscription = () => {
                             <div className="mt-10 md:mt-10 lg:mt-40 mb-10 md:mb-10 lg:mb-10 flex justify-center">
                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[white] text-[#1BD47B] font-bold py-2 px-4 rounded"
-                                    type="button">
+                                    type="button"
+                                >
                                     <span>Subscribe</span>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
                                     <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
@@ -184,7 +186,8 @@ const Subscription = () => {
                             <div className="mt-10 md:mt-10 lg:mt-[8.4em] mb-10 md:mb-10 lg:mb-10 flex justify-center">
                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
-                                    type="button">
+                                    type="button"
+                                >
                                     <span>Subscribe</span>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
                                     <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
