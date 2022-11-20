@@ -19,6 +19,9 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
+import SettingsPage from './pages/settingsPage';
+import ProfileSettingsPage from './pages/profilesettings';
+import PasswordSettingsPage from './pages/passwordsettingspage';
 
 import HelpPage from './pages/help/';
 import PolicyPage from './pages/privacy-statement';
@@ -110,6 +113,21 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/settings',
+        element: <SettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/profilesettings',
+        element: <ProfileSettingsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/passwordsettings',
+        element: <PasswordSettingsPage />,
+        errorElement: <ErrorPage />
+   },
+   {
         path: '/policy',
         element: <PolicyPage />,
         errorElement: <ErrorPage />
