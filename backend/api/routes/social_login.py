@@ -20,29 +20,31 @@ oauth.register(
     }
 )
 
+
 @router.get('/googlelogin')
 async def google_login(request: Request):
     redirect_uri = request.url_for('auth')
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
-@router.get('/auth') #auth redirection
+
+@router.get('/auth')  # auth redirection
 async def auth(request: Request):
     db: Session = next(get_db())
     try:
         token = await oauth.google.authorize_access_token(request)
     except OAuthError as error:
         return {"Error": "authentication error"}
-    username = token['userinfo'] 
-    google_user_data = {'user_id':username['sub'], 
-                        'profile_picture':username['picture'], 
-                        'email_verified':username['email_verified'], 
-                        'email':username['email'],
-                        'name':username['name']}
+    username = token['userinfo']
+    google_user_data = {'user_id': username['sub'],
+                        'profile_picture': username['picture'],
+                        'email_verified': username['email_verified'],
+                        'email': username['email'],
+                        'name': username['name']}
     google_user = schemas.User
 
-    #check whether user already exists
-    user_data = db.query(models.User).filter(models.User.id == username['sub']).first() 
-    if user_data: 
+    # check whether user already exists
+    user_data = db.query(models.User).filter(models.User.id == username['sub']).first()
+    if user_data:
         old_user_type_data = {'user_type': 'old user'}
         old_user_data = {**google_user_data, **old_user_type_data}
         return old_user_data
@@ -51,7 +53,7 @@ async def auth(request: Request):
         thename = username['name']
         theid = username['sub']
         theemail = username['email']
-        
+
         db_user = models.User(id=theid, email=theemail, name=thename)
         db.add(db_user)
         db.commit()
@@ -59,4 +61,3 @@ async def auth(request: Request):
         new_user_type_data = {'user_type': 'new user(added to database)'}
         new_user_data = {**google_user_data, **new_user_type_data}
         return new_user_data
-    
