@@ -65,6 +65,26 @@ const router = createBrowserRouter([
         path: '/company-profile',
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: '/payment',
+        element: <Payment />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/help',
+        element: <HelpPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/policy',
+        element: <PolicyPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/terms',
+        element: <TermsAndConditionPage />,
+        errorElement: <ErrorPage />
     }
 ]);
 
