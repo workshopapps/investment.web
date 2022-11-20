@@ -123,11 +123,11 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
     stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
                                                       models.StockPrice.date >= startDate,
                                                       models.StockPrice.date <= endDate
-                                                      ).order_by(models.StockPrice.date.asc()).all()
+                                                      ).order_by(models.StockPrice.date.desc()).all()
     financials = db.query(models.Financial).filter(models.Financial.company == company_id,
                                                    models.Financial.date >= startDate,
                                                    models.Financial.date <= endDate
-                                                   ).order_by(models.Financial.date.asc()).all()
+                                                   ).order_by(models.Financial.date.desc()).all()
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
@@ -154,13 +154,14 @@ async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
     stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == company_id).order_by(
-        models.StockPrice.date.asc()).first()
+        models.StockPrice.date.desc()).first()
     financials = db.query(models.Financial).filter(models.Financial.company == company_id).order_by(
-        models.Financial.date.asc()).first()
+        models.Financial.date.desc()).first()
 
     response = {
         'company_id': company.company_id,
         'name': company.name,
+        'market_cap': company.market_cap,
         'description': company.description,
         'sector': company.sect_value,
         'category': company.cat_value,
@@ -173,7 +174,7 @@ async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
 
 
 @router.get('/company/{company_id}/ranking/history', tags=["Company"])
-async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
+async def get_company_ranking_history(company_id: str, db: Session = Depends(get_db)):
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
