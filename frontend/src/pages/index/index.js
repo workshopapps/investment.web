@@ -9,7 +9,6 @@ import MtnImg from '../../assets/index/mtn.png';
 import NestleImg from '../../assets/index/nestle.png';
 import TranscorpImg from '../../assets/index/transcorp.png';
 
-
 const IndexPage = () => {
     return <span>MyStockPlug</span>;
 };

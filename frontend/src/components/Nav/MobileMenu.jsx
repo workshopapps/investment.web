@@ -38,12 +38,14 @@ const MobileMenu = ({ toggleMenu }) => {
         <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30">
             <div
                 className="absolute top-0 bottom-0 left-0 right-0 bg-transparent"
-                onClick={() => toggleMenu(false)}></div>
+                onClick={() => toggleMenu(false)}
+            ></div>
             <div className="absolute right-0 bg-white top-0 bottom-0 w-64">
                 <div className="py-6 px-6">
                     <div
                         className=" flex justify-end items-end mb-10"
-                        onClick={() => toggleMenu(false)}>
+                        onClick={() => toggleMenu(false)}
+                    >
                         <img src={Close} alt="" className="w-10 h-10" />
                     </div>
                     <ul className="uppercase flex-col gap-4 w-full flex justify-center items-center mb-20">

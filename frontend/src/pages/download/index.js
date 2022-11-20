@@ -40,8 +40,8 @@ const DownloadPage = () => {
                                 open CNBC and YouTube tabs? Now keep all of findable from just one
                                 click on your desktop menu.TradingView Desktop is even faster than
                                 your default browser. But you can still use both, and also our
-                                mobile apps. It is all the same, with 100% synced layouts, watchlists
-                                and settings.
+                                mobile apps. It is all the same, with 100% synced layouts,
+                                watchlists and settings.
                             </li>
                             <li>
                                 Multiple monitors are important to traders. TradingView Desktop
@@ -59,9 +59,9 @@ const DownloadPage = () => {
                             Tab linking by symbol
                         </h1>
                         <p className="w-18 p-6">
-                            Once you link a few tabs, they will all show up with the same symbol. And
-                            if you change that symbol in any of them, it will change for all of them.
-                            Handy for slicing your analysis multiple ways quickly.
+                            Once you link a few tabs, they will all show up with the same symbol.
+                            And if you change that symbol in any of them, it will change for all of
+                            them. Handy for slicing your analysis multiple ways quickly.
                         </p>
                         <img src={tabLinkingImg} className="w-[404px] mx-auto height-auto" />
                     </div>
