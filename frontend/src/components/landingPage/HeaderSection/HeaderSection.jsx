@@ -1,5 +1,4 @@
 import React from 'react';
-// import Frame1 from '../../../assets/index/landing-frame1.png';
 
 import Frame1 from '../../../assets/landingPage/landing-frame1.png';
 import Partner1 from '../../../assets/landingPage/partners/Binance.png';
