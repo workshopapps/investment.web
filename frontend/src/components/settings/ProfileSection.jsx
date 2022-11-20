@@ -1,4 +1,3 @@
-
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
@@ -21,12 +20,8 @@ export default function ProfileSection() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="name"
-
-                                className="text-base font-semibold text-[#0074FF]">
-
                                 className="text-base font-semibold text-[#0074FF]"
                             >
-
                                 Preferred Name
                             </label>
                             <input
@@ -40,13 +35,9 @@ export default function ProfileSection() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="location"
-
-                                className="text-base font-semibold text-[#0074FF]">
-
                                 className="text-base font-semibold text-[#0074FF]"
                             >
-
-                                Location
+                                 Location
                             </label>
                             <input
                                 type="text"

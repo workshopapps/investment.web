@@ -62,7 +62,4 @@ export const cardsData = [
         text: `This shows the growth rate of the revenue over a number of years`,
         key: 'cD7'
     }
- ];
-  
- 
- 
+];
