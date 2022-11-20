@@ -28,6 +28,9 @@ import Payment from './pages/paymentPage/Payment';
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
+import Careers from './pages/careers/Careers';
+import Plugger from './pages/careers/Plugger';
+import Position from './pages/careers/Position';
 
 import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
@@ -157,6 +160,21 @@ const router = createBrowserRouter([
     {
         path: '/terms',
         element: <TermsAndConditionPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/careers',
+        element: <Careers />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/position',
+        element: <Position />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/plugger',
+        element: <Plugger />,
         errorElement: <ErrorPage />
     }
     // ,
