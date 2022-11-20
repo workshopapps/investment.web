@@ -27,7 +27,8 @@ export default function ProductDesigner() {
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-4 h-4 mr-3 inline">
+                                className="w-4 h-4 mr-3 inline"
+                            >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -44,7 +45,8 @@ export default function ProductDesigner() {
                                 viewBox="0 0 24 24"
                                 strokeWidth="1.5"
                                 stroke="currentColor"
-                                className="w-4 h-4 mr-3 inline">
+                                className="w-4 h-4 mr-3 inline"
+                            >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -60,7 +62,8 @@ export default function ProductDesigner() {
                                 viewBox="0 0 24 24"
                                 strokeWidth={1.5}
                                 stroke="currentColor"
-                                className="w-4 h-4 mr-3 inline">
+                                className="w-4 h-4 mr-3 inline"
+                            >
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"

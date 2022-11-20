@@ -1,48 +1,44 @@
 @media screen and (min-width: 320px) and (max-width: 768px) {
-    .BasicSubHolder{
+    .BasicSubHolder {
         position: relative;
-        border: 1px solid rgba(141, 141, 141, 0.5);;
+        border: 1px solid rgba(141, 141, 141, 0.5);
     }
 
-    .costHolder{
+    .costHolder {
         position: absolute;
         left: 10em;
         top: 2em;
     }
 
-    .basicTextHolder{
+    .basicTextHolder {
         position: absolute;
         top: 6em;
         font-size: 0.8em;
     }
 
-
-    .theListing{
+    .theListing {
         border-top-left-radius: 8px;
-        border-top-color:  1px solid rgba(141, 141, 141, 0.5);
+        border-top-color: 1px solid rgba(141, 141, 141, 0.5);
         border-top: 1px solid rgba(141, 141, 141, 0.5);
         border-top-right-radius: 5px;
         padding-top: 35px;
-       
     }
-    .topContentHolder{
+    .topContentHolder {
         position: relative;
     }
-    
-    .curlySpring{
+
+    .curlySpring {
         position: absolute;
         top: -5em;
         left: 24.5em;
     }
-
 }
 
-
-.topContentHolder{
+.topContentHolder {
     position: relative;
 }
 
-.curlySpring{
+.curlySpring {
     position: absolute;
     top: 5em;
     right: 25em;
