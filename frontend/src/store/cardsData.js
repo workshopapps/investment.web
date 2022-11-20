@@ -18,7 +18,7 @@ export const cardsData = [
         title: 'Debit-to-Equity-Ratio',
         remark: 'Very Good',
         calculation:
-            'Debt to Equity Ratio = Total Debt / Total Equity (Total Assets - Total Liability)',
+            'Debt to Equity Ratio = Total Debt / Total Equity (Total assets - Total Liability)',
         determinant: 'Should be less than or equal to one',
         verdict: 'Should be less than 25%',
         text: ` The debt-to-equity ratio is a solvency ratio that measures how much a company finances itself using equity versus debt. This ratio provides insight into the solvency of the business by reflecting the ability of shareholder equity to cover all debt in the event of a business downturn`,
