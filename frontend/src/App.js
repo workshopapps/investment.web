@@ -9,9 +9,15 @@ import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
-
+import Picked from './pages/News/Picked';
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
+import World from './pages/News/World';
+import Small from './pages/News/Small';
+import Long from './pages/News/Long';
+import Industry from './pages/News/Industry';
+import Local from './pages/News/Local';
+import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
 
 import HelpPage from './pages/help/';
@@ -59,6 +65,39 @@ const router = createBrowserRouter([
         path: '/topstories',
         element: <Topstories />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: '/World',
+        element: <World />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Small',
+        element: <Small />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/long',
+        element: <Long />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/industry',
+        element: <Industry />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/mid',
+        element: <Bigcap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Local',
+        element: <Local />
+    },
+    {
+        path: '/picked',
+        element: <Picked />
     },
     {
         path: '/company-profile',
