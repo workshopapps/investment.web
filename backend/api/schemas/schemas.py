@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, datetime
+from datetime import date as date_type
 
 from sqlalchemy import Enum
 
@@ -9,6 +9,8 @@ class CompanyBase(BaseModel):
     location: str
     description: str
 
+    # class Config:
+    #     orm_mode = True
 
 class Company(CompanyBase):
     company_id: str
@@ -23,7 +25,7 @@ class Company(CompanyBase):
 class StockPriceBase(BaseModel):
     market_cap: float
     stock_price: float
-    date: date = datetime.now().date()
+    date: date_type
     annual_stock_return: float
     average_volume: float
     volume: float
@@ -32,6 +34,14 @@ class StockPriceBase(BaseModel):
     pe_ratio: float
     peg_ratio: float
     total_price_value: float
+    de_ratio: float
+    current_ratio: float
+    roe_ratio: float
+    quick_ratio: float
+    pb_ratio: float
+    ps_ratio: float
+    gross_profit_margin: float
+    dividend_yield: float
 
 
 class StockPrice(StockPriceBase):
@@ -45,7 +55,7 @@ class StockPrice(StockPriceBase):
 class RankingBase(BaseModel):
     score: float
     methodology: str
-    created_at: date = datetime.now().date()
+    created_at: date_type
 
 
 class Ranking(RankingBase):
@@ -77,7 +87,7 @@ class Ticker(BaseModel):
 
 
 class FinancialBase(BaseModel):
-    date: date = datetime.now().date()
+    date: date_type
     equity: float
     dividend_per_stock: float
     earnings_per_share: float
@@ -87,7 +97,7 @@ class FinancialBase(BaseModel):
     operating_cost: float
     gross_profit: float
     income_statement: float
-    income_statement_type: Enum
+    income_statement_type: str
 
 
 class Financial(FinancialBase):
