@@ -5,7 +5,7 @@ import img3 from './../../assets/about/box.png';
 
 export const Section = () => {
     return (
-        <div id="services">
+        <div id="services" data-testid="middle-section">
             <div className='bg-[#fafaff] flex flex-col md:flex-row gap-8 pt-9 justify-center bg-[url("/src/assets/about/bg-vec.png")] bg-no-repeat bg-right-bottom pb-24'>
                 <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
                     <h3 className="font-bold text-xl mb-2 text-center md:text-left">Who We Are</h3>
