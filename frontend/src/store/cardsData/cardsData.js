@@ -56,7 +56,7 @@ export const cardsData = [
     },
     {
         title: 'Revenue Growth Rate',
-        remark: 'Very GOod',
+        remark: 'Very Good',
         calculation: '(Current revenue / Previous revenue - 1) x 100 = 80%',
         determinant: 'Should be more than 10%',
         text: `This shows the growth rate of the revenue over a number of years`,
