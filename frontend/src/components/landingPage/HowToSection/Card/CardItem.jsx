@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CardItem = ({ title, subTitle, icon }) => {
     return (
-        <div className="md:w-1/3 flex flex-col py-10 justify-items-center shadow-md">
+        <div className="md:w-1/3 flex flex-col py-10 justify-items-center hover:shadow-2xl shadow-md">
             <span className="mx-auto justify-center">
                 <img src={icon} alt="icon"></img>
             </span>

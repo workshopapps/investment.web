@@ -1,0 +1,5 @@
+
+
+import QACard = () => {
+    return
+}
