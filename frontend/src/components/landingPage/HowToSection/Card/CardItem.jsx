@@ -9,14 +9,12 @@ const CardItem = ({ title, subTitle, icon }) => {
             </span>
             <span
                 data-testid="titleid"
-                className="text-[#000718] text-xl tracking-[0.25px] md:py-4 font-bold font-Hauora"
-            >
+                className="text-[#000718] text-xl tracking-[0.25px] md:py-4 font-bold font-Hauora">
                 {title}
             </span>
             <span
                 role="card-subtitle"
-                className="text-[#8A8D95] md:mx-[25%] mx-[10%] tracking-[0.25px] md:mt-0 mb-10 font-semibold font-HauoraLight"
-            >
+                className="text-[#8A8D95] md:mx-[25%] mx-[10%] tracking-[0.25px] md:mt-0 mb-10 font-semibold font-HauoraLight">
                 {subTitle}
             </span>
         </div>

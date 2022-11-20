@@ -6,8 +6,7 @@ const Goals = () => {
     return (
         <div
             data-testid="goals"
-            className="flex flex-col bg-white p-5 md:pl-[50px] md:pr-[50px] lg:pl-[100px] ] lg:pr-[100px]"
-        >
+            className="flex flex-col bg-white p-5 md:pl-[50px] md:pr-[50px] lg:pl-[100px] ] lg:pr-[100px]">
             <h1 className="text-2xl font-semibold text-center leading-[23px] md:text-left mb-4 md:leading-[50px] lg:text-[40px]">
                 Company with a difference in Innovation.
             </h1>
