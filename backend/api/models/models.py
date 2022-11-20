@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from sqlalchemy import (Column, ForeignKey,
-                        String, Float, DateTime)
+                        String, Float, DateTime, Date)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -15,6 +15,7 @@ class Company(Base):
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
     description = Column(String(10000))
+    market_cap = Column(Float, nullable=True)
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
     category = Column(String(64), ForeignKey("categories.category_id"))
     ticker = Column(String(64), ForeignKey("tickers.ticker_id"))
@@ -32,9 +33,8 @@ class StockPrice(Base):
 
     stock_price_id = Column("stock_price_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     company = Column(String(64), ForeignKey("company.company_id"))
-    market_cap = Column(Float, nullable=True)
     stock_price = Column(Float, nullable=True)
-    date = Column(DateTime(timezone=True), server_default=func.now())
+    date = Column(Date())
     annual_stock_return = Column(Float, nullable=True)
     average_volume = Column(Float, nullable=True)
     volume = Column(Float, nullable=True)
@@ -51,6 +51,7 @@ class StockPrice(Base):
     ps_ratio = Column(Float, nullable=True)
     gross_profit_margin = Column(Float, nullable=True)
     dividend_yield = Column(Float, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     company_value = relationship("Company", back_populates="stock_price_value")
 
@@ -62,7 +63,7 @@ class Ranking(Base):
     company = Column(String(64), ForeignKey("company.company_id"))
     score = Column(Float)
     methodology = Column(String(1000), nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now() )
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     comp_ranks = relationship("Company", back_populates='ranks_value')
 
@@ -78,7 +79,7 @@ class Sector(Base):
 
 class Ticker(Base):
     __tablename__ = "tickers"
-    
+
     ticker_id = Column("ticker_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     symbol = Column(String(10))
     exchange_name = Column(String(30))
@@ -94,7 +95,7 @@ class Financial(Base):
 
     financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     company = Column(String(64), ForeignKey("company.company_id"))
-    date = Column(DateTime(timezone=True), server_default=func.now())
+    date = Column(Date())
     equity = Column(Float, nullable=True)
     dividend_per_stock = Column(Float, nullable=True)
     earnings_per_share = Column(Float, nullable=True)
@@ -104,6 +105,7 @@ class Financial(Base):
     operating_cost = Column(Float, nullable=True)
     income_statement = Column(Float, nullable=True)
     income_statement_type = Column(String(30))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     finance = relationship("Company", back_populates="financial_value")
 
