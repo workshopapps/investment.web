@@ -38,7 +38,7 @@ const ReviewSection = () => {
                     We do not CAP over here. See reviews from our customers from all over the world
                 </span>
 
-                <div className="w-full flex md:flex-row flex-col gap-6 my-6">
+                <div role="section-items" className="w-full flex md:flex-row flex-col gap-6 my-6">
                     <ReviewItem
                         name="Ife, Ibadan"
                         description="Their services was very timely and i loved what that they did. It was really a job nicely done. I really would come back again and use their services again!"

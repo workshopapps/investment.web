@@ -9,8 +9,9 @@ const QACard = ({ question, answer }) => {
 
     return (
         <React.Fragment>
-            <div className="flex flex-row justify-between my-4 shadow-md">
+            <div role="qa-card" className="flex flex-row justify-between my-4 shadow-md">
                 <span
+                    role="question"
                     className="text-[#000718] cursor-pointer text-md md:text-2xl tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
                     onClick={() => setShow(!show)}>
                     {question}
@@ -32,7 +33,9 @@ const QACard = ({ question, answer }) => {
 
             {show ? (
                 <div className="flex flex-row justify-between my-4 shadow-md">
-                    <span className="text-[#000718] text-sm md:text-xl max-w-[80%] tracking-[0.25px] align-middle m-4 font-light font-Hauora">
+                    <span
+                        data-testid="qa-answer"
+                        className="text-[#000718] text-sm md:text-xl max-w-[80%] tracking-[0.25px] align-middle m-4 font-light font-Hauora">
                         {answer}
                     </span>
                 </div>
