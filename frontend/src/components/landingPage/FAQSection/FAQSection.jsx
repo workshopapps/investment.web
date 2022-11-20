@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import UpIcon from '../../../assets/landingPage/icons/up.svg';
@@ -22,13 +23,15 @@ const FAQSection = () => {
                         {show ? (
                             <span
                                 className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                                onClick={() => setShow(false)}>
+                                onClick={() => setShow(false)}
+                            >
                                 <img src={UpIcon} alt="open" />
                             </span>
                         ) : (
                             <span
                                 className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                                onClick={() => setShow(true)}>
+                                onClick={() => setShow(true)}
+                            >
                                 <img src={DownIcon} alt="open" />
                             </span>
                         )}
@@ -50,7 +53,8 @@ const FAQSection = () => {
                         </span>
                         <span
                             className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                            onClick={() => setShow(true)}>
+                            onClick={() => setShow(true)}
+                        >
                             <img src={DownIcon} alt="open" />
                         </span>
                     </div>
@@ -61,7 +65,8 @@ const FAQSection = () => {
                         </span>
                         <span
                             className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                            onClick={() => setShow(true)}>
+                            onClick={() => setShow(true)}
+                        >
                             <img src={DownIcon} alt="open" />
                         </span>
                     </div>
@@ -72,7 +77,8 @@ const FAQSection = () => {
                         </span>
                         <span
                             className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                            onClick={() => setShow(true)}>
+                            onClick={() => setShow(true)}
+                        >
                             <img src={DownIcon} alt="open" />
                         </span>
                     </div>

@@ -22,6 +22,7 @@ import Industry from './pages/News/Industry';
 import Local from './pages/News/Local';
 import Bigcap from './pages/News/Bigcap';
 import CompanyProfilePage from './pages/companyProfile';
+import Payment from './pages/paymentPage/Payment';
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
@@ -111,8 +112,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-<<<<<<< HEAD
-=======
+        path: '/payment',
+        element: <Payment />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/blog',
         element: <Blog />,
         errorElement: <ErrorPage />
@@ -143,7 +147,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
->>>>>>> acfc6a012eb5048e5b9953867afbdda424893687
         path: '/policy',
         element: <PolicyPage />,
         errorElement: <ErrorPage />
@@ -152,7 +155,6 @@ const router = createBrowserRouter([
         path: '/terms',
         element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
-<<<<<<< HEAD
     },
     {
         path: '/largecap',
@@ -173,8 +175,6 @@ const router = createBrowserRouter([
         path: '/Midcap',
         element: <MidCap />,
         errorElement: <ErrorPage />
-=======
->>>>>>> acfc6a012eb5048e5b9953867afbdda424893687
     }
 ]);
 
