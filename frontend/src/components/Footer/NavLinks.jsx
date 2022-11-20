@@ -11,7 +11,7 @@ const NavLinks = ({ navLinks }) => {
             {navLinks.map((item, index) => {
                 const { link } = item;
                 return (
-                    <Link to={item.to}>
+                    <Link to={item.to} key={index}>
                         <li key={index} className="text-sm md:text-base mb-6 cursor-pointer">
                             {link}
                         </li>

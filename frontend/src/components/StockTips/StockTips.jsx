@@ -147,7 +147,7 @@ const StockTips = () => {
                                         alt=""
                                         className="w-auto rounded-lg md:h-auto  "
                                     />
-                                    <div className="flex flex-col my-auto md:col-span-3 gap-1 md:gap-2 md:gap-0 font-bold">
+                                    <div className="flex flex-col my-auto md:col-span-3 gap-1 md:gap-0 font-bold">
                                         <h3 className=" text-green-600">Ade Pete</h3>
                                         <h1 className="  ">Trading Sally Holdings</h1>
                                         <p className="text-xs">

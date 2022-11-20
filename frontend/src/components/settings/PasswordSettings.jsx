@@ -2,6 +2,11 @@
 import React from 'react';
 
 export default function PasswordSettings() {
+    // function to handle submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert('submitted');
+    };
     return (
         <div className="flex">
             <div className="flex flex-col w-full h-full pl-1 md:pl-10 pr-3 md:pr-[100px]  pt-[56px] pb-[100px]">
@@ -13,8 +18,9 @@ export default function PasswordSettings() {
                         <div className="flex flex-col w-full h-full mb-8">
                             <label
                                 htmlFor="currentpassword"
-                                className="text-base font-semibold text-[#000000]">Current
-                                Password
+                                className="text-base font-semibold text-[#000000]"
+                            >
+                                Current Password
                             </label>
                             <input
                                 type="password"
@@ -28,7 +34,8 @@ export default function PasswordSettings() {
                             <label
                                 htmlFor="newpassword"
                                 className="text-base font-semibold text-[#000000]"
-                            > New Password
+                            >
+                                New Password
                             </label>
                             <input
                                 type="password"
@@ -39,8 +46,12 @@ export default function PasswordSettings() {
                             />
                         </div>
                     </form>
-                    <div className="flex flex-col ml-auto mt-[70px]">
-                        <button className="bg-[#19C170] text-black  font-semibold text-base py-4 px-[54px] rounded-md">
+                    <div className="flex flex-col md:ml-auto mt-[70px]">
+                        <button
+                            type="submit"
+                            onClick={handleSubmit}
+                            className="bg-[#19C170] text-black  font-semibold text-base py-4 px-[54px] rounded-md"
+                        >
                             Reset Password
                         </button>
                     </div>

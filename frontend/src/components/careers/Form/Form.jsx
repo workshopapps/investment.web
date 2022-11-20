@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Buttons/Button';
-import useForm from './useForm';
-import validate from './LoginRules';
 
 export default function Form() {
-    const { values, errors, handleChange, handleSubmit } = useForm(login, validate);
-
-    function login() {
-        console.log('No errors, submit callback called!');
-    }
+    const [selectedFile, setSelectedFile] = useState();
+    const [values, setValues] = useState({
+        fullName: '',
+        email: '',
+        message: ''
+    });
+    const fileHandler = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(values);
+        setValues({ fullName: '', email: '', message: '' });
+    };
     return (
         <form className="flex flex-col gap-y-4" onSubmit={handleSubmit}>
             <div>
@@ -18,14 +28,13 @@ export default function Form() {
                 <br />
                 <input
                     type="text"
-                    value={values.fullName || ''}
                     name="fullName"
                     required
-                    placeholder="Enter your full name"
-                    className="{`' '${errors.fullName && 'border-red-200'}`}bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
+                    value={values.fullName}
                     onChange={handleChange}
+                    placeholder="Enter your full name"
+                    className="bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
                 />
-                {errors.fullName && <p className="text-red text-xs">{errors.fullName}</p>}
             </div>
             <div>
                 <label className="font-bold text-base leading-7 text-primaryGray p-2">
@@ -35,13 +44,12 @@ export default function Form() {
                 <input
                     type="text"
                     required
-                    name="email"
-                    value={values.email || ''}
-                    placeholder="Enter your email address"
-                    className="{`' '${errors.email && 'border-red-200'}`}bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
+                    value={values.email}
                     onChange={handleChange}
+                    name="email"
+                    placeholder="Enter your email address"
+                    className="bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
                 />
-                {errors.email && <p className="text-red text-xs">{errors.email}</p>}
             </div>
             <div>
                 <label className="font-bold text-base leading-7 text-primaryGray p-2">
@@ -52,13 +60,12 @@ export default function Form() {
                     type="text"
                     rows="10"
                     name="message"
+                    value={values.message}
+                    onChange={handleChange}
                     required
                     placeholder="Tell us about yourself"
-                    className="{`' '${errors.fullName && 'border-red-200'}` bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
-                    value={values.message || ''}
-                    onChange={handleChange}
+                    className=" bg-white border-solid border-2 border-shade100 py-3 px-2 w-full rounded-sm"
                 />
-                {errors.message && <p className="text-red text-xs">{errors.message}</p>}
             </div>
             <div>
                 <label className="font-bold text-base leading-7 text-primaryGray p-2">
@@ -67,8 +74,10 @@ export default function Form() {
                 <br />
                 <div className="flex content-center gap-x-2">
                     <input
-                        type="text"
+                        type="file"
                         required
+                        name="file"
+                        onChange={fileHandler}
                         className="bg-white border-solid border-2 h-12 border-shade100 px-2 w-5/6 rounded-sm mt-3 "
                     />
                     <Button title="Upload" />

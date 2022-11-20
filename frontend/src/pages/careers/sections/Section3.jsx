@@ -14,17 +14,19 @@ export default function Section3() {
                 <input
                     type="text"
                     placeholder="Search positions,category"
-                    className="bg-white border-solid border border-shade100  w-1/2 h-11 rounded-sm px-2 outline-none mt-5 text-primaryGray"
+                    className="bg-white border-solid border border-shade100  md:w-1/2 w-full h-11 rounded-sm px-2 outline-none mt-5 text-primaryGray"
                 />
-                <div className="flex gap-6">
+                <div className="flex gap-6 content-center">
                     <select
                         name="category"
                         id="category"
                         required
-                        className="h-11 w- 10 mt-5 border-2 border-shade100 bg-white rounded-lg text-xs outline-none">
+                        className="h-11 w- 10 mt-5 border-2 border-shade100 bg-white rounded-lg text-xs outline-none"
+                    >
                         <option
                             value="all"
-                            className="bg-white border-b border-slate-100 dark:border-slate-700">
+                            className="bg-white border-b border-slate-100 dark:border-slate-700"
+                        >
                             All Categories
                         </option>
                         <option value="engineering">Engineering</option>
@@ -38,9 +40,9 @@ export default function Section3() {
                 </div>
             </form>
 
-            <div className="grid grid-cols-3 grid-rows-1 mt-10 w-full">
+            <div className="grid md:grid-cols-3 grid-cols-1 grid-rows-1 mt-10 w-full">
                 <div>
-                    <div className="border border-shade500 p-6 w-5/6 h-60 mb-6 hover:shadow-sm">
+                    <div className="border border-shade500 p-6 w-5/6  mb-6 hover:shadow-sm">
                         <div className="flex justify-between">
                             <div>
                                 <p className="text-primary102 text-sm">Product & Design</p>
@@ -79,9 +81,9 @@ export default function Section3() {
                     </div>
                 </div>
 
-                <div>
+                <div className="my-4">
                     <div className="border border-shade500 p-6 col-start-2 col-span-4 w-5/6 mb-6 hover:shadow-sm">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mb-4">
                             <div>
                                 <p className="text-primary102 text-sm">Sales & Marketing</p>
                             </div>
@@ -104,7 +106,7 @@ export default function Section3() {
                     </div>
 
                     <div className="border border-shade500 p-6 w-5/6 hover:shadow-sm">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mb-4">
                             <div>
                                 <p className="text-primary102 text-sm">Engineering </p>
                             </div>
@@ -125,7 +127,7 @@ export default function Section3() {
                 </div>
                 <div>
                     <div className="border border-shade500 p-6 w-5/6 mb-6 hover:shadow-sm">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mt-4">
                             <div>
                                 <p className="text-primary102 text-sm">Legal </p>
                             </div>

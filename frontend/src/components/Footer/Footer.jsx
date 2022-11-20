@@ -23,7 +23,8 @@ const Footer = () => {
                 { link: 'Help', to: '/help' },
                 { link: 'FAQ', to: '#' },
                 { link: 'News', to: 'news' },
-                { link: 'Blog', to: '/blog' }
+                { link: 'Blog', to: '/blog' },
+                { link: 'Settings', to: '/settings' }
             ]
         },
         {
@@ -51,8 +52,14 @@ const Footer = () => {
                     <div className="w-60 pb-8 md:pb-0">
                         <img src={logo} alt="" />
                     </div>
-                    <div className={`${pathname=='/' || pathname =="/company-profile"? "hidden lg:flex pt-4": "hidden"}`}>
-                        <img src={downloadImage} alt="download image" className="w-full"/>
+                    <div
+                        className={`${
+                            pathname == '/' || pathname == '/company-profile'
+                                ? 'hidden lg:flex pt-4'
+                                : 'hidden'
+                        }`}
+                    >
+                        <img src={downloadImage} alt="download image" className="w-full" />
                     </div>
                 </div>
                 <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">
@@ -67,7 +74,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 MyStockPlug</div>
+            <div className="text-center pb-10">2022 MyStockPlug </div>
         </footer>
     );
 };

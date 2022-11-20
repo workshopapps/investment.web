@@ -13,7 +13,9 @@ const HowToSection = () => {
                     Doing your stock analysis shouldn&apos;t be so hard
                 </span>
 
-                <span className="text-[#000718] text-2xl tracking-[0.25px] py-4 font-light font-HauoraLight">
+                <span
+                    role="title"
+                    className="text-[#000718] text-2xl tracking-[0.25px] py-4 font-light font-HauoraLight">
                     How It Works
                 </span>
 
@@ -22,7 +24,7 @@ const HowToSection = () => {
                     can finally control your financial future like a PRO cos thats how stars Do!
                 </span>
 
-                <div className="w-full flex md:flex-row flex-col gap-0">
+                <div role="section-card" className="w-full flex md:flex-row flex-col gap-0">
                     <CardItem
                         title="Register/Sign up"
                         subTitle="Register/Sign up with Mystocks to get started."
