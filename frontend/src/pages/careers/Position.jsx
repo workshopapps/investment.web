@@ -11,11 +11,11 @@ export default function Position() {
             <div className="w-full font-Hauora">
                 <Section8 />
                 <OpenPositions />
-                <div className="relative rounded-xl bg-shade400 grid grid-cols-3 gap-2 m-8 shadow ">
+                <div className="relative rounded-xl bg-shade400 grid md:grid-cols-3 gap-2 m-8 shadow ">
                     <div>
                         <Dropdown />
                     </div>
-                    <div className="col-span-2">
+                    <div className="md:col-span-2 hidden md:block">
                         <Table />
                     </div>
                 </div>
