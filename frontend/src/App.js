@@ -7,11 +7,16 @@ import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
 import AboutPage from './pages/about';
+import NewsPage from './pages/News/NewsPage';
+import Topstories from './pages/News/Topstories';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
-import DownloadPage from './pages/download';
+
+import HelpPage from './pages/help';
+import PolicyPage from './pages/privacy-statement';
+import TermsAndConditionPage from './pages/terms-of-use';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -41,18 +46,38 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/download',
-        element: <DownloadPage />,
-        errorElement: <ErrorPage />
-    },
-    {
         path: '/about',
         element: <AboutPage />,
         errorElement: <ErrorPage />
     },
     {
+        path: '/news',
+        element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/topstories',
+        element: <Topstories />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/company-profile',
         element: <CompanyProfilePage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/help',
+        element: <HelpPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/policy',
+        element: <PolicyPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/terms',
+        element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
     }
 ]);
