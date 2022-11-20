@@ -8,6 +8,7 @@ export default function Form() {
         email: '',
         message: ''
     });
+    console.log(selectedFile);
     const fileHandler = (e) => {
         setSelectedFile(e.target.files[0]);
     };
