@@ -55,8 +55,8 @@ export const Section = () => {
                                 Having values as a team is essential to the team working as a single
                                 unit. We are a group of diverse individuals, and working together
                                 can be tough but we learn to treat each other with respect and
-                                welcome welcome every idea. Here are some of our core values that we
-                                think companies should mirror;
+                                welcome every idea. Here are some of our core values that we think
+                                companies should mirror;
                             </p>
                             <h3 className="text-[#0F7544] font-semibold text-sm">Adaptability</h3>
                             <p>
