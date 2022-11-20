@@ -7,7 +7,7 @@ from api.database import database
 from api.database.database import engine
 
 
-from api.routers import company_metrics, company_category, company_timeframe
+from api.routers import company_metrics, company_category, company_timeframe, list_of_ranked_companies
 from api.scripts.ranking import run_process_scripts
 from fastapi_utils.tasks import repeat_every
 
