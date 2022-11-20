@@ -156,6 +156,29 @@ const router = createBrowserRouter([
         element: <TermsAndConditionPage />,
         errorElement: <ErrorPage />
     }
+    // ,
+    // {
+    //     path: '/largecap',
+    //     element: <LargeCap />,
+    //     errorElement: <ErrorPage />
+    // }
+    // ,
+    // {
+    //     path: '/smallcap',
+    //     element: <SmallCap />,
+    //     errorElement: <ErrorPage />
+    // },
+    // {
+    //     path: '/industry',
+    //     element: <Industry />,
+    //     errorElement: <ErrorPage />
+    // }
+    // ,
+    // {
+    //     path: '/Midcap',
+    //     element: <MidCap />,
+    //     errorElement: <ErrorPage />
+    // }
 ]);
 
 function App() {
