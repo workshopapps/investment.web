@@ -104,3 +104,11 @@ class Category(BaseModel):
     category_id: str
     market_cap: float
     name: str
+
+class User(BaseModel):
+    user_id: str
+    email: str
+    name: str
+    
+    class Config:
+        orm_mode = True
