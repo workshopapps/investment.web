@@ -65,39 +65,42 @@ const Contact = () => {
                                 />
                             ))}
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-8 w-full md:self-center md:items-center md:justify-center ">
-                        <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center">
-                            Follow us on all our <br />
-                            social media pages.
-                        </h4>
-                        <div className=" flex flex-col  md:self-center gap-8 md:grid md:grid-cols-3 md:w-full ">
-                            {socialData.map((item) => (
-                                <ContactCard
-                                    key={item.key}
-                                    title={item.title}
-                                    text1={item.text1}
-                                    text1a={item.text1a}
-                                />
-                            ))}
+                        <div className="flex flex-col gap-8 w-full md:self-center md:items-center md:justify-center ">
+                            <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center">
+                                Follow us on all our <br />
+                                social media pages.
+                            </h4>
+                            <div className=" flex flex-col  md:self-center gap-8 md:grid md:grid-cols-3 md:w-full ">
+                                {socialData.map((item) => (
+                                    <ContactCard
+                                        key={item.key}
+                                        title={item.title}
+                                        text1={item.text1}
+                                        text1a={item.text1a}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-4 md:w-full">
-                        <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center md:w-1/2 md:text-center">
-                            Get practical tips and insider secrets to help you make the right
-                            investments. .
-                        </h4>
-                        <div className=" md:self-center flex flex-col ">
-                            <form action="" onSubmit={formHandler} className="flex flex-col gap-4">
-                                <input
-                                    type="email"
-                                    placeholder="Enter Email "
-                                    className="border rounded-xl p-4"
-                                />
-                                <button className="text-[#1F2226] rounded-lg bg-[#1BD47B] w-full md:w-[596px] font-semibold text-sm md:text-base h-[52px]">
-                                    Subscribe to our Newsletter
-                                </button>
-                            </form>
+                        <div className="flex flex-col gap-4 md:w-full">
+                            <h4 className="text-[#0B5934] font-semibold text-lg md:text-2xl md:self-center md:w-1/2 md:text-center">
+                                Get practical tips and insider secrets to help you make the right
+                                investments. .
+                            </h4>
+                            <div className=" md:self-center flex flex-col ">
+                                <form
+                                    action=""
+                                    onSubmit={formHandler}
+                                    className="flex flex-col gap-4">
+                                    <input
+                                        type="email"
+                                        placeholder="Enter Email "
+                                        className="border rounded-xl p-4"
+                                    />
+                                    <button className="text-[#1F2226] rounded-lg bg-[#1BD47B] w-full md:w-[596px] font-semibold text-sm md:text-base h-[52px]">
+                                        Subscribe to our Newsletter
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
