@@ -1,10 +1,8 @@
 import React from 'react';
-// import '../../assets/scss/topnews.scss';
 import { BsChevronRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { pick } from '../reusabledata';
 
-// import newimage from '../../assets/images/Rectangle 4745.png';
 const Industry = () => {
     return (
         <div className="topNews__second top-components">
