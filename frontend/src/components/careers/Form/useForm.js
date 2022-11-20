@@ -1,31 +1,25 @@
-import { useState, useEffect } from 'react';
+// import { useState } from 'react';
+// import validate from './LoginRules';
 
-const useForm = (callback, validate) => {
-    const [values, setValues] = useState({});
-    const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+// const useForm = (validate, initialState = {}, validations = []) => {
+//     const [values, setValues] = useState({ initialState });
+//     const [errors, setErrors] = useState({});
+//     const [isSubmitting, setIsSubmitting] = useState(true);
 
-    useEffect(() => {
-        if ((Object.keys(errors).length === 0) & isSubmitting) {
-            callback();
-        }
-    }, [errors]);
+//     // const handleSubmit = (e) => {
+//     //     if (e) e.preventDefault();
+//     //     setErrors(validate(values));
+//     //     setIsSubmitting(true);
+//     //     console.log(values);
+//     // };
+//     const handleChange = (e) => {
+//         const newValues = { ...values, [e.target.value]: e.target.value };
+//         const { isSubmitting, errors } = validate(validations, newValues);
+//         setValues(newValues);
+//         setIsSubmitting(isSubmitting);
+//         setErrors(errors);
+//     };
+//     return { values, handleChange, isSubmitting, errors };
+// };
 
-    const handleSubmit = (e) => {
-        if (e) e.preventDefault();
-        setErrors(validate(values));
-        setIsSubmitting(true);
-        console.log(values);
-    };
-    const handleChange = (e) => {
-        e.persist();
-        setValues((values) => ({ ...values, [e.target.value]: e.target.value }));
-    };
-    return {
-        handleChange,
-        handleSubmit,
-        values,
-        errors
-    };
-};
-export default useForm;
+// export default useForm;
