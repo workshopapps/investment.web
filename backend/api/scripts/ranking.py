@@ -16,12 +16,14 @@ def rank_companies():
     companies = db.query(models.Company).all()
 
     for company in companies:
-        stock_prices = db.query(models.StockPrice).order_by(models.StockPrice.date.asc()).limit(2).all()
-        financials = db.query(models.Financial).order_by(models.Financial.date.asc()).limit(2).all()
+        stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id ).order_by(models.StockPrice.date.asc()).limit(2).all()
+        financials = db.query(models.Financial).filter(models.Financial.company == company.company_id ).order_by(models.Financial.date.asc()).limit(2).all()
         current_stock_price: models.StockPrice = stock_prices[0]
         previous_stock_price: models.StockPrice = stock_prices[1]
         current_financials: models.Financial = financials[0]
         previous_financials: models.Financial = financials[1]
+
+        print(current_stock_price)
 
         de_ratio_score = data_calculations.get_debt_to_equity_ratio_weighted_score(current_stock_price.de_ratio)
         gpm_score = data_calculations.get_gross_profit_margin_weighted_score(current_stock_price.gross_profit_margin, 
