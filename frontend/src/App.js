@@ -15,6 +15,10 @@ import Notification from './pages/notifications/Notification';
 import CompanyProfilePage from './pages/companyProfile';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
+import LargeCap from './pages/cap/LargeCap';
+import SmallCap from './pages/cap/SmallCap';
+import Industry from './pages/cap/Industry';
+import MidCap from './pages/cap/MidCap';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -71,6 +75,26 @@ const router = createBrowserRouter([
     {
         path: '/terms',
         element: <TermsAndConditionPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/largecap',
+        element: <LargeCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/smallcap',
+        element: <SmallCap />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/industry',
+        element: <Industry />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/Midcap',
+        element: <MidCap />,
         errorElement: <ErrorPage />
     }
 ]);
