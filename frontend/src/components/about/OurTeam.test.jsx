@@ -2,13 +2,13 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
-import MiddleSection from './MiddleSection';
+import OurTeam from './OurTeam';
 
-it('renders middle section succesfully', () => {
+it('renders Our team component succesfully', () => {
     render(
         <MemoryRouter>
-            <MiddleSection />
+            <OurTeam />
         </MemoryRouter>
     );
-    expect(screen.getByTestId('middle-section')).toBeInTheDocument();
+    expect(screen.getByTestId('the-team')).toBeInTheDocument();
 });
