@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import lead from '../../assets/download/lead.png';
 import stock from '../../assets/download/stock.png';
@@ -26,14 +27,12 @@ function DownloadPage() {
                                 <div className="hidden md:flex justify-start items-center gap-[8px]">
                                     <a
                                         href="#"
-                                        className="p-[8px] gap-[10px] flex rounded bg-black text-white"
-                                    >
+                                        className="p-[8px] gap-[10px] flex rounded bg-black text-white">
                                         <img src={download} /> Windows download
                                     </a>
                                     <a
                                         href="#"
-                                        className="p-[8px] gap-[10px] flex rounded bg-black text-white"
-                                    >
+                                        className="p-[8px] gap-[10px] flex rounded bg-black text-white">
                                         <img src={download} /> Mac Pc download
                                     </a>
                                 </div>
@@ -45,14 +44,12 @@ function DownloadPage() {
                                 <div className="flex text-[8px] md:hidden justify-center items-center gap-[8px]">
                                     <a
                                         href="#"
-                                        className="gap-[10px] flex p-[8px] justify-center items-center rounded bg-black text-white"
-                                    >
+                                        className="gap-[10px] flex p-[8px] justify-center items-center rounded bg-black text-white">
                                         <img src={download} /> Windows download
                                     </a>
                                     <a
                                         href="#"
-                                        className="gap-[10px] flex p-[8px] justify-center items-center rounded bg-black text-white"
-                                    >
+                                        className="gap-[10px] flex p-[8px] justify-center items-center rounded bg-black text-white">
                                         <img src={download} /> Mac Pc download
                                     </a>
                                 </div>

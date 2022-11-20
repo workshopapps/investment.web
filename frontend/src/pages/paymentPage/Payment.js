@@ -44,8 +44,7 @@ const Payment = () => {
                                 <li
                                     key={faqs.id}
                                     className="bg-white my-2 shadow-lg"
-                                    onClick={() => toggle(index)}
-                                >
+                                    onClick={() => toggle(index)}>
                                     <h2 className="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
                                         <span className="font-bold text-[16px]">{faqs.title}</span>
                                         <span>{clicked === index ? <FaMinus /> : <FaPlus />}</span>
@@ -140,8 +139,7 @@ const Payment = () => {
                     <div className="mt-8">
                         <button
                             className="w-[450px] md:w-[450px] lg:w-[605px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
-                            type="button"
-                        >
+                            type="button">
                             <span>Pay</span>
                             {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
                             <FaArrowRight className="w-3 mt-2 h-3  ml-1" />

@@ -13,22 +13,19 @@ const QACard = ({ question, answer }) => {
                 <span
                     role="question"
                     className="text-[#000718] cursor-pointer text-md md:text-2xl tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                    onClick={() => setShow(!show)}
-                >
+                    onClick={() => setShow(!show)}>
                     {question}
                 </span>
                 {show ? (
                     <span
                         className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                        onClick={() => setShow(!show)}
-                    >
+                        onClick={() => setShow(!show)}>
                         <img src={UpIcon} alt="open" />
                     </span>
                 ) : (
                     <span
                         className="text-[#000718] md:text-2xl md:pt-4 pt-2 tracking-[0.25px] align-middle m-4 font-bold font-Hauora"
-                        onClick={() => setShow(!show)}
-                    >
+                        onClick={() => setShow(!show)}>
                         <img src={DownIcon} alt="open" />
                     </span>
                 )}
@@ -38,8 +35,7 @@ const QACard = ({ question, answer }) => {
                 <div className="flex flex-row justify-between my-4 shadow-md">
                     <span
                         data-testid="qa-answer"
-                        className="text-[#000718] text-sm md:text-xl max-w-[80%] tracking-[0.25px] align-middle m-4 font-light font-Hauora"
-                    >
+                        className="text-[#000718] text-sm md:text-xl max-w-[80%] tracking-[0.25px] align-middle m-4 font-light font-Hauora">
                         {answer}
                     </span>
                 </div>
