@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from api.database import database
 from api.models import models
+from api.database import database
 from api.schemas import schemas
 
 
