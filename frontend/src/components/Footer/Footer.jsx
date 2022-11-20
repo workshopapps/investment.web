@@ -27,8 +27,8 @@ const Footer = () => {
         {
             name: 'Legal',
             navLinks: [
-                { link: 'Terms of Use' },
-                { link: 'Privacy Policy' },
+                { link: 'Terms of Use', to: '/terms' },
+                { link: 'Privacy Policy', to: '/policy' },
                 { link: 'Disclaimer' },
                 { link: 'Cookies Policy' }
             ]

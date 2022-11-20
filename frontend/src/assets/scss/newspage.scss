@@ -1,5 +1,5 @@
 .news__page-container {
-    padding: 0 2rem;
+    padding: 2rem;
     background: #cecccc;
     h1 {
         font-style: normal;
@@ -35,10 +35,15 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 2%;
+        @media (max-width: 900px) {
+            grid-template-columns:  1fr 1fr;
+            margin-bottom: 7rem;
+        }
         @media (max-width: 550px) {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin: 2rem 0;
         }
     }
 }
