@@ -3,7 +3,7 @@ import React from 'react';
 export default function ProductDesigner() {
     return (
         <div className="border border-shade100 p-8 m-10 rounded-md shadow bg-shade100 md:bg-white ">
-            <div className="grid grid-cols-2  w-full mx-4  place-content-center gap-6">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-2  w-full mx-4  place-content-center md:gap-6">
                 <div className="w-3/4">
                     <p className="font-medium text-xl leading-8 tracking-widest text-primary102 w-full">
                         Product Designer
@@ -17,7 +17,7 @@ export default function ProductDesigner() {
                         to make informed decisions.
                     </p>
                 </div>
-                <div className="mt-6">
+                <div className="md:mt-6 mt-1">
                     <ul className="font-normal text-sm leading-6 tracking-widest mt-5 w-full">
                         <li>
                             {' '}
@@ -73,7 +73,7 @@ export default function ProductDesigner() {
                 </div>
             </div>
 
-            <div className=" grid grid-cols-2 mx-4 my-8 w-full">
+            <div className=" grid md:grid-cols-2  gap-2 grid-cols-1 mx-4 my-8 w-full">
                 <div className="w-3/4">
                     <p className="font-medium text-xl leading-8 tracking-widest text-primary102">
                         Job Responsibilities
@@ -94,7 +94,7 @@ export default function ProductDesigner() {
                     </div>
                 </div>
                 <div className="w-full">
-                    <ul className="font-normal text-sm leading-6  ml-4 list-disc w-full text-justify mt-6">
+                    <ul className="font-normal text-sm leading-6  md:ml-4 ml-0 list-disc w-full text-justify md:mt-6 mt-1">
                         <li>Sketch drafts on paper or digitally (for example, using CAD)</li>
                         <li>Use 3D modeling software to design products and components</li>
                         <li>Produce prototypes and test functionality</li>
@@ -103,12 +103,12 @@ export default function ProductDesigner() {
                     </ul>
                 </div>
             </div>
-            <div className="grid grid-cols-2 mx-4 w-full">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-2  mx-4 w-full">
                 <div className="w-3/4">
                     <p className="font-medium text-xl leading-8  text-primary102 tracking-widest">
                         Job Requirement
                     </p>
-                    <div className="w-full ml-10">
+                    <div className="w-full md:ml-10 ml-2">
                         <ul className="font-normal text-sm leading-6  list-disc text-justify mt-2">
                             <li>
                                 Proven experience in all phases of the design process including user
@@ -129,8 +129,8 @@ export default function ProductDesigner() {
                         </ul>
                     </div>
                 </div>
-                <div className="w-3/4 ml-4">
-                    <ul className="font-normal text-sm leading-6  list-disc w-full mt-6  text-justify">
+                <div className="w-3/4 md:ml-4 ml-1">
+                    <ul className="font-normal text-sm leading-6  md:ml-4 ml-0 list-disc w-full text-justify md:mt-6 mt-0">
                         <li>
                             Ability to effectively communicate and persuade around design concepts
                         </li>
