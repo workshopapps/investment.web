@@ -12,7 +12,7 @@ on:
 
 jobs:
   Deployment:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Git pull
@@ -24,11 +24,11 @@ jobs:
           pwd
           echo "$AWS_EC2_PEM" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${AWS_EC2_USERNAME}@${AWS_EC2_PUBLIC_IP} 
-            cd {/investment.web} &&
-            git checkout staging &&
+            cd ${GITHUB_WORKSPACE} && bash deploy.sh
 
 
-            git pull origin staging &&
-            cd .. && run deploy.sh
+
+
+
 
 
