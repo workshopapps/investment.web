@@ -1,9 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import { faqDatas } from './FaqContent';
-// import ArrowIcons from './assets/icons/arrow-right.png';
-// import Shield from './assets/icons/shield-tick.png';
-// import Stripe from './assets/icons/stripe.png';
 import '../../assets/paymentpage/css/style.css';
 import Shield from '../../assets/paymentpage/icons/shield-tick.png';
 

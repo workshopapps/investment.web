@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import img1 from './../../assets/about/team-1.png';
 import img2 from './../../assets/about/team-2.png';
