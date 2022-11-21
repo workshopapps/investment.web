@@ -70,15 +70,15 @@ const StockTips = () => {
         { image: TrendingStocks6 }
     ];
     return (
-        <div>
-            <div id="charles" className="bg-gray-500">
+        <div data-testid="stock">
+            <div id="charles" className=" relative">
+                <div className="absolute w-full h-full bg-black bg-opacity-[35%] "></div>
                 <div
                     style={{
                         // backgroundImage: `url(${charles})`
                         backgroundImage: `url(require${charles})`
                     }}
-                    className="p-6 text-center text-xl text-white font-bold"
-                >
+                    className="p-6 md:p-12 text-center text-xl text-white font-bold z-20 relative">
                     <h2>MyStockPlug</h2>
                     <h1>STOCK TIPS FOR ABSOLUTE BEGINNERS</h1>
                 </div>
@@ -91,8 +91,7 @@ const StockTips = () => {
                             return (
                                 <div
                                     key={feature.image}
-                                    className="col-span-3 md:col-span-4 grid gap-1"
-                                >
+                                    className="col-span-3 md:col-span-4 grid gap-1">
                                     <img src={feature.image} alt="" className="w-full " />
                                     <div>Stock tips Update</div>
                                     <a href="http://" className="font-bold text-xs">
@@ -117,8 +116,7 @@ const StockTips = () => {
                             return (
                                 <div
                                     key={Stock.image}
-                                    className="col-span-3 md:col-span-4 grid gap-1"
-                                >
+                                    className="col-span-3 md:col-span-4 grid gap-1">
                                     <img src={Stock.image} alt="" className="w-full " />
                                     <div>Stock tips Update</div>
                                     <a href="http://" className="font-bold text-xs">
