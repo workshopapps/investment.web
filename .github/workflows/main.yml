@@ -24,7 +24,7 @@ jobs:
           pwd
           echo "$AWS_EC2_PEM" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${AWS_EC2_USERNAME}@${AWS_EC2_PUBLIC_IP} 
-            cd /home/ubuntu && bash deploy.sh
+            cd {/home/ubuntu} && bash deploy.sh
 
 
 
