@@ -5,9 +5,9 @@ from sqlalchemy.testing import db
 
 from api.schemas.schemas import PasswordReset
 
-# from ..send_email import password_reset
-# from ..oauth2 import create_access_token, get_current_user
-# from ..utils import get_password_hash
+from ..send_email import password_reset
+from .oauth2 import create_access_token, get_current_user
+
 
 router = APIRouter(
     prefix="/password",
