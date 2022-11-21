@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
 // Only Page Components Rendered Here
 import IndexPage from './pages/index/index'; // Landing Page Component
 import ErrorPage from './pages/error';
@@ -12,6 +11,7 @@ import Topstories from './pages/News/Topstories';
 
 import Contact from './pages/contact/Contact';
 import Notification from './pages/notifications/Notification';
+// eslint-disable-next-line import/no-unresolved
 import CompanyProfilePage from './pages/companyprofile';
 
 // Define Page Routes
@@ -29,12 +29,9 @@ const router = createBrowserRouter([
     {
         path: '/about',
         element: <AboutPage />,
-======= errorElement: <ErrorPage />
-     }
-     {  path: '/contact',
-        element: <Contact />,
         errorElement: <ErrorPage />
     },
+    { path: '/contact', element: <Contact />, errorElement: <ErrorPage /> },
 
     {
         path: 'notification',

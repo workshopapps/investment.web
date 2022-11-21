@@ -77,7 +77,7 @@ const StockTips = () => {
                         // backgroundImage: `url(${charles})`
                         backgroundImage: `url(require${charles})`
                     }}
-                    className="p-6 text-center text-xl text-white font-bold"
+                    className="p-6 md:p-12 text-center text-xl text-white font-bold"
                 >
                     <h2>MyStockPlug</h2>
                     <h1>STOCK TIPS FOR ABSOLUTE BEGINNERS</h1>
