@@ -53,7 +53,7 @@ async def create_company(company: dict, db: Session):
     categories: list = db.query(Category).all()
     categories.sort(key=sort_categories, reverse=True)
     company_market_cap = company_profile['mktCap']
-    company_category: Category = categories[0]
+    company_category: Category = categories[len(categories) - 1]
     for category in categories:
         if company_market_cap >= category.market_cap:
             company_category = category
