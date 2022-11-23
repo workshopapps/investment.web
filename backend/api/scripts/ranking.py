@@ -1,8 +1,11 @@
+import datetime
+
 from api.crud.base import get_db
 from api.models import models
 from sqlalchemy.orm import Session
 from uuid import uuid4
 from api.scripts import data_gathering, data_calculations
+from api.models.models import Ranking
 
 """
     This is the main function that accumulates all the 
@@ -49,17 +52,24 @@ def rank_companies():
         dividend_yield_score = data_calculations.get_dividend_yield_weighted_score(current_stock_price.dividend_yield)
 
         total_score = (
-                    de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
-                    peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
+                de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
+                peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
 
         ranking_score = (total_score / 11) * 10
+        ranking_score = round(ranking_score, 5)
 
-        ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
-                                 score=ranking_score, methodology="Fundamental Analysis")
-        db.add(ranking)
+        latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+
+        if latest_ranking and str(latest_ranking.score) == str(ranking_score):
+            latest_ranking.updated_at = datetime.datetime.now()
+        else:
+            latest_ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
+                                            score=ranking_score, methodology="Fundamental Analysis")
+        db.add(latest_ranking)
     db.commit()
 
 
 async def run_process_scripts():
-    await data_gathering.pick_four_random_companies()
+    #await data_gathering.pick_four_random_companies()
     rank_companies()

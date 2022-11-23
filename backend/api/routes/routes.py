@@ -44,17 +44,21 @@ def get_list_of_ranked_companies():
 
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
+        sector: models.Sector = comp.sect_value
+        category: models.Category = comp.cat_value
         data = {
             'company_id': comp.company_id,
             'name': comp.name,
             'market_cap': comp.market_cap,
-            'sector': comp.sect_value,
-            'category': comp.cat_value,
+            'profile_image': comp.profile_image,
+            'sector': sector.industry,
+            'category': category.name,
             'ticker_symbol': comp.ticker_value.symbol,
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
-                'created_at': ranking.created_at
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at,
             }
         }
         response.append(data)
@@ -96,13 +100,15 @@ async def get_company_category(category: str):
         data = {
             'company_id': comp.company_id,
             'name': comp.name,
+            'profile_image': comp.profile_image,
             'sector': comp.sect_value,
             'category': comp.cat_value,
             'ticker_symbol': comp.ticker_value.symbol,
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
-                'created_at': ranking.created_at
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at,
             }
         }
         response.append(data)
@@ -135,6 +141,7 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
         'company_id': company.company_id,
         'name': company.name,
         'description': company.description,
+        'profile_image': company.profile_image,
         'sector': company.sect_value,
         'category': company.cat_value,
         'ticker': company.ticker_value,
@@ -162,6 +169,7 @@ async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
         'company_id': company.company_id,
         'name': company.name,
         'market_cap': company.market_cap,
+        'profile_image': company.profile_image,
         'description': company.description,
         'sector': company.sect_value,
         'category': company.cat_value,
