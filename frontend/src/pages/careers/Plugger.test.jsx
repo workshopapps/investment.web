@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import Section4 from './Section4';
+import Plugger from './Plugger';
 
-it('renders section 4 component succesfully', () => {
+it('renders plugger component succesfully', () => {
     render(
         <MemoryRouter>
-            <Section4 />
+            <Plugger />
         </MemoryRouter>
     );
-    expect(screen.getByTestId('section4')).toBeInTheDocument();
+    expect(screen.getByTestId('plugger')).toBeInTheDocument();
 });

@@ -5,7 +5,7 @@ import Button from '../../../components/careers/Buttons/Button';
 
 export default function Section3() {
     return (
-        <div className="m-12" data-testid="section1">
+        <div className="m-12" data-testid="section3">
             <p className="text-primary102 pb-2 text-3xl">Open Positions</p>
             <p className="text-primaryGray text-sm">
                 These are some of the the most recent open positions:

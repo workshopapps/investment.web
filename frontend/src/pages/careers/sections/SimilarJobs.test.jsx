@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import Section4 from './Section4';
+import SimilarJobs from './SimilarJobs';
 
-it('renders section 4 component succesfully', () => {
+it('renders similar jobs component succesfully', () => {
     render(
         <MemoryRouter>
-            <Section4 />
+            <SimilarJobs />
         </MemoryRouter>
     );
-    expect(screen.getByTestId('section4')).toBeInTheDocument();
+    expect(screen.getByTestId('similar-job')).toBeInTheDocument();
 });

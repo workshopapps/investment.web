@@ -3,7 +3,9 @@ import Form from '../../../components/careers/Form/Form';
 
 export default function Section7() {
     return (
-        <div className="block md:grid sm:grid lg:grid grid-cols-2 bg-shade500 p-10  place-content-center">
+        <div
+            className="block md:grid sm:grid lg:grid grid-cols-2 bg-shade500 p-10  place-content-center"
+            data-testid="section7">
             <div className="mt-4 sm:mb-4 md:mb-4">
                 <p className="text-primary101 py-2 text-5xl">Connect With Us</p>
                 <p className="text-primary101 text-2xl py-2 md:w-3/4 w-full">

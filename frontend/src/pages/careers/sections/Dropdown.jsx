@@ -2,7 +2,9 @@ import React from 'react';
 
 export default function Dropdown() {
     return (
-        <div className="flex flex-col  md:w-3/4 w-full h-full gap-4 ml-10 my-10 md:justify-start">
+        <div
+            className="flex flex-col  md:w-3/4 w-full h-full gap-4 ml-10 my-10 md:justify-start"
+            data-testid="dropdown">
             <p className="py-5 text-secondaryBlack font-normal text-lg leading-8">Filters</p>
             <select
                 name="category"

@@ -3,13 +3,13 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import Section4 from './Section4';
+import Dropdown from './Dropdown';
 
-it('renders section 4 component succesfully', () => {
+it('renders dropdown component succesfully', () => {
     render(
         <MemoryRouter>
-            <Section4 />
+            <Dropdown />
         </MemoryRouter>
     );
-    expect(screen.getByTestId('section4')).toBeInTheDocument();
+    expect(screen.getByTestId('dropdown')).toBeInTheDocument();
 });

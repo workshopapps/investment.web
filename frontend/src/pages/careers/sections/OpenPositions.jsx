@@ -3,7 +3,7 @@ import Button from '../../../components/careers/Buttons/Button';
 
 export default function OpenPositions() {
     return (
-        <div className="mt-7 mb-4 mx-6">
+        <div className="mt-7 mb-4 mx-6" data-testid="open-positions">
             <p className="text-primary102 px-2 text-2xl">
                 {' '}
                 <span className="w-3 h-3 p-2 mx-2 bg-primary102"></span> All Open Postions

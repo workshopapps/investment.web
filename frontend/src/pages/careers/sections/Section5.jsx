@@ -8,7 +8,7 @@ export default function Section5() {
     return (
         <div
             className="my-8 container flex justify-center content-center flex-col mx-6 "
-            data-testid="section4">
+            data-testid="section5">
             <p className="font-semibold text-xl leading-7 text-primary101 pt-4">
                 Perks &amp; Benefits
             </p>

@@ -8,7 +8,7 @@ import PageLayout from '../layout';
 export default function Position() {
     return (
         <PageLayout>
-            <div className="w-full font-Hauora">
+            <div className="w-full font-Hauora" data-testid="position">
                 <Section8 />
                 <OpenPositions />
                 <div className="relative rounded-xl bg-shade400 grid md:grid-cols-3 gap-2 m-8 shadow p-10">

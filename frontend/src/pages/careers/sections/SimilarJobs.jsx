@@ -1,9 +1,9 @@
 import React from 'react';
 import Box from '../../../components/careers/Box/Box';
 
-export default function SimlarJobs() {
+export default function SimilarJobs() {
     return (
-        <div className="">
+        <div className="" data-testid="similar-job">
             <p className="text-primaryGray py-2 text-2xl ml-8 text-center md:text-justify">
                 Similar Jobs
             </p>

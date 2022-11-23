@@ -3,7 +3,7 @@ import Frame8 from '../../../assets/careers/frame8.png';
 
 export default function Section8() {
     return (
-        <div className="grid md:grid-cols-2 grid-cols-1 bg-shade500 p-10">
+        <div className="grid md:grid-cols-2 grid-cols-1 bg-shade500 p-10" data-testid="section8">
             <div className="h-1/2 px-2 py-20 w-full mt-6 sm:py-2 md:py-2">
                 <h1 className="text-bold md:text-4xl text-3xl  tracking-widest leading-7 md:w-3/4 w-full text-primary101">
                     Were looking for self-motivated and passionate individuals to join our expansive

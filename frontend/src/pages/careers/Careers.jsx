@@ -10,7 +10,7 @@ import Section7 from './sections/Section7';
 
 export default function Career() {
     return (
-        <div className="font-Hauora">
+        <div className="font-Hauora" data-testid="careers">
             <PageLayout>
                 <Section1 />
                 <Section2 />

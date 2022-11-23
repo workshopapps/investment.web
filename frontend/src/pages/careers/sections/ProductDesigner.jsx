@@ -2,7 +2,9 @@ import React from 'react';
 
 export default function ProductDesigner() {
     return (
-        <div className="border border-shade100 p-8 m-10 rounded-md shadow bg-shade100 md:bg-white ">
+        <div
+            className="border border-shade100 p-8 m-10 rounded-md shadow bg-shade100 md:bg-white"
+            data-testid="product-designer">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-2  w-full mx-4  place-content-center md:gap-6">
                 <div className="w-3/4">
                     <p className="font-medium text-xl leading-8 tracking-widest text-primary102 w-full">
