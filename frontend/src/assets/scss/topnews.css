@@ -1,0 +1,328 @@
+.topNews__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 2%;
+}
+
+@media (max-width: 900px) {
+  .topNews__section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .top__news {
+    margin: 2rem 0;
+  }
+}
+
+.topNews__second {
+  height: 500px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+@media (max-width: 550px) {
+  .topNews__second {
+    margin: 1rem 0;
+    height: auto;
+  }
+}
+
+.topNews__second img {
+  width: 100px;
+  height: 81px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+
+.topNews__second .icon_span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 33px;
+  padding: 0.5rem;
+  color: #1bd47b;
+}
+
+@media (max-width: 550px) {
+  .topNews__second .icon_span {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.topNews__second aside p {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+@media (max-width: 550px) {
+  .topNews__second aside p {
+    font-size: 9.68006px;
+    line-height: 10px;
+  }
+}
+
+.top__news {
+  background: #ffffff;
+  border-radius: 8px;
+  -ms-flex-preferred-size: 70%;
+      flex-basis: 70%;
+}
+
+.top__news img {
+  width: 174px;
+  height: 141px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 550px) {
+  .top__news img {
+    width: 100px;
+    height: 81px;
+  }
+}
+
+.top__news .icon_span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  padding: 0.5rem;
+  line-height: 33px;
+  color: #1bd47b;
+}
+
+@media (max-width: 550px) {
+  .top__news .icon_span {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.top__news-first {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5rem 1rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-item-align: start;
+      align-self: start;
+  gap: 2%;
+  border: 1px solid #e0e2e5;
+}
+
+.top__news-first aside:nth-child(1) {
+  -ms-flex-preferred-size: 70%;
+      flex-basis: 70%;
+}
+
+@media (max-width: 550px) {
+  .top__news-first aside:nth-child(1) {
+    -ms-flex-preferred-size: 60%;
+        flex-basis: 60%;
+  }
+}
+
+.top__news-first aside:nth-child(2) {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 550px) {
+  .top__news-first aside:nth-child(2) {
+    -ms-flex-preferred-size: 30%;
+        flex-basis: 30%;
+  }
+}
+
+.top__news-first aside p {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #66717e;
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 550px) {
+  .top__news-first aside p {
+    font-size: 9.68006px;
+    line-height: 10px;
+  }
+}
+
+.top__news-first aside h3 {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #1b1105;
+}
+
+@media (max-width: 550px) {
+  .top__news-first aside h3 {
+    font-size: 8.35007px;
+    line-height: 13px;
+  }
+}
+
+.top-components {
+  height: auto;
+}
+
+.top-components aside h3 {
+  font-size: 16px;
+}
+
+@media (max-width: 550px) {
+  .top-components aside h3 {
+    font-size: 8.35007px;
+    line-height: 13px;
+  }
+}
+
+.flex__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: white;
+}
+
+.flex__item aside:nth-child(1) {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  margin: 1rem;
+}
+
+.flex__item aside:nth-child(1) img {
+  width: 288px;
+  height: 233px;
+}
+
+@media (max-width: 550px) {
+  .flex__item aside:nth-child(1) img {
+    width: 87.09px;
+    height: 70.54px;
+    border-radius: 3.34003px;
+  }
+}
+
+.flex__item aside:nth-child(2) {
+  -ms-flex-preferred-size: 80%;
+      flex-basis: 80%;
+}
+
+@media (max-width: 550px) {
+  .flex__item aside:nth-child(2) {
+    -ms-flex-preferred-size: 65%;
+        flex-basis: 65%;
+  }
+}
+
+.flex__item aside:nth-child(2) h3 {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 50px;
+  color: #1b1105;
+}
+
+@media (max-width: 550px) {
+  .flex__item aside:nth-child(2) h3 {
+    font-size: 12.1926px;
+    line-height: 19px;
+    color: #1b1105;
+  }
+}
+
+.flex__item aside:nth-child(2) p {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  color: #66717e;
+}
+
+@media (max-width: 550px) {
+  .flex__item aside:nth-child(2) p {
+    font-size: 12.1926px;
+    line-height: 19px;
+    color: #66717e;
+  }
+}
+
+.usable__container {
+  padding: 1rem;
+}
+
+.usable__container .top__span {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 50px;
+  color: #000000;
+}
+
+@media (max-width: 550px) {
+  .usable__container .top__span {
+    font-size: 16px;
+    line-height: 24px;
+    color: #000000;
+  }
+}
+
+.main__body-btn {
+  width: 146px;
+  height: 40px;
+  left: 648px;
+  top: 1979px;
+  color: white;
+  margin: auto;
+  display: block;
+  background: #1bd47b;
+  border-radius: 4px;
+}
+/*# sourceMappingURL=topnews.css.map */
