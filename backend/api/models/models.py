@@ -15,7 +15,7 @@ class Company(Base):
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
     description = Column(String(10000))
-    profile_url = Column(String(200), nullable=True)
+    profile_image = Column(String(200), nullable=True)
     market_cap = Column(Float, nullable=True)
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
     category = Column(String(64), ForeignKey("categories.category_id"))

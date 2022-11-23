@@ -43,9 +43,11 @@ async def create_company(company: dict, db: Session):
                            isin=company_profile['isin'])
     db.add(insert_ticker)
 
-    # insert sector
-    insert_sector = Sector(sector_id=sector_id, industry=company_profile['sector'])
-    db.add(insert_sector)
+    # get or insert sector
+    sector = db.query(Sector).filter(Sector.industry == company_profile['sector']).first()
+    if not sector:
+        sector = Sector(sector_id=sector_id, industry=company_profile['sector'])
+        db.add(sector)
 
     # determine the category for the company
     categories: list = db.query(Category).all()
@@ -60,8 +62,8 @@ async def create_company(company: dict, db: Session):
     # insert the company
     insert_company = Company(company_id=company['symbol'], name=company['name'],
                              location=company_profile['country'], description=company_profile['description'],
-                             sector=sector_id, category=company_category.category_id, ticker=ticker_id,
-                             market_cap=company_profile['mktCap'])
+                             sector=sector.sector_id, category=company_category.category_id, ticker=ticker_id,
+                             market_cap=company_profile['mktCap'], profile_image=company_profile['image'])
     db.add(insert_company)
     db.commit()
 
