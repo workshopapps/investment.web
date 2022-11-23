@@ -31,7 +31,7 @@ async def update_script_task():
 
 
 @app.on_event("startup")
-@repeat_every(seconds=5)  # run every hour
+@repeat_every(seconds=60 * 60)  # run every hour
 async def run_cron():
     await update_script_task()
 
