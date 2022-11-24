@@ -134,4 +134,5 @@ class SubscribedUsers(Base):
     email = Column(String(30))
     created_date = Column(DateTime(timezone=True), server_default=func.now())
     
+   
     
