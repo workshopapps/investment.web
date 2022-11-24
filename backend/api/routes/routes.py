@@ -62,7 +62,7 @@ def get_list_of_ranked_companies():
             'current_ranking': {
                 'score': ranking.score,
                 'created_at': ranking.created_at,
-                'updated_at': ranking.updated_at,
+                'updated_at': ranking.updated_at, 
             }
         }
         response.append(data)
