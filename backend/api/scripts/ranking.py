@@ -3,7 +3,7 @@ from api.crud.base import get_db
 from api.models import models
 from sqlalchemy.orm import Session
 from uuid import uuid4
-from api.scripts import data_gathering, data_calculations, send_mail, email
+from api.scripts import data_gathering, data_calculations, email_sending
 from api.models.models import Ranking
 
 """
@@ -114,12 +114,9 @@ async def send_ranking_update_notification():
         comapny_ranks.append(data)
 
 
-    # await notify_users(comapny_ranks)
+    await email_sending.send_user_email(comapny_ranks)
 
 async def run_process_scripts():
-    # await data_gathering.pick_four_random_companies()
-    print("Sending email")
+    await data_gathering.pick_four_random_companies()
     await send_ranking_update_notification()
-    print("Email sent")
-
     rank_companies()
