@@ -143,7 +143,7 @@ class Customer(Base):
     __tablename__ = "customer"
 
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    session_id = Column(String)
+    session_id = Column(String(64))
     subscription = Column(String(64), ForeignKey("subscription.subscription_id"))
 
     subscription_value = relationship("Subscription", back_populates="customer_value")
