@@ -1,5 +1,5 @@
 from fastapi.templating import Jinja2Templates
-from fastapi import FastAPI, Depends, HTTPException, APIRouter, Request
+from fastapi import FastAPI, Depends, HTTPException, APIRouter, Request, Query
 
 from dotenv import load_dotenv
 from sqlalchemy.orm import Session
@@ -19,16 +19,14 @@ load_dotenv()
 app = FastAPI()
 router = APIRouter()
 
-templates = Jinja2Templates(directory="api/payment_gte/templates")
-
 stripe.api_key = os.getenv("STRIPE_API_KEY")
 price_id = os.getenv("PRICE_ID")
 
 
 
 # create customer profile
-@router.post('/create-customer-object/')
-async def create_customer_object(request: Request, db: Session=Depends(get_db), tags=["Company"]):
+@router.post('/create-customer-object/', tags=["Customer"],)
+async def create_customer_object(request: Request, db: Session=Depends(get_db)):
     user = security.read_users()
 
     users = db.query(User).all()
@@ -47,10 +45,12 @@ async def create_customer_object(request: Request, db: Session=Depends(get_db), 
 
 
 # create a checkout session
-@router.post('/create-checkout-session', tags=["Customer"],)
-async def create_session(request: Request, db: Session = Depends(get_db)):
+@router.post('/create-checkout-session/{price_id}', tags=["Customer"],)
+async def create_session(price_id: str, request: Request, db: Session = Depends(get_db)):
+    PRICE_ID='price_1M7SgJCCH5YrTF3ceYgl5mhM'
 
-    check_session = stripe.checkout.Session.create(
+    try:
+        check_session = stripe.checkout.Session.create(
         success_url="http://127.0.0.1:8000/success/?session_id={CHECKOUT_SESSION_ID}}",
         cancel_url="http://127.0.0.1:8000/",
         mode="subscription",
@@ -62,12 +62,15 @@ async def create_session(request: Request, db: Session = Depends(get_db)):
         }]
     )
 
-    return {"SessionID": check_session["id"]}
+        return {"SessionID": check_session["id"]}
+
+    except Exception as e:
+        return {"status_code": 200, "error": e.args}
 
 
 # Create customer portal
-@router.post('/customer-portal', response_model=Company, tags=["Customer"],)
-async def customer_portal(request: Request, db: Session = Depends(get_db)):
+@router.post('/customer-portal/{customer_id}', tags=["Customer"],)
+async def customer_portal(customer_id: str, request: Request, db: Session = Depends(get_db)):
     user = security.read_users()
     
     users = db.query(Customer).all()
@@ -81,12 +84,12 @@ async def customer_portal(request: Request, db: Session = Depends(get_db)):
         return {"Session_url": session.url}
 
     except Exception as e:
-        return{"status_Code": "500", "errors": e.args}
+        return{"status_Code": 200, "errors": e.args}
 
 
 # create subscription for user
-@router.post('/create-subscription-object/', tags=["Customer"],)
-async def create_subscription_object(request: Request, db: Session = Depends(get_db)):
+@router.post('/create-subscription-object/{CUSTOMER_ID}', tags=["Customer"],)
+async def create_subscription_object(request: Request, CUSTOMER_ID: str, price_id: str, db: Session = Depends(get_db)):
     user = security.read_users()
 
     users = db.query(Customer).all()
@@ -112,13 +115,13 @@ async def create_subscription_object(request: Request, db: Session = Depends(get
             "customer": subscription.customer
         }
     except Exception as e:
-        return {"statusCode": "403", "error": e.args }
+        return {"statusCode": 200, "error": e.args }
         
 
 
 # cancel subscription
-@router.post('/cancel-subscription', tags=["Customer"],)
-async def cancel_subscription(request: Request, db: Session = Depends(get_db)):
+@router.post('/cancel-subscription/{subscription_id}', tags=["Customer"],)
+async def cancel_subscription(subscription_id: str, request: Request, db: Session = Depends(get_db)):
     user = security.read_users()
 
     users  = db.query(Subscription).all()
@@ -130,7 +133,7 @@ async def cancel_subscription(request: Request, db: Session = Depends(get_db)):
             deleted_subscription
         }
     except Exception as e:
-        return {"status_code": "403", "error": e.args}
+        return {"status_code": 200, "error": e.args}
 
 
 # to handle webhook data from stripe
