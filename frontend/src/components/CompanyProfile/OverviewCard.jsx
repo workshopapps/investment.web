@@ -13,7 +13,7 @@ const OverviewCard = ({ companyId, name, price, industry }) => {
                 </button>
             </div>
             <div className="flex-row flex align-middle justify-start my-3">
-                <span className="text-xl md:text-2xl font-semibold pt-3">{price}</span>
+                <span className="text-xl md:text-2xl font-semibold pt-3">${price}</span>
             </div>
             <div className="flex-row flex align-middle justify-between">
                 <span className="text-base font-sans font-light pt-3">Industry: {industry}</span>
