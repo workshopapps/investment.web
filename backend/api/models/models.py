@@ -128,7 +128,17 @@ class User(Base):
     email = Column(String(30))
     name = Column(String(30))
 
+
+class SubscribedUsers(Base):
+    __tablename__ = "subscribers"
+
+    name = Column(String(30))
+    email = Column(String(30))
+    created_date = Column(DateTime(timezone=True), server_default=func.now())
     
+   
+    
+
 class Customer(Base):
     __tablename__ = "customer"
 
@@ -157,3 +167,4 @@ class Product(Base):
     price_id = Column(String(64))
 
     sub_value = relationship("Subscription", back_populates="product_value")
+
