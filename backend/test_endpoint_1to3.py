@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 from fastapi import APIRouter, Depends
 from main import app
 from api.models import models
-from api.database.database import import get_db
+from api.database.database import get_db
 from sqlalchemy.orm import  Session
 client = TestClient(app)
 

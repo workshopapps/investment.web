@@ -23,7 +23,7 @@ const Nav = ({ openMenu }) => {
     const navigate = useNavigate();
 
     return (
-        <nav style={navStyle} className="flex justify-center items-center p-4 h-20">
+        <nav style={navStyle} className="flex justify-center items-center h-20">
             <div className="w-full flex items-center justify-between lg:mx-[100px] mx-[16px]">
                 <div onClick={() => navigate('/')} className="cursor-pointer">
                     <img src={Logo} alt="" />

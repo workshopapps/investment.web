@@ -14,6 +14,7 @@ from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 from fastapi.middleware.cors import CORSMiddleware
 
+
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
@@ -38,6 +39,7 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 app.include_router(social_login.router)
 app.include_router(routes.router)
 app.include_router(server.router)
+
 
 
 async def update_script_task():
