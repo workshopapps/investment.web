@@ -14,7 +14,7 @@ from google.auth.transport import requests
 
 
 router = APIRouter()
-CLIENT_ID = os.getenv('CLIENT_ID')
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 
 
 
@@ -22,7 +22,7 @@ CLIENT_ID = os.getenv('CLIENT_ID')
 def authentication(request: Request,token:str):
     try:
         #verify the jwt signature
-        user =id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
+        user =id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
         id = user['sub']
         name = user['name']
         email = user['email']
