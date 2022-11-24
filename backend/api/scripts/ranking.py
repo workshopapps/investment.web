@@ -1,8 +1,11 @@
+import datetime
 from api.crud.base import get_db
 from api.models import models
 from sqlalchemy.orm import Session
 from uuid import uuid4
-from api.scripts import data_gathering, data_calculations
+from api.scripts import data_gathering, data_calculations, send_mail
+from api.routes.routes import get_list_of_ranked_companies
+from api.models.models import Ranking
 
 """
     This is the main function that accumulates all the 
@@ -15,7 +18,7 @@ def rank_companies():
     db: Session = next(get_db())
 
     companies = db.query(models.Company).all()
-
+    global latest_ranking
     for company in companies:
         stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id).order_by(
             models.StockPrice.date.desc()).limit(2).all()
@@ -53,13 +56,34 @@ def rank_companies():
                     peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
 
         ranking_score = (total_score / 11) * 10
+        ranking_score = round(ranking_score, 5)
 
-        ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
-                                 score=ranking_score, methodology="Fundamental Analysis")
-        db.add(ranking)
+        latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+
+        if latest_ranking and str(latest_ranking.score) == str(ranking_score):
+            latest_ranking.updated_at = datetime.datetime.now()
+        else:
+            latest_ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
+                                            score=ranking_score, methodology="Fundamental Analysis")
+        db.add(latest_ranking)
     db.commit()
+    
+    
 
+async def send_ranking_email():
+    db: Session = next(get_db())
+
+    email = db.query(models.User.email).all()
+    content = None #get the ranked companies
+    print(content)
+
+    email_content = await send_mail.send_email(email=email, content=content)
 
 async def run_process_scripts():
+    print("Sending email")
+    await send_ranking_email()
+    print("Email sent")
     await data_gathering.pick_four_random_companies()
     rank_companies()
+    
