@@ -5,7 +5,7 @@ from .email import send_user_email
 
 
 
-async def send_email_users(company_ranks):
+async def send_user_email(company_ranks):
     db: Session = next(get_db())
 
     # get users emails
