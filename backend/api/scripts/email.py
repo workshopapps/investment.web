@@ -25,7 +25,7 @@ conf = ConnectionConfig(
     MAIL_SSL = False,
     USE_CREDENTIALS = True,
     VALIDATE_CERTS = True,
-    TEMPLATE_FOLDER = "api/templates"
+    
 )
 
 async def send_subscription_mail(subject: str, email_to: str, body: dict):
@@ -37,7 +37,7 @@ async def send_subscription_mail(subject: str, email_to: str, body: dict):
         )
     
     fm = FastMail(conf)
-    await fm.send_message(message, template_name="email.html")
+    await fm.send_message(message)
     
 
 
