@@ -44,17 +44,25 @@ def get_list_of_ranked_companies():
 
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
+        sector: models.Sector = comp.sect_value
+        category: models.Category = comp.cat_value
+        stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
+            models.StockPrice.date.desc()).first()
         data = {
             'company_id': comp.company_id,
             'name': comp.name,
             'market_cap': comp.market_cap,
-            'sector': comp.sect_value,
-            'category': comp.cat_value,
+            'stock_price': stock_price.stock_price,
+            'dividend_yield': stock_price.dividend_yield,
+            'profile_image': comp.profile_image,
+            'sector': sector.industry,
+            'category': category.name,
             'ticker_symbol': comp.ticker_value.symbol,
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
-                'created_at': ranking.created_at
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at, 
             }
         }
         response.append(data)
