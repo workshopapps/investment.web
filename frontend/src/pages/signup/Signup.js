@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import signupimg from './../../assets/signup/signup-img.png';
 import signupdesk from './../../assets/signup/signup-desk-img.png';
 import googleicon from './../../assets/signup/googleicon.png';
+import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from 'firebase/auth';
 // import { auth } from '../firebase';
 import { auth } from '../../firebase';
 
 const Signup = () => {
-    const [passwordType] = useState('password');
+    const [passwordType, setPasswordType] = useState('password');
     const [signupForm, setSignUpForm] = useState({
         fullname: '',
         email: '',
         password: ''
     });
-    const [googleUserToken, setGoogleUserToken] = useState(false);
+    const [googleUserToken, setGoogleUserToken] = useState(null);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     console.log(googleUserToken);
 
+    //tracking form changes
     const handleChange = (event) => {
         const { name, value } = event.target;
         setSignUpForm((prevState) => {
@@ -27,11 +31,15 @@ const Signup = () => {
         });
     };
 
+    //handle form submit
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Submitted');
+        setFormErrors(validate(signupForm));
+        setIsSubmit(true);
     };
 
+    //handle google OAUTH
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider();
         signInWithRedirect(auth, provider);
@@ -45,15 +53,79 @@ const Signup = () => {
         }
     };
 
-    React.useEffect(() => {
+    //toggle password
+    const togglePassword = () => {
+        if (passwordType === 'password') {
+            setPasswordType('text');
+        } else {
+            setPasswordType('password');
+        }
+    };
+
+    const postResp = () => {
+        fetch('http://18.217.87.189/googlelogin', {
+            // Enter your IP address here
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(googleUserToken) // body data type must match "Content-Type" header
+        });
+        console.log('Run user token');
+    };
+
+    //form validation
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+            setSignUpForm((prevState) => {
+                return {
+                    ...prevState,
+                    fullname: '',
+                    email: '',
+                    password: ''
+                };
+            });
+        }
+    }, [formErrors]);
+
+    const validate = (values) => {
+        const errors = {};
+        const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
+
+        if (!signupForm.fullname) {
+            errors.fullname = 'Required';
+        }
+
+        if (!signupForm.email) {
+            errors.email = 'Required';
+        }
+
+        if (!signupForm.password) {
+            errors.password = 'Required';
+        } else if (!regex.test(values.email)) {
+            errors.email = 'This is not a valid email format';
+        }
+        return errors;
+    };
+
+    useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setGoogleUserToken(currentUser.accessToken);
-            // console.log(currentUser);
+            setGoogleUserToken(currentUser.reloadUserInfo);
+            postResp();
+            window.sessionStorage.setItem('userdata', JSON.stringify(googleUserToken));
         });
         return () => {
             unsubscribe();
         };
     }, []);
+
+    // useEffect(() => {
+    //     // fetch('http://18.217.87.189/googlelogin', {
+    //     //     // Enter your IP address here
+    //     //     method: 'POST',
+    //     //     // mode: 'cors',
+    //     //     body: JSON.stringify(googleUserToken) // body data type must match "Content-Type" header
+    //     // });
+    //     console.log('Run user token');
+    // }, [googleUserToken]);
 
     return (
         <div className="mb-12 md:h-screen md:overflow-hidden md:mb-0">
@@ -62,7 +134,7 @@ const Signup = () => {
                     <img src={signupimg} className="w-full md:hidden" />
                     <img src={signupdesk} className="hidden md:flex" />
                 </div>
-                <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-10 lg:mt-16 lg:gap-3 lg:w-3/4 xl:px-20">
+                <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-16 lg:mt-8 lg:gap-3 lg:w-full xl:px-20">
                     <h1 className="font-HauoraBold text-xl text-center tracking-wide">
                         Create Account
                     </h1>
@@ -73,7 +145,7 @@ const Signup = () => {
                         className="bg-green-100 flex items-center w-full py-3 gap-2 justify-center rounded-sm"
                         onClick={handleGoogleSignIn}>
                         <img src={googleicon} width={'20px'} />
-                        <h2 className="text-sm font-HauoraBold">Sign Up with Google</h2>
+                        <h2 className="text-sm font-HauoraBold">Sign up with Google</h2>
                     </button>
 
                     <div className="flex flex-row gap-3 items-center">
@@ -94,6 +166,9 @@ const Signup = () => {
                                 name={'fullname'}
                                 onChange={handleChange}
                             />
+                            {formErrors && (
+                                <p className="text-red-500 text-sm ">{formErrors?.fullname}</p>
+                            )}
                         </div>
                         <div className="flex flex-col gap-0.5">
                             <label className="font-HauoraBold text-sm">Email</label>
@@ -105,8 +180,11 @@ const Signup = () => {
                                 name={'email'}
                                 onChange={handleChange}
                             />
+                            {formErrors && (
+                                <p className="text-red-500 text-sm ">{formErrors?.email}</p>
+                            )}
                         </div>
-                        <div className="flex flex-col gap-0.5">
+                        <div className="flex flex-col gap-0.5 relative">
                             <label className="font-HauoraBold text-sm">Password</label>
                             <input
                                 type={passwordType}
@@ -116,6 +194,19 @@ const Signup = () => {
                                 name={'password'}
                                 onChange={handleChange}
                             />
+                            <div
+                                className={
+                                    !formErrors
+                                        ? 'absolute right-5 bottom-8 cursor-pointer'
+                                        : 'absolute right-5 bottom-3 cursor-pointer'
+                                }
+                                onClick={togglePassword}>
+                                {' '}
+                                <img src={eyeIcon} />
+                            </div>
+                            {formErrors && (
+                                <p className="text-red-500 text-sm ">{formErrors?.password}</p>
+                            )}
                         </div>
                         <button className="capitalize bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100">
                             create account
