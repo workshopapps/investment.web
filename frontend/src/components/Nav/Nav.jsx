@@ -16,8 +16,8 @@ const Nav = ({ openMenu }) => {
     };
 
     const btns = [
-        { name: 'Login', background: 'transparent' },
-        { name: 'Get Started', background: '#1BD47B' }
+        { name: 'Login', background: 'transparent', url: '/login' },
+        { name: 'Get Started', background: '#1BD47B', url: '/signup' }
     ];
 
     const navigate = useNavigate();
@@ -33,8 +33,8 @@ const Nav = ({ openMenu }) => {
                 </div>
                 <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                     {btns.map((item, index) => {
-                        const { name, background } = item;
-                        return <NavBtn name={name} background={background} key={index} />;
+                        const { name, background, url } = item;
+                        return <NavBtn name={name} background={background} key={index} url={url} />;
                     })}
                 </div>
                 <div className="ham-menu block md:hidden" onClick={() => openMenu(true)}>
