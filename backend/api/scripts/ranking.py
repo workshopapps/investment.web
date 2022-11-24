@@ -1,4 +1,5 @@
 import datetime
+
 from api.crud.base import get_db
 from api.models import models
 from sqlalchemy.orm import Session
@@ -54,14 +55,13 @@ def rank_companies():
 
         # add all scores
         total_score = (
-                    de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
-                    peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
+                de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
+                peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
 
         # divide and round the total score
         ranking_score = (total_score / 11) * 10
         ranking_score = round(ranking_score, 5)
-        
-        # insert score into the ranking table in the database
+
         latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id) \
             .order_by(Ranking.created_at.desc()).first()
 
