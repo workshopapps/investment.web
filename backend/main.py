@@ -14,6 +14,7 @@ from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 from api.scripts import email_sending
 
+
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
@@ -27,6 +28,7 @@ app.include_router(social_login.router)
 app.include_router(routes.router)
 app.include_router(server.router)
 app.include_router(email_sending.router)
+
 
 
 async def update_script_task():
