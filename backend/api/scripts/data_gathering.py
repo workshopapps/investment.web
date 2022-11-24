@@ -17,6 +17,7 @@ query_params = {'apikey': os.getenv('FINANCIAL_MODEL_PREP_API_KEY')}
 
 
 async def call_api(url: str, queries=None):
+    """ Makes a call to the financial modelling grep API and returns the parsed result """
     # get the data from the API
     if queries is None:
         queries = {}
@@ -27,15 +28,21 @@ async def call_api(url: str, queries=None):
     return data
 
 
-def sort_categories(category: Category):
+def sort_categories_key(category: Category):
+    """ A function that returns the key to sort categories by """
     return category.market_cap
 
 
 async def create_company(company: dict, db: Session):
+    """ Creates a new company and insert it to the database """
     company_profile = await call_api(f"profile/{company['symbol']}")
     company_profile = company_profile[0]
     ticker_id = str(uuid4())
     sector_id = str(uuid4())
+
+    # only use companies with market cap
+    if not company_profile['mktCap'] > 0:
+        return None
 
     # insert ticker
     insert_ticker = Ticker(ticker_id=ticker_id, symbol=company['symbol'],
@@ -43,15 +50,17 @@ async def create_company(company: dict, db: Session):
                            isin=company_profile['isin'])
     db.add(insert_ticker)
 
-    # insert sector
-    insert_sector = Sector(sector_id=sector_id, industry=company_profile['sector'])
-    db.add(insert_sector)
+    # get or insert sector
+    sector = db.query(Sector).filter(Sector.industry == company_profile['sector']).first()
+    if not sector:
+        sector = Sector(sector_id=sector_id, industry=company_profile['sector'])
+        db.add(sector)
 
     # determine the category for the company
     categories: list = db.query(Category).all()
-    categories.sort(key=sort_categories, reverse=True)
+    categories.sort(key=sort_categories_key, reverse=True)
     company_market_cap = company_profile['mktCap']
-    company_category: Category = categories[0]
+    company_category: Category = categories[len(categories) - 1]
     for category in categories:
         if company_market_cap >= category.market_cap:
             company_category = category
@@ -60,13 +69,14 @@ async def create_company(company: dict, db: Session):
     # insert the company
     insert_company = Company(company_id=company['symbol'], name=company['name'],
                              location=company_profile['country'], description=company_profile['description'],
-                             sector=sector_id, category=company_category.category_id, ticker=ticker_id,
-                             market_cap=company_profile['mktCap'])
+                             sector=sector.sector_id, category=company_category.category_id, ticker=ticker_id,
+                             market_cap=company_profile['mktCap'], profile_image=company_profile['image'])
     db.add(insert_company)
     db.commit()
 
 
 async def create_or_update_stock_price(ratio: dict, stock_price_id: str, company_id: str, db: Session):
+    """ Creates a new stock price record or updates an existing one """
     insert_stock = StockPrice(stock_price_id=stock_price_id, company=company_id,
                               stock_price=ratio['priceFairValue'], pe_ratio=ratio['priceEarningsRatio'],
                               peg_ratio=ratio['priceEarningsToGrowthRatio'],
@@ -81,6 +91,7 @@ async def create_or_update_stock_price(ratio: dict, stock_price_id: str, company
 
 
 async def create_or_update_financial(financial: dict, financial_id: str, company_id: str, db: Session):
+    """ Creates a new financials record or updates an existing one"""
     insert_financial = Financial(financial_id=financial_id, company=company_id,
                                  growth_rate=financial['revenueGrowth'],
                                  income_statement_type='Annual', date=financial['date'])
@@ -90,6 +101,7 @@ async def create_or_update_financial(financial: dict, financial_id: str, company
 
 
 async def pick_four_random_companies():
+    """ Picks at most four random companies from the API, fetch their metrics and store their records"""
     # get companies
     data = await call_api('available-traded/list', {'query': 'USD'})
 
@@ -113,7 +125,9 @@ async def pick_four_random_companies():
         query_result = db.query(Company).filter(Company.company_id == symbol).first()
         if not query_result:
             # create the company since it doesn't exist yet
-            await create_company(company, db)
+            created = await create_company(company, db)
+            if not created:
+                continue
 
         # get ratios and financial growth from API
         ratios = await call_api(f"ratios/{symbol}")
@@ -132,5 +146,3 @@ async def pick_four_random_companies():
             financial_data = await create_or_update_financial(financial, financial_id, symbol, db)
             financials.append(financial_data)
         company['financials'] = financials
-
-    return companies
