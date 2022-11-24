@@ -2,8 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const NavBtn = ({ name, background, color }) => {
+const NavBtn = ({ name, background, color, url }) => {
     const btnStyle = {
         background: `${background}`,
         padding: '16px',
@@ -13,7 +14,9 @@ const NavBtn = ({ name, background, color }) => {
     };
     return (
         <button type="button" style={btnStyle} className="rounded">
-            {name}
+            <Link to={url}>
+                {name}
+            </Link>
         </button>
     );
 };

@@ -14,8 +14,8 @@ const Signup = () => {
         email: '',
         password: ''
     });
-    const [googleUser, setGoogleUser] = useState(false);
-    console.log(googleUser);
+    const [googleUserToken, setGoogleUserToken] = useState(false);
+    console.log(googleUserToken);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -47,8 +47,8 @@ const Signup = () => {
 
     React.useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setGoogleUser(currentUser);
-            console.log(currentUser);
+            setGoogleUserToken(currentUser.accessToken);
+            // console.log(currentUser);
         });
         return () => {
             unsubscribe();
@@ -57,12 +57,12 @@ const Signup = () => {
 
     return (
         <div className="mb-12 md:h-screen md:overflow-hidden md:mb-0">
-            <div className="flex flex-col justify-center items-center md:flex-row-reverse lg:gap-12 lg:pl-5 lg:items-start">
-                <div className="w-full lg:overflow-hidden">
+            <div className="flex flex-col justify-center items-center md:flex-row-reverse lg:items-start">
+                <div className="w-full">
                     <img src={signupimg} className="w-full md:hidden" />
                     <img src={signupdesk} className="hidden md:flex" />
                 </div>
-                <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:w-full lg:px-10 lg:mt-16 lg:gap-3">
+                <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-10 lg:mt-16 lg:gap-3 lg:w-3/4 xl:px-20">
                     <h1 className="font-HauoraBold text-xl text-center tracking-wide">
                         Create Account
                     </h1>

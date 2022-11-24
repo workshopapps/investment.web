@@ -24,8 +24,8 @@ const MobileMenu = ({ toggleMenu }) => {
         }
     ];
     const btns = [
-        { name: 'Login', background: 'transparent', color: 'black' },
-        { name: 'Get Started', background: '#1BD47B', color: 'white' }
+        { name: 'Login', background: 'transparent', color: 'black', url: '/login' },
+        { name: 'Get Started', background: '#1BD47B', color: 'white', url: '/signup' }
     ];
 
     useEffect(() => {
@@ -56,12 +56,13 @@ const MobileMenu = ({ toggleMenu }) => {
                     </ul>
                     <div className=" justify-between items-center gap-4 nav-btns flex flex-col">
                         {btns.map((item, index) => {
-                            const { name, background, color } = item;
+                            const { name, background, color, url } = item;
                             return (
                                 <NavBtn
                                     name={name}
                                     background={background}
                                     color={color}
+                                    url={url}
                                     key={index}
                                 />
                             );
