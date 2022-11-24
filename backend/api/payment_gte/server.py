@@ -47,7 +47,6 @@ async def create_customer_object(request: Request, db: Session=Depends(get_db)):
 # create a checkout session
 @router.post('/create-checkout-session/{price_id}', tags=["Customer"],)
 async def create_session(price_id: str, request: Request, db: Session = Depends(get_db)):
-    PRICE_ID='price_1M7SgJCCH5YrTF3ceYgl5mhM'
 
     try:
         check_session = stripe.checkout.Session.create(
