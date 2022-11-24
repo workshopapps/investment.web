@@ -12,20 +12,22 @@ const Footer = () => {
         {
             name: 'Get To Know Us',
             navLinks: [
-                { link: 'About MyStockPlug', to: '/about' },
-                { link: 'Careers', to: '/careers' },
-                { link: 'Stock Tips', to: '/StockTips' },
-                { link: 'Contact Us', to: '/contact' }
+                { link: 'About MyStockPlug', to: '/about' }
+                // { link: 'Careers', to: '/careers' },
+                // { link: 'Stock Tips', to: '/StockTips' },
             ]
         },
         {
             name: 'Support',
             navLinks: [
                 { link: 'Help', to: '/help' },
-                { link: 'FAQ', to: '#' },
-                { link: 'News', to: 'news' },
-                { link: 'Blog', to: '/blog' },
-                { link: 'Settings', to: '/settings' }
+                { link: 'Contact Us', to: '/contact' }
+
+                // { link: 'FAQ', to: '#' },
+                // { link: 'News', to: 'news' },
+                // { link: 'Blog', to: '/blog' },
+                // { link: 'Settings', to: '/settings' },
+
             ]
         },
         {
@@ -33,8 +35,8 @@ const Footer = () => {
             navLinks: [
                 { link: 'Terms of Use', to: '/terms' },
                 { link: 'Privacy Policy', to: '/policy' },
-                { link: 'Disclaimer' },
-                { link: 'Cookies Policy' }
+                // { link: 'Disclaimer' },
+                // { link: 'Cookies Policy' }
             ]
         }
     ];
