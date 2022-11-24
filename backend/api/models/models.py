@@ -129,12 +129,12 @@ class User(Base):
     name = Column(String(30))
 
 
-class SubscribedUsers(Base):
-    __tablename__ = "subscribers"
+# class SubscribedUsers(Base):
+#     __tablename__ = "subscribers"
 
-    name = Column(String(30))
-    email = Column(String(30))
-    created_date = Column(DateTime(timezone=True), server_default=func.now())
+#     name = Column(String(30))
+#     email = Column(String(30))
+#     created_date = Column(DateTime(timezone=True), server_default=func.now())
     
    
     

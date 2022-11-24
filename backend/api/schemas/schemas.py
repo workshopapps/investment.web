@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import date as date_type
-from typing import Optional
+from typing import Optional, List, Dict
 
 
 class CompanyBase(BaseModel):
@@ -119,3 +119,5 @@ class User(BaseModel):
     
     class Config:
         orm_mode = True
+
+
