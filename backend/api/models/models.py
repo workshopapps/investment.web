@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 from sqlalchemy import (Column, ForeignKey,
-                        String, Float, DateTime, Date)
+                        String, Float, DateTime, Date, Text)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -128,4 +128,43 @@ class User(Base):
     email = Column(String(30))
     name = Column(String(30))
 
+
+class SubscribedUsers(Base):
+    __tablename__ = "subscribers"
+
+    name = Column(String(30))
+    email = Column(String(30))
+    created_date = Column(DateTime(timezone=True), server_default=func.now())
     
+   
+    
+
+class Customer(Base):
+    __tablename__ = "customer"
+
+    customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    session_id = Column(String)
+    subscription = Column(String(64), ForeignKey("subscription.subscription_id"))
+
+    subscription_value = relationship("Subscription", back_populates="customer_value")
+    
+
+class Subscription(Base):
+    __tablename__ = "subscription"
+
+    subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    subscription_type = Column(String(64), nullable=True)
+    product = Column(String(64), ForeignKey("product.product_id"))
+
+    customer_value = relationship("Customer", back_populates="subscription_value")
+    product_value = relationship("Product", back_populates="sub_value")
+
+
+class Product(Base):
+    __tablename__  = "product"
+
+    product_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    price_id = Column(String(64))
+
+    sub_value = relationship("Subscription", back_populates="product_value")
+
