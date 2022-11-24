@@ -1,44 +1,79 @@
 import React from 'react';
 
-const CompanyOverviewCard = () => {
+import DownIcon from '../../assets/landingPage/icons/down.svg';
+// import UpIcon from '../../assets/landingPage/icons/up.svg';
+import shareIcon from '../../assets/company-profile/share.svg';
+
+const VisualDataCard = () => {
     return (
-        <div className="flex flex-col bg-white md:px-[100px] px-[2rem]">
-            <div className="px-0 md:px-10">
-                <h3 className="text-2xl text-[#000616] font-semibold pt-10 pb-6 ">
-                    {' '}
-                    Amazon.com, Inc
-                    <span className="text-[#8A8D95] text-base font-normal"> AMZN </span>
-                </h3>
+        <div className="h-[40em] flex flex-col text-[#5C5A5A] border rounded-lg px-6 py-4 font-HauoraLight">
+            <div className="flex flex-row justify-between">
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10">
+                    2022{' '}
+                    <img
+                        className="p-2 ml-3 md:m-auto h-6 md:h-auto border bg-[#E8FBF2] rounded-full"
+                        src={DownIcon}
+                        alt="open"
+                    />
+                </button>
+
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
+                    Share This Stock{' '}
+                    <img
+                        className="ml-3 md:m-auto h-4 md:h-auto bg-none"
+                        src={shareIcon}
+                        alt="open"
+                    />
+                </button>
             </div>
-            <div className="flex flex-col md:flex-row justify-between px-0 md:px-10">
-                <div>
-                    <h3 className="py-2 font-bold text-[#8A8D95] text-2xl">
-                        $282.75{''}
-                        <span className="text-[#0B5934] bg-[#DCF0E5] rounded-lg ml-6 p-2">
-                            &uarr; 7.65%
-                        </span>
-                    </h3>
-                    <p className="text-[#66717E] text-base font-semibold pt-2 md:pb-10 p-0">
-                        Nov 11, 8:00:00 PM UTC-5 · USD · NASDAQ
-                    </p>
-                </div>
-                <div className="flex md:my-0 my-10">
-                    <div className="flex justify-between flex-col h-16 pr-6">
-                        <h3 className="text-[#8A8D95] text-2xl font-semibold">HEALTH SCORE</h3>
-                        <p className="text-[#8A8D95] text-base">
-                            Our Verdict:{' '}
-                            <span className="font-semibold text-base text-[#0B5934] pl-2">
-                                Very Safe
-                            </span>{' '}
-                        </p>
-                    </div>
-                    <div className="bg-[#139757] text-white font-bold text-xl md:text-5xl flex items-center h-[30px] md:h-16 px-4">
-                        89
-                    </div>
-                </div>
+
+            <div className="h-60 my-10 border">
+                <p>Chart.js</p>
+            </div>
+
+            <div className="mt-5 md:my-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+                <h2 className="opacity-50 pl-4">Key Metric</h2>
+                <h2 className="opacity-50 pl-0 md:pl-20">USD (2022)</h2>
+                <h2 className="opacity-50 pl-4">% Change</h2>
+            </div>
+
+            <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+                <span className="flex flex-row md:w-1/4">
+                    <input type="checkbox" />
+                    <p className="pl-5">Revenue</p>
+                </span>
+                <p className="text-left pr-10">56.2B</p>
+                <p>9.99</p>
+            </div>
+
+            <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+                <span className="flex flex-row md:w-1/4">
+                    <input type="checkbox" />
+                    <p className="pl-5">Operating expenses</p>
+                </span>
+                <p className="text-left pr-10">56.2B</p>
+                <p>9.99</p>
+            </div>
+
+            <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+                <span className="flex flex-row md:w-1/4">
+                    <input type="checkbox" />
+                    <p className="pl-5">Net Income</p>
+                </span>
+                <p className="text-left pr-10">56.2B</p>
+                <p>9.99</p>
+            </div>
+
+            <div className="my-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+                <span className="flex flex-row md:w-1/4">
+                    <input type="checkbox" />
+                    <p className="pl-5">Net profit Margin</p>
+                </span>
+                <p className="text-left pr-10">56.2B</p>
+                <p>9.99</p>
             </div>
         </div>
     );
 };
 
-export default CompanyOverviewCard;
+export default VisualDataCard;
