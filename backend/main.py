@@ -12,6 +12,7 @@ from api.database.database import engine
 from api.routes import routes, social_login
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
+from api.scripts import email_sending
 
 load_dotenv()
 
@@ -25,6 +26,7 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 app.include_router(social_login.router)
 app.include_router(routes.router)
 app.include_router(server.router)
+app.include_router(email_sending.router)
 
 
 async def update_script_task():
