@@ -19,5 +19,9 @@ The data processing script is the script that is used to calculate each value of
 
 - The script is the utility to calculate the weight of the score.
 
+### Email Sending to user Script
+
+The email sending script is used to send an email to all users in the database. It's main job is to call the send_user_email fuunction, pass the subject, users and the body of the message to the function so that they can receive an email of the companies with the highest ranking in a table like kind of view.
+
 ### How to run
 The script is configured in the `main.py` to startup automatically as soon as the application boots. To execute the script, just run ```python main.py``` to startup the application.
