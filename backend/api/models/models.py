@@ -15,6 +15,7 @@ class Company(Base):
     name = Column(String(100), unique=True, index=True)
     location = Column(String(100))
     description = Column(String(10000))
+    profile_image = Column(String(200), nullable=True)
     market_cap = Column(Float, nullable=True)
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
     category = Column(String(64), ForeignKey("categories.category_id"))
@@ -64,6 +65,7 @@ class Ranking(Base):
     score = Column(Float)
     methodology = Column(String(1000), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
 
     comp_ranks = relationship("Company", back_populates='ranks_value')
 
