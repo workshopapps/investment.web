@@ -1,6 +1,6 @@
 import os
 from fastapi import FastAPI
-from api.models.models import SubscribedUsers, User
+# from api.models.models import SubscribedUsers, User
 from fastapi_mail import FastMail, MessageSchema,ConnectionConfig
 
 from dotenv import load_dotenv
@@ -21,8 +21,8 @@ conf = ConnectionConfig(
     MAIL_FROM_NAME = Envs.MAIL_FROM_NAME,
     MAIL_PORT = Envs.MAIL_PORT,
     MAIL_SERVER = Envs.MAIL_SERVER,
-    MAIL_TLS = True,
-    MAIL_SSL = False,
+    MAIL_SSL_TLS = True,
+    MAIL_STARTTLS= True,
     USE_CREDENTIALS = True,
     VALIDATE_CERTS = True,
     
