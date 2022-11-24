@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
 
 from api.database import database
@@ -15,11 +16,21 @@ from api.scripts.ranking import run_process_scripts
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
+origins = [
+    "http://18.217.87.189",
+]
 
 
 app = FastAPI()
 SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(social_login.router)
 app.include_router(routes.router)
