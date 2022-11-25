@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
 
 from api.database import database
@@ -14,9 +15,13 @@ from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 from fastapi.middleware.cors import CORSMiddleware
 
+
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
+origins = [
+    "http://18.217.87.189",
+]
 
 app = FastAPI()
 
@@ -34,10 +39,18 @@ app.add_middleware(
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(social_login.router)
 app.include_router(routes.router)
 app.include_router(server.router)
+
 
 
 async def update_script_task():
