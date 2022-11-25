@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/header/logo.png.svg';
+import logo from '../../assets/header/stocknalysis-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
 import NavLinks from './NavLinks';
 
