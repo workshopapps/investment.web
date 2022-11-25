@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
@@ -225,7 +226,9 @@ const router = createBrowserRouter([
 function App() {
     return (
         <React.Fragment>
-            <RouterProvider router={router} />
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                <RouterProvider router={router} />
+            </GoogleOAuthProvider>
         </React.Fragment>
     );
 }

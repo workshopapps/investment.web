@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import signupimg from './../../assets/signup/signup-img.png';
 import signupdesk from './../../assets/signup/signup-desk-img.png';
-import googleicon from './../../assets/signup/googleicon.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [passwordType, setPasswordType] = useState('password');
     const [signupForm, setSignUpForm] = useState({
         fullname: '',
         email: '',
         password: ''
     });
-    // const [googleUserToken, setGoogleUserToken] = useState(null);
+    const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
+    console.log(formErrors);
     // const [isSubmit, setisSubmit] = useState(false);
 
     //tracking form changes
@@ -35,7 +38,28 @@ const Signup = () => {
     };
 
     //handle google OAUTH
-    const handleGoogleSignIn = async () => {};
+    const handleGoogleSignIn = async (tokenResponse) => {
+        setGoogleUserToken(tokenResponse);
+        console.log(googleUserToken);
+
+        axios
+            .get(`https://api.aybims.tech/auth?token=${tokenResponse.credential}`)
+            .then((res) => {
+                if (res.status === 200) {
+                    navigate('/');
+                } else {
+                    // Signup failed
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                // Signup failed
+            });
+    };
+
+    const handleGoogleSignInError = (err) => {
+        console.log(err);
+    };
 
     //toggle password
     const togglePassword = () => {
@@ -93,12 +117,18 @@ const Signup = () => {
                     <p className="text-sm text-center mb-3 sm:text-base">
                         Welcome to MyStockPlug professional stock brokerage
                     </p>
-                    <button
+                    {/* <button
                         className="bg-green-100 flex items-center w-full py-3 gap-2 justify-center rounded-sm"
                         onClick={handleGoogleSignIn}>
                         <img src={googleicon} width={'20px'} />
                         <h2 className="text-sm font-HauoraBold">Sign up with Google</h2>
-                    </button>
+                    </button> */}
+                    <div className="flex justify-center">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSignIn}
+                            onError={handleGoogleSignInError}
+                        />
+                    </div>
 
                     <div className="flex flex-row gap-3 items-center">
                         <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
@@ -148,9 +178,9 @@ const Signup = () => {
                             />
                             <div
                                 className={
-                                    !formErrors
+                                    formErrors?.email === null
                                         ? 'absolute right-5 bottom-8 cursor-pointer'
-                                        : 'absolute right-5 bottom-3 cursor-pointer'
+                                        : 'absolute right-5 bottom-4 cursor-pointer'
                                 }
                                 onClick={togglePassword}>
                                 {' '}
