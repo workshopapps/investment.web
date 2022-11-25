@@ -4,7 +4,8 @@ export const getCompanyData = async (companyId) => {
     return await axios
         .get(`http://18.217.87.189/company/${companyId}`, {
             headers: {
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': 'http://18.217.87.189',
+                withCredentials: false
             }
         })
         .then((resp) => {
