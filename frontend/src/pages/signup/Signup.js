@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import signupimg from './../../assets/signup/signup-img.png';
 import signupdesk from './../../assets/signup/signup-desk-img.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
@@ -18,7 +18,7 @@ const Signup = () => {
     const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
     console.log(formErrors);
-    // const [isSubmit, setisSubmit] = useState(false);
+    const [isSubmit, setisSubmit] = useState(false);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -34,7 +34,7 @@ const Signup = () => {
     //handle form submit
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Submitted');
+        setisSubmit(true);
         setFormErrors(validate(signupForm));
     };
 
@@ -74,18 +74,23 @@ const Signup = () => {
         }
     };
 
-    // useEffect(() => {
-    //     if (Object.keys(formErrors).length === 0 && isSubmit === true) {
-    //         setSignUpForm((prevState) => {
-    //             return {
-    //                 ...prevState,
-    //                 fullname: '',
-    //                 email: '',
-    //                 password: ''
-    //             };
-    //         });
-    //     }
-    // }, [formErrors]);
+    //getting the manual inputs
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+            setSignUpForm((prevState) => {
+                return {
+                    ...prevState,
+                    fullname: '',
+                    email: '',
+                    password: ''
+                };
+            });
+            toast.success('Login successful');
+            setInterval(() => {
+                navigate('/');
+            }, 1500);
+        }
+    }, [formErrors]);
 
     const validate = (values) => {
         const errors = {};
