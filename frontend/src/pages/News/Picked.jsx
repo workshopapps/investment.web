@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../assets/scss/topnews.scss';
+import '../../assets/scss/topnews.css';
 import '../../index.css';
 
 import { newFeed } from '../../components/reusabledata';
