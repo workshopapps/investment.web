@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import Logo from '../../assets/header/stocknalysis.svg';
-import NavBtn from './NavBtn';
+// import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
@@ -35,6 +35,8 @@ const Nav = ({ openMenu }) => {
     //     { name: 'Login', background: 'transparent', url: 'login' },
     //     { name: 'Get Started', background: '#1BD47B' }
     // ];
+    const { userLoggedIn, logoffHandler } = useLogin()
+
     const [mouse, setMouse] = useState(false);
     const viewProfile = () => {
         setMouse(true);
@@ -89,8 +91,8 @@ const Nav = ({ openMenu }) => {
                         </div>
                     </div>
                 )}
-            </div>
-        </nav>
+            </div >
+        </nav >
     );
 };
 
