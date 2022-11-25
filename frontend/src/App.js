@@ -120,7 +120,7 @@ const router = createBrowserRouter([
         element: <Picked />
     },
     {
-        path: '/company-profile',
+        path: '/company/:companyId',
         element: <CompanyProfilePage />,
         errorElement: <ErrorPage />
     },
