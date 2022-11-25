@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CapCard = ({ logo, abbr, name, marketCap, stockPrice, PERatio }) => {
     return (
-        <div className="border border-[#96ebc2] rounded-[10px] p-6">
+        <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full">
             <div>
                 <div className="flex gap-5 mb-6">
                     <div className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]">
