@@ -17,7 +17,7 @@ const Nav = ({ openMenu }) => {
 
     const btns = [
         { name: 'Login', background: 'transparent', url: 'login' },
-        { name: 'Get Started', background: '#1BD47B', url:'/signup'}
+        { name: 'Get Started', background: '#1BD47B', url: '/signup' }
     ];
 
     const navigate = useNavigate();
