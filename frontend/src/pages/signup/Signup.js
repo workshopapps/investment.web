@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import signupimg from './../../assets/signup/signup-img.png';
 import signupdesk from './../../assets/signup/signup-desk-img.png';
 import googleicon from './../../assets/signup/googleicon.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from 'firebase/auth';
-// import { auth } from '../firebase';
-import { auth } from '../../firebase';
 
 const Signup = () => {
     const [passwordType, setPasswordType] = useState('password');
@@ -15,10 +12,9 @@ const Signup = () => {
         email: '',
         password: ''
     });
-    const [googleUserToken, setGoogleUserToken] = useState(null);
+    // const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-    console.log(googleUserToken);
+    // const [isSubmit, setisSubmit] = useState(false);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -36,22 +32,10 @@ const Signup = () => {
         e.preventDefault();
         console.log('Submitted');
         setFormErrors(validate(signupForm));
-        setIsSubmit(true);
     };
 
     //handle google OAUTH
-    const googleSignIn = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithRedirect(auth, provider);
-    };
-
-    const handleGoogleSignIn = async () => {
-        try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const handleGoogleSignIn = async () => {};
 
     //toggle password
     const togglePassword = () => {
@@ -62,29 +46,18 @@ const Signup = () => {
         }
     };
 
-    const postResp = () => {
-        fetch('http://18.217.87.189/googlelogin', {
-            // Enter your IP address here
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(googleUserToken) // body data type must match "Content-Type" header
-        });
-        console.log('Run user token');
-    };
-
-    //form validation
-    useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
-            setSignUpForm((prevState) => {
-                return {
-                    ...prevState,
-                    fullname: '',
-                    email: '',
-                    password: ''
-                };
-            });
-        }
-    }, [formErrors]);
+    // useEffect(() => {
+    //     if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+    //         setSignUpForm((prevState) => {
+    //             return {
+    //                 ...prevState,
+    //                 fullname: '',
+    //                 email: '',
+    //                 password: ''
+    //             };
+    //         });
+    //     }
+    // }, [formErrors]);
 
     const validate = (values) => {
         const errors = {};
@@ -105,27 +78,6 @@ const Signup = () => {
         }
         return errors;
     };
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setGoogleUserToken(currentUser.reloadUserInfo);
-            postResp();
-            window.sessionStorage.setItem('userdata', JSON.stringify(googleUserToken));
-        });
-        return () => {
-            unsubscribe();
-        };
-    }, []);
-
-    // useEffect(() => {
-    //     // fetch('http://18.217.87.189/googlelogin', {
-    //     //     // Enter your IP address here
-    //     //     method: 'POST',
-    //     //     // mode: 'cors',
-    //     //     body: JSON.stringify(googleUserToken) // body data type must match "Content-Type" header
-    //     // });
-    //     console.log('Run user token');
-    // }, [googleUserToken]);
 
     return (
         <div className="mb-12 md:h-screen md:overflow-hidden md:mb-0">
