@@ -4,8 +4,8 @@ import signupdesk from './../../assets/signup/signup-desk-img.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 const Signup = () => {
     const navigate = useNavigate();

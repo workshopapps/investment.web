@@ -5,7 +5,7 @@ import Signup from './Signup';
 import '@testing-library/jest-dom';
 
 
-it('renders without Crashing', () => {
+it('Renders without crashing', () => {
     const div = document.createElement('div');
     const root = createRoot(div);
     root.render(<Signup />);
