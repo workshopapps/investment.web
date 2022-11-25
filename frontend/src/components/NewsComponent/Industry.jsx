@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../assets/scss/topnews.css';
 import { BsChevronRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { pick } from '../reusabledata';

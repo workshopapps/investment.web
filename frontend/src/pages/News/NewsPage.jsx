@@ -1,6 +1,6 @@
 import React from 'react';
 import Topnews from '../../components/NewsComponent/Topnews';
-import '../../assets/scss/newspage.scss';
+import '../../assets/scss/newspage.css';
 import Localmarket from '../../components/NewsComponent/Localmarket';
 import Worldmarket from '../../components/NewsComponent/Worldmarket';
 import Longcap from '../../components/NewsComponent/Longcap';
