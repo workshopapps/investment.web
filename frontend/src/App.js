@@ -4,9 +4,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
+
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
@@ -37,11 +40,11 @@ import Plugger from './pages/careers/Plugger';
 import Position from './pages/careers/Position';
 
 import HelpPage from './pages/help';
-import DownloadPage from './pages/download';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -160,11 +163,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/download',
-        element: <DownloadPage />,
-        errorElement: <ErrorPage />
-    },
-    {
         path: '/policy',
         element: <PolicyPage />,
         errorElement: <ErrorPage />
@@ -218,13 +216,20 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         errorElement: <ErrorPage />
+    },
+    {
+        path: '/signup',
+        element: <Signup />,
+        errorElement: <ErrorPage />
     }
 ]);
 
 function App() {
     return (
         <React.Fragment>
-            <RouterProvider router={router} />
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                <RouterProvider router={router} />
+            </GoogleOAuthProvider>
         </React.Fragment>
     );
 }
