@@ -5,6 +5,7 @@ import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -46,14 +47,17 @@ const Signup = () => {
             .get(`https://api.aybims.tech/auth?token=${tokenResponse.credential}`)
             .then((res) => {
                 if (res.status === 200) {
-                    navigate('/');
+                    toast.success('Login successful');
+                    setInterval(() => {
+                        navigate('/');
+                    }, 2000);
                 } else {
-                    // Signup failed
+                    toast.error('Authentication failed');
                 }
             })
             .catch((err) => {
                 console.log(err);
-                // Signup failed
+                toast.error('Authentication failed');
             });
     };
 
@@ -105,6 +109,7 @@ const Signup = () => {
 
     return (
         <div className="mb-12 md:h-screen md:overflow-hidden md:mb-0">
+            <ToastContainer />
             <div className="flex flex-col justify-center items-center md:flex-row-reverse lg:items-start">
                 <div className="w-full">
                     <img src={signupimg} className="w-full md:hidden" />
@@ -143,7 +148,11 @@ const Signup = () => {
                             <input
                                 type={'text'}
                                 placeholder={'Full Name'}
-                                className="border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow"
+                                className={
+                                    formErrors?.fullname
+                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                }
                                 value={signupForm.fullname}
                                 name={'fullname'}
                                 onChange={handleChange}
@@ -157,7 +166,11 @@ const Signup = () => {
                             <input
                                 type={'email'}
                                 placeholder={'Email Address'}
-                                className="border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow"
+                                className={
+                                    formErrors?.email
+                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                }
                                 value={signupForm.email}
                                 name={'email'}
                                 onChange={handleChange}
@@ -171,7 +184,11 @@ const Signup = () => {
                             <input
                                 type={passwordType}
                                 placeholder={'Password'}
-                                className="border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow"
+                                className={
+                                    formErrors?.password
+                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                }
                                 value={signupForm.password}
                                 name={'password'}
                                 onChange={handleChange}
