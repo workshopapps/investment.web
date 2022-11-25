@@ -43,6 +43,7 @@ import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -225,7 +226,9 @@ const router = createBrowserRouter([
 function App() {
     return (
         <React.Fragment>
-            <RouterProvider router={router} />
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                <RouterProvider router={router} />
+            </GoogleOAuthProvider>
         </React.Fragment>
     );
 }

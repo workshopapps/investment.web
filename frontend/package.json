@@ -4,9 +4,11 @@
     "private": true,
     "dependencies": {
         "@fontsource/hauora-sans": "^4.5.3",
+        "@react-oauth/google": "^0.5.0",
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^13.0.0",
         "@testing-library/user-event": "^13.2.1",
+        "add": "^2.0.6",
         "autoprefixer": "^10.4.13",
         "firebase": "^9.14.0",
         "axios": "^1.2.0",
@@ -20,7 +22,8 @@
         "react-scripts": "5.0.1",
         "react-switch": "^7.0.0",
         "tailwindcss": "^3.2.4",
-        "web-vitals": "^2.1.0"
+        "web-vitals": "^2.1.0",
+        "yarn": "^1.22.19"
     },
     "scripts": {
         "start": "react-scripts start",

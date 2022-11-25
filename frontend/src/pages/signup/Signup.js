@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import signupimg from './../../assets/signup/signup-img.png';
 import signupdesk from './../../assets/signup/signup-desk-img.png';
-import googleicon from './../../assets/signup/googleicon.png';
+// import googleicon from './../../assets/signup/googleicon.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
-import { Link } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithRedirect, onAuthStateChanged } from 'firebase/auth';
-// import { auth } from '../firebase';
-import { auth } from '../../firebase';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const [passwordType, setPasswordType] = useState('password');
     const [signupForm, setSignUpForm] = useState({
         fullname: '',
@@ -17,7 +18,7 @@ const Signup = () => {
     });
     const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
+    // const [isSubmit, setIsSubmit] = useState(false);
     console.log(googleUserToken);
 
     //tracking form changes
@@ -36,21 +37,29 @@ const Signup = () => {
         e.preventDefault();
         console.log('Submitted');
         setFormErrors(validate(signupForm));
-        setIsSubmit(true);
+        // setIsSubmit(true);
     };
 
-    //handle google OAUTH
-    const googleSignIn = () => {
-        const provider = new GoogleAuthProvider();
-        signInWithRedirect(auth, provider);
+    const handleGoogleSignIn = async (tokenResponse) => {
+        setGoogleUserToken(tokenResponse);
+
+        axios
+            .get(`https://api.aybims.tech/auth?token=${tokenResponse.credential}`)
+            .then((res) => {
+                if (res.status === 200) {
+                    navigate('/');
+                } else {
+                    // Signup failed
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                // Signup failed
+            });
     };
 
-    const handleGoogleSignIn = async () => {
-        try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error);
-        }
+    const handleGoogleSignInError = (err) => {
+        console.log(err);
     };
 
     //toggle password
@@ -62,29 +71,19 @@ const Signup = () => {
         }
     };
 
-    const postResp = () => {
-        fetch('http://18.217.87.189/googlelogin', {
-            // Enter your IP address here
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(googleUserToken) // body data type must match "Content-Type" header
-        });
-        console.log('Run user token');
-    };
-
     //form validation
-    useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
-            setSignUpForm((prevState) => {
-                return {
-                    ...prevState,
-                    fullname: '',
-                    email: '',
-                    password: ''
-                };
-            });
-        }
-    }, [formErrors]);
+    // useEffect(() => {
+    //     if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+    //         setSignUpForm((prevState) => {
+    //             return {
+    //                 ...prevState,
+    //                 fullname: '',
+    //                 email: '',
+    //                 password: ''
+    //             };
+    //         });
+    //     }
+    // }, [formErrors]);
 
     const validate = (values) => {
         const errors = {};
@@ -105,17 +104,6 @@ const Signup = () => {
         }
         return errors;
     };
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setGoogleUserToken(currentUser.reloadUserInfo);
-            postResp();
-            window.sessionStorage.setItem('userdata', JSON.stringify(googleUserToken));
-        });
-        return () => {
-            unsubscribe();
-        };
-    }, []);
 
     // useEffect(() => {
     //     // fetch('http://18.217.87.189/googlelogin', {
@@ -141,12 +129,13 @@ const Signup = () => {
                     <p className="text-sm text-center mb-3 sm:text-base">
                         Welcome to MyStockPlug professional stock brokerage
                     </p>
-                    <button
+                    {/* <button
                         className="bg-green-100 flex items-center w-full py-3 gap-2 justify-center rounded-sm"
                         onClick={handleGoogleSignIn}>
                         <img src={googleicon} width={'20px'} />
                         <h2 className="text-sm font-HauoraBold">Sign up with Google</h2>
-                    </button>
+                    </button> */}
+                    <GoogleLogin onSuccess={handleGoogleSignIn} onError={handleGoogleSignInError} />
 
                     <div className="flex flex-row gap-3 items-center">
                         <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
