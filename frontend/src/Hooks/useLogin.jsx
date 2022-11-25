@@ -3,10 +3,10 @@ import { useState } from 'react';
 const useLogin = () => {
     const [userLoggedIn, SetUserLoggedIn] = useState(false);
     const loginHandler = () => {
-        SetUserLoggedIn(true);
+        SetUserLoggedIn(false);
     };
     const logoffHandler = () => {
-        SetUserLoggedIn(false);
+        SetUserLoggedIn(true);
     };
     return {
         userLoggedIn,
