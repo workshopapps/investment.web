@@ -1,0 +1,25 @@
+name: CI/CD Docker
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+
+jobs:
+  Deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Git pull
+        env:
+          AWS_EC2_PEM: ${{ secrets.AWS_EC2_PEM  }}
+          AWS_EC2_PUBLIC_IP: ${{ secrets.AWS_EC2_PUBLIC_IP  }}
+          AWS_EC2_USERNAME: ${{ secrets.AWS_EC2_USERNAME  }}
+        run: |
+          pwd
+          echo "$AWS_EC2_PEM" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${AWS_EC2_USERNAME}@${AWS_EC2_PUBLIC_IP} 
+            cd ${GITHUB_WORKSPACE/backend} && ls -la
