@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/header/logo.png.svg';
+import logo from '../../assets/header/stocknalysis-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
 import NavLinks from './NavLinks';
 
@@ -53,13 +53,12 @@ const Footer = () => {
                         <img src={logo} alt="" />
                     </div>
                     <div
-                        className={`${
-                            pathname == '/' || pathname == '/company-profile'
-                                ? 'hidden lg:flex pt-4'
-                                : 'hidden'
-                        }`}>
+                        className={`${pathname !== '/download'
+                            ? 'hidden lg:flex pt-4'
+                            : 'hidden'
+                            }`}>
                         <Link to="/download">
-                            <img src={downloadImage} alt="download image" className="w-full" />
+                            <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
                     </div>
                 </div>

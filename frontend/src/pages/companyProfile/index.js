@@ -1,140 +1,102 @@
 /* eslint-disable */
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
+import { Link, UNSAFE_DataStaticRouterContext, useParams } from 'react-router-dom';
 import { cardsData } from '../../store/cardsData/cardsData';
+import DetailedCard from '../../components/CompanyProfile/DetailedCard';
 import PropTypes from 'prop-types';
 import PageLayout from '../layout';
-import Back from '../../assets/company-profile/back-arrow-icon.svg';
+import Back from '../../assets/company-profile/back-arrow.svg';
+import AboutCompanyCard from '../../components/CompanyProfile/AboutCompany';
+import CompanyOverviewCard from '../../components/CompanyProfile/AnalysisCard';
 
-// Company details card
-const CompanyCard = ({ title, calculation, determinant, text, status }) => {
-    return (
-        <div className="mx-0 md:mx-[100px] mt-6">
-            <div className="flex justify-between pt-[17px] pb-[18px] px-4 md:px-[30px] bg-white">
-                <h3 className="text-[#1F2226] text-[1rem] md:text-2xl font-semibold">{title}</h3>
-                <h4 className="bg-[#139757] rounded text-white text-base font-semibold px-[17px] py-[5px]">
-                    {status}
-                </h4>
-            </div>
-            <div className="bg-white/50 px-[30px]">
-                <div className="opacity-[0.74] pt-[23px]">
-                    Calculation:
-                    <span className="font-semibold pl-1">{calculation}</span>
-                </div>
-                <div className="opacity-[0.8] pt-[11px]">
-                    Determinant:
-                    <span className="font-semibold pl-1">{determinant}</span>
-                </div>
-                <div className="text-justify text-xs opacity-50 pt-[33px] pb-[15px]">{text}</div>
-            </div>
-        </div>
-    );
-};
+import UpIcon from '../../assets/landingPage/icons/up.svg';
+import DownIcon from '../../assets/landingPage/icons/down.svg';
+import OverviewCard from '../../components/CompanyProfile/OverviewCard';
+import VisualDataCard from '../../components/CompanyProfile/AnalysisCard';
+import { getCompanyData } from '../../server/companyProfile';
 
-CompanyCard.propTypes = {
-    title: PropTypes.string,
-    calculation: PropTypes.string,
-    determinant: PropTypes.string,
-    text: PropTypes.string,
-    status: PropTypes.string
-};
 
 const CompanyProfilePage = () => {
-    return (
-        <PageLayout>
-            <div className="bg-[#f5f5f5] font-Hauora">
-                <div>
-                    <Link to="/">
-                        <div className="flex bg-white mt-0 md:mt-7 pt-5 pb-[10px] md:pb-[30px] text-[1rem] md:text-[2rem] px-5 md:px-[98px]">
-                            <img src={Back} alt="back" className="w-2 md:w-3 mr-2 md:mr-4" />{' '}
-                            Company Profile / Summary of Analysis
-                        </div>
-                    </Link>
-                    <div className="md:px-[6.25rem] px-[2rem]">
-                        <h3 className="text-[40px] text-[#3D444C] font-semibold opacity-50 pt-10 pb-[34px]">
-                            Fundamental Analysis
-                        </h3>
-                        <h5 className="text-xl text-[#525A65] pb-6 "> About the Company </h5>
-                    </div>
-                    <div className="bg-white">
-                        <p className="text-base font-semibold opacity-50 pt-[39px] pb-4 md:px-[6.25rem] px-[2rem]">
-                            Amazon.com is an American tech multinational whose business interests
-                            include e-commerce, cloud computing, digital streaming, and artificial
-                            intelligence. A Fortune 100 mainstay, Amazon.com is also one of the Big
-                            Five, or the five largest and most dominant technology companies in the
-                            U.S. During the coronavirus pandemic, Amazon’s business soared, as
-                            millions of Americans in lockdown became more reliant than ever on the
-                            company’s delivery services. In early April 2021, then-CEO Jeff Bezos
-                            said the company had amassed 200 million Prime subscribers, compared
-                            with 150 million at the start of 2020. Over the years, Amazon has drawn
-                            stark criticism from those who accuse the company of monopolistic and
-                            anticompetitive practices, as well as from its fulfillment center
-                            employees who describe their poor treatment and difficult working
-                            conditions.
-                        </p>
-                    </div>
-                    <div className="text-xl text-[#525A65] pt-6 pb-4 px-5 md:px-[100px]">
-                        Our Analysis
-                    </div>
-                    <div className="flex flex-col bg-white px-[2rem] md:px-[130px]">
-                        <div>
-                            <h3 className="text-2xl text-[#000616] font-semibold pt-[45px] pb-6 ">
-                                {' '}
-                                Amazon.com, Inc
-                                <span className="text-[#66717E] text-base opacity-50 font-normal">
-                                    {' '}
-                                    AMZN{' '}
-                                </span>
-                            </h3>
-                        </div>
-                        <div className="flex flex-col md:flex-row justify-between">
-                            <div>
-                                <h3 className="py-2 font-bold text-[#66717E] text-2xl">
-                                    $282.75{''}
-                                    <span className="text-[#0B5934] bg-[#DCF0E5] rounded-lg ml-6 p-2">
-                                        &uarr; 7.65%
-                                    </span>
-                                </h3>
-                                <p className="text-[#66717E] text-base font-semibold pt-2 pb-[45px]">
-                                    Nov 11, 8:00:00 PM UTC-5 · USD · NASDAQ
-                                </p>
-                            </div>
-                            <div className="flex pt-2">
-                                <div className="flex justify-between flex-col h-16 pr-6">
-                                    <h3 className="text-[#525A65] text-2xl opacity-50 font-semibold">
-                                        HEALTH SCORE
-                                    </h3>
-                                    <p className="text-[#000616] opacity-50 text-base">
-                                        Our Verdict:{' '}
-                                        <span className="font-semibold text-base text-[#0B5934] opacity-50 pl-2">
-                                            Very Safe
-                                        </span>{' '}
-                                    </p>
-                                </div>
-                                <div className="bg-[#139757] text-white font-bold text-[0.75rem] md:text-[57px] flex items-center h-[30px] md:h-16 px-4">
-                                    89
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    const [show, setShow] = React.useState(true);
+    const { companyId } = useParams();
+    const [data, setData] = React.useState({})
 
-                    <div className="mx-[0] md:mx-[100px] px-[2rem] md:px-[0] my-6">
+    const [loading, setLoading] = React.useState(true)
+
+    const fetchData = useCallback(async () => {
+        if (companyId !== "") {
+            await Promise.all([getCompanyData(companyId)])
+                .then((res) => {
+                    console.log(res[0])
+                    setData(res[0])
+                    setLoading(false)
+                })
+                .catch((err) => {
+                    console.log(err[0].error_message);
+                    return err;
+                });
+        }
+    }, [companyId])
+
+    useEffect(() => {
+        fetchData()
+    }, [companyId]);
+
+    switch (loading) {
+        case true:
+            return null
+        default:
+            return (
+                <PageLayout>
+                    <div className="bg-[#f5f5f5] font-Hauora">
                         <div>
-                            {cardsData.map((item) => (
-                                <CompanyCard
-                                    key={item.key}
-                                    title={item.title}
-                                    calculation={item.calculation}
-                                    determinant={item.determinant}
-                                    text={item.text}
-                                    status={item.remark}
-                                />
-                            ))}
+                            <Link to="/">
+                                <div className="flex mt-0 pt-5 text-[#5C5A5A] text-sm md:text-lg mx-[1em] md:mx-[100px] font-semibold">
+                                    <img src={Back} alt="back" className="mr-4 md:mr-10" />{' '}
+                                    Home &gt; &gt; Company Profile
+                                </div>
+                            </Link>
+                            <div className="flex flex-col md:flex-row justify-between md:px-[100px] px-[1rem] gap-5">
+                                <div className="md:w-1/3 w-full">
+                                    <h3 className="text-2xl md:text-4xl text-[#5C5A5A] font-semibold py-10">
+                                        Company Profile
+                                    </h3>
+                                    <OverviewCard
+                                        companyId={companyId}
+                                        name={data.name}
+                                        price={`${data.stock_price.stock_price}`}
+                                        industry={data.sector.industry}
+                                    />
+                                    <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-10 pb-6 flex flex-row justify-between">
+                                        MARKET CAP <span className="font-HauoraBold font-bold">{(data.market_cap / 1e9).toFixed(2)}B</span>
+                                    </h5>
+
+                                    <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-10 pb-6 flex flex-row justify-between">
+                                        DIVIDEND YIELD <span className="font-HauoraBold font-bold">{data.stock_price.dividend_yield.toFixed(4)}</span>
+                                    </h5>
+
+                                    <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
+                                        About <img className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' src={show ? DownIcon : UpIcon} alt="open" onClick={() => setShow(!show)} />
+                                    </h5>
+                                    {show && <AboutCompanyCard description={data.description} />}
+
+                                    <br />
+                                </div>
+                                <div className="md:w-2/3 w-full">
+                                    <div className="flex flex-row text-xs md:text-lg text-[#5C5A5A] font-semibold py-4 md:py-10 gap-4">
+                                        <button className="bg-[#B8F2D6] p-2 px-4 rounded-lg">Income Statement</button>
+                                        <button className="hover:bg-[#B8F2D6] cursor-pointer rounded-lg opacity-50 p-2 px-4">Balance Statement</button>
+                                        <button className="hover:bg-[#B8F2D6] cursor-pointer rounded-lg opacity-50 p-2 px-4">Cash Flow Statement</button>
+                                    </div>
+                                    <VisualDataCard />
+                                    <br />
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </PageLayout>
-    );
+                </PageLayout>
+            )
+    }
 };
 export default CompanyProfilePage;
