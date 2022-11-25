@@ -1,8 +1,11 @@
+import datetime
+
 from api.crud.base import get_db
 from api.models import models
 from sqlalchemy.orm import Session
 from uuid import uuid4
-from api.scripts import data_gathering, data_calculations
+from api.scripts import data_gathering, data_calculations, email_sending
+from api.models.models import Ranking
 
 """
     This is the main function that accumulates all the 
@@ -14,8 +17,10 @@ from api.scripts import data_gathering, data_calculations
 def rank_companies():
     db: Session = next(get_db())
 
+    # get companies from database
     companies = db.query(models.Company).all()
-
+    
+    # loop through each company and update the appropriate tables in the database
     for company in companies:
         stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id).order_by(
             models.StockPrice.date.desc()).limit(2).all()
@@ -48,18 +53,72 @@ def rank_companies():
         ps_ratio_score = data_calculations.get_price_to_sales_weighted_score(current_stock_price.ps_ratio)
         dividend_yield_score = data_calculations.get_dividend_yield_weighted_score(current_stock_price.dividend_yield)
 
+        # add all scores
         total_score = (
-                    de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
-                    peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
+                de_ratio_score + gpm_score + current_ratio_score + roe_score + quick_ratio_score + pe_ratio_score +
+                peg_ratio_score + revenue_growth_score + pb_ratio_score + ps_ratio_score + dividend_yield_score)
 
+        # divide and round the total score
         ranking_score = (total_score / 11) * 10
+        ranking_score = round(ranking_score, 5)
 
-        ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
-                                 score=ranking_score, methodology="Fundamental Analysis")
-        db.add(ranking)
+        latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+
+        if latest_ranking and str(latest_ranking.score) == str(ranking_score):
+            latest_ranking.updated_at = datetime.datetime.now()
+        else:
+            latest_ranking = models.Ranking(ranking_id=str(uuid4()), company=company.company_id,
+                                            score=ranking_score, methodology="Fundamental Analysis")
+        db.add(latest_ranking)
     db.commit()
+    
 
+
+async def send_ranking_update_notification():
+    print('sending....')
+    db: Session = next(get_db())
+
+    # get company list
+    companies: list = db.query(models.Company).all()
+
+    # get latest rankings
+    rankings: list = []
+    for company in companies:
+        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+        if rank:
+            rankings.append(rank)
+
+    # sort rankings by score (descending)
+    def get_ranking_sort_key(inner_rank: Ranking):
+        return inner_rank.score
+
+    rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+    # create the response list
+    comapny_ranks = []
+    top_rankings = []
+    for ranking in rankings:
+        if len(top_rankings) == 12:
+            break
+
+        top_rankings.append(ranking)
+
+    for ranking in top_rankings:
+        comp: models.Company = ranking.comp_ranks
+        data = {
+            'company': comp.name,
+            'ticker_symbol': comp.ticker_value.symbol,
+            'current_ranking': ranking.score
+        }
+        comapny_ranks.append(data)
+
+
+    await email_sending.send_user_email(comapny_ranks)
+    print('done')
 
 async def run_process_scripts():
-    await data_gathering.pick_four_random_companies()
+    # await data_gathering.pick_four_random_companies()
     rank_companies()
+    await send_ranking_update_notification()
