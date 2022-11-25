@@ -6,6 +6,7 @@ from .email import send_user_email
 
 
 async def send_user_email(company_ranks):
+    print('beginning')
     db: Session = next(get_db())
 
     # get users emails
@@ -23,4 +24,10 @@ async def send_user_email(company_ranks):
     
     body += "</tbody></table></body></html>"
 
-    await send_user_email("Updated List of Ranked Companies", emails, body)
+    def map_emails(e):
+        return e[0]
+
+    destinations = []
+    for e in emails:
+        destinations.append(e[0])
+    await send_user_email("Updated List of Ranked Companies", destinations, body)

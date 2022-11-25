@@ -76,6 +76,7 @@ def rank_companies():
 
 
 async def send_ranking_update_notification():
+    print('sending....')
     db: Session = next(get_db())
 
     # get company list
@@ -107,7 +108,7 @@ async def send_ranking_update_notification():
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
         data = {
-            'comapny': comp.name,
+            'company': comp.name,
             'ticker_symbol': comp.ticker_value.symbol,
             'current_ranking': ranking.score
         }
@@ -115,8 +116,9 @@ async def send_ranking_update_notification():
 
 
     await email_sending.send_user_email(comapny_ranks)
+    print('done')
 
 async def run_process_scripts():
-    await data_gathering.pick_four_random_companies()
-    await send_ranking_update_notification()
+    # await data_gathering.pick_four_random_companies()
     rank_companies()
+    await send_ranking_update_notification()
