@@ -5,6 +5,8 @@
     "dependencies": {
         "@fontsource/hauora-sans": "^4.5.3",
         "@react-oauth/google": "^0.5.0",
+        "@stripe/react-stripe-js": "^1.15.0",
+        "@stripe/stripe-js": "^1.44.1",
         "@testing-library/jest-dom": "^5.14.1",
         "@testing-library/react": "^13.0.0",
         "@testing-library/user-event": "^13.2.1",

@@ -45,6 +45,8 @@ import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import Success from './pages/successPayment/Success';
+import Cancel from './pages/cancelPayment/Cancel';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -220,6 +222,16 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <Signup />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/success',
+        element: <Success />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/cancel',
+        element: <Cancel />,
         errorElement: <ErrorPage />
     }
 ]);
