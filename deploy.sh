@@ -20,7 +20,8 @@ sudo git pull origin staging
 
 
 # install and deploy backend
-cd .. && cd backend
+cd backend
+ls -la
 echo "\n\nInstalling Backend"
 pip install -r requirements.txt
 
