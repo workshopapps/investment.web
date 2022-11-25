@@ -26,5 +26,6 @@ jobs:
             
       - name: Restart server
         run: |
-          cd backend && sudo pm2 restart main.py --interpreter python3
+          ssh -o StrictHostKeyChecking=no -i private_key ${AWS_EC2_USERNAME}@${AWS_EC2_PUBLIC_IP} 
+          cd investment.web/backend && sudo pm2 restart main.py --interpreter python3
      
