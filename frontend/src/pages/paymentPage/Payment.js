@@ -4,12 +4,45 @@ import Footer from '../../components/Footer/Footer';
 import { faqDatas } from './FaqContent';
 import '../../assets/paymentpage/css/style.css';
 import Shield from '../../assets/paymentpage/icons/shield-tick.png';
-
+import { useLocation } from 'react-router-dom';
 import Nav from '../../components/Nav/Nav';
 import { FaPlus, FaStripe, FaMinus, FaArrowRight } from 'react-icons/fa';
+import { loadStripe } from "@stripe/stripe-js";
+
+let stripeTestPromise 
+
+const getStripe = () => {
+	if(!stripeTestPromise){
+
+	stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
+}
+
+return stripeTestPromise;
+}
+
+// import { Elements } from "@stripe/react-stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
+// import PaymentForm from './PaymentForm';
+
+
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+// const PUBLIC_KEY = 'pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct';
+
+// const stripeTestPromise = loadStripe(PUBLIC_KEY);
+
+//url for the customer id
+// const URL = "https://api.aybims.tech/create-customer-object";
+
 
 const Payment = () => {
     // const [isActive, setIsActive] = useState(false);
+
+    const [isLoading ,setIsLoading] = useState(false)
+    const [stripeError, setStripeError] = useState(null)
+
+    let location = useLocation();
 
     const [clicked, setClicked] = useState(false);
 
@@ -20,6 +53,47 @@ const Payment = () => {
         setClicked(index);
     };
 
+   
+
+ console.log(location.state.priceId)
+ console.log(location.state.getStripe)
+
+    const item = {
+        price:location.state.priceId,
+        quantity:1
+    }
+
+
+    const checkoutOptions = {
+
+        lineItems: [item],
+        mode:"payment",
+        successUrl:`${window.location.origin}/success`,
+        cancelUrl:`${window.location.origin}/cancel`,
+
+
+    }
+    const redirectToCheckout = async () => {
+
+            setIsLoading(true)
+        const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout(checkoutOptions)
+    
+    console.log("stripe checkout error",error)
+
+    if(error) {
+        setStripeError(error.message)
+    }
+
+    //then set it back to false after the checkout
+    setIsLoading(true)
+    }
+
+
+    
+    if (stripeError) {
+        alert(stripeError)
+    }
     return (
         <div>
             <nav>
@@ -68,43 +142,46 @@ const Payment = () => {
                         <div className="ml-4">
                             <input
                                 type="radio"
-                                className="h-5 w-5 checked:bg-[red] absolute top-[24px] left-[24px]"
+                                style={{ accentColor: 'green' }}
+                                checked
+                                className="h-5 w-5 absolute top-[24px] left-[24px]"
                             />
                         </div>
 
                         <div className="flex ml-[-15em] md:ml-[-15em] lg:ml-[-25em] w-2/3 flex-col flex-wrap">
-                            <h3 className="text-[#0A0B0D] font-bold">Basic</h3>
+                            <h3 className="text-[#0A0B0D] font-bold">
+                                {location.state.state.typeOfSubscription}
+                            </h3>
                             <p className="text-[#525A65] text-[0.8em]">
-                                For Basic Users new to investing. Get access to our basic features
-                                and invest with more precision.
+                                {location.state.state.content}
                             </p>
                         </div>
 
-                        <div className="ml-3 absolute left-[20em] md:left-[20em] lg:left-[30em] top-[20px]">
-                            <span>&#8358;5,000</span>
-                            <span>/month</span>
+                        <div className="ml-3 absolute left-[20em] md:left-[20em] lg:left-[27em] top-[20px]">
+                            <span>&#8358; {location.state.state.amount} </span>
+                            <span className="text-[0.7em]">/{location.state.state.subTime}</span>
                         </div>
                     </div>
 
                     {/* form starts from here */}
 
                     <div className="w-[95%] border-[#1BD47B] border-solid border-2 rounded-md flex mt-8 ">
-                        <form className="flex">
-                            <div className="flex flex-wrap justify-center">
-                                <div className="">
+                        <form className="flex w-full">
+                            <div className="flex items-center justify-center w-full">
+                                {/* <div className="">
                                     <div className="">
                                         <label className="block pt-4 text-[#0A0B0D] text-xs font-bold mb-2">
                                             Card Number
                                         </label>
-                                        <input
+                                        <input 
                                             className="w-[440px] md:w-[450px] lg:w-[550px] bg-white text-[#525A65] border-2 border-[#8D8D8D] rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                             type="text"
                                             placeholder="123-456-9856-773"
                                         />
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <div className="w-full flex justify-around">
+                                {/* <div className="w-full flex justify-around">
                                     <div className="">
                                         <label className="block tracking-wide text-[#0A0B0D] text-xs font-bold mb-2">
                                             Expiration Date
@@ -126,7 +203,21 @@ const Payment = () => {
                                             placeholder="CVV"
                                         />
                                     </div>
-                                </div>
+                                </div> */}
+                                    {/* <PaymentForm/> */}
+
+                                {/* <Elements stripe={stripeTestPromise}>
+                                </Elements> */}
+
+<div className="mt-8 w-full flex items-center justify-center">
+                        <button
+                            className="w-[300px] md:w-[300px] lg:w-[500px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded mb-9"
+                            type="button" disabled={isLoading} onClick={redirectToCheckout}>
+                            <span>{isLoading ? "Loading..." : "Pay"}</span>
+                            {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
+                            <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
+                        </button>
+                    </div>
                             </div>
                         </form>
                     </div>
@@ -134,15 +225,7 @@ const Payment = () => {
                     {/* form ends  here */}
 
                     {/* submit button started from here */}
-                    <div className="mt-8">
-                        <button
-                            className="w-[450px] md:w-[450px] lg:w-[605px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
-                            type="button">
-                            <span>Pay</span>
-                            {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                            <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
-                        </button>
-                    </div>
+                {/* button was here before */}
 
                     {/* submit button ends here */}
 

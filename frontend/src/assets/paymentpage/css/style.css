@@ -28,3 +28,32 @@
         margin-top: 57em;
     }
 }
+
+
+.FormGroup{
+    margin: 0 15px 20px;
+    padding: 0;
+    border-style: none;
+    will-change: opacity, transform;
+    border-radius: 4px;
+
+}
+
+.FormRow{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-left: 15px;
+    border-top: 1px solid #819efc;
+}
+
+.StripeElement--webkit-output{
+    background: transparent !important;
+}
+
+.StripeElement{
+    width: 100%;
+    padding: 11px 15px 11px 0;
+}
+
