@@ -44,13 +44,13 @@ const Signup = () => {
         console.log(googleUserToken);
 
         axios
-            .get(`https://api.aybims.tech/auth?token=${tokenResponse.credential}`)
+            .get(`/auth?token=${tokenResponse.credential}`)
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
                     setInterval(() => {
                         navigate('/');
-                    }, 2000);
+                    }, 1500);
                 } else {
                     toast.error('Authentication failed');
                 }
