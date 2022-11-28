@@ -14,7 +14,7 @@ import DownIcon from '../../assets/landingPage/icons/down.svg';
 import OverviewCard from '../../components/CompanyProfile/OverviewCard';
 import VisualDataCard from '../../components/CompanyProfile/AnalysisCard';
 import { getCompanyData } from '../../server/companyProfile';
-import { companyData } from '../../store/companyData/profileBackend';
+// import { companyData } from '../../store/companyData/profileBackend';
 
 const CompanyProfilePage = () => {
 
@@ -25,7 +25,7 @@ const CompanyProfilePage = () => {
     const [loading, setLoading] = React.useState(true)
 
     // 
-    const rawData = companyData
+    // const rawData = companyData
 
 
     const fetchData = useCallback(async () => {
@@ -44,12 +44,13 @@ const CompanyProfilePage = () => {
     }, [companyId])
 
     useEffect(() => {
-        const resultData = rawData.find((item) => {
-            return item.company_id == companyId
-        })
-        console.log(resultData)
-        setLoading(false)
-        setData(resultData)
+        // const resultData = rawData.find((item) => {
+        //     return item.company_id == companyId
+        // })
+        // console.log(resultData)
+        // setLoading(false)
+        // setData(resultData)
+        fetchData()
     }, [companyId]);
 
     switch (loading) {

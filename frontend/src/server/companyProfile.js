@@ -2,11 +2,7 @@ import axios from 'axios';
 
 export const getCompanyData = async (companyId) => {
     return await axios
-        .get(`/company/${companyId}`, {
-            headers: {
-                'Access-Control-Allow-Origin': '*'
-            }
-        })
+        .get(`/company/${companyId}`)
         .then((resp) => {
             console.log(resp.data);
             return resp.data;
