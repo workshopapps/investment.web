@@ -4,9 +4,12 @@ import mobileImage from './../../assets/login/login-mobile.png';
 import eyeIcon from './../../assets/login/eye-icon.png';
 import desktopImage from './../../assets/login/login-desktop.png';
 import { Link, useNavigate } from 'react-router-dom';
+import useLogin from '../../Hooks/useLogin';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { logoffHandler, userLoggedIn } = useLogin();
+    console.log(userLoggedIn);
 
     //form
     const [loginForm, setLoginForm] = useState({
@@ -34,7 +37,9 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
+            logoffHandler();
             setInterval(
                 () => {
                     navigate('/landing');
