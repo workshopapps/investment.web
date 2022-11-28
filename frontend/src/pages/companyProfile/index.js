@@ -15,6 +15,7 @@ import OverviewCard from '../../components/CompanyProfile/OverviewCard';
 import VisualDataCard from '../../components/CompanyProfile/AnalysisCard';
 import { getCompanyData } from '../../server/companyProfile';
 // import { companyData } from '../../store/companyData/profileBackend';
+import axios from 'axios'
 
 const CompanyProfilePage = () => {
 
@@ -30,14 +31,26 @@ const CompanyProfilePage = () => {
 
     const fetchData = useCallback(async () => {
         if (companyId !== "") {
-            await Promise.all([getCompanyData(companyId)])
+            console.log(companyId)
+            // await Promise.all([getCompanyData(companyId)])
+            //     .then((res) => {
+            //         console.log(res[0])
+            //         setData(res[0])
+            //         setLoading(false)
+            //     })
+            //     .catch((err) => {
+            //         console.log(err[0].error_message);
+            //         return err;
+            //     });
+            await axios
+                .get(`https://api.aybims.tech/company/${companyId.toString()}`)
                 .then((res) => {
-                    console.log(res[0])
-                    setData(res[0])
+                    setData(res.data)
+                    console.log(data)
                     setLoading(false)
                 })
                 .catch((err) => {
-                    console.log(err[0].error_message);
+                    console.log(err.error_message);
                     return err;
                 });
         }
