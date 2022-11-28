@@ -43,7 +43,11 @@ const CompanyProfilePage = () => {
             //         return err;
             //     });
             await axios
-                .get(`https://api.aybims.tech/company/${companyId.toString()}`)
+                .get(`https://api.aybims.tech/company/${companyId.toString()}`, {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
                 .then((res) => {
                     setData(res.data)
                     console.log(data)
