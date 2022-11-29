@@ -1,7 +1,7 @@
 from api.crud.base import get_db
 from sqlalchemy.orm import Session
 from api.models import models
-from .email import send_user_email
+from .email import send_email
 
 
 
@@ -30,4 +30,4 @@ async def send_user_email(company_ranks):
     destinations = []
     for e in emails:
         destinations.append(e[0])
-    await send_user_email("Updated List of Ranked Companies", destinations, body)
+    await send_email("Updated List of Ranked Companies", destinations, body)

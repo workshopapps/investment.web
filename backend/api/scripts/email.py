@@ -1,7 +1,7 @@
 import os
-from fastapi import BackgroundTasks, FastAPI, APIRouter
+from fastapi import BackgroundTasks
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
-from typing import Optional, List
+from typing import List
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,7 +25,7 @@ conf = ConnectionConfig(
     #TEMPLATE_FOLDER = Path(__file__).parent / 'templates',
 )
 
-async def send_user_email(subject: str, email_to:List[str], body):
+async def send_email(subject: str, email_to:List[str], body):
     """ Sending the email to users"""
     message = MessageSchema(
         subject=subject,
@@ -48,3 +48,4 @@ def send_email_notifications(background_tasks: BackgroundTasks, subject: str,  e
     )
     fast_mail = FastMail(conf)
     background_tasks.add_task(fast_mail.send_message, message)
+

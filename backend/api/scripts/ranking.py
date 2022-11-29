@@ -97,7 +97,7 @@ async def send_ranking_update_notification():
     rankings.sort(key=get_ranking_sort_key, reverse=True)
 
     # create the response list
-    comapny_ranks = []
+    company_ranks = []
     top_rankings = []
     for ranking in rankings:
         if len(top_rankings) == 12:
@@ -112,10 +112,10 @@ async def send_ranking_update_notification():
             'ticker_symbol': comp.ticker_value.symbol,
             'current_ranking': ranking.score
         }
-        comapny_ranks.append(data)
+        company_ranks.append(data)
+    
 
-
-    await email_sending.send_user_email(comapny_ranks)
+    await email_sending.send_user_email(company_ranks)
     print('done')
 
 async def run_process_scripts():
