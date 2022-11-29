@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
 import {
@@ -14,7 +14,87 @@ import {
 } from 'react-icons/fa';
 import '../../assets/subscriptionPage/css/style.css';
 import Spring from '../../assets/subscriptionPage/images/spring.png';
+import { freeMonthly, premiumMonthly, premiumMaxMonthly, freeYearly, premiumYearly, premiumMaxYearly } from './SubscriptionContent';
+import { Link } from 'react-router-dom';
+
+
 const Subscription = () => {
+
+    // const itemBasicMonthly = {
+    //     price:"price_1M84ELE0pPf6mXoCmP61VmyL",
+    //     quantity:1
+    // }
+
+    // const itemPremiumMonthly ={
+    //     price:"price_1M84FHE0pPf6mXoCaZEdZHgv",
+    //     quantity:1
+    // }
+
+    // const itemPremiumMaxMonthly ={
+    //     price:"price_1M84G9E0pPf6mXoC939Khuwk",
+    //     quantity:1
+    // }
+
+    // const itemBasicYearly ={
+    //     price:"price_1M84H0E0pPf6mXoC4hpx6xfA",
+    //     quantity:1
+    // }
+
+    // const itemPremiumYearly ={
+    //     price:"price_1M84HfE0pPf6mXoC84eKBtLB",
+    //     quantity:1
+    // }
+
+    // const itemPremiumMaxYearly ={
+    //     price:"price_1M84IIE0pPf6mXoCmgrhvn0L",
+    //     quantity:1
+    // }
+
+    // const checkoutOptions = {
+
+    //     lineItems: [itemPremiumMonthly],
+    //     mode:"payment",
+    //     successUrl:`${window.location.origin}/success`,
+    //     cancelUrl:`${window.location.origin}/cancel`,
+
+
+    // }
+
+
+    
+// const redirectToCheckout = async () => {
+//     const stripe = await getStripe()
+// const {error} = await stripe.redirectToCheckout(checkoutOptions)
+
+// console.log("stripe checkout error",error)
+// }
+
+
+
+    // state to set change the type of subscription yearly or monthly
+
+    const [subType, setSubType] = useState(1);
+
+    // function to change the subscription type from false to true
+    // which changes from monthly subscription to yearly Subscription
+
+ 
+
+    const handleSubType = (theSub) => {
+
+        if (theSub === 'monthly') {
+            setSubType(1)
+        console.log(subType)
+        }
+        
+        if (theSub === 'yearly') {
+            setSubType(2)
+        console.log(subType)
+        }
+    }
+   
+    console.log(freeMonthly)
+
     return (
         <div>
             <nav>
@@ -38,26 +118,29 @@ const Subscription = () => {
                 {/* subscription type button starts from here */}
                 <div className="w-full flex justify-center mt-10 mb-10">
                     <div className="inline-flex">
-                        <button className="bg-[#333946] text-white font-bold py-2 px-4 rounded-l">
+                        <button className= {subType === 1 ? `bg-[#333946] text-white font-bold py-2 px-4 rounded-l ` : `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l `}  onClick={() => handleSubType('monthly')}>
                             Monthly
                         </button>
-                        <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                        <button className={subType === 2 ? `bg-[#333946] text-white font-bold py-2 px-4 rounded-r ` : `bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r`} onClick={() => handleSubType('yearly')}>
                             Annually
+                            
                         </button>
                     </div>
                 </div>
                 {/* subscription type button ends here */}
 
-                {/* top content ends here */}
 
-                <div className="w-full flex justify-center">
+
+                {/* subscription content details start here */}
+
+            {subType === 1 ? <div className="w-full flex justify-center">
                     <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center w-[80%]  ">
                         {/* first costing div start from here*/}
 
-                        <div className=" bg-white rounded w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
-                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Basic</p>
+                        <div className=" bg-white rounded border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
+                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Free</p>
                             <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
-                                <span className="text-[#1BD47B] text-[24px]">&#8358;5,000</span>
+                                <span className="text-[#1BD47B]  text-[18px] md:text-[18px] lg:text-[24px]">&#8358;0.00</span>
                                 <span className="text-[#0A0B0D] text-[16px]"></span>/month
                             </h1>
                             <p className="pt-3 pl-6 pb-3 basicTextHolder">For Basic Users</p>
@@ -72,20 +155,24 @@ const Subscription = () => {
                                 </li>
                                 <li className="flex items-center">
                                     <FaCheckCircle fill="#1BD47B" />{' '}
-                                    <p className="pl-3 ">Compare Stocks</p>
+                                    <p className="pl-3 ">Share Stocks</p>
                                 </li>
                                 <li className="flex items-center">
                                     <FaCheckCircle fill="#1BD47B" />
-                                    <p className="pl-3">All Predictions</p>
+                                    <p className="pl-3">Access to Only 12 stocks</p>
                                 </li>
                             </ul>
                             <div className="mt-10 md:mt-10 lg:mt-52 mb-10 md:mb-10 lg:mb-10 flex justify-center">
-                                <button
+                                
+                                
+                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
                                     type="button">
-                                    <span>Subscribe</span>
+                                        <Link to={"/payment"} state={{state: freeMonthly, priceId:"price_1M84ELE0pPf6mXoCmP61VmyL"}}>
+                                    <span className='text-[black] text-[0.8em]'>Current Plan</span>
+                                    </Link>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                    <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
+                                    {/* <FaArrowRight className="w-3 mt-2 h-3  ml-1" /> */}
                                 </button>
                             </div>
                         </div>
@@ -94,9 +181,9 @@ const Subscription = () => {
                         {/* second costing div start from here*/}
 
                         <div className=" bg-[#1BD47B] text-[white] rounded w-[300px] h-[auto] BasicSubHolder  mb-5 md:mb-5 lg:mb-0">
-                            <p className="text-[white] text-[24px] pl-6 pt-8 ">Popular</p>
+                            <p className="text-[white] text-[24px] pl-6 pt-8 ">Premium</p>
                             <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
-                                <span className="text-[white] text-[24px]">&#8358;10,000</span>
+                                <span className="text-[white] text-[18px] md:text-[18px] lg:text-[24px]">&#8358;5,000</span>
                                 <span className="text-[#0A0B0D] text-[16px]"></span>/month
                             </h1>
                             <p className="pt-3 pl-6 pb-3 basicTextHolder">For Power Users</p>
@@ -111,30 +198,32 @@ const Subscription = () => {
                                 </li>
                                 <li className="flex items-center">
                                     <FaCheckCircle fill="white" />{' '}
-                                    <p className="pl-3 ">Compare Stocks</p>
+                                    <p className="pl-3 ">Share Stocks</p>
                                 </li>
                                 <li className="flex items-center">
                                     <FaCheckCircle fill="white" />
-                                    <p className="pl-3">All Predictions</p>
-                                </li>
-
-                                <li className="flex items-center">
-                                    <FaCheckCircle fill="white" />
-                                    <p className="pl-3">Price Alert</p>
+                                    <p className="pl-3">Unlimited access to all stocks</p>
                                 </li>
 
                                 <li className="flex items-center">
                                     <FaCheckCircle fill="white" />
-                                    <p className="pl-3">Auto Stock Calculator</p>
+                                    <p className="pl-3">Access to more filters</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />
+                                    <p className="pl-3">Access to Small Caps stocks</p>
                                 </li>
                             </ul>
                             <div className="mt-10 md:mt-10 lg:mt-40 mb-10 md:mb-10 lg:mb-10 flex justify-center">
                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[white] text-[#1BD47B] font-bold py-2 px-4 rounded"
-                                    type="button">
-                                    <span>Subscribe</span>
+                                    type="button" >
+                                          <Link to={"/payment"} state={{state: premiumMonthly, priceId:"price_1M84FHE0pPf6mXoCaZEdZHgv"}} className="flex">
+                                    <span className='text-[#1F2226] text-[0.8em]'>Subscribe</span>
+                                    </Link>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                    <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
+                                    <FaArrowRight className="w-3 mt-1 text-[#1F2226] h-3  ml-1" />
                                 </button>
                             </div>
                         </div>
@@ -142,10 +231,10 @@ const Subscription = () => {
 
                         {/* Third costing div start from here*/}
 
-                        <div className=" bg-white rounded w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
-                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Pro</p>
+                        <div className=" bg-white border-[1px] border-[rgba(141, 141, 141, 0.2)]  rounded w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
+                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Premium Max</p>
                             <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
-                                <span className="text-[#1BD47B] text-[24px]">&#8358;20,000</span>
+                                <span className="text-[#1BD47B] text-[18px] md:text-[18px] lg:text-[24px] pl-5 md:pl-5 lg:pl-0">&#8358;20,000</span>
                                 <span className="text-[#0A0B0D] text-[16px]"></span>/month
                             </h1>
                             <p className="pt-3 pl-6 pb-3 basicTextHolder">For Advanced Users</p>
@@ -186,15 +275,176 @@ const Subscription = () => {
                                 <button
                                     className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
                                     type="button">
-                                    <span>Subscribe</span>
+                                        <Link to={"/payment"} state={{state: premiumMaxMonthly, priceId:"price_1M84G9E0pPf6mXoC939Khuwk"}}>
+                                    <span className='text-[black] text-[0.8em]'>Coming Soon</span>
+                                    </Link>
                                     {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                    <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
+                                    {/* <FaArrowRight className="w-3 mt-2 h-3  ml-1" /> */}
+                                </button>
+                            </div>
+                        </div>
+                        {/* Third costing div ends here*/}
+                    </div>
+                </div> : subType === 2 ? 
+                
+                <div className="w-full flex justify-center">
+                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center w-[80%]  ">
+                        {/* first costing div start from here*/}
+
+                        <div className=" bg-white rounded border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
+                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Free</p>
+                            <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
+                                <span className="text-[#1BD47B]  text-[18px] md:text-[18px] lg:text-[24px]">&#8358;0.00</span>
+                                <span className="text-[#0A0B0D] text-[16px]"></span>/year
+                            </h1>
+                            <p className="pt-3 pl-6 pb-3 basicTextHolder">For Basic Users</p>
+                            <div className="w-full flex justify-center mb-3">
+                                <hr className=" w-[0px] md:w-[0px] lg:w-[250px] sm:border-[white] md:border-[white] lg:border-[#0A0B0D]" />
+                            </div>
+
+                            <ul className="w-full theListing list-inside pl-6">
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Stock Information</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />{' '}
+                                    <p className="pl-3 ">Share Stocks</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Access to Only 12 stocks</p>
+                                </li>
+                            </ul>
+                            <div className="mt-10 md:mt-10 lg:mt-52 mb-10 md:mb-10 lg:mb-10 flex justify-center">
+                                <button
+                                    className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
+                                    type="button">
+                                        <Link to={"/payment"} state={{state: freeYearly, priceId:"price_1M84H0E0pPf6mXoC4hpx6xfA"}}>
+                                    <span className='text-[black] text-[0.8em]'>Current Plan</span>
+                                    </Link>
+                                    {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
+                                    {/* <FaArrowRight className="w-3 mt-2 h-3  ml-1" /> */}
+                                </button>
+                            </div>
+                        </div>
+                        {/* first costing div ends here*/}
+
+                        {/* second costing div start from here*/}
+
+                        <div className=" bg-[#1BD47B] text-[white] rounded w-[300px] h-[auto] BasicSubHolder  mb-5 md:mb-5 lg:mb-0">
+                            <p className="text-[white] text-[24px] pl-6 pt-8 ">Premium</p>
+                            <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
+                                <span className="text-[white]  text-[18px] md:text-[18px] lg:text-[24px]">&#8358;60,000</span>
+                                <span className="text-[#0A0B0D] text-[16px]"></span>/year
+                            </h1>
+                            <p className="pt-3 pl-6 pb-3 basicTextHolder">For Power Users</p>
+                            <div className="w-full flex justify-center mb-3">
+                                <hr className=" w-[0px] md:w-[0px] lg:w-[250px] sm:border-[white] md:border-[white] lg:border-[white]" />
+                            </div>
+
+                            <ul className="w-full theListing list-inside pl-6">
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />
+                                    <p className="pl-3">Stock Information</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />{' '}
+                                    <p className="pl-3 ">Share Stocks</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />
+                                    <p className="pl-3">Unlimited access to all stocks</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />
+                                    <p className="pl-3">Access to more filters</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="white" />
+                                    <p className="pl-3">Access to Small Caps stocks</p>
+                                </li>
+                            </ul>
+                            <div className="mt-10 md:mt-10 lg:mt-40 mb-10 md:mb-10 lg:mb-10 flex justify-center">
+                                <button
+                                    className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[white] text-[#1BD47B] font-bold py-2 px-4 rounded"
+                                    type="button">
+                                        <Link to={"/payment"} state={{state: premiumYearly, priceId:"price_1M84HfE0pPf6mXoC84eKBtLB"}} className="flex">
+                                    <span className='text-[#1F2226] text-[0.8em]'>Subscribe</span>
+                                    {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
+                                    <FaArrowRight className="w-3 mt-1 text-[#1F2226] h-3  ml-1" />
+                                   </Link>
+                                </button>
+                            </div>
+                        </div>
+                        {/* second costing div ends here*/}
+
+                        {/* Third costing div start from here*/}
+
+                        <div className=" bg-white border-[1px] border-[rgba(141, 141, 141, 0.2)]  rounded w-[300px] h-[auto] BasicSubHolder mb-5 md:mb-5 lg:mb-0">
+                            <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">Premium Max</p>
+                            <h1 className="costHolder pl-0 md:pl-0 lg:pl-6">
+                                <span className="text-[#1BD47B]  text-[18px] md:text-[18px] lg:text-[24px] pl-5 md:pl-5 lg:pl-0">&#8358;240,000</span>
+                                <span className="text-[#0A0B0D] text-[16px]"></span>/year
+                            </h1>
+                            <p className="pt-3 pl-6 pb-3 basicTextHolder">For Advanced Users</p>
+                            <div className="w-full flex justify-center mb-3">
+                                <hr className=" w-[0px] md:w-[0px] lg:w-[250px] sm:border-[white] md:border-[white] lg:border-[#0A0B0D]" />
+                            </div>
+
+                            <ul className="w-full theListing list-inside pl-6">
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Stock Information</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />{' '}
+                                    <p className="pl-3 ">Compare Stocks</p>
+                                </li>
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">All Predictions</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Price Alert</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Auto Stock Calculator</p>
+                                </li>
+
+                                <li className="flex items-center">
+                                    <FaCheckCircle fill="#1BD47B" />
+                                    <p className="pl-3">Analytics</p>
+                                </li>
+                            </ul>
+                            <div className="mt-10 md:mt-10 lg:mt-[8.4em] mb-10 md:mb-10 lg:mb-10 flex justify-center">
+                                <button
+                                    className="w-[250px] md:w-[250px] lg:w-[250px] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded"
+                                    type="button">
+                                        <Link to={"/payment"} state={{state: premiumMaxYearly,priceId:"price_1M84IIE0pPf6mXoCmgrhvn0L"}}>
+                                    <span className='text-[black] text-[0.8em]'>Coming Soon</span>
+                                    </Link>
+                                    {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
+                                    {/* <FaArrowRight className="w-3 mt-2 h-3  ml-1" /> */}
                                 </button>
                             </div>
                         </div>
                         {/* Third costing div ends here*/}
                     </div>
                 </div>
+                : ""
+
+    }
+
+{/* subscription content details start here */}
+
+
 
                 {/* bottom start from here */}
                 <div className="w-full h-auto flex justify-center bottomHolder mt-16 mb-8">

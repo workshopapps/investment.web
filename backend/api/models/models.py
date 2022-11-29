@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
                         String, Float, DateTime, Date, Text)
 from sqlalchemy.orm import relationship
@@ -121,12 +122,14 @@ class Category(Base):
 
     cat = relationship("Company", back_populates="cat_value")
 
+
 class User(Base):
     __tablename__ = "user"
 
     id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     email = Column(String(30))
     name = Column(String(30))
+    password = Column(String(100))
 
 
 # class SubscribedUsers(Base):
@@ -135,9 +138,7 @@ class User(Base):
 #     name = Column(String(30))
 #     email = Column(String(30))
 #     created_date = Column(DateTime(timezone=True), server_default=func.now())
-    
-   
-    
+
 
 class Customer(Base):
     __tablename__ = "customer"
@@ -147,7 +148,7 @@ class Customer(Base):
     subscription = Column(String(64), ForeignKey("subscription.subscription_id"))
 
     subscription_value = relationship("Subscription", back_populates="customer_value")
-    
+
 
 class Subscription(Base):
     __tablename__ = "subscription"
@@ -161,10 +162,14 @@ class Subscription(Base):
 
 
 class Product(Base):
-    __tablename__  = "product"
+    __tablename__ = "product"
 
     product_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
     price_id = Column(String(64))
 
     sub_value = relationship("Subscription", back_populates="product_value")
 
+
+class CreateUserModel(BaseModel):
+    email: str
+    password: str

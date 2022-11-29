@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../assets/scss/topnews.scss';
+import '../../assets/scss/topnews.css';
 import '../../index.css';
 // import newimage from '../../assets/images/Rectangle 4745.png';
 // import Picks from '../../components/NewsComponent/Picks';

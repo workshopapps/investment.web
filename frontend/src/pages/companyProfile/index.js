@@ -82,7 +82,7 @@ const CompanyProfilePage = () => {
                                     </h5>
 
                                     <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-10 pb-6 flex flex-row justify-between">
-                                        DIVIDEND YIELD <span className="font-HauoraBold font-bold">{data.stock_price.dividend_yield.toFixed(4)}</span>
+                                        DIVIDEND YIELD <span className="font-HauoraBold font-bold">{data.stock_price.dividend_yield ? data.stock_price.dividend_yield.toFixed(4) : `n/a`}</span>
                                     </h5>
 
                                     <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
