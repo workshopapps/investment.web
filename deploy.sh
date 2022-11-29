@@ -6,17 +6,17 @@ echo "Pulling updates from github..."
 sudo git pull origin staging
 
 # install and deploy frontend
-#cd frontend
+cd frontend
 
-#echo "\n\nInstalling frontend"
-#sudo yarn install
+echo "\n\nInstalling frontend"
+sudo yarn install
 
-#echo "\n\nBuilding frontend"
-#sudo yarn build
+echo "\n\nBuilding frontend"
+sudo yarn build
 
-#echo "\n\nDeploying frontend"
-#sudo cp build /var/www/html -r
-#sudo systemctl restart nginx
+echo "\n\nDeploying frontend"
+sudo cp build /var/www/html -r
+sudo systemctl restart nginx
 
 
 # install and deploy backend
