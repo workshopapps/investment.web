@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-key */
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, {useContext} from 'react';
 import Logo from '../../assets/header/logo.svg';
 // import NavBtn from './NavBtn';
 import { UserStatusContext } from '../../store/UserStatusContext';
