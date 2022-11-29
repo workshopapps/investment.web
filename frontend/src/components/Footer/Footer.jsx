@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/header/stocknalysis-white.svg';
+import logo from '../../assets/footer/logo-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
 import NavLinks from './NavLinks';
 
@@ -51,8 +51,9 @@ const Footer = () => {
             className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full">
             <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
                 <div>
-                    <div className="w-60 pb-8 md:pb-0">
+                    <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
                         <img src={logo} alt="" />
+                        <p className="text-white font-bold ml-2">Yieldvest</p>
                     </div>
                     <div
                         className={`${pathname !== '/download'
