@@ -76,7 +76,6 @@ def rank_companies():
 
 
 async def send_ranking_update_notification():
-    print('sending....')
     db: Session = next(get_db())
 
     # get company list
@@ -116,7 +115,6 @@ async def send_ranking_update_notification():
     
 
     await email_sending.send_user_email(company_ranks)
-    print('done')
 
 async def run_process_scripts():
     # await data_gathering.pick_four_random_companies()
