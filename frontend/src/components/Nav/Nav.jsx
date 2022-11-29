@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-key */
 /* eslint-disable prettier/prettier */
-import React, { useContext } from 'react';
-import Logo from '../../assets/header/stocknalysis.svg';
+import React, { useState } from 'react';
+import Logo from '../../assets/header/logo.svg';
 // import NavBtn from './NavBtn';
 import { UserStatusContext } from '../../store/UserStatusContext';
 import MenuLinks from './MenuLinks';
@@ -45,8 +45,9 @@ const Nav = ({ openMenu }) => {
     return (
         <nav style={navStyle} className="flex justify-center items-center h-20">
             <div className="w-full flex items-center justify-between lg:mx-[100px] mx-[16px]">
-                <div onClick={() => navigate('/')} className="cursor-pointer">
+                <div onClick={() => navigate('/')} className="cursor-pointer flex items-center text-2xl">
                     <img src={Logo} alt="" />
+                    <p className="text-[#1BD47B] font-bold ml-2">Yieldvest</p>
                 </div>
                 <div className="hidden md:block nav-items max-w-xs w-full">
                     <MenuLinks />
