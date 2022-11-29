@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-
 """ Config values for a connection to be made """
 conf = ConnectionConfig(
     # see env values to add yours
@@ -36,16 +35,4 @@ async def send_email(subject: str, email_to:List[str], body):
 
     fast_mail = FastMail(conf)
     await fast_mail.send_message(message)
-
-
-def send_email_notifications(background_tasks: BackgroundTasks, subject: str,  email_to:List[str], body):
-    """ Send email as a Notification in the background """
-    message = MessageSchema(
-        subject=subject,
-        recipients=email_to,
-        body=body,
-        subtype='html',
-    )
-    fast_mail = FastMail(conf)
-    background_tasks.add_task(fast_mail.send_message, message)
 
