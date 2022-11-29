@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserStatusContext } from './store/UserStatusContext.jsx';
 
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
@@ -237,11 +238,20 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    const [logged, setLogged] = useState(false);
+    const loggedInHandler = () => {
+        setLogged(true);
+    };
+    const loggedOffHandler = () => {
+        setLogged(false);
+    };
     return (
         <React.Fragment>
-            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                <RouterProvider router={router} />
-            </GoogleOAuthProvider>
+            <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
+                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                    <RouterProvider router={router} />
+                </GoogleOAuthProvider>
+            </UserStatusContext.Provider>
         </React.Fragment>
     );
 }
