@@ -6,7 +6,6 @@ from .email import send_user_email
 
 
 async def send_user_email(company_ranks):
-    print('beginning')
     db: Session = next(get_db())
 
     # get users emails
