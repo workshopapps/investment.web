@@ -10,7 +10,7 @@ from fastapi_utils.tasks import repeat_every
 
 from api.database import database
 from api.database.database import engine
-from api.routes import routes, social_login
+from api.routes import routes, auth
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 from fastapi.middleware.cors import CORSMiddleware
@@ -47,7 +47,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(social_login.router)
+app.include_router(auth.router, prefix='/auth')
 app.include_router(routes.router)
 app.include_router(server.router)
 
