@@ -9,15 +9,15 @@ import Nav from '../../components/Nav/Nav';
 import { FaPlus, FaStripe, FaMinus, FaArrowRight } from 'react-icons/fa';
 import { loadStripe } from "@stripe/stripe-js";
 
-let stripeTestPromise 
+let stripeTestPromise
 
 const getStripe = () => {
-	if(!stripeTestPromise){
+    if (!stripeTestPromise) {
 
-	stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
-}
+        stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
+    }
 
-return stripeTestPromise;
+    return stripeTestPromise;
 }
 
 // import { Elements } from "@stripe/react-stripe-js";
@@ -39,7 +39,7 @@ return stripeTestPromise;
 const Payment = () => {
     // const [isActive, setIsActive] = useState(false);
 
-    const [isLoading ,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [stripeError, setStripeError] = useState(null)
 
     let location = useLocation();
@@ -53,44 +53,44 @@ const Payment = () => {
         setClicked(index);
     };
 
-   
 
- console.log(location.state.priceId)
- console.log(location.state.getStripe)
+
+    console.log(location.state.priceId)
+    console.log(location.state.getStripe)
 
     const item = {
-        price:location.state.priceId,
-        quantity:1
+        price: location.state.priceId,
+        quantity: 1
     }
 
 
     const checkoutOptions = {
 
         lineItems: [item],
-        mode:"payment",
-        successUrl:`${window.location.origin}/success`,
-        cancelUrl:`${window.location.origin}/cancel`,
+        mode: "payment",
+        successUrl: `${window.location.origin}/success`,
+        cancelUrl: `${window.location.origin}/cancel`,
 
 
     }
     const redirectToCheckout = async () => {
 
-            setIsLoading(true)
+        setIsLoading(true)
         const stripe = await getStripe()
-    const {error} = await stripe.redirectToCheckout(checkoutOptions)
-    
-    console.log("stripe checkout error",error)
+        const { error } = await stripe.redirectToCheckout(checkoutOptions)
 
-    if(error) {
-        setStripeError(error.message)
+        console.log("stripe checkout error", error)
+
+        if (error) {
+            setStripeError(error.message)
+        }
+
+        //then set it back to false after the checkout
+        setIsLoading(true)
     }
 
-    //then set it back to false after the checkout
-    setIsLoading(true)
-    }
 
 
-    
     if (stripeError) {
         alert(stripeError)
     }
@@ -204,20 +204,20 @@ const Payment = () => {
                                         />
                                     </div>
                                 </div> */}
-                                    {/* <PaymentForm/> */}
+                                {/* <PaymentForm/> */}
 
                                 {/* <Elements stripe={stripeTestPromise}>
                                 </Elements> */}
 
-<div className="mt-8 w-full flex items-center justify-center">
-                        <button
-                            className="w-[300px] md:w-[300px] lg:w-[500px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded mb-9"
-                            type="button" disabled={isLoading} onClick={redirectToCheckout}>
-                            <span>{isLoading ? "Loading..." : "Pay"}</span>
-                            {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                            <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
-                        </button>
-                    </div>
+                                <div className="mt-8 w-full flex items-center justify-center">
+                                    <button
+                                        className="w-[300px] md:w-[300px] lg:w-[500px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded mb-9"
+                                        type="button" disabled={isLoading} onClick={redirectToCheckout}>
+                                        <span>{isLoading ? "Loading..." : "Pay"}</span>
+                                        {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
+                                        <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -225,7 +225,7 @@ const Payment = () => {
                     {/* form ends  here */}
 
                     {/* submit button started from here */}
-                {/* button was here before */}
+                    {/* button was here before */}
 
                     {/* submit button ends here */}
 

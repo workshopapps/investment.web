@@ -1,4 +1,5 @@
 from uuid import uuid4
+from pydantic import BaseModel
 
 from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
@@ -156,6 +157,10 @@ class Subscription(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-
+    
     user_sub = relationship("User", back_populates="subscription_value")
+
+class CreateUserModel(BaseModel):
+    email: str
+    password: str
     
