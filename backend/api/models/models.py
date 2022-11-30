@@ -1,6 +1,7 @@
 from uuid import uuid4
 from pydantic import BaseModel
 
+from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
                         String, Float, DateTime, Date, Text)
 from sqlalchemy.orm import relationship
@@ -122,6 +123,7 @@ class Category(Base):
 
     cat = relationship("Company", back_populates="cat_value")
 
+
 class User(Base):
     __tablename__ = "user"
 
@@ -130,46 +132,35 @@ class User(Base):
     name = Column(String(30))
     password = Column(String(100))
 
-
+    customer = relationship("Customer", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
 # class SubscribedUsers(Base):
 #     __tablename__ = "subscribers"
 
 #     name = Column(String(30))
 #     email = Column(String(30))
 #     created_date = Column(DateTime(timezone=True), server_default=func.now())
-    
-   
-    
+
 
 class Customer(Base):
     __tablename__ = "customer"
 
+    user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
     session_id = Column(String(64))
-    subscription = Column(String(64), ForeignKey("subscription.subscription_id"))
 
-    subscription_value = relationship("Subscription", back_populates="customer_value")
-    
+    user_value = relationship("User", back_populates="customer")
+
 
 class Subscription(Base):
     __tablename__ = "subscription"
 
+    user_id = Column(String(64), ForeignKey("user.user_id"))
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    subscription_type = Column(String(64), nullable=True)
-    product = Column(String(64), ForeignKey("product.product_id"))
-
-    customer_value = relationship("Customer", back_populates="subscription_value")
-    product_value = relationship("Product", back_populates="sub_value")
-
-
-class Product(Base):
-    __tablename__  = "product"
-
-    product_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    price_id = Column(String(64))
-
-    sub_value = relationship("Subscription", back_populates="product_value")
+    
+    user_sub = relationship("User", back_populates="subscription_value")
 
 class CreateUserModel(BaseModel):
     email: str
     password: str
+    
