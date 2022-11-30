@@ -40,11 +40,27 @@ def get_sectors():
 
 
 @router.get('/company/ranking', tags=["Company"], )
-def get_list_of_ranked_companies():
+def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None):
     db: Session = next(get_db())
     # get companies
     low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
-    companies: list = db.query(models.Company).filter(models.Company.category != low_cap_category_id).all()
+    filters = []
+
+    if category:
+        if category == low_cap_category_id:
+            return []
+        else:
+            filters.append(models.Company.category == category)
+    else:
+        filters.append(models.Company.category != low_cap_category_id)
+
+    if sector:
+        filters.append(models.Company.sector == sector)
+
+    if industry:
+        filters.append(models.Company.industry == industry)
+
+    companies: list = db.query(models.Company).filter(*filters).all()
 
     # get latest rankings
     rankings: list = []
