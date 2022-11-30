@@ -12,7 +12,7 @@ export const faqDatas = [
         id: 2,
         title: 'Do I Need To Add My Card Details?',
         content: `If you want to make a payment for one of our packages,
-        you will need to add your card details. MyStockPlug 
+        you will need to add your card details. YieldVest 
         does not store your details unless you ask us to.`
     },
     {

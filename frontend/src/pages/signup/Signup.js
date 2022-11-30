@@ -125,7 +125,7 @@ const Signup = () => {
                         Create Account
                     </h1>
                     <p className="text-sm text-center mb-3 sm:text-base">
-                        Welcome to MyStockPlug professional stock brokerage
+                        Welcome to YieldVest professional stock brokerage
                     </p>
                     {/* <button
                         className="bg-green-100 flex items-center w-full py-3 gap-2 justify-center rounded-sm"

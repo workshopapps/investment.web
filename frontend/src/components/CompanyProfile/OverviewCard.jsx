@@ -15,6 +15,7 @@ const OverviewCard = ({ companyId, name, price, industry }) => {
             <div className="flex-row flex align-middle justify-start my-3">
                 <span className="text-xl md:text-2xl font-semibold pt-3">${price}</span>
             </div>
+<<<<<<< HEAD
             <div className="flex-row flex align-middle justify-between">
                 <div className="text-base font-sans font-light pt-3">
                     <span className="text-[#1BD47B] font-medium">Industry:</span>
@@ -30,6 +31,12 @@ const OverviewCard = ({ companyId, name, price, industry }) => {
                             className="flex justify-end"
                         />
                     </div>
+=======
+            <div className="flex ">
+                <div className="text-base font-sans font-light pt-3">Industry: {industry}</div>
+                <div className="flex flex-cols md:flex-row text-base pr-4 font-sans font-light pt-3 gap-2">
+                    <img src={USFlag} alt="Flag" className="w-7 h-7 mt-2" />
+>>>>>>> f170f0b (Update the User Interface of 5 different pages)
                     <p>United States</p>
                 </div>
             </div>

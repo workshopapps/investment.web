@@ -32,7 +32,7 @@ export default function Section5() {
                     </p>
                     <p className="text-primaryGray text-left py-2 w-3/4 leading-7 text-base">
                         Medical coverage including vision, dental and general health is what all
-                        team members enjoy at mystockplug
+                        team members enjoy at YieldVest
                     </p>
                 </div>
                 <div className="md:my-2">
@@ -51,7 +51,7 @@ export default function Section5() {
                         Employee Wellness Package
                     </p>
                     <p className="text-primaryGray text-left py-2 w-3/4 leading-7 text-base">
-                        Employee wellness is our top priority at mystockplug so we make sure all
+                        Employee wellness is our top priority at YieldVest so we make sure all
                         employees are at best perfoming capacity mentally with care packages.
                     </p>
                 </div>

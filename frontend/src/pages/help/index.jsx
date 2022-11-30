@@ -7,12 +7,12 @@ function HelpPage() {
     const faqs = {
         faq: [
             {
-                question: 'What is MyStockPlug used for?',
-                answer: 'It allows you to see the best performing stocks in the market to buy and top companies to invest in at the moment. MyStockPlug has a simple, straightforward user interface that shows real-time portfolio data, market value and growth potential of top companies and stocks.'
+                question: 'What is YieldVest used for?',
+                answer: 'It allows you to see the best performing stocks in the market to buy and top companies to invest in at the moment. YieldVest has a simple, straightforward user interface that shows real-time portfolio data, market value and growth potential of top companies and stocks.'
             },
             {
                 question: 'Can I trade stocks on this platform?',
-                answer: "No. MyStockPlug only provides information and suggestions on company's stocks to buy. After you must have known the stocks to buy, head over to the listed stock trading platform to buy and build your portfolio"
+                answer: "No. YieldVest only provides information and suggestions on company's stocks to buy. After you must have known the stocks to buy, head over to the listed stock trading platform to buy and build your portfolio"
             },
             {
                 question: 'How can I know stocks that fit my investment goals?',
@@ -20,21 +20,21 @@ function HelpPage() {
             },
             {
                 question: 'How can I know more about the company to invest in?',
-                answer: 'On MyStockPlug, every company has their details and company portfolio listed, obtained from reliable sources.'
+                answer: 'On YieldVest, every company has their details and company portfolio listed, obtained from reliable sources.'
             },
             {
                 question: 'I have no experience in stocks. Is this for me?',
-                answer: 'Yes, anyone interested in stocks can use it, even complete beginners. MyStockPlug is easy to use.'
+                answer: 'Yes, anyone interested in stocks can use it, even complete beginners. YieldVest is easy to use.'
             },
             {
                 question: 'How can I access the platform?',
-                answer: 'MyStockPlug is available as a website and a desktop application. This means you can access it on your mobile, as you go. And also on any computer, whether laptop or desktop.',
+                answer: 'YieldVest is available as a website and a desktop application. This means you can access it on your mobile, as you go. And also on any computer, whether laptop or desktop.',
                 link: 'Download for Desktop'
             }
         ],
         popular_questions: [
             {
-                question: 'Is MyStockPlug reliable?',
+                question: 'Is YieldVest reliable?',
                 answer: 'You can be sure that this is a reliable service. Decisions are made based on credible algorithms and metrics.'
             },
             {

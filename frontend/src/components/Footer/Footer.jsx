@@ -12,7 +12,7 @@ const Footer = () => {
         {
             name: 'Get To Know Us',
             navLinks: [
-                { link: 'About MyStockPlug', to: '/about' }
+                { link: 'About YieldVest', to: '/about' }
                 // { link: 'Careers', to: '/careers' },
                 // { link: 'Stock Tips', to: '/StockTips' },
             ]
@@ -70,14 +70,14 @@ const Footer = () => {
                         const { name, navLinks } = item;
                         return (
                             <div key={index} className="w-36">
-                                <p className="mb-8 ">{name}</p>
+                                <p className="mb-8 font-bold">{name}</p>
                                 <NavLinks navLinks={navLinks} />
                             </div>
                         );
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 MyStockPlug </div>
+            <div className="text-center pb-10">2022 YieldVest </div>
         </footer>
     );
 };

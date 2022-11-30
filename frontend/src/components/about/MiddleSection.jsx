@@ -10,7 +10,7 @@ export const Section = () => {
                 <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
                     <h3 className="font-bold text-xl mb-2 text-center md:text-left">Who We Are</h3>
                     <p className="text-[#66717E] text-center md:text-left">
-                        MyStockPlug is a stock advisory platform offering guidance to prospective
+                        YieldVest is a stock advisory platform offering guidance to prospective
                         investors, new or seasoned alike. We offer free and premium services with a
                         simple, straightforward, and user-intuitive interface, with up-to-date
                         valuations on growth potential, and market value of top companies or stocks
@@ -20,7 +20,7 @@ export const Section = () => {
                 <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
                     <h3 className="font-bold text-xl mb-2 text-center md:text-left">What We Do</h3>
                     <p className="text-[#66717E] text-center md:text-left">
-                        MyStockPlug guides individuals and businesses who need help knowing what
+                        YieldVest guides individuals and businesses who need help knowing what
                         stocks to invest in to make better and well-informed decisions on what
                         stocks to purchase. We bring the best to you after analyzing each of these
                         companies based on various metrics.

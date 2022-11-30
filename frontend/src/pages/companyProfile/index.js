@@ -15,6 +15,8 @@ import OverviewCard from '../../components/CompanyProfile/OverviewCard';
 import VisualDataCard from '../../components/CompanyProfile/AnalysisCard';
 import { getCompanyData } from '../../server/companyProfile';
 import { companyData } from '../../store/companyData/profileBackend';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+
 
 const CompanyProfilePage = () => {
 
@@ -86,7 +88,11 @@ const CompanyProfilePage = () => {
                                     </h5>
 
                                     <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
-                                        About <img className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' src={show ? DownIcon : UpIcon} alt="open" onClick={() => setShow(!show)} />
+                                        <span>About</span> 
+                                        {/* <img className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' src={show ? DownIcon : UpIcon} alt="open" onClick={() => setShow(!show)} /> */}
+                                        <div className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' alt="open" onClick={() => setShow(!show)} >
+                         {show ? <FaChevronDown color="#1BD47B" fontSize="0.6em" /> : <FaChevronUp  color="#1BD47B" fontSize="0.6em" />}
+                    </div>
                                     </h5>
                                     {show && <AboutCompanyCard description={data.description} />}
 

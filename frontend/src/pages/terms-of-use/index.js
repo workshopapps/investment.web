@@ -14,7 +14,7 @@ const TermsAndConditionPage = () => {
                 <div className="py-32 container mx-auto max-sm:px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48 text-center ">
                     {/* */}
                     <h2 className="font-[600] max-sm:text-[24px] sm:text-[33px] md:text-[40px] lg:text-[57px] pb-10">
-                        MyStockPlug Terms of Use
+                        YieldVest Terms of Use
                     </h2>
                     <p className="max-sm:text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px] pb-10">
                         Last updated November 16, 2022

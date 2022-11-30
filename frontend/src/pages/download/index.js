@@ -15,7 +15,7 @@ function DownloadPage() {
                         <div className="md:flex items-center justify-between gap-[30px] py-[40px] md:py-[120px]">
                             <div className="text-center md:w-1/2 md:text-left">
                                 <div className="flex justify-center gap-[5px] items-center text-[24px] mb-[16px] font-[600] md:block md:text-[57px]">
-                                    <h1 className="text-[#1BD47B]">MyStockPlug</h1>
+                                    <h1 className="text-[#1BD47B]">YieldVest</h1>
                                     <h1 className="text-[#1F2226]">Desktop App</h1>
                                 </div>
 
@@ -74,10 +74,10 @@ function DownloadPage() {
                                 <p className="text-[16px] text-[#545964] font-[400] mb-[16px]">
                                     Tired of always losing your charts, hidden away between all your
                                     open CNBC and YouTube tabs? Now keep all of findable from just
-                                    one click on your desktop menu. MyStockPlug Desktop is even
-                                    faster than your default browser. But you can still use both,
-                                    and also our mobile apps. It's all the same, with 100% synced
-                                    layouts, watchlists and settings.
+                                    one click on your desktop menu. YieldVest Desktop is even faster
+                                    than your default browser. But you can still use both, and also
+                                    our mobile apps. It's all the same, with 100% synced layouts,
+                                    watchlists and settings.
                                 </p>
                                 <p className="text-[16px] text-[#545964] font-[400] mb-[16px]">
                                     Multiple monitors are important to traders. TradingView Desktop

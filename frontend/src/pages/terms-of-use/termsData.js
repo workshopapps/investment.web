@@ -169,7 +169,7 @@ export const termsData = [
         title: 'INDEMNITY',
         content: `
             <p>
-            You consent to defend, indemnify, and hold MyStockplug. MyStockplug would be inconsequential from any claim or demand, including any allegation or claim, including attorneys' fees, made by any third party arising from anything you contribute, publish, distribute, modify, or otherwise make accessible through our services.
+            You consent to defend, indemnify, and hold YieldVest. YieldVest would be inconsequential from any claim or demand, including any allegation or claim, including attorneys' fees, made by any third party arising from anything you contribute, publish, distribute, modify, or otherwise make accessible through our services.
             </p>
         `
     },
@@ -178,13 +178,13 @@ export const termsData = [
         title: 'CONNECTIVITY PROTOCOLS',
         content: `
             <p class="pb-2">
-            A standard web browser is typically required to view MyStockplug. MyStockplug is designed to be viewed on a smartphone running the iOS or Android operating system. Even though there are alternative ways to access MyStockplug, you should be informed that these options are only to be used at your own risk because MyStockplug may not appear appropriately through them.
+            A standard web browser is typically required to view YieldVest. YieldVest is designed to be viewed on a smartphone running the iOS or Android operating system. Even though there are alternative ways to access YieldVest, you should be informed that these options are only to be used at your own risk because YieldVest may not appear appropriately through them.
             </p>
             <p class="pb-2">
-            Devices or services that offer high-speed, automated, recurring access should not be used to access MyStockplug unless authorized or made available by MyStockplug.You consent to receive electronic services online; you must have access to the internet, a working email address, a web browser, and ongoing access to the services.
+            Devices or services that offer high-speed, automated, recurring access should not be used to access YieldVest unless authorized or made available by YieldVest.You consent to receive electronic services online; you must have access to the internet, a working email address, a web browser, and ongoing access to the services.
             </p>
             <ul class="pl-8">
-                <li class="list-disc pb-2">By purchasing the premium service, you attest you have read, understood, and agreed to MyStockplug Terms of Use. You also allow the platform to charge your bank card automatically for the duration you choose for billing.</li>
+                <li class="list-disc pb-2">By purchasing the premium service, you attest you have read, understood, and agreed to YieldVest Terms of Use. You also allow the platform to charge your bank card automatically for the duration you choose for billing.</li>
 
                 <li class="list-disc pb-2">Every subscriber has a free 14-day trial period to try the premium subscription. Depending on the user's preference, the trial automatically converts to a monthly or annual paid plan if it is not terminated before its expiration date. Even if the membership is terminated on the same day the autoconversion payment has been processed, there are no refunds for plans.</li>
 
@@ -215,7 +215,7 @@ export const termsData = [
         title: 'WEBSITE ACCESSIBILITY',
         content: `
             <p>
-            Even though we invested time and money into designing and testing our computer systems, errors, lags, and crashes will still happen. Additionally, to do routine maintenance, we may need to restrict access to a particular section(s) of the website. However, you will be informed ahead of time. We'll make an effort to plan MyStockplug maintenance for late at night.You acknowledge that we cannot promise that you will always be able to access MyStockplug, even though our goal is to make MyStockplug accessible seven days a week, save for when maintenance is planned (often on the weekends).We cannot promise MyStockplug will always be available to you. Your computer may malfunction. The connection between your computer and your Internet service provider may need to be fixed. Your Internet service provider may go down, or our computers and the computers we link to may become unavailable due to unanticipated system outages. Computer issues can occur on your end, our end, or anywhere.
+            Even though we invested time and money into designing and testing our computer systems, errors, lags, and crashes will still happen. Additionally, to do routine maintenance, we may need to restrict access to a particular section(s) of the website. However, you will be informed ahead of time. We'll make an effort to plan YieldVest maintenance for late at night.You acknowledge that we cannot promise that you will always be able to access YieldVest, even though our goal is to make YieldVest accessible seven days a week, save for when maintenance is planned (often on the weekends).We cannot promise YieldVest will always be available to you. Your computer may malfunction. The connection between your computer and your Internet service provider may need to be fixed. Your Internet service provider may go down, or our computers and the computers we link to may become unavailable due to unanticipated system outages. Computer issues can occur on your end, our end, or anywhere.
             </p>
         `
     },
@@ -224,7 +224,7 @@ export const termsData = [
         title: 'SITE STABILITY AND SAFETY',
         content: `
             <p>
-            You understand that unauthorized or unanticipated third parties may access communications sent over the Internet and that the Internet is not a secure network. Notifications provided by MyStockplug via email won't include any private or sensitive information. You shouldn't send sensitive information, like account numbers or passwords, via unencrypted email due to security hazards. Emails need to be sent correctly. You consent to visit the MyStockplug website to ensure you get all time-sensitive information, regardless of whether you receive an email notification. You also consent to downloading, saving, or printing the electronic messages you receive for your records.
+            You understand that unauthorized or unanticipated third parties may access communications sent over the Internet and that the Internet is not a secure network. Notifications provided by YieldVest via email won't include any private or sensitive information. You shouldn't send sensitive information, like account numbers or passwords, via unencrypted email due to security hazards. Emails need to be sent correctly. You consent to visit the YieldVest website to ensure you get all time-sensitive information, regardless of whether you receive an email notification. You also consent to downloading, saving, or printing the electronic messages you receive for your records.
             </p>
         `
     },
@@ -233,10 +233,10 @@ export const termsData = [
         title: 'ACCEPTS DISTRIBUTION VIA ELECTRONIC MEANS',
         content: `
             <p>
-            By creating an account with MyStockplug, you consent to us using your email address to send you promotional materials, service-related notices, important information messages, special offers, etc. You can stop receiving this information by clicking on the email link.
+            By creating an account with YieldVest, you consent to us using your email address to send you promotional materials, service-related notices, important information messages, special offers, etc. You can stop receiving this information by clicking on the email link.
             </p>
             <p>
-            Your approval will take effect right now and endure until either MyStockplug, or you rescind it. You are aware that it could take up to three days for an electronic communication's consent to be revoked and that you might get electronic alerts during that time.
+            Your approval will take effect right now and endure until either YieldVest, or you rescind it. You are aware that it could take up to three days for an electronic communication's consent to be revoked and that you might get electronic alerts during that time.
             </p>
         `
     },
@@ -245,7 +245,7 @@ export const termsData = [
         title: 'CONTENTS’ TIMELINESS',
         content: `
             <p>
-            Every content on the MyStockplug platform is only provided as of the date it was published or otherwise noted. It could be changed due to later market developments or other factors. Additionally, you adjust your browser's cache settings to guarantee you get the most recent information.
+            Every content on the YieldVest platform is only provided as of the date it was published or otherwise noted. It could be changed due to later market developments or other factors. Additionally, you adjust your browser's cache settings to guarantee you get the most recent information.
             </p>
         `
     },
@@ -254,7 +254,7 @@ export const termsData = [
         title: 'TERMINATION',
         content: `
             <p>
-            You consent to MyStockplug unannounced right to revoke these Terms and Conditions at any time, with or without cause, and with immediate effect. This right also extends to suspending your access to the Service or the Content. If you violate any of these Terms and Conditions, as determined by MyStockplug in its sole discretion, these Terms and Conditions will end immediately without notice from MyStockplug. Termination or suspension of Service or the Content and any claims relating to such termination or suspension shall not subject Company to any liability to you or any third party.
+            You consent to YieldVest unannounced right to revoke these Terms and Conditions at any time, with or without cause, and with immediate effect. This right also extends to suspending your access to the Service or the Content. If you violate any of these Terms and Conditions, as determined by YieldVest in its sole discretion, these Terms and Conditions will end immediately without notice from YieldVest. Termination or suspension of Service or the Content and any claims relating to such termination or suspension shall not subject Company to any liability to you or any third party.
             </p>
         `
     },
@@ -272,7 +272,7 @@ export const termsData = [
         title: 'EXTERNAL URLs',
         content: `
             <p>
-            MyStockplug or a Third Party may provide links to other websites or resources. You acknowledge and accept that neither MyStockplug nor the Third Party is responsible for providing such external sites or resources. Neither MyStockplug nor the Third Party has any control over those sites or resources. Any Content, advertising, products, or other items on or accessible through such sites or resources are not endorsed by MyStockplug or the Third Party, nor are they responsible for them. You further acknowledge and agree neither the MyStockplug nor the Third Party shall be responsible or liable, directly or indirectly, for any harm or loss caused or alleged to have been caused by or in connection with the use of or reliance on any such Content, products, or services available on or through any such site or resource.
+            YieldVest or a Third Party may provide links to other websites or resources. You acknowledge and accept that neither YieldVest nor the Third Party is responsible for providing such external sites or resources. Neither YieldVest nor the Third Party has any control over those sites or resources. Any Content, advertising, products, or other items on or accessible through such sites or resources are not endorsed by YieldVest or the Third Party, nor are they responsible for them. You further acknowledge and agree neither the YieldVest nor the Third Party shall be responsible or liable, directly or indirectly, for any harm or loss caused or alleged to have been caused by or in connection with the use of or reliance on any such Content, products, or services available on or through any such site or resource.
             </p>
         `
     },
@@ -281,7 +281,7 @@ export const termsData = [
         title: 'NO WARRANTIES ARE IMPLIED',
         content: `
             <p>
-            No implied or express warranties, such as quality, fitness for a specific purpose, or non-infringement, are made by MyStockplug regarding the platform.You are given access to the platform "as is" and "as available," MyStockplug disclaims any responsibility for errors or omissions.The platform is not guaranteed by the organization to satisfy your needs or to be timely, secure, or error-free. Additionally, the company disclaims all responsibility for the accuracy or reliability of any results obtained through the platform or for the suitability of any products, services, information, or other materials you may purchase or obtain.
+            No implied or express warranties, such as quality, fitness for a specific purpose, or non-infringement, are made by YieldVest regarding the platform.You are given access to the platform "as is" and "as available," YieldVest disclaims any responsibility for errors or omissions.The platform is not guaranteed by the organization to satisfy your needs or to be timely, secure, or error-free. Additionally, the company disclaims all responsibility for the accuracy or reliability of any results obtained through the platform or for the suitability of any products, services, information, or other materials you may purchase or obtain.
             </p>
         `
     },
@@ -299,7 +299,7 @@ export const termsData = [
         title: 'ACCEPTANCE OF THESE TERMS',
         content: `
             <p>
-            Even if the MyStockplug or any third-party provider has been informed of the possibility of such damages, neither MyStockplug nor any third party shall be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including, but not limited to, damages for loss of profits, revenue, income, goodwill, use, data or other intangible losses:
+            Even if the YieldVest or any third-party provider has been informed of the possibility of such damages, neither YieldVest nor any third party shall be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including, but not limited to, damages for loss of profits, revenue, income, goodwill, use, data or other intangible losses:
             </p>
             <ul class="pl-8">
                 <li class="list-disc pb-2">Using the content or service or having access to it.</li>
@@ -308,7 +308,7 @@ export const termsData = [
                 <li class="list-disc pb-2">Any other issue involving the service or the content.</li>
             </ul>
             <p>
-            For any indirect, incidental, special, consequential, or other damages of any kind, including but not limited to lost profits, trading losses, damages resulting from the use or loss of use of the platform and third-party content, inconvenience, or delay, MyStockplug will not be liable to you or anyone else. This holds even if the business has been aware of the potential for such losses or damages. MyStockplug will not be responsible to you or anyone else for any loss brought on by a factor over which it has no direct control, such as ACTS OF GOD OR FORCE MAJEURE . Excessive or unusual weather, such as floods or earthquakes, fire, war, assassinations, terrorist acts, riots, labor disputes, and other labor issues, accidents, emergencies, or government actions, are examples of what this includes. It includes unauthorized access, viruses, theft, operator errors, and other unanticipated events. Failure of mechanical, electronic, or communication systems, including the internet, cable, and telephone, is also included. Suppose you reside in a jurisdiction where the exclusion or limitation of liability for incidental or consequential damages is prohibited. In that case, some or all of the above-mentioned limitations and exclusions may not apply to you.
+            For any indirect, incidental, special, consequential, or other damages of any kind, including but not limited to lost profits, trading losses, damages resulting from the use or loss of use of the platform and third-party content, inconvenience, or delay, YieldVest will not be liable to you or anyone else. This holds even if the business has been aware of the potential for such losses or damages. YieldVest will not be responsible to you or anyone else for any loss brought on by a factor over which it has no direct control, such as ACTS OF GOD OR FORCE MAJEURE . Excessive or unusual weather, such as floods or earthquakes, fire, war, assassinations, terrorist acts, riots, labor disputes, and other labor issues, accidents, emergencies, or government actions, are examples of what this includes. It includes unauthorized access, viruses, theft, operator errors, and other unanticipated events. Failure of mechanical, electronic, or communication systems, including the internet, cable, and telephone, is also included. Suppose you reside in a jurisdiction where the exclusion or limitation of liability for incidental or consequential damages is prohibited. In that case, some or all of the above-mentioned limitations and exclusions may not apply to you.
             </p>
         `
     },
@@ -317,7 +317,7 @@ export const termsData = [
         title: 'REGULATING LAW',
         content: `
             <p>
-            You acknowledge that, without regard to considerations of conflicts of law, these Terms shall be governed by and construed in conformity with the laws of the federal republic of Nigeria. No other court or tribunal shall have jurisdiction over any legal action or proceeding arising under, relating to, or involving these Terms or as a result of your use of MyStockplug or the Account, and you now irrevocably consent to the personal jurisdiction and venue of the federal or state courts physically located in Nigeria.
+            You acknowledge that, without regard to considerations of conflicts of law, these Terms shall be governed by and construed in conformity with the laws of the federal republic of Nigeria. No other court or tribunal shall have jurisdiction over any legal action or proceeding arising under, relating to, or involving these Terms or as a result of your use of YieldVest or the Account, and you now irrevocably consent to the personal jurisdiction and venue of the federal or state courts physically located in Nigeria.
             </p>
         `
     },
@@ -335,7 +335,7 @@ export const termsData = [
         title: 'MISCELLANEOUS',
         content: `
             <p>
-            Any waiver, modification, or discharge of any provision of these Terms shall be effective only if in writing and signed by the Indemnitee and MyStockplug. No exemption by either party hereto of any infringement by the other party hereto or compliance with any requirement or provision of these Terms to be performed by such other party at any time shall constitute a waiver of any other requirement or provision, whether similar or dissimilar, at the same time or at any other time or in the future. There have been no agreements or representations made by any party about the subject matter of this agreement that is not expressly specified in these Terms, whether they were made orally or in writing.
+            Any waiver, modification, or discharge of any provision of these Terms shall be effective only if in writing and signed by the Indemnitee and YieldVest. No exemption by either party hereto of any infringement by the other party hereto or compliance with any requirement or provision of these Terms to be performed by such other party at any time shall constitute a waiver of any other requirement or provision, whether similar or dissimilar, at the same time or at any other time or in the future. There have been no agreements or representations made by any party about the subject matter of this agreement that is not expressly specified in these Terms, whether they were made orally or in writing.
             </p>
         `
     },
@@ -344,7 +344,7 @@ export const termsData = [
         title: 'FEEDBACK',
         content: `
             <p>
-            By sending MyStockplug suggestions, information, recommendations, documents, and proposals (collectively, "Contributions") through our contact or feedback webpages, you acknowledge and agree that:
+            By sending YieldVest suggestions, information, recommendations, documents, and proposals (collectively, "Contributions") through our contact or feedback webpages, you acknowledge and agree that:
             </p>
             <p>Your Contributions do not contain confidential or proprietary information.</p>
             <p>We are not subject to any express or implied obligation of confidentiality concerning the Contributions.</p>

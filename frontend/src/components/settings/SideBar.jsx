@@ -4,8 +4,8 @@ import { React } from 'react';
 import settingsicon from '../../assets/settings/settingsicon.svg';
 import profileicon from '../../assets/settings/profileicon.svg';
 import notificationicon from '../../assets/settings/notificationicon.svg';
-import payementicon from '../../assets/settings/paymenticon.svg';
-import privacyicon from '../../assets/settings/privacyicon.svg';
+// import payementicon from '../../assets/settings/paymenticon.svg';
+// import privacyicon from '../../assets/settings/privacyicon.svg';
 import logouticon from '../../assets/settings/logouticon.svg';
 import passwordicon from '../../assets/settings/passwordicon.svg';
 import { Link } from 'react-router-dom';
@@ -21,16 +21,16 @@ const links = [
         icon: notificationicon,
         link: '/settings'
     },
-    {
-        name: 'payment',
-        icon: payementicon,
-        link: '/settings'
-    },
-    {
-        name: 'privacy',
-        icon: privacyicon,
-        link: '/settings'
-    },
+    // {
+    //     name: 'payment',
+    //     icon: payementicon,
+    //     link: '/settings'
+    // },
+    // {
+    //     name: 'privacy',
+    //     icon: privacyicon,
+    //     link: '/settings'
+    // },
     {
         name: 'password',
         icon: passwordicon,
@@ -64,7 +64,7 @@ export default function index() {
                     </div>
                     <Link
                         to="/"
-                        className="flex flex-row items-center w-full h-10 mt-10 text-base font-semibold"
+                        className="flex flex-row items-center w-full h-10 mt-16 text-base font-semibold"
                     >
                         <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
                         <h1 className="hidden md:flex ml-4 text-[#E84E4E]">Logout</h1>

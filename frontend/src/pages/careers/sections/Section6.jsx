@@ -76,7 +76,7 @@ export default function Section6() {
                     </p>
                     <p className="text-primaryGray text-sm font-normal leading-6 tracking-widest">
                         We want everyone to belong and be valued, irrespective of your geographic
-                        locations, race or gender. Empathy is our major currency at mystockplug.
+                        locations, race or gender. Empathy is our major currency at YieldVest.
                     </p>
                 </div>
                 <div>
