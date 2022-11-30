@@ -14,9 +14,12 @@ from api.models.models import User, CreateUserModel
 
 load_dotenv()
 
+from google.oauth2 import id_token
+from google.auth.transport import requests
+
 router = APIRouter()
 
-
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
 API_URL = os.getenv('API_URL')
 JWT_SECRET = os.getenv('JWT_SECRET')
@@ -27,6 +30,38 @@ JWTPayloadMapping = MutableMapping[
 
 # creates OAuth2PasswordBearer instance with token url as parameter as json
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
+
+#google auth endpoint
+@router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
+def authentication(token: str):
+    try:
+        # verify the jwt signature
+        user = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
+        name = user['name']
+        email = user['email']
+
+        db: Session = next(get_db())
+        current_user: User = db.query(models.User).filter(models.User.id == id).first()
+
+        def generate_token(user_id: str):
+            return {
+                "access_token": create_access_token(sub=user_id),
+                "token_type": "Bearer",
+            }
+
+        # check whether the user already exist
+        if current_user:
+            return generate_token(current_user.id)
+
+        # add new user to database
+        db_user: User = models.User(email=email, name=name)
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return generate_token(db_user.id)
+
+    except ValueError:
+        return HTTPException(status_code=401, detail='Invalid token')
 
 # login route returns access token and token type
 @router.post("/login", tags=['Auth'])
