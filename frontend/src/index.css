@@ -60,3 +60,12 @@ body {
 .policy_card_text {
     @apply text-left p-3 mb-6 pr-20 max-md:text-center max-md:p-5 self-center;
 }
+
+
+.how-bg {
+    background: url('../../frontend/src/assets/how-it-works/bg-mobile.png');
+    color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 50%;
+}
