@@ -74,6 +74,7 @@ class Sector(Base):
     __tablename__ = "sectors"
 
     sector_id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    sector = Column(String(100))
     industry = Column(String(64))
 
     sect = relationship("Company", back_populates="sect_value")

@@ -53,7 +53,7 @@ async def create_company(company: dict, db: Session):
     # get or insert sector
     sector = db.query(Sector).filter(Sector.industry == company_profile['sector']).first()
     if not sector:
-        sector = Sector(sector_id=sector_id, industry=company_profile['sector'])
+        sector = Sector(sector_id=sector_id, industry=company_profile['industry'], sector=company_profile['sector'])
         db.add(sector)
 
     # determine the category for the company

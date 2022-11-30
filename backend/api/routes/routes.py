@@ -69,6 +69,94 @@ def get_list_of_ranked_companies():
 
     return response
 
+# get list of ranked companies based on sector
+@router.get('/company/ranking/{param}', tags=["Company"], )
+def get_list_of_ranked_companies(param: str):
+    db: Session = next(get_db())
+
+    # get all sectors from the database and filter based parameter sent
+    sectors = db.query(models.Sector).filter(models.Sector.sector == param).all()
+    industries = db.query(models.Sector).filter(models.Sector.industry == param).all()
+    companies = db.query(models.Company).all()
+
+    # get the sector id for the sector passed as the parameter
+    sector_id_list = []
+    industry_id_list = []
+    if sectors:
+        for sector in sectors:
+            sector_id = sector.sector_id
+            sector_id_list.append(sector_id)
+    elif industries:
+        for industry in industries:
+            industry_id = industry.sector_id
+            industry_id_list.append(industry_id)
+    else:
+        return {"message": "not found"}
+
+    # get all companies having the same sector id as the ids in the list
+    company_list = []
+    for company in companies:
+        if sector_id_list:
+            for id in sector_id_list:
+                if company.sector == id:
+                    company_list.append(company)
+        elif industry_id_list:
+            for id in industry_id_list:
+                if company.sector == id:
+                    company_list.append(company)
+    # return company_list
+
+    # get latest rankings
+    rankings: list = []
+    for company in company_list:
+        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+        if rank:
+            rankings.append(rank)
+
+    # sort rankings by score (descending)
+    def get_ranking_sort_key(inner_rank: Ranking):
+        return inner_rank.score
+
+    rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+    # create the response list
+    response = []
+    top_rankings = []
+    for ranking in rankings:
+        if len(top_rankings) == 12:
+            break
+
+        top_rankings.append(ranking)
+
+    for ranking in top_rankings:
+        comp: models.Company = ranking.comp_ranks
+        sector: models.Sector = comp.sect_value
+        category: models.Category = comp.cat_value
+        stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
+            models.StockPrice.date.desc()).first()
+        data = {
+            'company_id': comp.company_id,
+            'name': comp.name,
+            'market_cap': comp.market_cap,
+            'stock_price': stock_price.stock_price,
+            'dividend_yield': stock_price.dividend_yield,
+            'profile_image': comp.profile_image,
+            'sector': sector.industry,
+            'category': category.name,
+            'ticker_symbol': comp.ticker_value.symbol,
+            'exchange_platform': comp.ticker_value.exchange_name,
+            'current_ranking': {
+                'score': ranking.score,
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at, 
+            }
+        }
+        response.append(data)
+
+    return response
+
+
 
 @router.get('/company/ranks/{category}', tags=["Company"], )
 async def get_company_category(category: str):
