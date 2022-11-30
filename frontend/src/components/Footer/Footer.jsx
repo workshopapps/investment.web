@@ -21,7 +21,8 @@ const Footer = () => {
             name: 'Support',
             navLinks: [
                 { link: 'Help', to: '/help' },
-                { link: 'Contact Us', to: '/contact' }
+                { link: 'Contact Us', to: '/contact' },
+                { link: 'How it works', to: '/howitworks' }
 
                 // { link: 'FAQ', to: '#' },
                 // { link: 'News', to: 'news' },
