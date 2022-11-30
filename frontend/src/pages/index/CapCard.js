@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CapCard = ({ logo, abbr, name, marketCap, stockPrice, PERatio }) => {
+const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank }) => {
     return (
         <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full">
             <div>
@@ -19,13 +19,15 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, PERatio }) => {
                         <p className="">Stock Price </p>
                         <p className="">${stockPrice}</p>
                     </div>
-                    <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base">
-                        <p className="">Market Cap </p>
-                        <p className="">${marketCap}</p>
+                    <div className="flex justify-between text-center font-semibold text-[#66717E] text-xs lg:text-base">
+                        <p className="flex items-center">Rank</p>
+                        <p className="bg-[#139757] text-white w-fit px-2 py-1 rounded">
+                            {rank.split(' ')[0]}
+                        </p>
                     </div>
                     <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base">
-                        <p className="">Dividend Yield </p>
-                        <p className="text-[#139757]">{PERatio}</p>
+                        <p className="">Market Cap</p>
+                        <p className="text-[#139757]">${marketCap / 1000000000}Bn</p>
                     </div>
                 </div>
             </div>
@@ -39,7 +41,8 @@ CapCard.propTypes = {
     name: PropTypes.string,
     marketCap: PropTypes.number,
     stockPrice: PropTypes.number,
-    PERatio: PropTypes.number
+    PERatio: PropTypes.number,
+    rank: PropTypes.string
 };
 
 export default CapCard;
