@@ -19,7 +19,7 @@ def rank_companies():
 
     # get companies from database
     companies = db.query(models.Company).all()
-    
+
     # loop through each company and update the appropriate tables in the database
     for company in companies:
         stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id).order_by(
@@ -72,11 +72,9 @@ def rank_companies():
                                             score=ranking_score, methodology="Fundamental Analysis")
         db.add(latest_ranking)
     db.commit()
-    
 
 
 async def send_ranking_update_notification():
-    print('sending....')
     db: Session = next(get_db())
 
     # get company list
@@ -114,11 +112,13 @@ async def send_ranking_update_notification():
         }
         comapny_ranks.append(data)
 
-
     await email_sending.send_user_email(comapny_ranks)
-    print('done')
+
 
 async def run_process_scripts():
-    # await data_gathering.pick_four_random_companies()
-    rank_companies()
-    await send_ranking_update_notification()
+    try:
+        await data_gathering.pick_random_companies()
+        rank_companies()
+        await send_ranking_update_notification()
+    except Exception as e:
+        print(e)
