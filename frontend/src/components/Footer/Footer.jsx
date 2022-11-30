@@ -21,6 +21,7 @@ const Footer = () => {
             name: 'Support',
             navLinks: [
                 { link: 'Help', to: '/help' },
+                { link: 'FAQ', to: '/faq' },
                 { link: 'Contact Us', to: '/contact' }
 
                 // { link: 'FAQ', to: '#' },

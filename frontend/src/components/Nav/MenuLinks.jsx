@@ -13,15 +13,16 @@ const MenuLinks = () => {
             url: '/about'
         },
         {
-            link: 'Help',
-            url: '/help'
+            link: `Help `,
+            url: '/help',
+            icon: true
         }
     ];
     return (
-        <ul className="w-full flex justify-between items center">
+        <ul className="w-full hidden md:flex gap-[5px] max-w-[328px] justify-between items center">
             {navLinks.map((item, index) => {
-                const { link, url } = item;
-                return <MenuLink link={link} url={url} key={index} />;
+                const { link, url, icon } = item;
+                return <MenuLink link={link} url={url} key={index} icon={icon} />;
             })}
         </ul>
     );
