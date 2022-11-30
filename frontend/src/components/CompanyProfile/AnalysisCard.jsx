@@ -1,11 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import DownIcon from '../../assets/landingPage/icons/down.svg';
-=======
-
 // import DownIcon from '../../assets/landingPage/icons/down.svg';
-// import UpIcon from '../../assets/landingPage/icons/up.svg';
->>>>>>> f170f0b (Update the User Interface of 5 different pages)
 import shareIcon from '../../assets/company-profile/share.svg';
 // import greenArrow from '../../assets/company-profile/green-arrow.svg';
 // import redArrow from '../../assets/company-profile/red-arrow.svg';
