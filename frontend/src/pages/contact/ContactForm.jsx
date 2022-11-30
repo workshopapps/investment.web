@@ -12,7 +12,7 @@ const ContactForm = () => {
     };
     return (
         <div>
-            <form action="" style={FormStyle} className="rounded-lg">
+            <form action="" style={FormStyle} className="rounded-lg md:my-0 my-6">
                 <h2 className="text-left text-white">Send us a message</h2>
                 <input
                     type="text"
@@ -33,7 +33,7 @@ const ContactForm = () => {
                     rows="10"
                     placeholder="Message"
                     className="w-[100%] m-3 p-1 rounded-md outline-none bg-transparent border-[1px] "></textarea>
-                <button className="w-[100%] m-3 p-1 rounded-md outline-none bg-[green] text-white">
+                <button className="w-[100%] m-3 p-1 rounded-md outline-none bg-[#1bd47b] text-white">
                     send message
                 </button>
             </form>
