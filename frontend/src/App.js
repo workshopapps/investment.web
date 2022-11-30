@@ -48,6 +48,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
+import Watchlist from './pages/watchlist/Watchlist.jsx';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -233,6 +234,11 @@ const router = createBrowserRouter([
     {
         path: '/cancel',
         element: <Cancel />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: 'watchlist',
+        element: <Watchlist />,
         errorElement: <ErrorPage />
     }
 ]);
