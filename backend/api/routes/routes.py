@@ -12,6 +12,33 @@ load_dotenv()
 router = APIRouter()
 
 
+@router.get('/company/sectors', tags=["Company"], )
+def get_sectors():
+    db: Session = next(get_db())
+    sectors = db.query(models.Sector).all()
+
+    response = []
+    for sector in sectors:
+        industries = db.query(models.Industry)\
+            .filter(models.Industry.sector == sector.sector_id).all()
+
+        industry_list = []
+        for industry in industries:
+            industry_list.append({
+                'industry_id': industry.industry_id,
+                'industry': industry.industry
+            })
+
+        data = {
+            'sector_id': sector.sector_id,
+            'sector': sector.sector,
+            'industries': industry_list
+        }
+        response.append(data)
+
+    return response
+
+
 @router.get('/company/ranking', tags=["Company"], )
 def get_list_of_ranked_companies():
     db: Session = next(get_db())
@@ -45,6 +72,7 @@ def get_list_of_ranked_companies():
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
+        industry: models.Industry = comp.industry_value
         category: models.Category = comp.cat_value
         stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
             models.StockPrice.date.desc()).first()
@@ -55,19 +83,21 @@ def get_list_of_ranked_companies():
             'stock_price': stock_price.stock_price,
             'dividend_yield': stock_price.dividend_yield,
             'profile_image': comp.profile_image,
-            'sector': sector.industry,
+            'sector': sector.sector,
+            'industry': industry.industry,
             'category': category.name,
             'ticker_symbol': comp.ticker_value.symbol,
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
                 'created_at': ranking.created_at,
-                'updated_at': ranking.updated_at, 
+                'updated_at': ranking.updated_at,
             }
         }
         response.append(data)
 
     return response
+
 
 # get list of ranked companies based on sector
 @router.get('/company/ranking/{param}', tags=["Company"], )
@@ -149,13 +179,12 @@ def get_list_of_ranked_companies(param: str):
             'current_ranking': {
                 'score': ranking.score,
                 'created_at': ranking.created_at,
-                'updated_at': ranking.updated_at, 
+                'updated_at': ranking.updated_at,
             }
         }
         response.append(data)
 
     return response
-
 
 
 @router.get('/company/ranks/{category}', tags=["Company"], )
