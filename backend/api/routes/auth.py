@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
 from api.models.models import User, CreateUserModel
+from uuid import uuid4
 
 load_dotenv()
 
@@ -89,7 +90,7 @@ def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(email=user.email, name=user.email, password=hash_password(user.password))
+        db_user = User(id=str(uuid4()), email=user.email, name=user.email, password=hash_password(user.password))
         db.add(db_user)
         db.commit()
 
