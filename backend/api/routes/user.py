@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from api.crud.base import get_db
 from api.models import models
 from api.routes.auth import get_current_user
-from api.models.models import User
+from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings
 
 load_dotenv()
 
