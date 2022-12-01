@@ -88,7 +88,7 @@ const Signup = () => {
             });
             toast.success('Login successful');
             setInterval(() => {
-                navigate('/');
+                toast.warn('Input here...');
             }, 1500);
         }
     }, [formErrors]);
