@@ -243,6 +243,11 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
 
+    if company.category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
+
     rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).all()
 

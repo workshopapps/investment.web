@@ -292,9 +292,8 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
-    if company.category == low_cap_category_id and not is_user_subscribed:
-        raise HTTPException(status_code=401,
-                            detail="You must be subscribed to view low market cap stocks")
+   
+   
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
@@ -318,3 +317,4 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
         'stock_price': stock_price,
     }
     return response
+
