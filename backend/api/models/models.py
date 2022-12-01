@@ -1,4 +1,5 @@
 from uuid import uuid4
+from pydantic import BaseModel
 
 from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
@@ -19,10 +20,12 @@ class Company(Base):
     profile_image = Column(String(200), nullable=True)
     market_cap = Column(Float, nullable=True)
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
+    industry = Column(String(64), ForeignKey("industries.industry_id"))
     category = Column(String(64), ForeignKey("categories.category_id"))
     ticker = Column(String(64), ForeignKey("tickers.ticker_id"))
 
     sect_value = relationship("Sector", back_populates="sect")
+    industry_value = relationship("Industry", back_populates="industry_value")
     cat_value = relationship("Category", back_populates="cat")
     ticker_value = relationship("Ticker", back_populates="tick")
     stock_price_value = relationship("StockPrice", back_populates="company_value")
@@ -58,6 +61,34 @@ class StockPrice(Base):
     company_value = relationship("Company", back_populates="stock_price_value")
 
 
+class Financial(Base):
+    __tablename__ = "financials"
+
+    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company = Column(String(64), ForeignKey("company.company_id"))
+    date = Column(Date())
+    equity = Column(Float, nullable=True)
+    dividend_per_stock = Column(Float, nullable=True)
+    earnings_per_share = Column(Float, nullable=True)
+    growth_rate = Column(Float, nullable=True)
+    total_revenue = Column(Float, nullable=True)
+    ttm = Column(Float, nullable=True)
+    operating_cost = Column(Float, nullable=True)
+    income_statement = Column(Float, nullable=True)
+    income_statement_type = Column(String(30))
+    gross_profit = Column(Float, nullable=True)
+    operating_expenses = Column(Float, nullable=True)
+    ebitda = Column(Float, nullable=True)
+    net_income = Column(Float, nullable=True)
+    revenue_growth = Column(Float, nullable=True)
+    operating_expenses_growth = Column(Float, nullable=True)
+    gross_profit_growth = Column(Float, nullable=True)
+    net_income_growth = Column(Float, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    finance = relationship("Company", back_populates="financial_value")
+
+
 class Ranking(Base):
     __tablename__ = 'rankings'
 
@@ -75,9 +106,19 @@ class Sector(Base):
     __tablename__ = "sectors"
 
     sector_id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
-    industry = Column(String(64))
+    sector = Column(String(100))
 
     sect = relationship("Company", back_populates="sect_value")
+
+
+class Industry(Base):
+    __tablename__ = "industries"
+
+    industry_id = Column("industry_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    sector = Column(String(64), ForeignKey("sectors.sector_id"))
+    industry = Column(String(100))
+
+    industry_value = relationship("Company", back_populates="industry_value")
 
 
 class Ticker(Base):
@@ -91,26 +132,6 @@ class Ticker(Base):
     isin = Column(String(30), nullable=True)
 
     tick = relationship("Company", back_populates="ticker_value")
-
-
-class Financial(Base):
-    __tablename__ = "financials"
-
-    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
-    company = Column(String(64), ForeignKey("company.company_id"))
-    date = Column(Date())
-    equity = Column(Float, nullable=True)
-    dividend_per_stock = Column(Float, nullable=True)
-    earnings_per_share = Column(Float, nullable=True)
-    growth_rate = Column(Float, nullable=True)
-    total_revenue = Column(Float, nullable=True)
-    ttm = Column(Float, nullable=True)
-    operating_cost = Column(Float, nullable=True)
-    income_statement = Column(Float, nullable=True)
-    income_statement_type = Column(String(30))
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    finance = relationship("Company", back_populates="financial_value")
 
 
 class Category(Base):
@@ -131,13 +152,8 @@ class User(Base):
     name = Column(String(30))
     password = Column(String(100))
 
-
-# class SubscribedUsers(Base):
-#     __tablename__ = "subscribers"
-
-#     name = Column(String(30))
-#     email = Column(String(30))
-#     created_date = Column(DateTime(timezone=True), server_default=func.now())
+    customer = relationship("Customer", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
 
 
 class Customer(Base):
@@ -174,3 +190,5 @@ class CreateUserModel(BaseModel):
     email: str
     password: str
 
+    user_sub = relationship("User", back_populates="subscription_value")
+    
