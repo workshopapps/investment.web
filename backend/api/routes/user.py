@@ -1,3 +1,4 @@
+import os
 from uuid import uuid4
 
 from dotenv import load_dotenv
@@ -7,7 +8,7 @@ from sqlalchemy.orm import Session
 from api.crud.base import get_db
 from api.models import models
 from api.routes.auth import get_current_user
-from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings
+from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking
 
 load_dotenv()
 
@@ -145,3 +146,86 @@ def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user
         "code": "success",
         "message": "Company removed from watchlist"
     }
+
+
+@router.get('/company/ranking', tags=["User"])
+def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None,
+                                 user: User = Depends(get_current_user)):
+    db: Session = next(get_db())
+
+    # TODO: Validate and ensure the user has active subscription for a low cap company
+    is_user_subscribed = False
+
+    # get companies
+    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+
+    filters = []
+
+    if category:
+        if category == low_cap_category_id and not is_user_subscribed:
+            raise HTTPException(status_code=401,
+                                detail='You must be subscribed to view low market cap stocks')
+        else:
+            filters.append(models.Company.category == category)
+    else:
+        filters.append(models.Company.category != low_cap_category_id)
+
+    if sector:
+        filters.append(models.Company.sector == sector)
+
+    if industry:
+        filters.append(models.Company.industry == industry)
+
+    companies: list = db.query(models.Company).filter(*filters).all()
+
+    # get latest rankings
+    rankings: list = []
+    for company in companies:
+        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+        if rank:
+            rankings.append(rank)
+
+    # sort rankings by score (descending)
+    def get_ranking_sort_key(inner_rank: Ranking):
+        return inner_rank.score
+
+    rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+    # create the response list
+    response = []
+    top_rankings = []
+    for ranking in rankings:
+        if len(top_rankings) == 12:
+            break
+
+        top_rankings.append(ranking)
+
+    for ranking in top_rankings:
+        comp: models.Company = ranking.comp_ranks
+        sector: models.Sector = comp.sect_value
+        industry: models.Industry = comp.industry_value
+        category: models.Category = comp.cat_value
+        stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
+            models.StockPrice.date.desc()).first()
+        data = {
+            'company_id': comp.company_id,
+            'name': comp.name,
+            'market_cap': comp.market_cap,
+            'stock_price': stock_price.stock_price,
+            'dividend_yield': stock_price.dividend_yield,
+            'profile_image': comp.profile_image,
+            'sector': sector.sector,
+            'industry': industry.industry,
+            'category': category.name,
+            'ticker_symbol': comp.ticker_value.symbol,
+            'exchange_platform': comp.ticker_value.exchange_name,
+            'current_ranking': {
+                'score': ranking.score,
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at,
+            }
+        }
+        response.append(data)
+
+    return response
