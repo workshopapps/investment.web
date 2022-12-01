@@ -40,6 +40,7 @@ app.include_router(user.router, prefix='/user')
 app.include_router(company.router)
 app.include_router(server.router)
 
+
 async def update_script_task():
     print('Running update script...')
     await run_process_scripts()
@@ -59,4 +60,4 @@ async def get_root():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, reload=True)
+    uvicorn.run("main:app", port=9666, reload=True)
