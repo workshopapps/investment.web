@@ -6,11 +6,17 @@ import PageLayout from '../layout';
 import { companyData } from '../../store/companyData/backend';
 
 const IndexPage = () => {
+    const baseUrl = 'https://api.yieldvest.hng.tech';
+
     const data = companyData;
     // const [data, setData] = useState([]);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
-    let filteredCap = data.filter((item)=>{
+    const [industry, setIndustry] = useState('all');
+    const [sectors, setSectors] = useState([]);
+    const [industries, setIndustries] = useState([]);
+
+    let filteredCap = data.filter((item) => {
         if (marketCap === 'large') {
             return item.category == `High Market Cap`;
         } else if (marketCap === 'mid') {
@@ -36,18 +42,41 @@ const IndexPage = () => {
         } else {
             return item;
         }
-    }) 
+    });
 
     const handleMarketCap = (e) => {
         e.preventDefault();
-        setSector(`all`)
-        setMarketCap(e.target.value)
-    }
+        setMarketCap(e.target.value);
+    };
+
     const handleSector = (e) => {
         e.preventDefault();
-        setMarketCap(`all`)
-        setSector(e.target.value)
-    }
+        setSector(e.target.value);
+    };
+
+    const handleIndustry = (e) => {
+        e.preventDefault();
+        setIndustry(e.target.value);
+    };
+
+    useEffect(() => {
+        axios
+            .get(`${baseUrl}/company/sectors`)
+            .then((res) => {
+                setSectors(res.data);
+                loadAllIndustries();
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    useEffect(() => {
+        loadAllIndustries();
+    }, [sectors]);
+
+    useEffect(() => {
+        reloadIndustriesForSector(sector);
+    }, [sector]);
+
     useEffect(() => {
         const url = `https://api.aybims.tech/company/ranking`;
         axios
@@ -55,6 +84,36 @@ const IndexPage = () => {
             .then((res) => setData(res.data))
             .catch((err) => console.log(`Error: ${err}`));
     }, [data]);
+
+    const loadAllIndustries = () => {
+        const industryList = [];
+        sectors.forEach((sector) => {
+            sector.industries.forEach((industry) => {
+                industryList.push(industry);
+            });
+        });
+
+        setIndustries([...industryList]);
+    };
+
+    const reloadIndustriesForSector = (sectorId) => {
+        if (sectorId === 'all') {
+            loadAllIndustries();
+        } else {
+            for (let i = 0; i < sectors.length; i++) {
+                if (sectors[i].sector_id === sectorId) {
+                    const industryList = [];
+                    sectors[i].industries.forEach((industry) => {
+                        industryList.push(industry);
+                    });
+
+                    setIndustries([...industryList]);
+                    break;
+                }
+            }
+        }
+    };
+
     return (
         <PageLayout>
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
@@ -84,45 +143,57 @@ const IndexPage = () => {
                                 </h3>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 filter-category">
-                                <select name="marketCap" onChange={handleMarketCap} className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                <select
+                                    name="marketCap"
+                                    onChange={handleMarketCap}
+                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
                                     <option value="all">All Cap</option>
-                                    <option value="large">Large Cap </option>
-                                    <option value="mid">Mid Cap </option>
-                                    <option value="small">Small Cap </option>
+                                    <option value="high_market_cap_category">Large Cap </option>
+                                    <option value="mid_market_cap_category">Mid Cap </option>
+                                    <option value="low_market_cap_category">Small Cap </option>
                                 </select>
-                                <select name="sector" onChange={handleSector} className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+
+                                <select
+                                    name="sector"
+                                    onChange={handleSector}
+                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
                                     <option value="all">All Sectors</option>
-                                    <option value="industrials">Industrials</option>
-                                    <option value="consumer">Consumer Cyclical </option>
-                                    <option value="estate">Real Estate</option>
-                                    <option value="communication">Communication Services </option>
-                                    <option value="materials">Basic Materials </option>
-                                    <option value="energy">Energy </option>
-                                    <option value="utilities">Utilities </option>
-                                    <option value="financial">Financial Services </option>
+                                    {sectors.map((sector, index) => (
+                                        <option value={sector.sector_id} key={index}>
+                                            {sector.sector}
+                                        </option>
+                                    ))}
                                 </select>
-                                <select className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option>US Stock</option>
+
+                                <select
+                                    name="industry"
+                                    onChange={handleIndustry}
+                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                    <option value="all">All Industry</option>
+                                    {industries.map((industry, index) => (
+                                        <option value={industry.industry_id} key={index}>
+                                            {industry.industry}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
-                        
-                        <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            { filteredCap.map((item, index)=> (
-                                    <CapCard
-                                        logo={item.profile_image}
-                                        abbr={item.company_id}
-                                        name={item.name}
-                                        PERatio={item.dividend_yield}
-                                        marketCap={item.market_cap}
-                                        stockPrice={item.stock_price}
-                                        rank={item.category}
-                                        index={index}
-                                        sector={item.sector}
-                                        link={`/company/${item.company_id}`}
-                                        />
-                            )) }
 
+                        <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+                            {filteredCap.map((item, index) => (
+                                <CapCard
+                                    logo={item.profile_image}
+                                    abbr={item.company_id}
+                                    name={item.name}
+                                    PERatio={item.dividend_yield}
+                                    marketCap={item.market_cap}
+                                    stockPrice={item.stock_price}
+                                    rank={item.category}
+                                    index={index}
+                                    sector={item.sector}
+                                    link={`/company/${item.company_id}`}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
