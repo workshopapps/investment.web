@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, get_company
 from api.schemas.schemas import Company
-from api.models.models import User, Customer, Subscription
+from api.models.models import User, Customer, Subscription, Product
 from api.routes.auth import get_current_user
 
 from google.oauth2 import id_token
@@ -27,6 +27,15 @@ PRICE_ID = os.getenv("PRICE_ID")
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 
+
+# get all info for product
+@router.get('/product-info', tags=['Customer'])
+async def product_info(request: Request, user: User=Depends(get_current_user)):
+    db: Session = next(get_db())
+    product_info = db.query(Product).all()
+    return {
+        "Product": product_info
+    }
 
 # create customer profile
 @router.post('/create-customer-object/', tags=["Customer"],)
@@ -177,19 +186,17 @@ async def cancel_subscription(request: Request, subscription_id: str, user: User
 @router.post('/webhook', tags=["Customer"],)
 async def webhook(request: Request):
     event = None
-    payload = request.data
-    sig_header = request.headers['STRIPE_SIGNATURE']
+    payload = request
+    sig_header = request.headers.get('stripe-signature')
 
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, STRIPE_WEBHOOK_SECRET
         )
-    except ValueError as e:
-        # Invalid payload
-        raise e.args
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        raise e.args
+    except Exception as e:
+        return {
+            "error": e.args
+        }
 
     # Handle the event
     if event['type'] == 'account.updated':
