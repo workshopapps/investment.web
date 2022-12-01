@@ -16,6 +16,7 @@ router = APIRouter()
 
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
+
 @router.get('/notification_settings', tags=['User'])
 def get_notification_settings(user: User = Depends(get_current_user)):
     db: Session = next(get_db())
@@ -111,7 +112,7 @@ def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
         raise HTTPException(status_code=404, detail="A company with this id doesn't exist")
 
     duplicate = db.query(models.WatchlistItem).filter(models.WatchlistItem.user_id == user.id,
-                                                      models.WatchlistItem.company_id == company_id)\
+                                                      models.WatchlistItem.company_id == company_id) \
         .first()
     if duplicate:
         raise HTTPException(status_code=400, detail="This company is already in your watchlist")
@@ -150,7 +151,7 @@ def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user
         "message": "Company removed from watchlist"
     }
 
-    
+
 @router.get('/company/{company_id}/interval', tags=["User"], )
 def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: str,
                                      user: User = Depends(get_current_user)):
@@ -166,7 +167,6 @@ def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: s
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
 
-    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
     if company.category == low_cap_category_id and not is_user_subscribed:
         raise HTTPException(status_code=401,
                             detail="You must be subscribed before you can access low cap companies")
@@ -199,7 +199,6 @@ def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: s
     return response
 
 
-
 @router.get('/company/ranking', tags=["User"])
 def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None,
                                  user: User = Depends(get_current_user)):
@@ -207,9 +206,6 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 
     # TODO: Validate and ensure the user has active subscription for a low cap company
     is_user_subscribed = False
-
-    # get companies
-    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
     filters = []
 
@@ -286,7 +282,6 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 @router.get('/company/{company_id}', tags=["User"])
 async def get_company_profile(company_id: str, db: Session = Depends(get_db),
                               user: User = Depends(get_current_user)):
-    
     is_user_subscribed = False
 
     company: models.Company = get_company(db, company_id=company_id)

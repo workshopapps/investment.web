@@ -154,6 +154,7 @@ class User(Base):
 
     customer = relationship("Customer", back_populates="user_value")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
 
 
 class Customer(Base):
@@ -202,7 +203,6 @@ class WatchlistItem(Base):
     company_id = Column(String(64), ForeignKey("company.company_id"))
 
     company = relationship("Company")
-
 
 
 class UpdateNotificationSettingsModel(BaseModel):
