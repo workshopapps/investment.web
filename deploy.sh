@@ -28,5 +28,5 @@ pip install -r requirements.txt
 echo "\n\nDeploying Backend"
 ls #pm2 stop main
 pm2 restart main.py --interpreter python3 #--name main
-#sudo systemctl restart nginx
+ls #sudo systemctl restart nginx
 echo "\n\nDeployments done..."
