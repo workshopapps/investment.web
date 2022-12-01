@@ -18,14 +18,17 @@ const SubscribeCard = ({
     switch (mode) {
         case 'secondary':
             return (
-                <div className=" bg-[#1BD47B] text-[white] rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[28em] h-auto md:h-[40em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md">
-                    <p className="text-[white] text-[24px] pl-6 pt-8 ">{name}</p>
-                    <h1 className="pl-5 md:pl-6 py-2">
-                        <span className="text-white  text-3xl md:text-6xl mr-2 md:mr-[1em]">
-                            &#8358;{price}
-                        </span>
-                        <span className="text-[#0A0B0D]"></span>/{type}
-                    </h1>
+                <div className=" bg-[#1BD47B] text-[white] rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] md:w-[28em] h-auto md:h-[40em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md">
+                    <div className="flex flex-row md:flex-col justify-between">
+                        <p className="text-[white] text-[24px] pl-6 pt-8 ">{name}</p>
+                        <h1 className="px-4 md:pl-6 py-2 pt-10 md:pt-0">
+                            <span className="text-white  text-xl md:text-6xl mr-2 md:mr-[1em]">
+                                &#8358;{price}
+                            </span>
+                            <span className="text-[#0A0B0D]"></span>/{type}
+                        </h1>
+                    </div>
+
                     <p className="pt-3 pl-6 pb-3 basicTextHolder">{target}</p>
                     <div className="w-full flex justify-center mb-3">
                         <hr className="w-0 md:w-full mx-5 sm:border-[white] md:border-[white]" />
@@ -59,14 +62,16 @@ const SubscribeCard = ({
             );
         default:
             return (
-                <div className=" bg-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[28em] h-auto md:h-[40em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md">
-                    <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">{name}</p>
-                    <h1 className="pl-5 md:pl-6 py-2">
-                        <span className="text-[#1BD47B] text-3xl md:text-6xl mr-2 md:mr-[1em]">
-                            &#8358;{price}
-                        </span>
-                        <span className="text-[#0A0B0D]"></span>/{type}
-                    </h1>
+                <div className=" bg-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] md:w-[28em] h-auto md:h-[40em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md">
+                    <div className="flex flex-row md:flex-col justify-between">
+                        <p className="text-[#0A0B0D] text-[24px] pl-6 pt-8 ">{name}</p>
+                        <h1 className="px-4 md:pl-6 py-2 pt-10 md:pt-0">
+                            <span className="text-[#1BD47B] text-xl md:text-6xl mr-2 md:mr-[1em]">
+                                &#8358;{price}
+                            </span>
+                            <span className="text-[#0A0B0D]"></span>/{type}
+                        </h1>
+                    </div>
                     <p className="pt-3 pl-6 pb-3 basicTextHolder">{target}</p>
                     <div className="w-full flex justify-center mb-3">
                         <hr className="w-0 md:w-full mx-5 sm:border-[white] md:border-[white] lg:border-[#0A0B0D]" />

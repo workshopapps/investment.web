@@ -35,8 +35,8 @@ const Subscription = () => {
     return (
         <PageLayout>
             <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-HauoraBold">
-                <div className="lg:w-[55%] w-[80%] mx-0 md:mx-[20em]">
-                    <h1 className="text-xl md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
+                <div className="lg:w-[55%] w-[90%] mx-0 md:mx-[20em]">
+                    <h1 className="text-md md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
                         Get started with <span className="text-[#1BD47B] ">MyStockPlug</span> by
                         subscribing to one of our plans
                     </h1>
@@ -65,7 +65,7 @@ const Subscription = () => {
             {/* subscription content details start here */}
 
             {subType === 1 ? <div className="w-full flex justify-center font-Hauora">
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center mx-0 md:mx-[100px] p-0 md:p-[2em] w-full">
+                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center mx-10 md:mx-[100px] p-0 md:px-[2em] w-full">
 
                     <SubscribeCard
                         name="Free"
