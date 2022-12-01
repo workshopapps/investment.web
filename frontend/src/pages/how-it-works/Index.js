@@ -4,8 +4,6 @@ import signUpImg from '../../assets/how-it-works/signupimg.png';
 import setUpImg from '../../assets/how-it-works/setupimg.png';
 import getImg from '../../assets/how-it-works/getimg.png';
 import arrowRight from '../../assets/how-it-works/arrow-right.png';
-// import arrow2 from '../../assets/how-it-works/arrow2.png';
-import arrow from '../../assets/how-it-works/m-arr-1.png';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
@@ -15,15 +13,13 @@ const Index = () => {
             image: signUpImg,
             headingText: 'Sign up for your free account',
             subText: 'Open a premium account for full functionality',
-            subText2: 'Learn more',
-            arrow: arrow
+            subText2: 'Learn more'
         },
         {
             id: '2',
             image: setUpImg,
             headingText: 'Set up your account',
-            subText: 'Create your profile and answer our short quiz on your risk appetite',
-            arrow: arrow
+            subText: 'Create your profile and answer our short quiz on your risk appetite'
         },
         {
             id: '3',
