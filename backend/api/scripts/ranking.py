@@ -140,11 +140,11 @@ async def send_ranking_update_notification():
 
 async def run_process_scripts():
     try:
-        # try:
-        #     await data_gathering.pick_random_companies()
-        # except Exception:
-        #     print('Data gathering script failed. Low API credits???')
-        #     print(traceback.print_exc())
+        try:
+            await data_gathering.pick_random_companies()
+        except Exception:
+            print('Data gathering script failed. Low API credits???')
+            print(traceback.print_exc())
 
         rank_companies()
         await send_ranking_update_notification()

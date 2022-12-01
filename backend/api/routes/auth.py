@@ -12,7 +12,6 @@ from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
 from api.models.models import User, CreateUserModel
 from uuid import uuid4
-from ..scripts.email import send_reset_password_email
 
 load_dotenv()
 
@@ -81,26 +80,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
         "access_token": create_access_token(sub=user.id),
         "token_type": "Bearer",
     }
-
-
-@router.post("/reset-password", tags=['Auth'])
-async def request_password_reset(email: str):
-    db: Session = next(get_db())
-
-    # check if user email exists in database
-    user = db.query(models.User).filter(models.User.email == email).all()
-    # if it exists, get user id and generate an auth token to be sent to user email
-    if user:
-        token = uuid4()
-        reset_link = f"http://localhost:8000/docs/reset?token={token}"
-
-        data = "Hi, here's your password reset link" + ' ' + reset_link
-        await send_reset_password_email(email=email, content=data)
-
-        return "email sucessfully sent"
-    else:
-        return HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with this email does not exist")
-    # send magic link with auth token to user email
 
 
 @router.post("/signup", tags=['Auth'])
