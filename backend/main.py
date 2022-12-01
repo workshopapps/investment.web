@@ -17,7 +17,9 @@ load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 origins = [
-    "http://18.217.87.189",
+    "http://localhost:3000",
+    "https://yieldvest.hng.tech",
+    "https://mystockplug-demo.vercel.app"
 ]
 
 app = FastAPI()
