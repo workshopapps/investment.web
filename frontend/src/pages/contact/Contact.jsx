@@ -36,9 +36,9 @@ const Contact = () => {
                         <h2 className="font-bold text-xl">Follow us on all our social pages</h2>
 
                         <aside className="flex">
-                            <BsFacebook />
-                            <AiFillInstagram className="mx-4" />
-                            <BsTwitter />
+                            <BsFacebook className="text-3xl" />
+                            <AiFillInstagram className="mx-4 text-3xl" />
+                            <BsTwitter className="text-3xl" />
                         </aside>
                     </aside>
                 </div>
