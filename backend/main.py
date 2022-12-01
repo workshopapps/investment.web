@@ -22,6 +22,7 @@ origins = [
     "http://localhost:3000",
     "https://yieldvest.hng.tech",
     "https://mystockplug-demo.vercel.app"
+]
 
 app = FastAPI()
 
