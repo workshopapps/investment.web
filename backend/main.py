@@ -17,14 +17,11 @@ load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 origins = [
-<<<<<<< HEAD
+
     "http://65.108.237.42",
-=======
     "http://localhost:3000",
     "https://yieldvest.hng.tech",
     "https://mystockplug-demo.vercel.app"
->>>>>>> 393d066d9d2c8ad325084a03cff82989bc31b212
-]
 
 app = FastAPI()
 
@@ -63,8 +60,4 @@ async def get_root():
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     uvicorn.run("main:app", port=9666, reload=True)
-=======
-    uvicorn.run("main:app", port=8000, reload=True)
->>>>>>> 393d066d9d2c8ad325084a03cff82989bc31b212
