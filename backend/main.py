@@ -1,20 +1,17 @@
-import uvicorn
-from starlette.middleware.sessions import SessionMiddleware
-
-from dotenv import load_dotenv
 import os
 
+import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
+from starlette.middleware.sessions import SessionMiddleware
 
 from api.database import database
 from api.database.database import engine
-from api.routes import routes, auth
 from api.payment_gte import server
+from api.routes import routes, auth, user
 from api.scripts.ranking import run_process_scripts
-from fastapi.middleware.cors import CORSMiddleware
-
 
 load_dotenv()
 
@@ -37,9 +34,9 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 app.include_router(auth.router, prefix='/auth')
+app.include_router(user.router, prefix='/user')
 app.include_router(routes.router)
 app.include_router(server.router)
-
 
 async def update_script_task():
     print('Running update script...')
