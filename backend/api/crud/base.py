@@ -26,6 +26,5 @@ def get_ranks(db:Session, ranking_id: str):
 def hash_password(password: str) -> str:
     return PWD_CONTEXT.hash(password)
 
-
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return PWD_CONTEXT.verify(plain_password, hashed_password)
