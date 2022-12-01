@@ -188,8 +188,10 @@ class Product(Base):
 
 class CreateUserModel(BaseModel):
     email: str
+    name: str
     password: str
-    
+
+
 class NotificationSettings(Base):
     __tablename__ = "notification_settings"
 
