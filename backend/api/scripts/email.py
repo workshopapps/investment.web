@@ -45,7 +45,7 @@ async def send_reset_password_email(email: str, content: str):
     email_password = os.getenv("MAIL_PASSWORD"),
     email_reciever = email
 
-    subject = 'Yieldvest Password Reset Email'
+    subject = 'YieldVest Password Reset Email'
     body = content
 
     em = EmailMessage()
