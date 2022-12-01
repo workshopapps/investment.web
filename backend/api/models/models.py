@@ -178,3 +178,9 @@ class Subscription(Base):
 class CreateUserModel(BaseModel):
     email: str
     password: str
+
+class RequestPsswordReset(BaseModel):
+    email: str
+
+class NewPassword(BaseModel):
+    password: str

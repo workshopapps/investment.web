@@ -79,6 +79,21 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
     }
 
 
+@router.post("/reset-password", tags=['Auth'])
+async def request_password_reset(email: str):
+    db: Session = next(get_db())
+
+    # check if user email exists in database
+    user = db.query(models.User).filter(models.User.email == email).all()
+    # if it exists, get user id and generate an auth token to be sent to user email
+    if user:
+        token = create_access_token(sub=user)
+        return token
+    else:
+        return "user does not exist"
+    # send magic link with auth token to user email
+
+
 @router.post("/signup", tags=['Auth'])
 def signup(user: CreateUserModel):
     db: Session = next(get_db())

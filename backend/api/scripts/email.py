@@ -35,3 +35,7 @@ async def send_email(subject: str, email_to:List[str], body):
     fast_mail = FastMail(conf)
     await fast_mail.send_message(message)
 
+
+def password_reset_email():
+    pass
+
