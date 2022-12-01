@@ -1,8 +1,8 @@
 import React from 'react';
 import PageLayout from '../layout';
-import signUpImg from '../../assets/how-it-works/signupimg.png';
-import setUpImg from '../../assets/how-it-works/setupimg.png';
-import getImg from '../../assets/how-it-works/getimg.png';
+import signUpImg from '../../assets/how-it-works/signUpImg.png';
+import setUpImg from '../../assets/how-it-works/setUpImg.png';
+import getImg from '../../assets/how-it-works/getImg.png';
 import arrowRight from '../../assets/how-it-works/arrow-right.png';
 import { Link } from 'react-router-dom';
 
