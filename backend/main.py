@@ -10,7 +10,7 @@ from fastapi_utils.tasks import repeat_every
 
 from api.database import database
 from api.database.database import engine
-from api.routes import routes, auth
+from api.routes import company, auth, user
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 from fastapi.middleware.cors import CORSMiddleware
@@ -37,7 +37,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 app.include_router(auth.router, prefix='/auth')
-app.include_router(routes.router)
+app.include_router(user.router, prefix='/user')
+app.include_router(company.router)
 app.include_router(server.router)
 
 
