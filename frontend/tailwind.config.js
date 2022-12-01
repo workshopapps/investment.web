@@ -13,6 +13,7 @@ module.exports = {
                 'hero-mobile': "url('./assets/index/header-mobile.svg')",
                 'how-mobile': "url('./assets/how-it-works/bg-mobile.png')",
                 'how-desktop': "url('./assets/how-it-works/bg-desktop.png')",
+                'desk-signup': "url('./assets/signup/bg-signup.png')"
             },
             colors: {
                 primary101: '#0B5934',
@@ -27,7 +28,8 @@ module.exports = {
                 primary104: '#1F2226'
             },
             width : {
-                210: '300px'
+                210: '300px',
+                520: '520px'
             }
         }
     },
