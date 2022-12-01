@@ -186,8 +186,8 @@ async def cancel_subscription(request: Request, subscription_id: str, user: User
 @router.post('/webhook', tags=["Customer"],)
 async def webhook(request: Request):
     event = None
-    payload = request
-    sig_header = request.headers.get('stripe-signature')
+    payload = request.data
+    sig_header = request.headers['STRIPE_SIGNATURE']
 
     try:
         event = stripe.Webhook.construct_event(
