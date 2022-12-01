@@ -11,6 +11,7 @@ from api.models.models import Ranking
 load_dotenv()
 router = APIRouter()
 
+low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
 @router.get('/company/sectors', tags=["Company"], )
 def get_sectors():
@@ -43,7 +44,7 @@ def get_sectors():
 def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None):
     db: Session = next(get_db())
     # get companies
-    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+    
 
     filters = []
 
@@ -175,6 +176,10 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
+    if company.category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
 
     stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
                                                       models.StockPrice.date >= startDate,
@@ -203,7 +208,7 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
 
 
 @router.get('/company/{company_id}', tags=["Company"])
-async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
+async def get_company_profile(company_id: str, db: Session = Depends(get_db)):
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
@@ -222,6 +227,7 @@ async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
         'profile_image': company.profile_image,
         'description': company.description,
         'sector': company.sect_value,
+        'industry': company.industry_value,
         'category': company.cat_value,
         'ticker': company.ticker_value,
         'current_ranking': ranking,
