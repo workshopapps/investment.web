@@ -49,6 +49,7 @@ import Signup from './pages/signup/Signup';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
 import HowItWorks from './pages/how-it-works/Index';
+import DownloadPage from './pages/download/index.js';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -85,6 +86,11 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/download',
+        element: <DownloadPage />,
         errorElement: <ErrorPage />
     },
     {

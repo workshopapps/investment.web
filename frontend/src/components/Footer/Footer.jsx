@@ -22,7 +22,9 @@ const Footer = () => {
             navLinks: [
                 { link: 'Help', to: '/help' },
                 { link: 'Contact Us', to: '/contact' },
-                { link: 'How it works', to: '/howitworks' }
+                { link: 'How it works', to: '/howitworks' },
+                { link: 'FAQ', to: '/faq' },
+                { link: 'Contact Us', to: '/contact' }
 
                 // { link: 'FAQ', to: '#' },
                 // { link: 'News', to: 'news' },
