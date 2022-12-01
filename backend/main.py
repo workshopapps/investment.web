@@ -20,7 +20,7 @@ load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 origins = [
-    "http://18.217.87.189",
+    "http://65.108.237.42",
 ]
 
 app = FastAPI()
@@ -72,4 +72,4 @@ async def get_root():
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=8000, reload=True)
+    uvicorn.run("main:app", port=9666, reload=True)
