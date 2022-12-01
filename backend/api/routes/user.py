@@ -14,6 +14,7 @@ load_dotenv()
 
 router = APIRouter()
 
+low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
 @router.get('/notification_settings', tags=['User'])
 def get_notification_settings(user: User = Depends(get_current_user)):
@@ -55,6 +56,8 @@ def update_notification_settings(update_model: UpdateNotificationSettingsModel,
     db.refresh(settings)
 
     return settings
+
+
 @router.get('/watchlist', tags=["User"])
 def get_watchlist(user: User = Depends(get_current_user)):
     """
@@ -146,7 +149,7 @@ def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user
         "code": "success",
         "message": "Company removed from watchlist"
     }
-    
+
     
 @router.get('/company/{company_id}/interval', tags=["User"], )
 def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: str,
@@ -279,3 +282,39 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 
     return response
 
+
+@router.get('/company/{company_id}', tags=["User"])
+async def get_company_profile(company_id: str, db: Session = Depends(get_db),
+                              user: User = Depends(get_current_user)):
+    
+    is_user_subscribed = False
+
+    company: models.Company = get_company(db, company_id=company_id)
+    if company is None:
+        raise HTTPException(status_code=404, detail="Company info not available")
+    if company.category == low_cap_category_id and not is_user_subscribed:
+        raise HTTPException(status_code=401,
+                            detail="You must be subscribed to view low market cap stocks")
+
+    ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
+        models.Ranking.created_at.desc()).first()
+    stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == company_id).order_by(
+        models.StockPrice.date.desc()).first()
+    financials = db.query(models.Financial).filter(models.Financial.company == company_id).order_by(
+        models.Financial.date.desc()).first()
+
+    response = {
+        'company_id': company.company_id,
+        'name': company.name,
+        'market_cap': company.market_cap,
+        'profile_image': company.profile_image,
+        'description': company.description,
+        'sector': company.sect_value,
+        'industry': company.industry_value,
+        'category': company.cat_value,
+        'ticker': company.ticker_value,
+        'current_ranking': ranking,
+        'financials': financials,
+        'stock_price': stock_price,
+    }
+    return response
