@@ -121,3 +121,8 @@ class User(BaseModel):
         orm_mode = True
 
 
+class  EmitEventModel(BaseModel):
+    notification: str
+    data: Optional[str]
+    event_id: Optional[int]
+    recipient_id: str

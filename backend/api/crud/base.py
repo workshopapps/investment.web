@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from api.database import database
 from api.models import models
-from api.database import database
-from api.schemas import schemas
+
+PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -17,7 +17,8 @@ def get_db():
     finally:
         db.close()
 
-def get_company(db:Session, company_id: str):
+
+def get_company(db: Session, company_id: str):
     return db.query(models.Company).filter(models.Company.company_id == company_id).first()
 
 def get_ranks(db:Session, ranking_id: str):
