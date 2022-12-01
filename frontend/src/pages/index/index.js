@@ -3,46 +3,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
-import { companyData } from '../../store/companyData/backend';
+import dateFormat from 'dateformat';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
 
-    const data = companyData;
-    // const [data, setData] = useState([]);
+    const [stocks, setStocks] = useState([]);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
     const [industry, setIndustry] = useState('all');
     const [sectors, setSectors] = useState([]);
     const [industries, setIndustries] = useState([]);
-
-    let filteredCap = data.filter((item) => {
-        if (marketCap === 'large') {
-            return item.category == `High Market Cap`;
-        } else if (marketCap === 'mid') {
-            return item.category == `Mid Market Cap`;
-        } else if (marketCap === 'small') {
-            return item.category == `Low Market Cap`;
-        } else if (sector === 'industrials') {
-            return item.sector == `Industrials`;
-        } else if (sector === 'consumer') {
-            return item.sector == `Consumer Cyclical`;
-        } else if (sector === 'estate') {
-            return item.sector == `Real Estate`;
-        } else if (sector === 'communication') {
-            return item.sector == `Communication Services`;
-        } else if (sector === 'materials') {
-            return item.sector == `Basic Materials`;
-        } else if (sector === 'energy') {
-            return item.sector == `Energy`;
-        } else if (sector === 'utilities') {
-            return item.sector == `Utilities`;
-        } else if (sector === 'financial') {
-            return item.sector == `Financial Services`;
-        } else {
-            return item;
-        }
-    });
+    const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
 
     const handleMarketCap = (e) => {
         e.preventDefault();
@@ -52,11 +24,16 @@ const IndexPage = () => {
     const handleSector = (e) => {
         e.preventDefault();
         setSector(e.target.value);
+        setIndustry('all');
     };
 
     const handleIndustry = (e) => {
         e.preventDefault();
         setIndustry(e.target.value);
+    };
+
+    const formatLastUpdateDate = (date) => {
+        return dateFormat(date, 'mmmm dS, yyyy, h:MM:ss TT');
     };
 
     useEffect(() => {
@@ -70,7 +47,7 @@ const IndexPage = () => {
     }, []);
 
     useEffect(() => {
-        loadAllIndustries();
+        reloadIndustriesForSector(sector);
     }, [sectors]);
 
     useEffect(() => {
@@ -78,12 +55,34 @@ const IndexPage = () => {
     }, [sector]);
 
     useEffect(() => {
-        const url = `https://api.aybims.tech/company/ranking`;
+        reloadRankedCompanies();
+    }, [marketCap, sector, industry]);
+
+    const reloadRankedCompanies = () => {
+        const queries = [];
+
+        if (marketCap !== 'all') queries.push({ key: 'category', value: marketCap });
+        if (sector !== 'all') queries.push({ key: 'sector', value: sector });
+        if (industry !== 'all') queries.push({ key: 'industry', value: industry });
+
+        const params = {};
+        queries.forEach((query) => {
+            params[query['key']] = query['value'];
+        });
+
         axios
-            .get(url, { headers: { 'Access-Control-Allow-Origin': '*' } })
-            .then((res) => setData(res.data))
-            .catch((err) => console.log(`Error: ${err}`));
-    }, [data]);
+            .get(`${baseUrl}/company/ranking`, {
+                params: params
+            })
+            .then((res) => {
+                setStocks(res.data);
+
+                if (res.data) {
+                    setLastUpdateDate(formatLastUpdateDate(res.data[0].current_ranking.updated_at));
+                }
+            })
+            .catch((err) => console.log(err));
+    };
 
     const loadAllIndustries = () => {
         const industryList = [];
@@ -132,7 +131,7 @@ const IndexPage = () => {
                     <p className="text-[#5c5a5a] text-base lg:text-2xl font-bold mb-4 md:mb-14 space-y-[10px]">
                         Recommended Stocks to Invest in Today
                         <span className="text-base lg:ml-8 block lg:inline">
-                            Updated on Nov 25th 2022 11:55 AM
+                            Updated on {lastUpdateDate}
                         </span>
                     </p>
                     <div className="space-y-6 ">
@@ -169,7 +168,9 @@ const IndexPage = () => {
                                     name="industry"
                                     onChange={handleIndustry}
                                     className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option value="all">All Industry</option>
+                                    <option value="all" selected={industry === 'all'}>
+                                        All Industry
+                                    </option>
                                     {industries.map((industry, index) => (
                                         <option value={industry.industry_id} key={index}>
                                             {industry.industry}
@@ -180,8 +181,9 @@ const IndexPage = () => {
                         </div>
 
                         <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            {filteredCap.map((item, index) => (
+                            {stocks.map((item, index) => (
                                 <CapCard
+                                    key={index}
                                     logo={item.profile_image}
                                     abbr={item.company_id}
                                     name={item.name}
@@ -190,7 +192,7 @@ const IndexPage = () => {
                                     stockPrice={item.stock_price}
                                     rank={item.category}
                                     index={index}
-                                    sector={item.sector}
+                                    sector={item.industry}
                                     link={`/company/${item.company_id}`}
                                 />
                             ))}
