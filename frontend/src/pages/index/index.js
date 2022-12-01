@@ -118,6 +118,7 @@ const IndexPage = () => {
                                         stockPrice={item.stock_price}
                                         rank={item.category}
                                         index={index}
+                                        sector={item.sector}
                                         link={`/company/${item.company_id}`}
                                         />
                             )) }

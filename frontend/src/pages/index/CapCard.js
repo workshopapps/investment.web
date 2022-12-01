@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
 
-const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index }) => {
+const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, sector }) => {
     console.log(rank);
     return (
         <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
@@ -19,7 +19,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index })
                         <div className="">
                             <p className="text-[#333946] font-normal text-lg">{abbr}</p>
                             <p className="text-[#139757] font-normal text-sm">{name}</p>
-                            <p className="text-[#545964] font-semibold text-sm">{name}</p>
+                            <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
                     <div className="bg-[#96EBC2] text-[#292D32] font-normal text-2xl rounded-lg w-11 h-11 items-center flex justify-center">
@@ -68,6 +68,7 @@ CapCard.propTypes = {
     PERatio: PropTypes.number,
     rank: PropTypes.string,
     link: PropTypes.string,
+    sector: PropTypes.string,
     index: PropTypes.number
 };
 
