@@ -153,7 +153,10 @@ class User(Base):
     password = Column(String(100))
 
     customer = relationship("Customer", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
+
 
 
 class Customer(Base):
@@ -173,6 +176,15 @@ class Subscription(Base):
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
 
     user_sub = relationship("User", back_populates="subscription_value")
+
+
+class Product(Base):
+    __tablename__ = "product"
+
+    name = Column(String(64))
+    price = Column(Float)
+    price_id = Column(String(64), primary_key=True, index=True)
+    sub_type = Column(String(64))
 
 
 class CreateUserModel(BaseModel):
@@ -204,9 +216,25 @@ class WatchlistItem(Base):
     company = relationship("Company")
 
 
-
 class UpdateNotificationSettingsModel(BaseModel):
     notifications_enabled: bool = None
     receive_for_small_caps: bool = None
     receive_for_mid_caps: bool = None
     receive_for_high_caps: bool = None
+
+
+class PasswordResetRequest(Base):
+    __tablename__ = "password_reset_requests"
+
+    email = Column(String(100), primary_key=True, index=True)
+    verification_code = Column(String(64))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class InitPasswordResetModel(BaseModel):
+    email: str
+
+
+class FinalizePasswordResetModel(BaseModel):
+    new_password: str
+    code: str
