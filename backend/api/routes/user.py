@@ -1,10 +1,11 @@
+import os
 from uuid import uuid4
 
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from api.crud.base import get_db
+from api.crud.base import get_db, get_company
 from api.models import models
 from api.routes.auth import get_current_user
 from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings
@@ -54,6 +55,8 @@ def update_notification_settings(update_model: UpdateNotificationSettingsModel,
     db.refresh(settings)
 
     return settings
+
+
 @router.get('/watchlist', tags=["User"])
 def get_watchlist(user: User = Depends(get_current_user)):
     """
@@ -107,7 +110,7 @@ def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
         raise HTTPException(status_code=404, detail="A company with this id doesn't exist")
 
     duplicate = db.query(models.WatchlistItem).filter(models.WatchlistItem.user_id == user.id,
-                                                      models.WatchlistItem.company_id == company_id)\
+                                                      models.WatchlistItem.company_id == company_id) \
         .first()
     if duplicate:
         raise HTTPException(status_code=400, detail="This company is already in your watchlist")
@@ -145,3 +148,51 @@ def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user
         "code": "success",
         "message": "Company removed from watchlist"
     }
+
+
+@router.get('/company/{company_id}/interval', tags=["User"], )
+def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: str,
+                                     user: User = Depends(get_current_user)):
+    """
+    This gets the metrics of a company within a specified interval for an authenticated user
+    """
+    db: Session = next(get_db())
+
+    # TODO: Validate and ensure the user has active subscription for a low cap company
+    is_user_subscribed = False
+
+    company: models.Company = get_company(db, company_id=company_id)
+    if company is None:
+        raise HTTPException(status_code=404, detail="Company info not available")
+
+    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+    if company.category == low_cap_category_id and not is_user_subscribed:
+        raise HTTPException(status_code=401,
+                            detail="You must be subscribed before you can access low cap companies")
+
+    stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
+                                                      models.StockPrice.date >= startDate,
+                                                      models.StockPrice.date <= endDate
+                                                      ).order_by(models.StockPrice.date.desc()).all()
+    financials = db.query(models.Financial).filter(models.Financial.company == company_id,
+                                                   models.Financial.date >= startDate,
+                                                   models.Financial.date <= endDate
+                                                   ).order_by(models.Financial.date.desc()).all()
+
+    ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
+        models.Ranking.created_at.desc()).first()
+    response = {
+        'company_id': company.company_id,
+        'name': company.name,
+        'description': company.description,
+        'profile_image': company.profile_image,
+        'sector': company.sect_value,
+        'industry': company.industry_value,
+        'category': company.cat_value,
+        'ticker': company.ticker_value,
+        'current_ranking': ranking,
+        'financials': financials,
+        'stock_prices': stock_prices,
+    }
+
+    return response

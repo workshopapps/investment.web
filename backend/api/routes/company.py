@@ -168,7 +168,7 @@ async def get_company_category(category: str):
 
 @router.get('/company/{company_id}/interval', tags=["Company"], )
 async def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: str,
-                                           db: Session = Depends(get_db)):
+                                           db: Session = Depends(get_db),):
     """
     This gets the metrics of a company within a specified interval
     """
@@ -241,3 +241,4 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
         models.Ranking.created_at.desc()).all()
 
     return rankings
+
