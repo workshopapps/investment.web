@@ -199,6 +199,16 @@ class NotificationSettings(Base):
     user_value = relationship("User", back_populates="notifications_settings_value")
 
 
+class WatchlistItem(Base):
+    __tablename__ = "watchlist_items"
+
+    id = Column("watchlist_item_id", String(64), primary_key=True, index=True, default=str(uuid4))
+    user_id = Column(String(64), ForeignKey("user.user_id"))
+    company_id = Column(String(64), ForeignKey("company.company_id"))
+
+    company = relationship("Company")
+
+
 class CreateUserModel(BaseModel):
     email: str
     password: str
