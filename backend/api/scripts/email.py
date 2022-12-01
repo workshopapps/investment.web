@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 """ Config values for a connection to be made """
 conf = ConnectionConfig(
     # see env values to add yours
@@ -20,10 +19,11 @@ conf = ConnectionConfig(
     MAIL_SSL_TLS=True,
 
     # TO add a template folder
-    #TEMPLATE_FOLDER = Path(__file__).parent / 'templates',
+    # TEMPLATE_FOLDER = Path(__file__).parent / 'templates',
 )
 
-async def send_email(subject: str, email_to:List[str], body):
+
+async def send_email(subject: str, email_to: List[str], body):
     """ Sending the email to users"""
     message = MessageSchema(
         subject=subject,
@@ -34,4 +34,3 @@ async def send_email(subject: str, email_to:List[str], body):
 
     fast_mail = FastMail(conf)
     await fast_mail.send_message(message)
-
