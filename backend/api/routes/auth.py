@@ -32,7 +32,8 @@ JWTPayloadMapping = MutableMapping[
 # creates OAuth2PasswordBearer instance with token url as parameter as json
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
 
-#google auth endpoint
+
+# google auth endpoint
 @router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
 def authentication(token: str):
     try:
@@ -63,6 +64,7 @@ def authentication(token: str):
 
     except ValueError:
         return HTTPException(status_code=401, detail='Invalid token')
+
 
 # login route returns access token and token type
 @router.post("/login", tags=['Auth'])
