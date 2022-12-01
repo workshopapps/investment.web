@@ -57,7 +57,7 @@ const IndexPage = () => {
     }, [data]);
     return (
         <PageLayout>
-            <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center">
+            <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
                 <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center items-center text-center m-auto p-5 sm:px-10 xl:p-0">
                     <h1 className="max-w-[792px] text-center text-xl sm:text-3xl xl:text-[50px] xl:leading-[50px] font-bold text-white mb-5 lg:mb-11">
                         We Track, Analyse & Recommend the best stocks for you.
