@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
-                        String, Float, DateTime, Date, Text)
+                        String, Float, DateTime, Date, Text, Boolean)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -147,13 +147,12 @@ class Category(Base):
 class User(Base):
     __tablename__ = "user"
 
-    id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4))
     email = Column(String(30))
     name = Column(String(30))
     password = Column(String(100))
 
-    customer = relationship("Customer", back_populates="user_value")
-    subscription_value = relationship("Subscription", back_populates="user_sub")
+    notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
 
 
 class Customer(Base):
@@ -175,6 +174,7 @@ class Subscription(Base):
 
     customer_value = relationship("Customer", back_populates="subscription_value")
     product_value = relationship("Product", back_populates="sub_value")
+    # user_sub = relationship("User", back_populates="subscription_value")
 
 
 class Product(Base):
@@ -186,9 +186,27 @@ class Product(Base):
     sub_value = relationship("Subscription", back_populates="product_value")
 
 
+class NotificationSettings(Base):
+    __tablename__ = "notification_settings"
+
+    notification_settings_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    user_id = Column(String(64), ForeignKey("user.user_id"))
+    receive_for_small_caps = Column(Boolean, default=True)
+    receive_for_mid_caps = Column(Boolean, default=True)
+    receive_for_high_caps = Column(Boolean, default=True)
+    notifications_enabled = Column(Boolean, default=False)
+
+    user_value = relationship("User", back_populates="notifications_settings_value")
+
+
 class CreateUserModel(BaseModel):
     email: str
     password: str
 
-    user_sub = relationship("User", back_populates="subscription_value")
-    
+
+class UpdateNotificationSettingsModel(BaseModel):
+    notifications_enabled: bool = None
+    receive_for_small_caps: bool = None
+    receive_for_mid_caps: bool = None
+    receive_for_high_caps: bool = None
+
