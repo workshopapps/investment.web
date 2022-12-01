@@ -3,20 +3,23 @@ from datetime import timedelta, datetime
 from typing import Any, Optional, MutableMapping, Union, List
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from google.auth.transport import requests
+from google.oauth2 import id_token
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
 from api.models.models import User, CreateUserModel
+from api.models.models import User, CreateUserModel, InitPasswordResetModel, PasswordResetRequest, \
+    FinalizePasswordResetModel
+from api.scripts.email import send_email
 from uuid import uuid4
 
 load_dotenv()
 
-from google.oauth2 import id_token
-from google.auth.transport import requests
 
 router = APIRouter()
 
@@ -35,7 +38,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
 
 # google auth endpoint
 @router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
-def authentication(token: str):
+async def authentication(token: str):
     try:
         # verify the jwt signature
         user = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
@@ -60,6 +63,8 @@ def authentication(token: str):
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
+
+        await resolve_password_reset_request(email, db)
         return generate_token(db_user.id)
 
     except ValueError:
@@ -98,6 +103,60 @@ def signup(user: CreateUserModel):
         db.commit()
 
     return {"message": "Account created successfully"}
+
+
+@router.post("/init_password_reset", tags=['Auth'])
+async def init_password_reset(model: InitPasswordResetModel):
+    db: Session = next(get_db())
+
+    user = db.query(User).filter(User.email == model.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="This email address is not registered")
+
+    await resolve_password_reset_request(model.email, db)
+    return {"message": "Password reset initialized successfully"}
+
+
+@router.post("/finalize_password_reset/", tags=['Auth'])
+async def finalize_password_reset(model: FinalizePasswordResetModel):
+    db: Session = next(get_db())
+
+    password_reset = db.query(PasswordResetRequest)\
+        .filter(PasswordResetRequest.verification_code == model.code).first()
+    if not password_reset:
+        return HTTPException(status_code=404, detail="Invalid/expired verification code")
+
+    user = db.query(User).filter(User.email == password_reset.email).first()
+    user.password = hash_password(model.new_password)
+    db.add(user)
+    db.delete(password_reset)
+    db.commit()
+
+    return {"message": "Password reset successfully"}
+
+
+async def resolve_password_reset_request(email: str, db: Session):
+    password_reset = db.query(PasswordResetRequest).filter(PasswordResetRequest.email == email).first()
+    if not password_reset:
+        password_reset = PasswordResetRequest(email=email, verification_code=str(uuid4()))
+        db.add(password_reset)
+        db.commit()
+
+    await send_password_reset_request_email(email, password_reset.verification_code)
+
+
+async def send_password_reset_request_email(email: str, code: str):
+    app_url = os.getenv('PASSWORD_RESET_URL')
+    reset_url = f"{app_url}?code={code}"
+
+    body = "<html> <body><h4>Hello,</h4>"
+    body += "<p>A request to reset your password on YieldVest was created!</p>"
+    body += f"<p>Click <a href=\"{reset_url}\">here</a> to reset your password or copy "
+    body += f"this link to your browser to reset your password: {reset_url}</p>"
+    body += "<br/><br/><strong>If you didn't initiate this request please ignore this email.</strong><br/>"
+    body += "<strong>Please note that you're required to reset your password when you signup with Google!</strong>"
+
+    await send_email("Reset your YieldVest Password", [email], body)
 
 
 def authenticate(
