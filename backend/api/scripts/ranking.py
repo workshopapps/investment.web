@@ -113,7 +113,7 @@ async def send_ranking_update_notification():
         company_ranks.append(data)
     
 
-    await email_sending.send_user_email(comapny_ranks)
+    await email_sending.send_user_email(company_ranks)
 
 
 async def run_process_scripts():
