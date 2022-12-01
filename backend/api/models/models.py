@@ -161,7 +161,7 @@ class Customer(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    session_id = Column(String(200))
+    session_id = Column(String(64))
 
     user_value = relationship("User", back_populates="customer")
 
@@ -171,7 +171,8 @@ class Subscription(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    subscription_type = Column(String(64), nullable=True)
+
+    user_sub = relationship("User", back_populates="subscription_value")
 
 
 class CreateUserModel(BaseModel):
