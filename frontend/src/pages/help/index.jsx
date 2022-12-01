@@ -76,7 +76,7 @@ function HelpPage() {
                     </button>
                 </div>
 
-                <div className="mt-6 sm:mt-8 lg:mt-10">
+                <div className="mt-6 sm:mt-8 lg:mt-10 text-[#0A0B0D]">
                     <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0A0B0D] mb-8">
                         Frequently Asked Questions
                     </h2>
