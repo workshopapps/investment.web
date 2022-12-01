@@ -119,6 +119,10 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 @router.get('/company/ranks/{category}', tags=["Company"], )
 async def get_company_category(category: str):
     db: Session = next(get_db())
+    if category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
     # get companies
     companies: list = db.query(models.Company).filter(models.Company.category == category).all()
 
