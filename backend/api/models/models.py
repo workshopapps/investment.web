@@ -210,3 +210,20 @@ class UpdateNotificationSettingsModel(BaseModel):
     receive_for_small_caps: bool = None
     receive_for_mid_caps: bool = None
     receive_for_high_caps: bool = None
+
+
+class PasswordResetRequest(Base):
+    __tablename__ = "password_reset_requests"
+
+    email = Column(String(100), primary_key=True, index=True)
+    verification_code = Column(String(64))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class InitPasswordResetModel(BaseModel):
+    email: str
+
+
+class FinalizePasswordResetModel(BaseModel):
+    new_password: str
+    code: str

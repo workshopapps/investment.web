@@ -3,7 +3,7 @@ from datetime import timedelta, datetime
 from typing import Any, Optional, MutableMapping, Union, List
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
