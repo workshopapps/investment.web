@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
@@ -110,7 +109,6 @@ const IndexPage = () => {
                         
                         <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
                             { filteredCap.map((item, index)=> (
-                                <Link key={index} to={`/company/${item.company_id}`}>
                                     <CapCard
                                         logo={item.profile_image}
                                         abbr={item.company_id}
@@ -119,8 +117,10 @@ const IndexPage = () => {
                                         marketCap={item.market_cap}
                                         stockPrice={item.stock_price}
                                         rank={item.category}
+                                        index={index}
+                                        sector={item.sector}
+                                        link={`/company/${item.company_id}`}
                                         />
-                                </Link>
                             )) }
 
                         </div>

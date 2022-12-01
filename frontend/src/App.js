@@ -39,7 +39,7 @@ import PasswordSettingsPage from './pages/passwordsettingspage';
 import Careers from './pages/careers/Careers';
 import Plugger from './pages/careers/Plugger';
 import Position from './pages/careers/Position';
-
+import HowITWorks from './pages/HOWITWORKS/HowITWorks.jsx';
 import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
@@ -61,6 +61,11 @@ const router = createBrowserRouter([
     {
         path: '/landing',
         element: <LandingPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/howto',
+        element: <HowITWorks />,
         errorElement: <ErrorPage />
     },
     {

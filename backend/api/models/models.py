@@ -153,8 +153,10 @@ class User(Base):
     password = Column(String(100))
 
     customer = relationship("Customer", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
     subscription_value = relationship("Subscription", back_populates="user_sub")
+
 
 
 class Customer(Base):
@@ -174,6 +176,15 @@ class Subscription(Base):
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
 
     user_sub = relationship("User", back_populates="subscription_value")
+
+
+class Product(Base):
+    __tablename__ = "product"
+
+    name = Column(String(64))
+    price = Column(Float)
+    price_id = Column(String(64), primary_key=True, index=True)
+    sub_type = Column(String(64))
 
 
 class CreateUserModel(BaseModel):
