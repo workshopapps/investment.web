@@ -41,11 +41,11 @@ async def send_email(subject: str, email_to: List[str], body):
 # send password reset email
 async def send_reset_password_email(email: str, content: str):
 
-    email_sender = os.getenv("MAIL_USERNAME"),
-    email_password = os.getenv("MAIL_PASSWORD"),
+    email_sender =os.getenv("MAIL_USERNAME")
+    email_password =os.getenv("MAIL_PASSWORD")
     email_reciever = email
 
-    subject = 'YieldVest Password Reset Email'
+    subject = 'Yieldvest Password Reset Email'
     body = content
 
     em = EmailMessage()
