@@ -25,10 +25,6 @@ origins = [
 
 app = FastAPI()
 
-origins = [
-    'http://localhost:3000'
-]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -39,18 +35,10 @@ app.add_middleware(
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 app.include_router(auth.router, prefix='/auth')
 app.include_router(routes.router)
 app.include_router(server.router)
-
 
 
 async def update_script_task():
@@ -67,7 +55,7 @@ async def run_cron():
 @app.get('/')
 async def get_root():
     return {
-        "message": "My Stock Plug API",
+        "message": "YieldVest API v1",
     }
 
 

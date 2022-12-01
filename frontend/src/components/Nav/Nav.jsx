@@ -12,6 +12,7 @@ import user_image from '../../assets/images/Rectangle 4749.png';
 
 import { IoIosNotifications } from 'react-icons/io';
 import { FiSettings } from 'react-icons/fi';
+import { BiBell } from 'react-icons/bi';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
@@ -35,25 +36,24 @@ const Nav = ({ openMenu }) => {
         display: 'inline-block',
         color: `white`
     };
-    // const btns = [
-    //     { name: 'Login', background: 'transparent', url: 'login' },
-    //     { name: 'Get Started', background: '#1BD47B' }
-    // ];
 
     const navigate = useNavigate();
 
     return (
-        <nav style={navStyle} className="flex justify-center items-center h-20">
-            <div className="w-full flex items-center justify-between lg:mx-[100px] mx-[16px]">
+        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px]">
+            <div className="w-full flex items-center justify-between max-w-[1243px]">
                 <div onClick={() => navigate('/')} className="cursor-pointer flex items-center text-2xl">
                     <img src={Logo} alt="" />
                     <p className="text-[#1BD47B] font-bold ml-2">Yieldvest</p>
                 </div>
-                <div className="hidden md:block nav-items max-w-xs w-full">
-                    <MenuLinks />
-                </div>
+                <MenuLinks />
+                {/* <div className="hidden md:block nav-items w-full">
+                </div> */}
                 {!logged && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
+                        <div className='notification'>
+                            <BiBell className="text-[26px]" />
+                        </div>
                         <Link to="/login">
                             <button type="button" style={loginStyle} className="rounded">
                                 Login
@@ -66,7 +66,6 @@ const Nav = ({ openMenu }) => {
                         </Link>
                     </div>
                 )}
-
                 <div className="ham-menu block md:hidden" onClick={() => openMenu(true)}>
                     <img src={Menu} alt="" />
                     
