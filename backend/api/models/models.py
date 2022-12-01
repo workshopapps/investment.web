@@ -177,6 +177,15 @@ class Subscription(Base):
     user_sub = relationship("User", back_populates="subscription_value")
 
 
+class Product(Base):
+    __tablename__ = "product"
+
+    name = Column(String(64))
+    price = Column(Float)
+    price_id = Column(String(64), primary_key=True, index=True)
+    sub_type = Column(String(64))
+
+
 class CreateUserModel(BaseModel):
     email: str
     name: str
