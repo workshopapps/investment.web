@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
+import Modal from '../../components/Modal';
 
 const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, sector }) => {
+    const [fundamentalModal, setFundamentalModal] = useState(false);
+    const [priceModal, setPriceModal] = useState(false);
+    const handlePriceModal = () => {
+        setPriceModal(!priceModal);
+    };
+    const handleFundamentalModal = () => {
+        setFundamentalModal(!fundamentalModal);
+    };
     console.log(rank);
     return (
         <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
@@ -29,7 +38,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                 <div className="space-y-2">
                     <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base mb-6">
                         <p className="text-[#B0B2B7] font-normal pl-2">PRICE </p>
-                        <p className="cursor-pointer">
+                        <p className="cursor-pointer" onClick={handlePriceModal}>
                             <img src={Eye} alt="eye" />
                         </p>
                     </div>
@@ -40,7 +49,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <hr className="text-[#B0B2B7] mx-1" />
                     <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base pb-[34px]">
                         <p className="text-[#B0B2B7] font-normal pl-2">FUNDAMENTALS </p>
-                        <p className="cursor-pointer">
+                        <p className="cursor-pointer" onClick={handleFundamentalModal}>
                             <img src={Eye} alt="eye" />
                         </p>
                     </div>
@@ -55,6 +64,38 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     </div>
                 </Link>
             </div>
+            {priceModal && (
+                <Modal passedFunc={priceModal} setPassedFunc={setPriceModal}>
+                    <div>
+                        <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
+                            PRICE{' '}
+                        </p>
+                    </div>
+                    <div className="flex justify-between text-xs lg:text-base">
+                        <p className="text-[#66717E] font-normal">Stock Price </p>
+                        <p className="text-[#333946] text-semibold">${stockPrice}</p>
+                    </div>
+                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
+                        Sparkline Loading...
+                    </div>
+                </Modal>
+            )}
+            {fundamentalModal && (
+                <Modal passedFunc={fundamentalModal} setPassedFunc={setFundamentalModal}>
+                    <div>
+                        <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
+                            FUNDAMENTALS{' '}
+                        </p>
+                    </div>
+                    <div className="flex justify-between text-xs lg:text-base">
+                        <p className="text-[#66717E] font-normal">Market Cap </p>
+                        <p className="text-[#333946] text-semibold">${marketCap / 1000000000}B</p>
+                    </div>
+                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
+                        Chart Loading...
+                    </div>
+                </Modal>
+            )}
         </div>
     );
 };
