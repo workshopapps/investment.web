@@ -1,4 +1,5 @@
 import datetime
+import os
 
 from api.crud.base import get_db
 from api.models import models
@@ -6,6 +7,8 @@ from sqlalchemy.orm import Session
 from uuid import uuid4
 from api.scripts import data_gathering, data_calculations, email_sending
 from api.models.models import Ranking
+from sqlalchemy import or_
+import traceback
 
 """
     This is the main function that accumulates all the 
@@ -77,49 +80,73 @@ def rank_companies():
 async def send_ranking_update_notification():
     db: Session = next(get_db())
 
-    # get company list
-    companies: list = db.query(models.Company).all()
+    # get notifications
+    notification_settings = db.query(models.NotificationSettings).all()
 
-    # get latest rankings
-    rankings: list = []
-    for company in companies:
-        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
-            .order_by(Ranking.created_at.desc()).first()
-        if rank:
-            rankings.append(rank)
+    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+    mid_cap_category_id = os.getenv('MID_MARKET_CAP_CATEGORY_ID')
+    high_cap_category_id = os.getenv('HIGH_MARKET_CAP_CATEGORY_ID')
 
-    # sort rankings by score (descending)
-    def get_ranking_sort_key(inner_rank: Ranking):
-        return inner_rank.score
+    for settings in notification_settings:
+        if not settings.notifications_enabled:
+            continue
 
-    rankings.sort(key=get_ranking_sort_key, reverse=True)
+        filters = []
 
-    # create the response list
-    company_ranks = []
-    top_rankings = []
-    for ranking in rankings:
-        if len(top_rankings) == 12:
-            break
+        if settings.receive_for_small_caps:
+            filters.append(models.Company.category == low_cap_category_id)
+        if settings.receive_for_mid_caps:
+            filters.append(models.Company.category == mid_cap_category_id)
+        if settings.receive_for_high_caps:
+            filters.append(models.Company.category == high_cap_category_id)
 
-        top_rankings.append(ranking)
+        # get company list
+        companies: list = db.query(models.Company).filter(or_(*filters)).all()
 
-    for ranking in top_rankings:
-        comp: models.Company = ranking.comp_ranks
-        data = {
-            'company': comp.name,
-            'ticker_symbol': comp.ticker_value.symbol,
-            'current_ranking': ranking.score
-        }
-        company_ranks.append(data)
-    
+        # get latest rankings
+        rankings: list = []
+        for company in companies:
+            rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+                .order_by(Ranking.created_at.desc()).first()
+            if rank:
+                rankings.append(rank)
 
-    await email_sending.send_user_email(company_ranks)
+        # sort rankings by score (descending)
+        def get_ranking_sort_key(inner_rank: Ranking):
+            return inner_rank.score
+
+        rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+        # create the response list
+        company_ranks = []
+        top_rankings = []
+        for ranking in rankings:
+            if len(top_rankings) == 12:
+                break
+
+            top_rankings.append(ranking)
+
+        for ranking in top_rankings:
+            comp: models.Company = ranking.comp_ranks
+            data = {
+                'company': comp.name,
+                'ticker_symbol': comp.ticker_value.symbol,
+                'current_ranking': ranking.score
+            }
+            company_ranks.append(data)
+
+        await email_sending.send_user_email(company_ranks, settings.user_value.email)
 
 
 async def run_process_scripts():
     try:
-        await data_gathering.pick_random_companies()
+        # try:
+        #     await data_gathering.pick_random_companies()
+        # except Exception:
+        #     print('Data gathering script failed. Low API credits???')
+        #     print(traceback.print_exc())
+
         rank_companies()
         await send_ranking_update_notification()
-    except Exception as e:
-        print(e)
+    except Exception:
+        print(traceback.print_exc())

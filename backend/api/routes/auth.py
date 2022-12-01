@@ -3,7 +3,7 @@ from datetime import timedelta, datetime
 from typing import Any, Optional, MutableMapping, Union, List
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
 from sqlalchemy.orm import Session
@@ -11,6 +11,8 @@ from sqlalchemy.orm import Session
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
 from api.models.models import User, CreateUserModel
+from uuid import uuid4
+from ..scripts.email import send_reset_password_email
 
 load_dotenv()
 
@@ -31,7 +33,8 @@ JWTPayloadMapping = MutableMapping[
 # creates OAuth2PasswordBearer instance with token url as parameter as json
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
 
-#google auth endpoint
+
+# google auth endpoint
 @router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
 def authentication(token: str):
     try:
@@ -63,6 +66,7 @@ def authentication(token: str):
     except ValueError:
         return HTTPException(status_code=401, detail='Invalid token')
 
+
 # login route returns access token and token type
 @router.post("/login", tags=['Auth'])
 def login(form_data: OAuth2PasswordRequestForm = Depends()
@@ -87,10 +91,15 @@ async def request_password_reset(email: str):
     user = db.query(models.User).filter(models.User.email == email).all()
     # if it exists, get user id and generate an auth token to be sent to user email
     if user:
-        token = create_access_token(sub=user)
-        return token
+        token = uuid4()
+        reset_link = f"http://localhost:8000/docs/reset?token={token}"
+
+        data = "Hi, here's your password reset link" + ' ' + reset_link
+        await send_reset_password_email(email=email, content=data)
+
+        return "email sucessfully sent"
     else:
-        return "user does not exist"
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User with this email does not exist")
     # send magic link with auth token to user email
 
 
@@ -105,7 +114,7 @@ def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(email=user.email, name=user.email, password=hash_password(user.password))
+        db_user = User(id=str(uuid4()), email=user.name, name=user.email, password=hash_password(user.password))
         db.add(db_user)
         db.commit()
 
@@ -124,6 +133,7 @@ def authenticate(
     if not verify_password(password, user.password):
         return None
     return user
+
 
 # creates jwt token
 def create_access_token(*, sub: str) -> str:
@@ -147,6 +157,7 @@ def _create_token(
     payload["sub"] = str(sub)
 
     return jwt.encode(payload, JWT_SECRET, algorithm='HS256')
+
 
 # creates get_current_user dependency
 # get_current_user will have a dependency with oauth2_scheme
@@ -175,8 +186,3 @@ def get_current_user(token: str = Depends(oauth2_scheme)
     if user is None:
         raise credentials_exception
     return user
-
-
-@router.post("/test", tags=['Test'])
-def test(current_user: User = Depends(get_current_user)):
-    return current_user

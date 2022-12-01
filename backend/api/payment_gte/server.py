@@ -84,11 +84,10 @@ async def create_session(request: Request, user: User=Depends(get_current_user))
                 "quantity": 1
             }]
         )
-        # working to fix the bug on the commented code
-            # insert_session = Customer(session_id=check_session['id'])
-            # db.add(insert_session)
-            # db.commit()
-            # db.refresh(insert_session)
+            insert_session = Customer(session_id=check_session['id'])
+            db.add(insert_session)
+            db.commit()
+            db.refresh(insert_session)
 
             return {"SessionID": check_session["id"]}
 
@@ -154,7 +153,7 @@ async def create_subscription_object(request: Request, user: User=Depends(get_cu
 
 
 # cancel subscription
-@router.post('/cancel-subscription/{subscription_id}', tags=["Customer"],)
+@router.post('/cancel-subscription/', tags=["Customer"],)
 async def cancel_subscription(request: Request, subscription_id: str, user: User=Depends(get_current_user)):
     if request:
         # get current user
