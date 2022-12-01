@@ -153,7 +153,9 @@ class User(Base):
     password = Column(String(100))
 
     customer = relationship("Customer", back_populates="user_value")
+    subscription_value = relationship("Subscription", back_populates="user_sub")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
+
 
 
 class Customer(Base):
