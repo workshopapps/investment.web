@@ -98,7 +98,7 @@ def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(id=str(uuid4()), email=user.name, name=user.email, password=hash_password(user.password))
+        db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password))
         db.add(db_user)
         db.commit()
 
