@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import signupimg from './../../assets/signup/signup-img.png';
-import signupdesk from './../../assets/signup/signup-desk-img.png';
+// import signupimg from './../../assets/signup/signup-img.png';
+// import signupdesk from './../../assets/signup/signup-desk-img.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import PageLayout from '../layout';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -113,121 +114,121 @@ const Signup = () => {
     };
 
     return (
-        <div className="mb-12 md:h-screen md:overflow-hidden md:mb-0">
-            <ToastContainer />
-            <div className="flex flex-col justify-center items-center md:flex-row-reverse lg:items-start">
-                <div className="w-full">
-                    <img src={signupimg} className="w-full md:hidden" />
-                    <img src={signupdesk} className="hidden md:flex" />
-                </div>
-                <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-16 lg:mt-8 lg:gap-3 lg:w-full xl:px-20">
-                    <h1 className="font-HauoraBold text-xl text-center tracking-wide">
-                        Create Account
-                    </h1>
-                    <p className="text-sm text-center mb-3 sm:text-base">
-                        Welcome to MyStockPlug professional stock brokerage
-                    </p>
-                    {/* <button
-                        className="bg-green-100 flex items-center w-full py-3 gap-2 justify-center rounded-sm"
-                        onClick={handleGoogleSignIn}>
-                        <img src={googleicon} width={'20px'} />
-                        <h2 className="text-sm font-HauoraBold">Sign up with Google</h2>
-                    </button> */}
-                    <div className="flex justify-center">
-                        <GoogleLogin
-                            onSuccess={handleGoogleSignIn}
-                            onError={handleGoogleSignInError}
-                        />
-                    </div>
-
-                    <div className="flex flex-row gap-3 items-center">
-                        <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
-                        <p className="text-sm font-HauoraBold">or</p>
-                        <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
-                    </div>
-                    <form
-                        className="flex flex-col gap-3 w-full md:justify-center md:place-self-center"
-                        onSubmit={handleSubmit}>
-                        <div className="flex flex-col gap-0.5">
-                            <label className="font-HauoraBold text-sm">Name</label>
-                            <input
-                                type={'text'}
-                                placeholder={'Full Name'}
-                                className={
-                                    formErrors?.fullname
-                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
-                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
-                                }
-                                value={signupForm.fullname}
-                                name={'fullname'}
-                                onChange={handleChange}
-                            />
-                            {formErrors && (
-                                <p className="text-red-500 text-sm ">{formErrors?.fullname}</p>
-                            )}
-                        </div>
-                        <div className="flex flex-col gap-0.5">
-                            <label className="font-HauoraBold text-sm">Email</label>
-                            <input
-                                type={'email'}
-                                placeholder={'Email Address'}
-                                className={
-                                    formErrors?.email
-                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
-                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
-                                }
-                                value={signupForm.email}
-                                name={'email'}
-                                onChange={handleChange}
-                            />
-                            {formErrors && (
-                                <p className="text-red-500 text-sm ">{formErrors?.email}</p>
-                            )}
-                        </div>
-                        <div className="flex flex-col gap-0.5 relative">
-                            <label className="font-HauoraBold text-sm">Password</label>
-                            <input
-                                type={passwordType}
-                                placeholder={'Password'}
-                                className={
-                                    formErrors?.password
-                                        ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
-                                        : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
-                                }
-                                value={signupForm.password}
-                                name={'password'}
-                                onChange={handleChange}
-                            />
-                            <div
-                                className={
-                                    formErrors?.email === null
-                                        ? 'absolute right-5 bottom-8 cursor-pointer'
-                                        : 'absolute right-5 bottom-4 cursor-pointer'
-                                }
-                                onClick={togglePassword}>
-                                {' '}
-                                <img src={eyeIcon} />
-                            </div>
-                            {formErrors && (
-                                <p className="text-red-500 text-sm ">{formErrors?.password}</p>
-                            )}
-                        </div>
-                        <button className="capitalize bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100">
-                            create account
-                        </button>
-                    </form>
-
-                    <div className="flex justify-center text-sm md:place-self-start md:text-base">
-                        <p>
-                            Already have an account?{' '}
-                            <span className="text-green-500 font-HauoraBold cursor-pointer ml-1">
-                                <Link to={'/login'}>Log in</Link>
-                            </span>
+        <PageLayout>
+            <div className="mb-12 md:overflow-hidden md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
+                <ToastContainer />
+                <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
+                    Buy stocks and grow your business
+                </h1>
+                <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-10">
+                    <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-8 lg:gap-3 lg:w-full xl:px-20">
+                        <h1 className="font-HauoraBold text-xl text-center tracking-wide">
+                            Create Account
+                        </h1>
+                        <p className="text-sm text-center mb-3 sm:text-base">
+                            Welcome to Yieldvest professional stock brokerage
                         </p>
+
+                        {/* <div className="flex flex-row gap-3 items-center">
+                            <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
+                            <p className="text-sm font-HauoraBold">or</p>
+                            <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
+                        </div> */}
+                        <form
+                            className="flex flex-col gap-3 w-full md:justify-center md:place-self-center"
+                            onSubmit={handleSubmit}>
+                            <div className="flex flex-col gap-0.5">
+                                <label className="font-HauoraBold text-sm">Name</label>
+                                <input
+                                    type={'text'}
+                                    placeholder={'Full Name'}
+                                    className={
+                                        formErrors?.fullname
+                                            ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                            : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                    }
+                                    value={signupForm.fullname}
+                                    name={'fullname'}
+                                    onChange={handleChange}
+                                />
+                                {formErrors && (
+                                    <p className="text-red-500 text-sm ">{formErrors?.fullname}</p>
+                                )}
+                            </div>
+                            <div className="flex flex-col gap-0.5">
+                                <label className="font-HauoraBold text-sm">Email</label>
+                                <input
+                                    type={'email'}
+                                    placeholder={'Email Address'}
+                                    className={
+                                        formErrors?.email
+                                            ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                            : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                    }
+                                    value={signupForm.email}
+                                    name={'email'}
+                                    onChange={handleChange}
+                                />
+                                {formErrors && (
+                                    <p className="text-red-500 text-sm ">{formErrors?.email}</p>
+                                )}
+                            </div>
+                            <div className="flex flex-col gap-0.5 relative">
+                                <label className="font-HauoraBold text-sm">Password</label>
+                                <input
+                                    type={passwordType}
+                                    placeholder={'Password'}
+                                    className={
+                                        formErrors?.password
+                                            ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
+                                            : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
+                                    }
+                                    value={signupForm.password}
+                                    name={'password'}
+                                    onChange={handleChange}
+                                />
+                                <div
+                                    className={
+                                        formErrors?.email === null
+                                            ? 'absolute right-5 bottom-8 cursor-pointer'
+                                            : 'absolute right-5 bottom-4 cursor-pointer'
+                                    }
+                                    onClick={togglePassword}>
+                                    {' '}
+                                    <img src={eyeIcon} />
+                                </div>
+                                {formErrors && (
+                                    <p className="text-red-500 text-sm ">{formErrors?.password}</p>
+                                )}
+                            </div>
+                            <button className="capitalize bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100">
+                                create account
+                            </button>
+                        </form>
+
+                        <div className="flex w-full justify-center text-gray-500">
+                            <p>Or create an account with</p>
+                        </div>
+
+                        <div className="flex justify-center">
+                            <GoogleLogin
+                                onSuccess={handleGoogleSignIn}
+                                onError={handleGoogleSignInError}
+                            />
+                        </div>
+
+                        <div className="flex justify-center text-sm md:place-self-start md:text-base md:place-self-center">
+                            <p className="text-gray-500">
+                                Already have an account?{' '}
+                                <span className="text-green-500 font-HauoraBold cursor-pointer ml-1">
+                                    <Link to={'/login'}>Log in</Link>
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </PageLayout>
     );
 };
 
