@@ -13,6 +13,7 @@ router = APIRouter()
 
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
+
 @router.get('/company/sectors', tags=["Company"], )
 def get_sectors():
     db: Session = next(get_db())
@@ -20,7 +21,7 @@ def get_sectors():
 
     response = []
     for sector in sectors:
-        industries = db.query(models.Industry)\
+        industries = db.query(models.Industry) \
             .filter(models.Industry.sector == sector.sector_id).all()
 
         industry_list = []
@@ -44,7 +45,6 @@ def get_sectors():
 def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None):
     db: Session = next(get_db())
     # get companies
-    
 
     filters = []
 
