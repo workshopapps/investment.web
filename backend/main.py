@@ -1,33 +1,32 @@
-import uvicorn
-from starlette.middleware.sessions import SessionMiddleware
-
-from dotenv import load_dotenv
 import os
 
+import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
+from starlette.middleware.sessions import SessionMiddleware
 
 from api.database import database
 from api.database.database import engine
-from api.routes import routes, auth
+from api.routes import company, auth, user
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
-from fastapi.middleware.cors import CORSMiddleware
-
 
 load_dotenv()
 
 database.Base.metadata.create_all(bind=engine)
 origins = [
+<<<<<<< HEAD
     "http://65.108.237.42",
+=======
+    "http://localhost:3000",
+    "https://yieldvest.hng.tech",
+    "https://mystockplug-demo.vercel.app"
+>>>>>>> 393d066d9d2c8ad325084a03cff82989bc31b212
 ]
 
 app = FastAPI()
-
-origins = [
-    'http://localhost:3000'
-]
 
 app.add_middleware(
     CORSMiddleware,
@@ -39,19 +38,11 @@ app.add_middleware(
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 app.include_router(auth.router, prefix='/auth')
-app.include_router(routes.router)
+app.include_router(user.router, prefix='/user')
+app.include_router(company.router)
 app.include_router(server.router)
-
-
 
 async def update_script_task():
     print('Running update script...')
@@ -67,9 +58,13 @@ async def run_cron():
 @app.get('/')
 async def get_root():
     return {
-        "message": "My Stock Plug API",
+        "message": "YieldVest API v1",
     }
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     uvicorn.run("main:app", port=9666, reload=True)
+=======
+    uvicorn.run("main:app", port=8000, reload=True)
+>>>>>>> 393d066d9d2c8ad325084a03cff82989bc31b212

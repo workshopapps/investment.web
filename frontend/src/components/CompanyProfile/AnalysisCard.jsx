@@ -1,7 +1,5 @@
 import React from 'react';
-
 import DownIcon from '../../assets/landingPage/icons/down.svg';
-// import UpIcon from '../../assets/landingPage/icons/up.svg';
 import shareIcon from '../../assets/company-profile/share.svg';
 import greenArrow from '../../assets/company-profile/green-arrow.svg';
 import redArrow from '../../assets/company-profile/red-arrow.svg';

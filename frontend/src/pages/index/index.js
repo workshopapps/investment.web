@@ -50,9 +50,9 @@ const IndexPage = () => {
         setSector(e.target.value)
     }
     useEffect(() => {
-        const url = `http://18.217.87.189/company/ranking`;
+        const url = `https://api.aybims.tech/company/ranking`;
         axios
-            .get(url, { headers: { 'Access-Control-Allow-Origin': 'http://18.217.87.189' } })
+            .get(url, { headers: { 'Access-Control-Allow-Origin': '*' } })
             .then((res) => setData(res.data))
             .catch((err) => console.log(`Error: ${err}`));
     }, [data]);
@@ -65,8 +65,7 @@ const IndexPage = () => {
                     </h1>
                     <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white">
                         We provide well curated information to make smarted investment decisions
-                        based on top companies metrics through simple and accessible expert
-                        investment guidance.{' '}
+                        based on Fundamental Analysis{' '}
                     </p>
                 </div>
             </section>
@@ -119,6 +118,7 @@ const IndexPage = () => {
                                         PERatio={item.dividend_yield}
                                         marketCap={item.market_cap}
                                         stockPrice={item.stock_price}
+                                        rank={item.category}
                                         />
                                 </Link>
                             )) }

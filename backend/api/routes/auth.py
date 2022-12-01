@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
 from api.models.models import User, CreateUserModel
+from uuid import uuid4
 
 load_dotenv()
 
@@ -28,9 +29,11 @@ JWTPayloadMapping = MutableMapping[
     str, Union[datetime, bool, str, List[str], List[int]]
 ]
 
+# creates OAuth2PasswordBearer instance with token url as parameter as json
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
 
 
+# google auth endpoint
 @router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
 def authentication(token: str):
     try:
@@ -63,6 +66,7 @@ def authentication(token: str):
         return HTTPException(status_code=401, detail='Invalid token')
 
 
+# login route returns access token and token type
 @router.post("/login", tags=['Auth'])
 def login(form_data: OAuth2PasswordRequestForm = Depends()
           ) -> Any:
@@ -89,7 +93,7 @@ def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(email=user.email, name=user.email, password=hash_password(user.password))
+        db_user = User(id=str(uuid4()), email=user.name, name=user.email, password=hash_password(user.password))
         db.add(db_user)
         db.commit()
 
@@ -110,6 +114,7 @@ def authenticate(
     return user
 
 
+# creates jwt token
 def create_access_token(*, sub: str) -> str:
     return _create_token(
         token_type="access_token",
@@ -133,6 +138,8 @@ def _create_token(
     return jwt.encode(payload, JWT_SECRET, algorithm='HS256')
 
 
+# creates get_current_user dependency
+# get_current_user will have a dependency with oauth2_scheme
 def get_current_user(token: str = Depends(oauth2_scheme)
                      ) -> User:
     credentials_exception = HTTPException(

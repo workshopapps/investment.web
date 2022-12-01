@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserStatusContext } from '../../store/UserStatusContext';
 import PageLayout from '../layout';
 import mobileImage from './../../assets/login/login-mobile.png';
 import eyeIcon from './../../assets/login/eye-icon.png';
@@ -6,6 +7,8 @@ import desktopImage from './../../assets/login/login-desktop.png';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const { loggedInHandler } = useContext(UserStatusContext);
+    console.log(loggedInHandler);
     const navigate = useNavigate();
 
     //form
@@ -34,7 +37,9 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
+            loggedInHandler();
             setInterval(
                 () => {
                     navigate('/landing');

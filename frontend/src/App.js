@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserStatusContext } from './store/UserStatusContext.jsx';
 
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
@@ -47,6 +48,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
+import DownloadPage from './pages/download/index.js';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -83,6 +85,11 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/download',
+        element: <DownloadPage />,
         errorElement: <ErrorPage />
     },
     {
@@ -237,11 +244,20 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+    const [logged, setLogged] = useState(false);
+    const loggedInHandler = () => {
+        setLogged(true);
+    };
+    const loggedOffHandler = () => {
+        setLogged(false);
+    };
     return (
         <React.Fragment>
-            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                <RouterProvider router={router} />
-            </GoogleOAuthProvider>
+            <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
+                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                    <RouterProvider router={router} />
+                </GoogleOAuthProvider>
+            </UserStatusContext.Provider>
         </React.Fragment>
     );
 }
