@@ -75,6 +75,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice}</p>
                     </div>
+                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
+                        Sparkline Loading...
+                    </div>
                 </Modal>
             )}
             {fundamentalModal && (
@@ -87,6 +90,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Market Cap </p>
                         <p className="text-[#333946] text-semibold">${marketCap / 1000000000}B</p>
+                    </div>
+                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
+                        Chart Loading...
                     </div>
                 </Modal>
             )}
