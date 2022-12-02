@@ -172,15 +172,18 @@ async def pick_random_companies():
             income_statement = {}
             income_statement_growth = {}
 
-            for statement in income_statements:
-                if statement['date'] == financial['date']:
-                    income_statement = statement
-                    break
+            try:
+                for statement in income_statements:
+                    if statement['date'] == financial['date']:
+                        income_statement = statement
+                        break
 
-            for statement_growth in income_statement_growths:
-                if statement_growth['date'] == financial['date']:
-                    income_statement_growth = statement_growth
-                    break
+                for statement_growth in income_statement_growths:
+                    if statement_growth['date'] == financial['date']:
+                        income_statement_growth = statement_growth
+                        break
+            except Exception:
+                continue
 
             financial_data = await create_or_update_financial(financial, financial_id, symbol,
                                                               income_statement, income_statement_growth,
