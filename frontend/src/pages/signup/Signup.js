@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import signupimg from './../../assets/signup/signup-img.png';
-// import signupdesk from './../../assets/signup/signup-desk-img.png';
 import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
