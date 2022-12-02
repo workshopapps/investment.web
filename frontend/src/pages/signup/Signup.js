@@ -20,6 +20,7 @@ const Signup = () => {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
     const [timeOut, setTimeout] = useState(false);
+    const [timeOutGoogle, setTimeoutGoogle] = useState(false);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -70,12 +71,14 @@ const Signup = () => {
         console.log(googleUserToken);
 
         axios
-            .get(`/auth?token=${tokenResponse.credential}`)
+            .get(
+                `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
+            )
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
                     setInterval(() => {
-                        navigate('/');
+                        setTimeoutGoogle(true);
                     }, 1500);
                 } else {
                     toast.error('Authentication failed');
@@ -137,6 +140,9 @@ const Signup = () => {
 
     if (timeOut) {
         navigate('/login');
+    }
+    if (timeOutGoogle) {
+        navigate('/');
     }
 
     return (

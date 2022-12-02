@@ -18,7 +18,6 @@ const Login = () => {
     const [isSubmit, setisSubmit] = useState(false);
     const [accessToken, setAccessToken] = useState(null);
     const [timeOut, setTimeout] = useState(false);
-    // const [auth, setAuth] = useState(false);
     console.log(accessToken);
 
     //form
@@ -26,7 +25,6 @@ const Login = () => {
         email: '',
         password: ''
     });
-    // console.log(loginForm);
 
     const [passwordType, setPasswordType] = useState('password');
 
@@ -73,12 +71,14 @@ const Login = () => {
         console.log(googleUserToken);
 
         axios
-            .get(`/auth?token=${tokenResponse.credential}`)
+            .get(
+                `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
+            )
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
                     setInterval(() => {
-                        navigate('/');
+                        setTimeout(true);
                     }, 1500);
                 } else {
                     toast.error('Authentication failed');
