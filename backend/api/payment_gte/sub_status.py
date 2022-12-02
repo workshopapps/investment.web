@@ -12,8 +12,6 @@ import os
 
 stripe.api_key = os.getenv("STRIPE_API_KEY")
 
-router = APIRouter()
-
 
 # Get the subscription status
 async def sub_status(user: User):
@@ -26,6 +24,6 @@ async def sub_status(user: User):
 
     try:
         subscription_data = stripe.Subscription.retrieve(SUBSCRIPTION_ID)
-        return {"subscription_data": subscription_data.status}
+        return subscription_data.status
     except Exception as e:
-        return {"error": e.args}
+        return False
