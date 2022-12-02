@@ -23,7 +23,7 @@ sudo systemctl restart nginx
 cd .. && cd backend
 #ls -la
 echo "\n\nInstalling Backend"
-pip install -r requirements.txt
+pip install -r requirements.txt --force
 #python3 main.py
 echo "\n\nDeploying Backend"
 sudo su aybims && whoami 
