@@ -17,7 +17,7 @@ import { BiBell } from 'react-icons/bi';
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
     const { logged } = useContext(UserStatusContext);
-    console.log(logged);
+    // console.log(logged);
     const navStyle = {
         background: '#000718',
         color: 'white'
