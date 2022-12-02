@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-key */
 /* eslint-disable prettier/prettier */
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Logo from '../../assets/header/logo.svg';
 // import NavBtn from './NavBtn';
-import { UserStatusContext } from '../../store/UserStatusContext';
 import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,11 +11,13 @@ import user_image from '../../assets/images/Rectangle 4749.png';
 
 import { IoIosNotifications } from 'react-icons/io';
 import { FiSettings } from 'react-icons/fi';
-import { BiBell } from 'react-icons/bi';
+// import { BiBell } from 'react-icons/bi';
+import AuthContext from '../../auth/AuthContext';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
-    const { logged } = useContext(UserStatusContext);
+    const { isLoggedIn } = useContext(AuthContext);
+
     // console.log(logged);
     const navStyle = {
         background: '#000718',
@@ -42,18 +43,20 @@ const Nav = ({ openMenu }) => {
     return (
         <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px]">
             <div className="w-full flex items-center justify-between max-w-[1243px]">
-                <div onClick={() => navigate('/')} className="cursor-pointer flex items-center text-2xl">
+                <div
+                    onClick={() => navigate('/')}
+                    className="cursor-pointer flex items-center text-2xl">
                     <img src={Logo} alt="" />
                     <p className="text-[#1BD47B] font-bold ml-2">Yieldvest</p>
                 </div>
                 <MenuLinks />
                 {/* <div className="hidden md:block nav-items w-full">
                 </div> */}
-                {!logged && (
+                {!isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        <div className='notification'>
+                        {/* <div className="notification">
                             <BiBell className="text-[26px]" />
-                        </div>
+                        </div> */}
                         <Link to="/login">
                             <button type="button" style={loginStyle} className="rounded">
                                 Login
@@ -68,17 +71,16 @@ const Nav = ({ openMenu }) => {
                 )}
                 <div className="ham-menu block md:hidden" onClick={() => openMenu(true)}>
                     <img src={Menu} alt="" />
-                    
                 </div>
 
-                {logged && (
+                {isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                         <IoIosNotifications />
 
                         <FiSettings onClick={() => navigate('/settings')} />
 
                         <img
-                            className="w-16 h-16 rounded-full"
+                            className="w-10 h-10 rounded-full"
                             src={user_image}
                             alt="user_profile"
                         />

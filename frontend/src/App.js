@@ -50,6 +50,7 @@ import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
+import AuthProvider from './auth/AuthProvider.jsx';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -266,7 +267,9 @@ function App() {
         <React.Fragment>
             <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                    <RouterProvider router={router} />
+                    <AuthProvider>
+                        <RouterProvider router={router} />
+                    </AuthProvider>
                 </GoogleOAuthProvider>
             </UserStatusContext.Provider>
         </React.Fragment>
