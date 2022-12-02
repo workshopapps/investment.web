@@ -1,4 +1,5 @@
 import os
+import traceback
 from datetime import timedelta, datetime
 from typing import Any, Optional, MutableMapping, Union, List
 
@@ -70,6 +71,8 @@ async def authentication(token: str):
 
     except ValueError:
         return HTTPException(status_code=401, detail='Invalid token')
+    except Exception:
+        print(traceback.print_exc())
 
 
 # login route returns access token and token type
