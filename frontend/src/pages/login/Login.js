@@ -18,6 +18,7 @@ const Login = () => {
     const [isSubmit, setisSubmit] = useState(false);
     const [accessToken, setAccessToken] = useState(null);
     const [timeOut, setTimeout] = useState(false);
+    // const [auth, setAuth] = useState(false);
     console.log(accessToken);
 
     //form
@@ -119,6 +120,7 @@ const Login = () => {
                 if (response.status === 200) {
                     toast.success('Login successful');
                     setAccessToken(response.data.accessToken);
+                    // setAuth(true);
                     //setAccessTokenToSessionStorage
                     setInterval(() => {
                         setTimeout(true);
@@ -130,7 +132,12 @@ const Login = () => {
             })
             .catch((err) => {
                 console.log(err);
+                toast.error('Invalid username or password');
             });
+
+        // if (!auth) {
+        //     toast.error('Invalid username or password');
+        // }
     };
 
     //validation

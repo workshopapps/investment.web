@@ -60,6 +60,7 @@ const Signup = () => {
             })
             .catch(function (error) {
                 console.log(error);
+                toast.warn('Account already exists. Kindly proceed to login');
             });
     };
 
