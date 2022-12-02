@@ -2,8 +2,12 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/footer/logo-white.svg';
+//import logo from '../../assets/footer/logo-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
+import footerLogo from '../../assets/footer/footerLogo.png';
+import footerFb from '../../assets/footer/footerFb.png';
+import insta from '../../assets/footer/insta.png';
+import footerTwitter from '../../assets/footer/footerTwitter.png';
 import NavLinks from './NavLinks';
 
 const Footer = () => {
@@ -30,14 +34,13 @@ const Footer = () => {
                 // { link: 'News', to: 'news' },
                 // { link: 'Blog', to: '/blog' },
                 // { link: 'Settings', to: '/settings' },
-
             ]
         },
         {
             name: 'Legal',
             navLinks: [
                 { link: 'Terms of Use', to: '/terms' },
-                { link: 'Privacy Policy', to: '/policy' },
+                { link: 'Privacy Policy', to: '/policy' }
                 // { link: 'Disclaimer' },
                 // { link: 'Cookies Policy' }
             ]
@@ -55,14 +58,19 @@ const Footer = () => {
             <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
                 <div>
                     <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
-                        <img src={logo} alt="" />
-                        <p className="text-white font-bold ml-2">Yieldvest</p>
+                        <img src={footerLogo} alt="" />
+
+                        <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
+                    </div>
+                    <div className='flex gap-3'>
+                        <img src={footerTwitter} alt="" />
+                        <img src={insta} alt="" />
+                        <img src={footerFb} alt="" />
                     </div>
                     <div
-                        className={`${pathname !== '/download'
-                            ? 'hidden lg:flex pt-4'
-                            : 'hidden'
-                            }`}>
+                        className={`${
+                            pathname !== '/download' ? 'hidden lg:flex pt-4' : 'hidden'
+                        }`}>
                         <Link to="/download">
                             <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
@@ -80,7 +88,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 MyStockPlug </div>
+            <div className="text-center pb-10">2022 Yieldvest </div>
         </footer>
     );
 };
