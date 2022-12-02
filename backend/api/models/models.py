@@ -155,8 +155,6 @@ class User(Base):
     customer = relationship("Customer", back_populates="user_value")
     subscription_value = relationship("Subscription", back_populates="user_sub")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
-    subscription_value = relationship("Subscription", back_populates="user_sub")
-
 
 
 class Customer(Base):
@@ -238,3 +236,9 @@ class InitPasswordResetModel(BaseModel):
 class FinalizePasswordResetModel(BaseModel):
     new_password: str
     code: str
+
+
+class UpdatePasswordModel(BaseModel):
+    current_password: str
+    new_password: str
+
