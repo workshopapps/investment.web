@@ -34,5 +34,5 @@ pm2 stop main
 
 #pm2 list #sudo systemctl restart nginx
 pm2 start main.py --interpreter python3
-sudo pm2 save
+pm2 save
 echo "\n\nDeployments done..."
