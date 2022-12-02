@@ -12,22 +12,24 @@ const Index = () => {
         {
             id: '1',
             image: signUpImg,
-            headingText: 'Sign up for your free account',
-            subText: 'Open a premium account for full functionality',
+            headingText: 'Create your Yieldvest account',
+            subText:
+                'Sign up & Setup your free account. You can upgrade to a premium account for full functionality',
             subText2: 'Learn more'
         },
         {
             id: '2',
             image: setUpImg,
-            headingText: 'Set up your account',
-            subText: 'Create your profile and answer our short quiz on your risk appetite'
+            headingText: 'View our well-curated recommendations list',
+            subText:
+                'Going through our list we have various options put together for you based on expert fundamental analysis.'
         },
         {
             id: '3',
             image: getImg,
-            headingText: 'Get your custom-made recommendations',
+            headingText: 'Choose a company',
             subText:
-                'From the short quiz, we understand your interests and curate stock options that are tailored to you'
+                'After going through the list and seeing what you like, click on the company to get more information about the company and make your decision on which to Invest in!!'
         }
     ];
 
@@ -62,10 +64,10 @@ const Index = () => {
                                 </div>
                                 <div className="flex flex-col items-center gap-2 z-20 w-full">
                                     <img src={item?.image} className=" w-full" />
-                                    <h1 className="font-HauoraBold text-sm text-center sm:text-xl">
+                                    <h1 className="font-HauoraBold text-sm text-center sm:text-lg">
                                         {item?.headingText}
                                     </h1>
-                                    <p className="text-sm text-center sm:text-lg">
+                                    <p className="text-sm text-center sm:text-sm">
                                         {item?.subText}
                                     </p>
                                     {item?.subText2 && (
