@@ -176,6 +176,7 @@ def update_password(model: UpdatePasswordModel, user: User = Depends(get_current
     db: Session = next(get_db())
     update = db.query(User).filter(User.id == user.id)
     update.password = hash_password(model.new_password)
+    db.add(update)
     db.commit()
     db.flush()
 
