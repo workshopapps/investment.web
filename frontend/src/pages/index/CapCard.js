@@ -112,7 +112,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     </span>
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Market Cap </p>
-                        <p className="text-[#333946] text-semibold">${marketCap / 1000000000}B</p>
+                        <p className="text-[#333946] text-semibold">${marketCap / 1000000000}Bn</p>
                     </div>
                 </div>
                 <Link to={link}>
