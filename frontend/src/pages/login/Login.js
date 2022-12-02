@@ -17,6 +17,7 @@ const Login = () => {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
     const [accessToken, setAccessToken] = useState(null);
+    const [timeOut, setTimeout] = useState(false);
     console.log(accessToken);
 
     //form
@@ -119,7 +120,9 @@ const Login = () => {
                     toast.success('Login successful');
                     setAccessToken(response.data.accessToken);
                     //setAccessTokenToSessionStorage
-                    navigate('/');
+                    setInterval(() => {
+                        setTimeout(true);
+                    }, 1500);
                 } else {
                     toast.error('login failed');
                 }
@@ -160,6 +163,10 @@ const Login = () => {
             post();
         }
     }, [formErrors]);
+
+    if (timeOut) {
+        navigate('/');
+    }
 
     return (
         <PageLayout>

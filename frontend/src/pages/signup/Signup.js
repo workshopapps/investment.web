@@ -19,6 +19,7 @@ const Signup = () => {
     const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
+    const [timeOut, setTimeout] = useState(false);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -50,8 +51,8 @@ const Signup = () => {
                 if (response.status === 200) {
                     toast.success('Signed up successful');
                     setInterval(() => {
-                        navigate('/login');
-                    }, 1000);
+                        setTimeout(true);
+                    }, 1500);
                 } else {
                     toast.error('Signup failed');
                     console.log(response);
@@ -132,6 +133,10 @@ const Signup = () => {
         }
         return errors;
     };
+
+    if (timeOut) {
+        navigate('/login');
+    }
 
     return (
         <PageLayout>
