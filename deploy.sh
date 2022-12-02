@@ -30,6 +30,6 @@ echo "\n\nDeploying Backend"
 #pm2 start main.py --interpreter python3 #--name main
 
 #pm2 list #sudo systemctl restart nginx
-pm2 restart main.py --interpreter python3
+sudo pm2 restart main.py --interpreter python3
 pm2 list
 echo "\n\nDeployments done..."
