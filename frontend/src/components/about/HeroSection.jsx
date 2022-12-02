@@ -12,6 +12,7 @@ const HeroSection = () => {
               <p className="text-xs md:text-2xl font-[500] text-center">The Spark that ignites your dreams</p>
           </div>
       </div>
+
     );
 };
 
