@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthContext from './AuthContext';
 import axios from 'axios';
 
@@ -11,6 +11,8 @@ const AuthProvider = ({ children }) => {
         email: '',
         name: ''
     });
+
+    const localToken = sessionStorage.getItem('accessToken');
 
     const getApiService = (requireAuthentication = true) => {
         const service = axios.create({
@@ -25,6 +27,7 @@ const AuthProvider = ({ children }) => {
             service.interceptors.response.use(
                 (res) => {
                     if (res.status === 401) {
+                        setIsLoggedIn(false);
                         window.location = '/login';
                     }
 
@@ -42,6 +45,42 @@ const AuthProvider = ({ children }) => {
         return service;
     };
 
+    const logout = () => {
+        setIsLoggedIn(false);
+        sessionStorage.removeItem('accessToken');
+    };
+
+    useEffect(() => {
+        if (localToken) {
+            setAccessToken(localToken);
+
+            getApiService(false)
+                .get('/user/profile', {
+                    headers: {
+                        Authorization: `Bearer ${localToken}`
+                    }
+                })
+                .then((res) => {
+                    if (res.status === 401) {
+                        sessionStorage.removeItem('accessToken');
+                        logout();
+                        window.location = '/login';
+                    }
+
+                    if (res.status === 200) {
+                        setIsLoggedIn(true);
+                        setUser({
+                            email: res.data.email,
+                            name: res.data.name
+                        });
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [localToken]);
+
     return (
         <AuthContext.Provider
             value={{
@@ -51,7 +90,8 @@ const AuthProvider = ({ children }) => {
                 setIsLoggedIn: setIsLoggedIn,
                 getApiService: getApiService,
                 user: user,
-                setUser: setUser
+                setUser: setUser,
+                logout: logout
             }}>
             {children}
         </AuthContext.Provider>

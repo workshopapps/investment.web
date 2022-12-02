@@ -2,22 +2,20 @@ import React, { useEffect, useContext } from 'react';
 import AuthContext from './AuthContext';
 
 const ProtectedPage = ({ children }) => {
-    const { setAccessToken, getApiService, setUser, setIsLoggedIn } = useContext(AuthContext);
+    const { getApiService, setUser, setIsLoggedIn, logout, accessToken } = useContext(AuthContext);
 
     useEffect(() => {
-        const localToken = sessionStorage.getItem('accessToken');
-        if (localToken) {
-            setAccessToken(localToken);
-
+        if (accessToken) {
             getApiService(false)
                 .get('/user/profile', {
                     headers: {
-                        Authorization: `Bearer ${localToken}`
+                        Authorization: `Bearer ${accessToken}`
                     }
                 })
                 .then((res) => {
                     if (res.status === 401) {
                         sessionStorage.removeItem('accessToken');
+                        logout();
                         window.location = '/login';
                     }
 
@@ -33,7 +31,7 @@ const ProtectedPage = ({ children }) => {
                     console.log(err);
                 });
         }
-    }, []);
+    }, [accessToken]);
 
     return <>{children}</>;
 };
