@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaArrowRight, FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const SubscribeCard = ({
-    name,
-    price,
-    type,
-    target,
-    priceId,
-    payload,
-    buttonText
-}) => {
+const SubscribeCard = ({ name, price, type, target, priceId, features, payload, buttonText }) => {
+    console.log(features);
     return (
         <div className="relative bg-white] text-[#0A0B0D] rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] md:w-[28em] h-auto md:h-[40em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md">
             <div className="flex flex-row md:flex-col justify-between">
