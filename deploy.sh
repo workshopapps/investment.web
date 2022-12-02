@@ -29,7 +29,7 @@ echo "\n\nDeploying Backend"
 sudo su aybims && whoami 
 
 #pm2 stop main
-pm2 start main.py --interpreter python3 #--name main
+pm2 restart main.py --interpreter python3 #--name main
 
 #pm2 list #sudo systemctl restart nginx
 #sudo pm2 restart main.py --interpreter python3
