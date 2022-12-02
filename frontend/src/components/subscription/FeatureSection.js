@@ -1,11 +1,10 @@
 import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
 import Icon1 from '../../assets/subscriptionPage/images/icon1.svg';
-import Icon2 from '../../assets/subscriptionPage/images/icon2.svg';
-import Icon3 from '../../assets/subscriptionPage/images/icon3.svg';
+import Icon2 from '../../assets/subscriptionPage/images/icon5.png';
+import Icon3 from '../../assets/subscriptionPage/images/icon4.png';
 import Icon4 from '../../assets/subscriptionPage/images/icon4.svg';
 import Icon5 from '../../assets/subscriptionPage/images/icon5.svg';
-import Icon6 from '../../assets/subscriptionPage/images/icon6.svg';
+import Icon6 from '../../assets/subscriptionPage/images/icon6.png';
 
 const FeatureSection = () => {
     return (
@@ -32,18 +31,11 @@ const FeatureSection = () => {
                             {/* <FaWeixin fill="white" /> */}
                             <img src={Icon1} alt="icon1" />
                         </div>
-                        <h1 className="mt-2 py-2">Compare Stocks</h1>
+                        <h1 className="mt-2 py-2">Company fundamentals</h1>
                         <p className="text-[#0A0B0D] py-2">
-                            Compare the prices of different stocks on our web and desktop apps. You
-                            are able to track stocks in real time.
+                            To help you forecast more accurately, we give you charts showing how the
+                            company`s stock has performed over the last 5 years
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-3 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
 
                     <div>
@@ -53,87 +45,51 @@ const FeatureSection = () => {
                         <h1 className="mt-2 py-2">Analytics</h1>
                         <p className="text-[#0A0B0D] py-2">
                             Our optimized analytics tool does fundamental and techical analysis and
-                            saves you the stress of doing research.
+                            saves you the stress of doing research
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-3 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
                             <img src={Icon5} alt="icon3" />
                         </div>
-                        <h1 className="mt-2 py-2">Unlimited Stocks</h1>
+                        <h1 className="mt-2 py-2">Unlimited stock categories</h1>
                         <p className="text-[#0A0B0D] py-2">
-                            Access a wide variety of stock companies across different industries.
-                            You have an a wealth of stocks to buy from.
+                            Access a wide variety of stock companies across different categories
+                            like market cap industries, etc to suit for investment goals
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-3 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
                             <img src={Icon3} alt="icon3" />
                         </div>
-                        <h1 className="mt-2 py-2"> Stock Information</h1>
+                        <h1 className="mt-2 py-2"> Never miss an update</h1>
                         <p className="text-[#0A0B0D] py-2">
-                            To help you forecast more accurately, we give you charts of how a stock
-                            company has performed over the last 5 fiscal years.
+                            Get Email Notifications when a new stock is added to the list of
+                            recommended stocks.
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-3 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
                             <img src={Icon2} alt="icon4" />
                         </div>
-                        <h1 className="mt-2 py-2">Invest</h1>
+                        <h1 className="mt-2 py-2">Save your favorite stocks</h1>
                         <p className="text-[#0A0B0D] py-2">
-                            Compare the prices of different stocks on our web and desktop apps. You
-                            are able to track stocks in real time.
+                            You add a stock to your a watchlist so you can look at it later.
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-5 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
                             <img src={Icon6} alt="icon5" />
                         </div>
-                        <h1 className="mt-2 py-2">Sell</h1>
+                        <h1 className="mt-2 py-2">Share a stock</h1>
                         <p className="text-[#0A0B0D] py-2">
-                            Compare the prices of different stocks on our web and desktop apps. You
-                            are able to track stocks in real time.
+                            Share your favourite stocks with friends and fellow investors. Bring
+                            them in on the action too.
                         </p>
-                        <div className="mt-2">
-                            <p className="w-[250px] md:w-[250px] lg:w-[250px] flex cursor-pointer hover:opacity-50">
-                                <span className="text-[#1BD47B]">Learn More</span>
-                                {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                <FaArrowRight fill="#1BD47B" className="w-3 mt-2 h-3  ml-1" />
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
