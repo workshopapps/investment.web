@@ -176,7 +176,7 @@ const Login = () => {
     }
 
     return (
-        <PageLayout>
+        <PageLayout showFooter={false}>
             <div className="flex flex-col items-center justify-center w-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
                 <ToastContainer />
                 <h1 className="hidden text-white text-xl font-HauoraBold mt-10 md:flex md:tracking-widest">

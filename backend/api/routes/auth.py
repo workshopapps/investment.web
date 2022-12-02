@@ -13,14 +13,13 @@ from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
-from api.models.models import User, CreateUserModel
+from api.models.models import User, CreateUserModel, UpdatePasswordModel
 from api.models.models import User, CreateUserModel, InitPasswordResetModel, PasswordResetRequest, \
     FinalizePasswordResetModel
 from api.scripts.email import send_email
 from uuid import uuid4
 
 load_dotenv()
-
 
 router = APIRouter()
 
@@ -35,6 +34,35 @@ JWTPayloadMapping = MutableMapping[
 
 # creates OAuth2PasswordBearer instance with token url as parameter as json
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
+
+
+# creates get_current_user dependency
+# get_current_user will have a dependency with oauth2_scheme
+def get_current_user(token: str = Depends(oauth2_scheme)
+                     ) -> User:
+    credentials_exception = HTTPException(
+        status_code=401,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    db: Session = next(get_db())
+
+    try:
+        payload = jwt.decode(
+            token,
+            JWT_SECRET,
+            algorithms=['HS256'],
+            options={"verify_aud": False},
+        )
+        user_id: str = payload.get("sub")
+    except JWTError:
+        raise credentials_exception
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise credentials_exception
+    return user
 
 
 # google auth endpoint
@@ -70,10 +98,10 @@ async def authentication(token: str):
         return generate_token(db_user.id)
 
     except ValueError:
-        return HTTPException(status_code=401, detail='Invalid token')
+        raise HTTPException(status_code=401, detail='Invalid token')
     except Exception:
         print(traceback.print_exc())
-        return HTTPException(status_code=500, detail='Internal Server Error')
+        raise HTTPException(status_code=500, detail='Internal Server Error')
 
 
 # login route returns access token and token type
@@ -126,10 +154,10 @@ async def init_password_reset(model: InitPasswordResetModel):
 async def finalize_password_reset(model: FinalizePasswordResetModel):
     db: Session = next(get_db())
 
-    password_reset = db.query(PasswordResetRequest)\
+    password_reset = db.query(PasswordResetRequest) \
         .filter(PasswordResetRequest.verification_code == model.code).first()
     if not password_reset:
-        return HTTPException(status_code=404, detail="Invalid/expired verification code")
+        raise HTTPException(status_code=404, detail="Invalid/expired verification code")
 
     user = db.query(User).filter(User.email == password_reset.email).first()
     user.password = hash_password(model.new_password)
@@ -138,6 +166,20 @@ async def finalize_password_reset(model: FinalizePasswordResetModel):
     db.commit()
 
     return {"message": "Password reset successfully"}
+
+
+@router.patch('/update_password', tags=['Auth'])
+def update_password(model: UpdatePasswordModel, user: User = Depends(get_current_user)):
+    if not verify_password(model.current_password, user.password):
+        raise HTTPException(status_code=401, detail="Invalid current password")
+
+    db: Session = next(get_db())
+    update = db.query(User).filter(User.id == user.id).first()
+    update.password = hash_password(model.new_password)
+    db.commit()
+    db.flush()
+
+    return {"message": "Password updated successfully"}
 
 
 async def resolve_password_reset_request(email: str, db: Session):
@@ -160,6 +202,7 @@ async def send_password_reset_request_email(email: str, code: str):
     body += f"this link to your browser to reset your password: {reset_url}</p>"
     body += "<br/><br/><strong>If you didn't initiate this request please ignore this email.</strong><br/>"
     body += "<strong>Please note that you're required to reset your password when you signup with Google!</strong>"
+    body += "</body></html>"
 
     await send_email("Reset your YieldVest Password", [email], body)
 
@@ -200,32 +243,3 @@ def _create_token(
     payload["sub"] = str(sub)
 
     return jwt.encode(payload, JWT_SECRET, algorithm='HS256')
-
-
-# creates get_current_user dependency
-# get_current_user will have a dependency with oauth2_scheme
-def get_current_user(token: str = Depends(oauth2_scheme)
-                     ) -> User:
-    credentials_exception = HTTPException(
-        status_code=401,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-
-    db: Session = next(get_db())
-
-    try:
-        payload = jwt.decode(
-            token,
-            JWT_SECRET,
-            algorithms=['HS256'],
-            options={"verify_aud": False},
-        )
-        user_id: str = payload.get("sub")
-    except JWTError:
-        raise credentials_exception
-
-    user = db.query(User).filter(User.id == user_id).first()
-    if user is None:
-        raise credentials_exception
-    return user

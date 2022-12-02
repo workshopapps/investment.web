@@ -99,7 +99,7 @@ const Subscription = () => {
                         type="month"
                         target="For Advanced Users"
                         priceId="price_1M84G9E0pPf6mXoC939Khuwk"
-                        features={["Stock Information", "Compare Stocks", "All Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
+                        features={["Stock Information", "Compare Stocks", "AI Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
                         payload={premiumMaxMonthly}
                         mode="primary"
                         buttonText="Coming Soon"
@@ -143,7 +143,7 @@ const Subscription = () => {
                             type="year"
                             target="For Advanced Users"
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Compare Stocks", "All Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
+                            features={["Stock Information", "Compare Stocks", "AI Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
                             payload={premiumMaxYearly}
                             mode="primary"
                             buttonText="Coming Soon"
