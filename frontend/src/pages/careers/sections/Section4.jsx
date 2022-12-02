@@ -13,7 +13,7 @@ export default function Section4() {
                     <li>Be Valued</li>
                 </ul>
                 <p className="text-primaryGray text-left py-2 w-3/4 leading-7 text-base">
-                    “Working with mystockplug has been an amazing experience. We adopt a workplace
+                    “Working with Yieldvest has been an amazing experience. We adopt a workplace
                     culture where everyone is allowed to be as expressive of their creativity as
                     possible. We make magic out of the simplest of ideas.”
                 </p>
