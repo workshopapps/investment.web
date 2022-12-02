@@ -1,8 +1,10 @@
 import React from 'react';
 import Faq from '../../components/Help/Faq';
 // import searchIcon from '../../assets/help/search.svg';
+
 import PageLayout from '../layout';
 import HeroSection from './HeroSection';
+import faiq from './Data.json';
 
 function HelpPage() {
     const faqs = {
@@ -62,7 +64,7 @@ function HelpPage() {
     };
     return (
         <PageLayout>
-            <HeroSection />
+            <HeroSection data={faiq} />
             <div className="py-8 font-Hauora sm:py-12 md:py-14 lg:py-16  lg:pb-16 px-4 sm:px-10 md:px-14 lg:px-32 xl:px-[206px] flex flex-col w-full">
                 <div className="mt-6 sm:mt-8 lg:mt-10 text-[#0A0B0D]">
                     <h2 className="font-bold lg:text-semibold sm:text-lg md:text-xl lg:text-2xl text-base text-[#0B5934] mb-8">
