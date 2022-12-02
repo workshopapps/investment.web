@@ -26,10 +26,12 @@ echo "\n\nInstalling Backend"
 pip install -r requirements.txt
 #python3 main.py
 echo "\n\nDeploying Backend"
+sudo su dcnc && whoami 
+uvicorn main:app --host 0.0.0.0 --port 9666
 #pm2 stop main
 #pm2 start main.py --interpreter python3 #--name main
 
 #pm2 list #sudo systemctl restart nginx
-sudo pm2 restart main.py --interpreter python3
-pm2 list
+#sudo pm2 restart main.py --interpreter python3
+#pm2 list
 echo "\n\nDeployments done..."
