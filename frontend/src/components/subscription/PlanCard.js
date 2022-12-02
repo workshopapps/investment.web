@@ -50,7 +50,7 @@ const SubscribeCard = ({
                                 priceId: priceId
                             }}
                             className="w-[80%] flex hover:shadow-xl justify-around md:justify-around lg:justify-center shadow bg-[white] text-[#1BD47B] font-bold py-2 px-4 rounded">
-                            <button className="flex rounded " type="button">
+                            <button className="flex rounded" type="button">
                                 <span className="text-[#1F2226] align-middle">{buttonText}</span>
 
                                 {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
@@ -93,7 +93,7 @@ const SubscribeCard = ({
                                 priceId: priceId
                             }}
                             className="w-[80%] flex hover:shadow-xl justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded">
-                            <button className="flex rounded shadow" type="button">
+                            <button className="flex rounded" type="button">
                                 <span className="text-[#1F2226] align-middle">{buttonText}</span>
                             </button>
                         </Link>
