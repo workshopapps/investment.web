@@ -26,8 +26,8 @@ echo "\n\nInstalling Backend"
 pip install -r requirements.txt
 #python3 main.py
 echo "\n\nDeploying Backend"
-#pm2 stop main
+whoami #pm2 stop main
 sudo pm2 restart main.py --interpreter python3 #--name main
-#pm2 save 
+pm2 list
 sudo pm2 list #sudo systemctl restart nginx
 echo "\n\nDeployments done..."
