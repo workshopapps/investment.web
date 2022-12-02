@@ -16,17 +16,16 @@ router = APIRouter()
 
 
 # Get the subscription status
-async def sub_status(request: Request, user: User=Depends(get_current_user)):
+async def sub_status(user: User):
     """ Get the subscription status of current user"""
-    if request:
-        # get current user
-        db: Session = next(get_db())
-        id = user.id
-        users = db.query(Subscription).filter(Subscription.user_id == id).first()
-        SUBSCRIPTION_ID = users.subscription_id
+    # get current user
+    db: Session = next(get_db())
+    id = user.id
+    users = db.query(Subscription).filter(Subscription.user_id == id).first()
+    SUBSCRIPTION_ID = users.subscription_id
 
-        try:
-            subscription_data = stripe.Subscription.retrieve(SUBSCRIPTION_ID)
-            return {"subscription_data": subscription_data.status}
-        except Exception as e:
-            return {"error": e.args}
+    try:
+        subscription_data = stripe.Subscription.retrieve(SUBSCRIPTION_ID)
+        return {"subscription_data": subscription_data.status}
+    except Exception as e:
+        return {"error": e.args}
