@@ -69,13 +69,14 @@ def get_current_user(token: str = Depends(oauth2_scheme)
 @router.get('/google_auth', tags=['Auth'],
             description="Endpoint for both Google login and Google signup")
 async def authentication(token: str):
+    db: Session = next(get_db())
+
     try:
         # verify the jwt signature
         user = id_token.verify_oauth2_token(token, requests.Request(), GOOGLE_CLIENT_ID)
         name = user['name']
         email = user['email']
 
-        db: Session = next(get_db())
         current_user: User = db.query(models.User).filter(models.User.email == email).first()
 
         def generate_token(user_id: str):
@@ -95,11 +96,14 @@ async def authentication(token: str):
         db.commit()
 
         await resolve_password_reset_request(email, db)
+        db.close()
         return generate_token(db_user.id)
 
     except ValueError:
+        db.close()
         raise HTTPException(status_code=401, detail='Invalid token')
     except Exception:
+        db.close()
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail='Internal Server Error')
 
@@ -112,12 +116,16 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
 
     user = authenticate(email=form_data.username, password=form_data.password, db=db)
     if not user:
+        db.close()
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
-    return {
+    data = {
         "access_token": create_access_token(sub=user.id),
         "token_type": "Bearer",
     }
+    db.close()
+
+    return data
 
 
 @router.post("/signup", tags=['Auth'])
@@ -126,6 +134,7 @@ def signup(user: CreateUserModel):
     existing_user: User = db.query(User).filter(User.email == user.email).first()
 
     if existing_user:
+        db.close()
         raise HTTPException(
             status_code=400,
             detail="This email is already registered"
@@ -134,6 +143,7 @@ def signup(user: CreateUserModel):
         db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password))
         db.add(db_user)
         db.commit()
+        db.close()
 
     return {"message": "Account created successfully"}
 
@@ -144,9 +154,11 @@ async def init_password_reset(model: InitPasswordResetModel):
 
     user = db.query(User).filter(User.email == model.email).first()
     if not user:
+        db.close()
         raise HTTPException(status_code=404, detail="This email address is not registered")
 
     await resolve_password_reset_request(model.email, db)
+    db.close()
     return {"message": "Password reset initialized successfully"}
 
 
