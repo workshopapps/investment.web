@@ -52,7 +52,7 @@ const IndexPage = () => {
 
     useEffect(() => {
         reloadIndustriesForSector(sector);
-    }, [sector]);
+    }, [sector, industry]);
 
     useEffect(() => {
         reloadRankedCompanies();
