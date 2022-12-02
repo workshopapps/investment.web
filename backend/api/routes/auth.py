@@ -38,7 +38,8 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{API_URL}/auth/login")
 
 
 # google auth endpoint
-@router.get('/google_auth', tags=['Auth'], description="Endpoint for both Google login and Google singup")
+@router.get('/google_auth', tags=['Auth'],
+            description="Endpoint for both Google login and Google signup")
 async def authentication(token: str):
     try:
         # verify the jwt signature
@@ -47,7 +48,7 @@ async def authentication(token: str):
         email = user['email']
 
         db: Session = next(get_db())
-        current_user: User = db.query(models.User).filter(models.User.id == id).first()
+        current_user: User = db.query(models.User).filter(models.User.email == email).first()
 
         def generate_token(user_id: str):
             return {
@@ -64,7 +65,6 @@ async def authentication(token: str):
                              password=hash_password(str(uuid4())))
         db.add(db_user)
         db.commit()
-        db.refresh(db_user)
 
         await resolve_password_reset_request(email, db)
         return generate_token(db_user.id)
@@ -73,6 +73,7 @@ async def authentication(token: str):
         return HTTPException(status_code=401, detail='Invalid token')
     except Exception:
         print(traceback.print_exc())
+        return HTTPException(status_code=500, detail='Internal Server Error')
 
 
 # login route returns access token and token type
