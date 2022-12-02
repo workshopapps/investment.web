@@ -17,6 +17,11 @@ router = APIRouter()
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
 
+@router.get('/profile', tags=['User'])
+def get_user_profile(user: User = Depends(get_current_user)):
+    return user
+
+
 @router.get('/notification_settings', tags=['User'])
 def get_notification_settings(user: User = Depends(get_current_user)):
     db: Session = next(get_db())
