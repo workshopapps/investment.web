@@ -1,13 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import Footer from '../components/Footer/Footer';
-// import { Outlet } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
 import { useState, useEffect } from 'react';
 import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
+import ProtectedPage from '../auth/ProtectedPage';
 
-const PageLayout = ({ children, showNavBar = true, showFooter = true }) => {
+const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtected = false }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const pathName = useLocation();
 
@@ -28,7 +28,14 @@ const PageLayout = ({ children, showNavBar = true, showFooter = true }) => {
                     {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
                 </>
             )}
-            <div className="page-content grow">{children}</div>
+
+            {isProtected ? (
+                <ProtectedPage>
+                    <div className="page-content grow">{children}</div>
+                </ProtectedPage>
+            ) : (
+                <div className="page-content grow">{children}</div>
+            )}
 
             {showFooter && (
                 <div className="footer flex-none">
