@@ -26,6 +26,15 @@ export const Section = () => {
                         companies based on various metrics.
                     </p>
                 </div>
+                <div className="bg-white p-4 md:p-9  md:pt-14 md:pb-16 md:max-w-[390px] m-4 md:m-0">
+                    <h3 className="font-bold text-xl mb-2 text-center md:text-left">What We Do</h3>
+                    <p className="text-[#66717E] text-center md:text-left">
+                        MyStockPlug guides individuals and businesses who need help knowing what
+                        stocks to invest in to make better and well-informed decisions on what
+                        stocks to purchase. We bring the best to you after analyzing each of these
+                        companies based on various metrics.
+                    </p>
+                </div>
             </div>
             <div className='p-5 flex flex-col md:pl-[50px] md:pr-[50px] lg:pl-[100px] lg:pr-[100px] md:bg-[url("/src/assets/about/bg-vec.png")] bg-no-repeat bg-left-bottom pb-24'>
                 <h1 className="font-semibold text-4xl text-center">Why Choose Us</h1>
@@ -37,7 +46,7 @@ export const Section = () => {
                     </div>
                     <img className="hidden md:block m-auto" src={img1} alt="" />
                 </div>
-                <div className="flex flex-col items-center flex- mt-16 md:gap-16 md:flex-row">
+                <div className="flex flex-col items-center flex- mt-16 md:gap-16 md:flex-row bg-[#F5F5F5] p-2">
                     <div className="relative md:w-[50%]">
                         <img className="rounded md:rounded-none " src={img2} alt="core " />
                         <img

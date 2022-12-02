@@ -11,13 +11,58 @@ from api.models.models import Ranking
 load_dotenv()
 router = APIRouter()
 
+low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+
+
+@router.get('/company/sectors', tags=["Company"], )
+def get_sectors():
+    db: Session = next(get_db())
+    sectors = db.query(models.Sector).all()
+
+    response = []
+    for sector in sectors:
+        industries = db.query(models.Industry) \
+            .filter(models.Industry.sector == sector.sector_id).all()
+
+        industry_list = []
+        for industry in industries:
+            industry_list.append({
+                'industry_id': industry.industry_id,
+                'industry': industry.industry
+            })
+
+        data = {
+            'sector_id': sector.sector_id,
+            'sector': sector.sector,
+            'industries': industry_list
+        }
+        response.append(data)
+
+    return response
+
 
 @router.get('/company/ranking', tags=["Company"], )
-def get_list_of_ranked_companies():
+def get_list_of_ranked_companies(category: str = None, sector: str = None, industry: str = None):
     db: Session = next(get_db())
     # get companies
-    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
-    companies: list = db.query(models.Company).filter(models.Company.category != low_cap_category_id).all()
+
+    filters = []
+
+    if category:
+        if category == low_cap_category_id:
+            return []
+        else:
+            filters.append(models.Company.category == category)
+    else:
+        filters.append(models.Company.category != low_cap_category_id)
+
+    if sector:
+        filters.append(models.Company.sector == sector)
+
+    if industry:
+        filters.append(models.Company.industry == industry)
+
+    companies: list = db.query(models.Company).filter(*filters).all()
 
     # get latest rankings
     rankings: list = []
@@ -45,6 +90,7 @@ def get_list_of_ranked_companies():
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
+        industry: models.Industry = comp.industry_value
         category: models.Category = comp.cat_value
         stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
             models.StockPrice.date.desc()).first()
@@ -55,14 +101,15 @@ def get_list_of_ranked_companies():
             'stock_price': stock_price.stock_price,
             'dividend_yield': stock_price.dividend_yield,
             'profile_image': comp.profile_image,
-            'sector': sector.industry,
+            'sector': sector.sector,
+            'industry': industry.industry,
             'category': category.name,
             'ticker_symbol': comp.ticker_value.symbol,
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
                 'created_at': ranking.created_at,
-                'updated_at': ranking.updated_at, 
+                'updated_at': ranking.updated_at,
             }
         }
         response.append(data)
@@ -129,6 +176,10 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
+    if company.category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
 
     stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
                                                       models.StockPrice.date >= startDate,
@@ -157,7 +208,7 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
 
 
 @router.get('/company/{company_id}', tags=["Company"])
-async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
+async def get_company_profile(company_id: str, db: Session = Depends(get_db)):
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
@@ -176,6 +227,7 @@ async def get_company_metrics(company_id: str, db: Session = Depends(get_db)):
         'profile_image': company.profile_image,
         'description': company.description,
         'sector': company.sect_value,
+        'industry': company.industry_value,
         'category': company.cat_value,
         'ticker': company.ticker_value,
         'current_ranking': ranking,
@@ -190,6 +242,11 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
+
+    if company.category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
 
     rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).all()
