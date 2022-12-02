@@ -16,7 +16,7 @@ const Footer = () => {
         {
             name: 'Get To Know Us',
             navLinks: [
-                { link: 'About MyStockPlug', to: '/about' }
+                { link: 'About Yieldvest', to: '/about' }
                 // { link: 'Careers', to: '/careers' },
                 // { link: 'Stock Tips', to: '/StockTips' },
             ]
