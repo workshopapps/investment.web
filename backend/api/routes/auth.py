@@ -175,7 +175,7 @@ def update_password(model: UpdatePasswordModel, user: User = Depends(get_current
 
     db: Session = next(get_db())
     user.password = hash_password(model.new_password)
-    db.add(user)
+    db.refresh(user)
     db.commit()
 
     return {"message": "Password updated successfully"}
