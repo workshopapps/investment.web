@@ -92,7 +92,7 @@ const Index = () => {
                 <div className="hidden lg:flex lg:justify-center lg:m-10">
                     <Link
                         to={'/signup'}
-                        className="text-sm flex items-center gap-2 bg-green-400 py-3 px-12 rounded-md hover:bg-green-500 transition ease-in-out delay-100">
+                        className="text-sm flex items-center gap-2 bg-green-400 py-3 px-20 rounded-md hover:bg-green-500 transition ease-in-out delay-100">
                         <p className="font-HauoraBold">Get Started</p>
                         <img src={arrowRight} />
                     </Link>
