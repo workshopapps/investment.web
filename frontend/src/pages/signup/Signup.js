@@ -123,7 +123,7 @@ const Signup = () => {
         const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
 
         if (!signupForm.name) {
-            errors.fullname = 'Required';
+            errors.name = 'Required';
         }
 
         if (!signupForm.email) {
@@ -175,7 +175,7 @@ const Signup = () => {
                                     type={'text'}
                                     placeholder={'Full Name'}
                                     className={
-                                        formErrors?.fullname
+                                        formErrors?.name
                                             ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
                                             : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
                                     }
