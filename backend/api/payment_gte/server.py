@@ -163,7 +163,7 @@ async def create_subscription_object(request: Request, user: User=Depends(get_cu
 
 # cancel subscription
 @router.post('/cancel-subscription/', tags=["Customer"],)
-async def cancel_subscription(request: Request, subscription_id: str, user: User=Depends(get_current_user)):
+async def cancel_subscription(request: Request, user: User=Depends(get_current_user)):
     if request:
         # get current user
         id = user.id
