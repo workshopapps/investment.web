@@ -9,16 +9,16 @@ import axios from 'axios';
 import PageLayout from '../layout';
 
 const Signup = () => {
+    const baseUrl = 'https://api.yieldvest.hng.tech/auth/signup';
     const navigate = useNavigate();
     const [passwordType, setPasswordType] = useState('password');
     const [signupForm, setSignUpForm] = useState({
-        fullname: '',
         email: '',
+        name: '',
         password: ''
     });
     const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
-    console.log(formErrors);
     const [isSubmit, setisSubmit] = useState(false);
 
     //tracking form changes
@@ -37,6 +37,30 @@ const Signup = () => {
         e.preventDefault();
         setisSubmit(true);
         setFormErrors(validate(signupForm));
+    };
+
+    //post to the backend
+    const post = () => {
+        axios
+            .post(baseUrl, {
+                email: signupForm.email,
+                name: signupForm.name,
+                password: signupForm.password
+            })
+            .then(function (response) {
+                if (response.status === 200) {
+                    toast.success('Signed up successful');
+                    setInterval(() => {
+                        navigate('/login');
+                    }, 1000);
+                } else {
+                    toast.error('Signup failed');
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     //handle google OAUTH
@@ -81,15 +105,12 @@ const Signup = () => {
             setSignUpForm((prevState) => {
                 return {
                     ...prevState,
-                    fullname: '',
+                    name: '',
                     email: '',
                     password: ''
                 };
             });
-            toast.success('Login successful');
-            setInterval(() => {
-                toast.warn('Input here...');
-            }, 1500);
+            post();
         }
     }, [formErrors]);
 
@@ -97,7 +118,7 @@ const Signup = () => {
         const errors = {};
         const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
 
-        if (!signupForm.fullname) {
+        if (!signupForm.name) {
             errors.fullname = 'Required';
         }
 
@@ -147,12 +168,12 @@ const Signup = () => {
                                             ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
                                             : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
                                     }
-                                    value={signupForm.fullname}
-                                    name={'fullname'}
+                                    value={signupForm.name}
+                                    name={'name'}
                                     onChange={handleChange}
                                 />
                                 {formErrors && (
-                                    <p className="text-red-500 text-sm ">{formErrors?.fullname}</p>
+                                    <p className="text-red-500 text-sm ">{formErrors?.name}</p>
                                 )}
                             </div>
                             <div className="flex flex-col gap-0.5">
