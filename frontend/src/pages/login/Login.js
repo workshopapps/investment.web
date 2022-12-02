@@ -183,7 +183,7 @@ const Login = () => {
                     Buy stocks and grow your business
                 </h1>
                 <div className="w-full p-5 md:flex md:flex-col md:justify-center md:items-center md:w-520 md:bg-white md:rounded-lg md:px-8">
-                    <div className="flex flex-col text-center px-10 md:w-4/5 md:px-0 md:items-center">
+                    <div className="flex flex-col text-center px-10 md:w-full md:px-1 md:items-center">
                         <h1 className="font-HauoraBold text-xl mb-5 md:text-2xl">Welcome back</h1>
                         <p className="md:text-left">
                             Log in to your account - enjoy exclusive features and more
