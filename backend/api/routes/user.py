@@ -287,8 +287,6 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
-   
-   
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
@@ -316,9 +314,9 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
 
 @router.get('/company/{company_id}/ranking/history', tags=["User"])
 async def get_company_ranking_history(company_id: str, db: Session = Depends(get_db),
-                                            user: User = Depends(get_current_user)):
+                                      user: User = Depends(get_current_user)):
     is_user_subscribed = False
-    
+
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
@@ -336,6 +334,7 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
         models.Ranking.created_at.desc()).all()
 
     return rankings
+
 
 @router.get('/company/ranks/{category}', tags=["User"], )
 def get_company_category(category: str, user: User = Depends(get_current_user)):
