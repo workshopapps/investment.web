@@ -174,9 +174,10 @@ def update_password(model: UpdatePasswordModel, user: User = Depends(get_current
         raise HTTPException(status_code=401, detail="Invalid current password")
 
     db: Session = next(get_db())
-    user.password = hash_password(model.new_password)
-    db.refresh(user)
+    update = db.query(User).filter(User.id == user.id).first()
+    update.password = hash_password(model.new_password)
     db.commit()
+    db.flush()
 
     return {"message": "Password updated successfully"}
 
