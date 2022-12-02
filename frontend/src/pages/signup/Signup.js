@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
-// import signupimg from './../../assets/signup/signup-img.png';
-// import signupdesk from './../../assets/signup/signup-desk-img.png';
-import eyeIcon from './../../assets/signup/eye-icon.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import PageLayout from '../layout';
+import { AiOutlineEyeInvisible } from 'react-icons/ai';
+import { AiOutlineEye } from 'react-icons/ai';
 
 const Signup = () => {
+    const baseUrl = 'https://api.yieldvest.hng.tech/auth/signup';
     const navigate = useNavigate();
     const [passwordType, setPasswordType] = useState('password');
     const [signupForm, setSignUpForm] = useState({
-        fullname: '',
         email: '',
+        name: '',
         password: ''
     });
     const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
-    console.log(formErrors);
     const [isSubmit, setisSubmit] = useState(false);
+    const [timeOut, setTimeout] = useState(false);
+    const [timeOutGoogle, setTimeoutGoogle] = useState(false);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -39,18 +40,45 @@ const Signup = () => {
         setFormErrors(validate(signupForm));
     };
 
+    //post to the backend
+    const post = () => {
+        axios
+            .post(baseUrl, {
+                email: signupForm.email,
+                name: signupForm.name,
+                password: signupForm.password
+            })
+            .then(function (response) {
+                if (response.status === 200) {
+                    toast.success('Signed up successful');
+                    setInterval(() => {
+                        setTimeout(true);
+                    }, 1500);
+                } else {
+                    toast.error('Signup failed');
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+                toast.warn('Account already exists. Kindly proceed to login');
+            });
+    };
+
     //handle google OAUTH
     const handleGoogleSignIn = async (tokenResponse) => {
         setGoogleUserToken(tokenResponse);
         console.log(googleUserToken);
 
         axios
-            .get(`/auth?token=${tokenResponse.credential}`)
+            .get(
+                `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
+            )
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
                     setInterval(() => {
-                        navigate('/');
+                        setTimeoutGoogle(true);
                     }, 1500);
                 } else {
                     toast.error('Authentication failed');
@@ -81,15 +109,12 @@ const Signup = () => {
             setSignUpForm((prevState) => {
                 return {
                     ...prevState,
-                    fullname: '',
+                    name: '',
                     email: '',
                     password: ''
                 };
             });
-            toast.success('Login successful');
-            setInterval(() => {
-                navigate('/');
-            }, 1500);
+            post();
         }
     }, [formErrors]);
 
@@ -97,7 +122,7 @@ const Signup = () => {
         const errors = {};
         const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
 
-        if (!signupForm.fullname) {
+        if (!signupForm.name) {
             errors.fullname = 'Required';
         }
 
@@ -113,6 +138,13 @@ const Signup = () => {
         return errors;
     };
 
+    if (timeOut) {
+        navigate('/login');
+    }
+    if (timeOutGoogle) {
+        navigate('/');
+    }
+
     return (
         <PageLayout>
             <div className="mb-12 md:overflow-hidden md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
@@ -120,8 +152,8 @@ const Signup = () => {
                 <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
                     Buy stocks and grow your business
                 </h1>
-                <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-10">
-                    <div className="w-5/6 mt-8 flex flex-col gap-3 md:px-4 md:gap-2 lg:px-8 lg:gap-3 lg:w-full xl:px-20">
+                <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-8">
+                    <div className="w-5/6 mt-8 flex flex-col gap-3 md:gap-2 lg:px-5 lg:gap-3 lg:w-full">
                         <h1 className="font-HauoraBold text-xl text-center tracking-wide">
                             Create Account
                         </h1>
@@ -135,7 +167,7 @@ const Signup = () => {
                             <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
                         </div> */}
                         <form
-                            className="flex flex-col gap-3 w-full md:justify-center md:place-self-center"
+                            className="flex flex-col gap-3 w-full md:justify-center md:place-self-center md:w-95"
                             onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-0.5">
                                 <label className="font-HauoraBold text-sm">Name</label>
@@ -147,12 +179,12 @@ const Signup = () => {
                                             ? 'border border-red-500 px-3 h-11 rounded-md text-base focus:outline-red-400 focus:shadow'
                                             : 'border border-gray-400 px-3 h-11 rounded-md text-base focus:outline-green-400 focus:shadow'
                                     }
-                                    value={signupForm.fullname}
-                                    name={'fullname'}
+                                    value={signupForm.name}
+                                    name={'name'}
                                     onChange={handleChange}
                                 />
                                 {formErrors && (
-                                    <p className="text-red-500 text-sm ">{formErrors?.fullname}</p>
+                                    <p className="text-red-500 text-sm ">{formErrors?.name}</p>
                                 )}
                             </div>
                             <div className="flex flex-col gap-0.5">
@@ -195,7 +227,25 @@ const Signup = () => {
                                     }
                                     onClick={togglePassword}>
                                     {' '}
-                                    <img src={eyeIcon} />
+                                    <div
+                                        className={
+                                            !formErrors?.password
+                                                ? 'absolute right-0 bottom-0 cursor-pointer'
+                                                : 'absolute right-0 bottom-5 cursor-pointer'
+                                        }
+                                        onClick={togglePassword}>
+                                        {' '}
+                                        <i>
+                                            {passwordType === 'password' ? (
+                                                <AiOutlineEyeInvisible
+                                                    size={'20px'}
+                                                    color={'#A3AAB2'}
+                                                />
+                                            ) : (
+                                                <AiOutlineEye size={'20px'} color={'#A3AAB2'} />
+                                            )}
+                                        </i>
+                                    </div>
                                 </div>
                                 {formErrors && (
                                     <p className="text-red-500 text-sm ">{formErrors?.password}</p>
