@@ -75,7 +75,6 @@ const Subscription = () => {
                         priceId="price_1M84ELE0pPf6mXoCmP61VmyL"
                         features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                         payload={freeMonthly}
-                        mode="primary"
                         buttonText="Subscribe"
                     />
 
@@ -88,7 +87,6 @@ const Subscription = () => {
                         priceId="price_1M84FHE0pPf6mXoCaZEdZHgv"
                         features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
                         payload={premiumMonthly}
-                        mode="primary"
                         buttonText="Subscribe"
                     />
 
@@ -98,7 +96,7 @@ const Subscription = () => {
             </div> : subType === 2 ?
 
                 <div className="w-full flex justify-center font-Hauora">
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center mx-0 md:mx-[100px] p-0 md:p-[2em] w-full">
+                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full">
 
                         <SubscribeCard
                             name="Basic"
@@ -108,7 +106,6 @@ const Subscription = () => {
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
                             features={["Stock Information", "Share Stocks", "Access to Only 12 stocks"]}
                             payload={freeYearly}
-                            mode="primary"
                             buttonText="Subscribe"
                         />
 
@@ -121,7 +118,6 @@ const Subscription = () => {
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
                             features={["Stock Information", "Share Stocks", "Unlimited access to all stocks", "Access to more filters", "Access to Small Caps stocks"]}
                             payload={premiumYearly}
-                            mode="secondary"
                             buttonText="Subscribe"
                         />
 
