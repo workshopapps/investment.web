@@ -59,7 +59,8 @@ async def authentication(token: str):
             return generate_token(current_user.id)
 
         # add new user to database
-        db_user: User = models.User(email=email, name=name)
+        db_user: User = User(id=str(uuid4()), email=email, name=name,
+                             password=hash_password(str(uuid4())))
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
