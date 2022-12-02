@@ -50,7 +50,7 @@ const Signup = () => {
             })
             .then(function (response) {
                 if (response.status === 200) {
-                    toast.success('Signed up successful');
+                    toast.success('Signed up successfully');
                     setInterval(() => {
                         setTimeout(true);
                     }, 1500);
@@ -146,7 +146,7 @@ const Signup = () => {
     }
 
     return (
-        <PageLayout>
+        <PageLayout showFooter={false}>
             <div className="mb-12 md:overflow-hidden md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
                 <ToastContainer />
                 <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
