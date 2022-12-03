@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AuthContext from './AuthContext';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 const AuthProvider = ({ children }) => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
@@ -97,5 +98,5 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
+AuthProvider.propTypes = { children: PropTypes.element };
 export default AuthProvider;

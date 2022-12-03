@@ -37,7 +37,7 @@ const Subscription = () => {
             <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-HauoraBold">
                 <div className="lg:w-[55%] w-[90%] mx-0 md:mx-auto">
                     <h1 className="text-md md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
-                        Get started with <span className="text-[#1BD47B] ">MyStockPlug</span> by
+                        Get started with <span className="text-[#1BD47B] ">Yieldvest</span> by
                         subscribing to one of our plans
                     </h1>
                 </div>
