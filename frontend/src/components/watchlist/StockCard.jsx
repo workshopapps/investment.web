@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './../../assets/company-profile/US.png';
 import { FiTrash } from 'react-icons/fi';
+import WatchListContext from '../../store/watchList/WatchlistContext';
 
 // eslint-disable-next-line react/prop-types
 const StockCard = ({ id }) => {
+    const { deleteFromWatchList } = useContext(WatchListContext);
     // const [data, setData] = useState([]);
     console.log(id);
     return (
@@ -32,7 +34,7 @@ const StockCard = ({ id }) => {
                             <p className="font-[600] text-[#545964] mb-[5x]">E-commerce</p>
                         </div>
                     </div>
-                    <div>
+                    <div onClick={deleteFromWatchList(id)}>
                         <FiTrash className="text-[21px]" />
                     </div>
                 </div>

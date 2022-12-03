@@ -6,7 +6,6 @@ import dateFormat from 'dateformat';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
-
     const [stocks, setStocks] = useState([]);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
