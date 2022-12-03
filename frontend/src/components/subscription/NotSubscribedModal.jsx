@@ -17,7 +17,7 @@ const NotSubscribedModal = () => {
                     leave="ease-in duration-200"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0">
-                    <div className="fixed inset-0 bg-[rgba(10, 11, 13)] bg-opacity-75 transition-opacity" />
+                    <div className="fixed inset-0 bg-[#0a0b0d] bg-opacity-75 transition-opacity" />
                 </Transition.Child>
                 <div className="fixed inset-0 z-10 overflow-y-auto">
                     <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -29,9 +29,11 @@ const NotSubscribedModal = () => {
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                            <Dialog.Panel className="relative w-full transform overflow-hidden rounded-[8px] px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6 lg:max-w-[440px]">
+                            <Dialog.Panel className="relative w-full transform overflow-hidden shadow-xl transition-all flex justify-center items-center">
                                 <div className="flex justify-center items-center flex-col ">
-                                    <div className="mb-[8px] flex justify-end items-center rounded-lg w-full">
+                                    <div
+                                        className="mb-[8px] flex justify-end items-center rounded-lg w-full"
+                                        onClick={() => setOpen(false)}>
                                         <img src={Cancel} alt="" />
                                     </div>
                                     <div className="bg-white max-w-[441px] flex flex-col items-center justify-start rounded-[8px] px-[54px] pt-[60px] pb-[34px]">
