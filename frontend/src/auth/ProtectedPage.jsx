@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import AuthContext from './AuthContext';
-
+import PropTypes from 'prop-types';
 const ProtectedPage = ({ children }) => {
     const { getApiService, setUser, setIsLoggedIn, logout, accessToken } = useContext(AuthContext);
 
@@ -35,5 +35,5 @@ const ProtectedPage = ({ children }) => {
 
     return <>{children}</>;
 };
-
+ProtectedPage.propTypes = { children: PropTypes.element };
 export default ProtectedPage;

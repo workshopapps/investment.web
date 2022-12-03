@@ -18,7 +18,7 @@ const HeroSection = ({ data }) => {
     return (
         <div
             data-testid="hero-section"
-            className='flex bg-[url("/src/assets/images/myhero.png")] relative bg-no-repeat bg-cover  items-center pl-5 md:pl-[50px] lg:pl-[100px] h-[160px] md:h-[360px]'>
+            className='flex bg-[url("/src/assets/images/myhero.svg")] relative bg-no-repeat bg-cover  items-center pl-5 md:pl-[50px] lg:pl-[100px] h-[160px] md:h-[360px]'>
             <div className="flex flex-col text-white gap-[6px] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-[90%]">
                 <h1 className="font-bold text-center sm:text-3xl md:text-4xl text-xl lg:text-[40px]  text-white lg:font-semibold mb-10">
                     The Yieldvest Help Center
