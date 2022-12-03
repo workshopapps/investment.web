@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import SuccessIcon from '../../../assets/resetPassword/success.png';
 import { BiErrorCircle } from 'react-icons/bi';
 import { ClapSpinner } from 'react-spinners-kit';
+import { useNavigate } from 'react-router-dom';
 
 const ResetModal = ({ close, status = '' }) => {
     let success, error, loading;
+    const navigate = useNavigate();
+
     error = (
         <div className="absolute top-0 font-Hauora right-0 w-full h-full bg-black/70 flex items-center justify-center">
             <div className=" w-full h-full  bg-white  md:w-[658px] md:h-[508px]  md:rounded-lg flex flex-col gap-4 items-center justify-center">
@@ -21,7 +24,6 @@ const ResetModal = ({ close, status = '' }) => {
             </div>
         </div>
     );
-    // dd
     success = (
         <div className="absolute top-0 font-Hauora right-0 w-full h-full bg-black/70 flex items-center justify-center">
             <div className=" w-full h-full  bg-white  md:w-[658px] md:h-[508px]  md:rounded-lg flex flex-col gap-8 items-center justify-center">
@@ -34,6 +36,7 @@ const ResetModal = ({ close, status = '' }) => {
                     className="bg-[#1BD47B] text-sm w-[344px] h-[52px] rounded-lg"
                     onClick={() => {
                         close();
+                        navigate('/login');
                     }}>
                     Done
                 </button>

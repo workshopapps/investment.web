@@ -1,17 +1,46 @@
 import React, { useState } from 'react';
 import PageLayout from '../../layout';
 import ResetModal from './SuccessModal';
-// import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 const ResetPassword = () => {
     const [showModal, setShowModal] = useState(false);
     const [status, setStatus] = useState('');
-    // const [newPwd, setNewPwd] = useState('');
-    // const [oldPwd, setOldPwd] = useState('');
+    const [newPwd, setNewPwd] = useState('');
+    const [oldPwd, setOldPwd] = useState('');
+    const [pwdTouched, setPwdTouched] = useState(false);
+
+    const [query] = useSearchParams();
+    const code = query.get('code');
 
     const formHandler = async (e) => {
         e.preventDefault();
         setShowModal(true);
+
+        const body = JSON.stringify({
+            new_password: newPwd,
+            code: code
+        });
+        try {
+            const response = await axios.post(
+                'https://api.yieldvest.hng.tech/auth/finalize_password_reset/',
+                body,
+                {
+                    headers: {
+                        accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+
+            if (response) {
+                console.log(response);
+                setStatus('success');
+            }
+        } catch (error) {
+            setStatus('error');
+        }
     };
     return (
         <div className="relative">
@@ -37,8 +66,10 @@ const ResetPassword = () => {
                                     </label>
                                     <input
                                         className="w-full border rounded-[4px] h-[56px] px-4 placeholder:text-sm"
-                                        type="text"
+                                        type="password"
                                         placeholder="Enter new password"
+                                        onChange={(e) => setOldPwd(e.target.value)}
+                                        value={oldPwd}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1">
@@ -49,10 +80,18 @@ const ResetPassword = () => {
                                         className="w-full border rounded-[4px] h-[56px] px-4 placeholder:text-sm"
                                         type="password"
                                         placeholder="Enter password"
+                                        onChange={(e) => setNewPwd(e.target.value)}
+                                        value={newPwd}
+                                        onBlur={() => setPwdTouched(true)}
                                     />
                                 </div>
+                                {oldPwd !== newPwd && pwdTouched && (
+                                    <p className="text-red-500">Passwords not the same</p>
+                                )}
 
-                                <button className="bg-primary102 h-[52px] font-semibold w-full text-[#1F2226] text-center rounded-lg text-sm">
+                                <button
+                                    disabled={newPwd.length < 3 || oldPwd !== newPwd}
+                                    className="bg-primary102 h-[52px] font-semibold w-full text-[#1F2226] text-center rounded-lg text-sm">
                                     Save Password
                                 </button>
                             </form>

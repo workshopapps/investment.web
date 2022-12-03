@@ -245,7 +245,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/reset',
+        path: '/finalize_password_reset',
         element: <ResetPassword />,
         errorElement: <ErrorPage />
     },
