@@ -3,22 +3,15 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import Logo from '../../assets/header/logo.svg';
-// import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import user_image from '../../assets/images/Rectangle 4749.png';
-
-import { IoIosNotifications } from 'react-icons/io';
-import { FiSettings } from 'react-icons/fi';
-// import { BiBell } from 'react-icons/bi';
 import AuthContext from '../../auth/AuthContext';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
     const { isLoggedIn } = useContext(AuthContext);
-
-    // console.log(logged);
     const navStyle = {
         background: '#000718',
         color: 'white'
@@ -50,13 +43,8 @@ const Nav = ({ openMenu }) => {
                     <p className="text-[#1BD47B] font-bold ml-2">Yieldvest</p>
                 </div>
                 <MenuLinks />
-                {/* <div className="hidden md:block nav-items w-full">
-                </div> */}
                 {!isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        {/* <div className="notification">
-                            <BiBell className="text-[26px]" />
-                        </div> */}
                         <Link to="/login">
                             <button type="button" style={loginStyle} className="rounded">
                                 Login
@@ -75,15 +63,13 @@ const Nav = ({ openMenu }) => {
 
                 {isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        <IoIosNotifications />
-
-                        <FiSettings onClick={() => navigate('/settings')} />
-
-                        <img
-                            className="w-10 h-10 rounded-full"
-                            src={user_image}
-                            alt="user_profile"
-                        />
+                        <Link to="/settings">
+                            <img
+                                className="w-10 h-10 rounded-full"
+                                src={user_image}
+                                alt="user_profile"
+                            />
+                        </Link>
                     </div>
                 )}
             </div>
