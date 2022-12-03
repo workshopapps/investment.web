@@ -14,7 +14,7 @@ import DownIcon from '../../assets/landingPage/icons/down.svg';
 import OverviewCard from '../../components/CompanyProfile/OverviewCard';
 import VisualDataCard from '../../components/CompanyProfile/AnalysisCard';
 import { getCompanyData } from '../../server/companyProfile';
-import { companyData } from '../../store/companyData/profileBackend';
+import axios from 'axios';
 
 const CompanyProfilePage = () => {
 
@@ -24,33 +24,17 @@ const CompanyProfilePage = () => {
 
     const [loading, setLoading] = React.useState(true)
 
-    // 
-    const rawData = companyData
-
-
-    const fetchData = useCallback(async () => {
-        if (companyId !== "") {
-            await Promise.all([getCompanyData(companyId)])
-                .then((res) => {
-                    console.log(res[0])
-                    setData(res[0])
-                    setLoading(false)
-                })
-                .catch((err) => {
-                    console.log(err[0].error_message);
-                    return err;
-                });
-        }
-    }, [companyId])
-
     useEffect(() => {
-        const resultData = rawData.find((item) => {
-            return item.company_id == companyId
-        })
-        console.log(resultData)
-        setLoading(false)
-        setData(resultData)
+        axios
+            .get(`https://api.yieldvest.hng.tech/company/${companyId}`)
+            .then((res) => {
+                setData(res.data)
+                console.log(res.data)
+                setLoading(false)
+            })
+            .catch((err) => console.log(err));
     }, [companyId]);
+
 
     switch (loading) {
         case true:
@@ -75,7 +59,7 @@ const CompanyProfilePage = () => {
                                         companyId={companyId}
                                         name={data.name}
                                         price={`${data.stock_price.stock_price}`}
-                                        industry={data.sector.industry}
+                                        industry={data.sector.sector}
                                     />
                                     <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-10 pb-6 flex flex-row justify-between">
                                         MARKET CAP <span className="font-HauoraBold font-bold">{(data.market_cap / 1e9).toFixed(2)}B</span>
