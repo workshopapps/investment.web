@@ -62,5 +62,4 @@ const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-AuthProvider.propTypes = { children: PropTypes.element };
 export default AuthProvider;
