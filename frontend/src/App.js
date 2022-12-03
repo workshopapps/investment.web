@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
-
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
@@ -30,16 +29,14 @@ import LargeCap from './pages/cap/LargeCap';
 import SmallCap from './pages/cap/SmallCap';
 import MidCap from './pages/cap/MidCap';
 import CapIndustry from './pages/cap/Industry';
-
 import Payment from './pages/paymentPage/Payment';
-
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
 import Careers from './pages/careers/Careers';
 import Plugger from './pages/careers/Plugger';
 import Position from './pages/careers/Position';
-
+import HowITWorks from './pages/HOWITWORKS/HowITWorks.jsx';
 import HelpPage from './pages/help';
 import PolicyPage from './pages/privacy-statement';
 import TermsAndConditionPage from './pages/terms-of-use';
@@ -48,6 +45,9 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
+import Watchlist from './pages/watchlist/Watchlist.jsx';
+import HowItWorks from './pages/how-it-works/Index';
+import DownloadPage from './pages/download/index.js';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -59,6 +59,11 @@ const router = createBrowserRouter([
     {
         path: '/landing',
         element: <LandingPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/howto',
+        element: <HowITWorks />,
         errorElement: <ErrorPage />
     },
     {
@@ -84,6 +89,11 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/download',
+        element: <DownloadPage />,
         errorElement: <ErrorPage />
     },
     {
@@ -233,6 +243,16 @@ const router = createBrowserRouter([
     {
         path: '/cancel',
         element: <Cancel />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/watchlist',
+        element: <Watchlist />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/howitworks',
+        element: <HowItWorks />,
         errorElement: <ErrorPage />
     }
 ]);

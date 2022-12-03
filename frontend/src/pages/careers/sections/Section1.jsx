@@ -14,7 +14,7 @@ export default function Section1() {
                 <p className="text-primaryGray text-left py-2 md:w-3/6 w-full text-sm tracking-widest leading-6">
                     {' '}
                     If you love working smart, taking on big challenges and making impacts, then
-                    join amazing people at mystockplug.
+                    join amazing people at Yieldvest.
                 </p>
                 <Link to="/position">
                     <Button title="View Positions" />

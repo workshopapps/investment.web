@@ -5,10 +5,9 @@ const HeroSection = () => {
     return (
         <div
             data-testid="hero-section"
-            className='flex bg-[url("/src/assets/about/hero.png")] bg-no-repeat bg-cover  items-center pl-5 md:pl-[50px] lg:pl-[100px] h-[160px] md:h-[360px]'>
-            <div className="flex flex-col text-white gap-[6px]">
-                <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">About Us</h1>
-                <p className="text-xs md:text-2xl font-[500]">The Spark that ignites your dreams</p>
+            className='flex font-HauoraBold bg-[url("/src/assets/about/hero-image.png")] bg-no-repeat bg-cover pl-4 md:pl-0 justify-center text-center items-center h-[200px] md:h-[360px] drop-shadow-2xl :shadow-gray-500'>
+            <div className="flex flex-col mt-2 md:mt-10 text-white gap-[6px]">
+                <h1 className="text-4xl lg:text-6xl font-bold">About Us</h1>
             </div>
         </div>
     );
