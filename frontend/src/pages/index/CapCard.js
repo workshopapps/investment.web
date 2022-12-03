@@ -19,12 +19,11 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
         setFundamentalModal(!fundamentalModal);
     };
     const handleFundamentalHover = () => {
-        setHoverFundamental(!hoverFundamental);
+        //setHoverFundamental(!hoverFundamental);
     };
     const handlePriceHover = () => {
-        setHoverPrice(!hoverPrice);
+        //setHoverPrice(!hoverPrice);
     };
-    console.log(rank);
     return (
         <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
             <div>
@@ -55,9 +54,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <span>
                         <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
-                                onMouseEnter={handlePriceHover}
-                                onMouseLeave={handlePriceHover}
-                                onMouseOver={handlePriceModal}
+                                // onMouseEnter={handlePriceHover}
+                                // onMouseLeave={handlePriceHover}
+                                // onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -67,9 +66,10 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             </p>
                             <p
                                 className="cursor-pointer"
-                                onMouseEnter={handlePriceHover}
-                                onMouseLeave={handlePriceHover}
-                                onMouseOver={handlePriceModal}>
+                                // onMouseEnter={handlePriceHover}
+                                // onMouseLeave={handlePriceHover}
+                                // onMouseOver={handlePriceModal}
+                            >
                                 <Tippy
                                     content={<span className="">See details</span>}
                                     placement="bottom">
@@ -77,6 +77,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                         src={hoverPrice ? Eye : inactiveEye}
                                         alt="eye"
                                         className="w-5 h-6"
+                                        onClick={handlePriceModal}
                                     />
                                 </Tippy>
                             </p>
@@ -84,8 +85,8 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     </span>
                     {/* Mobile view */}
                     <span
-                        onMouseEnter={handlePriceHover}
-                        onMouseLeave={handlePriceHover}
+                        // onMouseEnter={handlePriceHover}
+                        // onMouseLeave={handlePriceHover}
                         onClick={handlePriceModal}>
                         <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
@@ -121,9 +122,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                         <span className="w-2">
                             <div className="hidden lg:flex w-fit font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                                 <p
-                                    onMouseEnter={handleFundamentalHover}
-                                    onMouseLeave={handleFundamentalHover}
-                                    onMouseOver={handleFundamentalModal}
+                                    // onMouseEnter={handleFundamentalHover}
+                                    // onMouseLeave={handleFundamentalHover}
+                                    // onMouseOver={handleFundamentalModal}
                                     className={
                                         !hoverFundamental
                                             ? `text-[#B0B2B7] font-normal pl-2 pr-4`
@@ -133,9 +134,10 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                 </p>{' '}
                                 <p
                                     className="cursor-pointer"
-                                    onMouseEnter={handleFundamentalHover}
-                                    onMouseLeave={handleFundamentalHover}
-                                    onMouseOver={handleFundamentalModal}>
+                                    // onMouseEnter={handleFundamentalHover}
+                                    // onMouseLeave={handleFundamentalHover}
+                                    // onMouseOver={handleFundamentalModal}
+                                >
                                     <Tippy
                                         content={<span className="">See details</span>}
                                         placement="bottom">
@@ -143,6 +145,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                             src={hoverFundamental ? Eye : inactiveEye}
                                             alt="eye"
                                             className="w-5 h-6"
+                                            onClick={handleFundamentalModal}
                                         />
                                     </Tippy>
                                 </p>
@@ -151,8 +154,8 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     </div>
                     {/* Mobile view */}
                     <span
-                        onMouseEnter={handleFundamentalHover}
-                        onMouseLeave={handleFundamentalHover}
+                        // onMouseEnter={handleFundamentalHover}
+                        // onMouseLeave={handleFundamentalHover}
                         onClick={handleFundamentalModal}>
                         <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                             <p
