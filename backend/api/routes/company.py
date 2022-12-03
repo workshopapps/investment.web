@@ -37,6 +37,7 @@ def get_sectors():
             'industries': industry_list
         }
         response.append(data)
+    db.close()
 
     return response
 
@@ -114,12 +115,17 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         }
         response.append(data)
 
+    db.close()
     return response
 
 
 @router.get('/company/ranks/{category}', tags=["Company"], )
 async def get_company_category(category: str):
     db: Session = next(get_db())
+    if category == low_cap_category_id:
+        raise HTTPException(status_code=401,
+                            detail="Please use the authenticated version of this route to "
+                                   "access low market cap stocks")
     # get companies
     companies: list = db.query(models.Company).filter(models.Company.category == category).all()
 
@@ -164,6 +170,7 @@ async def get_company_category(category: str):
         }
         response.append(data)
 
+    db.close()
     return response
 
 
@@ -192,6 +199,7 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
+
     response = {
         'company_id': company.company_id,
         'name': company.name,
@@ -204,6 +212,8 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
         'financials': financials,
         'stock_prices': stock_prices,
     }
+
+    db.close()
     return response
 
 
@@ -234,6 +244,8 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db)):
         'financials': financials,
         'stock_price': stock_price,
     }
+
+    db.close()
     return response
 
 
@@ -250,5 +262,6 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
 
     rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).all()
+    db.close()
 
     return rankings

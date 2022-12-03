@@ -2,12 +2,17 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
+import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
 import WatchListContext from '../../store/watchList/WatchList';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, sector }) => {
     const [fundamentalModal, setFundamentalModal] = useState(false);
     const [priceModal, setPriceModal] = useState(false);
+    const [hoverFundamental, setHoverFundamental] = useState(false);
+    const [hoverPrice, setHoverPrice] = useState(false);
     const handlePriceModal = () => {
         setPriceModal(!priceModal);
     };
@@ -16,10 +21,17 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
     };
     rank;
     const { addWatch, deleteWatch } = useContext(WatchListContext);
+    const handleFundamentalHover = () => {
+        setHoverFundamental(!hoverFundamental);
+    };
+    const handlePriceHover = () => {
+        setHoverPrice(!hoverPrice);
+    };
+    console.log(rank);
     return (
-        <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+        <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
             <div>
-                <div className="-mt-4 -ml-3 text-[#525A65] text-2xl font-Hauora font-semibold">
+                <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-10 h-10 text-white text-2xl font-Hauora font-bold">
                     {index + 1}
                 </div>
                 <div className="flex gap-5 mb-6 justify-between">
@@ -35,35 +47,77 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    <div
-                        className="bg-[#96EBC2] text-[#292D32] font-normal text-2xl rounded-lg w-11 h-11 items-center flex justify-center"
-                        onClick={() => {
-                            addWatch(abbr);
-                        }}>
-                        +
+                    <div className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center">
+                        <Tippy
+                            content={<span className="">Add to watchlist</span>}
+                            placement="bottom">
+                            <span>+</span>
+                        </Tippy>
                     </div>
                 </div>
                 <div className="space-y-2">
-                    <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base mb-6">
-                        <p className="text-[#B0B2B7] font-normal pl-2">PRICE </p>
-                        <p className="cursor-pointer" onClick={handlePriceModal}>
-                            <img src={Eye} alt="eye" />
-                        </p>
-                    </div>
+                    <span
+                        onMouseEnter={handlePriceHover}
+                        onMouseLeave={handlePriceHover}
+                        onClick={handlePriceModal}>
+                        <div className="flex font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
+                            <p
+                                className={
+                                    !hoverPrice
+                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
+                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                }>
+                                PRICE{' '}
+                            </p>
+                            <p className="cursor-pointer">
+                                <Tippy
+                                    content={<span className="">See details</span>}
+                                    placement="bottom">
+                                    <img
+                                        src={hoverPrice ? Eye : inactiveEye}
+                                        alt="eye"
+                                        className="w-5 h-6"
+                                    />
+                                </Tippy>
+                            </p>
+                        </div>
+                    </span>
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice}</p>
                     </div>
-                    <hr className="text-[#B0B2B7] mx-1" />
-                    <div className="flex justify-between font-semibold text-[#66717E] text-xs lg:text-base pb-[34px]">
-                        <p className="text-[#B0B2B7] font-normal pl-2">FUNDAMENTALS </p>
-                        <p className="cursor-pointer" onClick={handleFundamentalModal}>
-                            <img src={Eye} alt="eye" />
-                        </p>
+                    <div className="p-2">
+                        <div className="w-full bg-[#B0B2B7] h-[1px]"></div>
                     </div>
+                    <span
+                        onMouseEnter={handleFundamentalHover}
+                        onMouseLeave={handleFundamentalHover}
+                        onClick={handleFundamentalModal}>
+                        <div className="flex font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
+                            <p
+                                className={
+                                    !hoverFundamental
+                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
+                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                }>
+                                FUNDAMENTALS{' '}
+                            </p>{' '}
+                            <p className="cursor-pointer">
+                                <Tippy
+                                    content={<span className="">See details</span>}
+                                    placement="bottom">
+                                    <img
+                                        src={hoverFundamental ? Eye : inactiveEye}
+                                        alt="eye"
+                                        className="w-5 h-6"
+                                    />
+                                </Tippy>
+                            </p>
+                        </div>
+                    </span>
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Market Cap </p>
-                        <p className="text-[#333946] text-semibold">${marketCap / 1000000000}B</p>
+                        <p className="text-[#333946] text-semibold">${marketCap / 1000000000}Bn</p>
                     </div>
                 </div>
                 <Link to={link}>
@@ -86,6 +140,11 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
                         Sparkline Loading...
                     </div>
+                    <Link to={link}>
+                        <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
+                            See Company Profile
+                        </div>
+                    </Link>
                 </Modal>
             )}
             {fundamentalModal && (
@@ -102,6 +161,11 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
                         Chart Loading...
                     </div>
+                    <Link to={link}>
+                        <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
+                            See Company Profile
+                        </div>
+                    </Link>
                 </Modal>
             )}
         </div>

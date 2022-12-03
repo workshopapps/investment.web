@@ -5,28 +5,31 @@ import setUpImg from '../../assets/how-it-works/setUpImg.png';
 import getImg from '../../assets/how-it-works/getImg.png';
 import arrowRight from '../../assets/how-it-works/arrow-right.png';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Index = () => {
     const process = [
         {
             id: '1',
             image: signUpImg,
-            headingText: 'Sign up for your free account',
-            subText: 'Open a premium account for full functionality',
+            headingText: 'Create your Yieldvest account',
+            subText:
+                'Sign up & Setup your free account. You can upgrade to a premium account for full functionality',
             subText2: 'Learn more'
         },
         {
             id: '2',
             image: setUpImg,
-            headingText: 'Set up your account',
-            subText: 'Create your profile and answer our short quiz on your risk appetite'
+            headingText: 'View our well-curated recommendations list',
+            subText:
+                'Going through our list we have various options put together for you based on expert fundamental analysis.'
         },
         {
             id: '3',
             image: getImg,
-            headingText: 'Get your custom-made recommendations',
+            headingText: 'Choose a company',
             subText:
-                'From the short quiz, we understand your interests and curate stock options that are tailored to you'
+                'After going through the list and seeing what you like, click on the company to get more information about the company and make your decision on which to Invest in!!'
         }
     ];
 
@@ -47,21 +50,24 @@ const Index = () => {
                 </div>
 
                 {/* SMALLER SCREEN */}
-                <div className="p-10 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+                <div className="p-10 cursor-pointer flex flex-col gap-8 items-center lg:flex-row lg:items-start lg:justify-between">
                     {process?.map((item, index) => {
                         return (
-                            <div key={index} className="flex flex-col justify-center gap-10">
-                                <div className="flex">
-                                    <p className="px-3 py-1 border border-black rounded-full font-HauoraBold">
+                            <motion.div
+                                key={index}
+                                className="flex flex-col justify-center gap-10 w-295 pt-20 relative sm:w-460 md:w-520 lg:w-210"
+                                whileHover={{ scale: 1.2 }}>
+                                <div className="absolute top-5 left-32 text-gray-600 sm:top-2 sm:left-48 md:left-56 lg:left-32">
+                                    <p className="font-HauoraBold text-7xl sm:text-8xl">
                                         {item?.id}
                                     </p>
                                 </div>
-                                <div className="flex flex-col items-center gap-2 lg:w-210">
-                                    <img src={item?.image} className="w-64 sm:w-1/2 lg:w-full" />
-                                    <h1 className="font-HauoraBold text-sm text-center sm:text-xl">
+                                <div className="flex flex-col items-center gap-2 z-20 w-full">
+                                    <img src={item?.image} className=" w-full" />
+                                    <h1 className="font-HauoraBold text-sm text-center sm:text-lg">
                                         {item?.headingText}
                                     </h1>
-                                    <p className="text-sm text-center sm:text-lg">
+                                    <p className="text-sm text-center sm:text-sm">
                                         {item?.subText}
                                     </p>
                                     {item?.subText2 && (
@@ -70,7 +76,7 @@ const Index = () => {
                                         </p>
                                     )}
                                 </div>
-                            </div>
+                            </motion.div>
                         );
                     })}
 
@@ -88,7 +94,7 @@ const Index = () => {
                 <div className="hidden lg:flex lg:justify-center lg:m-10">
                     <Link
                         to={'/signup'}
-                        className="text-sm flex items-center gap-2 bg-green-400 py-3 px-12 rounded-md hover:bg-green-500 transition ease-in-out delay-100">
+                        className="text-sm flex items-center gap-2 bg-green-400 py-3 px-20 rounded-md hover:bg-green-500 transition ease-in-out delay-100">
                         <p className="font-HauoraBold">Get Started</p>
                         <img src={arrowRight} />
                     </Link>

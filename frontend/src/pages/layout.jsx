@@ -1,13 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/prop-types */
 import Footer from '../components/Footer/Footer';
-// import { Outlet } from 'react-router-dom';
 import Nav from '../components/Nav/Nav';
 import { useState, useEffect } from 'react';
 import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
+import ProtectedPage from '../auth/ProtectedPage';
 
-const PageLayout = ({ children }) => {
+const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtected = false }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const pathName = useLocation();
 
@@ -20,14 +20,28 @@ const PageLayout = ({ children }) => {
 
     return (
         <div className="flex flex-col h-screen relative ">
-            <div className="nav-bar flex-none">
-                <Nav openMenu={setOpenMobileMenu} />
-            </div>
-            {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-            <div className="page-content grow">{children}</div>
-            <div className="footer flex-none">
-                <Footer />
-            </div>
+            {showNavBar && (
+                <>
+                    <div className="nav-bar flex-none">
+                        <Nav openMenu={setOpenMobileMenu} />
+                    </div>
+                    {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
+                </>
+            )}
+
+            {isProtected ? (
+                <ProtectedPage>
+                    <div className="page-content grow">{children}</div>
+                </ProtectedPage>
+            ) : (
+                <div className="page-content grow">{children}</div>
+            )}
+
+            {showFooter && (
+                <div className="footer flex-none">
+                    <Footer />
+                </div>
+            )}
         </div>
     );
 };

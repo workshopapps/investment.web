@@ -17,6 +17,12 @@ router = APIRouter()
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 
 
+@router.get('/profile', tags=['User'])
+def get_user_profile(user: User = Depends(get_current_user)):
+    del user.password
+    return user
+
+
 @router.get('/notification_settings', tags=['User'])
 def get_notification_settings(user: User = Depends(get_current_user)):
     db: Session = next(get_db())
@@ -30,6 +36,7 @@ def get_notification_settings(user: User = Depends(get_current_user)):
         db.add(settings)
         db.commit()
         db.refresh(settings)
+    db.close()
 
     return settings
 
@@ -55,6 +62,7 @@ def update_notification_settings(update_model: UpdateNotificationSettingsModel,
     db.add(settings)
     db.commit()
     db.refresh(settings)
+    db.close()
 
     return settings
 
@@ -97,6 +105,7 @@ def get_watchlist(user: User = Depends(get_current_user)):
         }
         response.append(data)
 
+    db.close()
     return response
 
 
@@ -120,6 +129,7 @@ def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
     item = models.WatchlistItem(id=str(uuid4()), user_id=user.id, company_id=company_id)
     db.add(item)
     db.commit()
+    db.close()
 
     return {
         "code": "success",
@@ -145,6 +155,7 @@ def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user
 
     db.delete(item)
     db.commit()
+    db.close()
 
     return {
         "code": "success",
@@ -182,6 +193,7 @@ def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: s
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
+
     response = {
         'company_id': company.company_id,
         'name': company.name,
@@ -196,6 +208,7 @@ def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: s
         'stock_prices': stock_prices,
     }
 
+    db.close()
     return response
 
 
@@ -256,6 +269,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         category: models.Category = comp.cat_value
         stock_price = db.query(models.StockPrice).filter(models.StockPrice.company == comp.company_id).order_by(
             models.StockPrice.date.desc()).first()
+
         data = {
             'company_id': comp.company_id,
             'name': comp.name,
@@ -276,6 +290,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         }
         response.append(data)
 
+    db.close()
     return response
 
 
@@ -287,8 +302,6 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
-   
-   
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
@@ -311,14 +324,16 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
         'financials': financials,
         'stock_price': stock_price,
     }
+
+    db.close()
     return response
 
 
 @router.get('/company/{company_id}/ranking/history', tags=["User"])
 async def get_company_ranking_history(company_id: str, db: Session = Depends(get_db),
-                                            user: User = Depends(get_current_user)):
+                                      user: User = Depends(get_current_user)):
     is_user_subscribed = False
-    
+
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
@@ -334,5 +349,67 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
 
     rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).all()
+    db.close()
 
     return rankings
+
+
+@router.get('/company/ranks/{category}', tags=["User"], )
+def get_company_category(category: str, user: User = Depends(get_current_user)):
+    """
+    This gets the metrics of a company by category for an authenticated user
+    """
+    db: Session = next(get_db())
+
+    # TODO: Validate and ensure the user has active subscription for a low cap company
+    is_user_subscribed = False
+
+    if category == low_cap_category_id and not is_user_subscribed:
+        raise HTTPException(status_code=401,
+                            detail="You must be subscribed before you can access low cap companies")
+    # get companies
+    companies: list = db.query(models.Company).filter(models.Company.category == category).all()
+
+    # get latest rankings
+    rankings: list = []
+    for company in companies:
+        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+        if rank:
+            rankings.append(rank)
+
+    # sort rankings by score (descending)
+    def get_ranking_sort_key(inner_rank: Ranking):
+        return inner_rank.score
+
+    rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+    # create the response list
+    response = []
+    top_rankings = []
+    for ranking in rankings:
+        if len(top_rankings) == 12:
+            break
+
+        top_rankings.append(ranking)
+
+    for ranking in top_rankings:
+        comp: models.Company = ranking.comp_ranks
+        data = {
+            'company_id': comp.company_id,
+            'name': comp.name,
+            'profile_image': comp.profile_image,
+            'sector': comp.sect_value,
+            'category': comp.cat_value,
+            'ticker_symbol': comp.ticker_value.symbol,
+            'exchange_platform': comp.ticker_value.exchange_name,
+            'current_ranking': {
+                'score': ranking.score,
+                'created_at': ranking.created_at,
+                'updated_at': ranking.updated_at,
+            }
+        }
+        response.append(data)
+
+    db.close()
+    return response
