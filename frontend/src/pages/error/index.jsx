@@ -1,7 +1,7 @@
 import React from 'react';
 // import PageLayout from '../layout';
-import saturn from './../../assets/error/moon 1.png';
-import arrow from './../../assets/error/arrow-left.png';
+import saturn from './../../assets/error/moon 1.svg';
+// import arrow from './../../assets/error/arrow-left.svg';
 import { Link } from 'react-router-dom';
 import PageLayout from '../layout';
 
@@ -19,11 +19,8 @@ const ErrorPage = () => {
                                 removed or temporarily unavailable.
                             </p>
                             <div className="flex flex-col w-full gap-4 md:flex-row md:justify-center">
-                                <button className="bg-green-500 text-base h-12 rounded-md flex font-HauoraBold md:w-56">
-                                    <Link to={'/'} className="flex items-center content-center">
-                                        {' '}
-                                        <img src={arrow} alt="" /> Go back
-                                    </Link>
+                                <button className="bg-green-500 text-base h-12 rounded-md flex items-center justify-center font-HauoraBold md:w-56">
+                                    <Link to={'/'}> Go back</Link>
                                 </button>
                             </div>
                         </div>
