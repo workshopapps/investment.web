@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
 import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
+import WatchListContext from '../../store/watchList/WatchLIstProvider';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-const CapCard = ({ logo, abbr, name, marketCap, stockPrice, link, index, sector }) => {
+const CapCard = ({
+    logo,
+    abbr,
+    name,
+    marketCap,
+    stockPrice,
+    link,
+    index,
+    sector,
+    onSuccess,
+    onFailure
+}) => {
     const [fundamentalModal, setFundamentalModal] = useState(false);
     const [priceModal, setPriceModal] = useState(false);
     const [hoverFundamental, setHoverFundamental] = useState(false);
@@ -18,6 +30,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, link, index, sector 
     const handleFundamentalModal = () => {
         setFundamentalModal(!fundamentalModal);
     };
+    const { addToWatchList } = useContext(WatchListContext);
     const handleFundamentalHover = () => {
         //setHoverFundamental(!hoverFundamental);
     };
@@ -41,7 +54,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, link, index, sector 
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    <div className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center">
+                    <div
+                        className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
+                        onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
                         <Tippy
                             content={<span className="">Add to watchlist</span>}
                             placement="bottom">
