@@ -26,8 +26,7 @@ const Nav = ({ openMenu, user }) => {
         background: `#1BD47B`,
         padding: '12px 16px',
         border: 'none',
-        display: 'inline-block',
-        color: `white`
+        display: 'inline-block'
     };
 
     const navigate = useNavigate();
@@ -47,12 +46,12 @@ const Nav = ({ openMenu, user }) => {
                 {!isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                         <Link to="/login">
-                            <button type="button" style={loginStyle} className="rounded">
+                            <button type="button" style={loginStyle} className="rounded text-white">
                                 Login
                             </button>
                         </Link>
                         <Link to="/signup">
-                            <button type="button" style={btnStyle} className="rounded">
+                            <button type="button" style={btnStyle} className="rounded text-[#1F2226] font-[400]">
                                 Get Started
                             </button>
                         </Link>
