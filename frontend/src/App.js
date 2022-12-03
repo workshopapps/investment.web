@@ -50,6 +50,7 @@ import Cancel from './pages/cancelPayment/Cancel';
 import Watchlist from './pages/watchlist/Watchlist.jsx';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
+import Cookies from './pages/Cookies.jsx';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -91,6 +92,11 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/cookies',
+        element: <Cookies />,
         errorElement: <ErrorPage />
     },
     {
@@ -162,12 +168,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/settings',
+        path: '/notificationsettings',
         element: <SettingsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: '/profilesettings',
+        path: '/settings',
         element: <ProfileSettingsPage />,
         errorElement: <ErrorPage />
     },

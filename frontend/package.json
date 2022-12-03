@@ -2,6 +2,7 @@
     "name": "mystockplug",
     "version": "0.1.0",
     "private": true,
+    "license": "MIT",
     "dependencies": {
         "@fontsource/hauora-sans": "^4.5.3",
         "@headlessui/react": "^1.7.4",
@@ -20,6 +21,7 @@
         "postcss": "^8.4.19",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.40.0",
         "react-icons": "^4.6.0",
         "react-router-dom": "^6.4.3",
         "react-router-hash-link": "^2.4.3",
