@@ -44,23 +44,6 @@ const AuthProvider = ({ children }) => {
                     console.log(err);
                 });
         }
-
-        // axios.interceptors.response.use(
-        //     (res) => {
-        //         localStorage.setItem('hook', accessToken);
-        //         if (res.status === 401) {
-        //             setIsLoggedIn(false);
-        //             window.location = '/login';
-        //         }
-
-        //         return res;
-        //     },
-        //     (error) => {
-        //         localStorage.setItem('err', JSON.stringify(error));
-        //         console.log(error);
-        //         return Promise.reject(error);
-        //     }
-        // );
     }, [localToken]);
 
     return (
