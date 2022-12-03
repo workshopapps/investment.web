@@ -34,14 +34,14 @@ const Subscription = () => {
 
     return (
         <PageLayout>
-            <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-HauoraBold">
-                <div className="lg:w-[55%] w-[90%] mx-0 md:mx-auto">
-                    <h1 className="text-md md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
+            <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-Hauora">
+                <div className="lg:w-[60%] w-[80%] mx-0 md:mx-auto">
+                    <h1 className="text-xl md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
                         Get started with <span className="text-[#1BD47B] ">Yieldvest</span> by
                         subscribing to one of our plans
                     </h1>
                 </div>
-                <div className="ml-2 md:ml-10">
+                <div className="hidden ml-2 md:ml-10">
                     <img src={Spring} alt="curly-spring" className="w-6 md:w-12 h-8 md:h-14 ml-6 md:ml-0 mt-0 md:mt-6 curlySpring" />
                 </div>
             </div>
@@ -65,7 +65,7 @@ const Subscription = () => {
             {/* subscription content details start here */}
 
             {subType === 1 ? <div className="w-full flex justify-center font-Hauora">
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full">
+                <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full gap-auto">
 
                     <SubscribeCard
                         name="Basic"
@@ -96,7 +96,7 @@ const Subscription = () => {
             </div> : subType === 2 ?
 
                 <div className="w-full flex justify-center font-Hauora">
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full">
+                    <div className=" grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full">
 
                         <SubscribeCard
                             name="Basic"
