@@ -566,3 +566,14 @@ async def webhook(request: Request):
       print('Unhandled event type {}'.format(event['type']))
 
     return {"success": True}
+
+@router.post('/model-info', tags=["Customer"],)
+async def model_info(request: Request, user: User=Depends(get_current_user)):
+    if request:
+        # get current user
+        id = user.id
+        db: Session = next(get_db())
+        users_sub = db.query(Subscription).all()
+        users_customer = db.query(Customer).all()
+
+        return {"user_subscription_details": users_sub, "customer_Details":users_customer}
