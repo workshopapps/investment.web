@@ -79,7 +79,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 Yieldvest </div>
+            <div className="text-center border-t-[2px] w-full border-white pt-[18px]">2022 Yieldvest </div>
         </footer>
     );
 };
