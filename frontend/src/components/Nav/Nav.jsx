@@ -3,22 +3,14 @@
 /* eslint-disable prettier/prettier */
 import React, { useContext } from 'react';
 import Logo from '../../assets/header/logo.svg';
-// import NavBtn from './NavBtn';
 import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import user_image from '../../assets/images/Rectangle 4749.png';
-
-import { IoIosNotifications } from 'react-icons/io';
-import { FiSettings } from 'react-icons/fi';
-// import { BiBell } from 'react-icons/bi';
 import AuthContext from '../../auth/AuthContext';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
-    const { isLoggedIn } = useContext(AuthContext);
-
-    // console.log(logged);
+    const { isLoggedIn, user } = useContext(AuthContext);
     const navStyle = {
         background: '#000718',
         color: 'white'
@@ -34,15 +26,14 @@ const Nav = ({ openMenu }) => {
         background: `#1BD47B`,
         padding: '12px 16px',
         border: 'none',
-        display: 'inline-block',
-        color: `white`
+        display: 'inline-block'
     };
 
     const navigate = useNavigate();
 
     return (
-        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px]">
-            <div className="w-full flex items-center justify-between max-w-[1243px]">
+        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px]">
+            <div className="w-full flex items-center justify-between">
                 <div
                     onClick={() => navigate('/')}
                     className="cursor-pointer flex items-center text-2xl">
@@ -50,20 +41,15 @@ const Nav = ({ openMenu }) => {
                     <p className="text-[#1BD47B] font-bold ml-2">Yieldvest</p>
                 </div>
                 <MenuLinks />
-                {/* <div className="hidden md:block nav-items w-full">
-                </div> */}
                 {!isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        {/* <div className="notification">
-                            <BiBell className="text-[26px]" />
-                        </div> */}
                         <Link to="/login">
-                            <button type="button" style={loginStyle} className="rounded">
+                            <button type="button" style={loginStyle} className="rounded text-white">
                                 Login
                             </button>
                         </Link>
                         <Link to="/signup">
-                            <button type="button" style={btnStyle} className="rounded">
+                            <button type="button" style={btnStyle} className="rounded text-[#1F2226] font-[400]">
                                 Get Started
                             </button>
                         </Link>
@@ -75,15 +61,11 @@ const Nav = ({ openMenu }) => {
 
                 {isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        <IoIosNotifications />
-
-                        <FiSettings onClick={() => navigate('/settings')} />
-
-                        <img
-                            className="w-10 h-10 rounded-full"
-                            src={user_image}
-                            alt="user_profile"
-                        />
+                        <Link to="/settings" className="w-10 h-10 rounded-full text-white bg-gray-400 flex justify-center items-center">
+                            <h1 className='text-white uppercase font-[700]'>
+                                {user.name.slice(0,2)}
+                            </h1>
+                        </Link>
                     </div>
                 )}
             </div>

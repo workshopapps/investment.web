@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 import dateFormat from 'dateformat';
+import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
+import authContext from '../../auth/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
-
     const [stocks, setStocks] = useState([]);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
@@ -14,6 +16,8 @@ const IndexPage = () => {
     const [sectors, setSectors] = useState([]);
     const [industries, setIndustries] = useState([]);
     const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
+
+    const { isLoggedIn } = createContext(authContext);
 
     const handleMarketCap = (e) => {
         e.preventDefault();
@@ -112,8 +116,18 @@ const IndexPage = () => {
         }
     };
 
+    const onSuccess = () => {
+        toast.success('Added to watch list');
+    };
+
+    const onFailure = () => {
+        toast.error('Failed to add to the list');
+    };
+
     return (
         <PageLayout>
+            {!isLoggedIn && <NotSubscribedModal />}
+            <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
                 <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20">
                     <h1
@@ -199,6 +213,8 @@ const IndexPage = () => {
                                     index={index}
                                     sector={item.industry}
                                     link={`/company/${item.company_id}`}
+                                    onSuccess={onSuccess}
+                                    onFailure={onFailure}
                                 />
                             ))}
                         </div>
