@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import logo from '../../assets/footer/logo-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
 import footerLogo from '../../assets/footer/footerLogo.png';
 import footerFb from '../../assets/footer/footerFb.png';
@@ -17,8 +16,6 @@ const Footer = () => {
             name: 'Get To Know Us',
             navLinks: [
                 { link: 'About Yieldvest', to: '/about' }
-                // { link: 'Careers', to: '/careers' },
-                // { link: 'Stock Tips', to: '/StockTips' },
             ]
         },
         {
@@ -29,11 +26,6 @@ const Footer = () => {
                 { link: 'How it works', to: '/howitworks' },
                 { link: 'FAQ', to: '/faq' },
                 { link: 'Contact Us', to: '/contact' }
-
-                // { link: 'FAQ', to: '#' },
-                // { link: 'News', to: 'news' },
-                // { link: 'Blog', to: '/blog' },
-                // { link: 'Settings', to: '/settings' },
             ]
         },
         {
@@ -41,8 +33,6 @@ const Footer = () => {
             navLinks: [
                 { link: 'Terms of Use', to: '/terms' },
                 { link: 'Privacy Policy', to: '/policy' }
-                // { link: 'Disclaimer' },
-                // { link: 'Cookies Policy' }
             ]
         }
     ];
@@ -55,7 +45,7 @@ const Footer = () => {
         <footer
             style={footerStyle}
             className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full">
-            <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
+            <div className="flex w-full flex-wrap justify-between items-start gap-8  pb-12 mb-8 md:mt-12">
                 <div>
                     <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
                         <img src={footerLogo} alt="" />
@@ -64,14 +54,13 @@ const Footer = () => {
                     </div>
                     <div
                         className={`${
-                            pathname !== '/download' ? 'hidden lg:flex pt-4' : 'hidden'
+                            pathname !== '/download' ? 'hidden lg:flex pt-4 mb-[66px]' : 'hidden'
                         }`}>
                         <Link to="/download">
                             <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
                     </div>
-
-                    <div className="flex gap-3 pt-20">
+                    <div className='flex gap-3  '>
                         <img src={footerTwitter} alt="" />
                         <img src={insta} alt="" />
                         <img src={footerFb} alt="" />
@@ -91,7 +80,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center pb-10">2022 Yieldvest </div>
+            <div className="text-center border-t-[2px] w-full border-white pt-[18px]"> 2022 Yieldvest </div>
         </footer>
     );
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import USFlag from '../../assets/company-profile/US.png';
 
-const OverviewCard = ({ companyId, name, price, industry }) => {
+const OverviewCard = ({ companyId, name, price, industry, market_cap, dividend_yield }) => {
     return (
         <div className="hover:shadow-xl flex flex-col text-[#5C5A5A] bg-white rounded-xl border justify-center px-4 md:px-10 py-5 mb-6 font-Hauora">
             <div className="flex-row flex align-middle justify-between gap-1">
@@ -16,11 +16,11 @@ const OverviewCard = ({ companyId, name, price, industry }) => {
                 <span className="text-xl md:text-2xl font-semibold pt-3">${price}</span>
             </div>
             <div className="flex-row flex align-middle justify-between">
-                <div className="text-base font-sans font-light pt-3">
-                    <span className="text-[#1BD47B] font-medium">Industry:</span>
-                    <br /> {industry}
+                <div className="w-[50%] text-base font-sans flex flex-row font-light pt-3">
+                    <span className="mr-2">Industry:</span>
+                    {industry}
                 </div>
-                <div className="flex flex-col justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-2">
+                <div className="w-[50%] flex flex-row justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-2">
                     <div className="flex justify-end">
                         <img
                             src={USFlag}
@@ -33,6 +33,22 @@ const OverviewCard = ({ companyId, name, price, industry }) => {
                     <p>United States</p>
                 </div>
             </div>
+            <div className="flex-row mt-2 flex align-middle justify-between">
+                <div className="w-[50%] text-base flex flex-row font-light pt-3">
+                    <span className="mr-2">MARKET CAP:</span>
+                </div>
+                <div className="w-[50%] flex flex-row justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-2">
+                    <p>{market_cap}B</p>
+                </div>
+            </div>
+            <div className="flex-row my-2 flex align-middle justify-between">
+                <div className="w-[50%] text-base flex flex-row font-light pt-3">
+                    <span className="mr-2">DIVIDEND YIELD:</span>
+                </div>
+                <div className="w-[50%] flex flex-row justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-2">
+                    <p>{dividend_yield}</p>
+                </div>
+            </div>
         </div>
     );
 };
@@ -41,7 +57,9 @@ OverviewCard.propTypes = {
     companyId: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.string,
-    industry: PropTypes.string
+    industry: PropTypes.string,
+    market_cap: PropTypes.string,
+    dividend_yield: PropTypes.string
 };
 
 export default OverviewCard;

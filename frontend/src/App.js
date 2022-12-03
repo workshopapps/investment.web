@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
-
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
@@ -30,9 +29,7 @@ import LargeCap from './pages/cap/LargeCap';
 import SmallCap from './pages/cap/SmallCap';
 import MidCap from './pages/cap/MidCap';
 import CapIndustry from './pages/cap/Industry';
-
 import Payment from './pages/paymentPage/Payment';
-
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
@@ -48,6 +45,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
+import Watchlist from './pages/watchlist/Watchlist.jsx';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
 
@@ -245,6 +243,11 @@ const router = createBrowserRouter([
     {
         path: '/cancel',
         element: <Cancel />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/watchlist',
+        element: <Watchlist />,
         errorElement: <ErrorPage />
     },
     {
