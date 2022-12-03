@@ -32,11 +32,12 @@ const CapCard = ({
     };
     const { addToWatchList } = useContext(WatchListContext);
     const handleFundamentalHover = () => {
-        //setHoverFundamental(!hoverFundamental);
+        setHoverFundamental(!hoverFundamental);
     };
     const handlePriceHover = () => {
-        //setHoverPrice(!hoverPrice);
+        setHoverPrice(!hoverPrice);
     };
+
     return (
         <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
             <div>
@@ -69,9 +70,6 @@ const CapCard = ({
                     <span>
                         <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
-                                // onMouseEnter={handlePriceHover}
-                                // onMouseLeave={handlePriceHover}
-                                // onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -89,10 +87,18 @@ const CapCard = ({
                                     content={<span className="">See details</span>}
                                     placement="bottom">
                                     <img
-                                        src={hoverPrice ? Eye : inactiveEye}
+                                        src={Eye}
                                         alt="eye"
                                         className="w-5 h-6"
                                         onClick={handlePriceModal}
+                                        onMouseEnter={handlePriceHover}
+                                        onMouseLeave={handlePriceHover}
+                                        style={{
+                                            filter: !hoverPrice
+                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
+                                                : '',
+                                            transition: '.2s ease'
+                                        }}
                                     />
                                 </Tippy>
                             </p>
@@ -117,9 +123,17 @@ const CapCard = ({
                                     content={<span className="">See details</span>}
                                     placement="bottom">
                                     <img
-                                        src={hoverPrice ? Eye : inactiveEye}
+                                        src={Eye}
                                         alt="eye"
                                         className="w-5 h-6"
+                                        onMouseEnter={handlePriceHover}
+                                        onMouseLeave={handlePriceHover}
+                                        style={{
+                                            filter: !hoverPrice
+                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
+                                                : '',
+                                            transition: '.2s ease'
+                                        }}
                                     />
                                 </Tippy>
                             </p>
@@ -142,8 +156,8 @@ const CapCard = ({
                                     // onMouseOver={handleFundamentalModal}
                                     className={
                                         !hoverFundamental
-                                            ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                            : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                            ? `text-[#B0B2B7] font-normal pr-4`
+                                            : `font-normal pr-4 text-[#49DD95]`
                                     }>
                                     FUNDAMENTALS{' '}
                                 </p>{' '}
@@ -157,10 +171,18 @@ const CapCard = ({
                                         content={<span className="">See details</span>}
                                         placement="bottom">
                                         <img
-                                            src={hoverFundamental ? Eye : inactiveEye}
+                                            src={Eye}
                                             alt="eye"
                                             className="w-5 h-6"
                                             onClick={handleFundamentalModal}
+                                            onMouseEnter={handleFundamentalHover}
+                                            onMouseLeave={handleFundamentalHover}
+                                            style={{
+                                                filter: !hoverFundamental
+                                                    ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
+                                                    : '',
+                                                transition: '.2s ease'
+                                            }}
                                         />
                                     </Tippy>
                                 </p>
@@ -176,8 +198,8 @@ const CapCard = ({
                             <p
                                 className={
                                     !hoverFundamental
-                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                        ? `text-[#B0B2B7] font-normal pr-4`
+                                        : `font-normal pr-4 text-[#49DD95]`
                                 }>
                                 FUNDAMENTALS{' '}
                             </p>{' '}
@@ -186,9 +208,17 @@ const CapCard = ({
                                     content={<span className="">See details</span>}
                                     placement="bottom">
                                     <img
-                                        src={hoverFundamental ? Eye : inactiveEye}
+                                        src={Eye}
                                         alt="eye"
                                         className="w-5 h-6"
+                                        onMouseEnter={handleFundamentalHover}
+                                        onMouseLeave={handleFundamentalHover}
+                                        style={{
+                                            filter: !hoverFundamental
+                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
+                                                : '',
+                                            transition: '.2s ease'
+                                        }}
                                     />
                                 </Tippy>
                             </p>
