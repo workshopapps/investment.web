@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
 import Modal from '../../components/Modal';
+import WatchListContext from '../../store/watchList/WatchList';
 
 const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, sector }) => {
     const [fundamentalModal, setFundamentalModal] = useState(false);
@@ -13,7 +14,8 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
     const handleFundamentalModal = () => {
         setFundamentalModal(!fundamentalModal);
     };
-    console.log(rank);
+    rank;
+    const { addWatch, deleteWatch } = useContext(WatchListContext);
     return (
         <div className="border border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
             <div>
@@ -22,7 +24,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                 </div>
                 <div className="flex gap-5 mb-6 justify-between">
                     <div className="flex gap-5">
-                        <div className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]">
+                        <div
+                            className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]"
+                            onClick={() => deleteWatch(abbr)}>
                             <img src={logo} alt={abbr} />
                         </div>
                         <div className="">
@@ -31,7 +35,11 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    <div className="bg-[#96EBC2] text-[#292D32] font-normal text-2xl rounded-lg w-11 h-11 items-center flex justify-center">
+                    <div
+                        className="bg-[#96EBC2] text-[#292D32] font-normal text-2xl rounded-lg w-11 h-11 items-center flex justify-center"
+                        onClick={() => {
+                            addWatch(abbr);
+                        }}>
                         +
                     </div>
                 </div>

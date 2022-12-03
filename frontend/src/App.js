@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserStatusContext } from './store/UserStatusContext.jsx';
 
+import { WatchListProvider } from './store/watchList/WatchList.js';
+
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -270,11 +272,13 @@ function App() {
     };
     return (
         <React.Fragment>
-            <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
-                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                    <RouterProvider router={router} />
-                </GoogleOAuthProvider>
-            </UserStatusContext.Provider>
+            <WatchListProvider>
+                <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
+                    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+                        <RouterProvider router={router} />
+                    </GoogleOAuthProvider>
+                </UserStatusContext.Provider>
+            </WatchListProvider>
         </React.Fragment>
     );
 }
