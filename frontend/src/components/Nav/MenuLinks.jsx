@@ -6,7 +6,7 @@ import AuthContext from '../../auth/AuthContext';
 const MenuLinks = () => {
     const navLinks = [
         {
-            link: 'Stock',
+            link: 'Home',
             url: '/'
         },
         {
