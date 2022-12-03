@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
+import Chart from '../../assets/index/fundamentals-chart.svg';
+import Graph from '../../assets/index/stock-price-graph.svg';
 import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
 import Tippy from '@tippyjs/react';
@@ -181,7 +183,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
             </div>
             {priceModal && (
                 <Modal passedFunc={priceModal} setPassedFunc={setPriceModal}>
-                    <div>
+                    {/* <div>
                         <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
                             PRICE{' '}
                         </p>
@@ -189,9 +191,9 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice.toFixed(2)}</p>
-                    </div>
-                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
-                        Sparkline Loading...
+                    </div> */}
+                    <div className="flex text-center text-xs lg:text-base mt-2">
+                        <img src={Graph} alt="fundamentals chart" className="h-[170px] w-full" />
                     </div>
                     <Link to={link}>
                         <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
@@ -202,7 +204,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
             )}
             {fundamentalModal && (
                 <Modal passedFunc={fundamentalModal} setPassedFunc={setFundamentalModal}>
-                    <div>
+                    {/* <div>
                         <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
                             FUNDAMENTALS{' '}
                         </p>
@@ -212,12 +214,12 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                         <p className="text-[#333946] text-semibold">
                             ${(marketCap / 1000000000).toFixed(2)}B
                         </p>
-                    </div>
-                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
-                        Chart Loading...
+                    </div> */}
+                    <div className="flex text-center text-xs lg:text-base mt-2">
+                        <img src={Chart} alt="fundamentals chart" className="h-[170px] w-full" />
                     </div>
                     <Link to={link}>
-                        <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
+                        <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
                             See Company Profile
                         </div>
                     </Link>
