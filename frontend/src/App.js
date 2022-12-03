@@ -160,12 +160,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/settings',
+        path: '/notificationsettings',
         element: <SettingsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: '/profilesettings',
+        path: '/settings',
         element: <ProfileSettingsPage />,
         errorElement: <ErrorPage />
     },

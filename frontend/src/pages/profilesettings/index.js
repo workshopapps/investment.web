@@ -2,16 +2,18 @@ import React from 'react';
 import SideBar from '../../components/settings/SideBar';
 import ProfileSection from '../../components/settings/ProfileSection';
 import PageLayout from '../layout';
+import SubPlan from '../../components/settings/SubPlan';
 
 export default function index() {
     return (
         <PageLayout>
-            <div className="flex">
-                <div className="w-1/5 border-r-black">
+            <div className="flex flex-col">
+                <div className=" border-r-black">
                     <SideBar />
                 </div>
-                <div className="w-4/5 mr-2">
+                <div className="mr-2">
                     <ProfileSection />
+                    <SubPlan />
                 </div>
             </div>
         </PageLayout>
