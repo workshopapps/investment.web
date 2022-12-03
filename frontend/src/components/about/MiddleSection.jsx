@@ -11,13 +11,15 @@ export const Section = () => {
         <div id="services" data-testid="middle-section">
             <div className="bg-[#fafaff] flex flex-col md:flex-row gap-6 md:gap-20 pt-10 md:pt-20 justify-center pb-10 md:pb-20 font-Hauora">
                 <div className="bg-white p-5 md:p-10 md:pt-14 md:pb-16 md:max-w-[390px] mx-6 md:mx-0">
-                    <h3 className="font-bold text-xl mb-2 text-center md:text-left">What We Do</h3>
+                    <h3 className="font-bold text-xl mb-2 text-center md:text-left">
+                        About The Name
+                    </h3>
                     <p className="text-[#66717E] text-center md:text-left">
-                        Yieldvest guides individuals and businesses who need help knowing what
-                        stocks to invest in to make better and well-informed decisions on what
-                        stocks to purchase. We bring the best to you after analyzing each of these
-                        companies based on various metrics. Here`s how we help you make educated
-                        decisions;
+                        Yieldvest offers stock investment recommendations using basic fundamental
+                        analysis to help you make well-informed stock investment decisions. Our goal
+                        is to provide you with the information you need in a
+                        simple,straightfoward,user-friendly way. We help you make educated decisons
+                        through; Stock recomendatins,Stock category,Company Profile.
                     </p>
                 </div>
                 <div className="bg-white p-5 md:p-10 md:pt-14 md:pb-16 md:max-w-[390px] mx-6 md:mx-0">
@@ -46,7 +48,7 @@ export const Section = () => {
                     Why Choose Us
                 </h1>
                 <div className="flex flex-row-reverse gap-8 md:gap-auto md:flex-col justify-center mt-8">
-                    <div className="flex flex-col gap-3 md:mb-5 md:flex-row text-[#0F7544] md:text-inherit font-normal justify-center md:gap-[10rem]">
+                    <div className="flex flex-col gap-3  md:flex-row text-[#0F7544] md:text-inherit font-normal justify-center md:gap-[10rem]">
                         <p>Stock recommendations</p>
                         <p>Stock Categories</p>
                         <p>Company Profile</p>
@@ -59,7 +61,7 @@ export const Section = () => {
                     <div className="relative flex flex-col md:flex-row gap-10 md:w-[60%]">
                         <img className="hidden md:block" src={img2} alt="core " />
                         <img className="md:hidden block" src={img4} alt="core " />
-                        <div className="flex flex-col py-10 md:py-20 gap-5">
+                        <div className="flex flex-col pb-10 md:py-20 gap-5">
                             <h1 className="text-[#455A64] text-center md:text-left md:font-semibold mb-0 md:mb-2 text-xl md:text-4xl">
                                 Our Core Values
                             </h1>
