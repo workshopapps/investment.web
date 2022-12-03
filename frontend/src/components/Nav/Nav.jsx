@@ -9,8 +9,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
 
 // eslint-disable-next-line react/prop-types
-const Nav = ({ openMenu, user }) => {
-    const { isLoggedIn } = useContext(AuthContext);
+const Nav = ({ openMenu }) => {
+    const { isLoggedIn, user } = useContext(AuthContext);
     const navStyle = {
         background: '#000718',
         color: 'white'
@@ -63,7 +63,7 @@ const Nav = ({ openMenu, user }) => {
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                         <Link to="/settings" className="w-10 h-10 rounded-full text-white bg-gray-400 flex justify-center items-center">
                             <h1 className='text-white uppercase font-[700]'>
-                                {isLoggedIn && user}
+                                {user.name.slice(0,2)}
                             </h1>
                         </Link>
                     </div>
