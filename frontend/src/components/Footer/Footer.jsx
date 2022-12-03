@@ -17,8 +17,6 @@ const Footer = () => {
             name: 'Get To Know Us',
             navLinks: [
                 { link: 'About Yieldvest', to: '/about' }
-                // { link: 'Careers', to: '/careers' },
-                // { link: 'Stock Tips', to: '/StockTips' },
             ]
         },
         {
@@ -29,11 +27,6 @@ const Footer = () => {
                 { link: 'How it works', to: '/howitworks' },
                 { link: 'FAQ', to: '/faq' },
                 { link: 'Contact Us', to: '/contact' }
-
-                // { link: 'FAQ', to: '#' },
-                // { link: 'News', to: 'news' },
-                // { link: 'Blog', to: '/blog' },
-                // { link: 'Settings', to: '/settings' },
             ]
         },
         {
@@ -41,8 +34,6 @@ const Footer = () => {
             navLinks: [
                 { link: 'Terms of Use', to: '/terms' },
                 { link: 'Privacy Policy', to: '/policy' }
-                // { link: 'Disclaimer' },
-                // { link: 'Cookies Policy' }
             ]
         }
     ];
@@ -62,18 +53,18 @@ const Footer = () => {
 
                         <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
                     </div>
-                    <div className='flex gap-3'>
-                        <img src={footerTwitter} alt="" />
-                        <img src={insta} alt="" />
-                        <img src={footerFb} alt="" />
-                    </div>
                     <div
                         className={`${
-                            pathname !== '/download' ? 'hidden lg:flex pt-4' : 'hidden'
+                            pathname !== '/download' ? 'hidden lg:flex pt-4 mb-[66px]' : 'hidden'
                         }`}>
                         <Link to="/download">
                             <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
+                    </div>
+                    <div className='flex gap-3  '>
+                        <img src={footerTwitter} alt="" />
+                        <img src={insta} alt="" />
+                        <img src={footerFb} alt="" />
                     </div>
                 </div>
                 <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">
