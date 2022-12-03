@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { UserStatusContext } from '../../store/UserStatusContext';
 import PageLayout from '../layout';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import AuthContext from '../../auth/AuthContext';
 
 const Login = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech/auth/login';
-    // const { loggedInHandler } = useContext(UserStatusContext);
-    // console.log(loggedInHandler);
     const navigate = useNavigate();
-    const [googleUserToken, setGoogleUserToken] = useState(null);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
-    const [accessToken, setAccessToken] = useState(null);
     const [timeOut, setTimeout] = useState(false);
-    console.log(accessToken);
+
+    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
     //form
     const [loginForm, setLoginForm] = useState({
@@ -65,11 +62,14 @@ const Login = () => {
         }
     };
 
+    const whenAuthenticated = (accessToken) => {
+        setAccessToken(accessToken);
+        setIsLoggedIn(true);
+        sessionStorage.setItem('accessToken', accessToken);
+    };
+
     //handle google OAUTH
     const handleGoogleSignIn = async (tokenResponse) => {
-        setGoogleUserToken(tokenResponse);
-        console.log(googleUserToken);
-
         axios
             .get(
                 `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
@@ -77,6 +77,7 @@ const Login = () => {
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
+                    whenAuthenticated(res.data.access_token);
                     setInterval(() => {
                         setTimeout(true);
                     }, 1500);
@@ -94,7 +95,6 @@ const Login = () => {
         console.log(err);
     };
 
-    //backendint
     const post = () => {
         const config = {
             headers: {
@@ -119,9 +119,7 @@ const Login = () => {
             .then((response) => {
                 if (response.status === 200) {
                     toast.success('Login successful');
-                    setAccessToken(response.data.accessToken);
-                    // setAuth(true);
-                    //setAccessTokenToSessionStorage
+                    whenAuthenticated(response.data.access_token);
                     setInterval(() => {
                         setTimeout(true);
                     }, 1500);
@@ -134,10 +132,6 @@ const Login = () => {
                 console.log(err);
                 toast.error('Invalid username or password');
             });
-
-        // if (!auth) {
-        //     toast.error('Invalid username or password');
-        // }
     };
 
     //validation

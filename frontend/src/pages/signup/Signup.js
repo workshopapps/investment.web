@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import PageLayout from '../layout';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { AiOutlineEye } from 'react-icons/ai';
+import AuthContext from '../../auth/AuthContext';
 
 const Signup = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech/auth/signup';
@@ -21,6 +22,8 @@ const Signup = () => {
     const [isSubmit, setisSubmit] = useState(false);
     const [timeOut, setTimeout] = useState(false);
     const [timeOutGoogle, setTimeoutGoogle] = useState(false);
+
+    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -65,6 +68,12 @@ const Signup = () => {
             });
     };
 
+    const whenAuthenticated = (accessToken) => {
+        setAccessToken(accessToken);
+        setIsLoggedIn(true);
+        sessionStorage.setItem('accessToken', accessToken);
+    };
+
     //handle google OAUTH
     const handleGoogleSignIn = async (tokenResponse) => {
         setGoogleUserToken(tokenResponse);
@@ -77,6 +86,7 @@ const Signup = () => {
             .then((res) => {
                 if (res.status === 200) {
                     toast.success('Login successful');
+                    whenAuthenticated(res.data.access_token);
                     setInterval(() => {
                         setTimeoutGoogle(true);
                     }, 1500);
