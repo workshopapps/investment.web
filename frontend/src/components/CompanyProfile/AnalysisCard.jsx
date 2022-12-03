@@ -22,9 +22,10 @@ const VisualDataCard = () => {
         show: false,
         showRevenue: true,
         showIncome: true,
-        shwoExpenses: true,
+        showExpenses: true,
         showProfit: true,
-        value: '2022'
+        value: '2022',
+        position: 0
     });
 
     const [data, setData] = React.useState([]);
@@ -33,6 +34,16 @@ const VisualDataCard = () => {
         const year = parseInt(state.value) - 5;
         console.log(year);
         return `${year}-12-31`;
+    };
+
+    const getDateIndex = () => {
+        data.forEach((each, key) => {
+            if (each['date'] === `${state.value}-12-31`) {
+                setState({ ...state, position: key });
+            } else {
+                console.log(each);
+            }
+        });
     };
 
     const getEndDate = () => {
@@ -70,10 +81,11 @@ const VisualDataCard = () => {
                 });
 
                 setData(raw.reverse());
+                getDateIndex();
                 console.log(data);
             })
             .catch((err) => console.log(err));
-    }, [state.value]);
+    }, [state.value, state.showExpenses, state.showIncome, state.showProfit, state.showRevenue]);
 
     return (
         <div className="h-auto flex flex-col bg-white text-[#5C5A5A] border rounded-lg px-6 py-4 font-HauoraLight">
@@ -192,7 +204,7 @@ const VisualDataCard = () => {
                                 strokeWidth={2}
                             />
                         )}
-                        {state.shwoExpenses && (
+                        {state.showExpenses && (
                             <Area
                                 type="monotone"
                                 dataKey="operating_expenses"
@@ -246,15 +258,19 @@ const VisualDataCard = () => {
                             />
                             <p className="pl-5">Revenue</p>
                         </span>
-                        <p className="text-left pr-10">{`${data[0]['total_revenue'].toFixed(
-                            2
-                        )}B`}</p>
+                        <p className="text-left pr-10">{`${data[data.length - 1][
+                            'total_revenue'
+                        ].toFixed(2)}B`}</p>
                         <p className="flex flex-row gap-2">
                             <img
-                                src={isNegative(data[0]['revenue_growth']) ? redArrow : greenArrow}
+                                src={
+                                    isNegative(data[data.length - 1]['revenue_growth'])
+                                        ? redArrow
+                                        : greenArrow
+                                }
                                 alt="loss"
                             />
-                            {`${Math.abs(data[0]['revenue_growth'].toFixed(2))}%`}
+                            {`${Math.abs(data[data.length - 1]['revenue_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                     <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -262,26 +278,28 @@ const VisualDataCard = () => {
                             <input
                                 className="text-[#1BD47B]"
                                 type="checkbox"
-                                checked={state.shwoExpenses}
+                                checked={state.showExpenses}
                                 onChange={() =>
-                                    setState({ ...state, shwoExpenses: !state.shwoExpenses })
+                                    setState({ ...state, showExpenses: !state.showExpenses })
                                 }
                             />
                             <p className="pl-5">Operating expenses</p>
                         </span>
-                        <p className="text-left pr-10">{`${data[0]['operating_expenses'].toFixed(
-                            2
-                        )}B`}</p>
+                        <p className="text-left pr-10">{`${data[data.length - 1][
+                            'operating_expenses'
+                        ].toFixed(2)}B`}</p>
                         <p className="flex flex-row gap-2">
                             <img
                                 src={
-                                    isNegative(data[0]['operating_expenses_growth'])
+                                    isNegative(data[data.length - 1]['operating_expenses_growth'])
                                         ? redArrow
                                         : greenArrow
                                 }
                                 alt="loss"
                             />
-                            {`${Math.abs(data[0]['operating_expenses_growth'].toFixed(2))}%`}
+                            {`${Math.abs(
+                                data[data.length - 1]['operating_expenses_growth'].toFixed(2)
+                            )}%`}
                         </p>
                     </div>
                     <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -297,18 +315,20 @@ const VisualDataCard = () => {
                             <p className="pl-5">Gross Profit</p>
                         </span>
                         <p className="text-left pr-10">{`${Math.abs(
-                            data[0]['gross_profit'].toFixed(2)
+                            data[data.length - 1]['gross_profit'].toFixed(2)
                         )}B`}</p>
                         <p className="flex flex-row gap-2">
                             <img
                                 src={
-                                    isNegative(data[0]['gross_profit_growth'])
+                                    isNegative(data[data.length - 1]['gross_profit_growth'])
                                         ? redArrow
                                         : greenArrow
                                 }
                                 alt="loss"
                             />
-                            {`${Math.abs(data[0]['gross_profit_growth'].toFixed(2))}%`}
+                            {`${Math.abs(
+                                data[data.length - 1]['gross_profit_growth'].toFixed(2)
+                            )}%`}
                         </p>
                     </div>
                     <div className="my-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -323,15 +343,19 @@ const VisualDataCard = () => {
                             />
                             <p className="pl-5">Net Income</p>
                         </span>
-                        <p className="text-left pr-10">{`${data[0]['net_income'].toFixed(2)}B`}</p>
+                        <p className="text-left pr-10">{`${data[data.length - 1][
+                            'net_income'
+                        ].toFixed(2)}B`}</p>
                         <p className="flex flex-row gap-2">
                             <img
                                 src={
-                                    isNegative(data[0]['net_income_growth']) ? redArrow : greenArrow
+                                    isNegative(data[data.length - 1]['net_income_growth'])
+                                        ? redArrow
+                                        : greenArrow
                                 }
                                 alt="loss"
                             />
-                            {`${Math.abs(data[0]['net_income_growth'].toFixed(2))}%`}
+                            {`${Math.abs(data[data.length - 1]['net_income_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                 </>
