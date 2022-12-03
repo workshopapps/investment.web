@@ -125,8 +125,9 @@ const IndexPage = () => {
                         We Track, Analyse & Recommend the best stocks for you.
                     </h1>
                     <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white">
-                        We provide well curated information to make smarted investment decisions
-                        based on Fundamental Analysis{' '}
+                        We provide well curated information to make smarter investment
+                        <br />
+                        decisions based on Fundamental Analysis{' '}
                     </p>
                 </div>
             </section>
