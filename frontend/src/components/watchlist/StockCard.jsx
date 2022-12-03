@@ -34,7 +34,7 @@ const StockCard = ({ id }) => {
                             <p className="font-[600] text-[#545964] mb-[5x]">E-commerce</p>
                         </div>
                     </div>
-                    <div onClick={deleteFromWatchList(id)}>
+                    <div onClick={() => deleteFromWatchList(id)}>
                         <FiTrash className="text-[21px]" />
                     </div>
                 </div>
