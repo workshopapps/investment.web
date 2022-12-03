@@ -6,11 +6,10 @@ import Logo from '../../assets/header/logo.svg';
 import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import user_image from '../../assets/images/Rectangle 4749.png';
 import AuthContext from '../../auth/AuthContext';
 
 // eslint-disable-next-line react/prop-types
-const Nav = ({ openMenu }) => {
+const Nav = ({ openMenu, user }) => {
     const { isLoggedIn } = useContext(AuthContext);
     const navStyle = {
         background: '#000718',
@@ -32,6 +31,8 @@ const Nav = ({ openMenu }) => {
     };
 
     const navigate = useNavigate();
+    console.log(user);
+    // const textProfile = user.email.slice(0, 3)
 
     return (
         <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px]">
@@ -63,12 +64,8 @@ const Nav = ({ openMenu }) => {
 
                 {isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        <Link to="/settings">
-                            <img
-                                className="w-10 h-10 rounded-full"
-                                src={user_image}
-                                alt="user_profile"
-                            />
+                        <Link to="/settings" className="w-10 h-10 rounded-full text-white bg-gray-400 flex justify-center items-center">
+                            <h1 className='text-white uppercase font-[700]'>TA</h1>
                         </Link>
                     </div>
                 )}

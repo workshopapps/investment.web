@@ -46,7 +46,7 @@ const Footer = () => {
         <footer
             style={footerStyle}
             className="lg:px-[100px] p-6 flex flex-col items-center justify-center w-full">
-            <div className="flex w-full flex-wrap justify-between items-start gap-8 md:border-b border-white pb-12 mb-8 md:mt-12">
+            <div className="flex w-full flex-wrap justify-between items-start gap-8  pb-12 mb-8 md:mt-12">
                 <div>
                     <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
                         <img src={footerLogo} alt="" />
@@ -79,7 +79,7 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center border-t-[2px] w-full border-white pt-[18px]">2022 Yieldvest </div>
+            <div className="text-center border-t-[2px] w-full border-white pt-[18px]"> 2022 Yieldvest </div>
         </footer>
     );
 };

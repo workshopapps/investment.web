@@ -7,7 +7,7 @@ import Modal from '../../components/Modal';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, sector }) => {
+const CapCard = ({ logo, abbr, name, marketCap, stockPrice, link, index, sector }) => {
     const [fundamentalModal, setFundamentalModal] = useState(false);
     const [priceModal, setPriceModal] = useState(false);
     const [hoverFundamental, setHoverFundamental] = useState(false);
@@ -24,7 +24,6 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
     const handlePriceHover = () => {
         setHoverPrice(!hoverPrice);
     };
-    console.log(rank);
     return (
         <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
             <div>
