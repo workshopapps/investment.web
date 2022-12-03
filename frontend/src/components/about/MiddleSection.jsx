@@ -3,6 +3,7 @@ import img0 from './../../assets/about/vline.png';
 import img1 from './../../assets/about/line.png';
 import img2 from './../../assets/about/desk-frame1.png';
 import img3 from './../../assets/about/tick-circle.png';
+import img4 from './../../assets/about/mobile.svg';
 // import img3 from './../../assets/about/box.png';
 
 export const Section = () => {
@@ -57,6 +58,7 @@ export const Section = () => {
                 <div className="bg-[#fafaff] flex flex-col md:flex-row gap-0 md:gap-20 pt-9 m-auto md:m-[5em] justify-center font-HauoraLight">
                     <div className="relative flex flex-col md:flex-row gap-10 md:w-[60%]">
                         <img className="hidden md:block" src={img2} alt="core " />
+                        <img className="md:hidden block" src={img4} alt="core " />
                         <div className="flex flex-col py-10 md:py-20 gap-5">
                             <h1 className="text-[#455A64] text-center md:text-left md:font-semibold mb-0 md:mb-2 text-xl md:text-4xl">
                                 Our Core Values
