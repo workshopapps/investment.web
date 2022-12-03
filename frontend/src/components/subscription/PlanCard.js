@@ -21,7 +21,7 @@ const SubscribeCard = ({ name, price, type, target, priceId, features, payload, 
                 <hr className="w-0 md:w-full mx-5 sm:border-[white] md:border-[white] lg:border-[#0A0B0D]" />
             </div>
 
-            <ul className="w-full theListing list-inside pl-6 pt-4">
+            <ul className="w-full theListing list-inside pl-6 pt-4 mb-[8em] md:mb-0">
                 {features.map((element, index) => (
                     <li key={index} className="flex items-center py-2">
                         <FaCheckCircle fill="#1BD47B" />
