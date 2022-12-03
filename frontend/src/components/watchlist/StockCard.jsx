@@ -1,26 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './../../assets/company-profile/US.png';
 import { FiTrash } from 'react-icons/fi';
-import WatchListContext from '../../store/watchList/WatchList';
 
 // eslint-disable-next-line react/prop-types
 const StockCard = ({ id }) => {
-    const [data, setData] = useState([]);
-    const url = `https://api.yieldvest.hng.tech/${id}`;
-    const token = 'isdfkasdbfasdfasdfasdf';
-    useEffect(() => {
-        axios
-            .get(url, {
-                headers: {
-                    Authorization: `Basic ${token}`
-                }
-            })
-            .then((res) => setData(res.data))
-            .catch((err) => console.log(`Error: ${err}`));
-    });
-    const { abbr } = data;
+    // const [data, setData] = useState([]);
+    console.log(id);
     return (
         <div className="max-w-[408px] w-full rounded-[8px] p-[28px] bg-white">
             <div>

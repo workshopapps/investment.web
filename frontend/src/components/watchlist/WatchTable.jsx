@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import StockCard from './StockCard';
-import WatchListContext from '../../store/watchList/WatchList';
-import axios from 'axios';
 
 const WatchTable = () => {
     return (

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserStatusContext } from './store/UserStatusContext.jsx';
 
-import { WatchListProvider } from './store/watchList/WatchList.js';
+import { WatchListProvider } from './store/watchList/WatchLIstProvider.js';
 
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
