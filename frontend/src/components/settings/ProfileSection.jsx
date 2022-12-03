@@ -10,7 +10,7 @@ export default function ProfileSection() {
               
                 <div className='flex flex-col md:flex-row'>
 
-                <div className="flex w-2/5 ml-[150px] md:m-0">
+                <div className="flex w-2/5 ml-[180px] md:m-0">
                     <img src={profileimg} alt="profileimg" className="w-[100px] h-[100px] md:w-[164px] md:h-[164px] mb-4" />
                    
                 </div>

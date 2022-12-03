@@ -11,7 +11,7 @@ const links = [
     {
         name: 'My Account',
         icon: profileicon,
-        link: '/profilesettings'
+        link: '/settings'
     },
 
     {

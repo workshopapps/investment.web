@@ -19,7 +19,7 @@ export default function PasswordSettings() {
 
     return (
         <div className="flex  mt-3 md:px-[200px] ">
-            <div className="flex w-1/5 px-2 mt-[60px]">
+            <div className="hidden md:flex w-1/5 px-2 mt-[60px]">
                 <img
                     src={profileimg}
                     alt="profileimg"
