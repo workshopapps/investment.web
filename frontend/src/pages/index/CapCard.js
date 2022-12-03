@@ -42,7 +42,7 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    <div className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center">
+                    <div className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center">
                         <Tippy
                             content={<span className="">Add to watchlist</span>}
                             placement="bottom">
@@ -57,7 +57,6 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p
                                 onMouseEnter={handlePriceHover}
                                 onMouseLeave={handlePriceHover}
-                                onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -97,15 +96,11 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                 PRICE{' '}
                             </p>
                             <p className="cursor-pointer">
-                                <Tippy
-                                    content={<span className="">See details</span>}
-                                    placement="bottom">
-                                    <img
-                                        src={hoverPrice ? Eye : inactiveEye}
-                                        alt="eye"
-                                        className="w-5 h-6"
-                                    />
-                                </Tippy>
+                                <img
+                                    src={hoverPrice ? Eye : inactiveEye}
+                                    alt="eye"
+                                    className="w-5 h-6"
+                                />
                             </p>
                         </div>
                     </span>
@@ -123,11 +118,10 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                 <p
                                     onMouseEnter={handleFundamentalHover}
                                     onMouseLeave={handleFundamentalHover}
-                                    onMouseOver={handleFundamentalModal}
                                     className={
                                         !hoverFundamental
-                                            ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                            : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                            ? `text-[#B0B2B7] font-normal pr-4`
+                                            : `font-normal pr-4 text-[#49DD95]`
                                     }>
                                     FUNDAMENTALS{' '}
                                 </p>{' '}
@@ -158,21 +152,17 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p
                                 className={
                                     !hoverFundamental
-                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                        ? `text-[#B0B2B7] font-normal pr-4`
+                                        : `font-normal pr-4 text-[#49DD95]`
                                 }>
                                 FUNDAMENTALS{' '}
                             </p>{' '}
-                            <p className="cursor-pointer">
-                                <Tippy
-                                    content={<span className="">See details</span>}
-                                    placement="bottom">
-                                    <img
-                                        src={hoverFundamental ? Eye : inactiveEye}
-                                        alt="eye"
-                                        className="w-5 h-6"
-                                    />
-                                </Tippy>
+                            <p>
+                                <img
+                                    src={hoverFundamental ? Eye : inactiveEye}
+                                    alt="eye"
+                                    className="w-5 h-6"
+                                />
                             </p>
                         </div>
                     </span>
