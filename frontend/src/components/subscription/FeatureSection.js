@@ -62,7 +62,7 @@ const FeatureSection = () => {
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
-                            <img src={Icon3} alt="icon3" />
+                            <img src={Icon6} alt="icon3" />
                         </div>
                         <h1 className="mt-2 py-2"> Never miss an update</h1>
                         <p className="text-[#0A0B0D] py-2">
@@ -83,7 +83,7 @@ const FeatureSection = () => {
 
                     <div>
                         <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
-                            <img src={Icon6} alt="icon5" />
+                            <img src={Icon3} alt="icon5" />
                         </div>
                         <h1 className="mt-2 py-2">Share a stock</h1>
                         <p className="text-[#0A0B0D] py-2">
