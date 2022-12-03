@@ -10,7 +10,7 @@ const SubscribeCard = ({ name, price, type, target, priceId, features, payload, 
             <div className="flex flex-row md:flex-col justify-between">
                 <p className="text-[24px] pl-6 pt-8 ">{name}</p>
                 <h1 className="px-4 md:pl-6 py-2 pt-10 md:pt-0">
-                    <span className="text-[#1BD47B] hover:text-[white] text-xl md:text-6xl mr-2 md:mr-[1em]">
+                    <span className="text-[#1BD47B] text-xl md:text-6xl mr-2 md:mr-[1em]">
                         &#8358;{price}
                     </span>
                     <span></span>/{type}
