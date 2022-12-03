@@ -1,13 +1,9 @@
 import axios from 'axios';
-import { useContext } from 'react';
-import AuthContext from './AuthContext';
 
 const useApiService = () => {
-    const { accessToken, setIsLoggedIn } = useContext(AuthContext);
-
     const baseUrl = 'https://api.yieldvest.hng.tech';
 
-    return (requireAuthentication = true) => {
+    return (accessToken) => {
         const service = axios.create({
             baseURL: baseUrl,
             headers: {
@@ -16,22 +12,20 @@ const useApiService = () => {
             validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500
         });
 
-        if (requireAuthentication) {
-            service.interceptors.response.use(
-                (res) => {
-                    localStorage.setItem('message', JSON.stringify(res.data));
-                    if (res.status === 401) {
-                        setIsLoggedIn(false);
-                        window.location = '/login';
-                    }
+        // service.interceptors.response.use(
+        //     (res) => {
+        //         if (res.status === 401) {
+        //             sessionStorage.removeItem('accessToken');
+        //             window.location = '/login';
+        //         }
 
-                    return res;
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-        }
+        //         return res;
+        //     },
+        //     (error) => {
+        //         Promise.reject(error);
+        //     }
+        // );
+
         return service;
     };
 };
