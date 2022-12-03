@@ -106,11 +106,16 @@ const VisualDataCard = () => {
 
             <div className="h-100 my-10 w-full border border-1px bg-transparent">
                 <LineChart width={900} height={500} data={data}>
-                    <Line type="monotone" dataKey="total_revenue" stroke="#333946" />
-                    <Line type="monotone" dataKey="net_income" stroke="#1BD47B" />
+                    <Line
+                        type="monotone"
+                        dataKey="total_revenue"
+                        stroke="#333946"
+                        strokeWidth={2}
+                    />
+                    <Line type="monotone" dataKey="net_income" stroke="#1BD47B" strokeWidth={2} />
                     <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="net_income" />
+                    <YAxis dataKey="total_revenue" />
                     <Tooltip />
                 </LineChart>
             </div>
