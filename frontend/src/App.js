@@ -53,7 +53,6 @@ import Cancel from './pages/cancelPayment/Cancel';
 import Watchlist from './pages/watchlist/Watchlist.jsx';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
-import AuthProvider from './auth/AuthProvider.jsx';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -275,11 +274,7 @@ function App() {
         <React.Fragment>
             <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                    <AuthProvider>
-                        <WatchListProvider>
-                            <RouterProvider router={router} />
-                        </WatchListProvider>
-                    </AuthProvider>
+                    <RouterProvider router={router} />
                 </GoogleOAuthProvider>
             </UserStatusContext.Provider>
         </React.Fragment>
