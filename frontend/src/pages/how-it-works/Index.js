@@ -53,17 +53,18 @@ const Index = () => {
                 <div className="p-10 cursor-pointer flex flex-col gap-8 items-center lg:flex-row lg:items-start lg:justify-between">
                     {process?.map((item, index) => {
                         return (
-                            <motion.div
+                            <div
                                 key={index}
-                                className="flex flex-col justify-center gap-10 w-295 pt-20 relative sm:w-460 md:w-520 lg:w-210"
-                                whileHover={{ scale: 1.2 }}>
+                                className="flex flex-col justify-center gap-10 w-295 pt-20 relative sm:w-460 md:w-520 lg:w-210">
                                 <div className="absolute top-5 left-32 text-gray-600 sm:top-2 sm:left-48 md:left-56 lg:left-32">
                                     <p className="font-HauoraBold text-7xl sm:text-8xl">
                                         {item?.id}
                                     </p>
                                 </div>
                                 <div className="flex flex-col items-center gap-2 z-20 w-full">
-                                    <img src={item?.image} className=" w-full" />
+                                    <motion.div whileHover={{ scale: 1.2 }}>
+                                        <img src={item?.image} className=" w-full" />
+                                    </motion.div>
                                     <h1 className="font-HauoraBold text-sm text-center sm:text-lg">
                                         {item?.headingText}
                                     </h1>
@@ -71,12 +72,14 @@ const Index = () => {
                                         {item?.subText}
                                     </p>
                                     {item?.subText2 && (
-                                        <p className="text-sm text-green-500 cursor-pointer hover:text-green-600 transition ease-in-out delay-100 lg:text-base">
-                                            {item?.subText2}
-                                        </p>
+                                        <Link to="/subscription">
+                                            <p className="text-sm text-green-500 cursor-pointer hover:text-green-600 transition ease-in-out delay-100 lg:text-base">
+                                                {item?.subText2}
+                                            </p>
+                                        </Link>
                                     )}
                                 </div>
-                            </motion.div>
+                            </div>
                         );
                     })}
 
