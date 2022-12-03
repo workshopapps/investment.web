@@ -1,10 +1,10 @@
 import React from 'react';
 import Icon1 from '../../assets/subscriptionPage/images/icon1.svg';
-import Icon2 from '../../assets/subscriptionPage/images/icon5.png';
-import Icon3 from '../../assets/subscriptionPage/images/icon4.png';
+import Icon2 from '../../assets/subscriptionPage/images/icon7.svg';
+import Icon3 from '../../assets/subscriptionPage/images/icon8.svg';
 import Icon4 from '../../assets/subscriptionPage/images/icon4.svg';
 import Icon5 from '../../assets/subscriptionPage/images/icon5.svg';
-import Icon6 from '../../assets/subscriptionPage/images/icon6.png';
+import Icon6 from '../../assets/subscriptionPage/images/icon6.svg';
 
 const FeatureSection = () => {
     return (
