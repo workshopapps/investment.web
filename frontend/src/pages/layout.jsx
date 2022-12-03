@@ -7,6 +7,7 @@ import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
 import ProtectedPage from '../auth/ProtectedPage';
 import AuthProvider from '../auth/AuthProvider';
+import { WatchListProvider } from '../store/watchList/WatchLIstProvider';
 
 const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtected = false }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
@@ -22,28 +23,30 @@ const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtecte
     return (
         <div className="flex flex-col h-screen relative ">
             <AuthProvider>
-                {showNavBar && (
-                    <>
-                        <div className="nav-bar flex-none">
-                            <Nav openMenu={setOpenMobileMenu} />
-                        </div>
-                        {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-                    </>
-                )}
+                <WatchListProvider>
+                    {showNavBar && (
+                        <>
+                            <div className="nav-bar flex-none">
+                                <Nav openMenu={setOpenMobileMenu} />
+                            </div>
+                            {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
+                        </>
+                    )}
 
-                {isProtected ? (
-                    <ProtectedPage>
+                    {isProtected ? (
+                        <ProtectedPage>
+                            <div className="page-content grow">{children}</div>
+                        </ProtectedPage>
+                    ) : (
                         <div className="page-content grow">{children}</div>
-                    </ProtectedPage>
-                ) : (
-                    <div className="page-content grow">{children}</div>
-                )}
+                    )}
 
-                {showFooter && (
-                    <div className="footer flex-none">
-                        <Footer />
-                    </div>
-                )}
+                    {showFooter && (
+                        <div className="footer flex-none">
+                            <Footer />
+                        </div>
+                    )}
+                </WatchListProvider>
             </AuthProvider>
         </div>
     );

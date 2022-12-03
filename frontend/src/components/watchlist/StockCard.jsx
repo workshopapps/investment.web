@@ -1,24 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiTrash, FiEye } from 'react-icons/fi';
 import WatchListContext from '../../store/watchList/WatchlistContext';
-import axios from 'axios';
 
 // eslint-disable-next-line react/prop-types
-const StockCard = ({ id }) => {
-    const [stockDetails, setStockDetails] = useState(null);
+const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
     const { deleteFromWatchList } = useContext(WatchListContext);
-    const baseUrl = 'https://api.yieldvest.hng.tech';
-    useEffect(() => {
-        axios
-            .get(`${baseUrl}/company/${id}`)
-            .then((res) => {
-                setStockDetails(res);
-            })
-            .catch((err) => console.log(err));
-    });
-    const { name, profile_image, sector, stock_price, market_cap } = stockDetails;
-    console.log(id);
+    const { name, profile_image, sector, stock_price, market_cap, company_id } = stock;
     return (
         <div className="max-w-[408px] w-full rounded-[8px] p-[28px] bg-white">
             <div>
@@ -37,33 +25,39 @@ const StockCard = ({ id }) => {
                             <img src={profile_image} alt="" />
                         </div>
                         <div>
-                            <h2 className="font-[400] text-[18px] text-[#333946] ">Amazon(AMZN)</h2>
+                            <h2 className="font-[400] text-[18px] text-[#333946] ">
+                                {name.split(' ')[0]}
+                            </h2>
                             <p className="font-[400] text-[#139757] mb-[5x] capitalize">{name}</p>
                             <p className="font-[600] text-[#545964] mb-[5x]">
                                 {sector ? sector.sector : 'sectors'}
                             </p>
                         </div>
                     </div>
-                    <div onClick={deleteFromWatchList(id)}>
+                    <div
+                        onClick={() => {
+                            deleteFromWatchList(company_id, onSuccess, onFailure);
+                            reload();
+                        }}>
                         <FiTrash className="text-[21px]" />
                     </div>
                 </div>
                 <div className="flex justify-center items-center">
                     <div className="mb-[28px] max-w-[242px] w-full">
                         <div className="mb-[24px] border-b-[2px]">
-                            <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E]">
+                            <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E] flex justify-start items-center">
                                 PRICE
                                 <span className="ml-[10px]">
                                     <FiEye className="text-[#8A8D95] " />
                                 </span>
                             </h3>
-                            <div className="flex justify-between items-center mb-[24px] text-[16px] font-[400] text-[#545964]">
+                            <div className="flex justify-between items-center mb-[24px] text-[16px] font-[400] text-[#545964] ">
                                 <p>Stock Price</p>
                                 <p>{stock_price.stock_price}</p>
                             </div>
                         </div>
                         <div>
-                            <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E]">
+                            <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E] flex justify-start items-center">
                                 FUNAMENTALS
                                 <span className="ml-[10px]">
                                     <FiEye className="text-[#8A8D95] " />
@@ -78,7 +72,7 @@ const StockCard = ({ id }) => {
                 </div>
                 <div className="text-center">
                     <Link
-                        to={`/company/${id}`}
+                        to={`/company/${company_id}`}
                         className="text-[#0F7544] text-[16px] font-[600] underline">
                         See Company Profile
                     </Link>

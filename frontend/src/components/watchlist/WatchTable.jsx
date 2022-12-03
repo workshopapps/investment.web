@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import StockCard from './StockCard';
-import AuthHooks from '../../auth/AuthHooks';
+import authHooks from '../../auth/AuthHooks';
+import AuthContext from '../../auth/AuthContext';
 
-const WatchTable = () => {
+const WatchTable = ({ onSuccess, onFailure }) => {
     const [watchlist, setWatchlist] = useState([]);
-    const apiService = AuthHooks.useApiService();
-
-    useEffect(() => {
-        apiService()
+    const { accessToken } = useContext(AuthContext);
+    const apiService = authHooks.useApiService();
+    const fetchWatchList = () => {
+        if (!accessToken) return;
+        apiService(accessToken)
             .get('/user/watchlist')
             .then((res) => {
                 if (res.status === 200) {
@@ -15,12 +17,23 @@ const WatchTable = () => {
                 }
             })
             .catch((err) => console.log(err));
-    }, []);
+    };
+    useEffect(() => {
+        fetchWatchList();
+    }, [accessToken]);
     return (
         <div>
             <div className="flex justify-around items-center gap-x-[8px] gap-y-[24px] flex-wrap">
-                {watchlist.map((id, index) => {
-                    return <StockCard id={id} key={index} />;
+                {watchlist.map((stock, index) => {
+                    return (
+                        <StockCard
+                            stock={stock}
+                            key={index}
+                            reload={fetchWatchList}
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}
+                        />
+                    );
                 })}
             </div>
         </div>
