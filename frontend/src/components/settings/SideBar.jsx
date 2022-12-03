@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 
-import { React } from 'react';
+import { React, useContext } from 'react';
 import profileicon from '../../assets/settings/profileicon.svg';
 import logouticon from '../../assets/settings/logouticon.svg';
 import passwordicon from '../../assets/settings/passwordicon.svg';
 import notificationicon from '../../assets/settings/notificationicon.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../auth/AuthContext';
 
 const links = [
     {
@@ -29,6 +30,9 @@ const links = [
 // export default function index() {
 
 export default function index() {
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     return (
         <div className="flex pl-[0px] md:px-[200px] py-2 h-full bg-[ #FFFFFF]  ">
             <div className="flex flex-col  w-full border-b-2 border-[##D9D9D9]">
@@ -37,18 +41,15 @@ export default function index() {
                         <span className="flex text-[#0A0B0D] font-normal text-3xl ml-4 mb-5">
                             Settings
                         </span>
-                        
 
                         <Link
-                                to="/"
-                                className="flex md:hidden flex-row items-center  h-full  text-base font-semibold ml-[240px]">
-                                <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
-                                <h1 className="font-normal text-base md:flex ml-4 text-[#E84E4E]">
-                                    Logout
-                                </h1>
-                            </Link>
-                     
-
+                            to="/"
+                            className="flex md:hidden flex-row items-center  h-full  text-base font-semibold ml-[240px]">
+                            <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
+                            <h1 className="font-normal text-base md:flex ml-4 text-[#E84E4E]">
+                                Logout
+                            </h1>
+                        </Link>
                     </div>
                     <div className="flex w-full ">
                         <div className="flex flex-row w-2/5 md:w-full">
@@ -70,14 +71,20 @@ export default function index() {
                                     </Link>
                                 ))}
                             </div>
-                            <Link
-                                to="/"
-                                className="hidden md:flex  flex-row items-center  h-full  text-base font-semibold ml-[240px]">
+                            <div
+                                onClick={() => {
+                                    logout();
+                                    navigate('/');
+                                }}
+                                className="hidden md:flex  flex-row items-center  h-full  text-base font-semibold ml-[240px]"
+                                style={{
+                                    cursor: 'pointer'
+                                }}>
                                 <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
                                 <h1 className="font-normal text-base md:flex ml-4 text-[#E84E4E]">
                                     Logout
                                 </h1>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
