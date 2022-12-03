@@ -22,7 +22,7 @@ const TermsAndConditionPage = () => {
                         Last updated November 16, 2022
                     </p>
                     {/* */}
-                    <section className="text-justify max-sm:px-6 sm:px-8 md:px-12 lg:px-14 pt-8">
+                    <section className="text-justify  max-sm:px-6 sm:px-8 md:px-12 lg:px-14 pt-8 bg-white rounded-lg pb-9">
                         {termsData.map((data, index) => (
                             <Term key={index} data={data} />
                         ))}

@@ -60,8 +60,8 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                                 onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
-                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                        ? `text-[#B0B2B7] font-normal pr-4`
+                                        : `font-normal pr-4 text-[#49DD95]`
                                 }>
                                 PRICE{' '}
                             </p>
@@ -91,8 +91,8 @@ const CapCard = ({ logo, abbr, name, marketCap, stockPrice, rank, link, index, s
                             <p
                                 className={
                                     !hoverPrice
-                                        ? `text-[#B0B2B7] font-normal pl-2 pr-4`
-                                        : `font-normal pl-2 pr-4 text-[#49DD95]`
+                                        ? `text-[#B0B2B7] font-normal pr-4`
+                                        : `font-normal pr-4 text-[#49DD95]`
                                 }>
                                 PRICE{' '}
                             </p>
