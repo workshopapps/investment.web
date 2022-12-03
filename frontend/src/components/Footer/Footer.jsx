@@ -2,7 +2,6 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import logo from '../../assets/footer/logo-white.svg';
 import downloadImage from '../../assets/index/footer-download.svg';
 import footerLogo from '../../assets/footer/footerLogo.png';
 import footerFb from '../../assets/footer/footerFb.png';
@@ -72,7 +71,9 @@ const Footer = () => {
                         const { name, navLinks } = item;
                         return (
                             <div key={index} className="w-36">
-                                <p className="mb-8 ">{name}</p>
+                                <p className="mb-8" style={{ fontWeight: 700, fontSize: '18px' }}>
+                                    {name}
+                                </p>
                                 <NavLinks navLinks={navLinks} />
                             </div>
                         );
