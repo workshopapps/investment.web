@@ -195,14 +195,14 @@ def update_password(model: UpdatePasswordModel, user: User = Depends(get_current
 
 
 @router.patch('/update_email', tags=['Auth'])
-def update_password(model: UpdateEmailModel, user: User = Depends(get_current_user)):
+def update_email(model: UpdateEmailModel, user: User = Depends(get_current_user)):
     db: Session = next(get_db())
     update = db.query(User).filter(User.id == user.id).first()
     update.email = model.email
     db.commit()
     db.flush()
 
-    return {"message": "Password updated successfully"}
+    return {"message": "Email updated successfully"}
 
 
 async def resolve_password_reset_request(email: str, db: Session):
