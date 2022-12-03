@@ -65,7 +65,7 @@ const Subscription = () => {
             {/* subscription content details start here */}
 
             {subType === 1 ? <div className="w-full flex justify-center font-Hauora">
-                <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full gap-auto">
+                <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
 
                     <SubscribeCard
                         name="Basic"
@@ -96,7 +96,7 @@ const Subscription = () => {
             </div> : subType === 2 ?
 
                 <div className="w-full flex justify-center font-Hauora">
-                    <div className=" grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[20em] p-0 md:px-[2em] w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
 
                         <SubscribeCard
                             name="Basic"
@@ -104,7 +104,7 @@ const Subscription = () => {
                             type="year"
                             target="For Basic Users"
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Share Stocks", "Access to Only 12 stocks"]}
+                            features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                             payload={freeYearly}
                             buttonText="Subscribe"
                         />
@@ -116,7 +116,7 @@ const Subscription = () => {
                             type="year"
                             target="For Power Users"
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Share Stocks", "Unlimited access to all stocks", "Access to more filters", "Access to Small Caps stocks"]}
+                            features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
                             payload={premiumYearly}
                             buttonText="Subscribe"
                         />
