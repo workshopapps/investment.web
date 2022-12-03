@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import MenuLink from './MenuLink';
 import AuthContext from '../../auth/AuthContext';
 
@@ -20,24 +20,24 @@ const MenuLinks = () => {
             dropItems: [
                 {
                     link: 'How it Works',
-                    url: '/howitworks',
+                    url: '/howitworks'
                 },
                 {
-                    link: 'FAQS',
-                    url: '/faq',
+                    link: 'Cookies',
+                    url: '/cookies'
                 },
                 {
                     link: 'Contact Us',
-                    url: '/contact',
+                    url: '/contact'
                 },
                 {
                     link: 'Terms of Use',
-                    url: '/terms',
+                    url: '/terms'
                 },
                 {
                     link: 'Privacy Policy',
-                    url: '/policy',
-                },
+                    url: '/policy'
+                }
             ]
         }
     ];
@@ -46,11 +46,11 @@ const MenuLinks = () => {
         <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
             {navLinks.map((item, index) => {
                 const { link, url, icon, dropItems } = item;
-                return <MenuLink link={link} url={url} key={index} icon={icon} dropItems={dropItems} />;
+                return (
+                    <MenuLink link={link} url={url} key={index} icon={icon} dropItems={dropItems} />
+                );
             })}
-            {
-                isLoggedIn && <MenuLink link={'Watchlist'} url={'/watchlist'} />
-            }
+            {isLoggedIn && <MenuLink link={'Watchlist'} url={'/watchlist'} />}
         </ul>
     );
 };
