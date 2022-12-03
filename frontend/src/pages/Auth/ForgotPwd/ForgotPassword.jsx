@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
 import PageLayout from '../../layout';
 import ResetModal from './SuccessModal';
-// import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const ForgotPassword = () => {
     const [showModal, setShowModal] = useState(false);
     const [status, setStatus] = useState('');
-    // const [newPwd, setNewPwd] = useState('');
-    // const [oldPwd, setOldPwd] = useState('');
+    const [email, setEmail] = useState('');
+    const [touched, setTouched] = useState(false);
 
     const formHandler = async (e) => {
         e.preventDefault();
         setShowModal(true);
+        let response;
+        try {
+            response = await axios({
+                method: 'post',
+                url: `https://api.yieldvest.hng.tech/auth/init_password_reset`,
+                data: {
+                    email
+                },
+                headers: {
+                    accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 200) {
+                setStatus('success');
+            }
+        } catch (error) {
+            setStatus('error');
+        }
     };
     return (
         <div className="relative">
@@ -39,7 +59,15 @@ const ForgotPassword = () => {
                                         className="w-full border rounded-[4px] h-[56px] px-4 placeholder:text-sm"
                                         type="email"
                                         placeholder="Enter email address"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        onBlur={() => setTouched(true)}
                                     />
+                                    {touched && !email.includes('@') && (
+                                        <p className="text-xs text-gray-500">
+                                            Please provide a valid email address
+                                        </p>
+                                    )}
                                 </div>
 
                                 <button className="bg-primary102 h-[52px] font-semibold w-full text-[#1F2226] text-center rounded-lg text-sm">
