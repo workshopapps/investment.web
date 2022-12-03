@@ -268,6 +268,7 @@ const VisualDataCard = () => {
                                         ? redArrow
                                         : greenArrow
                                 }
+                                className="block mt-2 h-2"
                                 alt="loss"
                             />
                             {`${Math.abs(data[data.length - 1]['revenue_growth'].toFixed(2))}%`}
@@ -295,6 +296,7 @@ const VisualDataCard = () => {
                                         ? redArrow
                                         : greenArrow
                                 }
+                                className="block mt-2 h-2"
                                 alt="loss"
                             />
                             {`${Math.abs(
@@ -324,6 +326,7 @@ const VisualDataCard = () => {
                                         ? redArrow
                                         : greenArrow
                                 }
+                                className="block mt-2 h-2"
                                 alt="loss"
                             />
                             {`${Math.abs(
@@ -353,6 +356,7 @@ const VisualDataCard = () => {
                                         ? redArrow
                                         : greenArrow
                                 }
+                                className="block mt-2 h-2"
                                 alt="loss"
                             />
                             {`${Math.abs(data[data.length - 1]['net_income_growth'].toFixed(2))}%`}
