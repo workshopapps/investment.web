@@ -1,9 +1,7 @@
 from uuid import uuid4
-from pydantic import BaseModel
 
-from pydantic import BaseModel
 from sqlalchemy import (Column, ForeignKey,
-                        String, Float, DateTime, Date, Text, Boolean)
+                        String, Float, DateTime, Date, Text)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -20,12 +18,10 @@ class Company(Base):
     profile_image = Column(String(200), nullable=True)
     market_cap = Column(Float, nullable=True)
     sector = Column(String(64), ForeignKey("sectors.sector_id"))
-    industry = Column(String(64), ForeignKey("industries.industry_id"))
     category = Column(String(64), ForeignKey("categories.category_id"))
     ticker = Column(String(64), ForeignKey("tickers.ticker_id"))
 
     sect_value = relationship("Sector", back_populates="sect")
-    industry_value = relationship("Industry", back_populates="industry_value")
     cat_value = relationship("Category", back_populates="cat")
     ticker_value = relationship("Ticker", back_populates="tick")
     stock_price_value = relationship("StockPrice", back_populates="company_value")
@@ -61,34 +57,6 @@ class StockPrice(Base):
     company_value = relationship("Company", back_populates="stock_price_value")
 
 
-class Financial(Base):
-    __tablename__ = "financials"
-
-    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
-    company = Column(String(64), ForeignKey("company.company_id"))
-    date = Column(Date())
-    equity = Column(Float, nullable=True)
-    dividend_per_stock = Column(Float, nullable=True)
-    earnings_per_share = Column(Float, nullable=True)
-    growth_rate = Column(Float, nullable=True)
-    total_revenue = Column(Float, nullable=True)
-    ttm = Column(Float, nullable=True)
-    operating_cost = Column(Float, nullable=True)
-    income_statement = Column(Float, nullable=True)
-    income_statement_type = Column(String(30))
-    gross_profit = Column(Float, nullable=True)
-    operating_expenses = Column(Float, nullable=True)
-    ebitda = Column(Float, nullable=True)
-    net_income = Column(Float, nullable=True)
-    revenue_growth = Column(Float, nullable=True)
-    operating_expenses_growth = Column(Float, nullable=True)
-    gross_profit_growth = Column(Float, nullable=True)
-    net_income_growth = Column(Float, nullable=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    finance = relationship("Company", back_populates="financial_value")
-
-
 class Ranking(Base):
     __tablename__ = 'rankings'
 
@@ -106,19 +74,9 @@ class Sector(Base):
     __tablename__ = "sectors"
 
     sector_id = Column("sector_id", String(64), primary_key=True, index=True, default=str(uuid4()))
-    sector = Column(String(100))
+    industry = Column(String(64))
 
     sect = relationship("Company", back_populates="sect_value")
-
-
-class Industry(Base):
-    __tablename__ = "industries"
-
-    industry_id = Column("industry_id", String(64), primary_key=True, index=True, default=str(uuid4()))
-    sector = Column(String(64), ForeignKey("sectors.sector_id"))
-    industry = Column(String(100))
-
-    industry_value = relationship("Company", back_populates="industry_value")
 
 
 class Ticker(Base):
@@ -134,6 +92,26 @@ class Ticker(Base):
     tick = relationship("Company", back_populates="ticker_value")
 
 
+class Financial(Base):
+    __tablename__ = "financials"
+
+    financial_id = Column("financial_id", String(64), primary_key=True, index=True, default=str(uuid4()))
+    company = Column(String(64), ForeignKey("company.company_id"))
+    date = Column(Date())
+    equity = Column(Float, nullable=True)
+    dividend_per_stock = Column(Float, nullable=True)
+    earnings_per_share = Column(Float, nullable=True)
+    growth_rate = Column(Float, nullable=True)
+    total_revenue = Column(Float, nullable=True)
+    ttm = Column(Float, nullable=True)
+    operating_cost = Column(Float, nullable=True)
+    income_statement = Column(Float, nullable=True)
+    income_statement_type = Column(String(30))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    finance = relationship("Company", back_populates="financial_value")
+
+
 class Category(Base):
     __tablename__ = "categories"
 
@@ -143,102 +121,50 @@ class Category(Base):
 
     cat = relationship("Company", back_populates="cat_value")
 
-
 class User(Base):
     __tablename__ = "user"
 
-    id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4))
+    id = Column("user_id", String(64), primary_key=True, index=True, default=str(uuid4()))
     email = Column(String(30))
     name = Column(String(30))
-    password = Column(String(100))
 
-    customer = relationship("Customer", back_populates="user_value")
-    subscription_value = relationship("Subscription", back_populates="user_sub")
-    notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
 
+# class SubscribedUsers(Base):
+#     __tablename__ = "subscribers"
+
+#     name = Column(String(30))
+#     email = Column(String(30))
+#     created_date = Column(DateTime(timezone=True), server_default=func.now())
+    
+   
+    
 
 class Customer(Base):
     __tablename__ = "customer"
 
-    user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
     session_id = Column(String(64))
+    subscription = Column(String(64), ForeignKey("subscription.subscription_id"))
 
-    user_value = relationship("User", back_populates="customer")
-
+    subscription_value = relationship("Subscription", back_populates="customer_value")
+    
 
 class Subscription(Base):
     __tablename__ = "subscription"
 
-    user_id = Column(String(64), ForeignKey("user.user_id"))
     subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    subscription_type = Column(String(64), nullable=True)
+    product = Column(String(64), ForeignKey("product.product_id"))
 
-    user_sub = relationship("User", back_populates="subscription_value")
+    customer_value = relationship("Customer", back_populates="subscription_value")
+    product_value = relationship("Product", back_populates="sub_value")
 
 
 class Product(Base):
-    __tablename__ = "product"
+    __tablename__  = "product"
 
-    name = Column(String(64))
-    price = Column(Float)
-    price_id = Column(String(64), primary_key=True, index=True)
-    sub_type = Column(String(64))
+    product_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
+    price_id = Column(String(64))
 
-
-class CreateUserModel(BaseModel):
-    email: str
-    name: str
-    password: str
-
-
-class NotificationSettings(Base):
-    __tablename__ = "notification_settings"
-
-    notification_settings_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    user_id = Column(String(64), ForeignKey("user.user_id"))
-    receive_for_small_caps = Column(Boolean, default=True)
-    receive_for_mid_caps = Column(Boolean, default=True)
-    receive_for_high_caps = Column(Boolean, default=True)
-    notifications_enabled = Column(Boolean, default=False)
-
-    user_value = relationship("User", back_populates="notifications_settings_value")
-
-
-class WatchlistItem(Base):
-    __tablename__ = "watchlist_items"
-
-    id = Column("watchlist_item_id", String(64), primary_key=True, index=True, default=str(uuid4))
-    user_id = Column(String(64), ForeignKey("user.user_id"))
-    company_id = Column(String(64), ForeignKey("company.company_id"))
-
-    company = relationship("Company")
-
-
-class UpdateNotificationSettingsModel(BaseModel):
-    notifications_enabled: bool = None
-    receive_for_small_caps: bool = None
-    receive_for_mid_caps: bool = None
-    receive_for_high_caps: bool = None
-
-
-class PasswordResetRequest(Base):
-    __tablename__ = "password_reset_requests"
-
-    email = Column(String(100), primary_key=True, index=True)
-    verification_code = Column(String(64))
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-
-class InitPasswordResetModel(BaseModel):
-    email: str
-
-
-class FinalizePasswordResetModel(BaseModel):
-    new_password: str
-    code: str
-
-
-class UpdatePasswordModel(BaseModel):
-    current_password: str
-    new_password: str
+    sub_value = relationship("Subscription", back_populates="product_value")
 

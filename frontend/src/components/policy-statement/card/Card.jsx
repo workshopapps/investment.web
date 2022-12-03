@@ -15,13 +15,13 @@ const Card = ({
     return (
         <div className={`${classStyle1} container w-auto h-auto`}>
             <div className={`${textStyle} container h-auto w-full`}>
-                <h3 className="font-[400] text-[32px] max-md:text-[27px] max-sm:text-left lg:text-[32px] mt-10 text-[#0B5934] pb-2">
+                <h3 className="font-[400] text-[32px] max-md:text-[27px] lg:text-[32px] mt-10 text-[#0B5934] pb-2">
                     {textHeader}
                 </h3>
-                <p className="font-[400] max-sm:text-[14px] sm:text-[12px] max-sm:text-left md:text-[12px] lg:text-[14px] xl:text-[16px] text-[#66717E] pb-2">
+                <p className="font-[400] max-sm:text-[14px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-[#66717E] pb-2">
                     {contentOne}
                 </p>
-                <p className="font-[400] max-sm:text-[14px] sm:text-[12px] max-sm:text-left md:text-[12px] lg:text-[14px] xl:text-[16px] text-[#66717E]">
+                <p className="font-[400] max-sm:text-[14px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[16px] text-[#66717E]">
                     {contentTwo}
                 </p>
             </div>

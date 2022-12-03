@@ -7,7 +7,6 @@ import { policyData } from './policyData';
 import HeroBg1 from '../../assets/policy-statement/image/Data-dirl.png';
 import HeroBg2 from '../../assets/policy-statement/image/Free-girl.png';
 import HeroBg3 from '../../assets/policy-statement/image/studio.png';
-import logo from '../../assets/images/logo.png';
 
 //Components
 import PageLayout from '../layout';
@@ -20,21 +19,20 @@ const PolicyStatement = () => {
             <div className="bg-[#f5f5f5] font-Hauora">
                 <div className="py-32 container mx-auto max-sm:px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48 text-center ">
                     {/* */}
-                    <img src={logo} alt="logo" className="m-auto" />
                     <h2 className="font-[600] max-sm:text-[24px] sm:text-[33px] md:text-[40px] lg:text-[57px]">
-                        <span className="text-[#1BD47B]">Yieldvest</span> Privacy Statement
+                        MyStockPlug Privacy Statement
                     </h2>
                     {/* */}
                     <section className="max-sm:px-6 sm:px-8 md:px-12 lg:px-14 pt-8">
                         <p className="max-sm:text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px]">
-                            At Yieldvest we take your privacy very seriously. It is important to us
-                            that you understand your rights in how we handle your personal
+                            At MyStockPlug we take your privacy very seriously. It is important to
+                            us that you understand your rights in how we handle your personal
                             information. Our diligent privacy team meticulously review our products
                             before they go live, so you can expect the best from us.
                         </p>
                     </section>
                     {/* */}
-                    <h3 className="font-[600] max-sm:text-[20px] max-sm:text-left sm:text-[26px] md:text-[32px] lg:text-[40px]  mt-10">
+                    <h3 className="font-[600] max-sm:text-[20px] sm:text-[26px] md:text-[32px] lg:text-[40px] mt-10">
                         Your Privacy Is Your Right
                     </h3>
                     {/* */}
@@ -47,7 +45,7 @@ const PolicyStatement = () => {
                         contentOne="You have the right to understand and control how your personal
                     information should be used"
                         contentTwo="If you have any requesta about personal information, feel free to
-                    contact us at privacy@Yieldvest.ng"
+                    contact us at privacy@mystockplug.ng"
                         image={HeroBg1}
                     />
                     <Card
@@ -71,7 +69,7 @@ const PolicyStatement = () => {
                     />
                 </div>
                 <div className="container mx-auto max-sm:px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48">
-                    <h3 className="font-[600] max-sm:text-[20px] max-sm:text-left sm:text-[26px] md:text-[32px] lg:text-[40px] mb-10 text-center">
+                    <h3 className="font-[600] max-sm:text-[20px] sm:text-[26px] md:text-[32px] lg:text-[40px] mb-10 text-center">
                         Our detailed privacy policy
                     </h3>
 

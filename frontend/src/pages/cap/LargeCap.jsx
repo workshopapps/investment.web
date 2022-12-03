@@ -8,7 +8,7 @@ const LargeCap = () => {
 
     return (
         <PageLayout>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center ">
                 <div className="w-full max-w-[1673px]">
                     <div className="py-[35px] text-[16px] md:text-[40px] font-bold px-[16px]">
                         {title}

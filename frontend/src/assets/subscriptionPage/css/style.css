@@ -4,6 +4,17 @@
         border: 1px solid rgba(141, 141, 141, 0.5);
     }
 
+    .costHolder {
+        position: absolute;
+        left: 10em;
+        top: 2em;
+    }
+
+    .basicTextHolder {
+        position: absolute;
+        top: 6em;
+        font-size: 0.8em;
+    }
 
     .theListing {
         border-top-left-radius: 8px;
@@ -18,8 +29,8 @@
 
     .curlySpring {
         position: absolute;
-        top: 1em;
-        left: 18em;
+        top: -5em;
+        left: 24.5em;
     }
 }
 

@@ -79,7 +79,7 @@ const StockTips = () => {
                         backgroundImage: `url(require${charles})`
                     }}
                     className="p-6 md:p-12 text-center text-xl text-white font-bold z-20 relative">
-                    <h2>Yieldvest</h2>
+                    <h2>MyStockPlug</h2>
                     <h1>STOCK TIPS FOR ABSOLUTE BEGINNERS</h1>
                 </div>
             </div>
@@ -177,7 +177,7 @@ const StockTips = () => {
                             Get The Best Stock Investment Advice Anywhere
                         </h1>
                         <p className="font-bold text-sm md:text-2xl md:text-left whitespace-pre-wrap w-screen md:w-auto px-3 text-center">
-                            On Yieldvest, gain access to thousands of stocks and point precision
+                            On MyStockPlug, gain access to thousands of stocks and point precision
                             advice on the best stocks to buy
                         </p>
                         <button className="flex items-center gap-2 mx-auto bg-green-600 text-white p-4 px-6 rounded-lg">

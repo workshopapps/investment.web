@@ -6,7 +6,7 @@ import PageLayout from '../layout';
 
 export default function index() {
     return (
-        <PageLayout isProtected>
+        <PageLayout>
             <div className="flex ">
                 <div className="w-1/5 border-r-black">
                     <Sidebar />

@@ -1,5 +1,4 @@
 import datetime
-import os
 
 from api.crud.base import get_db
 from api.models import models
@@ -7,8 +6,6 @@ from sqlalchemy.orm import Session
 from uuid import uuid4
 from api.scripts import data_gathering, data_calculations, email_sending
 from api.models.models import Ranking
-from sqlalchemy import or_
-import traceback
 
 """
     This is the main function that accumulates all the 
@@ -22,7 +19,7 @@ def rank_companies():
 
     # get companies from database
     companies = db.query(models.Company).all()
-
+    
     # loop through each company and update the appropriate tables in the database
     for company in companies:
         stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company.company_id).order_by(
@@ -75,78 +72,53 @@ def rank_companies():
                                             score=ranking_score, methodology="Fundamental Analysis")
         db.add(latest_ranking)
     db.commit()
+    
 
 
 async def send_ranking_update_notification():
+    print('sending....')
     db: Session = next(get_db())
 
-    # get notifications
-    notification_settings = db.query(models.NotificationSettings).all()
+    # get company list
+    companies: list = db.query(models.Company).all()
 
-    low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
-    mid_cap_category_id = os.getenv('MID_MARKET_CAP_CATEGORY_ID')
-    high_cap_category_id = os.getenv('HIGH_MARKET_CAP_CATEGORY_ID')
+    # get latest rankings
+    rankings: list = []
+    for company in companies:
+        rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
+            .order_by(Ranking.created_at.desc()).first()
+        if rank:
+            rankings.append(rank)
 
-    for settings in notification_settings:
-        if not settings.notifications_enabled:
-            continue
+    # sort rankings by score (descending)
+    def get_ranking_sort_key(inner_rank: Ranking):
+        return inner_rank.score
 
-        filters = []
+    rankings.sort(key=get_ranking_sort_key, reverse=True)
 
-        if settings.receive_for_small_caps:
-            filters.append(models.Company.category == low_cap_category_id)
-        if settings.receive_for_mid_caps:
-            filters.append(models.Company.category == mid_cap_category_id)
-        if settings.receive_for_high_caps:
-            filters.append(models.Company.category == high_cap_category_id)
+    # create the response list
+    comapny_ranks = []
+    top_rankings = []
+    for ranking in rankings:
+        if len(top_rankings) == 12:
+            break
 
-        # get company list
-        companies: list = db.query(models.Company).filter(or_(*filters)).all()
+        top_rankings.append(ranking)
 
-        # get latest rankings
-        rankings: list = []
-        for company in companies:
-            rank = db.query(Ranking).filter(Ranking.company == company.company_id) \
-                .order_by(Ranking.created_at.desc()).first()
-            if rank:
-                rankings.append(rank)
+    for ranking in top_rankings:
+        comp: models.Company = ranking.comp_ranks
+        data = {
+            'company': comp.name,
+            'ticker_symbol': comp.ticker_value.symbol,
+            'current_ranking': ranking.score
+        }
+        comapny_ranks.append(data)
 
-        # sort rankings by score (descending)
-        def get_ranking_sort_key(inner_rank: Ranking):
-            return inner_rank.score
 
-        rankings.sort(key=get_ranking_sort_key, reverse=True)
-
-        # create the response list
-        company_ranks = []
-        top_rankings = []
-        for ranking in rankings:
-            if len(top_rankings) == 12:
-                break
-
-            top_rankings.append(ranking)
-
-        for ranking in top_rankings:
-            comp: models.Company = ranking.comp_ranks
-            data = {
-                'company': comp.name,
-                'ticker_symbol': comp.ticker_value.symbol,
-                'current_ranking': ranking.score
-            }
-            company_ranks.append(data)
-
-        await email_sending.send_user_email(company_ranks, settings.user_value.email)
-
+    await email_sending.send_user_email(comapny_ranks)
+    print('done')
 
 async def run_process_scripts():
-    try:
-        try:
-            await data_gathering.pick_random_companies()
-        except Exception:
-            print('Data gathering script failed. Low API credits???')
-            print(traceback.print_exc())
-
-        rank_companies()
-        await send_ranking_update_notification()
-    except Exception:
-        print(traceback.print_exc())
+    # await data_gathering.pick_four_random_companies()
+    rank_companies()
+    await send_ranking_update_notification()
