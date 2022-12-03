@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,152 +6,162 @@ import axios from 'axios';
 import PageLayout from '../layout';
 import { AiOutlineEyeInvisible } from 'react-icons/ai';
 import { AiOutlineEye } from 'react-icons/ai';
+import AuthContext from '../../auth/AuthContext';
 
 const Signup = () => {
-    const baseUrl = 'https://api.yieldvest.hng.tech/auth/signup';
-    const navigate = useNavigate();
-    const [passwordType, setPasswordType] = useState('password');
-    const [signupForm, setSignUpForm] = useState({
-        email: '',
-        name: '',
-        password: ''
-    });
-    const [googleUserToken, setGoogleUserToken] = useState(null);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setisSubmit] = useState(false);
-    const [timeOut, setTimeout] = useState(false);
-    const [timeOutGoogle, setTimeoutGoogle] = useState(false);
-
-    //tracking form changes
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setSignUpForm((prevState) => {
-            return {
-                ...prevState,
-                [name]: value
-            };
+    const Inner = () => {
+        const baseUrl = 'https://api.yieldvest.hng.tech/auth/signup';
+        const navigate = useNavigate();
+        const [passwordType, setPasswordType] = useState('password');
+        const [signupForm, setSignUpForm] = useState({
+            email: '',
+            name: '',
+            password: ''
         });
-    };
+        const [googleUserToken, setGoogleUserToken] = useState(null);
+        const [formErrors, setFormErrors] = useState({});
+        const [isSubmit, setisSubmit] = useState(false);
+        const [timeOut, setTimeout] = useState(false);
+        const [timeOutGoogle, setTimeoutGoogle] = useState(false);
 
-    //handle form submit
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setisSubmit(true);
-        setFormErrors(validate(signupForm));
-    };
+        const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
-    //post to the backend
-    const post = () => {
-        axios
-            .post(baseUrl, {
-                email: signupForm.email,
-                name: signupForm.name,
-                password: signupForm.password
-            })
-            .then(function (response) {
-                if (response.status === 200) {
-                    toast.success('Signed up successfully');
-                    setInterval(() => {
-                        setTimeout(true);
-                    }, 1500);
-                } else {
-                    toast.error('Signup failed');
-                    console.log(response);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-                toast.warn('Account already exists. Kindly proceed to login');
-            });
-    };
-
-    //handle google OAUTH
-    const handleGoogleSignIn = async (tokenResponse) => {
-        setGoogleUserToken(tokenResponse);
-        console.log(googleUserToken);
-
-        axios
-            .get(
-                `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-            )
-            .then((res) => {
-                if (res.status === 200) {
-                    toast.success('Login successful');
-                    setInterval(() => {
-                        setTimeoutGoogle(true);
-                    }, 1500);
-                } else {
-                    toast.error('Authentication failed');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error('Authentication failed');
-            });
-    };
-
-    const handleGoogleSignInError = (err) => {
-        console.log(err);
-    };
-
-    //toggle password
-    const togglePassword = () => {
-        if (passwordType === 'password') {
-            setPasswordType('text');
-        } else {
-            setPasswordType('password');
-        }
-    };
-
-    //getting the manual inputs
-    useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+        //tracking form changes
+        const handleChange = (event) => {
+            const { name, value } = event.target;
             setSignUpForm((prevState) => {
                 return {
                     ...prevState,
-                    name: '',
-                    email: '',
-                    password: ''
+                    [name]: value
                 };
             });
-            post();
+        };
+
+        //handle form submit
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            setisSubmit(true);
+            setFormErrors(validate(signupForm));
+        };
+
+        //post to the backend
+        const post = () => {
+            axios
+                .post(baseUrl, {
+                    email: signupForm.email,
+                    name: signupForm.name,
+                    password: signupForm.password
+                })
+                .then(function (response) {
+                    if (response.status === 200) {
+                        toast.success('Signed up successfully');
+                        setInterval(() => {
+                            setTimeout(true);
+                        }, 1500);
+                    } else {
+                        toast.error('Signup failed');
+                        console.log(response);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    toast.warn('Account already exists. Kindly proceed to login');
+                });
+        };
+
+        const whenAuthenticated = (accessToken) => {
+            setAccessToken(accessToken);
+            setIsLoggedIn(true);
+            sessionStorage.setItem('accessToken', accessToken);
+        };
+
+        //handle google OAUTH
+        const handleGoogleSignIn = async (tokenResponse) => {
+            setGoogleUserToken(tokenResponse);
+            console.log(googleUserToken);
+
+            axios
+                .get(
+                    `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
+                )
+                .then((res) => {
+                    if (res.status === 200) {
+                        toast.success('Login successful');
+                        whenAuthenticated(res.data.access_token);
+                        setInterval(() => {
+                            setTimeoutGoogle(true);
+                        }, 1500);
+                    } else {
+                        toast.error('Authentication failed');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Authentication failed');
+                });
+        };
+
+        const handleGoogleSignInError = (err) => {
+            console.log(err);
+        };
+
+        //toggle password
+        const togglePassword = () => {
+            if (passwordType === 'password') {
+                setPasswordType('text');
+            } else {
+                setPasswordType('password');
+            }
+        };
+
+        //getting the manual inputs
+        useEffect(() => {
+            if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+                setSignUpForm((prevState) => {
+                    return {
+                        ...prevState,
+                        name: '',
+                        email: '',
+                        password: ''
+                    };
+                });
+                post();
+            }
+        }, [formErrors]);
+
+        const validate = (values) => {
+            const errors = {};
+            const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
+
+            if (!signupForm.name) {
+                errors.name = 'Required';
+            }
+
+            if (!signupForm.email) {
+                errors.email = 'Required';
+            }
+
+            if (!signupForm.password) {
+                errors.password = 'Required';
+            } else if (!regex.test(values.email)) {
+                errors.email = 'This is not a valid email format';
+            }
+            return errors;
+        };
+
+        if (timeOut) {
+            navigate('/login');
         }
-    }, [formErrors]);
-
-    const validate = (values) => {
-        const errors = {};
-        const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
-
-        if (!signupForm.name) {
-            errors.name = 'Required';
+        if (timeOutGoogle) {
+            navigate('/');
         }
 
-        if (!signupForm.email) {
-            errors.email = 'Required';
-        }
-
-        if (!signupForm.password) {
-            errors.password = 'Required';
-        } else if (!regex.test(values.email)) {
-            errors.email = 'This is not a valid email format';
-        }
-        return errors;
-    };
-
-    if (timeOut) {
-        navigate('/login');
-    }
-    if (timeOutGoogle) {
-        navigate('/');
-    }
-
-    return (
-        <PageLayout showFooter={false}>
-            <div className="mb-12 md:overflow-hidden md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
+        return (
+            <div className="mb-12 md:overflow-hidden h-full md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
                 <ToastContainer />
-                <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
+                {/* <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
                     Buy stocks and grow your business
-                </h1>
+                </h1> */}
                 <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-8">
                     <div className="w-5/6 mt-8 flex flex-col gap-3 md:gap-2 lg:px-5 lg:gap-3 lg:w-full">
                         <h1 className="font-HauoraBold text-xl text-center tracking-wide">
@@ -278,6 +288,12 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
+        );
+    };
+
+    return (
+        <PageLayout showFooter={false}>
+            <Inner />
         </PageLayout>
     );
 };

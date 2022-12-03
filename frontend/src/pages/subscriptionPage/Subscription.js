@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import '../../assets/subscriptionPage/css/style.css';
 import Spring from '../../assets/subscriptionPage/images/spring.png';
-import { freeMonthly, premiumMonthly, premiumMaxMonthly, freeYearly, premiumYearly, premiumMaxYearly } from './SubscriptionContent';
+import { freeMonthly, premiumMonthly, freeYearly, premiumYearly } from './SubscriptionContent';
 import PageLayout from '../layout';
 import FeatureSection from '../../components/subscription/FeatureSection';
 import SubscribeCard from '../../components/subscription/PlanCard';
@@ -34,14 +34,14 @@ const Subscription = () => {
 
     return (
         <PageLayout>
-            <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-HauoraBold">
-                <div className="lg:w-[55%] w-[90%] mx-0 md:mx-[20em]">
-                    <h1 className="text-md md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
-                        Get started with <span className="text-[#1BD47B] ">MyStockPlug</span> by
+            <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-Hauora">
+                <div className="lg:w-[60%] w-[80%] mx-0 md:mx-auto">
+                    <h1 className="text-xl md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">
+                        Get started with <span className="text-[#1BD47B] ">Yieldvest</span> by
                         subscribing to one of our plans
                     </h1>
                 </div>
-                <div className="ml-2 md:ml-10">
+                <div className="hidden ml-2 md:ml-10">
                     <img src={Spring} alt="curly-spring" className="w-6 md:w-12 h-8 md:h-14 ml-6 md:ml-0 mt-0 md:mt-6 curlySpring" />
                 </div>
             </div>
@@ -65,89 +65,62 @@ const Subscription = () => {
             {/* subscription content details start here */}
 
             {subType === 1 ? <div className="w-full flex justify-center font-Hauora">
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center mx-10 md:mx-[100px] p-0 md:px-[2em] w-full">
+                <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
 
                     <SubscribeCard
-                        name="Free"
+                        name="Basic"
                         price="0.00"
                         type="month"
                         target="For Basic Users"
                         priceId="price_1M84ELE0pPf6mXoCmP61VmyL"
-                        features={["Stock Information", "Share Stocks", "Access to Only 12 stocks"]}
+                        features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                         payload={freeMonthly}
-                        mode="primary"
-                        buttonText="Current Plan"
-                    />
-
-
-                    <SubscribeCard
-                        name="Premium"
-                        price="5,000"
-                        type="month"
-                        target="For Power Users"
-                        priceId="price_1M84FHE0pPf6mXoCaZEdZHgv"
-                        features={["Stock Information", "Share Stocks", "Unlimited access to all stocks", "Access to more filters", "Access to Small Caps stocks"]}
-                        payload={premiumMonthly}
-                        mode="secondary"
                         buttonText="Subscribe"
                     />
 
 
                     <SubscribeCard
-                        name="Premium Max"
-                        price="20,000"
+                        name="Standard"
+                        price="5,000"
                         type="month"
-                        target="For Advanced Users"
-                        priceId="price_1M84G9E0pPf6mXoC939Khuwk"
-                        features={["Stock Information", "Compare Stocks", "AI Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
-                        payload={premiumMaxMonthly}
-                        mode="primary"
-                        buttonText="Coming Soon"
+                        target="For Power Users"
+                        priceId="price_1M84FHE0pPf6mXoCaZEdZHgv"
+                        features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
+                        payload={premiumMonthly}
+                        buttonText="Subscribe"
                     />
+
+
 
                 </div>
             </div> : subType === 2 ?
 
                 <div className="w-full flex justify-center font-Hauora">
-                    <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 place-items-center mx-0 md:mx-[100px] p-0 md:p-[2em] w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-2 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
 
                         <SubscribeCard
-                            name="Free"
+                            name="Basic"
                             price="0.00"
                             type="year"
                             target="For Basic Users"
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Share Stocks", "Access to Only 12 stocks"]}
+                            features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                             payload={freeYearly}
-                            mode="primary"
-                            buttonText="Current Plan"
-                        />
-
-
-                        <SubscribeCard
-                            name="Premium"
-                            price="60,000"
-                            type="year"
-                            target="For Power Users"
-                            priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Share Stocks", "Unlimited access to all stocks", "Access to more filters", "Access to Small Caps stocks"]}
-                            payload={premiumYearly}
-                            mode="secondary"
                             buttonText="Subscribe"
                         />
 
 
                         <SubscribeCard
-                            name="Premium Max"
-                            price="240,000"
+                            name="Standard"
+                            price="60,000"
                             type="year"
-                            target="For Advanced Users"
+                            target="For Power Users"
                             priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
-                            features={["Stock Information", "Compare Stocks", "AI Predictions", "Price Alerts", "Auto Stock Calculator", "Analytics"]}
-                            payload={premiumMaxYearly}
-                            mode="primary"
-                            buttonText="Coming Soon"
+                            features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
+                            payload={premiumYearly}
+                            buttonText="Subscribe"
                         />
+
 
                     </div>
                 </div>

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 import dateFormat from 'dateformat';
+import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
+import authContext from '../../auth/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
-
     const [stocks, setStocks] = useState([]);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
@@ -14,6 +16,8 @@ const IndexPage = () => {
     const [sectors, setSectors] = useState([]);
     const [industries, setIndustries] = useState([]);
     const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
+
+    const { isLoggedIn } = createContext(authContext);
 
     const handleMarketCap = (e) => {
         e.preventDefault();
@@ -112,16 +116,32 @@ const IndexPage = () => {
         }
     };
 
+    const onSuccess = () => {
+        toast.success('Added to watch list');
+    };
+
+    const onFailure = () => {
+        toast.error('Failed to add to the list');
+    };
+
     return (
         <PageLayout>
+            {!isLoggedIn && <NotSubscribedModal />}
+            <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
-                <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center items-center text-center m-auto p-5 sm:px-10 xl:p-0">
-                    <h1 className="max-w-[792px] text-center text-xl sm:text-3xl xl:text-[50px] xl:leading-[50px] font-bold text-white mb-5 lg:mb-11">
+                <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20">
+                    <h1
+                        className="max-w-[792px] text-left text-xl sm:text-3xl xl:text-[70px] xl:leading-[50px] font-bol text-white mb-5 lg:mb-11"
+                        style={{
+                            paddingRight: '50px',
+                            lineHeight: '65px'
+                        }}>
                         We Track, Analyse & Recommend the best stocks for you.
                     </h1>
                     <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white">
-                        We provide well curated information to make smarted investment decisions
-                        based on Fundamental Analysis{' '}
+                        We provide well curated information to make smarter investment
+                        <br />
+                        decisions based on Fundamental Analysis{' '}
                     </p>
                 </div>
             </section>
@@ -193,6 +213,8 @@ const IndexPage = () => {
                                     index={index}
                                     sector={item.industry}
                                     link={`/company/${item.company_id}`}
+                                    onSuccess={onSuccess}
+                                    onFailure={onFailure}
                                 />
                             ))}
                         </div>

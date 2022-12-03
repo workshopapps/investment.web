@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // import { UserStatusContext } from '../../store/UserStatusContext';
 import PageLayout from '../layout';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,181 +6,176 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import AuthContext from '../../auth/AuthContext';
 
 const Login = () => {
-    const baseUrl = 'https://api.yieldvest.hng.tech/auth/login';
-    // const { loggedInHandler } = useContext(UserStatusContext);
-    // console.log(loggedInHandler);
-    const navigate = useNavigate();
-    const [googleUserToken, setGoogleUserToken] = useState(null);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setisSubmit] = useState(false);
-    const [accessToken, setAccessToken] = useState(null);
-    const [timeOut, setTimeout] = useState(false);
-    console.log(accessToken);
+    const Inner = () => {
+        const baseUrl = 'https://api.yieldvest.hng.tech/auth/login';
+        const navigate = useNavigate();
+        const [formErrors, setFormErrors] = useState({});
+        const [isSubmit, setisSubmit] = useState(false);
+        const [timeOut, setTimeout] = useState(false);
 
-    //form
-    const [loginForm, setLoginForm] = useState({
-        email: '',
-        password: ''
-    });
+        const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
-    const [passwordType, setPasswordType] = useState('password');
-
-    //track changes in form
-    const handleChange = (event) => {
-        const { type, name, value, checked } = event.target;
-        setLoginForm((prevState) => {
-            return {
-                ...prevState,
-                [name]: type === 'checkbox' ? checked : value
-            };
+        //form
+        const [loginForm, setLoginForm] = useState({
+            email: '',
+            password: ''
         });
-    };
 
-    //handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setisSubmit(true);
-        setFormErrors(validate(loginForm));
+        const [passwordType, setPasswordType] = useState('password');
 
-        // if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
-        //     // loggedInHandler();
-        //     setInterval(
-        //         () => {
-        //             navigate('/landing');
-        //         },
-        //         1,
-        //         500
-        //     );
-        // }
-    };
-
-    const togglePassword = () => {
-        if (passwordType === 'password') {
-            setPasswordType('text');
-        } else {
-            setPasswordType('password');
-        }
-    };
-
-    //handle google OAUTH
-    const handleGoogleSignIn = async (tokenResponse) => {
-        setGoogleUserToken(tokenResponse);
-        console.log(googleUserToken);
-
-        axios
-            .get(
-                `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-            )
-            .then((res) => {
-                if (res.status === 200) {
-                    toast.success('Login successful');
-                    setInterval(() => {
-                        setTimeout(true);
-                    }, 1500);
-                } else {
-                    toast.error('Authentication failed');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error('Authentication failed');
-            });
-    };
-
-    const handleGoogleSignInError = (err) => {
-        console.log(err);
-    };
-
-    //backendint
-    const post = () => {
-        const config = {
-            headers: {
-                accept: 'application / json',
-                'content-type': 'application/x-www-form-urlencoded'
-            }
-        };
-
-        axios
-            .post(
-                baseUrl,
-                {
-                    grant_type: '',
-                    username: loginForm.email,
-                    password: loginForm.password,
-                    scope: '',
-                    client_id: '',
-                    client_secret: ''
-                },
-                config
-            )
-            .then((response) => {
-                if (response.status === 200) {
-                    toast.success('Login successful');
-                    setAccessToken(response.data.accessToken);
-                    // setAuth(true);
-                    //setAccessTokenToSessionStorage
-                    setInterval(() => {
-                        setTimeout(true);
-                    }, 1500);
-                } else {
-                    toast.error('login failed');
-                }
-                console.log(response);
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error('Invalid username or password');
-            });
-
-        // if (!auth) {
-        //     toast.error('Invalid username or password');
-        // }
-    };
-
-    //validation
-    const validate = (values) => {
-        const errors = {};
-        const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
-
-        if (!values.email) {
-            errors.email = 'required';
-        } else if (!regex.test(values.email)) {
-            errors.email = 'This is not a valid email format';
-        }
-
-        if (!values.password) {
-            errors.password = 'required';
-        }
-
-        return errors;
-    };
-
-    useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+        //track changes in form
+        const handleChange = (event) => {
+            const { type, name, value, checked } = event.target;
             setLoginForm((prevState) => {
                 return {
                     ...prevState,
-                    email: '',
-                    password: ''
+                    [name]: type === 'checkbox' ? checked : value
                 };
             });
-            post();
+        };
+
+        //handle form submission
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            setisSubmit(true);
+            setFormErrors(validate(loginForm));
+
+            // if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
+            //     // loggedInHandler();
+            //     setInterval(
+            //         () => {
+            //             navigate('/landing');
+            //         },
+            //         1,
+            //         500
+            //     );
+            // }
+        };
+
+        const togglePassword = () => {
+            if (passwordType === 'password') {
+                setPasswordType('text');
+            } else {
+                setPasswordType('password');
+            }
+        };
+
+        const whenAuthenticated = (accessToken) => {
+            setAccessToken(accessToken);
+            setIsLoggedIn(true);
+            sessionStorage.setItem('accessToken', accessToken);
+        };
+
+        //handle google OAUTH
+        const handleGoogleSignIn = async (tokenResponse) => {
+            axios
+                .get(
+                    `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
+                )
+                .then((res) => {
+                    if (res.status === 200) {
+                        toast.success('Login successful');
+                        whenAuthenticated(res.data.access_token);
+                        setInterval(() => {
+                            setTimeout(true);
+                        }, 1500);
+                    } else {
+                        toast.error('Authentication failed');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Authentication failed');
+                });
+        };
+
+        const handleGoogleSignInError = (err) => {
+            console.log(err);
+        };
+
+        const post = () => {
+            const config = {
+                headers: {
+                    accept: 'application / json',
+                    'content-type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            axios
+                .post(
+                    baseUrl,
+                    {
+                        grant_type: '',
+                        username: loginForm.email,
+                        password: loginForm.password,
+                        scope: '',
+                        client_id: '',
+                        client_secret: ''
+                    },
+                    config
+                )
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success('Login successful');
+                        whenAuthenticated(response.data.access_token);
+                        setInterval(() => {
+                            setTimeout(true);
+                        }, 1500);
+                    } else {
+                        toast.error('login failed');
+                    }
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Invalid username or password');
+                });
+        };
+
+        //validation
+        const validate = (values) => {
+            const errors = {};
+            const regex = /^[^@]+@[^@]+\.[^@]{2,}$/i;
+
+            if (!values.email) {
+                errors.email = 'required';
+            } else if (!regex.test(values.email)) {
+                errors.email = 'This is not a valid email format';
+            }
+
+            if (!values.password) {
+                errors.password = 'required';
+            }
+
+            return errors;
+        };
+
+        useEffect(() => {
+            if (Object.keys(formErrors).length === 0 && isSubmit === true) {
+                setLoginForm((prevState) => {
+                    return {
+                        ...prevState,
+                        email: '',
+                        password: ''
+                    };
+                });
+                post();
+            }
+        }, [formErrors]);
+
+        if (timeOut) {
+            navigate('/');
         }
-    }, [formErrors]);
 
-    if (timeOut) {
-        navigate('/');
-    }
-
-    return (
-        <PageLayout showFooter={false}>
-            <div className="flex flex-col items-center justify-center w-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
+        return (
+            <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
                 <ToastContainer />
-                <h1 className="hidden text-white text-xl font-HauoraBold mt-10 md:flex md:tracking-widest">
+                {/* <h1 className="hidden text-white text-xl font-HauoraBold mt-10 md:flex md:tracking-widest">
                     Buy stocks and grow your business
-                </h1>
+                </h1> */}
                 <div className="w-full p-5 md:flex md:flex-col md:justify-center md:items-center md:w-520 md:bg-white md:rounded-lg md:px-8">
                     <div className="flex flex-col text-center px-10 md:w-full md:px-1 md:items-center">
                         <h1 className="font-HauoraBold text-xl mb-5 md:text-2xl">Welcome back</h1>
@@ -286,6 +281,12 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+        );
+    };
+
+    return (
+        <PageLayout showFooter={false}>
+            <Inner />
         </PageLayout>
     );
 };
