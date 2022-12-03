@@ -9,7 +9,11 @@ const UserAvatar = ({ width = '50px', height = '50px', fontSize = '16px' }) => {
         <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
             <Link
                 to="/settings"
-                className={`w-[${width}] h-[${height}] rounded-full text-white bg-gray-400 flex justify-center items-center`}>
+                className={`rounded-full text-white bg-gray-400 flex justify-center items-center`}
+                style={{
+                    width: width,
+                    height: height
+                }}>
                 <h1 className={`text-white uppercase font-[700] text-[${fontSize}]`}>
                     {user.name.slice(0, 2)}
                 </h1>
