@@ -20,14 +20,14 @@ const OverviewCard = ({ companyId, name, price, industry, market_cap, dividend_y
                     <span className="mr-2">Industry:</span>
                     {industry}
                 </div>
-                <div className="w-[50%] flex flex-row justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-2">
+                <div className="w-[50%] flex flex-row justify-end text-right text-base pr-3 font-sans font-light pt-3 gap-0 md:gap-2">
                     <div className="flex justify-end">
                         <img
                             src={USFlag}
                             alt="Flag"
                             width="40px"
                             height="5em"
-                            className="flex justify-end"
+                            className="flex h-6 justify-end"
                         />
                     </div>
                     <p>United States</p>
