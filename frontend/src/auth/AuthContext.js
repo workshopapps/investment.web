@@ -10,7 +10,6 @@ const authStructure = {
     setUser: {}, // Function prototype: (user: object) => Any
     setAccessToken: {}, // Function prototype: (accessToken: string) => Any
     setIsLoggedIn: {}, // Function prototype: (isLoggedIn: bool) => Any
-    getApiService: {}, // Function prototype: () => axios instance
     logout: {} // Function prototype: () => Any
 };
 
