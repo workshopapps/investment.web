@@ -1,16 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import lead from '../../assets/download/mac.png';
-import stock from '../../assets/download/comp.png';
-import chart from '../../assets/download/loosingChartImg.png';
+import lead from '../../assets/download/mac.svg';
+import stock from '../../assets/download/comp.svg';
+import chart from '../../assets/download/loosingChartImg.svg';
 import download from '../../assets/download/download.svg';
 import PageLayout from '../layout';
 
 function DownloadPage() {
     return (
         <PageLayout>
-            <div className="w-full md:flex justify-center items-center flex-col">
-                <div className="md:flex px-[16px] w-full justify-center items-center bg-[#F5F5F5]">
+            <div className="w-full md:flex justify-center items-center flex-col bg-[#F5F5F5]">
+                <div className="md:flex px-[16px] w-full justify-center items-center bg-[#FFFFFF]">
                     <div className="max-w-[1243px] w-full">
                         <div className="md:flex items-center justify-between gap-[30px] py-[40px] md:py-[120px]">
                             <div className="text-center md:w-1/2 md:text-left">
@@ -59,7 +59,7 @@ function DownloadPage() {
                 </div>
                 {/* Second section */}
 
-                <div className="md:flex px-[16px] w-full justify-center items-center bg-[#FFFFFF]">
+                <div className="md:flex px-[16px] w-full justify-center my-[3rem] items-center bg-[#FFFFFF]">
                     <div className="max-w-[1243px] w-full">
                         <div className="md:flex items-center justify-between gap-[30px] md:py-[120px]">
                             <div className="md:w-1/2">
