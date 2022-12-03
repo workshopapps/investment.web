@@ -43,53 +43,65 @@ const CompanyProfilePage = () => {
         default:
             return (
                 <PageLayout>
-                    <div className="bg-[#f5f5f5] font-Hauora ">
-                        <div >
+                    <div className="bg-[#f5f5f5] font-Hauora">
+                        <div>
                             <Link to="/">
-                                <div className="flex mt-0 py-5 text-[#5C5A5A] text-sm md:text-lg mx-[1em] md:mx-[100px] font-semibold">
-                                    <img src={Back} alt="back" className="mr-4 md:mr-10" />{' '}
-                                    Home
+                                <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md mx-[1em] md:mx-[100px]">
+                                    Stock <span className="inline-flex mx-2 ">&gt; </span>Company Profile
                                 </div>
                             </Link>
-                            <h3 className="text-2xl md:text-4xl text-[#5C5A5A] font-semibold py-10 mr-4">
-                                        Company Profile
-                                    </h3>
-                            <hr />
-                            <div className="flex flex-col md:flex-row justify-between md:px-[100px] px-[1rem] gap-5">
-                                <div className="md:w-2/5 w-full">
-                                    
-                                    <div className=" bg-[#FFFFFF] rounded-xl  text-[#5C5A5A] px-4 md:px-10 py-3 border font-normal  hover:shadow-xl mb-7">
-
-                                    <OverviewCard
-                                        companyId={companyId}
-                                        name={data.name}
-                                        price={`${data.stock_price.stock_price}`}
-                                        industry={data.sector.industry}
-                                    />
-                                    <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-7 pb-6 flex flex-row justify-between">
-                                        MARKET CAP <span className="font-HauoraBold font-bold">{(data.market_cap / 1e9).toFixed(2)}B</span>
-                                    </h5>
-
-                                    <h5 className="text-sm md:text-md text-[#5C5A5A] px-4 md:px-7 pb-6 flex flex-row justify-between">
-                                        DIVIDEND YIELD <span className="font-HauoraBold font-bold">{data.stock_price.dividend_yield ? data.stock_price.dividend_yield.toFixed(4) : `n/a`}</span>
-                                    </h5>
+                            <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
+                                <div className="w-full flex flex-row justify-between">
+                                    <div>
+                                        <h3 className="text-2xl md:text-4xl text-[#5C5A5A] pt-10">
+                                            Company Profile
+                                        </h3>
+                                        <p className="text-xl md:text-2xl text-[#5C5A5A] pt-4">Overview</p>
                                     </div>
 
-                                    <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
-                                        About <img className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' src={show ? DownIcon : UpIcon} alt="open" onClick={() => setShow(!show)} />
-                                    </h5>
-                                    {show && <AboutCompanyCard description={data.description} />}
-
-                                    <br />
+                                    <div className="mt-auto">
+                                        <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
+                                            Share This Stock{' '}
+                                            <img
+                                                className="ml-3 md:m-auto h-4 md:h-auto bg-none"
+                                                src={shareIcon}
+                                                alt="open"
+                                            />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="md:w-3/5 w-full">
-                                    <div className="flex flex-row text-xs md:text-lg text-[#5C5A5A] font-semibold py-4 md:py-10 gap-4">
-                                        <button className="bg-[#B8F2D6] p-2 px-4 rounded-lg">Income Statement</button>
-                                        <button className="hover:bg-[#B8F2D6] cursor-pointer rounded-lg opacity-50 p-2 px-4">Balance Statement</button>
-                                        <button className="hover:bg-[#B8F2D6] cursor-pointer rounded-lg opacity-50 p-2 px-4">Cash Flow Statement</button>
+
+
+
+                                <hr className="w-full mb-4 h-2" />
+
+
+                                <div className="flex flex-col md:flex-row gap-5 ">
+                                    <div className="md:w-1/3 w-full">
+                                        <OverviewCard
+                                            companyId={companyId}
+                                            name={data.name}
+                                            price={`${data.stock_price.stock_price.toFixed(2)}`}
+                                            industry={data.sector.sector}
+                                            market_cap={(data.market_cap / 1e9).toFixed(2)}
+                                            dividend_yield={data.stock_price.dividend_yield ? `${data.stock_price.dividend_yield.toFixed(3)}B` : `n/a`}
+                                        />
+
+                                        <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
+                                            About <img className='p-2 cursor-pointer border bg-[#E8FBF2] rounded-full' src={show ? DownIcon : UpIcon} alt="open" onClick={() => setShow(!show)} />
+                                        </h5>
+                                        {show && <AboutCompanyCard description={data.description} />}
+
+                                        <br />
                                     </div>
-                                    <VisualDataCard />
-                                    <br />
+
+
+                                    <div className="md:w-2/3 w-full">
+
+                                        <VisualDataCard />
+                                        <br />
+                                    </div>
+
                                 </div>
 
 
