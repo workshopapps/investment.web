@@ -5,9 +5,9 @@ import Logo from './../../assets/company-profile/US.png';
 import { FiTrash } from 'react-icons/fi';
 import WatchListContext from '../../store/watchList/WatchList';
 
+// eslint-disable-next-line react/prop-types
 const StockCard = ({ id }) => {
     const [data, setData] = useState([]);
-    const { watchList } = useContext(WatchListContext);
     const url = `https://api.yieldvest.hng.tech/${id}`;
     const token = 'isdfkasdbfasdfasdfasdf';
     useEffect(() => {
