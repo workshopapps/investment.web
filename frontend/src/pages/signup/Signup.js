@@ -157,11 +157,11 @@ const Signup = () => {
 
     return (
         <PageLayout showFooter={false}>
-            <div className="mb-12 md:overflow-hidden md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
+            <div className="mb-12 md:overflow-hidden h-full md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
                 <ToastContainer />
-                <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
+                {/* <h1 className="hidden md:flex text-center text-white text-xl tracking-wide md:mt-10">
                     Buy stocks and grow your business
-                </h1>
+                </h1> */}
                 <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-8">
                     <div className="w-5/6 mt-8 flex flex-col gap-3 md:gap-2 lg:px-5 lg:gap-3 lg:w-full">
                         <h1 className="font-HauoraBold text-xl text-center tracking-wide">
