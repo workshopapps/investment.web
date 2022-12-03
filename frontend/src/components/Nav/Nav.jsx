@@ -30,12 +30,10 @@ const Nav = ({ openMenu, user }) => {
     };
 
     const navigate = useNavigate();
-    console.log(user);
-    // const textProfile = user.email.slice(0, 3)
 
     return (
-        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px]">
-            <div className="w-full flex items-center justify-between max-w-[1243px]">
+        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px]">
+            <div className="w-full flex items-center justify-between">
                 <div
                     onClick={() => navigate('/')}
                     className="cursor-pointer flex items-center text-2xl">
@@ -64,7 +62,9 @@ const Nav = ({ openMenu, user }) => {
                 {isLoggedIn && (
                     <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
                         <Link to="/settings" className="w-10 h-10 rounded-full text-white bg-gray-400 flex justify-center items-center">
-                            <h1 className='text-white uppercase font-[700]'>TA</h1>
+                            <h1 className='text-white uppercase font-[700]'>
+                                {isLoggedIn && user}
+                            </h1>
                         </Link>
                     </div>
                 )}

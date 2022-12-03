@@ -16,15 +16,37 @@ const MenuLinks = () => {
         {
             link: `Help `,
             url: '/help',
-            icon: true
+            icon: true,
+            dropItems: [
+                {
+                    link: 'How it Works',
+                    url: '/howitworks',
+                },
+                {
+                    link: 'FAQS',
+                    url: '/faq',
+                },
+                {
+                    link: 'Contact Us',
+                    url: '/contact',
+                },
+                {
+                    link: 'Terms of Use',
+                    url: '/terms',
+                },
+                {
+                    link: 'Privacy Policy',
+                    url: '/policy',
+                },
+            ]
         }
     ];
     const { isLoggedIn } = useContext(AuthContext);
     return (
-        <ul className="w-full hidden md:flex gap-[5px] max-w-[328px] justify-between items center">
+        <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
             {navLinks.map((item, index) => {
-                const { link, url, icon } = item;
-                return <MenuLink link={link} url={url} key={index} icon={icon} />;
+                const { link, url, icon, dropItems } = item;
+                return <MenuLink link={link} url={url} key={index} icon={icon} dropItems={dropItems} />;
             })}
             {
                 isLoggedIn && <MenuLink link={'Watchlist'} url={'/watchlist'} />

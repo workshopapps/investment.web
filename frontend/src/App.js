@@ -10,7 +10,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
-
 import AboutPage from './pages/about';
 import NewsPage from './pages/News/NewsPage';
 import Topstories from './pages/News/Topstories';
@@ -30,9 +29,7 @@ import LargeCap from './pages/cap/LargeCap';
 import SmallCap from './pages/cap/SmallCap';
 import MidCap from './pages/cap/MidCap';
 import CapIndustry from './pages/cap/Industry';
-
 import Payment from './pages/paymentPage/Payment';
-
 import SettingsPage from './pages/settingsPage';
 import ProfileSettingsPage from './pages/profilesettings';
 import PasswordSettingsPage from './pages/passwordsettingspage';
