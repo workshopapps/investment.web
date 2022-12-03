@@ -23,11 +23,6 @@ const MobileMenu = ({ toggleMenu }) => {
             url: '/help'
         }
     ];
-    // const btns = [
-    //     { name: 'Login', background: 'transparent', color: 'black', url: '/login' },
-    //     { name: 'Get Started', background: '#1BD47B', color: 'white', url: '/signup' }
-    // ];
-
     useEffect(() => {
         document.body.style.overflowY = 'hidden';
         return () => {
@@ -35,7 +30,7 @@ const MobileMenu = ({ toggleMenu }) => {
         };
     }, []);
     return (
-        <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30">
+        <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30 z-10">
             <div
                 className="absolute top-0 bottom-0 left-0 right-0 bg-transparent"
                 onClick={() => toggleMenu(false)}
@@ -56,20 +51,6 @@ const MobileMenu = ({ toggleMenu }) => {
                             return <MenuLink link={link} url={url} key={index} />;
                         })}
                     </ul>
-                    {/* <div className=" justify-between items-left gap-4 nav-btns flex flex-col font-[600]">
-                        {btns.map((item, index) => {
-                            const { name, background, color, url } = item;
-                            return (
-                                <NavBtn
-                                    name={name}
-                                    background={background}
-                                    color={color}
-                                    url={url}
-                                    key={index}
-                                />
-                            );
-                        })}
-                    </div> */}
                 </div>
             </div>
         </div>
