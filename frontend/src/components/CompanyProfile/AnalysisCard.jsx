@@ -165,7 +165,7 @@ const VisualDataCard = () => {
                     <div className="my-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
                         <span className="flex flex-row md:w-1/4">
                             <input type="checkbox" />
-                            <p className="pl-5">Net profit Margin</p>
+                            <p className="pl-5">Net Income</p>
                         </span>
                         <p className="text-left pr-10">-3.49B</p>
                         <p className="flex flex-row gap-2">
