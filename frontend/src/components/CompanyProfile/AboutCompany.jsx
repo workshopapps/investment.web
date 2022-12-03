@@ -4,7 +4,7 @@ import { Dialog } from '@headlessui/react';
 import Cancel from '../../assets/company-profile/cancel.svg';
 
 const AboutCompanyCard = ({ description }) => {
-    const [isOpen, setIsOpen] = React.useState(true);
+    const [isOpen, setIsOpen] = React.useState(false);
     return (
         <div className="bg-white border rounded-xl my-2 hover:shadow-xl">
             <p className="md:text-base text-justify text-xs font-semibold text-[#8A8D95] px-4 md:px-10 py-6">
