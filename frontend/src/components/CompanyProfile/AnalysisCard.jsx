@@ -1,14 +1,20 @@
 import React from 'react';
 import axios from 'axios';
-import { AreaChart, Area, CartesianGrid, XAxis, Tooltip, YAxis } from 'recharts';
+import {
+    ResponsiveContainer,
+    AreaChart,
+    Area,
+    CartesianGrid,
+    XAxis,
+    Tooltip,
+    YAxis
+} from 'recharts';
+import { useParams } from 'react-router-dom';
 
 import DownIcon from '../../assets/landingPage/icons/down.svg';
 import UpIcon from '../../assets/landingPage/icons/up.svg';
-import shareIcon from '../../assets/company-profile/share.svg';
-import greenArrow from '../../assets/company-profile/green-arrow.svg';
-import redArrow from '../../assets/company-profile/red-arrow.svg';
-import { useParams } from 'react-router-dom';
-// import DummyChart from '../../assets/company-profile/chart.svg';
+import greenArrow from '../../assets/company-profile/green.svg';
+import redArrow from '../../assets/company-profile/red.svg';
 
 const VisualDataCard = () => {
     const { companyId } = useParams();
@@ -70,10 +76,14 @@ const VisualDataCard = () => {
     }, [state.value]);
 
     return (
-        <div className="h-auto flex flex-col text-[#5C5A5A] border rounded-lg px-6 py-4 font-HauoraLight">
+        <div className="h-auto flex flex-col bg-white text-[#5C5A5A] border rounded-lg px-6 py-4 font-HauoraLight">
             <div className="flex flex-row justify-between">
+                <div className="flex flex-row text-xs md:text-lg font-HauoraBold font-bold text-[#5C5A5A] border-b-2 border-[#1BD47B] px-1">
+                    <button className="text-[#1BD47B] rounded-lg">Income Statement</button>
+                </div>
+
                 <div className="relative inline-block">
-                    <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10">
+                    <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-2 md:py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10">
                         {state.value}{' '}
                         <img
                             className="p-2 ml-3 md:m-auto h-6 md:h-auto border bg-[#E8FBF2] rounded-full"
@@ -109,60 +119,111 @@ const VisualDataCard = () => {
                         </div>
                     )}
                 </div>
-
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
-                    Share This Stock{' '}
-                    <img
-                        className="ml-3 md:m-auto h-4 md:h-auto bg-none"
-                        src={shareIcon}
-                        alt="open"
-                    />
-                </button>
             </div>
 
-            <div className="h-100 my-10 w-full border border-1px bg-transparent">
-                <AreaChart width={900} height={500} data={data} stackOffset="expand">
-                    {state.showRevenue && (
-                        <Area
-                            type="monotone"
+            <div className="h-100 my-10 w-full border border-1px rounded-lg bg-transparent">
+                <div className="flex flex-row justify-between text-xl md:text-2xl font-semibold pt-6 pl-5">
+                    {companyId} Chart
+                    <div className="flex flex-row justify-end text-xs md:text-md gap-2 mr-5">
+                        <svg
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#1BD47B" />
+                        </svg>
+                        Total Revenue
+                        <svg
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#000000" />
+                        </svg>
+                        Net Income
+                        <svg
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#ff2c2c" />
+                        </svg>
+                        Operating expenses
+                        <svg
+                            width="17"
+                            height="17"
+                            viewBox="0 0 17 17"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#3388ff" />
+                        </svg>
+                        Gross Profit
+                    </div>
+                </div>
+
+                <ResponsiveContainer className="mt-10" width="100%" height={300}>
+                    <AreaChart
+                        data={data}
+                        margin={{
+                            top: 20,
+                            right: 20,
+                            bottom: 20,
+                            left: 20
+                        }}>
+                        {state.showRevenue && (
+                            <Area
+                                type="monotone"
+                                dataKey="total_revenue"
+                                stroke="#1BD47B"
+                                fill="#E8FBF2"
+                                strokeWidth={2}
+                            />
+                        )}
+                        {state.showIncome && (
+                            <Area
+                                type="monotone"
+                                dataKey="net_income"
+                                stroke="#000000"
+                                fillOpacity={1}
+                                fill="#E8FBF2"
+                                strokeWidth={2}
+                            />
+                        )}
+                        {state.shwoExpenses && (
+                            <Area
+                                type="monotone"
+                                dataKey="operating_expenses"
+                                stroke="#ff2c2c"
+                                fill="#E8FBF2"
+                                strokeWidth={2}
+                            />
+                        )}
+                        {state.showProfit && (
+                            <Area
+                                type="monotone"
+                                dataKey="gross_profit"
+                                stroke="#3388ff"
+                                fill="#E8FBF2"
+                                strokeWidth={2}
+                            />
+                        )}
+                        <CartesianGrid stroke="white" strokeDasharray="5 5" />
+                        <XAxis dataKey="date" />
+                        <YAxis
                             dataKey="total_revenue"
-                            stroke="#1BD47B"
-                            fill="#E8FBF2"
-                            strokeWidth={2}
+                            label={{
+                                angle: -90,
+                                value: 'Revenue (billions)',
+                                position: 'insideLeft',
+                                textAnchor: 'middle'
+                            }}
                         />
-                    )}
-                    {state.showIncome && (
-                        <Area
-                            type="monotone"
-                            dataKey="net_income"
-                            stroke="#000000"
-                            fill="#E8FBF2"
-                            strokeWidth={2}
-                        />
-                    )}
-                    {state.shwoExpenses && (
-                        <Area
-                            type="monotone"
-                            dataKey="operating_expenses"
-                            stroke="#ff2c2c"
-                            fill="#E8FBF2"
-                            strokeWidth={2}
-                        />
-                    )}
-                    {state.showProfit && (
-                        <Area
-                            type="monotone"
-                            dataKey="gross_profit"
-                            stroke="#3388ff"
-                            fill="#E8FBF2"
-                            strokeWidth={2}
-                        />
-                    )}
-                    <CartesianGrid stroke="white" strokeDasharray="5 5" />
-                    <XAxis dataKey="date" />
-                    <YAxis dataKey="total_revenue" />
-                    <Tooltip />
-                </AreaChart>
+                        <Tooltip />
+                    </AreaChart>
+                </ResponsiveContainer>
             </div>
 
             <div className="mt-5 md:my-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -192,9 +253,8 @@ const VisualDataCard = () => {
                             <img
                                 src={isNegative(data[0]['revenue_growth']) ? redArrow : greenArrow}
                                 alt="loss"
-                                className="w-[20px] md:w-auto"
                             />
-                            {`${data[0]['revenue_growth'].toFixed(2)}%`}
+                            {`${Math.abs(data[0]['revenue_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                     <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -220,9 +280,8 @@ const VisualDataCard = () => {
                                         : greenArrow
                                 }
                                 alt="loss"
-                                className="w-[20px] md:w-auto"
                             />
-                            {`${data[0]['operating_expenses_growth'].toFixed(2)}%`}
+                            {`${Math.abs(data[0]['operating_expenses_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                     <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -237,8 +296,8 @@ const VisualDataCard = () => {
                             />
                             <p className="pl-5">Gross Profit</p>
                         </span>
-                        <p className="text-left pr-10">{`${data[0]['gross_profit'].toFixed(
-                            2
+                        <p className="text-left pr-10">{`${Math.abs(
+                            data[0]['gross_profit'].toFixed(2)
                         )}B`}</p>
                         <p className="flex flex-row gap-2">
                             <img
@@ -248,9 +307,8 @@ const VisualDataCard = () => {
                                         : greenArrow
                                 }
                                 alt="loss"
-                                className="w-[20px] md:w-auto"
                             />
-                            {`${data[0]['gross_profit_growth'].toFixed(2)}%`}
+                            {`${Math.abs(data[0]['gross_profit_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                     <div className="my-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
@@ -272,9 +330,8 @@ const VisualDataCard = () => {
                                     isNegative(data[0]['net_income_growth']) ? redArrow : greenArrow
                                 }
                                 alt="loss"
-                                className="w-[20px] md:w-auto"
                             />
-                            {`${data[0]['net_income_growth'].toFixed(2)}%`}
+                            {`${Math.abs(data[0]['net_income_growth'].toFixed(2))}%`}
                         </p>
                     </div>
                 </>
