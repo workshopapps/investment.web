@@ -46,6 +46,8 @@ import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import ResetPassword from './pages/Auth/ResetPassword/ResetPassword';
+import ForgotPassword from './pages/Auth/ForgotPwd/ForgotPassword.jsx';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
 import HowItWorks from './pages/how-it-works/Index';
@@ -235,6 +237,16 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <Signup />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/forgot',
+        element: <ForgotPassword />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/reset',
+        element: <ResetPassword />,
         errorElement: <ErrorPage />
     },
     {
