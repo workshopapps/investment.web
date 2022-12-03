@@ -1,11 +1,11 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
-import authContext from '../../auth/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
+import AuthContext from '../../auth/AuthContext';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
@@ -16,8 +16,9 @@ const IndexPage = () => {
     const [sectors, setSectors] = useState([]);
     const [industries, setIndustries] = useState([]);
     const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
+    const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
 
-    const { isLoggedIn } = createContext(authContext);
+    const { isLoggedIn } = useContext(AuthContext);
 
     const handleMarketCap = (e) => {
         e.preventDefault();
@@ -56,6 +57,12 @@ const IndexPage = () => {
     useEffect(() => {
         reloadIndustriesForSector(sector);
     }, [sector]);
+
+    useEffect(() => {
+        if (marketCap === 'low_market_cap_category') {
+            setShowNotSubscribedModal(true);
+        }
+    }, [marketCap]);
 
     useEffect(() => {
         reloadRankedCompanies();
@@ -126,7 +133,12 @@ const IndexPage = () => {
 
     return (
         <PageLayout>
-            {!isLoggedIn && <NotSubscribedModal />}
+            {!isLoggedIn && (
+                <NotSubscribedModal
+                    isOpen={showNotSubscribedModal}
+                    onClose={() => setShowNotSubscribedModal(false)}
+                />
+            )}
             <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
                 <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20">
