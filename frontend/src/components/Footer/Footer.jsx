@@ -62,11 +62,6 @@ const Footer = () => {
 
                         <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
                     </div>
-                    <div className='flex gap-3'>
-                        <img src={footerTwitter} alt="" />
-                        <img src={insta} alt="" />
-                        <img src={footerFb} alt="" />
-                    </div>
                     <div
                         className={`${
                             pathname !== '/download' ? 'hidden lg:flex pt-4' : 'hidden'
@@ -75,13 +70,21 @@ const Footer = () => {
                             <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
                     </div>
+
+                    <div className="flex gap-3 pt-20">
+                        <img src={footerTwitter} alt="" />
+                        <img src={insta} alt="" />
+                        <img src={footerFb} alt="" />
+                    </div>
                 </div>
                 <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">
                     {navItems.map((item, index) => {
                         const { name, navLinks } = item;
                         return (
                             <div key={index} className="w-36">
-                                <p className="mb-8 ">{name}</p>
+                                <p className="mb-8" style={{ fontWeight: 700, fontSize: '18px' }}>
+                                    {name}
+                                </p>
                                 <NavLinks navLinks={navLinks} />
                             </div>
                         );
