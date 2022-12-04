@@ -50,6 +50,7 @@ const CapCard = ({
     };
 
     const addToWatchList = (id, onSuccess, onFailure) => {
+        if (isLoading) return;
         setIsLoading(true);
 
         apiService(accessToken)
