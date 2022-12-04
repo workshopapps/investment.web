@@ -43,11 +43,16 @@ import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import ResetPassword from './pages/Auth/ResetPassword/ResetPassword';
+import ForgotPassword from './pages/Auth/ForgotPwd/ForgotPassword';
 import Success from './pages/successPayment/Success';
 import Cancel from './pages/cancelPayment/Cancel';
 import Watchlist from './pages/watchlist/Watchlist.jsx';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
+import Cookies from './pages/Cookies.jsx';
+import AuthProvider from './auth/AuthProvider.jsx';
+import { WatchListProvider } from './store/watchList/WatchLIstProvider.js';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -89,6 +94,11 @@ const router = createBrowserRouter([
     {
         path: '/news',
         element: <NewsPage />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/cookies',
+        element: <Cookies />,
         errorElement: <ErrorPage />
     },
     {
@@ -160,12 +170,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/settings',
+        path: '/notificationsettings',
         element: <SettingsPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: '/profilesettings',
+        path: '/settings',
         element: <ProfileSettingsPage />,
         errorElement: <ErrorPage />
     },
@@ -236,6 +246,16 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/forgot',
+        element: <ForgotPassword />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/finalize_password_reset',
+        element: <ResetPassword />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/success',
         element: <Success />,
         errorElement: <ErrorPage />
@@ -269,7 +289,11 @@ function App() {
         <React.Fragment>
             <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                    <RouterProvider router={router} />
+                    <AuthProvider>
+                        <WatchListProvider>
+                            <RouterProvider router={router} />
+                        </WatchListProvider>
+                    </AuthProvider>
                 </GoogleOAuthProvider>
             </UserStatusContext.Provider>
         </React.Fragment>

@@ -7,6 +7,7 @@ const WatchTable = ({ onSuccess, onFailure }) => {
     const [watchlist, setWatchlist] = useState([]);
     const { accessToken } = useContext(AuthContext);
     const apiService = authHooks.useApiService();
+
     const fetchWatchList = () => {
         if (!accessToken) return;
         apiService(accessToken)
@@ -18,9 +19,11 @@ const WatchTable = ({ onSuccess, onFailure }) => {
             })
             .catch((err) => console.log(err));
     };
+
     useEffect(() => {
         fetchWatchList();
     }, [accessToken]);
+
     return (
         <div>
             <div className="flex justify-around items-center gap-x-[8px] gap-y-[24px] flex-wrap">

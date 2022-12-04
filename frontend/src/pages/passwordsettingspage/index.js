@@ -6,11 +6,11 @@ import PageLayout from '../layout';
 export default function index() {
     return (
         <PageLayout>
-            <div className="flex sm:flex col lg:flex-row">
-                <div className="w-1/5 border-r-black">
+            <div className="flex flex-col">
+                <div className=" border-r-black">
                     <SideBar />
                 </div>
-                <div className="w-4/5 mr-2">
+                <div className=" mr-2">
                     <PasswordSettings />
                 </div>
             </div>

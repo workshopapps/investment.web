@@ -1,24 +1,26 @@
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import CapCard from './CapCard';
 import PageLayout from '../layout';
 import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
-import authContext from '../../auth/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 // import Select from 'react-dropdown-select';
+import AuthContext from '../../auth/AuthContext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
-    const [stocks, setStocks] = useState([]);
+    const [stocks, setStocks] = useState(null);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
     const [industry, setIndustry] = useState('all');
     const [sectors, setSectors] = useState([]);
     const [industries, setIndustries] = useState([]);
     const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
+    const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
 
-    const { isLoggedIn } = createContext(authContext);
+    const { isLoggedIn } = useContext(AuthContext);
 
     const handleMarketCap = (e) => {
         e.preventDefault();
@@ -59,10 +61,17 @@ const IndexPage = () => {
     }, [sector]);
 
     useEffect(() => {
+        if (marketCap === 'low_market_cap_category') {
+            setShowNotSubscribedModal(true);
+        }
+    }, [marketCap]);
+
+    useEffect(() => {
         reloadRankedCompanies();
     }, [marketCap, sector, industry]);
 
     const reloadRankedCompanies = () => {
+        setStocks(null);
         const queries = [];
 
         if (marketCap !== 'all') queries.push({ key: 'category', value: marketCap });
@@ -127,7 +136,12 @@ const IndexPage = () => {
 
     return (
         <PageLayout>
-            {!isLoggedIn && <NotSubscribedModal />}
+            {!isLoggedIn && (
+                <NotSubscribedModal
+                    isOpen={showNotSubscribedModal}
+                    onClose={() => setShowNotSubscribedModal(false)}
+                />
+            )}
             <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
                 <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20">
@@ -201,25 +215,47 @@ const IndexPage = () => {
                             </div>
                         </div>
 
-                        <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            {stocks.map((item, index) => (
-                                <CapCard
-                                    key={index}
-                                    logo={item.profile_image}
-                                    abbr={item.company_id}
-                                    name={item.name}
-                                    PERatio={item.dividend_yield}
-                                    marketCap={item.market_cap}
-                                    stockPrice={item.stock_price}
-                                    rank={item.category}
-                                    index={index}
-                                    sector={item.industry}
-                                    link={`/company/${item.company_id}`}
-                                    onSuccess={onSuccess}
-                                    onFailure={onFailure}
+                        {!stocks && (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    width: '100%',
+                                    marginTop: '30px'
+                                }}>
+                                <ThreeDots
+                                    height="80"
+                                    width="80"
+                                    color="#49dd95"
+                                    ariaLabel="bars-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
                                 />
-                            ))}
-                        </div>
+                            </div>
+                        )}
+
+                        {stocks && (
+                            <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+                                {stocks.map((item, index) => (
+                                    <CapCard
+                                        key={index}
+                                        logo={item.profile_image}
+                                        abbr={item.company_id}
+                                        name={item.name}
+                                        PERatio={item.dividend_yield}
+                                        marketCap={item.market_cap}
+                                        stockPrice={item.stock_price}
+                                        rank={item.category}
+                                        index={index}
+                                        sector={item.industry}
+                                        link={`/company/${item.company_id}`}
+                                        onSuccess={onSuccess}
+                                        onFailure={onFailure}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

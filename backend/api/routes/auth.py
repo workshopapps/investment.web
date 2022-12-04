@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
-from api.models.models import User, CreateUserModel, UpdatePasswordModel
+from api.models.models import User, CreateUserModel, UpdatePasswordModel, UpdateEmailModel
 from api.models.models import User, CreateUserModel, InitPasswordResetModel, PasswordResetRequest, \
     FinalizePasswordResetModel
 from api.scripts.email import send_email
@@ -183,7 +183,7 @@ async def finalize_password_reset(model: FinalizePasswordResetModel):
 @router.patch('/update_password', tags=['Auth'])
 def update_password(model: UpdatePasswordModel, user: User = Depends(get_current_user)):
     if not verify_password(model.current_password, user.password):
-        raise HTTPException(status_code=401, detail="Invalid current password")
+        raise HTTPException(status_code=400, detail="Invalid current password")
 
     db: Session = next(get_db())
     update = db.query(User).filter(User.id == user.id).first()
@@ -192,6 +192,17 @@ def update_password(model: UpdatePasswordModel, user: User = Depends(get_current
     db.flush()
 
     return {"message": "Password updated successfully"}
+
+
+@router.patch('/update_email', tags=['Auth'])
+def update_email(model: UpdateEmailModel, user: User = Depends(get_current_user)):
+    db: Session = next(get_db())
+    update = db.query(User).filter(User.id == user.id).first()
+    update.email = model.email
+    db.commit()
+    db.flush()
+
+    return {"message": "Email updated successfully"}
 
 
 async def resolve_password_reset_request(email: str, db: Session):

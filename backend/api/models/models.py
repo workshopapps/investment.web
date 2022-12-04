@@ -242,3 +242,6 @@ class UpdatePasswordModel(BaseModel):
     current_password: str
     new_password: str
 
+
+class UpdateEmailModel(BaseModel):
+    email: str

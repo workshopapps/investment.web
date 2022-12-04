@@ -10,7 +10,7 @@ export default function Notificationsettings() {
         switch5: false,
         switch6: false
     });
-    // handle switch change
+    // handle switch changes
 
     const handleChange = (e) => {
         setChecked({ ...checked, [e.target.name]: e.target.checked });

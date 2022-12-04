@@ -253,12 +253,14 @@ const Login = () => {
                                 <p className="text-sm">Remember me</p>
                             </div> */}
                             <Link
-                                to={'/passwordsettings'}
+                                to={'/forgot'}
                                 className="text-sm text-green-500 hover:text-green-600 transition ease-in-out delay-100 md:text-base">
                                 Forgot password?
                             </Link>
                         </div>
-                        <button className="bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100">
+                        <button
+                            className="bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100"
+                            style={{ color: '#1F2226' }}>
                             Log in
                         </button>
                     </form>

@@ -15,24 +15,23 @@ const Footer = () => {
         {
             name: 'Get To Know Us',
             navLinks: [
-                { link: 'About Yieldvest', to: '/about' }
+                { link: 'About Yieldvest', to: '/about' },
+                { link: 'Contact Us', to: '/contact' }
             ]
         },
         {
             name: 'Support',
             navLinks: [
-                { link: 'Help', to: '/help' },
-                { link: 'Contact Us', to: '/contact' },
                 { link: 'How it works', to: '/howitworks' },
-                { link: 'FAQ', to: '/faq' },
-                { link: 'Contact Us', to: '/contact' }
+                { link: 'Help', to: '/help' }
             ]
         },
         {
             name: 'Legal',
             navLinks: [
                 { link: 'Terms of Use', to: '/terms' },
-                { link: 'Privacy Policy', to: '/policy' }
+                { link: 'Privacy Policy', to: '/policy' },
+                { link: 'Cookies', to: '/cookies' }
             ]
         }
     ];
@@ -60,7 +59,7 @@ const Footer = () => {
                             <img src={downloadImage} alt="download-image" className="w-full" />
                         </Link>
                     </div>
-                    <div className='flex gap-3  '>
+                    <div className="flex gap-3  ">
                         <img src={footerTwitter} alt="" />
                         <img src={insta} alt="" />
                         <img src={footerFb} alt="" />
@@ -80,7 +79,10 @@ const Footer = () => {
                     })}
                 </div>
             </div>
-            <div className="text-center border-t-[2px] w-full border-white pt-[18px]"> 2022 Yieldvest </div>
+            <div className="text-center border-t-[2px] w-full border-white pt-[18px]">
+                {' '}
+                2022 Yieldvest{' '}
+            </div>
         </footer>
     );
 };

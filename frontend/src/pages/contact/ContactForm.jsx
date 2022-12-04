@@ -17,14 +17,16 @@ const ContactForm = () => {
                 <input
                     type="text"
                     placeholder="Name"
-                    className="w-[100%] m-3 p-1 rounded-md outline-none  bg-transparent border-[#333946] border-[1px]"
+                    className="w-[100%] m-3 p-2 rounded-md outline-none  bg-transparent border-[#333946] border-[1px]"
+                    style={{ color: 'white' }}
                 />
                 <input
                     type="email"
                     name=""
                     id=""
                     placeholder="Email"
-                    className="w-[100%] m-3 p-1 rounded-md outline-none bg-transparent border-[#333946]  border-[1px]"
+                    className="w-[100%] m-3 p-2 rounded-md outline-none bg-transparent border-[#333946]  border-[1px]"
+                    style={{ color: 'white' }}
                 />
                 <textarea
                     name=""
@@ -32,8 +34,9 @@ const ContactForm = () => {
                     cols="30"
                     rows="10"
                     placeholder="Message"
-                    className="w-[100%] m-3 p-1 rounded-md outline-none bg-transparent border-[1px] border-[#333946] "></textarea>
-                <button className="w-[100%] m-3 p-1 rounded-md outline-none bg-[#1bd47b] text-white">
+                    className="w-[100%] m-3 p-2 rounded-md outline-none bg-transparent border-[1px] border-[#333946] "
+                    style={{ color: 'white' }}></textarea>
+                <button className="w-[100%] m-3 p-2 rounded-md outline-none bg-[#1bd47b] text-white">
                     send message
                 </button>
             </form>

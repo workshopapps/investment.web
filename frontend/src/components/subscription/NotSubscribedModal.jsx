@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import Cancel from './../../assets/cancel.svg';
 
-const NotSubscribedModal = () => {
-    const [open, setOpen] = useState(true);
+const NotSubscribedModal = ({ onClose, isOpen = false }) => {
     const navigate = useNavigate();
+
     return (
-        <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+        <Transition.Root show={isOpen} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={onClose}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -33,8 +33,12 @@ const NotSubscribedModal = () => {
                                 <div className="flex justify-center items-center flex-col ">
                                     <div
                                         className="mb-[8px] flex justify-end items-center rounded-lg w-full"
-                                        onClick={() => setOpen(false)}>
-                                        <img src={Cancel} alt="" />
+                                        onClick={onClose}>
+                                        <img
+                                            src={Cancel}
+                                            alt="Close"
+                                            style={{ cursor: 'pointer' }}
+                                        />
                                     </div>
                                     <div className="bg-white max-w-[441px] flex flex-col items-center justify-start rounded-[8px] px-[54px] pt-[60px] pb-[34px]">
                                         <div className="text">

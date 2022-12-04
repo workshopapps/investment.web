@@ -12,19 +12,19 @@ const useApiService = () => {
             validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500
         });
 
-        // service.interceptors.response.use(
-        //     (res) => {
-        //         if (res.status === 401) {
-        //             sessionStorage.removeItem('accessToken');
-        //             window.location = '/login';
-        //         }
+        service.interceptors.response.use(
+            (res) => {
+                if (res.status === 401) {
+                    sessionStorage.removeItem('accessToken');
+                    window.location = '/login';
+                }
 
-        //         return res;
-        //     },
-        //     (error) => {
-        //         Promise.reject(error);
-        //     }
-        // );
+                return res;
+            },
+            (error) => {
+                Promise.reject(error);
+            }
+        );
 
         return service;
     };
