@@ -200,9 +200,6 @@ const IndexPage = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <select className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option>U.S Stocks</option>
-                                </select>
                                 <select
                                     name="sector"
                                     onChange={handleSector}
@@ -213,6 +210,9 @@ const IndexPage = () => {
                                             {sector.sector}
                                         </option>
                                     ))}
+                                </select>
+                                <select className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                    <option>U.S Stocks</option>
                                 </select>
                             </div>
                         </div>
@@ -249,12 +249,6 @@ const IndexPage = () => {
                                 }}>
                                 <div>
                                     <img src={NotFoundImage} alt="Stocks not found" />
-                                    <h4
-                                        style={{
-                                            color: '#3D444C'
-                                        }}>
-                                        Sorry, no stocks found at the moment.
-                                    </h4>
                                 </div>
                             </div>
                         )}
