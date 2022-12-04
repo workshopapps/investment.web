@@ -23,7 +23,9 @@ const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtecte
             {showNavBar && (
                 <>
                     <div className="nav-bar flex-none">
-                        <Nav openMenu={setOpenMobileMenu} />
+                        <ProtectedPage>
+                            <Nav openMenu={setOpenMobileMenu} />
+                        </ProtectedPage>
                     </div>
                     {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
                 </>
