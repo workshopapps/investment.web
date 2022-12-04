@@ -288,12 +288,6 @@ const IndexPage = () => {
                                 }}>
                                 <div>
                                     <img src={NotFoundImage} alt="Stocks not found" />
-                                    <h4
-                                        style={{
-                                            color: '#3D444C'
-                                        }}>
-                                        Sorry, no stocks found at the moment.
-                                    </h4>
                                 </div>
                             </div>
                         )}
