@@ -109,6 +109,22 @@ def get_watchlist(user: User = Depends(get_current_user)):
     return response
 
 
+@router.get('/in_watchlist/{company_id}', tags=["User"])
+def verify_watchlist_item(company_id: str, user: User = Depends(get_current_user)):
+    """
+    Verifies if a company is in a user's watchlist
+    """
+    db: Session = next(get_db())
+
+    watchlist = db.query(models.WatchlistItem)\
+        .filter(models.WatchlistItem.user_id == user.id, models.WatchlistItem.company_id == company_id)\
+        .first()
+    if watchlist:
+        return {"message": "This company is in your watchlist"}
+    else:
+        raise HTTPException(status_code=404, detail="This company is not in your watchlist")
+
+
 @router.post("/watchlist/{company_id}", tags=["User"])
 def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
     """
