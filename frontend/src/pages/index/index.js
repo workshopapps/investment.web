@@ -5,7 +5,7 @@ import PageLayout from '../layout';
 import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
 import { ToastContainer, toast } from 'react-toastify';
-// import Select from 'react-dropdown-select';
+import { Select } from 'react-jsx-select';
 import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -211,9 +211,48 @@ const IndexPage = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <select className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option>U.S Stocks</option>
-                                </select>
+                                <Select
+                                    options={[
+                                        {
+                                            value: 'All Caps',
+                                            label: 'All Caps',
+                                            jsx: <span>All Caps</span>
+                                        },
+                                        {
+                                            value: 'Large Cap',
+                                            label: 'Large Cap',
+                                            jsx: <span>Large Cap</span>
+                                        },
+                                        {
+                                            value: 'Small Cap',
+                                            label: 'Small Cap',
+                                            jsx: <span>Mid Cap</span>
+                                        },
+                                        {
+                                            value: 'Small Cap',
+                                            label: 'Small Cap',
+                                            jsx: <span>Small Cap</span>
+                                        }
+                                    ]}
+                                    onChange={(e) => console.log(e)}
+                                    name="Caps"
+                                    defaultValue="All Caps"
+                                    // disabled={false}
+                                    // required={false}
+                                    placeholder="Filter by Caps"
+                                    className="form-control w-[236px] h-[48px] py-3 px-4 border-2 border-[#00000020] rounded"
+                                    listStyle={{
+                                        backgroundColor: 'white',
+                                        border: '2px solid rgba(0, 0, 0, 0.2)'
+                                    }}
+                                    activeItemStyle={{ backgroundColor: '#49dd95' }}
+                                    iconWidth="40"
+                                    iconStyle={{
+                                        fontSize: '26px',
+                                        borderRadius: '0 5px 5px 0',
+                                        color: '#49dd95'
+                                    }}
+                                />
                             </div>
                         </div>
 
