@@ -2,7 +2,33 @@ import React from 'react';
 
 import cookie from '../assets/download/cookies.svg';
 import PageLayout from './layout';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Cookies = () => {
+    const notify = () => {
+        toast.success('🦄 cookies accepted!', {
+            position: 'bottom-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light'
+        });
+    };
+    const close = () => {
+        toast.error('🦄 Wow so easy!', {
+            position: 'bottom-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light'
+        });
+    };
     return (
         <PageLayout>
             <h2 className="flex items-center justify-center py-8 md:hidden bg-[#D9D9D9]">
@@ -44,14 +70,42 @@ const Cookies = () => {
                         Cookie Policy by your continued use of the Site after the date such revised
                         Cookie Policy is posted.
                     </p>
-                    {/* <div className="flex justify-between md:w-[40%] w-[100%] mt-10">
-                        <button className="h-[50px] min-w-[100px] rounded-md border-2 border-[#1BD47B] p-2 block m-2">
+                    <div className="flex md:justify-start justify-between   w-[100%] mt-10">
+                        <button
+                            onClick={close}
+                            className="h-[50px] min-w-[100px] rounded-md border-2 border-[#1BD47B] p-2 block m-2">
                             Decline Cookies
                         </button>
-                        <button className="h-[50px] min-w-[100px] rounded-md bg-[#1BD47B] block p-2 m-2">
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={3000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+                        <button
+                            onClick={notify}
+                            className="h-[50px] min-w-[100px] rounded-md bg-[#1BD47B] block p-2 m-2">
                             Accept Cookies
                         </button>
-                    </div> */}
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={3000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+                    </div>
                 </div>
             </div>
         </PageLayout>
