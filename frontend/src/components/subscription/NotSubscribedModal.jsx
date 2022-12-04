@@ -34,7 +34,11 @@ const NotSubscribedModal = ({ onClose, isOpen = false }) => {
                                     <div
                                         className="mb-[8px] flex justify-end items-center rounded-lg w-full"
                                         onClick={onClose}>
-                                        <img src={Cancel} alt="" />
+                                        <img
+                                            src={Cancel}
+                                            alt="Close"
+                                            style={{ cursor: 'pointer' }}
+                                        />
                                     </div>
                                     <div className="bg-white max-w-[441px] flex flex-col items-center justify-start rounded-[8px] px-[54px] pt-[60px] pb-[34px]">
                                         <div className="text">

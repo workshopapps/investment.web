@@ -4,9 +4,9 @@ import { GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import PageLayout from '../layout';
-import { AiOutlineEyeInvisible } from 'react-icons/ai';
-import { AiOutlineEye } from 'react-icons/ai';
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import AuthContext from '../../auth/AuthContext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Signup = () => {
     const Inner = () => {
@@ -23,6 +23,7 @@ const Signup = () => {
         const [isSubmit, setisSubmit] = useState(false);
         const [timeOut, setTimeout] = useState(false);
         const [timeOutGoogle, setTimeoutGoogle] = useState(false);
+        const [isLoading, setIsLoading] = useState(false);
 
         const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
@@ -46,6 +47,8 @@ const Signup = () => {
 
         //post to the backend
         const post = () => {
+            setIsLoading(true);
+
             axios
                 .post(baseUrl, {
                     email: signupForm.email,
@@ -53,6 +56,8 @@ const Signup = () => {
                     password: signupForm.password
                 })
                 .then(function (response) {
+                    setIsLoading(false);
+
                     if (response.status === 200) {
                         toast.success('Signed up successfully');
                         setInterval(() => {
@@ -64,6 +69,7 @@ const Signup = () => {
                     }
                 })
                 .catch(function (error) {
+                    setIsLoading(false);
                     console.log(error);
                     toast.warn('Account already exists. Kindly proceed to login');
                 });
@@ -77,14 +83,16 @@ const Signup = () => {
 
         //handle google OAUTH
         const handleGoogleSignIn = async (tokenResponse) => {
+            setIsLoading(true);
             setGoogleUserToken(tokenResponse);
-            console.log(googleUserToken);
 
             axios
                 .get(
                     `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
                 )
                 .then((res) => {
+                    setIsLoading(false);
+
                     if (res.status === 200) {
                         toast.success('Login successful');
                         whenAuthenticated(res.data.access_token);
@@ -96,12 +104,14 @@ const Signup = () => {
                     }
                 })
                 .catch((err) => {
+                    setIsLoading(false);
                     console.log(err);
                     toast.error('Authentication failed');
                 });
         };
 
         const handleGoogleSignInError = (err) => {
+            setIsLoading(false);
             console.log(err);
         };
 
@@ -167,15 +177,6 @@ const Signup = () => {
                         <h1 className="font-HauoraBold text-xl text-center tracking-wide">
                             Create Account
                         </h1>
-                        <p className="text-sm text-center mb-3 sm:text-base">
-                            Welcome to Yieldvest professional stock brokerage
-                        </p>
-
-                        {/* <div className="flex flex-row gap-3 items-center">
-                            <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
-                            <p className="text-sm font-HauoraBold">or</p>
-                            <div className="w-full h-0.5 bg-gray-400 rounded-sm"></div>
-                        </div> */}
                         <form
                             className="flex flex-col gap-3 w-full md:justify-center md:place-self-center md:w-95"
                             onSubmit={handleSubmit}>
@@ -263,8 +264,24 @@ const Signup = () => {
                             </div>
                             <button
                                 className="capitalize bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100"
-                                style={{ color: '#1F2226' }}>
-                                create account
+                                style={{ color: '#1F2226' }}
+                                disabled={isLoading}>
+                                {isLoading ? (
+                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <ThreeDots
+                                            height="50"
+                                            width="50"
+                                            radius="9"
+                                            color="#fff"
+                                            ariaLabel="three-dots-loading"
+                                            wrapperStyle={{}}
+                                            wrapperClassName=""
+                                            visible={true}
+                                        />
+                                    </div>
+                                ) : (
+                                    'create account'
+                                )}
                             </button>
                         </form>
 

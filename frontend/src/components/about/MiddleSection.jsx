@@ -15,11 +15,10 @@ export const Section = () => {
                         About The Name
                     </h3>
                     <p className="text-[#66717E] text-center md:text-left">
-                        Yieldvest offers stock investment recommendations using basic fundamental
-                        analysis to help you make well-informed stock investment decisions. Our goal
-                        is to provide you with the information you need in a
-                        simple,straightfoward,user-friendly way. We help you make educated decisons
-                        through; Stock recomendatins,Stock category,Company Profile.
+                        The word “yield” represents growth and expansion. It portrays profit and
+                        positive earnings for you, our customer. As our name implies, we hope to
+                        help you multiply your income greatly and help you become more stable
+                        financially.
                     </p>
                 </div>
                 <div className="bg-white p-5 md:p-10 md:pt-14 md:pb-16 md:max-w-[390px] mx-6 md:mx-0">

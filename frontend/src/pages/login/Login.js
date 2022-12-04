@@ -7,6 +7,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import AuthContext from '../../auth/AuthContext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
     const Inner = () => {
@@ -15,6 +16,7 @@ const Login = () => {
         const [formErrors, setFormErrors] = useState({});
         const [isSubmit, setisSubmit] = useState(false);
         const [timeOut, setTimeout] = useState(false);
+        const [isLoading, setIsLoading] = useState(false);
 
         const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
 
@@ -42,17 +44,6 @@ const Login = () => {
             e.preventDefault();
             setisSubmit(true);
             setFormErrors(validate(loginForm));
-
-            // if (loginForm.email !== '' && loginForm.password !== '' && loginForm.checkbox === true) {
-            //     // loggedInHandler();
-            //     setInterval(
-            //         () => {
-            //             navigate('/landing');
-            //         },
-            //         1,
-            //         500
-            //     );
-            // }
         };
 
         const togglePassword = () => {
@@ -71,6 +62,8 @@ const Login = () => {
 
         //handle google OAUTH
         const handleGoogleSignIn = async (tokenResponse) => {
+            setIsLoading(true);
+
             axios
                 .get(
                     `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
@@ -79,6 +72,8 @@ const Login = () => {
                     if (res.status === 200) {
                         toast.success('Login successful');
                         whenAuthenticated(res.data.access_token);
+                        setIsLoading(false);
+
                         setInterval(() => {
                             setTimeout(true);
                         }, 1500);
@@ -87,6 +82,7 @@ const Login = () => {
                     }
                 })
                 .catch((err) => {
+                    setIsLoading(false);
                     console.log(err);
                     toast.error('Authentication failed');
                 });
@@ -94,9 +90,12 @@ const Login = () => {
 
         const handleGoogleSignInError = (err) => {
             console.log(err);
+            setIsLoading(false);
         };
 
         const post = () => {
+            setIsLoading(true);
+
             const config = {
                 headers: {
                     accept: 'application / json',
@@ -118,6 +117,8 @@ const Login = () => {
                     config
                 )
                 .then((response) => {
+                    setIsLoading(false);
+
                     if (response.status === 200) {
                         toast.success('Login successful');
                         whenAuthenticated(response.data.access_token);
@@ -130,6 +131,7 @@ const Login = () => {
                     console.log(response);
                 })
                 .catch((err) => {
+                    setIsLoading(false);
                     console.log(err);
                     toast.error('Invalid username or password');
                 });
@@ -253,15 +255,31 @@ const Login = () => {
                                 <p className="text-sm">Remember me</p>
                             </div> */}
                             <Link
-                                to={'/passwordsettings'}
+                                to={'/forgot'}
                                 className="text-sm text-green-500 hover:text-green-600 transition ease-in-out delay-100 md:text-base">
                                 Forgot password?
                             </Link>
                         </div>
                         <button
                             className="bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100"
-                            style={{ color: '#1F2226' }}>
-                            Log in
+                            style={{ color: '#1F2226', textAlign: 'center' }}
+                            disabled={isLoading}>
+                            {isLoading ? (
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <ThreeDots
+                                        height="50"
+                                        width="50"
+                                        radius="9"
+                                        color="#fff"
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true}
+                                    />
+                                </div>
+                            ) : (
+                                'Log in'
+                            )}
                         </button>
                     </form>
 
