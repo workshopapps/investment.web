@@ -11,7 +11,7 @@ import Close from './../../assets/header/close.svg';
 const MobileMenu = ({ toggleMenu }) => {
     const navLinks = [
         {
-            link: 'Stock',
+            link: 'Home',
             url: '/'
         },
         {
@@ -21,6 +21,10 @@ const MobileMenu = ({ toggleMenu }) => {
         {
             link: 'Help',
             url: '/help'
+        },
+        {
+            link: 'Login',
+            url: '/login'
         }
     ];
     useEffect(() => {
