@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Basicsub from '../../assets/settings/basicsub.svg';
+import basicmobile from '../../assets/settings/mobileplan.svg';
 
 import { Link } from 'react-router-dom';
 
@@ -38,7 +39,12 @@ export default function SubPlan() {
                 <h1 className="text-4xl">Your Plan </h1>
             </div>
             <div className="flex flex-col w-full h-full mt-6">
-                <img src={Basicsub} alt="Basicsub" className="w-full h-full mb-4" />
+                <picture>
+                    <source media="(min-width: 768px)" srcSet={Basicsub} />
+                    <source media="(max-width: 767px)" srcSet={basicmobile} />
+                    <img src={basicmobile} alt="basicmobile" className="w-full h-full mb-4" />
+                </picture>
+                {/* <img src={Basicsub} alt="Basicsub" className="w-full h-full mb-4" /> */}
 
                 <div>
                     <div className="mt-3" style={{ textAlign: 'right' }}>
