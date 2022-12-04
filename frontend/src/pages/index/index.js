@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
 
+import NotFoundImage from '../../assets/images/not_found.svg';
+
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
     const [stocks, setStocks] = useState(null);
@@ -215,6 +217,7 @@ const IndexPage = () => {
 
                         {!stocks && (
                             <div
+                                className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10"
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -233,7 +236,28 @@ const IndexPage = () => {
                             </div>
                         )}
 
-                        {stocks && (
+                        {stocks && stocks.length === 0 && (
+                            <div
+                                //className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10"
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    width: '100%',
+                                    marginTop: '30px'
+                                }}>
+                                <div>
+                                    <img src={NotFoundImage} alt="Stocks not found" />
+                                    <h4
+                                        style={{
+                                            color: '#3D444C'
+                                        }}>
+                                        Sorry, no stocks found at the moment.
+                                    </h4>
+                                </div>
+                            </div>
+                        )}
+
+                        {stocks && stocks.length !== 0 && (
                             <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
                                 {stocks.map((item, index) => (
                                     <CapCard
