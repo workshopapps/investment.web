@@ -6,10 +6,15 @@ import { useState, useEffect } from 'react';
 import MobileMenu from '../components/Nav/MobileMenu';
 import { useLocation } from 'react-router-dom';
 import ProtectedPage from '../auth/ProtectedPage';
+import { scrollToTop } from '../utils/scroll';
 
 const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtected = false }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const pathName = useLocation();
+
+    useEffect(() => {
+        scrollToTop();
+    }, []);
 
     useEffect(() => {
         setOpenMobileMenu(false);
