@@ -188,6 +188,17 @@ const IndexPage = () => {
                                     <option value="low_market_cap_category">Small Cap </option>
                                 </select>
                                 <select
+                                    name="sector"
+                                    onChange={handleSector}
+                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                    <option value="all">All Sectors</option>
+                                    {sectors.map((sector, index) => (
+                                        <option value={sector.sector_id} key={index}>
+                                            {sector.sector}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select
                                     name="industry"
                                     onChange={handleIndustry}
                                     className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
@@ -197,17 +208,6 @@ const IndexPage = () => {
                                     {industries.map((industry, index) => (
                                         <option value={industry.industry_id} key={index}>
                                             {industry.industry}
-                                        </option>
-                                    ))}
-                                </select>
-                                <select
-                                    name="sector"
-                                    onChange={handleSector}
-                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option value="all">All Sectors</option>
-                                    {sectors.map((sector, index) => (
-                                        <option value={sector.sector_id} key={index}>
-                                            {sector.sector}
                                         </option>
                                     ))}
                                 </select>
