@@ -41,7 +41,7 @@ export default function SubPlan() {
                 <img src={Basicsub} alt="Basicsub" className="w-full h-full mb-4" />
 
                 <div>
-                    <div className="flex md:ml-[750px] mt-3">
+                    <div className="mt-3" style={{ textAlign: 'right' }}>
                         <Link to="/subscription">
                             <button className="text-[#19C170]  font-semibold text-base py-4 px-[45px] border-[1px] border-[#1BD47B] rounded-md">
                                 Upgrade Plan

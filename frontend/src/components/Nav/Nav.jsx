@@ -7,10 +7,11 @@ import MenuLinks from './MenuLinks';
 import Menu from '../../assets/header/menu.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
+import UserAvatar from './UserAvatar';
 
 // eslint-disable-next-line react/prop-types
 const Nav = ({ openMenu }) => {
-    const { isLoggedIn, user } = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
     const navStyle = {
         background: '#000718',
         color: 'white'
@@ -32,7 +33,9 @@ const Nav = ({ openMenu }) => {
     const navigate = useNavigate();
 
     return (
-        <nav style={navStyle} className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px]">
+        <nav
+            style={navStyle}
+            className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px]">
             <div className="w-full flex items-center justify-between">
                 <div
                     onClick={() => navigate('/')}
@@ -49,7 +52,10 @@ const Nav = ({ openMenu }) => {
                             </button>
                         </Link>
                         <Link to="/signup">
-                            <button type="button" style={btnStyle} className="rounded text-[#1F2226] font-[400]">
+                            <button
+                                type="button"
+                                style={btnStyle}
+                                className="rounded text-[#1F2226] font-[400]">
                                 Get Started
                             </button>
                         </Link>
@@ -59,15 +65,7 @@ const Nav = ({ openMenu }) => {
                     <img src={Menu} alt="" />
                 </div>
 
-                {isLoggedIn && (
-                    <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
-                        <Link to="/settings" className="w-10 h-10 rounded-full text-white bg-gray-400 flex justify-center items-center">
-                            <h1 className='text-white uppercase font-[700]'>
-                                {user.name.slice(0,2)}
-                            </h1>
-                        </Link>
-                    </div>
-                )}
+                {isLoggedIn && <UserAvatar />}
             </div>
         </nav>
     );

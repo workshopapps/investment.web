@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
-import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
 import WatchListContext from '../../store/watchList/WatchLIstProvider';
 import Tippy from '@tippyjs/react';

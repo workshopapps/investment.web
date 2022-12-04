@@ -44,14 +44,14 @@ const Cookies = () => {
                         Cookie Policy by your continued use of the Site after the date such revised
                         Cookie Policy is posted.
                     </p>
-                    <div className="flex justify-between md:w-[40%] w-[100%] mt-10">
+                    {/* <div className="flex justify-between md:w-[40%] w-[100%] mt-10">
                         <button className="h-[50px] min-w-[100px] rounded-md border-2 border-[#1BD47B] p-2 block m-2">
                             Decline Cookies
                         </button>
                         <button className="h-[50px] min-w-[100px] rounded-md bg-[#1BD47B] block p-2 m-2">
                             Accept Cookies
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </PageLayout>

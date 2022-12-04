@@ -1,59 +1,100 @@
 /* eslint-disable prettier/prettier */
 
-import React from 'react';
-import profileimg from '../../assets/settings/profileimg.png';
+import React, { useContext } from 'react';
+import AuthContext from '../../auth/AuthContext';
+import UserAvatar from '../Nav/UserAvatar';
+import authHooks from '../../auth/AuthHooks';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ProfileSection() {
-    return (
-        <div className="flex  mt-3 md:px-[200px] ">
-            <div className="flex flex-col md:flex-col w-full h-full mx-2 md:pl-10 md:pr-[100px] pt-[56px] pb-[70px]">
-              
-                <div className='flex flex-col md:flex-row'>
+    const { user, accessToken, setUser } = useContext(AuthContext);
+    const apiService = authHooks.useApiService();
 
-                <div className="flex w-2/5 ml-[180px] md:m-0">
-                    <img src={profileimg} alt="profileimg" className="w-[100px] h-[100px] md:w-[164px] md:h-[164px] mb-4" />
-                   
-                </div>
-                
-                <div className="flex flex-col md:ml-[60px] w-full h-full ">
-                    <form>
-                        <div className="flex flex-col w- h-full mb-8">
-                            <label
-                                htmlFor="name"
-                                className="text-sm font-normal text-[#1F2226]"
-                            >
-                                Preferred Name
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                placeholder="Enter your name"
-                                className="w-full h-10 px-4 mt-2 text-base text-black border border-[#A3AAB2] rounded-lg focus:outline-none focus:border-[#E84E4E]"
-                            />
-                        </div>
-                        <div className="flex flex-col w-full h-full mb-8">
-                            <label
-                                htmlFor="location"
-                                className="text-sm font-normal text-[#1F2226]"
-                            >
-                                Email
-                            </label>
-                            <input
-                                type="text"
-                                name="email"
-                                id="email"
-                                placeholder="Johnbull@example.com"
-                                className="w-full h-10 px-4 mt-2 text-base text-black border border-[#A3AAB2] rounded-lg focus:outline-none focus:border-[#E84E4E]"
-                            />
-                        </div>
-                    </form>
-                    <div className="flex flex-col ml-auto mt-2">
-                        <button className=" text-[#19C170]  font-semibold text-base py-4 px-[54px] border-[1px] border-[#1BD47B] rounded-md">
-                        Update Email
-                        </button>
+    const updateEmail = (evt) => {
+        evt.preventDefault();
+        const email = evt.target[1].value;
+        if (!email) {
+            toast.error('Enter an email address');
+        } else {
+            apiService(accessToken)
+                .patch('/auth/update_email', { email })
+                .then((res) => {
+                    if (res.status === 200) {
+                        toast.success('Email updated');
+                        setUser({ ...user, email: email });
+                    } else {
+                        toast.error('Failed to update email');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Failed to update email');
+                });
+        }
+    };
+
+    return (
+        <div className="flex  mt-3 md:px-[200px] flex-start">
+            <ToastContainer />
+            <div className="flex flex-col md:flex-col w-full h-full mx-2 md:pl-10 md:pr-[100px] pt-[56px] pb-[70px]">
+                <div
+                    className="flex flex-col md:flex-row"
+                    style={{
+                        alignItems: 'start'
+                    }}>
+                    <div className="flex w-2/5 ml-[180px] md:m-0">
+                        <UserAvatar width="200px" height="200px" fontSize="50px" />
                     </div>
-                </div>
+
+                    <div className="flex flex-col md:ml-[60px] w-full h-full ">
+                        <form onSubmit={updateEmail}>
+                            <div className="flex flex-col w- h-full mb-8">
+                                <label
+                                    htmlFor="name"
+                                    className="text-sm font-normal text-[#1F2226]"
+                                    style={{
+                                        color: 'gray'
+                                    }}>
+                                    Full Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    disabled
+                                    placeholder="Enter your name"
+                                    value={user.name}
+                                    className="w-full h-10 px-4 mt-2 text-base text-black border border-[#A3AAB2] rounded-lg focus:outline-none focus:border-[#E84E4E]"
+                                    style={{
+                                        color: 'gray'
+                                    }}
+                                />
+                            </div>
+                            <div className="flex flex-col w-full h-full mb-8">
+                                <label
+                                    htmlFor="location"
+                                    className="text-sm font-normal text-[#1F2226]">
+                                    Email
+                                </label>
+                                <input
+                                    type="text"
+                                    name="email"
+                                    id="email"
+                                    defaultValue={user.email}
+                                    placeholder="you@example.com"
+                                    className="w-full h-10 px-4 mt-2 text-base text-black border border-[#A3AAB2] rounded-lg focus:outline-none focus:border-[#E84E4E]"
+                                />
+                            </div>
+
+                            <div className="mt-2" style={{ textAlign: 'right' }}>
+                                <button
+                                    type="submit"
+                                    className=" text-[#19C170]  font-semibold text-base py-4 px-[54px] border-[1px] border-[#1BD47B] rounded-md">
+                                    Update Email
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
