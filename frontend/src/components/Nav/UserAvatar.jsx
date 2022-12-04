@@ -14,7 +14,7 @@ const UserAvatar = ({ width = '50px', height = '50px', fontSize = '16px' }) => {
                     width: width,
                     height: height
                 }}>
-                <h1 className={`text-white uppercase font-[700] text-[${fontSize}]`}>
+                <h1 className={`text-white uppercase font-[700]`} style={{ fontSize: fontSize }}>
                     {user.name.slice(0, 2)}
                 </h1>
             </Link>

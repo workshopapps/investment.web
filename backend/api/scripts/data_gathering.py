@@ -124,7 +124,7 @@ async def create_or_update_financial(financial: dict, financial_id: str, company
 
 
 async def pick_random_companies():
-    """ Picks at most four random companies from the API, fetch their metrics and store their records"""
+    """ Picks random companies from the API, fetch their metrics and store their records"""
     count = 2
     # get companies
     data = await call_api('available-traded/list', {'query': 'USD'})

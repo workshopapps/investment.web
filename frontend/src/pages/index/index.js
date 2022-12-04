@@ -6,10 +6,11 @@ import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
 import { ToastContainer, toast } from 'react-toastify';
 import AuthContext from '../../auth/AuthContext';
+import { ThreeDots } from 'react-loader-spinner';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
-    const [stocks, setStocks] = useState([]);
+    const [stocks, setStocks] = useState(null);
     const [marketCap, setMarketCap] = useState('all');
     const [sector, setSector] = useState('all');
     const [industry, setIndustry] = useState('all');
@@ -69,6 +70,7 @@ const IndexPage = () => {
     }, [marketCap, sector, industry]);
 
     const reloadRankedCompanies = () => {
+        setStocks(null);
         const queries = [];
 
         if (marketCap !== 'all') queries.push({ key: 'category', value: marketCap });
@@ -211,25 +213,47 @@ const IndexPage = () => {
                             </div>
                         </div>
 
-                        <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                            {stocks.map((item, index) => (
-                                <CapCard
-                                    key={index}
-                                    logo={item.profile_image}
-                                    abbr={item.company_id}
-                                    name={item.name}
-                                    PERatio={item.dividend_yield}
-                                    marketCap={item.market_cap}
-                                    stockPrice={item.stock_price}
-                                    rank={item.category}
-                                    index={index}
-                                    sector={item.industry}
-                                    link={`/company/${item.company_id}`}
-                                    onSuccess={onSuccess}
-                                    onFailure={onFailure}
+                        {!stocks && (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    width: '100%',
+                                    marginTop: '30px'
+                                }}>
+                                <ThreeDots
+                                    height="80"
+                                    width="80"
+                                    color="#49dd95"
+                                    ariaLabel="bars-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
                                 />
-                            ))}
-                        </div>
+                            </div>
+                        )}
+
+                        {stocks && (
+                            <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+                                {stocks.map((item, index) => (
+                                    <CapCard
+                                        key={index}
+                                        logo={item.profile_image}
+                                        abbr={item.company_id}
+                                        name={item.name}
+                                        PERatio={item.dividend_yield}
+                                        marketCap={item.market_cap}
+                                        stockPrice={item.stock_price}
+                                        rank={item.category}
+                                        index={index}
+                                        sector={item.industry}
+                                        link={`/company/${item.company_id}`}
+                                        onSuccess={onSuccess}
+                                        onFailure={onFailure}
+                                    />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
