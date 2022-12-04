@@ -7,6 +7,7 @@ import passwordicon from '../../assets/settings/passwordicon.svg';
 import notificationicon from '../../assets/settings/notificationicon.svg';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
+import SidebarMobile from './SidebarMobile';
 
 const links = [
     {
@@ -70,10 +71,14 @@ export default function index() {
                         <span className="flex text-[#0A0B0D] font-normal text-3xl mb-5">
                             Settings
                         </span>
-
+                        <div
+                            className="flex md:hidden w-auto  mt-[60px]"
+                           >
+                            <SidebarMobile />
+                        </div>
                         <Link
                             to="/"
-                            className="flex md:hidden flex-row items-center  h-full  text-base font-semibold ml-[240px]">
+                            className="flex md:hidden flex-row items-center  h-full  text-base font-semibold ml-auto pr-4">
                             <img src={logouticon} alt="settingsicon" className="w-5 h-5" />
                             <h1 className="font-normal text-base md:flex ml-4 text-[#E84E4E]">
                                 Logout
@@ -188,4 +193,4 @@ export default function index() {
 //             </div>
 //         </div>
 //     );
-// }
+// };
