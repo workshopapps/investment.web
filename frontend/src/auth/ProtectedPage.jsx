@@ -12,7 +12,8 @@ const ProtectedPage = ({ children }) => {
                 .get('https://api.yieldvest.hng.tech/user/profile', {
                     headers: {
                         Authorization: `Bearer ${localToken}`
-                    }
+                    },
+                    validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500
                 })
                 .then((res) => {
                     if (res.status === 401) {

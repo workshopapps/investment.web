@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AuthContext from './AuthContext';
 
 const AuthProvider = ({ children }) => {
@@ -9,42 +8,11 @@ const AuthProvider = ({ children }) => {
         email: '',
         name: ''
     });
-    const localToken = sessionStorage.getItem('accessToken');
 
     const logout = () => {
         setIsLoggedIn(false);
         sessionStorage.removeItem('accessToken');
     };
-
-    useEffect(() => {
-        if (localToken) {
-            axios
-                .get('https://api.yieldvest.hng.tech/user/profile', {
-                    headers: {
-                        Authorization: `Bearer ${localToken}`
-                    }
-                })
-                .then((res) => {
-                    if (res.status === 401) {
-                        sessionStorage.removeItem('accessToken');
-                        logout();
-                        window.location = '/login';
-                    }
-
-                    if (res.status === 200) {
-                        setIsLoggedIn(true);
-                        setAccessToken(localToken);
-                        setUser({
-                            email: res.data.email,
-                            name: res.data.name
-                        });
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        }
-    }, [localToken]);
 
     return (
         <AuthContext.Provider
