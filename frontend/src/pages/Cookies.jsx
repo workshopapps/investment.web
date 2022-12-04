@@ -18,7 +18,7 @@ const Cookies = () => {
         });
     };
     const close = () => {
-        toast.error('🦄 Wow so easy!', {
+        toast.error('🦄 cookies declined!', {
             position: 'bottom-right',
             autoClose: 3000,
             hideProgressBar: false,
