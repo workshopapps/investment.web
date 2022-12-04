@@ -6,6 +6,7 @@ import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
 import authContext from '../../auth/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
+// import Select from 'react-dropdown-select';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
@@ -160,7 +161,7 @@ const IndexPage = () => {
                                     Filter by:
                                 </h3>
                             </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 filter-category">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 filter-category">
                                 <select
                                     name="marketCap"
                                     onChange={handleMarketCap}
@@ -170,19 +171,6 @@ const IndexPage = () => {
                                     <option value="mid_market_cap_category">Mid Cap </option>
                                     <option value="low_market_cap_category">Small Cap </option>
                                 </select>
-
-                                <select
-                                    name="sector"
-                                    onChange={handleSector}
-                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
-                                    <option value="all">All Sectors</option>
-                                    {sectors.map((sector, index) => (
-                                        <option value={sector.sector_id} key={index}>
-                                            {sector.sector}
-                                        </option>
-                                    ))}
-                                </select>
-
                                 <select
                                     name="industry"
                                     onChange={handleIndustry}
@@ -193,6 +181,20 @@ const IndexPage = () => {
                                     {industries.map((industry, index) => (
                                         <option value={industry.industry_id} key={index}>
                                             {industry.industry}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                    <option>U.S Stocks</option>
+                                </select>
+                                <select
+                                    name="sector"
+                                    onChange={handleSector}
+                                    className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded">
+                                    <option value="all">All Sectors</option>
+                                    {sectors.map((sector, index) => (
+                                        <option value={sector.sector_id} key={index}>
+                                            {sector.sector}
                                         </option>
                                     ))}
                                 </select>
