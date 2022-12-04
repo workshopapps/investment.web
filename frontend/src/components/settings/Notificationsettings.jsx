@@ -11,20 +11,36 @@ export default function Notificationsettings() {
         switch6: false
     });
     // handle switch changes
-
+    // add max-width: 1028px mx-auto
     const handleChange = (e) => {
         setChecked({ ...checked, [e.target.name]: e.target.checked });
     };
 
     return (
-        <div className="flex flex-col w-full pb-[100px] ">
-            <div className="flex flex-col w-full h-full py-10">
-                <div className="flex flex-col w-full h-full py-2 px-2 md:px-[30px] font-semibold text-base text-black">
-                    <h1 className="text-4xl">Notifications</h1>
-                    <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-black ">
-                        <div className="flex justify-between items-center py-6">
-                            <h2 className="text-xl font-normal">
-                                Receive notifications about all newly added stocks{' '}
+        <div className="flex flex-col pb-[100px]">
+            <div className="flex flex-col  h-full items-center py-5">
+                <div className="flex flex-col w-full h-full py-2 font-semibold text-base text-black max-w-[1028px]">
+                    <div className="flex justify-between items-center  px-6 py-4">
+                        <h2 className="text-xl font-normal">Enable email notification</h2>
+                        <ReactSwitch
+                            checked={checked.switch1}
+                            name="switch1"
+                            onChange={handleChange}
+                            onColor="#19C170"
+                            onHandleColor="#ffffff"
+                            handleDiameter={13}
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            height={21}
+                            width={27}
+                            className="ml-4"
+                        />
+                    </div>
+                    <hr className="w-full border" />
+                    <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-#0A0B0D ">
+                        <div className="flex justify-between items-center px-6 py-6">
+                            <h2 className="text-l text-#0A0B0D font-normal">
+                                Receive notifications about small cap stocks to invest in{' '}
                             </h2>
                             <ReactSwitch
                                 checked={checked.switch1}
@@ -40,10 +56,10 @@ export default function Notificationsettings() {
                                 className="ml-4"
                             />
                         </div>
-                        <hr />
-                        <div className="flex justify-between items-center py-6">
-                            <h2 className="text-xl font-normal">
-                                Receive notifications about latest stocks to invest in{' '}
+
+                        <div className="flex justify-between items-center px-6 py-6">
+                            <h2 className="text-l text-#0A0B0D font-normal">
+                                Receive notifications about large cap stocks to invest in{' '}
                             </h2>
                             <ReactSwitch
                                 checked={checked.switch2}
@@ -59,10 +75,10 @@ export default function Notificationsettings() {
                                 className="ml-4"
                             />
                         </div>
-                        <hr />
-                        <div className="flex justify-between items-center py-6">
-                            <h2 className="text-xl font-normal">
-                                Receive notifications about changes happening in the stock market{' '}
+
+                        <div className="flex justify-between items-center px-6 py-6">
+                            <h2 className="text-l text-#0A0B0D font-normal">
+                                Receive notifications about mid cap stocks to invest in{' '}
                             </h2>
                             <ReactSwitch
                                 checked={checked.switch3}
@@ -78,8 +94,8 @@ export default function Notificationsettings() {
                                 className="ml-4"
                             />
                         </div>
-                        <hr />
-                        <div className="flex justify-between items-center py-6">
+
+                        {/* <div className="flex justify-between items-center py-6">
                             <h2 className="text-xl font-normal">
                                 Notify me about stocks that should be in my watchlist{' '}
                             </h2>
@@ -135,11 +151,11 @@ export default function Notificationsettings() {
                                 className="ml-4"
                             />
                         </div>
-                        <hr />
+                        <hr /> */}
                     </div>
                     <div className="flex flex-col md:ml-auto mr-4 mt-[70px]">
-                        <button className="bg-[#19C170] text-black  font-semibold text-base py-4 px-8 rounded-md">
-                            Update Notification
+                        <button className="bg-[#19C170] text-black  font-semibold text-base py-3 px-6 rounded-md">
+                            Update Changes
                         </button>
                     </div>
                 </div>
