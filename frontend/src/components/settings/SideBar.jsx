@@ -63,11 +63,11 @@ export default function index() {
     };
 
     return (
-        <div className="flex pl-[0px] md:px-[200px] py-2 h-full bg-[ #FFFFFF]  ">
-            <div className="flex flex-col  w-full border-b-2 border-[##D9D9D9]">
-                <div className="flex flex-col w-full pl-4  md:pl-0 pt-7 pb-3">
+        <div className="flex pl-[0px] py-2 h-full">
+            <div className="flex flex-col  w-full border-b-2 border-black">
+                <div className="flex flex-col w-full pl-4 px-7 pt-7 pb-3">
                     <div className="flex flex-row items-center w-full mb-2">
-                        <span className="flex text-[#0A0B0D] font-normal text-3xl ml-4 mb-5">
+                        <span className="flex text-[#0A0B0D] font-normal text-3xl mb-5">
                             Settings
                         </span>
 
@@ -81,7 +81,7 @@ export default function index() {
                         </Link>
                     </div>
                     <div className="flex w-full ">
-                        <div className="flex flex-row w-2/5 md:w-full">
+                        <div className="flex flex-row w-2/5 md:w-full justify-between">
                             <div className="hidden md:flex h-full  w-3/5 font-semibold text-base text-black">
                                 {links.map((link, index) => (
                                     // eslint-disable-next-line react/jsx-key
