@@ -53,7 +53,7 @@ export default function PasswordSettings() {
                 style={{
                     alignItems: 'start'
                 }}>
-                <UserAvatar width="100px" height="100px" fontSize="30px" />
+                <UserAvatar width="200px" height="200px" fontSize="50px" />
             </div>
             <div className="flex flex-col md:flex-col w-full h-full mx-2 md:pl-5 md:pr-[100px] pt-[56px] pb-[70px]">
                 <div className="flex flex-col md:ml-[60px] w-full h-full mb-6">

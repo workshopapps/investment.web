@@ -258,7 +258,9 @@ const Login = () => {
                                 Forgot password?
                             </Link>
                         </div>
-                        <button className="bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100">
+                        <button
+                            className="bg-green-500 text-white h-11 rounded-md mt-2 hover:bg-green-600 transition ease-in-out delay-100"
+                            style={{ color: '#1F2226' }}>
                             Log in
                         </button>
                     </form>

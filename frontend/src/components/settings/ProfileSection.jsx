@@ -43,7 +43,7 @@ export default function ProfileSection() {
                         alignItems: 'start'
                     }}>
                     <div className="flex w-2/5 ml-[180px] md:m-0">
-                        <UserAvatar width="100px" height="100px" fontSize="30px" />
+                        <UserAvatar width="200px" height="200px" fontSize="50px" />
                     </div>
 
                     <div className="flex flex-col md:ml-[60px] w-full h-full ">
