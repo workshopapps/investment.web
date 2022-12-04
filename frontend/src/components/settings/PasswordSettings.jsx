@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import authHooks from '../../auth/AuthHooks';
+import AuthContext from '../../auth/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import UserAvatar from '../Nav/UserAvatar';
 
 export default function PasswordSettings() {
     const {
@@ -9,18 +13,47 @@ export default function PasswordSettings() {
         formState: { errors },
         reset
     } = useForm();
-    
+    const [validationError, setValidationError] = useState(false);
+    const apiService = authHooks.useApiService();
+    const { accessToken } = useContext(AuthContext);
+
     const onSubmit = (data) => {
-        
+        setValidationError(false);
+
+        if (data.newpassword !== data.confirmpassword) {
+            setValidationError(true);
+        } else {
+            apiService(accessToken)
+                .patch('auth/update_password', {
+                    current_password: data.oldpassword,
+                    new_password: data.newpassword
+                })
+                .then((res) => {
+                    if (res.status === 200) {
+                        toast.success('Password updated!');
+                        reset();
+                    } else if (res.status === 400) {
+                        toast.error('Incorrect current password');
+                    } else {
+                        toast.error('Failed to update password');
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error('Failed to update password');
+                });
+        }
     };
 
     return (
         <div className="flex  mt-3 md:px-[200px] ">
+            <ToastContainer />
             <div
                 className="hidden md:flex w-1/5 px-2 mt-[60px]"
                 style={{
                     alignItems: 'start'
                 }}>
+                <UserAvatar width="200px" height="200px" fontSize="50px" />
             </div>
             <div className="flex flex-col md:flex-col w-full h-full mx-2 md:pl-5 md:pr-[100px] pt-[56px] pb-[70px]">
                 <div className="flex flex-col md:ml-[60px] w-full h-full mb-6">
@@ -82,7 +115,11 @@ export default function PasswordSettings() {
                                         {errors.newpassword.message}
                                     </p>
                                 )}
-                                
+                                {validationError && (
+                                    <p className="text-red-500 text-xs italic">
+                                        Passwords do not match
+                                    </p>
+                                )}
                             </div>
                             <div className="flex flex-col w-full h-full mb-8">
                                 <label
@@ -109,7 +146,11 @@ export default function PasswordSettings() {
                                         {errors.confirmpassword.message}
                                     </p>
                                 )}
-                                
+                                {validationError && (
+                                    <p className="text-red-500 text-xs italic">
+                                        Passwords do not match
+                                    </p>
+                                )}
                             </div>
                             <div className="flex flex-col w-full h-full mb-8">
                                 <button
