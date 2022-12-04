@@ -69,12 +69,11 @@ const CapCard = ({
                 </div>
                 <div className="space-y-2">
                     {/* Desktop view */}
-                    <span>
+                    <span onClick={handlePriceModal}>
                         <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
                                 onMouseEnter={handlePriceHover}
                                 onMouseLeave={handlePriceHover}
-                                onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -87,16 +86,13 @@ const CapCard = ({
                                     content={<span className="">See details</span>}
                                     placement="bottom">
                                     <img
-                                        src={Eye}
+                                        src={hoverPrice ? Eye : inactiveEye}
                                         alt="eye"
-                                        className="w-5 h-6"
-                                        onMouseOver={handlePriceModal}
+                                        className="w-5 h-6 transition duration-200"
                                         onMouseEnter={handlePriceHover}
                                         onMouseLeave={handlePriceHover}
                                         style={{
-                                            filter: !hoverPrice
-                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
-                                                : '',
+                                            filter: !hoverPrice ? '' : '',
                                             transition: '.2s ease'
                                         }}
                                     />
@@ -133,12 +129,11 @@ const CapCard = ({
                     </div>
                     {/* Desktop view */}
                     <div>
-                        <span className="w-2">
+                        <span className="w-2" onClick={handleFundamentalModal}>
                             <div className="hidden lg:flex w-fit font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                                 <p
                                     onMouseEnter={handleFundamentalHover}
                                     onMouseLeave={handleFundamentalHover}
-                                    onMouseOver={handleFundamentalModal}
                                     className={
                                         !hoverFundamental
                                             ? `text-[#B0B2B7] font-normal pr-4`
@@ -151,16 +146,13 @@ const CapCard = ({
                                         content={<span className="">See details</span>}
                                         placement="bottom">
                                         <img
-                                            src={Eye}
+                                            src={hoverFundamental ? Eye : inactiveEye}
                                             alt="eye"
-                                            className="w-5 h-6"
-                                            onMouseOver={handleFundamentalModal}
+                                            className="w-5 h-6 transition duration-200"
                                             onMouseEnter={handleFundamentalHover}
                                             onMouseLeave={handleFundamentalHover}
                                             style={{
-                                                filter: !hoverFundamental
-                                                    ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
-                                                    : '',
+                                                filter: !hoverFundamental ? 'text-[#49DD95]' : '',
                                                 transition: '.2s ease'
                                             }}
                                         />
