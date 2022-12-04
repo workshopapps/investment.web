@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
@@ -8,7 +8,9 @@ import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
 import WatchListContext from '../../store/watchList/WatchLIstProvider';
 import Tippy from '@tippyjs/react';
+import authHooks from '../../auth/AuthHooks';
 import 'tippy.js/dist/tippy.css';
+import AuthContext from '../../auth/AuthContext';
 
 const CapCard = ({
     logo,
@@ -26,19 +28,40 @@ const CapCard = ({
     const [priceModal, setPriceModal] = useState(false);
     const [hoverFundamental, setHoverFundamental] = useState(false);
     const [hoverPrice, setHoverPrice] = useState(false);
+    const [isInWatchlist, setInWatchlist] = useState(false);
+    const { accessToken, isLoggedIn } = useContext(AuthContext);
+    const { addToWatchList } = useContext(WatchListContext);
+    const apiService = authHooks.useApiService();
+
     const handlePriceModal = () => {
         setPriceModal(!priceModal);
     };
+
     const handleFundamentalModal = () => {
         setFundamentalModal(!fundamentalModal);
     };
-    const { addToWatchList } = useContext(WatchListContext);
+
     const handleFundamentalHover = () => {
         setHoverFundamental(!hoverFundamental);
     };
+
     const handlePriceHover = () => {
         setHoverPrice(!hoverPrice);
     };
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            apiService(accessToken)
+                .get(`/user/in_watchlist/${abbr}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        setInWatchlist(true);
+                    } else {
+                        setInWatchlist(false);
+                    }
+                });
+        }
+    }, [accessToken, isLoggedIn]);
 
     return (
         <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
@@ -57,15 +80,17 @@ const CapCard = ({
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    <div
-                        className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
-                        onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
-                        <Tippy
-                            content={<span className="">Add to watchlist</span>}
-                            placement="bottom">
-                            <span>+</span>
-                        </Tippy>
-                    </div>
+                    {!isInWatchlist && (
+                        <div
+                            className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
+                            onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
+                            <Tippy
+                                content={<span className="">Add to watchlist</span>}
+                                placement="bottom">
+                                <span>+</span>
+                            </Tippy>
+                        </div>
+                    )}
                 </div>
                 <div className="space-y-2">
                     {/* Desktop view */}
