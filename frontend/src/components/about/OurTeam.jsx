@@ -17,21 +17,27 @@ const OurTeam = () => {
                 <div className="">
                     <img className="w-full rounded-t-lg" src={img1} alt="team member" />
                     <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">Ayobami Isreal</p>
+                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
+                            Ayobami Isreal
+                        </p>
                         <p className="text-xs">Product Designer</p>
                     </div>
                 </div>
                 <div className="">
                     <img className="w-full rounded-t-lg" src={img2} alt="team member" />
                     <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">Divine Uzodinma</p>
+                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
+                            Divine Uzodinma
+                        </p>
                         <p className="text-xs">Product manager</p>
                     </div>
                 </div>
                 <div className="">
                     <img className="w-full rounded-t-lg" src={img3} alt="team member" />
                     <div className=" md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">Imran Abdulmalik</p>
+                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
+                            Imran Abdulmalik
+                        </p>
                         <p className="text-xs">Tech Lead</p>
                     </div>
                 </div>
