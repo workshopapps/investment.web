@@ -211,7 +211,7 @@ const IndexPage = () => {
                                         </option>
                                     ))}
                                 </select>
-                                <Select
+                                {/* <Select
                                     options={[
                                         {
                                             value: 'All Caps',
@@ -252,7 +252,7 @@ const IndexPage = () => {
                                         borderRadius: '0 5px 5px 0',
                                         color: '#49dd95'
                                     }}
-                                />
+                                /> */}
                             </div>
                         </div>
 
