@@ -6,11 +6,11 @@ import Chart from '../../assets/index/fundamentals-chart.svg';
 import Graph from '../../assets/index/stock-price-graph.svg';
 import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
-import WatchListContext from '../../store/watchList/WatchLIstProvider';
 import Tippy from '@tippyjs/react';
 import authHooks from '../../auth/AuthHooks';
 import 'tippy.js/dist/tippy.css';
 import AuthContext from '../../auth/AuthContext';
+import { TailSpin } from 'react-loader-spinner';
 
 const CapCard = ({
     logo,
@@ -29,8 +29,8 @@ const CapCard = ({
     const [hoverFundamental, setHoverFundamental] = useState(false);
     const [hoverPrice, setHoverPrice] = useState(false);
     const [isInWatchlist, setInWatchlist] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { accessToken, isLoggedIn } = useContext(AuthContext);
-    const { addToWatchList } = useContext(WatchListContext);
     const apiService = authHooks.useApiService();
 
     const handlePriceModal = () => {
@@ -47,6 +47,27 @@ const CapCard = ({
 
     const handlePriceHover = () => {
         setHoverPrice(!hoverPrice);
+    };
+
+    const addToWatchList = (id, onSuccess, onFailure) => {
+        setIsLoading(true);
+
+        apiService(accessToken)
+            .post(`/user/watchlist/${id}`)
+            .then((res) => {
+                setIsLoading(false);
+                if (res.status === 200) {
+                    onSuccess();
+                    setInWatchlist(true);
+                } else {
+                    onFailure();
+                }
+            })
+            .catch((error) => {
+                setIsLoading(false);
+                console.log(error);
+                onFailure();
+            });
     };
 
     useEffect(() => {
@@ -84,11 +105,24 @@ const CapCard = ({
                         <div
                             className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
                             onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
-                            <Tippy
-                                content={<span className="">Add to watchlist</span>}
-                                placement="bottom">
-                                <span>+</span>
-                            </Tippy>
+                            {isLoading ? (
+                                <TailSpin
+                                    height="40"
+                                    width="40"
+                                    color="#4fa94d"
+                                    ariaLabel="tail-spin-loading"
+                                    radius="1"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
+                                />
+                            ) : (
+                                <Tippy
+                                    content={<span className="">Add to watchlist</span>}
+                                    placement="bottom">
+                                    <span>+</span>
+                                </Tippy>
+                            )}
                         </div>
                     )}
                 </div>
