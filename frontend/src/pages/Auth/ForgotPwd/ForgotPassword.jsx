@@ -38,9 +38,9 @@ const ForgotPassword = () => {
             <PageLayout showFooter={false}>
                 <div className="relative md:static md:bg-desk-signup h-screen font-hauora flex flex-col items-center md:justify-center ">
                     <div>
-                        <h4 className="hidden md:block text-white text-2xl font-semibold text-center pb-6">
+                        {/* <h4 className="hidden md:block text-white text-2xl font-semibold text-center pb-6">
                             Buy stocks and grow your business
-                        </h4>
+                        </h4> */}
 
                         <div className="px-4 md:px-10 py-12 bg-white md:rounded-lg flex flex-col gap-4 md:gap-8">
                             <div className="flex flex-col gap-2">
