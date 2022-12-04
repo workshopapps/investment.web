@@ -42,7 +42,7 @@ const ForgotPassword = () => {
                             Buy stocks and grow your business
                         </h4>
 
-                        <div className="px-4 md:px-10 py-12 bg-white md:rounded-lg">
+                        <div className="px-4 md:px-10 py-12 bg-white md:rounded-lg flex flex-col gap-4 md:gap-8">
                             <div className="flex flex-col gap-2">
                                 <h4 className="text-2xl text-[#000718]">Forget Password</h4>
                                 <p className="text-[#545964]">
