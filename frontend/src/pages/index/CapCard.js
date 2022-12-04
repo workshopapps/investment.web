@@ -57,11 +57,9 @@ const CapCard = ({
                             <p className="text-[#545964] font-semibold text-sm">{sector}</p>
                         </div>
                     </div>
-                    {/* <div
-                        className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
-                        > */}
-                    <div className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
-                    onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
+                    <div
+                        className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
+                        onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
                         <Tippy
                             content={<span className="">Add to watchlist</span>}
                             placement="bottom">
@@ -76,6 +74,7 @@ const CapCard = ({
                             <p
                                 onMouseEnter={handlePriceHover}
                                 onMouseLeave={handlePriceHover}
+                                onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -83,12 +82,7 @@ const CapCard = ({
                                 }>
                                 PRICE{' '}
                             </p>
-                            <p
-                                className="cursor-pointer"
-                                // onMouseEnter={handlePriceHover}
-                                // onMouseLeave={handlePriceHover}
-                                // onMouseOver={handlePriceModal}
-                            >
+                            <p className="cursor-pointer">
                                 <Tippy
                                     content={<span className="">See details</span>}
                                     placement="bottom">
@@ -96,7 +90,7 @@ const CapCard = ({
                                         src={Eye}
                                         alt="eye"
                                         className="w-5 h-6"
-                                        onClick={handlePriceModal}
+                                        onMouseOver={handlePriceModal}
                                         onMouseEnter={handlePriceHover}
                                         onMouseLeave={handlePriceHover}
                                         style={{
@@ -111,8 +105,7 @@ const CapCard = ({
                         </div>
                     </span>
                     {/* Mobile view */}
-                    <span
-                        onClick={handlePriceModal}>
+                    <span onClick={handlePriceModal}>
                         <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
                                 className={
@@ -177,8 +170,7 @@ const CapCard = ({
                         </span>
                     </div>
                     {/* Mobile view */}
-                    <span
-                        onClick={handleFundamentalModal}>
+                    <span onClick={handleFundamentalModal}>
                         <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                             <p
                                 className={
