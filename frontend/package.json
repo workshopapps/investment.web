@@ -21,6 +21,7 @@
         "postcss": "^8.4.19",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-dropdown-select": "^4.9.0",
         "react-hook-form": "^7.40.0",
         "react-icons": "^4.6.0",
         "react-loader-spinner": "^5.3.4",

@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Eye from '../../assets/index/eye.svg';
+import Chart from '../../assets/index/fundamentals-chart.svg';
+import Graph from '../../assets/index/stock-price-graph.svg';
+import inactiveEye from '../../assets/index/default-eye.svg';
 import Modal from '../../components/Modal';
 import WatchListContext from '../../store/watchList/WatchLIstProvider';
 import Tippy from '@tippyjs/react';
@@ -55,7 +58,7 @@ const CapCard = ({
                         </div>
                     </div>
                     <div
-                        className="bg-[#96EBC2] hover:bg-[#49DD95] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
+                        className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
                         onClick={() => addToWatchList(abbr, onSuccess, onFailure)}>
                         <Tippy
                             content={<span className="">Add to watchlist</span>}
@@ -69,47 +72,9 @@ const CapCard = ({
                     <span>
                         <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
                             <p
-                                className={
-                                    !hoverPrice
-                                        ? `text-[#B0B2B7] font-normal pr-4`
-                                        : `font-normal pr-4 text-[#49DD95]`
-                                }>
-                                PRICE{' '}
-                            </p>
-                            <p
-                                className="cursor-pointer"
-                                // onMouseEnter={handlePriceHover}
-                                // onMouseLeave={handlePriceHover}
-                                // onMouseOver={handlePriceModal}
-                            >
-                                <Tippy
-                                    content={<span className="">See details</span>}
-                                    placement="bottom">
-                                    <img
-                                        src={Eye}
-                                        alt="eye"
-                                        className="w-5 h-6"
-                                        onClick={handlePriceModal}
-                                        onMouseEnter={handlePriceHover}
-                                        onMouseLeave={handlePriceHover}
-                                        style={{
-                                            filter: !hoverPrice
-                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
-                                                : '',
-                                            transition: '.2s ease'
-                                        }}
-                                    />
-                                </Tippy>
-                            </p>
-                        </div>
-                    </span>
-                    {/* Mobile view */}
-                    <span
-                        // onMouseEnter={handlePriceHover}
-                        // onMouseLeave={handlePriceHover}
-                        onClick={handlePriceModal}>
-                        <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
-                            <p
+                                onMouseEnter={handlePriceHover}
+                                onMouseLeave={handlePriceHover}
+                                onMouseOver={handlePriceModal}
                                 className={
                                     !hoverPrice
                                         ? `text-[#B0B2B7] font-normal pr-4`
@@ -125,6 +90,7 @@ const CapCard = ({
                                         src={Eye}
                                         alt="eye"
                                         className="w-5 h-6"
+                                        onMouseOver={handlePriceModal}
                                         onMouseEnter={handlePriceHover}
                                         onMouseLeave={handlePriceHover}
                                         style={{
@@ -135,6 +101,26 @@ const CapCard = ({
                                         }}
                                     />
                                 </Tippy>
+                            </p>
+                        </div>
+                    </span>
+                    {/* Mobile view */}
+                    <span onClick={handlePriceModal}>
+                        <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
+                            <p
+                                className={
+                                    !hoverPrice
+                                        ? `text-[#B0B2B7] font-normal pr-4`
+                                        : `font-normal pr-4 text-[#49DD95]`
+                                }>
+                                PRICE{' '}
+                            </p>
+                            <p className="cursor-pointer">
+                                <img
+                                    src={hoverPrice ? Eye : inactiveEye}
+                                    alt="eye"
+                                    className="w-5 h-6"
+                                />
                             </p>
                         </div>
                     </span>
@@ -150,9 +136,9 @@ const CapCard = ({
                         <span className="w-2">
                             <div className="hidden lg:flex w-fit font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                                 <p
-                                    // onMouseEnter={handleFundamentalHover}
-                                    // onMouseLeave={handleFundamentalHover}
-                                    // onMouseOver={handleFundamentalModal}
+                                    onMouseEnter={handleFundamentalHover}
+                                    onMouseLeave={handleFundamentalHover}
+                                    onMouseOver={handleFundamentalModal}
                                     className={
                                         !hoverFundamental
                                             ? `text-[#B0B2B7] font-normal pr-4`
@@ -160,12 +146,7 @@ const CapCard = ({
                                     }>
                                     FUNDAMENTALS{' '}
                                 </p>{' '}
-                                <p
-                                    className="cursor-pointer"
-                                    // onMouseEnter={handleFundamentalHover}
-                                    // onMouseLeave={handleFundamentalHover}
-                                    // onMouseOver={handleFundamentalModal}
-                                >
+                                <p className="cursor-pointer">
                                     <Tippy
                                         content={<span className="">See details</span>}
                                         placement="bottom">
@@ -173,7 +154,7 @@ const CapCard = ({
                                             src={Eye}
                                             alt="eye"
                                             className="w-5 h-6"
-                                            onClick={handleFundamentalModal}
+                                            onMouseOver={handleFundamentalModal}
                                             onMouseEnter={handleFundamentalHover}
                                             onMouseLeave={handleFundamentalHover}
                                             style={{
@@ -189,10 +170,7 @@ const CapCard = ({
                         </span>
                     </div>
                     {/* Mobile view */}
-                    <span
-                        // onMouseEnter={handleFundamentalHover}
-                        // onMouseLeave={handleFundamentalHover}
-                        onClick={handleFundamentalModal}>
+                    <span onClick={handleFundamentalModal}>
                         <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-[34px] mt-2 cursor-pointer items-center">
                             <p
                                 className={
@@ -202,24 +180,12 @@ const CapCard = ({
                                 }>
                                 FUNDAMENTALS{' '}
                             </p>{' '}
-                            <p className="cursor-pointer">
-                                <Tippy
-                                    content={<span className="">See details</span>}
-                                    placement="bottom">
-                                    <img
-                                        src={Eye}
-                                        alt="eye"
-                                        className="w-5 h-6"
-                                        onMouseEnter={handleFundamentalHover}
-                                        onMouseLeave={handleFundamentalHover}
-                                        style={{
-                                            filter: !hoverFundamental
-                                                ? 'invert(76%) sepia(33%) saturate(581%) hue-rotate(98deg) brightness(100%) contrast(86%)'
-                                                : '',
-                                            transition: '.2s ease'
-                                        }}
-                                    />
-                                </Tippy>
+                            <p>
+                                <img
+                                    src={hoverFundamental ? Eye : inactiveEye}
+                                    alt="eye"
+                                    className="w-5 h-6"
+                                />
                             </p>
                         </div>
                     </span>
@@ -238,7 +204,7 @@ const CapCard = ({
             </div>
             {priceModal && (
                 <Modal passedFunc={priceModal} setPassedFunc={setPriceModal}>
-                    <div>
+                    {/* <div>
                         <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
                             PRICE{' '}
                         </p>
@@ -246,9 +212,9 @@ const CapCard = ({
                     <div className="flex justify-between text-xs lg:text-base">
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice.toFixed(2)}</p>
-                    </div>
-                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
-                        Sparkline Loading...
+                    </div> */}
+                    <div className="flex text-center text-xs lg:text-base mt-2">
+                        <img src={Graph} alt="fundamentals chart" className="h-[170px] w-full" />
                     </div>
                     <Link to={link}>
                         <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
@@ -259,7 +225,7 @@ const CapCard = ({
             )}
             {fundamentalModal && (
                 <Modal passedFunc={fundamentalModal} setPassedFunc={setFundamentalModal}>
-                    <div>
+                    {/* <div>
                         <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
                             FUNDAMENTALS{' '}
                         </p>
@@ -269,12 +235,12 @@ const CapCard = ({
                         <p className="text-[#333946] text-semibold">
                             ${(marketCap / 1000000000).toFixed(2)}B
                         </p>
-                    </div>
-                    <div className="flex justify-center text-center text-xs lg:text-base mt-10 opacity-50">
-                        Chart Loading...
+                    </div> */}
+                    <div className="flex text-center text-xs lg:text-base mt-2">
+                        <img src={Chart} alt="fundamentals chart" className="h-[170px] w-full" />
                     </div>
                     <Link to={link}>
-                        <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
+                        <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
                             See Company Profile
                         </div>
                     </Link>
