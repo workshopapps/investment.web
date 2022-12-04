@@ -49,6 +49,8 @@ import Watchlist from './pages/watchlist/Watchlist.jsx';
 import HowItWorks from './pages/how-it-works/Index';
 import DownloadPage from './pages/download/index.js';
 import Cookies from './pages/Cookies.jsx';
+import AuthProvider from './auth/AuthProvider.jsx';
+import { WatchListProvider } from './store/watchList/WatchLIstProvider.js';
 
 // Define Page Routes
 const router = createBrowserRouter([
@@ -275,7 +277,11 @@ function App() {
         <React.Fragment>
             <UserStatusContext.Provider value={{ logged, loggedInHandler, loggedOffHandler }}>
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-                    <RouterProvider router={router} />
+                    <AuthProvider>
+                        <WatchListProvider>
+                            <RouterProvider router={router} />
+                        </WatchListProvider>
+                    </AuthProvider>
                 </GoogleOAuthProvider>
             </UserStatusContext.Provider>
         </React.Fragment>
