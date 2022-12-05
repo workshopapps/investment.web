@@ -5,11 +5,10 @@ import PageLayout from '../layout';
 import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
 import { ToastContainer, toast } from 'react-toastify';
-import { Select } from 'react-jsx-select';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
-
+import CookieConsent from 'react-cookie-consent';
 import NotFoundImage from '../../assets/images/not_found.svg';
 
 const IndexPage = () => {
@@ -42,7 +41,7 @@ const IndexPage = () => {
     };
 
     const formatLastUpdateDate = (date) => {
-        return dateFormat(date, 'mmmm dS, yyyy, h:MM:ss TT');
+        return dateFormat(new Date(date + 'Z').toLocaleString(), 'mmmm dS, yyyy hh:MM:ss TT');
     };
 
     useEffect(() => {
@@ -140,7 +139,7 @@ const IndexPage = () => {
     const navigate = useNavigate();
 
     return (
-        <PageLayout>
+        <PageLayout isProtected isProtectedLessStrict>
             {!isLoggedIn && (
                 <NotSubscribedModal
                     isOpen={showNotSubscribedModal}
@@ -167,11 +166,14 @@ const IndexPage = () => {
                 <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
                     <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
                         <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
-                            We Track, Analyse & Recommend the best stocks for you.
+                            We Track, Analyze & Recommend the best stocks for you.
                         </h1>
                         <p className="text-[13px] font-[400] leading-[18px] mb-[8px] md:max-w-[520px] lg:max-w-[600px] w-full md:text-[16px] md:leading-[24px]">
                             We provide well curated information to help you make smarter investment
-                            decisions based on Fundamental Analysis
+                            decisions based on{' '}
+                            <span style={{ color: '#1BD47B', fontWeight: 'bold' }}>
+                                Fundamental Analysis
+                            </span>
                         </p>
                     </div>
                     <div className="flex justify-start items-center md:hidden">
@@ -187,8 +189,13 @@ const IndexPage = () => {
                 <div className="max-w-7xl mx-auto">
                     <p className="text-[#5c5a5a] text-base lg:text-2xl font-bold mb-4 md:mb-14 space-y-[10px]">
                         Recommended Stocks to Invest in Today
-                        <span className="text-base lg:ml-8 block lg:inline">
-                            Updated on {lastUpdateDate}
+                        <span
+                            className="text-base lg:ml-8 block lg:inline"
+                            style={{ fontSize: '.9rem' }}>
+                            Last Updated on{' '}
+                            <span style={{ color: 'rgb(27, 180, 123)', fontWeight: 'bold' }}>
+                                {lastUpdateDate}
+                            </span>
                         </span>
                     </p>
                     <div className="space-y-6 ">
@@ -337,6 +344,26 @@ const IndexPage = () => {
                     </div>
                 </div>
             </section>
+            <CookieConsent
+                location="bottom"
+                buttonText="Accept All Cookies"
+                cookieName="Yieldvest Cookies Consent"
+                style={{
+                    background: '#2B373B'
+                }}
+                buttonStyle={{
+                    color: '#1F2226',
+                    fontSize: '16px',
+                    background: 'rgb(27, 212, 123)',
+                    padding: '.5rem 2rem',
+                    borderRadius: '10px'
+                }}
+                expires={365}>
+                This website uses cookies to enhance the user experience.{' '}
+                <span style={{ fontSize: '15px', textDecoration: 'underline', color: '#1BD47B' }}>
+                    <Link to="/cookies">Check cookies policy.</Link>
+                </span>
+            </CookieConsent>
         </PageLayout>
     );
 };
