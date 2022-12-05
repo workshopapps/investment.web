@@ -8,7 +8,13 @@ import { useLocation } from 'react-router-dom';
 import ProtectedPage from '../auth/ProtectedPage';
 import { scrollToTop } from '../utils/scroll';
 
-const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtected = false }) => {
+const PageLayout = ({
+    children,
+    showNavBar = true,
+    showFooter = true,
+    isProtected = false,
+    isProtectedLessStrict = false
+}) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const pathName = useLocation();
 
@@ -37,7 +43,7 @@ const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtecte
             )}
 
             {isProtected ? (
-                <ProtectedPage>
+                <ProtectedPage strict={isProtectedLessStrict}>
                     <div className="page-content grow">{children}</div>
                 </ProtectedPage>
             ) : (
