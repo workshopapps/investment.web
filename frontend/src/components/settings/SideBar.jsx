@@ -114,7 +114,6 @@ export default function index() {
         </div>
     );
 }
-
 // return (
 //         <div className="flex pl-[0px] md:px-[200px] py-2 h-full bg-[ #FFFFFF]  ">
 //             <div className="flex flex-col  w-full border-b-2 border-[##D9D9D9]">

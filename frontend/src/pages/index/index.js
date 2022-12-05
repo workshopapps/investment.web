@@ -6,6 +6,7 @@ import dateFormat from 'dateformat';
 import NotSubscribedModal from '../../components/subscription/NotSubscribedModal';
 import { ToastContainer, toast } from 'react-toastify';
 import { Select } from 'react-jsx-select';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
 
@@ -138,6 +139,8 @@ const IndexPage = () => {
         toast.error('Failed to add to the list');
     };
 
+    const navigate = useNavigate();
+
     return (
         <PageLayout>
             {!isLoggedIn && (
@@ -148,7 +151,7 @@ const IndexPage = () => {
             )}
             <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
-                <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20">
+                {/* <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20 px-[16px] md:px-[20px] ">
                     <h1
                         className="max-w-[792px] text-left text-xl sm:text-3xl xl:text-[70px] xl:leading-[50px] font-bol text-white mb-5 lg:mb-11"
                         style={{
@@ -157,11 +160,29 @@ const IndexPage = () => {
                         }}>
                         We Track, Analyse & Recommend the best stocks for you.
                     </h1>
-                    <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white">
+                    <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white mb-[34px] md:mb-0">
                         We provide well curated information to make smarter investment
                         <br />
                         decisions based on Fundamental Analysis{' '}
                     </p>
+                </div> */}
+                <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
+                    <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
+                        <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
+                            We Track, Analyse & Recommend the best stocks for you.
+                        </h1>
+                        <p className="text-[13px] font-[400] leading-[18px] mb-[8px] md:max-w-[520px] lg:max-w-[600px] w-full md:text-[16px] md:leading-[24px]">
+                            We provide well curated information to help you make smarter investment
+                            decisions based on Fundamental Analysis
+                        </p>
+                    </div>
+                    <div className="flex justify-start items-center md:hidden">
+                        <button
+                            onClick={() => navigate('/signup')}
+                            className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
+                            Get Started
+                        </button>
+                    </div>
                 </div>
             </section>
             <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
