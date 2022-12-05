@@ -69,7 +69,7 @@ function DownloadPage() {
                             </div>
                             <div className="text-center md:w-1/2 md:text-left">
                                 <h3 className="text-[#1BD47B] mb-[16px] text-[20px] md:[32px]">
-                                    Stop loosing charts
+                                    Stop losing charts
                                 </h3>
                                 <p className="text-[16px] text-[#545964] font-[400] mb-[16px]">
                                     Tired of always losing your charts, hidden away between all your

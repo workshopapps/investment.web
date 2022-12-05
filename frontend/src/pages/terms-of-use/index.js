@@ -19,7 +19,7 @@ const TermsAndConditionPage = () => {
                         <span className="text-[#1BD47B]">Yieldvest</span> Terms of Use
                     </h2>
                     <p className="max-sm:text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px] pb-10">
-                        Last updated November 16, 2022
+                        Last updated december 4, 2022
                     </p>
                     {/* */}
                     <section className="text-justify  max-sm:px-6 sm:px-8 md:px-12 lg:px-14 pt-8 bg-white rounded-lg pb-9">
