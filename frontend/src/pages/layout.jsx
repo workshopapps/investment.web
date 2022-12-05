@@ -28,7 +28,7 @@ const PageLayout = ({ children, showNavBar = true, showFooter = true, isProtecte
             {showNavBar && (
                 <>
                     <div className="nav-bar flex-none">
-                        <ProtectedPage>
+                        <ProtectedPage strict={false}>
                             <Nav openMenu={setOpenMobileMenu} />
                         </ProtectedPage>
                     </div>
