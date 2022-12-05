@@ -28,16 +28,20 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                             <h2 className="font-[400] text-[18px] text-[#333946] ">
                                 {name.split(' ')[0]}
                             </h2>
-                            <p className="font-[400] text-[#139757] mb-[5x] capitalize">{name}</p>
+                            <p className="font-[400] text-[#139757] mb-[5x] capitalize">
+                                {`${name.substring(0, 15)}`}
+                            </p>
                             <p className="font-[600] text-[#545964] mb-[5x]">
-                                {sector ? sector.sector : 'sectors'}
+                                {sector ? `${sector.sector.substring(0, 10)}` : 'sectors'}
                             </p>
                         </div>
                     </div>
                     <div
-                        onClick={() => {
-                            deleteFromWatchList(company_id, onSuccess, onFailure);
-                            reload();
+                        onClick={async () => {
+                            await deleteFromWatchList(company_id, onSuccess, onFailure);
+                            setTimeout(() => {
+                                reload();
+                            }, 1000);
                         }}>
                         <FiTrash className="text-[21px]" />
                     </div>
@@ -53,7 +57,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                             </h3>
                             <div className="flex justify-between items-center mb-[24px] text-[16px] font-[400] text-[#545964] ">
                                 <p>Stock Price</p>
-                                <p>{stock_price.stock_price}</p>
+                                <p>{`$${stock_price.stock_price.toFixed(2)}B`}</p>
                             </div>
                         </div>
                         <div>
@@ -65,7 +69,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                             </h3>
                             <div className="flex justify-between items-center text-[16px] font-[400] text-[#545964] ">
                                 <p>Market Cap</p>
-                                <p>{market_cap}</p>
+                                <p>{`$${(market_cap / 1000000000).toFixed(2)}B`}</p>
                             </div>
                         </div>
                     </div>
