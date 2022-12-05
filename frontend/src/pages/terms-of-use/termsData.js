@@ -184,13 +184,13 @@ export const termsData = [
             Devices or services that offer high-speed, automated, recurring access should not be used to access Yieldvest unless authorized or made available by Yieldvest.You consent to receive electronic services online; you must have access to the internet, a working email address, a web browser, and ongoing access to the services.
             </p>
             <ul class="pl-8">
-                <li class="list-disc pb-2">By purchasing the premium service, you attest you have read, understood, and agreed to Yieldvest Terms of Use. You also allow the platform to charge your bank card automatically for the duration you choose for billing.</li>
+                <li class="list-disc pb-2">By purchasing the Standard service, you attest you have read, understood, and agreed to Yieldvest Terms of Use. You also allow the platform to charge your bank card automatically for the duration you choose for billing.</li>
 
-                <li class="list-disc pb-2">Every subscriber has a free 14-day trial period to try the premium subscription. Depending on the user's preference, the trial automatically converts to a monthly or annual paid plan if it is not terminated before its expiration date. Even if the membership is terminated on the same day the autoconversion payment has been processed, there are no refunds for plans.</li>
+                <li class="list-disc pb-2">Every subscriber has a free 14-day trial period to try the Standard subscription. Depending on the user's preference, the trial automatically converts to a monthly or annual paid plan if it is not terminated before its expiration date. Even if the membership is terminated on the same day the autoconversion payment has been processed, there are no refunds for plans.</li>
 
                 <li class="list-disc pb-2">Only after an automated deduction for annual payments, i.e., upon trial and after renewal within 14 calendar days of the payment's date, are refunds possible. Please be aware that users who submit a claim or a chargeback/dispute request are not entitled to a refund.</li>
 
-                <li class="list-disc pb-2">Premium subscriptions automatically include small-cap market data. You can check which markets are free to use in the Big cap and Mid-Size categories. A canceled trial and related services terminate immediately, except for purchased data packages.</li>
+                <li class="list-disc pb-2">Standard subscriptions automatically include small-cap market data. You can check which markets are free to use in the Big cap and Mid-Size categories. A canceled trial and related services terminate immediately, except for purchased data packages.</li>
 
                 <li class="list-disc pb-2">A monthly, yearly, or two-year advance payment is required for the service. There won't be any credits or refunds for unused service months or months with an open user account. You will automatically be converted to a monthly plan if auto-renewal for an annual plan is unsuccessful.</li>
 
