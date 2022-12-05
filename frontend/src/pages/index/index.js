@@ -139,7 +139,7 @@ const IndexPage = () => {
     const navigate = useNavigate();
 
     return (
-        <PageLayout isProtected isProtectedLessStrict>
+        <PageLayout isProtected disableStrictProtection>
             {!isLoggedIn && (
                 <NotSubscribedModal
                     isOpen={showNotSubscribedModal}
