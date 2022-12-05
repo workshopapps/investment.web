@@ -13,7 +13,7 @@ const PageLayout = ({
     showNavBar = true,
     showFooter = true,
     isProtected = false,
-    isProtectedLessStrict = false
+    disableStrictProtection = false
 }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
     const pathName = useLocation();
@@ -43,7 +43,7 @@ const PageLayout = ({
             )}
 
             {isProtected ? (
-                <ProtectedPage strict={isProtectedLessStrict}>
+                <ProtectedPage strict={!disableStrictProtection}>
                     <div className="page-content grow">{children}</div>
                 </ProtectedPage>
             ) : (
