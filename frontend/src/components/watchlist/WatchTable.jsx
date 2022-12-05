@@ -13,12 +13,14 @@ const WatchTable = ({ onSuccess, onFailure }) => {
     const fetchWatchList = () => {
         setLoading(true);
         if (!accessToken) return;
+        setWatchlist([]);
         apiService(accessToken)
             .get('/user/watchlist')
             .then((res) => {
                 if (res.status === 200) {
                     setLoading(false);
                     setWatchlist(res.data);
+                    console.log('Fetching data');
                 }
             })
             .catch((err) => console.log(err));
@@ -44,7 +46,7 @@ const WatchTable = ({ onSuccess, onFailure }) => {
         <div>
             <div className="flex justify-around items-center gap-x-[8px] gap-y-[24px] flex-wrap">
                 {loading && (
-                    <div className="h-[50vh] flex justify-center items-center w-full bg-white">
+                    <div className="h-[50px] flex justify-center items-center w-full bg-white">
                         <ThreeDots
                             height="80"
                             width="80"
@@ -56,7 +58,7 @@ const WatchTable = ({ onSuccess, onFailure }) => {
                         />
                     </div>
                 )}
-                {watchlistItems}
+                {watchlist && watchlistItems}
             </div>
         </div>
     );
