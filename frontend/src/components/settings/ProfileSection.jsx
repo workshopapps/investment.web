@@ -1,12 +1,14 @@
 /* eslint-disable prettier/prettier */
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../../auth/AuthContext';
 import UserAvatar from '../Nav/UserAvatar';
 import authHooks from '../../auth/AuthHooks';
 import { ToastContainer, toast } from 'react-toastify';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function ProfileSection() {
+    const [isLoading, setIsLoading] = useState(false);
     const { user, accessToken, setUser } = useContext(AuthContext);
     const apiService = authHooks.useApiService();
 
@@ -16,9 +18,13 @@ export default function ProfileSection() {
         if (!email) {
             toast.error('Enter an email address');
         } else {
+            setIsLoading(true);
+
             apiService(accessToken)
                 .patch('/auth/update_email', { email })
                 .then((res) => {
+                    setIsLoading(false);
+
                     if (res.status === 200) {
                         toast.success('Email updated');
                         setUser({ ...user, email: email });
@@ -27,6 +33,7 @@ export default function ProfileSection() {
                     }
                 })
                 .catch((err) => {
+                    setIsLoading(false);
                     console.log(err);
                     toast.error('Failed to update email');
                 });
@@ -89,8 +96,24 @@ export default function ProfileSection() {
                             <div className="mt-2" style={{ textAlign: 'right' }}>
                                 <button
                                     type="submit"
-                                    className=" text-[#19C170]  font-semibold text-base py-4 px-[54px] border-[1px] border-[#1BD47B] rounded-md">
-                                    Update Email
+                                    className=" text-[#19C170]  font-semibold text-base py-4 px-[54px] border-[1px] border-[#1BD47B] w-[230px] h-[55px] rounded-md"
+                                    disabled={isLoading}>
+                                    {isLoading ? (
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <ThreeDots
+                                                height="30"
+                                                width="50"
+                                                radius="9"
+                                                color="#19C170"
+                                                ariaLabel="three-dots-loading"
+                                                wrapperStyle={{}}
+                                                wrapperClassName=""
+                                                visible={true}
+                                            />
+                                        </div>
+                                    ) : (
+                                        'Update Email'
+                                    )}
                                 </button>
                             </div>
                         </form>

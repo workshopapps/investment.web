@@ -10,13 +10,13 @@ export default function index() {
     const [notificationsSettings, setNotificationSettings] = useState(null);
     const { accessToken } = useContext(AuthContext);
     const apiService = authHooks.useApiService();
+
     const getSettingsNotifications = () => {
         if (!accessToken) return;
         apiService(accessToken)
             .get(`/user/notification_settings/`)
             .then((res) => {
-                setNotificationSettings(res?.data);
-                console.log(res?.data.data);
+                setNotificationSettings(res.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -26,6 +26,7 @@ export default function index() {
     useEffect(() => {
         getSettingsNotifications();
     }, [accessToken]);
+
     return (
         <PageLayout isProtected>
             <div className="flex flex-col ">
@@ -35,7 +36,7 @@ export default function index() {
                 </div>
                 {/* <div className="max-w[1028px] mx-auto w-full"> */}
                 <div className="mr-2">
-                    <Notificationsettings notifications={{ notificationsSettings }} />
+                    <Notificationsettings notifications={notificationsSettings} />
                 </div>
             </div>
         </PageLayout>
