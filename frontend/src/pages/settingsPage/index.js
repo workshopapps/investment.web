@@ -16,7 +16,7 @@ export default function index() {
             .get(`/user/notification_settings/`)
             .then((res) => {
                 setNotificationSettings(res?.data);
-                console.log(res.data);
+                console.log(res?.data.data);
             })
             .catch((error) => {
                 console.log(error);
