@@ -41,7 +41,6 @@ const IndexPage = () => {
     };
 
     const formatLastUpdateDate = (date) => {
-        console.log(date);
         return dateFormat(date + 'Z', 'mmmm dS, yyyy hh:MM:ss TT');
     };
 
