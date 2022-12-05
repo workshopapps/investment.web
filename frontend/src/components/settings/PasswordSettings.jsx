@@ -5,6 +5,7 @@ import authHooks from '../../auth/AuthHooks';
 import AuthContext from '../../auth/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import UserAvatar from '../Nav/UserAvatar';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function PasswordSettings() {
     const {
@@ -14,6 +15,7 @@ export default function PasswordSettings() {
         reset
     } = useForm();
     const [validationError, setValidationError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const apiService = authHooks.useApiService();
     const { accessToken } = useContext(AuthContext);
 
@@ -23,12 +25,14 @@ export default function PasswordSettings() {
         if (data.newpassword !== data.confirmpassword) {
             setValidationError(true);
         } else {
+            setIsLoading(true);
             apiService(accessToken)
                 .patch('auth/update_password', {
                     current_password: data.oldpassword,
                     new_password: data.newpassword
                 })
                 .then((res) => {
+                    setIsLoading(false);
                     if (res.status === 200) {
                         toast.success('Password updated!');
                         reset();
@@ -41,6 +45,7 @@ export default function PasswordSettings() {
                 .catch((err) => {
                     console.log(err);
                     toast.error('Failed to update password');
+                    setIsLoading(false);
                 });
         }
     };
@@ -154,9 +159,25 @@ export default function PasswordSettings() {
                             </div>
                             <div className="flex flex-col w-full h-full mb-8">
                                 <button
-                                    type="submit"
-                                    className="w-[200px] h-[52px] px-4 mt-2 text-base text-black bg-[#1BD47B] border rounded-lg focus:outline-none focus:border-[#1BD47B] ml-auto">
-                                    Change Password
+                                    className="bg-[#19C170] text-black  font-semibold text-base py-3 px-6  w-[200px] h-[50px] rounded-md"
+                                    disabled={isLoading}
+                                    type="submit">
+                                    {isLoading ? (
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <ThreeDots
+                                                height="30"
+                                                width="50"
+                                                radius="9"
+                                                color="#fff"
+                                                ariaLabel="three-dots-loading"
+                                                wrapperStyle={{}}
+                                                wrapperClassName=""
+                                                visible={true}
+                                            />
+                                        </div>
+                                    ) : (
+                                        'Change Password'
+                                    )}
                                 </button>
                             </div>
                         </form>
