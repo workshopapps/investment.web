@@ -1,14 +1,50 @@
-import { React, useState } from 'react';
+import { React, useState, useContext, useEffect } from 'react';
 //import ReactSwitch from 'react-switch';
 import toggleOn from '../../assets/notificationSettigns/toggleOn.svg';
 import toggleOff from '../../assets/notificationSettigns/toggleOff.svg';
+
+import AuthContext from '../../auth/AuthContext';
+import authHooks from '../../auth/AuthHooks';
+
 // import classNames from 'classnames';
 
-export default function Notificationsettings() {
-    const [ischecked1, setIsChecked1] = useState(true);
-    const [ischecked2, setIsChecked2] = useState(false);
-    const [ischecked3, setIsChecked3] = useState(true);
-    const [ischecked4, setIsChecked4] = useState(false);
+export default function Notificationsettings({ notifications }) {
+    const [ischecked1, setIsChecked1] = useState(
+        notifications.notificationsSettings?.notifications_enabled
+    );
+    const [ischecked2, setIsChecked2] = useState(
+        notifications.notificationsSettings?.receive_for_small_caps
+    );
+    const [ischecked3, setIsChecked3] = useState(
+        notifications.notificationsSettings?.receive_for_mid_caps
+    );
+    const [ischecked4, setIsChecked4] = useState(
+        notifications.notificationsSettings?.receive_for_high_caps
+    );
+    const { accessToken } = useContext(AuthContext);
+    const apiService = authHooks.useApiService();
+
+    const patchSettings = (data) => {
+        if (!accessToken) return;
+        apiService(accessToken)
+            .patch(`/user/notification_settings/`, data)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    useEffect(() => {
+        console.log(notifications);
+        patchSettings({
+            notifications_enabled: ischecked1,
+            receive_for_small_caps: ischecked2,
+            receive_for_mid_caps: ischecked3,
+            receive_for_high_caps: ischecked4
+        });
+    }, [ischecked1, ischecked2, ischecked3, ischecked4, accessToken]);
 
     const handleChecked = () => {
         setIsChecked1((prev) => !prev);
@@ -30,9 +66,9 @@ export default function Notificationsettings() {
                     <div className="flex justify-between items-center  px-6 py-4">
                         <h2 className="text-xl font-normal">Enable email notification</h2>
                         {ischecked1 ? (
-                            <img src={toggleOff} onClick={handleChecked} alt="toggle" />
-                        ) : (
                             <img src={toggleOn} onClick={handleChecked} alt="toggle" />
+                        ) : (
+                            <img src={toggleOff} onClick={handleChecked} alt="toggle" />
                         )}
                     </div>
                     <hr className="w-full border" />
@@ -42,9 +78,9 @@ export default function Notificationsettings() {
                                 Receive notifications about small cap stocks to invest in{' '}
                             </h2>
                             {ischecked2 ? (
-                                <img src={toggleOff} onClick={handleCheckedTwo} alt="toggle" />
-                            ) : (
                                 <img src={toggleOn} onClick={handleCheckedTwo} alt="toggle" />
+                            ) : (
+                                <img src={toggleOff} onClick={handleCheckedTwo} alt="toggle" />
                             )}
                         </div>
 
@@ -53,9 +89,9 @@ export default function Notificationsettings() {
                                 Receive notifications about large cap stocks to invest in{' '}
                             </h2>
                             {ischecked3 ? (
-                                <img src={toggleOff} onClick={handleCheckedThree} alt="toggle" />
-                            ) : (
                                 <img src={toggleOn} onClick={handleCheckedThree} alt="toggle" />
+                            ) : (
+                                <img src={toggleOff} onClick={handleCheckedThree} alt="toggle" />
                             )}
                         </div>
 
@@ -64,9 +100,9 @@ export default function Notificationsettings() {
                                 Receive notifications about mid cap stocks to invest in{' '}
                             </h2>
                             {ischecked4 ? (
-                                <img src={toggleOff} onClick={handleCheckedFour} alt="toggle" />
-                            ) : (
                                 <img src={toggleOn} onClick={handleCheckedFour} alt="toggle" />
+                            ) : (
+                                <img src={toggleOff} onClick={handleCheckedFour} alt="toggle" />
                             )}
                         </div>
                     </div>
