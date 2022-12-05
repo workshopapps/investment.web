@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
 
+import CookieConsent from 'react-cookie-consent';
+import { Link } from 'react-router-dom';
 import NotFoundImage from '../../assets/images/not_found.svg';
 
 const IndexPage = () => {
@@ -337,6 +339,23 @@ const IndexPage = () => {
                     </div>
                 </div>
             </section>
+            <CookieConsent
+                debug={true}
+                location="bottom"
+                buttonText="Accept All Cookies!!"
+                cookieName="myAwesomeCookieName2"
+                style={{ background: '#2B373B' }}
+                buttonStyle={{
+                    color: '#fff',
+                    fontSize: '16px',
+                    background: 'rgb(27, 212, 123)'
+                }}
+                expires={150}>
+                This website uses cookies to enhance the user experience.{' '}
+                <span style={{ fontSize: '15px', textDecoration: 'underline', color: 'blue' }}>
+                    <Link to="/cookies">check cookies policy</Link>
+                </span>
+            </CookieConsent>
         </PageLayout>
     );
 };

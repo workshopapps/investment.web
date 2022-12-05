@@ -19,7 +19,7 @@ export const termsData = [
     },
     {
         id: 3,
-        title: 'CHANGES TO MY STOCK PLUG',
+        title: 'CHANGES TO YIELDVEST',
         content: `
             <p>
             Any service or feature on the website may be canceled or changed at any moment without prior notice. In this instance, we cannot guarantee that our services and Application Programming Interface (API) will work together just like in the past one.
@@ -28,10 +28,10 @@ export const termsData = [
     },
     {
         id: 4,
-        title: 'OWNERSHIP OF INFORMATION TO USE MY STOCK PLUG.',
+        title: 'OWNERSHIP OF INFORMATION TO USE YIELDVEST.',
         content: `
             <p>
-            Except where otherwise stated, My Stock Plug, its affiliates, or Data Providers, as defined in the disclaimer regarding the content below, are the sole owners of all rights, titles, and interest in My Stock Plug including all information made available in all language, formats, and media worldwide.
+            Except where otherwise stated, Yieldvest, its affiliates, or Data Providers, as defined in the disclaimer regarding the content below, are the sole owners of all rights, titles, and interest in Yieldvest including all information made available in all language, formats, and media worldwide.
             </p>
         `
     },
