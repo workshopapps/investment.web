@@ -41,7 +41,8 @@ const IndexPage = () => {
     };
 
     const formatLastUpdateDate = (date) => {
-        return dateFormat(new Date(date + 'Z').toLocaleString(), 'mmmm dS, yyyy hh:MM:ss TT');
+        console.log(date);
+        return dateFormat(date + 'Z', 'mmmm dS, yyyy hh:MM:ss TT');
     };
 
     useEffect(() => {
