@@ -194,9 +194,9 @@ async def webhook(request: Request):
             payload, sig_header, STRIPE_WEBHOOK_SECRET
         )
     except Exception as e:
-        return {
-            "error": e.args
-        }
+        return HTTPException(status_code=400, detail="Invalid request")
+            
+        
 
     # Handle the event
     if event['type'] == 'account.updated':
