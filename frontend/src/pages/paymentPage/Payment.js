@@ -1,46 +1,40 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import Footer from '../../components/Footer/Footer';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { faqDatas } from './FaqContent';
 import '../../assets/paymentpage/css/style.css';
 import Shield from '../../assets/paymentpage/icons/shield-tick.png';
-import { useLocation } from 'react-router-dom';
-import Nav from '../../components/Nav/Nav';
-import { FaPlus, FaStripe, FaMinus, FaArrowRight } from 'react-icons/fa';
+import Stripe from '../../assets/paymentpage/icons/stripe.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { loadStripe } from "@stripe/stripe-js";
+import PageLayout from '../layout';
+import AuthContext from '../../auth/AuthContext';
+import AuthHooks from '../../auth/AuthHooks';
 
 let stripeTestPromise
 
 const getStripe = () => {
     if (!stripeTestPromise) {
-
+        // stripeTestPromise = loadStripe("pk_test_51M6wW6CCH5YrTF3cFB5mOHycZK5b2HJL5mNzGMxSU1himwu50ZDq8dIFNCLVT3Rl8Br79wAQcSgRnCTB0hjrtakd00Yv8dAami");
         stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
     }
 
     return stripeTestPromise;
-}
-
-// import { Elements } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
-// import PaymentForm from './PaymentForm';
+};
 
 
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-// const PUBLIC_KEY = 'pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct';
-
-// const stripeTestPromise = loadStripe(PUBLIC_KEY);
-
-//url for the customer id
-// const URL = "https://api.aybims.tech/create-customer-object";
 
 
 const Payment = () => {
-    // const [isActive, setIsActive] = useState(false);
-
+    const { isLoggedIn, user, accessToken } = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false)
     const [stripeError, setStripeError] = useState(null)
+    const apiService = AuthHooks.useApiService();
+
+    const navigate = useNavigate();
+
+    const [customerId, setCustomerId] = useState("")
 
     let location = useLocation();
 
@@ -53,10 +47,17 @@ const Payment = () => {
         setClicked(index);
     };
 
+    const fetchCustomerId = useCallback(async () => {
+        await apiService(accessToken)
+            .post(`/create-customer-object`)
+            .then((res) => {
+                const data = res.data
+                setCustomerId(data['Customer_id']);
+                return
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
-
-    console.log(location.state.priceId)
-    console.log(location.state.getStripe)
 
     const item = {
         price: location.state.priceId,
@@ -65,18 +66,19 @@ const Payment = () => {
 
 
     const checkoutOptions = {
-
         lineItems: [item],
+        // customer: customerId,
+        clientReferenceId: customerId,
         mode: "payment",
         successUrl: `${window.location.origin}/success`,
         cancelUrl: `${window.location.origin}/cancel`,
-
-
+        customerEmail: user.email
     }
     const redirectToCheckout = async () => {
 
         setIsLoading(true)
         const stripe = await getStripe()
+        console.log('customerId', customerId)
         const { error } = await stripe.redirectToCheckout(checkoutOptions)
 
         console.log("stripe checkout error", error)
@@ -86,44 +88,44 @@ const Payment = () => {
         }
 
         //then set it back to false after the checkout
-        setIsLoading(true)
+        setIsLoading(false)
     }
 
+    useEffect(() => {
+        if (isLoggedIn === false) {
+            navigate('/login');
+        }
+        fetchCustomerId()
+    }, [fetchCustomerId]);
 
 
     if (stripeError) {
         alert(stripeError)
     }
     return (
-        <div>
-            <nav>
-                <Nav />
-            </nav>
-
-            <section className="h-auto flex flex-wrap bg-white mainHolder">
+        <PageLayout isProtected={true}>
+            <section className="h-auto flex flex-col md:flex-row bg-white mx-0 md:mx-[5em]">
                 {/* left side start from here */}
-                <div className="w-full md:w-full lg:w-1/2 theLeftSide mt-16">
-                    <div className="upperLeftSide">
-                        <p className="text-[#1BD47B] pl-6">Payment</p>
-                        <h1 className="text-[30px] lg:text-[40px] font-semibold text-vnet-blue mb-2 completePayment pl-6">
-                            Complete Payment
-                        </h1>
-                    </div>
+                <div className="w-full md:w-full lg:w-1/2 mt-10 font-Hauora ">
+                    <p className="text-[#1BD47B] text-md md:text-lg pl-6 py-2">Payment</p>
+                    <h1 className="text-3xl lg:text-5xl mb-2 completePayment pl-6 py-2">
+                        Complete Payment
+                    </h1>
 
-                    <ul className="theFaqHolder pl-6 pr-6">
+                    <ul className="hidden md:block m-[1em] pl-6 pr-6">
                         {faqDatas?.map((faqs, index) => {
                             return (
                                 <li
                                     key={faqs.id}
-                                    className="bg-white my-2 shadow-lg"
+                                    className="my-2"
                                     onClick={() => toggle(index)}>
-                                    <h2 className="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer">
-                                        <span className="font-bold text-[16px]">{faqs.title}</span>
-                                        <span>{clicked === index ? <FaMinus /> : <FaPlus />}</span>
+                                    <h2 className="flex flex-row justify-between items-center p-3 cursor-pointer">
+                                        <span className="text-xl md:text-lg">{faqs.title}</span>
+                                        <span>{clicked === index ? <IoIosArrowDown /> : <IoIosArrowUp />}</span>
                                     </h2>
                                     {clicked === index ? (
                                         <div className=" overflow-hidden">
-                                            <p className="p-3 font-normal text-gray-900">
+                                            <p className="p-3 text-xl md:text-lg text-gray-900">
                                                 {faqs.content}
                                             </p>
                                         </div>
@@ -137,27 +139,27 @@ const Payment = () => {
                 {/* left side ends here */}
 
                 {/* right side start from here */}
-                <div className=" w-full lg:w-1/2 flex flex-col justify-center theRightSide items-center md:w-1 sm:w-1 mt-16">
-                    <div className="w-[95%] relative p-5 border-[#1BD47B] border-solid border-2 rounded-md flex justify-around items-center">
+                <div className=" w-full lg:w-1/2 flex flex-col justify-center items-center md:w-1 sm:w-1 mt-16">
+                    <div className="w-[95%] relative p-10 mt-0 md:mt-10 border-[#1BD47B] border-solid border rounded-lg flex justify-around items-center">
                         <div className="ml-4">
                             <input
                                 type="radio"
                                 style={{ accentColor: 'green' }}
-                                checked
+                                defaultChecked={true}
                                 className="h-5 w-5 absolute top-[24px] left-[24px]"
                             />
                         </div>
 
-                        <div className="flex ml-[-15em] md:ml-[-15em] lg:ml-[-25em] w-2/3 flex-col flex-wrap">
-                            <h3 className="text-[#0A0B0D] font-bold">
+                        <div className="mt-[-1.5em] ml-[-15em] md:ml-[-15em] lg:ml-[-25em] w-2/3 flex-col flex-wrap">
+                            <h3 className="text-[#0A0B0D] text-xl">
                                 {location.state.state.typeOfSubscription}
                             </h3>
-                            <p className="text-[#525A65] text-[0.8em]">
+                            <p className="text-[#525A65] text-base pt-2 pr-5">
                                 {location.state.state.content}
                             </p>
                         </div>
 
-                        <div className="ml-3 absolute left-[20em] md:left-[20em] lg:left-[27em] top-[20px]">
+                        <div className="ml-3 absolute left-[15em] md:left-[20em] lg:left-[30em] top-[20px] text-lg">
                             <span>&#8358; {location.state.state.amount} </span>
                             <span className="text-[0.7em]">/{location.state.state.subTime}</span>
                         </div>
@@ -165,61 +167,17 @@ const Payment = () => {
 
                     {/* form starts from here */}
 
-                    <div className="w-[95%] border-[#1BD47B] border-solid border-2 rounded-md flex mt-8 ">
-                        <form className="flex w-full">
-                            <div className="flex items-center justify-center w-full">
-                                {/* <div className="">
-                                    <div className="">
-                                        <label className="block pt-4 text-[#0A0B0D] text-xs font-bold mb-2">
-                                            Card Number
-                                        </label>
-                                        <input 
-                                            className="w-[440px] md:w-[450px] lg:w-[550px] bg-white text-[#525A65] border-2 border-[#8D8D8D] rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type="text"
-                                            placeholder="123-456-9856-773"
-                                        />
-                                    </div>
-                                </div> */}
-
-                                {/* <div className="w-full flex justify-around">
-                                    <div className="">
-                                        <label className="block tracking-wide text-[#0A0B0D] text-xs font-bold mb-2">
-                                            Expiration Date
-                                        </label>
-                                        <input
-                                            className="appearance-none block w-[210px] md:w-[210px] lg:w-[250px] bg-white text-[#525A65] border-2 border-[#8D8D8D] rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                            type="text"
-                                            placeholder="MM/YY"
-                                        />
-                                    </div>
-
-                                    <div className="">
-                                        <label className="block uppercase tracking-wide text-[#0A0B0D] text-xs font-bold mb-2">
-                                            cvv
-                                        </label>
-                                        <input
-                                            className="appearance-none block w-[210px] md:w-[210px] lg:w-[250px] bg-white text-[#525A65] border-2 border-[#8D8D8D] rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type="text"
-                                            placeholder="CVV"
-                                        />
-                                    </div>
-                                </div> */}
-                                {/* <PaymentForm/> */}
-
-                                {/* <Elements stripe={stripeTestPromise}>
-                                </Elements> */}
-
-                                <div className="mt-8 w-full flex items-center justify-center">
-                                    <button
-                                        className="w-[300px] md:w-[300px] lg:w-[500px] flex justify-center shadow bg-[#1BD47B] text-white font-bold py-2 px-4 rounded mb-9"
-                                        type="button" disabled={isLoading} onClick={redirectToCheckout}>
-                                        <span>{isLoading ? "Loading..." : "Pay"}</span>
-                                        {/* <img className="w-3 mt-2 h-3  ml-1" src={ArrowIcons} alt="arrow" /> */}
-                                        <FaArrowRight className="w-3 mt-2 h-3  ml-1" />
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    {/* <PaymentForm/>  */}
+                    {/* 
+                    <Elements stripe={getStripe()}>
+                    </Elements> */}
+                    <div className="mt-8 w-full flex items-center justify-center">
+                        <button
+                            className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-2 px-4 rounded mb-5"
+                            type="button" disabled={isLoading} onClick={redirectToCheckout}>
+                            <span>{isLoading ? "Loading..." : "Pay using Stripe"}</span>
+                            <FaArrowRight className="w-5 mt-2 h-3  ml-1" />
+                        </button>
                     </div>
 
                     {/* form ends  here */}
@@ -229,19 +187,16 @@ const Payment = () => {
 
                     {/* submit button ends here */}
 
-                    <div className="flex w-full justify-center items-center mt-3 mb-3">
-                        <p className="text-[0.7em] font-semiboldxl">Secured by </p>
-                        {/* <img className="w-[35px] h-[20px]" alt="stripe-logo" src={Stripe} /> */}
-                        <FaStripe className="w-8 h-[20px] pl-2" />
-                        <img className="w-3 h-3 ml-1" alt="stripe-logo" src={Shield} />
+                    <div className="flex w-full justify-center items-center mb-10">
+                        <p className="text-[0.7em]">Secured by </p>
+                        <img className="w-20 h-10 ml-1" alt="stripe-logo" src={Stripe} />
+                        <img className="w-6 h-6" alt="stripe-logo" src={Shield} />
                     </div>
                 </div>
             </section>
 
-            <footer className="footerHolder">
-                <Footer />
-            </footer>
-        </div>
+        </PageLayout>
+
     );
 };
 
