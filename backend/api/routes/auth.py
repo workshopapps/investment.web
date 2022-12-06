@@ -129,7 +129,7 @@ async def authentication(token: str):
         def generate_token(user_id: str):
             return {
                 "access_token": create_access_token(sub=user_id),
-                "refresh_token": create_refresh_token(sub=user.id),
+                "refresh_token": create_refresh_token(sub=user_id),
                 "token_type": "Bearer",
             }
 
