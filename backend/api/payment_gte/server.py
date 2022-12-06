@@ -132,10 +132,13 @@ async def customer_portal(request: Request, user: User=Depends(get_current_user)
 async def create_subscription_object(request: Request, user: User=Depends(get_current_user)):
     if request:
         # get current user
-        db: Session = next(get_db())
-        id = user.id
-        users = db.query(Customer).filter(Customer.user_id == id).first()
-        CUSTOMER_ID = users.customer_id
+        try:
+            db: Session = next(get_db())
+            id = user.id
+            users = db.query(Customer).filter(Customer.user_id == id).first()
+            CUSTOMER_ID = users.customer_id
+        except:
+            return {"error": "create customer object"}
 
         try:
             subscription = stripe.Subscription.create(
