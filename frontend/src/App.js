@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as Sentry from "@sentry/react";
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserStatusContext } from './store/UserStatusContext.jsx';
@@ -300,4 +301,4 @@ function App() {
     );
 }
 
-export default App;
+export default Sentry.withProfiler(App);
