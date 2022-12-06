@@ -138,7 +138,7 @@ async def create_subscription_object(request: Request, user: User=Depends(get_cu
             users = db.query(Customer).filter(Customer.user_id == id).first()
             CUSTOMER_ID = users.customer_id
         except:
-            return {"error": "create customer object"}
+            return {"detail": "create customer"}
 
         try:
             subscription = stripe.Subscription.create(
@@ -169,10 +169,14 @@ async def create_subscription_object(request: Request, user: User=Depends(get_cu
 async def cancel_subscription(request: Request, user: User=Depends(get_current_user)):
     if request:
         # get current user
-        id = user.id
-        db: Session = next(get_db())
-        users = db.query(Subscription).filter(Subscription.user_id == id).first()
-        SUBSCRIPTION_ID = users.subscription_id
+        try:
+            id = user.id
+            db: Session = next(get_db())
+            users = db.query(Subscription).filter(Subscription.user_id == id).first()
+            SUBSCRIPTION_ID = users.subscription_id
+            
+        except:
+            return {"detail": "create subscription"}
 
         try:
             deleted_subscription = stripe.Subscription.delete(SUBSCRIPTION_ID)
