@@ -162,7 +162,7 @@ class Customer(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    session_id = Column(String(64))
+    session_id = Column(String(200))
 
     user_value = relationship("User", back_populates="customer")
 
