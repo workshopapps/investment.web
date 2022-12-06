@@ -1,4 +1,5 @@
 import os
+import sentry_sdk
 
 import uvicorn
 from dotenv import load_dotenv
@@ -14,6 +15,15 @@ from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 
 load_dotenv()
+
+sentry_sdk.init(
+    dsn="https://6ea75f2205cc4469a564cf2bce39ccfb@o4504281377996800.ingest.sentry.io/4504283426390016",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=0.3,
+)
 
 database.Base.metadata.create_all(bind=engine)
 origins = [
@@ -58,6 +68,10 @@ async def get_root():
         "message": "YieldVest API v1",
     }
 
+@app.get("/sentry-debug")
+async def trigger_error():
+    division_by_zero = 1 / 0
+    return {"message": "Error"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=int(os.getenv('BACKEND_PORT')), reload=True)
