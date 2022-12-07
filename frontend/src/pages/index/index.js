@@ -176,13 +176,15 @@ const IndexPage = () => {
                             </span>
                         </p>
                     </div>
-                    <div className="flex justify-start items-center md:hidden">
-                        <button
-                            onClick={() => navigate('/signup')}
-                            className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
-                            Get Started
-                        </button>
-                    </div>
+                    {!isLoggedIn && (
+                        <div className="flex justify-start items-center md:hidden">
+                            <button
+                                onClick={() => navigate('/signup')}
+                                className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
+                                Get Started
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
