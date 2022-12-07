@@ -111,7 +111,8 @@ export async function getServerSideProps({ query }) {
         company = res.data;
       }
     } catch (err) {
-      console.log(err);
+      //console.log(err);
+      console.log("Fetch failed for company: " + companyId);
     }
   }
 
