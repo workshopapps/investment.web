@@ -171,7 +171,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     }, [formErrors]);
 
     if (timeOut) {
-      let destination = "/";
+      let destination = "/signup";
       if (sessionStorage.getItem("destination")) {
         destination = sessionStorage.getItem("destination");
         sessionStorage.removeItem("destination");

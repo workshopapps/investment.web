@@ -6,11 +6,10 @@ import AuthContext from "./AuthContext";
 const ProtectedPage = ({ children, strict = true }) => {
   const { logout, setIsLoggedIn, setAccessToken, setUser } =
     useContext(AuthContext);
-  const navigate = useRouter().push;
+  const router = useRouter();
 
   useEffect(() => {
     const localToken = sessionStorage.getItem("accessToken");
-    sessionStorage.setItem("tkn", localToken);
 
     if (localToken) {
       axios
@@ -26,7 +25,8 @@ const ProtectedPage = ({ children, strict = true }) => {
             sessionStorage.removeItem("accessToken");
             logout();
             if (strict) {
-              navigate("/login");
+              sessionStorage.setItem("destination", router.pathname);
+              router.push("/login");
             }
           }
 
@@ -45,7 +45,8 @@ const ProtectedPage = ({ children, strict = true }) => {
     } else {
       if (strict) {
         if (strict) {
-          navigate("/login");
+          sessionStorage.setItem("destination", router.pathname);
+          router.push("/login");
         }
       }
     }
