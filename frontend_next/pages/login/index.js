@@ -16,7 +16,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     const navigate = useRouter();
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
-    const [timeOut, setTimeout] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
@@ -28,6 +27,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     });
 
     const [passwordType, setPasswordType] = useState("password");
+
+    let timeOutHandler;
 
     //track changes in form
     const handleChange = (event) => {
@@ -75,8 +76,9 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
             whenAuthenticated(res.data.access_token);
             setIsLoading(false);
 
-            setInterval(() => {
-              setTimeout(true);
+            clearInterval(timeOutHandler);
+            timeOutHandler = setInterval(() => {
+              redirect();
             }, 1500);
           } else {
             toast.error("Authentication failed");
@@ -123,8 +125,10 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
           if (response.status === 200) {
             toast.success("Login successful");
             whenAuthenticated(response.data.access_token);
-            setInterval(() => {
-              setTimeout(true);
+
+            clearInterval(timeOutHandler);
+            timeOutHandler = setInterval(() => {
+              redirect();
             }, 1500);
           } else {
             toast.error("login failed");
@@ -170,15 +174,14 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formErrors]);
 
-    if (timeOut) {
-      let destination = "/signup";
-      if (sessionStorage.getItem("destination")) {
-        destination = sessionStorage.getItem("destination");
-        sessionStorage.removeItem("destination");
-      }
-
-      navigate.push(destination);
-    }
+    const redirect = () => {
+      // let destination = "/";
+      // if (sessionStorage.getItem("destination")) {
+      //   destination = sessionStorage.getItem("destination");
+      //   sessionStorage.removeItem("destination");
+      // }
+      // navigate.push(destination);
+    };
 
     return (
       <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
