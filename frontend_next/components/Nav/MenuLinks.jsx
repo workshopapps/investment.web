@@ -9,7 +9,7 @@ const MenuLinks = () => {
       url: "/",
     },
     {
-      link: "About Us",
+      link: "About",
       url: "/about",
     },
     {
@@ -45,6 +45,7 @@ const MenuLinks = () => {
     },
   ];
   const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
       {navLinks.map((item, index) => {
