@@ -12,7 +12,6 @@ from api.database.database import engine
 from api.routes import company, auth, user
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
-from api.scripts import contact_us
 
 load_dotenv()
 
@@ -40,7 +39,6 @@ app.include_router(auth.router, prefix='/auth')
 app.include_router(user.router, prefix='/user')
 app.include_router(company.router)
 app.include_router(server.router)
-app.include_router(contact_us.router)
 
 
 async def update_script_task():
