@@ -65,3 +65,13 @@ html {
 .policy_card_text {
     @apply text-left p-3 mb-6 pr-20 max-md:text-center max-md:p-5 self-center;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('./assets/index/drop.svg') 96% /15% no-repeat;
+    outline: none;
+    border-color:  2px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 5px !important;
+}
