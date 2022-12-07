@@ -10,6 +10,8 @@ import AuthContext from '../../auth/AuthContext';
 import { ThreeDots } from 'react-loader-spinner';
 import CookieConsent from 'react-cookie-consent';
 import NotFoundImage from '../../assets/images/not_found.svg';
+import Newsletter from '../../components/newsletter/Newsletter';
+import NewsletterModal from '../../components/newsletter/NewsletterModal';
 
 const IndexPage = () => {
     const baseUrl = 'https://api.yieldvest.hng.tech';
@@ -21,6 +23,7 @@ const IndexPage = () => {
     const [industries, setIndustries] = useState([]);
     const [lastUpdateDate, setLastUpdateDate] = useState(new Date().toLocaleDateString());
     const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+    const [popup, setPopup] = useState(false);
 
     const { isLoggedIn } = useContext(AuthContext);
 
@@ -71,6 +74,12 @@ const IndexPage = () => {
     useEffect(() => {
         reloadRankedCompanies();
     }, [marketCap, sector, industry]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setPopup(true);
+        }, 5000);
+    }, []);
 
     const reloadRankedCompanies = () => {
         setStocks(null);
@@ -364,6 +373,14 @@ const IndexPage = () => {
                     <Link to="/cookies">Check cookies policy.</Link>
                 </span>
             </CookieConsent>
+            <section className="xl:py-14 sm:px-1  p-5 bg-[#F5F5F5]">
+                <div className="flex justify-center items-center">
+                    <Newsletter />
+                </div>
+            </section>
+            <div>
+                <NewsletterModal trigger={popup} setTrigger={setPopup} />
+            </div>
         </PageLayout>
     );
 };
