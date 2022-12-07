@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("accessToken");
+    setAccessToken(null);
   };
 
   useEffect(() => {
@@ -23,6 +24,8 @@ const AuthProvider = ({ children }) => {
           const destination = sessionStorage.getItem("destination");
           sessionStorage.removeItem("destination");
           router.push(destination);
+        } else {
+          router.push("/");
         }
       }, 1500);
     }
