@@ -18,6 +18,7 @@ module.exports = {
         "how-desktop": "url('../assets/how-it-works/bg-desktop.png')",
         "desk-signup": "url('../assets/signup/bg-signup.svg')",
         "about-hero-image": "url('../assets/about/hero-image.png')",
+        "help-hero-image": "url('../assets/images/myhero.svg')",
       },
       colors: {
         primary101: "#0B5934",
