@@ -30,17 +30,17 @@ const getStripe = () => {
 };
 
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ clientSecret }) => {
     // const stripe = useStripe(
     //     loadStripe("pk_test_51M6wW6CCH5YrTF3cFB5mOHycZK5b2HJL5mNzGMxSU1himwu50ZDq8dIFNCLVT3Rl8Br79wAQcSgRnCTB0hjrtakd00Yv8dAami")
     // );
     const stripe = useStripe(getStripe());
-    const elements = useElements(CardElement);
+    const elements = useElements();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(elements, 'elenents')
+        console.log(elements, 'elements')
         console.log(stripe)
 
         if (elements == null) {
@@ -52,9 +52,11 @@ const CheckoutForm = () => {
         //     card: elements.getElement(CardElement),
         // });
 
-        await stripe.confirmPayment({
+        await stripe.confirmCardPayment(clientSecret, {
             //`Elements` instance that was used to create the Payment Element
-            elements: elements.getElement(CardElement),
+            payment_method: {
+                card: elements.getElement(CardElement),
+            },
             confirmParams: {
                 return_url: `http://localhost:3000/success`,
             },
@@ -84,7 +86,7 @@ const Payment = () => {
 
     const navigate = useNavigate();
 
-    const [customerId, setCustomerId] = useState("");
+    // const [customerId, setCustomerId] = useState("");
     const [clientSecret, setClientSecret] = useState("");
     // const options ={
     //     clientSecret: ""
@@ -101,45 +103,34 @@ const Payment = () => {
         setClicked(index);
     };
 
-    const fetchCustomerId = useCallback(async () => {
+    const fetchSubcriptionObj = useCallback(async () => {
         await apiService(accessToken)
-            .post(`/create-customer-object`)
-            .then((res) => {
-                const data = res.data
-                setCustomerId(data['Customer_id']);
-                return
-            })
-            .catch((err) => console.log(err));
-    }, []);
-
-    const fetchClientSecret = useCallback(async () => {
-        await apiService(accessToken)
-            .post(`/create-subscription-object`)
+            .post(`/create-subscription-object/?price_id=${location.state.priceId}`)
             .then((res) => {
                 const data = res.data;
                 console.log(data)
+                // setCustomerId(data['Customer_id']);
                 setClientSecret(data['clientSecret']);
                 return
             })
             .catch((err) => console.log(err));
     }, []);
 
+    // const item = {
+    //     price: location.state.priceId,
+    //     quantity: 1
+    // };
 
-    const item = {
-        price: location.state.priceId,
-        quantity: 1
-    };
-
-    const options = {
-        clientSecret: clientSecret,
-        lineItems: [item],
-        // customer: customerId,
-        clientReferenceId: customerId,
-        mode: "payment",
-        successUrl: `${window.location.origin}/success`,
-        cancelUrl: `${window.location.origin}/cancel`,
-        customerEmail: user.email
-    };
+    // const options = {
+    //     clientSecret: clientSecret,
+    //     lineItems: [item],
+    //     // customer: customerId,
+    //     clientReferenceId: customerId,
+    //     mode: "payment",
+    //     successUrl: `${window.location.origin}/success`,
+    //     cancelUrl: `${window.location.origin}/cancel`,
+    //     customerEmail: user.email
+    // };
 
     // const redirectToCheckout = async () => {
     //     const stripe = await getStripe()
@@ -154,14 +145,13 @@ const Payment = () => {
     // }
 
     useEffect(() => {
-        fetchCustomerId()
-        fetchClientSecret()
+        fetchSubcriptionObj()
         console.log(clientSecret)
         if (isLoggedIn === false) {
             navigate('/login');
         }
 
-    }, [fetchCustomerId, fetchClientSecret]);
+    }, [fetchSubcriptionObj]);
 
 
     if (stripeError) {
