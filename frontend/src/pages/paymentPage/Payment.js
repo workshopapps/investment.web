@@ -8,6 +8,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { loadStripe } from "@stripe/stripe-js";
+import {
+    CardElement,
+    Elements,
+    useStripe,
+    useElements,
+} from '@stripe/react-stripe-js';
 import PageLayout from '../layout';
 import AuthContext from '../../auth/AuthContext';
 import AuthHooks from '../../auth/AuthHooks';
@@ -16,25 +22,73 @@ let stripeTestPromise
 
 const getStripe = () => {
     if (!stripeTestPromise) {
-        // stripeTestPromise = loadStripe("pk_test_51M6wW6CCH5YrTF3cFB5mOHycZK5b2HJL5mNzGMxSU1himwu50ZDq8dIFNCLVT3Rl8Br79wAQcSgRnCTB0hjrtakd00Yv8dAami");
-        stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
+        stripeTestPromise = loadStripe("pk_test_51M6wW6CCH5YrTF3cFB5mOHycZK5b2HJL5mNzGMxSU1himwu50ZDq8dIFNCLVT3Rl8Br79wAQcSgRnCTB0hjrtakd00Yv8dAami");
+        // stripeTestPromise = loadStripe("pk_test_51M7m02E0pPf6mXoClZhuSDMtjB8OC3HktSYrMk07cxpwGSLWV5C115FfTifsMrA11U3TRKaXU3EdRGa9p8qEO9Co00wmCA5Uct");
     }
 
     return stripeTestPromise;
 };
 
 
+const CheckoutForm = () => {
+    // const stripe = useStripe(
+    //     loadStripe("pk_test_51M6wW6CCH5YrTF3cFB5mOHycZK5b2HJL5mNzGMxSU1himwu50ZDq8dIFNCLVT3Rl8Br79wAQcSgRnCTB0hjrtakd00Yv8dAami")
+    // );
+    const stripe = useStripe(getStripe());
+    const elements = useElements(CardElement);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        console.log(elements, 'elenents')
+        console.log(stripe)
+
+        if (elements == null) {
+            return;
+        }
+
+        // const { error, paymentMethod } = await stripe.createPaymentMethod({
+        //     type: 'card',
+        //     card: elements.getElement(CardElement),
+        // });
+
+        await stripe.confirmPayment({
+            //`Elements` instance that was used to create the Payment Element
+            elements: elements.getElement(CardElement),
+            confirmParams: {
+                return_url: `http://localhost:3000/success`,
+            },
+        });
+    };
+
+    return (
+        <form onSubmit={handleSubmit} className="flex flex-col w-full justify-center items-center mb-10">
+            <CardElement className="w-[30%] mt-4 mx-20" />
+            <button
+                className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-2 px-4 rounded mb-5"
+                type="submit"
+            >
+                <span>Pay using Stripe</span>
+                {(!stripe || !elements) && <FaArrowRight className="w-5 mt-2 h-3  ml-1" />}
+            </button>
+        </form>
+    );
+};
+
 
 
 const Payment = () => {
     const { isLoggedIn, user, accessToken } = useContext(AuthContext);
-    const [isLoading, setIsLoading] = useState(false)
     const [stripeError, setStripeError] = useState(null)
     const apiService = AuthHooks.useApiService();
 
     const navigate = useNavigate();
 
-    const [customerId, setCustomerId] = useState("")
+    const [customerId, setCustomerId] = useState("");
+    const [clientSecret, setClientSecret] = useState("");
+    // const options ={
+    //     clientSecret: ""
+    // };
 
     let location = useLocation();
 
@@ -58,14 +112,26 @@ const Payment = () => {
             .catch((err) => console.log(err));
     }, []);
 
+    const fetchClientSecret = useCallback(async () => {
+        await apiService(accessToken)
+            .post(`/create-subscription-object`)
+            .then((res) => {
+                const data = res.data;
+                console.log(data)
+                setClientSecret(data['clientSecret']);
+                return
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
 
     const item = {
         price: location.state.priceId,
         quantity: 1
-    }
+    };
 
-
-    const checkoutOptions = {
+    const options = {
+        clientSecret: clientSecret,
         lineItems: [item],
         // customer: customerId,
         clientReferenceId: customerId,
@@ -73,30 +139,29 @@ const Payment = () => {
         successUrl: `${window.location.origin}/success`,
         cancelUrl: `${window.location.origin}/cancel`,
         customerEmail: user.email
-    }
-    const redirectToCheckout = async () => {
+    };
 
-        setIsLoading(true)
-        const stripe = await getStripe()
-        console.log('customerId', customerId)
-        const { error } = await stripe.redirectToCheckout(checkoutOptions)
+    // const redirectToCheckout = async () => {
+    //     const stripe = await getStripe()
+    //     console.log('customerId', customerId)
+    //     const { error } = await stripe.redirectToCheckout(checkoutOptions)
 
-        console.log("stripe checkout error", error)
+    //     console.log("stripe checkout error", error)
 
-        if (error) {
-            setStripeError(error.message)
-        }
-
-        //then set it back to false after the checkout
-        setIsLoading(false)
-    }
+    //     if (error) {
+    //         setStripeError(error.message)
+    //     }
+    // }
 
     useEffect(() => {
+        fetchCustomerId()
+        fetchClientSecret()
+        console.log(clientSecret)
         if (isLoggedIn === false) {
             navigate('/login');
         }
-        fetchCustomerId()
-    }, [fetchCustomerId]);
+
+    }, [fetchCustomerId, fetchClientSecret]);
 
 
     if (stripeError) {
@@ -168,16 +233,16 @@ const Payment = () => {
                     {/* form starts from here */}
 
                     {/* <PaymentForm/>  */}
-                    {/* 
-                    <Elements stripe={getStripe()}>
-                    </Elements> */}
-                    <div className="mt-8 w-full flex items-center justify-center">
-                        <button
-                            className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-2 px-4 rounded mb-5"
-                            type="button" disabled={isLoading} onClick={redirectToCheckout}>
-                            <span>{isLoading ? "Loading..." : "Pay using Stripe"}</span>
-                            <FaArrowRight className="w-5 mt-2 h-3  ml-1" />
-                        </button>
+
+
+                    <div className="w-[95%] relative p-2 pb-0 flex justify-center items-center">
+
+                        {clientSecret !== "" && (
+                            <Elements stripe={getStripe()} options={{ clientSecret }}>
+                                <CheckoutForm />
+                            </Elements>
+                        )}
+
                     </div>
 
                     {/* form ends  here */}
