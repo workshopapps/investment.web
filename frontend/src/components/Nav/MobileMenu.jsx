@@ -19,6 +19,10 @@ const MobileMenu = ({ toggleMenu }) => {
             url: '/about'
         },
         {
+            link: 'Pricing',
+            url: '/subscription'
+        },
+        {
             link: 'Help',
             url: '/help'
         },

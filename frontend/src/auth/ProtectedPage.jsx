@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
-const ProtectedPage = ({ children }) => {
+const ProtectedPage = ({ children, strict = true }) => {
     const localToken = sessionStorage.getItem('accessToken');
     const { logout, setIsLoggedIn, setAccessToken, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (localToken) {
@@ -19,7 +21,9 @@ const ProtectedPage = ({ children }) => {
                     if (res.status === 401) {
                         sessionStorage.removeItem('accessToken');
                         logout();
-                        window.location = '/login';
+                        if (strict) {
+                            navigate('/login');
+                        }
                     }
 
                     if (res.status === 200) {
@@ -34,6 +38,12 @@ const ProtectedPage = ({ children }) => {
                 .catch((err) => {
                     console.log(err);
                 });
+        } else {
+            if (strict) {
+                if (strict) {
+                    navigate('/login');
+                }
+            }
         }
     }, [localToken]);
 

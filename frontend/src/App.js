@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import * as Sentry from '@sentry/react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UserStatusContext } from './store/UserStatusContext.jsx';
 
+// React Toast CSS
+import 'react-toastify/dist/ReactToastify.css';
+
 // Only Page Components Rendered Here
 import IndexPage from './pages/index';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/landing'; // Landing Page Component
 import ErrorPage from './pages/error';
 import { StockPage } from './pages/stock';
@@ -300,4 +303,4 @@ function App() {
     );
 }
 
-export default App;
+export default Sentry.withProfiler(App);

@@ -6,7 +6,7 @@ import SubPlan from '../../components/settings/SubPlan';
 
 export default function index() {
     return (
-        <PageLayout>
+        <PageLayout isProtected>
             <div className="flex flex-col">
                 <div className=" border-r-black">
                     <SideBar />

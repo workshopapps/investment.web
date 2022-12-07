@@ -24,7 +24,7 @@ load_dotenv()
 router = APIRouter()
 
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
+ACCESS_TOKEN_EXPIRE_DAYS = os.getenv('ACCESS_TOKEN_EXPIRE_DAYS')
 API_URL = os.getenv('API_URL')
 JWT_SECRET = os.getenv('JWT_SECRET')
 
@@ -65,7 +65,54 @@ def get_current_user(token: str = Depends(oauth2_scheme)
     return user
 
 
+def get_user_from_refresh_token(token: str) -> User:
+    credentials_exception = HTTPException(
+        status_code=401,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    db: Session = next(get_db())
+
+    try:
+        payload = jwt.decode(
+            token,
+            JWT_SECRET,
+            algorithms=['HS256'],
+            options={"verify_aud": False},
+        )
+        user_id: str = payload.get("sub")
+    except JWTError:
+        raise credentials_exception
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise credentials_exception
+    return user
+
+
 # google auth endpoint
+@router.get('/refresh_token', tags=['Auth'],
+            description="Endpoint for getting a new access token using a refresh token")
+async def get_new_access_token(refresh_token: str):
+    try:
+        user = get_user_from_refresh_token(refresh_token)
+
+        data = {
+            "access_token": create_access_token(sub=user.id),
+            "refresh_token": create_refresh_token(sub=user.id),
+            "token_type": "Bearer",
+        }
+        return data
+    except ValueError:
+        raise HTTPException(status_code=401, detail='Invalid token')
+    except HTTPException:
+        raise HTTPException(status_code=401, detail='Invalid token')
+    except Exception:
+        print(traceback.print_exc())
+        raise HTTPException(status_code=500, detail='Internal Server Error')
+
+
 @router.get('/google_auth', tags=['Auth'],
             description="Endpoint for both Google login and Google signup")
 async def authentication(token: str):
@@ -82,6 +129,7 @@ async def authentication(token: str):
         def generate_token(user_id: str):
             return {
                 "access_token": create_access_token(sub=user_id),
+                "refresh_token": create_refresh_token(sub=user_id),
                 "token_type": "Bearer",
             }
 
@@ -121,6 +169,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
 
     data = {
         "access_token": create_access_token(sub=user.id),
+        "refresh_token": create_refresh_token(sub=user.id),
         "token_type": "Bearer",
     }
     db.close()
@@ -248,7 +297,15 @@ def authenticate(
 def create_access_token(*, sub: str) -> str:
     return _create_token(
         token_type="access_token",
-        lifetime=timedelta(minutes=float(ACCESS_TOKEN_EXPIRE_MINUTES)),
+        lifetime=timedelta(days=float(ACCESS_TOKEN_EXPIRE_DAYS)),
+        sub=sub,
+    )
+
+
+def create_refresh_token(*, sub: str) -> str:
+    return _create_token(
+        token_type="refresh_token",
+        lifetime=timedelta(days=float(ACCESS_TOKEN_EXPIRE_DAYS * 7)),
         sub=sub,
     )
 
