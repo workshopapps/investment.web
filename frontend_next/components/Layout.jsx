@@ -4,6 +4,7 @@ import ProtectedPage from "./auth/ProtectedPage";
 import Footer from "./Footer/Footer";
 import Nav from "./Nav/Nav";
 import MobileMenu from "./Nav/MobileMenu";
+import { scrollToTop } from "../utils/scroll";
 
 const Layout = ({
   children,
@@ -15,9 +16,9 @@ const Layout = ({
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const pathName = useRouter().pathname;
 
-  // useEffect(() => {
-  //   scrollToTop();
-  // }, []);
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     setOpenMobileMenu(false);

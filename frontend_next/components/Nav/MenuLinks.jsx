@@ -23,7 +23,7 @@ const MenuLinks = () => {
       dropItems: [
         {
           link: "How it Works",
-          url: "/howitworks",
+          url: "/how-it-works",
         },
         {
           link: "Cookies",
