@@ -31,7 +31,7 @@ const links = [
 // export default function index() {
 
 export default function index() {
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -62,21 +62,15 @@ export default function index() {
             </NavLink>
         );
     };
-
     return (
         <div className="flex justify-center items-center py-2 h-full bg-[ #FFFFFF] px-[16px] ">
             <div className="max-w-[1028px] w-full">
-                <div className="flex flex-col  w-full border-b-2 border-[##D9D9D9]">
+                <div className="flex flex-col  w-full md:border-b-2 border-[##D9D9D9]">
                     <div className="flex flex-col w-full pl-4  md:pl-0 pt-7 pb-3">
                         <div className="flex flex-row items-center w-full mb-2">
                             <span className="flex text-[#0A0B0D] font-normal text-xl md:text-3xl ml-4 mb-5">
                                 Settings
                             </span>
-                            <div
-                                className="flex md:hidden w-auto  mt-[60px]"
-                            >
-                                <SidebarMobile />
-                            </div>
                             <Link
                                 to="/"
                                 className="flex md:hidden flex-row items-center  h-full  text-base font-semibold ml-auto pr-4">
@@ -86,6 +80,21 @@ export default function index() {
                                 </h1>
                             </Link>
                         </div>
+                        <div className="flex md:hidden w-auto  justify-center items-center mb-[20px]">
+                            <SidebarMobile />
+                        </div>
+                        <div className="flex items-center justify-center">
+                            <div
+                                className={`rounded-full text-white bg-gray-400 flex justify-center items-center`}
+                                style={{
+                                    width: '100px',
+                                    height: '100px'
+                                }}>
+                                <h1 className={`text-white uppercase font-[700]`} style={{ fontSize: '36px' }}>
+                                    {user.name.slice(0, 2)}
+                                </h1>
+                            </div>
+                        </div>
                         <div className="flex w-full ">
                             <div className="flex flex-row w-2/5 md:w-full">
                                 <div className="hidden md:flex h-full gap-[10px]  w-4/6 font-semibold text-base text-black">
@@ -93,8 +102,7 @@ export default function index() {
                                         <MenuOption link={link} key={index} />
                                     ))}
                                 </div>
-                                <div
-                                    onClick={() => {
+                                <div onClick={() => {
                                         logout();
                                         navigate('/');
                                     }}
