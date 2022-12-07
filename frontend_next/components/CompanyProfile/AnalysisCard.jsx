@@ -103,7 +103,7 @@ const VisualDataCard = () => {
   };
 
   return (
-    <div className="h-auto flex flex-col bg-white text-[#5C5A5A] border rounded-lg px-6 py-4 font-HauoraLight">
+    <div className="h-auto flex flex-col bg-white text-[#5C5A5A] md:border rounded-lg px-2 md:px-6 py-0 md:py-4 font-HauoraLight">
       <div className="flex flex-row justify-between">
         <div className="flex flex-row text-xs md:text-lg font-HauoraBold font-bold text-[#5C5A5A] border-b-2 border-[#1BD47B] px-1">
           <button className="text-[#1BD47B] rounded-lg">
@@ -152,10 +152,10 @@ const VisualDataCard = () => {
         </div>
       </div>
 
-      <div className="h-100 my-10 w-full border border-1px rounded-lg bg-transparent">
-        <div className="flex flex-row justify-between text-xl md:text-2xl font-semibold pt-6 pl-5">
+      <div className="h-100 my-10 w-full border-0 md:border md:border-1px rounded-lg bg-transparent">
+        <div className="flex flex-col md:flex-row justify-between text-xl md:text-2xl font-semibold pt-0 md:pt-6 pl-0 md:pl-5 gap-2">
           {companyId} Chart
-          <div className="flex flex-row justify-end text-xs md:text-md gap-2 mr-5">
+          <div className="flex flex-row justify-end text-xs md:text-md py-2 gap-2 mr-5">
             {state.showRevenue && (
               <>
                 <svg
@@ -235,14 +235,14 @@ const VisualDataCard = () => {
           </div>
         </div>
 
-        <ResponsiveContainer className="mt-10" width="100%" height={300}>
+        <ResponsiveContainer className="mt-5 md:mt-10" width="100%" height={300}>
           <AreaChart
             data={data}
             margin={{
               top: 20,
               right: 20,
               bottom: 20,
-              left: 20,
+              left: 10,
             }}
           >
             <defs>
@@ -318,7 +318,7 @@ const VisualDataCard = () => {
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-5 md:my-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+      <div className="mt-0 md:my-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
         <h2 className="opacity-50 pl-4">Key Metric</h2>
         <h2 className="opacity-50 pl-0 md:pl-20">USD ({state.value})</h2>
         <h2 className="opacity-50 pl-4">% Change</h2>
