@@ -297,7 +297,7 @@ def authenticate(
 def create_access_token(*, sub: str) -> str:
     return _create_token(
         token_type="access_token",
-        lifetime=timedelta(minutes=float(ACCESS_TOKEN_EXPIRE_DAYS)),
+        lifetime=timedelta(days=float(ACCESS_TOKEN_EXPIRE_DAYS)),
         sub=sub,
     )
 

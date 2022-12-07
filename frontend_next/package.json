@@ -1,0 +1,51 @@
+{
+  "name": "frontend_next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "13.0.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@fontsource/hauora-sans": "^4.5.3",
+    "@sentry/react": "^7.23.0",
+    "@sentry/tracing": "^7.23.0",
+    "@headlessui/react": "^1.7.4",
+    "@react-oauth/google": "^0.5.0",
+    "@stripe/react-stripe-js": "^1.15.0",
+    "@stripe/stripe-js": "^1.44.1",
+    "@tippyjs/react": "^4.2.6",
+    "axios": "^1.2.0",
+    "classnames": "^2.3.2",
+    "dateformat": "^5.0.3",
+    "framer-motion": "^7.6.18",
+    "react-cookie-consent": "^8.0.1",
+    "react-hook-form": "^7.40.0",
+    "react-icons": "^4.6.0",
+    "react-jsx-select": "^1.3.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-scroll": "^1.8.8",
+    "react-spinners-kit": "^1.9.1",
+    "react-switch": "^7.0.0",
+    "react-toast-notifier": "^1.0.3",
+    "react-toastify": "^9.1.1",
+    "recharts": "^2.1.16"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^3.2.4",
+    "eslint": "8.29.0",
+    "eslint-config-next": "13.0.6",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "prop-types": "^15.8.1"
+  }
+}
