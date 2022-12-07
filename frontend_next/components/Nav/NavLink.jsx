@@ -20,8 +20,8 @@ function NavLink({ href, exact, children, ...props }) {
   }
 
   return (
-    <Link href={href} {...props} legacyBehavior>
-      <a>{children}</a>
+    <Link href={href} legacyBehavior>
+      <a {...props}>{children}</a>
     </Link>
   );
 }

@@ -1,18 +1,26 @@
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
+import { useRouter } from "next/router";
 
 const MenuLink = ({ link, url, icon, dropItems }) => {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const pathname = useRouter().pathname;
+
   const activeStyle = {
     color: "#1BD47B",
   };
+
+  useEffect(() => {
+    setIsActive(pathname === url);
+  }, [pathname, url]);
 
   return (
     <li className="relative h-full" onMouseEnter={() => setShowDropDown(true)}>
       <NavLink
         href={url}
-        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        style={isActive ? activeStyle : {}}
         className="flex items-center justify-between gap-[10px] h-full"
       >
         {link}
