@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import ProtectedPage from "./auth/ProtectedPage";
 import Footer from "./Footer/Footer";
+import Nav from "./Nav/Nav";
+import MobileMenu from "./Nav/MobileMenu";
 
 const Layout = ({
   children,
@@ -26,16 +28,16 @@ const Layout = ({
 
   return (
     <div className="flex flex-col h-screen relative ">
-      {/* {showNavBar && (
-            <>
-                <div className="nav-bar flex-none">
-                    <ProtectedPage strict={false}>
-                        <Nav openMenu={setOpenMobileMenu} />
-                    </ProtectedPage>
-                </div>
-                {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
-            </>
-        )} */}
+      {showNavBar && (
+        <>
+          <div className="nav-bar flex-none">
+            <ProtectedPage strict={false}>
+              <Nav openMenu={setOpenMobileMenu} />
+            </ProtectedPage>
+          </div>
+          {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
+        </>
+      )}
 
       {isProtected ? (
         <ProtectedPage strict={!disableStrictProtection}>

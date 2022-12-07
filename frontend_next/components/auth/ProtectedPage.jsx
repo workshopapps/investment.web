@@ -1,11 +1,12 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useEffect, useContext } from "react";
 import AuthContext from "./AuthContext";
 
 const ProtectedPage = ({ children, strict = true }) => {
   const { logout, setIsLoggedIn, setAccessToken, setUser } =
     useContext(AuthContext);
-  const navigate = useNavigate();
+  const navigate = useRouter().push;
 
   useEffect(() => {
     const localToken = sessionStorage.getItem("accessToken");
