@@ -13,7 +13,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
   const Inner = () => {
     const baseUrl = "https://api.yieldvest.hng.tech/auth/login";
 
-    const navigate = useRouter().push;
+    const navigate = useRouter();
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
     const [timeOut, setTimeout] = useState(false);
@@ -171,7 +171,13 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     }, [formErrors]);
 
     if (timeOut) {
-      navigate("/");
+      let destination = "/";
+      if (sessionStorage.getItem("destination")) {
+        destination = sessionStorage.getItem("destination");
+        sessionStorage.removeItem("destination");
+      }
+
+      navigate.push(destination);
     }
 
     return (

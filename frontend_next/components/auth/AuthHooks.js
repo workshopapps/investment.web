@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const useApiService = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
+  const router = useRouter();
 
   return (accessToken) => {
     const service = axios.create({
@@ -16,7 +18,8 @@ const useApiService = () => {
       (res) => {
         if (res.status === 401) {
           sessionStorage.removeItem("accessToken");
-          window.location = "/login";
+          sessionStorage.setItem("destination", router.pathname);
+          router.push("/login");
         }
 
         return res;
