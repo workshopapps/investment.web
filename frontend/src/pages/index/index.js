@@ -378,7 +378,7 @@ const IndexPage = () => {
                     <Newsletter />
                 </div>
             </section>
-            <div>
+            <div className="mx-7 p-5">
                 <NewsletterModal trigger={popup} setTrigger={setPopup} />
             </div>
         </PageLayout>
