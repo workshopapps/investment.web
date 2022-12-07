@@ -12,11 +12,11 @@ module.exports = {
         HauoraBold: ["Hauora-Bold"],
       },
       backgroundImage: {
-        "hero-desktop": "url('./assets/index/header-desktop.svg')",
-        "hero-mobile": "url('./assets/index/header-mobile.svg')",
-        "how-mobile": "url('./assets/how-it-works/bg-mobile.png')",
-        "how-desktop": "url('./assets/how-it-works/bg-desktop.png')",
-        "desk-signup": "url('./assets/signup/bg-signup.svg')",
+        "hero-desktop": "url('../assets/index/header-desktop.svg')",
+        "hero-mobile": "url('../assets/index/header-mobile.svg')",
+        "how-mobile": "url('../assets/how-it-works/bg-mobile.png')",
+        "how-desktop": "url('../assets/how-it-works/bg-desktop.png')",
+        "desk-signup": "url('../assets/signup/bg-signup.svg')",
       },
       colors: {
         primary101: "#0B5934",
