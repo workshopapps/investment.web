@@ -8,6 +8,8 @@ import Nav from "../../components/Nav/Nav";
 import { FaPlus, FaStripe, FaMinus, FaArrowRight } from "react-icons/fa";
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
+import Layout from "../../components/Layout";
+import Head from "next/head";
 
 let stripeTestPromise;
 
@@ -53,8 +55,6 @@ const Payment = () => {
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
 
-    console.log("stripe checkout error", error);
-
     if (error) {
       setStripeError(error.message);
     }
@@ -67,10 +67,11 @@ const Payment = () => {
     alert(stripeError);
   }
   return (
-    <div>
-      <nav>
-        <Nav />
-      </nav>
+    <Layout>
+      <Head>
+        <title>Yieldvest - Payment</title>
+        <meta name="description" content="Complete payment" />
+      </Head>
 
       <section className="h-auto flex flex-wrap bg-white mainHolder">
         {/* left side start from here */}
@@ -215,11 +216,7 @@ const Payment = () => {
           </div>
         </div>
       </section>
-
-      <footer className="footerHolder">
-        <Footer />
-      </footer>
-    </div>
+    </Layout>
   );
 };
 

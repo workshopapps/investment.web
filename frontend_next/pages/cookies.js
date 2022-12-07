@@ -3,6 +3,7 @@ import React from "react";
 import cookie from "../assets/download/cookies.svg";
 import Layout from "../components/Layout";
 import { ToastContainer, toast } from "react-toastify";
+import Head from "next/head";
 
 const Cookies = () => {
   const notify = () => {
@@ -33,6 +34,10 @@ const Cookies = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Yieldvest - Cookies</title>
+      </Head>
+
       <h2 className="flex items-center justify-center py-8 md:hidden bg-[#D9D9D9]">
         {" "}
         <img src={cookie.src} alt="" />{" "}

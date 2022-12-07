@@ -8,10 +8,19 @@ import logo from "../../assets/images/logo.png";
 import Layout from "../../components/Layout";
 import Card from "../../components/policy/card/Card";
 import Accordian from "../../components/policy/accordian/Accordian";
+import Head from "next/head";
 
 const PolicyStatement = () => {
   return (
     <Layout>
+      <Head>
+        <title>Yieldvest - Privacy Policy</title>
+        <meta
+          name="description"
+          content="At Yieldvest we take your privacy very seriously. It is important to us that you understand your rights in how we handle your personal information. Our diligent privacy team meticulously review our products before they go live, so you can expect the best from us"
+        />
+      </Head>
+
       <div className="bg-[#f5f5f5] font-Hauora">
         <div className="py-32 container mx-auto max-sm:px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48 text-center ">
           {/* */}

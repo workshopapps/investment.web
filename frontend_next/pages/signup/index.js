@@ -8,6 +8,7 @@ import AuthContext from "../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 
 const Signup = ({ GOOGLE_CLIENT_ID }) => {
   const Inner = () => {
@@ -319,6 +320,10 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
 
   return (
     <Layout showFooter={false}>
+      <Head>
+        <title>Yieldvest - My Account</title>
+      </Head>
+
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <Inner />
       </GoogleOAuthProvider>
