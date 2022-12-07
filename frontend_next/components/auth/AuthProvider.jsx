@@ -17,20 +17,20 @@ const AuthProvider = ({ children }) => {
     setAccessToken(null);
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      setTimeout(() => {
-        if (sessionStorage.getItem("destination")) {
-          const destination = sessionStorage.getItem("destination");
-          sessionStorage.removeItem("destination");
-          router.push(destination);
-        } else {
-          router.push("/");
-        }
-      }, 1500);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     setTimeout(() => {
+  //       if (sessionStorage.getItem("destination")) {
+  //         const destination = sessionStorage.getItem("destination");
+  //         sessionStorage.removeItem("destination");
+  //         router.push(destination);
+  //       } else {
+  //         router.push("/");
+  //       }
+  //     }, 1500);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider

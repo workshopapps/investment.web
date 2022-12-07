@@ -12,6 +12,7 @@ import CookieConsent from "react-cookie-consent";
 import NotFoundImage from "../assets/images/not_found.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 
 const Index = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
@@ -151,6 +152,14 @@ const Index = () => {
 
   return (
     <Layout isProtected disableStrictProtection>
+      <Head>
+        <title>Yieldvest - Top Recommended Stocks</title>
+        <meta
+          name="description"
+          content="Get up to date recommendations on the best stocks to buy"
+        />
+      </Head>
+
       {!isLoggedIn && (
         <NotSubscribedModal
           isOpen={showNotSubscribedModal}

@@ -16,6 +16,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     const navigate = useRouter();
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
+    const [timeOut, setTimeout] = useState(false);
+    const [redirected, setRedirected] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
@@ -27,8 +29,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     });
 
     const [passwordType, setPasswordType] = useState("password");
-
-    let timeOutHandler;
 
     //track changes in form
     const handleChange = (event) => {
@@ -76,9 +76,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
             whenAuthenticated(res.data.access_token);
             setIsLoading(false);
 
-            clearInterval(timeOutHandler);
-            timeOutHandler = setInterval(() => {
-              redirect();
+            setInterval(() => {
+              setTimeout(true);
             }, 1500);
           } else {
             toast.error("Authentication failed");
@@ -125,10 +124,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
           if (response.status === 200) {
             toast.success("Login successful");
             whenAuthenticated(response.data.access_token);
-
-            clearInterval(timeOutHandler);
-            timeOutHandler = setInterval(() => {
-              redirect();
+            setInterval(() => {
+              setTimeout(true);
             }, 1500);
           } else {
             toast.error("login failed");
@@ -161,6 +158,20 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     };
 
     useEffect(() => {
+      if (redirected || !timeOut) return;
+
+      let destination = "/";
+      if (sessionStorage.getItem("destination")) {
+        setRedirected(true);
+        destination = sessionStorage.getItem("destination");
+        sessionStorage.removeItem("destination");
+      }
+
+      navigate.push(destination);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timeOut]);
+
+    useEffect(() => {
       if (Object.keys(formErrors).length === 0 && isSubmit === true) {
         setLoginForm((prevState) => {
           return {
@@ -173,15 +184,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formErrors]);
-
-    const redirect = () => {
-      // let destination = "/";
-      // if (sessionStorage.getItem("destination")) {
-      //   destination = sessionStorage.getItem("destination");
-      //   sessionStorage.removeItem("destination");
-      // }
-      // navigate.push(destination);
-    };
 
     return (
       <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
