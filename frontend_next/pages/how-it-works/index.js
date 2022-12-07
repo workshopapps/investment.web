@@ -8,6 +8,7 @@ import getImg from "../../assets/how-it-works/getImg.png";
 import arrowRight from "../../assets/how-it-works/arrow-right.png";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Head from "next/head";
 
 const Index = () => {
   const process = [
@@ -37,6 +38,11 @@ const Index = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>How It Works</title>
+        <meta name="description" content="Investing in 3 Easy Steps!" />
+      </Head>
+
       <div className="w-full h-full">
         <div className="bg-how-mobile bg-cover bg-no-repeat text-white h-48 flex flex-col items-center justify-center md:bg-how-desktop">
           <div className="flex flex-col items-center gap-1">

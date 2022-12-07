@@ -4,6 +4,7 @@ import Sidebar from "../../components/settings/SideBar";
 import Layout from "../../components/Layout";
 import AuthContext from "../../components/auth/AuthContext";
 import authHooks from "../../components/auth/AuthHooks";
+import Head from "next/head";
 
 export default function Notifications() {
   const [notificationsSettings, setNotificationSettings] = useState(null);
@@ -29,6 +30,10 @@ export default function Notifications() {
 
   return (
     <Layout isProtected>
+      <Head>
+        <title>Yieldvest - Notification Settings</title>
+      </Head>
+
       <div className="flex flex-col ">
         {/* <div className="border-r-black max-w[1028px] w-[100%]"> */}
         <div className="border-r-black w-full">

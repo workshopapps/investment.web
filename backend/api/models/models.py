@@ -153,7 +153,6 @@ class User(Base):
     password = Column(String(100))
 
     customer = relationship("Customer", back_populates="user_value")
-    subscription_value = relationship("Subscription", back_populates="user_sub")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
 
 
@@ -162,18 +161,11 @@ class Customer(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    session_id = Column(String(200))
+    session_id = Column(String(200), nullable=True)
+    subscription_id = Column(String(64))
+    subscription_status = Column(String(64))
 
     user_value = relationship("User", back_populates="customer")
-
-
-class Subscription(Base):
-    __tablename__ = "subscription"
-
-    user_id = Column(String(64), ForeignKey("user.user_id"))
-    subscription_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-
-    user_sub = relationship("User", back_populates="subscription_value")
 
 
 class Product(Base):

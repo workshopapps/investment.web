@@ -8,6 +8,7 @@ import AuthContext from "../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Head from "next/head";
 
 const Login = ({ GOOGLE_CLIENT_ID }) => {
   const Inner = () => {
@@ -17,6 +18,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
     const [timeOut, setTimeout] = useState(false);
+    const [redirected, setRedirected] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
@@ -157,6 +159,20 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     };
 
     useEffect(() => {
+      if (redirected || !timeOut) return;
+
+      let destination = "/";
+      if (sessionStorage.getItem("destination")) {
+        setRedirected(true);
+        destination = sessionStorage.getItem("destination");
+        sessionStorage.removeItem("destination");
+      }
+
+      navigate.push(destination);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [timeOut]);
+
+    useEffect(() => {
       if (Object.keys(formErrors).length === 0 && isSubmit === true) {
         setLoginForm((prevState) => {
           return {
@@ -169,16 +185,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formErrors]);
-
-    if (timeOut) {
-      let destination = "/signup";
-      if (sessionStorage.getItem("destination")) {
-        destination = sessionStorage.getItem("destination");
-        sessionStorage.removeItem("destination");
-      }
-
-      navigate.push(destination);
-    }
 
     return (
       <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
@@ -310,6 +316,11 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
   return (
     <Layout showFooter={false}>
+      <Head>
+        <title>Yieldvest - Login</title>
+        <meta name="description" content="Login to your account!" />
+      </Head>
+
       <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
         <Inner />
       </GoogleOAuthProvider>
