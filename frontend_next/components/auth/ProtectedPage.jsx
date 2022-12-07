@@ -10,6 +10,8 @@ const ProtectedPage = ({ children, strict = true }) => {
 
   useEffect(() => {
     const localToken = sessionStorage.getItem("accessToken");
+    sessionStorage.setItem("tkn", localToken);
+
     if (localToken) {
       axios
         .get("https://api.yieldvest.hng.tech/user/profile", {
