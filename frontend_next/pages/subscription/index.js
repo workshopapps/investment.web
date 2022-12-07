@@ -12,6 +12,7 @@ import {
 import Layout from "../../components/Layout";
 import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
+import Head from "next/head";
 
 const Subscription = () => {
   // state to set change the type of subscription yearly or monthly
@@ -32,6 +33,10 @@ const Subscription = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Yieldvest - Subscription</title>
+      </Head>
+
       <div className="w-full mt-10 md:mt-20 flex justify-center items-center text-center topContentHolder font-Hauora">
         <div className="lg:w-[60%] w-[80%] mx-0 md:mx-auto">
           <h1 className="text-xl md:text-4xl lg:text-5xl tracking-widest my-5 pr-2 ">

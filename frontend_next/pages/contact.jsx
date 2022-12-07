@@ -3,10 +3,15 @@ import { BsFacebook, BsTwitter } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import Layout from "../components/Layout";
 import ContactForm from "../components/contact/ContactForm";
+import Head from "next/head";
 
 const Contact = () => {
   return (
     <Layout>
+      <Head>
+        <title>Yieldvest - Contact Us</title>
+      </Head>
+
       <section className="  min-h-fit justify-around p-5 flex md:p-12 flex-col-reverse md:flex-row ">
         <div className="basis-[30%] font-Hauora ">
           <aside className="mb-4 hidden md:block">

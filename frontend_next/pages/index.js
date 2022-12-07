@@ -50,17 +50,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/company/sectors`)
-      .then((res) => {
-        setSectors(res.data);
-        loadAllIndustries();
-      })
-      .catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     reloadIndustriesForSector(sector);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sectors]);

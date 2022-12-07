@@ -4,10 +4,15 @@ import Term from "../../components/terms/Term";
 import Layout from "../../components/Layout";
 import logo from "../../assets/images/logo.png";
 import { termsData } from "../../utils/TermsData";
+import Head from "next/head";
 
 const TermsAndConditionPage = () => {
   return (
     <Layout>
+      <Head>
+        <title>Yieldvest - Terms</title>
+      </Head>
+
       <div className="bg-[#f5f5f5] font-Hauora">
         <div className="py-32 container mx-auto max-sm:px-4 sm:px-6 md:px-12 lg:px-24 xl:px-48 text-center ">
           <img src={logo.src} alt="logo" className="m-auto" />
