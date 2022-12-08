@@ -83,7 +83,7 @@ const Subscription = () => {
       {/* subscription content details start here */}
       {subType === 1 ? (
         <div className="w-full flex justify-center font-Hauora">
-          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[80px] lg:mx-[5em] p-0 md:px-[2em] w-full gap-10">
             <SubscribeCard
               name="Basic"
               price=""
