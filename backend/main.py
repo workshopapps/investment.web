@@ -10,7 +10,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from api.database import database
 from api.database.database import engine
 from api.routes import company, auth, user, newsletter
-from api.payment_gte import server
+from api.payment_gte import session, server
 from api.scripts.ranking import run_process_scripts
 
 load_dotenv()
@@ -38,8 +38,9 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 app.include_router(auth.router, prefix='/auth')
 app.include_router(user.router, prefix='/user')
 app.include_router(company.router)
-app.include_router(server.router)
+app.include_router(session.router)
 app.include_router(newsletter.router)
+app.include_router(server.router)
 
 
 async def update_script_task():
