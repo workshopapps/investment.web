@@ -17,15 +17,16 @@ const Footer = () => {
       name: "Get To Know Us",
       navLinks: [
         { link: "About Yieldvest", to: "/about" },
+        { link: "Pricing", to: "/subscription" },
         { link: "Contact Us", to: "/contact" },
       ],
     },
     {
       name: "Support",
       navLinks: [
-        { link: "Companies", to: "/companies" },
         { link: "How it works", to: "/how-it-works" },
         { link: "Help", to: "/help" },
+        { link: "Directory", to: "/directory" },
       ],
     },
     {
@@ -33,7 +34,7 @@ const Footer = () => {
       navLinks: [
         { link: "Terms of Use", to: "/terms" },
         { link: "Privacy Policy", to: "/policy" },
-        { link: "Cookies", to: "/cookies" },
+        { link: "Cookies Policy", to: "/cookies" },
       ],
     },
   ];
@@ -55,10 +56,11 @@ const Footer = () => {
             <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
           </div>
           <div
-            className={`${pathname !== "/download"
-              ? "hidden lg:flex pt-4 mb-[66px]"
-              : "hidden"
-              }`}
+            className={`${
+              pathname !== "/download"
+                ? "hidden lg:flex pt-4 mb-[66px]"
+                : "hidden"
+            }`}
           >
             <Link href="/download">
               <img

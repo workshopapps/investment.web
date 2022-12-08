@@ -36,7 +36,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3 className="text-2xl md:text-2xl text-[#5C5A5A] pt-10">
+                <h3
+                  className="text-1xl md:text-1xl text-[#5C5A5A] pt-10"
+                  style={{ fontSize: "1.3rem" }}
+                >
                   {company.name} Stock Fundamentals
                 </h3>
                 <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
