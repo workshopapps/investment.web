@@ -18,7 +18,7 @@ const SubscribeCard = ({
   buttonText,
 }) => {
   return (
-    <div className="group relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-5">
+    <div className="group relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0">
       {price !== "" && (<div>
         <img className="group-hover:hidden flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white " src={Image.src} alt="image" />
         <img className="hidden group-hover:flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white " src={Image2.src} alt="image" />
