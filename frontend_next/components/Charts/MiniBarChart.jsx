@@ -39,6 +39,7 @@ const MiniBarChartCard = ({ companyId }) => {
 
         setState(raw.reverse());
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   useEffect(() => {
