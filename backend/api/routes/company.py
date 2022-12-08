@@ -324,7 +324,8 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
                 'position': position,
                 'score': current_rank.score,
                 'companies_compared_with': len(rankings) - 1,
-                'date': current_rank.updated_at
+                'date': current_rank.updated_at,
+                'rankings': rankings
             }
             response.append(data)
 
@@ -341,9 +342,18 @@ async def get_list_of_all_companies(substring: str = None):
     if substring:
         filters.append(models.Company.name.like(f"%{substring}%"))
 
-    companies: list = db.query(models.Company).filter(*filters).order_by(
+    companies: List[models.Company] = db.query(models.Company).filter(*filters).order_by(
         models.Company.name.asc()).all()
 
     # Return the sorted list of companies
+    result = []
+
+    for company in companies:
+        data = {
+            'ticker': company.ticker,
+            'name': company.name,
+        }
+        result.append(data)
+
     db.close()
     return companies
