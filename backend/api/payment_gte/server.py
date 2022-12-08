@@ -50,7 +50,7 @@ async def create_customer_object(request: Request, price_id: str, user: User=Dep
                 name=CUSTOMER_NAME,
             )
         except:
-          return HTTPException(detail="could not create customer")
+          return HTTPException(status_code=403, detail="could not create customer")
 
         try:
             subscription = stripe.Subscription.create(

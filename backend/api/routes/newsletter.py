@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 # subscribed user
-@router.post('/newsletter-subscribe', tags=['EmailSubscription'])
+@router.post('/newsletter-subscription', tags=['EmailSubscription'])
 async def newsletter_subscribed(request: Request, user_email: str, db: Session=Depends(get_db)):
     if request:
         users = db.query(NewsLetter).filter(NewsLetter.email == user_email).first()
@@ -31,17 +31,16 @@ async def newsletter_subscribed(request: Request, user_email: str, db: Session=D
         
 
 # cancel newletter subscription
-@router.post('/newsletter-unsubscribe', tags=['EmailSubscription'])
+@router.delete('/newsletter-unsubscription', tags=['EmailSubscription'])
 async def newsletter_unsubscribed(request: Request, user_email: str, db: Session=Depends(get_db)):
     if request:
         users = db.query(NewsLetter).filter(NewsLetter.email == user_email).first()
-        users.subscribed = False
-        db.add(users)
-        db.flush
-        db.commit()
-        db.refresh(users)
+        if users is not None:
+            db.delete(users)
+            db.commit()
 
-        return {"isnewLetterSubscribed": {"email": users.email, "subscribed": users.subscribed}}
+            return {"isnewLetterSubscribed": "users email deleted"}
+        return {"isnewLetterSubscribed": "users email already unsubscribed"}
 
 # get list of subscribed user and send newsletter email
 async def newsletter_sub_user():
