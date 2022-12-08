@@ -22,8 +22,8 @@ const VisualDataCard = () => {
     show: false,
     showRevenue: true,
     showIncome: true,
-    showExpenses: false,
-    showProfit: false,
+    showExpenses: true,
+    showProfit: true,
     value: "2022",
     position: 0,
   });
@@ -153,7 +153,7 @@ const VisualDataCard = () => {
       </div>
 
       <div className="h-100 my-10 w-full border-0 md:border md:border-1px rounded-lg bg-transparent">
-        <div className="flex flex-col md:flex-row justify-between text-xl md:text-2xl font-semibold pt-0 md:pt-6 pl-0 md:pl-5 gap-2">
+        <div className="flex flex-col md:flex-row justify-between text-xl md:text-1xl font-semibold pt-0 md:pt-6 pl-0 md:pl-5 gap-2">
           {companyId} Chart
           <div className="flex flex-row justify-end text-xs md:text-md py-2 gap-2 mr-5">
             {state.showRevenue && (
@@ -235,7 +235,11 @@ const VisualDataCard = () => {
           </div>
         </div>
 
-        <ResponsiveContainer className="mt-5 md:mt-10" width="100%" height={300}>
+        <ResponsiveContainer
+          className="mt-5 md:mt-10"
+          width="100%"
+          height={300}
+        >
           <AreaChart
             data={data}
             margin={{
@@ -326,7 +330,7 @@ const VisualDataCard = () => {
 
       {data.length > 0 ? (
         <>
-          <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+          <div className="mt-6 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -357,7 +361,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+          <div className="mt-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -390,7 +394,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+          <div className="mt-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -421,7 +425,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="my-6 mr-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
+          <div className="my-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"

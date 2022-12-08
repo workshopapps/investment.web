@@ -2,13 +2,36 @@
 import Link from "next/link";
 import React, { useContext } from "react";
 import { FiTrash, FiEye } from "react-icons/fi";
-import WatchListContext from "../../store/watchList/WatchlistContext";
+// import WatchListContext from "../../store/watchList/WatchlistContext";
+import authHooks from "../auth/AuthHooks";
+import AuthContext from "../auth/AuthContext";
 
 const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
-  const { deleteFromWatchList } = useContext(WatchListContext);
-  const { name, profile_image, sector, stock_price, market_cap, company_id } =
-    stock;
+  // const { deleteFromWatchList } = useContext(WatchListContext);
+  const { accessToken, isLoggedIn } = useContext(AuthContext);
+  const apiService = authHooks.useApiService();
+  const { name, profile_image, sector, stock_price, market_cap, company_id } = stock;
 
+  const deleteFromWatchList = (id, onSuccess, onFailure) => {
+    apiService(accessToken)
+      .delete(`/user/watchlist/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          // Notify user it has been deleted
+          onSuccess();
+          console.log(id, " Removed from watchlist");
+        } else {
+          // Notify the user
+          onFailure();
+          console.log(res);
+        }
+      })
+      .catch((error) => {
+        // Notify the user something failed
+        onFailure();
+        console.log(error);
+      });
+  };
   return (
     <div className="max-w-[408px] w-full rounded-[8px] p-[28px] bg-white">
       <div>
@@ -40,7 +63,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
           </div>
           <div
             onClick={async () => {
-              await deleteFromWatchList(company_id, onSuccess, onFailure);
+              deleteFromWatchList(company_id, onSuccess, onFailure);
               setTimeout(() => {
                 reload();
               }, 1000);

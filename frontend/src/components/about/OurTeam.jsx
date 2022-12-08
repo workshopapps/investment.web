@@ -1,10 +1,27 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import img1 from './../../assets/about/team-1.png';
-import img2 from './../../assets/about/team-2.png';
-import img3 from './../../assets/about/team-3.png';
+import img1 from './../../assets/about/ayobami.jpeg';
+import img2 from './../../assets/about/Divine.jpg';
+import img3 from './../../assets/about/Imran.jpg';
 
 const OurTeam = () => {
+    const teams = [
+        {
+            img: img1,
+            name: 'Ayobami Isreal',
+            role: 'Product Designer'
+        },
+        {
+            img: img2,
+            name: 'Divine Uzodinma',
+            role: 'Product Manager'
+        },
+        {
+            img: img3,
+            name: 'Imran Abdulmalik',
+            role: 'Tech Lead'
+        }
+    ]
     return (
         <div
             id="team"
@@ -13,34 +30,20 @@ const OurTeam = () => {
             <h1 className="font-normal md:font-semibold text-center mb-8 pt-0 md:pt-12 text-2xl md:text-4xl">
                 Meet Our Team
             </h1>
-            <div className="flex flex-col md:flex-row justify-center gap-8 md:justify-between m-10 md:-20">
-                <div className="">
-                    <img className="w-full rounded-t-lg" src={img1} alt="team member" />
-                    <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-                            Ayobami Isreal
-                        </p>
-                        <p className="text-xs">Product Designer</p>
-                    </div>
-                </div>
-                <div className="">
-                    <img className="w-full rounded-t-lg" src={img2} alt="team member" />
-                    <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-                            Divine Uzodinma
-                        </p>
-                        <p className="text-xs">Product manager</p>
-                    </div>
-                </div>
-                <div className="">
-                    <img className="w-full rounded-t-lg" src={img3} alt="team member" />
-                    <div className=" md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-                        <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-                            Imran Abdulmalik
-                        </p>
-                        <p className="text-xs">Tech Lead</p>
-                    </div>
-                </div>
+            <div className="flex justify-center gap-[32px] items-center flex-wrap">
+                {
+                    teams.map((item, index) => {
+                        const {img, name, role} = item;
+                        return(
+                            <div key={index} style={{background: `url(${img})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}} className="h-[278px] md:h-[387px] max-w-[318px] w-full flex items-end rounded-[8px] overflow-hidden">
+                                <div className="bg-[#E8FBF2] md:bg-[#ECECEC] w-full text-center pt-[20px] pb-[31px] ">
+                                    <p className="font-semibold md:text-[#455A64] text-[#1BD47B] text-[16px]">{name}</p>
+                                    <p className="text-[12px]">{role}</p>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
         </div>
     );
