@@ -2,13 +2,14 @@ import os
 from uuid import uuid4
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Form
 from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, get_company
 from api.models import models
 from api.routes.auth import get_current_user
 from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking
+from api.scripts.email import send_email
 
 load_dotenv()
 
@@ -21,6 +22,19 @@ low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 def get_user_profile(user: User = Depends(get_current_user)):
     del user.password
     return user
+    
+
+@router.post("/contact_us/", tags=["User"])
+async def contact_us(name: str = Form(), email: str = Form(), msg: str = Form()):
+    
+    body = f"<html><body><h4>{name}</h4>"
+    body += f"<p>{email}</p>"
+    body += f"<p>{msg}</p>"
+    body += "</body></html>"
+
+    await send_email('New Customer Suggestion/Complaints', ['yieldvesttech@gmail.com',], body)
+    
+    return {'Email successfully sent'}
 
 
 @router.get('/notification_settings', tags=['User'])
