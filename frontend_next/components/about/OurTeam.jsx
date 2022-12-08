@@ -3,6 +3,9 @@ import React from "react";
 import img1 from "../../assets/about/team-1.png";
 import img2 from "../../assets/about/team-2.png";
 import img3 from "../../assets/about/team-3.png";
+import Divine from "../../assets/about/divine.png";
+import Imran from "../../assets/about/imran.png";
+import Ayobami from "../../assets/about/ayobami.png";
 
 const OurTeam = () => {
   return (
@@ -17,8 +20,8 @@ const OurTeam = () => {
       <div className="flex flex-col md:flex-row justify-center gap-8 md:justify-between m-10 md:-20">
         <div className="">
           <img
-            className="w-full rounded-t-lg"
-            src={img1.src}
+            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
+            src={Ayobami.src}
             alt="team member"
           />
           <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
@@ -30,8 +33,8 @@ const OurTeam = () => {
         </div>
         <div className="">
           <img
-            className="w-full rounded-t-lg"
-            src={img2.src}
+            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
+            src={Divine.src}
             alt="team member"
           />
           <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
@@ -43,8 +46,8 @@ const OurTeam = () => {
         </div>
         <div className="">
           <img
-            className="w-full rounded-t-lg"
-            src={img3.src}
+            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
+            src={Imran.src}
             alt="team member"
           />
           <div className=" md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
