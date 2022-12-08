@@ -39,7 +39,7 @@ async def newsletter_unsubscribed(request: Request, user_email: str, db: Session
             db.delete(users)
             db.commit()
 
-            return {"isnewLetterSubscribed": "users email deleted"}
+            return {"isnewLetterSubscribed": "users unsubscribed"}
         return {"isnewLetterSubscribed": "users email already unsubscribed"}
 
 # get list of subscribed user and send newsletter email
