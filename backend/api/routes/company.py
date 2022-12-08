@@ -350,7 +350,7 @@ async def get_list_of_all_companies(substring: str = None):
 
     for company in companies:
         data = {
-            'ticker': company.ticker,
+            'ticker': company.ticker_value.symbol,
             'name': company.name,
         }
         result.append(data)
