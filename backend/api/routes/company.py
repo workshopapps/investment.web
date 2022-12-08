@@ -273,7 +273,7 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
 
     filters = []
     if restrict_to_category:
-        filters.append(models.Company.sector == company.sector)
+        filters.append(models.Company.category == company.category)
     if restrict_to_sector:
         filters.append(models.Company.sector == company.sector)
     if restrict_to_industry:
