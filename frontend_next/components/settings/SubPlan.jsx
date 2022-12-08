@@ -14,7 +14,7 @@ export default function SubPlan() {
           <source media="(min-width: 768px)" srcSet={Basicsub} />
           <source media="(max-width: 767px)" srcSet={basicmobile} />
           <img
-            src={basicmobile}
+            src={basicmobile.src}
             alt="basicmobile"
             className="w-full h-full mb-4"
           />
