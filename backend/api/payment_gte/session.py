@@ -105,7 +105,7 @@ async def create_session(request: Request, price_id: str, user: User=Depends(get
             else:
                 return HTTPException(status_code=403, detail="Customer does not exist")
             
-            return {"SessionID": check_session["id"]}
+            return {"SessionID": check_session["id"], "sessionurl": check_session["url"]}
 
         except Exception as e:
             return HTTPException(status_code=403, detail="could not create session")
