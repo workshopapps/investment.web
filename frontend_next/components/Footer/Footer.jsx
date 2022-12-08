@@ -55,11 +55,10 @@ const Footer = () => {
             <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
           </div>
           <div
-            className={`${
-              pathname !== "/download"
-                ? "hidden lg:flex pt-4 mb-[66px]"
-                : "hidden"
-            }`}
+            className={`${pathname !== "/download"
+              ? "hidden lg:flex pt-4 mb-[66px]"
+              : "hidden"
+              }`}
           >
             <Link href="/download">
               <img
