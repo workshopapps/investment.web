@@ -75,6 +75,7 @@ const Payment = () => {
     apiService(accessToken)
       .get("https://api.yieldvest.hng.tech/user/profile")
       .then();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken]);
 
   return (
