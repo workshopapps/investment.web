@@ -273,7 +273,7 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
 
     filters = []
     if restrict_to_category:
-        filters.append(models.Company.sector == company.sector)
+        filters.append(models.Company.category == company.category)
     if restrict_to_sector:
         filters.append(models.Company.sector == company.sector)
     if restrict_to_industry:
@@ -324,8 +324,36 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
                 'position': position,
                 'score': current_rank.score,
                 'companies_compared_with': len(rankings) - 1,
-                'date': current_rank.updated_at
+                'date': current_rank.updated_at,
+                'rankings': rankings
             }
             response.append(data)
 
     return response
+
+
+@router.get('/companies', tags=["Company"], )
+async def get_list_of_all_companies(substring: str = None):
+    db: Session = next(get_db())
+    """
+    This gets the lists of all companies
+    """
+    filters = []
+    if substring:
+        filters.append(models.Company.name.like(f"%{substring}%"))
+
+    companies: List[models.Company] = db.query(models.Company).filter(*filters).order_by(
+        models.Company.name.asc()).all()
+
+    # Return the sorted list of companies
+    result = []
+
+    for company in companies:
+        data = {
+            'ticker': company.ticker_value.symbol,
+            'name': company.name,
+        }
+        result.append(data)
+
+    db.close()
+    return result
