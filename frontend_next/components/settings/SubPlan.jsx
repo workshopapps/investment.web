@@ -12,8 +12,8 @@ export default function SubPlan() {
         </div>
         <div className="flex flex-col w-full h-full mt-6">
           <picture>
-            <source media="(min-width: 768px)" srcSet={Basicsub} />
-            <source media="(max-width: 767px)" srcSet={basicmobile} />
+            <source media="(min-width: 768px)" srcSet={Basicsub.src} />
+            <source media="(max-width: 767px)" srcSet={basicmobile.src} />
             <img
               src={basicmobile.src}
               alt="basicmobile"
@@ -30,7 +30,7 @@ export default function SubPlan() {
               </Link>
             </div>
           </div>
-      </div>
+        </div>
       </div>
     </div>
   );
