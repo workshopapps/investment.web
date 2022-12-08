@@ -366,9 +366,10 @@ const Index = () => {
           <Newsletter />
         </div>
       </section>
-      <div className="mx-7 p-5">
-        <NewsletterModal trigger={popup} setTrigger={setPopup} />
+      {
+        popup && <div className="mx-7 p-5 "><NewsletterModal trigger={popup} setTrigger={setPopup} />
       </div>
+      }
     </Layout>
   );
 };
