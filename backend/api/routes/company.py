@@ -271,6 +271,7 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
     company_rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.updated_at.desc()).all()
 
+    
     filters = []
     if restrict_to_category:
         filters.append(models.Company.category == company.category)
@@ -329,3 +330,16 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
             response.append(data)
 
     return response
+
+
+@router.get('/companies', tags=["Company"], )
+async def get_list_of_all_companies (substring: str = None):
+    db: Session = Depends(get_db())
+    """
+    This gets the lists of all companies
+    """
+    companies: list = db.query(models.Company).filter(models.Company.name.like(f"%{substring}%")).order_by(models.Company.name.asc()).all()
+    
+    #Return the sorted list of companies
+    db.close()
+    return companies
