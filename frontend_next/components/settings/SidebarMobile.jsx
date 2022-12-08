@@ -24,22 +24,22 @@ const SidebarMobile = () => {
 
   return (
     <div className="relative">
-      <div className="flex items-center" onClick={() => setDropdown(!dropdown)}>
+      <div className={dropdown ? "flex items-center bg-[#1BD47B] w-[250px] px-[30px] py-[12px]" : "flex items-center w-[250px] px-[30px] py-[12px]"} onClick={() => setDropdown(!dropdown)}>
         <img src={profileicon.src} alt="profileicon" className="w-5 h-5" />
-        <Link href="/settings" className="font-normal text-base ml-4">
+        <div className="font-normal text-base ml-4">
           My Account
-        </Link>
+        </div>
         {/* <h1 className="font-normal text-base md:flex ml-4 border-green-400">My Account</h1> */}
         <IoIosArrowDown className="ml-2" />
       </div>
       {dropdown && (
-        <ul className="absolute top-8 ">
+        <ul className="absolute bottom-[-110px] bg-white shadow-md flex flex-col gap-[16px] w-[250px]">
           {Menulinks.map((link) => (
             <li key={link.name}>
-              <Link to={link.link}>
+              <Link href={link.link} className="px-[30px] py-[12px] hover:bg-[#1BD47B] inline-block w-full">
                 <div className="flex">
                   <img
-                    src={link.icon}
+                    src={link.icon.src}
                     alt="settingsicon"
                     className="w-5 h-5 "
                   />
