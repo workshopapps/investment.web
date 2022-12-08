@@ -96,12 +96,12 @@ const Subscription = () => {
                 "Weekly email notification for large & mid-cap stocks only",
                 "Access to large-cap and mid-cap categories",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={freeMonthly}
               buttonText="Get Started"
+              destination="/login"
             />
-
 
             <SubscribeCard
               name="Pro"
@@ -116,10 +116,11 @@ const Subscription = () => {
                 "Access to all categories",
                 "Add only 5 stocks to your watchlist",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={premiumMonthly}
               buttonText="Subscribe"
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -135,10 +136,11 @@ const Subscription = () => {
                 "Access to all categories",
                 "Add unlimited stocks to your watchlist",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={premiumMonthly}
               buttonText="Subscribe"
+              destination="/payment"
             />
           </div>
         </div>
@@ -157,12 +159,12 @@ const Subscription = () => {
                 "Weekly email notification for large & mid-cap stocks only",
                 "Access to large-cap and mid-cap categories",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={freeMonthly}
               buttonText="Get Started"
+              destination="/login"
             />
-
 
             <SubscribeCard
               name="Pro"
@@ -177,10 +179,11 @@ const Subscription = () => {
                 "Access to all categories",
                 "Add only 5 stocks to your watchlist",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={premiumMonthly}
               buttonText="Subscribe"
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -196,10 +199,11 @@ const Subscription = () => {
                 "Access to all categories",
                 "Add unlimited stocks to your watchlist",
                 "View company fundamentals",
-                "View ranking history"
+                "View ranking history",
               ]}
               payload={premiumMonthly}
               buttonText="Subscribe"
+              destination="/payment"
             />
           </div>
         </div>

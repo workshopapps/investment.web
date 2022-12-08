@@ -87,7 +87,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow-xl">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
                     className="p-2 cursor-pointer border bg-[#E8FBF2] rounded-full"
