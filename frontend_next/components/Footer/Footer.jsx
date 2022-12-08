@@ -2,9 +2,9 @@
 import React from "react";
 import downloadImage from "../../assets/index/footer-download.svg";
 import footerLogo from "../../assets/footer/footerLogo.png";
-import footerFb from "../../assets/footer/footerFb.png";
-import insta from "../../assets/footer/insta.png";
-import footerTwitter from "../../assets/footer/footerTwitter.png";
+import reddit from "../../assets/footer/reddit.svg";
+import linkedin from "../../assets/footer/linkedin.svg";
+import twitter from "../../assets/footer/twitter.svg";
 import NavLinks from "./NavLinks";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -50,8 +50,8 @@ const Footer = () => {
     >
       <div className="flex w-full flex-wrap justify-between items-start gap-8  pb-12 mb-8 md:mt-12">
         <div>
-          <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
-            <img src={footerLogo} alt="" />
+          <div className="w-60 flex items-center text-2xl pb-8 md:pb-0 mb-[35px] lg:mb-0">
+            <img src={footerLogo.src} alt="" />
 
             <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
           </div>
@@ -70,10 +70,16 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <div className="flex gap-3  ">
-            <img src={footerTwitter} alt="" />
-            <img src={insta} alt="" />
-            <img src={footerFb} alt="" />
+          <div className="flex gap-3 items-center">
+            <Link href="https://twitter.com/YieldVest">
+              <img src={twitter.src} alt="" />
+            </Link>
+            <Link href="https://www.linkedin.com/company/yieldvest/">
+              <img src={linkedin.src} alt="" />
+            </Link>
+            <Link href="https://www.reddit.com/user/Yieldvest">
+              <img src={reddit.src} alt="" />
+            </Link>
           </div>
         </div>
         <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">

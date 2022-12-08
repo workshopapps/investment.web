@@ -263,7 +263,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
             </div>
             <div className="flex flex-row w-full justify-center items-center">
               <Link
-                href={"/forgot"}
+                href={"/forgot-password"}
                 className="text-sm text-green-500 hover:text-green-600 transition ease-in-out delay-100 md:text-base"
               >
                 Forgot password?

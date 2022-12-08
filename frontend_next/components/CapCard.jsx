@@ -278,12 +278,16 @@ const CapCard = ({
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice.toFixed(2)}</p>
                     </div> */}
-          <div className="flex text-center text-xs lg:text-base mt-2">
-            <img
+          <div
+            className="flex text-center text-xs lg:text-base mt-2 w-full"
+            style={{ justifyContent: "center" }}
+          >
+            {/* <img
               src={Graph.src}
               alt="fundamentals chart"
               className="h-[170px] w-full"
-            />
+            /> */}
+            N/A
           </div>
           <Link href={link}>
             <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
@@ -299,7 +303,7 @@ const CapCard = ({
         >
           <div>
             <p className="text-[#B0B2B7] font-normal pb-2 text-xs lg:text-sm">
-              FUNDAMENTALS{' '}
+              FUNDAMENTALS{" "}
             </p>
           </div>
           <div className="flex justify-between text-xs lg:text-sm">
@@ -317,12 +321,7 @@ const CapCard = ({
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle
-                cx="8.50032"
-                cy="8.33333"
-                r="8.33333"
-                fill="#1BD47B"
-              />
+              <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#1BD47B" />
             </svg>
             Profit($bn)
             <svg
@@ -332,12 +331,7 @@ const CapCard = ({
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle
-                cx="8.50032"
-                cy="8.33333"
-                r="8.33333"
-                fill="#000000"
-              />
+              <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#000000" />
             </svg>
             Income($bn)
           </div>
