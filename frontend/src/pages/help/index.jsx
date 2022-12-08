@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Faq from '../../components/Help/Faq';
 // import searchIcon from '../../assets/help/search.svg';
 
@@ -32,7 +32,8 @@ function HelpPage() {
             {
                 question: 'How can I access the platform?',
                 answer: 'Yieldvest is available as a website and a desktop application. This means you can access it on your mobile, as you go. And also on any computer, whether laptop or desktop.',
-                link: 'Download for Desktop'
+                link: 'Download for Desktop',
+                url: '/download'
             }
         ],
         popular_questions: [
@@ -77,6 +78,7 @@ function HelpPage() {
                                 question={faq.question}
                                 answer={faq.answer}
                                 link={faq.link}
+                                url={faq.url}
                             />
                         ))}
                     </div>
