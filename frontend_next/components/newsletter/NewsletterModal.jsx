@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -17,11 +17,18 @@ export default function Newsletter(props) {
     reset();
   };
 
+  useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => {
+      document.body.style.overflowY = "scroll";
+    };
+  }, []);
+
   // pop up form
 
   return props.trigger ? (
     <div className="flex flex-col justify-center items-center fixed top-0 left-0 w-full h-[100vh] bg-[rgba(0, 0, 0, 0.3)]">
-      <div className="flex flex-col items-center justify-center  bg-[#ffffff] rounded-lg border-2 border-[#fffff]">
+      <div className="flex flex-col items-center justify-center  bg-[#ffffff] rounded-lg border-2 border-[#fffff] z-[999]">
         <AiOutlineCloseCircle
           className="flex w-8 h-8 m-2 items-center justify-center ml-auto  cursor-pointer border-2 border-[#fffff] rounded-full"
           onClick={() => props.setTrigger(false)}
@@ -64,6 +71,10 @@ export default function Newsletter(props) {
           </div>
         </div>
       </div>
+      <div
+        className="bg-transparent absolute inset-0 z-[9] backdrop-blur-sm"
+        onClick={() => props.setTrigger(false)}
+      ></div>
     </div>
   ) : (
     ""
