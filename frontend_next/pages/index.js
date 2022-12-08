@@ -13,6 +13,8 @@ import NotFoundImage from "../assets/images/not_found.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import NewsletterModal from "../components/newsletter/NewsletterModal";
+import Newsletter from "../components/newsletter/Newsletter";
 
 const Index = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
@@ -24,6 +26,7 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -46,6 +49,12 @@ const Index = () => {
   const formatLastUpdateDate = (date) => {
     return dateFormat(date + "Z", "mmmm dS, yyyy hh:MM:ss TT");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPopup(true);
+    }, 5000);
+  }, []);
 
   useEffect(() => {
     axios
@@ -351,6 +360,15 @@ const Index = () => {
           <Link href="/cookies">Check cookies policy.</Link>
         </span>
       </CookieConsent>
+
+      <section className="xl:py-14 sm:px-1  p-5 bg-[#F5F5F5]">
+        <div className="flex justify-center items-center">
+          <Newsletter />
+        </div>
+      </section>
+      <div className="mx-7 p-5">
+        <NewsletterModal trigger={popup} setTrigger={setPopup} />
+      </div>
     </Layout>
   );
 };
