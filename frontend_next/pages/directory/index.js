@@ -59,8 +59,8 @@ const CompanyIndexerPage = ({ indexer, data }) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-x-[3em] gap-y-5">
             {data.map((company, key) => {
               return (
-                <Link href={`/company/${company.ticker}`}>
-                  <p key={key} style={{ fontSize: ".8rem", color: "#0F7544" }}>
+                <Link href={`/company/${company.ticker}`} key={key}>
+                  <p style={{ fontSize: ".8rem", color: "#0F7544" }}>
                     {company.name}
                   </p>
                 </Link>
