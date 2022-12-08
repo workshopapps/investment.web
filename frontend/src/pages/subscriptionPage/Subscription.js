@@ -84,7 +84,7 @@ const Subscription = () => {
                         price="5,000"
                         type="month"
                         target="For Power Users"
-                        priceId="price_1M84FHE0pPf6mXoCaZEdZHgv"
+                        priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
                         features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
                         payload={premiumMonthly}
                         buttonText="Subscribe"

@@ -5,6 +5,7 @@ import AboutCompanyCard from "../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../assets/landingPage/icons/up.svg";
 import DownIcon from "../../assets/landingPage/icons/down.svg";
 import shareIcon from "../../assets/company-profile/share.svg";
+import rankIcon from "../../assets/company-profile/ranking.svg";
 import OverviewCard from "../../components/CompanyProfile/OverviewCard";
 import VisualcompanyCard from "../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
@@ -24,7 +25,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
         />
       </Head>
 
-      <div className="bg-[#f5f5f5] font-Hauora">
+      <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
             <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md mx-[1em] md:mx-[100px]">
@@ -35,19 +36,30 @@ const CompanyProfilePage = ({ company, companyId }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3 className="text-2xl md:text-3xl text-[#5C5A5A] pt-10">
+                <h3 className="text-2xl md:text-2xl text-[#5C5A5A] pt-10">
                   {company.name} Stock Fundamentals
                 </h3>
-                <p className="text-xl md:text-2xl text-[#5C5A5A] pt-4">
+                <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
                   Overview
                 </p>
               </div>
 
-              <div className="mt-auto">
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
-                  Share This Stock{" "}
+              <div className="flex flex-row mt-auto gap-2">
+                <Link
+                  href={`/company/${companyId}/history`}
+                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md"
+                >
+                  <span className="hidden md:block">View Ranking History </span>
                   <img
-                    className="ml-3 md:m-auto h-4 md:h-auto bg-none"
+                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    src={rankIcon.src}
+                    alt="open"
+                  />
+                </Link>
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
+                  <span className="hidden md:block">Share This Stock </span>
+                  <img
+                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
                     src={shareIcon.src}
                     alt="open"
                   />
@@ -55,7 +67,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
               </div>
             </div>
 
-            <hr className="w-full mb-4 h-2" />
+            <hr className="hidden md:block w-full mb-4 h-2" />
 
             <div className="flex flex-col md:flex-row gap-5 ">
               <div className="md:w-1/3 w-full">
@@ -72,7 +84,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 md:px-10 py-3 border flex flex-row font-semibold justify-between hover:shadow-xl">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow-xl">
                   About{" "}
                   <img
                     className="p-2 cursor-pointer border bg-[#E8FBF2] rounded-full"

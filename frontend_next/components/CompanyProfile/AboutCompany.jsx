@@ -8,8 +8,8 @@ const AboutCompanyCard = ({ description }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div className="bg-white border rounded-xl my-2 hover:shadow-xl">
-      <p className="md:text-base text-justify text-xs font-semibold text-[#8A8D95] px-4 md:px-10 py-6">
+    <div className="bg-white md:border rounded-xl my-2 hover:shadow-xl">
+      <p className="md:text-base text-justify text-xs font-semibold text-[#8A8D95] px-2 md:px-5 py-6">
         {description.slice(0, 750)}...
         <br />
         <br />
