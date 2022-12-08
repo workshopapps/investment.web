@@ -10,7 +10,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from api.database import database
 from api.database.database import engine
-from api.routes import company, auth, user
+from api.routes import company, auth, user, newsletter
 from api.payment_gte import server
 from api.scripts.ranking import run_process_scripts
 
@@ -49,6 +49,7 @@ app.include_router(auth.router, prefix='/auth')
 app.include_router(user.router, prefix='/user')
 app.include_router(company.router)
 app.include_router(server.router)
+app.include_router(newsletter.router)
 
 
 async def update_script_task():

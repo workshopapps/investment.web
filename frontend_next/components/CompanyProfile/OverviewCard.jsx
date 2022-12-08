@@ -13,7 +13,7 @@ const OverviewCard = ({
   stock_price,
 }) => {
   return (
-    <div className="hover:shadow-xl flex flex-col text-[#5C5A5A] bg-white rounded-xl border justify-center px-4 md:px-10 py-5 mb-6 font-Hauora">
+    <div className="hover:shadow-xl flex flex-col text-[#5C5A5A] bg-white rounded-xl md:border justify-center px-2 md:px-10 py-5 mb-6 font-Hauora">
       <div className="flex-row flex align-middle justify-between gap-1">
         <span className="text-lg md:text-xl font-sans font-bold pt-2">
           {name}

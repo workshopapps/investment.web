@@ -5,6 +5,7 @@ import AboutCompanyCard from "../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../assets/landingPage/icons/up.svg";
 import DownIcon from "../../assets/landingPage/icons/down.svg";
 import shareIcon from "../../assets/company-profile/share.svg";
+import rankIcon from "../../assets/company-profile/ranking.svg";
 import OverviewCard from "../../components/CompanyProfile/OverviewCard";
 import VisualcompanyCard from "../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
@@ -24,7 +25,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
         />
       </Head>
 
-      <div className="bg-[#f5f5f5] font-Hauora">
+      <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
             <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md mx-[1em] md:mx-[100px]">
@@ -43,11 +44,19 @@ const CompanyProfilePage = ({ company, companyId }) => {
                 </p>
               </div>
 
-              <div className="mt-auto">
+              <div className="flex flex-row mt-auto gap-2">
                 <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
-                  Share This Stock{" "}
+                  <span className="hidden md:block">View Ranking History{" "}</span>
                   <img
-                    className="ml-3 md:m-auto h-4 md:h-auto bg-none"
+                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    src={rankIcon.src}
+                    alt="open"
+                  />
+                </button>
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
+                  <span className="hidden md:block">Share This Stock{" "}</span>
+                  <img
+                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
                     src={shareIcon.src}
                     alt="open"
                   />
@@ -55,7 +64,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
               </div>
             </div>
 
-            <hr className="w-full mb-4 h-2" />
+            <hr className="hidden md:block w-full mb-4 h-2" />
 
             <div className="flex flex-col md:flex-row gap-5 ">
               <div className="md:w-1/3 w-full">

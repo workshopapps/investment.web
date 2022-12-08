@@ -22,9 +22,7 @@ const Index = () => {
   const [industry, setIndustry] = useState("all");
   const [sectors, setSectors] = useState([]);
   const [industries, setIndustries] = useState([]);
-  const [lastUpdateDate, setLastUpdateDate] = useState(
-    new Date().toLocaleDateString()
-  );
+  const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
 
   const { isLoggedIn } = useContext(AuthContext);
@@ -48,6 +46,17 @@ const Index = () => {
   const formatLastUpdateDate = (date) => {
     return dateFormat(date + "Z", "mmmm dS, yyyy hh:MM:ss TT");
   };
+
+  useEffect(() => {
+    axios
+      .get(`${baseUrl}/company/sectors`)
+      .then((res) => {
+        setSectors(res.data);
+        loadAllIndustries();
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     reloadIndustriesForSector(sector);
@@ -187,15 +196,19 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <p className="text-[#5c5a5a] text-base lg:text-2xl font-bold mb-4 md:mb-14 space-y-[10px]">
             Recommended Stocks to Invest in Today
-            <span
-              className="text-base lg:ml-8 block lg:inline"
-              style={{ fontSize: ".9rem" }}
-            >
-              Last Updated on{" "}
-              <span style={{ color: "rgb(27, 180, 123)", fontWeight: "bold" }}>
-                {lastUpdateDate}
+            {lastUpdateDate != null && (
+              <span
+                className="text-base lg:ml-8 block lg:inline"
+                style={{ fontSize: ".9rem" }}
+              >
+                Last Updated on{" "}
+                <span
+                  style={{ color: "rgb(27, 180, 123)", fontWeight: "bold" }}
+                >
+                  {lastUpdateDate}
+                </span>
               </span>
-            </span>
+            )}
           </p>
           <div className="space-y-6 ">
             <div className="flex flex-col md:flex-row items-left md:items-center">
