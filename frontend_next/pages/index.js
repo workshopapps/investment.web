@@ -171,10 +171,15 @@ const Index = () => {
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
           <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
             <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
-              We Track, Analyze & Recommend the best stocks for you.
+              We Track, Analyze
+              <br />
+              & Recommend the best
+              <br />
+              stocks for you.
             </h1>
             <p className="text-[13px] font-[400] leading-[18px] mb-[8px] md:max-w-[520px] lg:max-w-[600px] w-full md:text-[16px] md:leading-[24px]">
               We provide well curated information to help you make smarter
+              <br />
               investment decisions based on{" "}
               <span style={{ color: "#1BD47B", fontWeight: "bold" }}>
                 Fundamental Analysis

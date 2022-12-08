@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timedelta
 from typing import List
 
 from dotenv import load_dotenv
@@ -298,8 +299,9 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
         # Get the current matching ranking of all the companies
         rankings: List[Ranking] = []
         for company in companies:
+            date: datetime = company_rank.updated_at
             rank = db.query(Ranking).filter(Ranking.company == company.company_id,
-                                            Ranking.updated_at == company_rank.updated_at) \
+                                            Ranking.updated_at >= date) \
                 .order_by(Ranking.created_at.desc()).first()
             if rank:
                 rankings.append(rank)
@@ -325,7 +327,6 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
                 'score': current_rank.score,
                 'companies_compared_with': len(rankings) - 1,
                 'date': current_rank.updated_at,
-                'rankings': rankings
             }
             response.append(data)
 
@@ -340,7 +341,7 @@ async def get_list_of_all_companies(substring: str = None):
     """
     filters = []
     if substring:
-        filters.append(models.Company.name.like(f"%{substring}%"))
+        filters.append(models.Company.name.like(f"{substring}%"))
 
     companies: List[models.Company] = db.query(models.Company).filter(*filters).order_by(
         models.Company.name.asc()).all()
