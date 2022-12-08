@@ -23,6 +23,7 @@ const Footer = () => {
     {
       name: "Support",
       navLinks: [
+        { link: "Companies", to: "/companies" },
         { link: "How it works", to: "/how-it-works" },
         { link: "Help", to: "/help" },
       ],
