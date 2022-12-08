@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopup(true);
-    }, 5000);
+    }, 15000);
   }, []);
 
   useEffect(() => {
@@ -366,10 +366,11 @@ const Index = () => {
           <Newsletter />
         </div>
       </section>
-      {
-        popup && <div className="mx-7 p-5 "><NewsletterModal trigger={popup} setTrigger={setPopup} />
-      </div>
-      }
+      {popup && (
+        <div className="mx-7 p-5 ">
+          <NewsletterModal trigger={popup} setTrigger={setPopup} />
+        </div>
+      )}
     </Layout>
   );
 };
