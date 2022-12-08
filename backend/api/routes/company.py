@@ -356,4 +356,4 @@ async def get_list_of_all_companies(substring: str = None):
         result.append(data)
 
     db.close()
-    return companies
+    return result
