@@ -268,17 +268,13 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
 
 
 @router.get('/companies', tags=["Company"], )
-async def get_list_of_all_companies (name: str | None = None):
+async def get_list_of_all_companies (substring: str = None):
     db: Session = Depends(get_db())
     """
     This gets the lists of all companies
     """
-    # if name:
-    #     return {'name': models.Company.name,}
-    # return {'name': models.Company.name}
-    companies: list = db.query(models.Company).filter(models.Company.name == name.startswith).order_by(models.Company.asc()).all()
-    # Sort the list of companies alphabetically
-    sorted_companies = sorted(companies)
+    companies: list = db.query(models.Company).filter(models.Company.name.like(f"%{substring}%")).order_by(models.Company.name.asc()).all()
+    
     #Return the sorted list of companies
     db.close()
-    return sorted_companies
+    return companies
