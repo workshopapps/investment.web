@@ -51,7 +51,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                 >
                   <span className="hidden md:block">View Ranking History </span>
                   <img
-                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
                     src={rankIcon.src}
                     alt="open"
                   />
@@ -59,7 +59,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                 <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
                   <span className="hidden md:block">Share This Stock </span>
                   <img
-                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
                     src={shareIcon.src}
                     alt="open"
                   />
@@ -125,6 +125,15 @@ export async function getServerSideProps({ query }) {
     } catch (err) {
       //console.log(err);
       console.log("Fetch failed for company: " + companyId);
+      return {
+        redirect: {
+          destination: "/login"
+        },
+        props: {
+          GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        }
+      }
+
     }
   }
 
