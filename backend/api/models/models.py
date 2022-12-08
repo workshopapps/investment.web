@@ -2,7 +2,7 @@ from uuid import uuid4
 from pydantic import BaseModel
 
 from pydantic import BaseModel
-from sqlalchemy import (Column, ForeignKey,
+from sqlalchemy import (Column, ForeignKey, Integer,
                         String, Float, DateTime, Date, Text, Boolean)
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -205,6 +205,12 @@ class WatchlistItem(Base):
 
     company = relationship("Company")
 
+class NewsLetter(Base):
+    __tablename__ = "newsletter"
+
+    id = Column("newletter_id", Integer, primary_key=True, index=True, autoincrement=True)
+    email = Column(String(64))
+    subscribed = Column(Boolean, default=False)
 
 class UpdateNotificationSettingsModel(BaseModel):
     notifications_enabled: bool = None

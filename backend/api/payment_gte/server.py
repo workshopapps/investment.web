@@ -26,7 +26,7 @@ STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 
 # get all info for product
 @router.get('/product-info', tags=['Customer'])
-async def product_info(request: Request, user: User=Depends(get_current_user)):
+async def product_info(request: Request):
     db: Session = next(get_db())
     product_info = db.query(Product).all()
     return {
@@ -50,7 +50,7 @@ async def create_customer_object(request: Request, price_id: str, user: User=Dep
                 name=CUSTOMER_NAME,
             )
         except:
-          return HTTPException(detail="could not create customer")
+          return HTTPException(status_code=403, detail="could not create customer")
 
         try:
             subscription = stripe.Subscription.create(
