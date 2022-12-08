@@ -16,7 +16,7 @@ export default function index() {
         <div className=" border-r-black">
           <SideBar />
         </div>
-        <div className="mr-2">
+        <div className="px-[17px]">
           <ProfileSection />
           <SubPlan />
         </div>

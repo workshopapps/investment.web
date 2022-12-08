@@ -15,7 +15,7 @@ export default function index() {
         <div className=" border-r-black">
           <SideBar />
         </div>
-        <div className=" mr-2">
+        <div className="">
           <PasswordSettings />
         </div>
       </div>
