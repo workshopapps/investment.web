@@ -156,22 +156,7 @@ const IndexPage = () => {
                 />
             )}
             <ToastContainer />
-            <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
-                {/* <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20 px-[16px] md:px-[20px] ">
-                    <h1
-                        className="max-w-[792px] text-left text-xl sm:text-3xl xl:text-[70px] xl:leading-[50px] font-bol text-white mb-5 lg:mb-11"
-                        style={{
-                            paddingRight: '50px',
-                            lineHeight: '65px'
-                        }}>
-                        We Track, Analyse & Recommend the best stocks for you.
-                    </h1>
-                    <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white mb-[34px] md:mb-0">
-                        We provide well curated information to make smarter investment
-                        <br />
-                        decisions based on Fundamental Analysis{' '}
-                    </p>
-                </div> */}
+            <section className="bg-hero-desktop bg-cover bg-center relative">
                 <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
                     <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
                         <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
