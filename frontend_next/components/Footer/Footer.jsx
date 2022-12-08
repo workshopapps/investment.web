@@ -49,8 +49,8 @@ const Footer = () => {
     >
       <div className="flex w-full flex-wrap justify-between items-start gap-8  pb-12 mb-8 md:mt-12">
         <div>
-          <div className="w-60 flex items-center text-2xl pb-8 md:pb-0">
-            <img src={footerLogo} alt="" />
+          <div className="w-60 flex items-center text-2xl pb-8 md:pb-0 mb-[35px] lg:mb-0">
+            <img src={footerLogo.src} alt="" />
 
             <p className="font-bold ml-2 text-[#1BD47B]">Yieldvest</p>
           </div>
@@ -68,10 +68,10 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <div className="flex gap-3  ">
-            <img src={footerTwitter} alt="" />
-            <img src={insta} alt="" />
-            <img src={footerFb} alt="" />
+          <div className="flex gap-3">
+            <img src={footerTwitter.src} alt="" />
+            <img src={insta.src} alt="" />
+            <img src={footerFb.src} alt="" />
           </div>
         </div>
         <div className="flex justify-between items-start flex-wrap gap-8 max-w-2xl w-full">
