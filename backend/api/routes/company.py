@@ -334,14 +334,14 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
 
 
 @router.get('/companies', tags=["Company"], )
-async def get_list_of_all_companies(substring: str = None):
+async def get_list_of_all_companies(initials: str = None):
     db: Session = next(get_db())
     """
     This gets the lists of all companies
     """
     filters = []
-    if substring:
-        filters.append(models.Company.name.like(f"{substring}%"))
+    if initials:
+        filters.append(models.Company.name.like(f"{initials}%"))
 
     companies: List[models.Company] = db.query(models.Company).filter(*filters).order_by(
         models.Company.name.asc()).all()
