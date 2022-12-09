@@ -1,3 +1,4 @@
+
 export const policyData = [
     {
         title: 'About Yieldvest',
@@ -148,18 +149,18 @@ export const policyData = [
         
         <p class=" pb-2">Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
 
-        <p class=" pb-2">The Company will take all steps reasonably necessary to ensure that your data is treatedsecurely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
+        <p class=" pb-2">The Company will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
         `
     },
     {
         title: 'Delete your Personal Data',
         id: 7,
         content: `
-        <p class=" pb-2">you have the right to delete or request that We assist in deleting the Personal Data that Wehave collected about you.</p>
+        <p class=" pb-2">you have the right to delete or request that We assist in deleting the Personal Data that We have collected about you.</p>
         
         <p class=" pb-2">Our Service may give you the ability to delete certain information about you from within the Service.</p>
 
-        <p class=" pb-2">You may update, amend, or delete your information at any time by signing in to your Account, if you have one, and visiting the account settings section that allows you to manageyour personal information. you may also contact Us to request access to, correct, or deleteany personal information that you have provided to Us.</p>
+        <p class=" pb-2">You may update, amend, or delete your information at any time by signing in to your Account, if you have one, and visiting the account settings section that allows you to manage your personal information. you may also contact Us to request access to, correct, or delete any personal information that you have provided to Us.</p>
 
         <p class=" pb-2">Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
         `
@@ -190,7 +191,7 @@ export const policyData = [
         title: 'Security of your Personal Data',
         id: 9,
         content: `
-        <p class=" pb-2">The security of your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100%secure. While Westrive to use commercially acceptable means to protect your Personal Data, We cannot guarantee its absolute security.</p>
+        <p class=" pb-2">The security of your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100%secure. While We strive to use commercially acceptable means to protect your Personal Data, We cannot guarantee its absolute security.</p>
         `
     },
     {
@@ -206,7 +207,7 @@ export const policyData = [
         title: 'Links to Other Websites',
         id: 11,
         content: `
-        <p class=" pb-2">Our Service may contain links to other websites that are not operated by Us. If you click onathird party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
+        <p class=" pb-2">Our Service may contain links to other websites that are not operated by Us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
 
         <p class=" pb-2">We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
         `
@@ -230,6 +231,7 @@ export const policyData = [
 
         <ul class="pl-8">
             <li class="list-disc pb-2">email: info@Yieldvest.hng.tech</li>
+            <li class="list-disc pb-2"> visit the contact us page</li>
         </ul>
         `
     }
