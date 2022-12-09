@@ -80,7 +80,7 @@ const Cookies = () => {
           <div className="flex md:justify-start justify-between   w-[100%] mt-10">
             <button
               onClick={close}
-              className="h-[50px] min-w-[100px] rounded-md border-2 border-[#1BD47B] p-2 block m-2"
+              className="h-[50px] min-w-[100px] hover:scale-90 transition duration-500 rounded-md border-2 border-[#1BD47B] p-2 block m-2"
             >
               Decline Cookies
             </button>
@@ -98,7 +98,7 @@ const Cookies = () => {
             />
             <button
               onClick={notify}
-              className="h-[50px] min-w-[100px] rounded-md bg-[#1BD47B] block p-2 m-2"
+              className="h-[50px] min-w-[100px] hover:scale-90 transition duration-500 rounded-md bg-[#1BD47B] block p-2 m-2"
             >
               Accept Cookies
             </button>

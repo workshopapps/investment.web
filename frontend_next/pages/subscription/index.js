@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../components/auth/AuthContext";
 
 import "../../assets/subscriptionPage/css/style.module.css";
 import Spring from "../../assets/subscriptionPage/images/spring.png";
@@ -15,6 +16,7 @@ import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
 
 const Subscription = () => {
+  const { isLoggedIn } = useContext(AuthContext);
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
 
@@ -60,7 +62,7 @@ const Subscription = () => {
             className={
               subType === 1
                 ? `bg-[#333946] text-white py-2 px-8 rounded-l `
-                : ` hover:bg-gray-400 text-gray-800 font-bold py-2 px-8  rounded-l `
+                : ` hover:bg-gray-400 text-gray-800 transition duration-500 font-bold py-2 px-8  rounded-l `
             }
             onClick={() => handleSubType("monthly")}
           >
@@ -70,7 +72,7 @@ const Subscription = () => {
             className={
               subType === 2
                 ? `bg-[#333946] text-white py-2 px-8 rounded-r `
-                : `hover:bg-gray-400 text-gray-800 font-bold py-2 px-8  rounded-r`
+                : `hover:bg-gray-400 text-gray-800 font-bold py-2 px-8 transition duration-500 rounded-r`
             }
             onClick={() => handleSubType("yearly")}
           >
@@ -83,7 +85,7 @@ const Subscription = () => {
       {/* subscription content details start here */}
       {subType === 1 ? (
         <div className="w-full flex justify-center font-Hauora">
-          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[80px] lg:mx-[5em] p-0 md:px-[2em] w-full gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 place-items-center mx-10 md:mx-[80px] lg:mx-[5em] p-0 md:px-[2em] w-full gap-10 transition duration-500">
             <SubscribeCard
               name="Basic"
               price=""

@@ -315,7 +315,7 @@ const Index = () => {
             )}
 
             {stocks && stocks.length !== 0 && (
-              <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+              <div className="lg:bg-white lg:border-2 lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
                 {stocks.map((item, index) => (
                   <CapCard
                     key={index}
