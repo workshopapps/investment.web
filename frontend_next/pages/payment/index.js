@@ -66,8 +66,8 @@ const Payment = () => {
     lineItems: [item],
     mode: "payment",
     clientReferenceId: customerId,
-    successUrl: `${router.basePath}/payment/success`,
-    cancelUrl: `${router.basePath}/payment/cancel`,
+    successUrl: `https://yieldvest.hng.tech/payment/success`,
+    cancelUrl: `https://yieldvest.hng.tech/payment/cancel`,
     customerEmail: user.email
   };
 
@@ -75,6 +75,7 @@ const Payment = () => {
   const redirectToCheckout = async () => {
     setIsLoading(true);
     const stripe = await getStripe();
+    console.log(router.pathname)
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
 
     if (error) {
