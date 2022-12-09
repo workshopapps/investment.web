@@ -13,6 +13,8 @@ import NotFoundImage from "../assets/images/not_found.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import NewsletterModal from "../components/newsletter/NewsletterModal";
+import Newsletter from "../components/newsletter/Newsletter";
 
 const Index = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
@@ -24,6 +26,7 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -46,6 +49,12 @@ const Index = () => {
   const formatLastUpdateDate = (date) => {
     return dateFormat(date + "Z", "mmmm dS, yyyy hh:MM:ss TT");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPopup(true);
+    }, 15000);
+  }, []);
 
   useEffect(() => {
     axios
@@ -199,7 +208,10 @@ const Index = () => {
 
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#5c5a5a] text-base lg:text-2xl font-bold mb-4 md:mb-14 space-y-[10px]">
+          <p
+            className="text-[#5c5a5a] text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
+            style={{ fontWeight: 300 }}
+          >
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
               <span
@@ -218,7 +230,10 @@ const Index = () => {
           <div className="space-y-6 ">
             <div className="flex flex-col md:flex-row items-left md:items-center">
               <div className="flex mb-3 md:mb-0">
-                <h3 className="text-sm lg:text-2xl font-semibold text-[#66717e] pr-8">
+                <h3
+                  className="text-sm lg:text-2xl text-[#66717e] pr-8"
+                  style={{ fontWeight: 300 }}
+                >
                   Filter by:
                 </h3>
               </div>
@@ -351,6 +366,17 @@ const Index = () => {
           <Link href="/cookies">Check cookies policy.</Link>
         </span>
       </CookieConsent>
+
+      <section className="xl:py-14 sm:px-1  p-5 bg-[#F5F5F5]">
+        <div className="flex justify-center items-center">
+          <Newsletter />
+        </div>
+      </section>
+      {popup && (
+        <div className="mx-7 p-5 ">
+          <NewsletterModal trigger={popup} setTrigger={setPopup} />
+        </div>
+      )}
     </Layout>
   );
 };

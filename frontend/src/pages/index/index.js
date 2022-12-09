@@ -170,13 +170,15 @@ const IndexPage = () => {
                             </span>
                         </p>
                     </div>
-                    <div className="flex justify-start items-center md:hidden">
-                        <button
-                            onClick={() => navigate('/signup')}
-                            className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
-                            Get Started
-                        </button>
-                    </div>
+                    {!isLoggedIn && (
+                        <div className="flex justify-start items-center md:hidden">
+                            <button
+                                onClick={() => navigate('/signup')}
+                                className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
+                                Get Started
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
@@ -233,48 +235,6 @@ const IndexPage = () => {
                                         </option>
                                     ))}
                                 </select>
-                                {/* <Select
-                                    options={[
-                                        {
-                                            value: 'All Caps',
-                                            label: 'All Caps',
-                                            jsx: <span>All Caps</span>
-                                        },
-                                        {
-                                            value: 'Large Cap',
-                                            label: 'Large Cap',
-                                            jsx: <span>Large Cap</span>
-                                        },
-                                        {
-                                            value: 'Small Cap',
-                                            label: 'Small Cap',
-                                            jsx: <span>Mid Cap</span>
-                                        },
-                                        {
-                                            value: 'Small Cap',
-                                            label: 'Small Cap',
-                                            jsx: <span>Small Cap</span>
-                                        }
-                                    ]}
-                                    onChange={(e) => console.log(e)}
-                                    name="Caps"
-                                    defaultValue="All Caps"
-                                    // disabled={false}
-                                    // required={false}
-                                    placeholder="Filter by Caps"
-                                    className="form-control w-[236px] h-[48px] py-3 px-4 border-2 border-[#00000020] rounded"
-                                    listStyle={{
-                                        backgroundColor: 'white',
-                                        border: '2px solid rgba(0, 0, 0, 0.2)'
-                                    }}
-                                    activeItemStyle={{ backgroundColor: '#49dd95' }}
-                                    iconWidth="40"
-                                    iconStyle={{
-                                        fontSize: '26px',
-                                        borderRadius: '0 5px 5px 0',
-                                        color: '#49dd95'
-                                    }}
-                                /> */}
                             </div>
                         </div>
 
@@ -301,7 +261,6 @@ const IndexPage = () => {
 
                         {stocks && stocks.length === 0 && (
                             <div
-                                //className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10"
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -363,7 +322,7 @@ const IndexPage = () => {
                     <Newsletter />
                 </div>
             </section>
-            <div>
+            <div className="mx-7 p-5">
                 <NewsletterModal trigger={popup} setTrigger={setPopup} />
             </div>
         </PageLayout>

@@ -35,7 +35,7 @@ export const Section = () => {
                     <h3 className="font-bold text-xl mb-2 text-center md:text-left">What We Do</h3>
                     <p className="text-[#66717E] text-center md:text-left">
                         Yieldvest guides individuals and businesses who need help knowing what
-                        stocks to invest in to make better and well-informed decisions on what
+                        stocks to invest in to make better and more informed decisions on what
                         stocks to purchase. We bring the best to you after analyzing each of these
                         companies based on various metrics. Here`s how we help you make educated
                         decisions;
@@ -64,12 +64,12 @@ export const Section = () => {
                             <h1 className="text-[#455A64] text-center md:text-left md:font-semibold mb-0 md:mb-2 text-xl md:text-4xl">
                                 Our Core Values
                             </h1>
-                            <p className="text-sm md:text-lg">
+                            <p className="text-sm md:text-lg text-justify">
                                 Having values as a team is essential to the team working as a single
-                                unit. We`re a group of diverse individuals, and working together can
-                                be tough but we learn to treat each other with respect and welcome
-                                every idea. Here are some of our core values that we think other
-                                companies should mirror;
+                                unit. We are a group of diverse individuals, and working together
+                                can be tough but we learn to treat each other with respect and
+                                welcome every idea. Here are some of our core values that we think
+                                other companies should mirror:
                             </p>
                         </div>
                     </div>

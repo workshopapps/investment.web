@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dropdown from '../../assets/help/dropdown.svg';
 
-function faq({ question, answer, link }) {
+function faq({ question, answer, link, url }) {
     const [isFaqToggle, setIsFaqToggle] = useState(false);
     return (
         <div className="w-full font-Hauora text-xs sm:text-sm lg:text-base text-[#0A0B0D]">
@@ -30,9 +31,9 @@ function faq({ question, answer, link }) {
             >
                 <p className="w-full h-full text-[#000C1A]">
                     {answer}{' '}
-                    <a href="#" className=" underline text-[#0078D4]">
+                    <Link to={url} className=" underline text-[#0078D4]">
                         {link}
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>
