@@ -13,7 +13,7 @@ const Contact = () => {
             <section className="  min-h-fit justify-around p-5 flex md:p-12 flex-col-reverse md:flex-row bg-[#F4F5F6] text-[#525A65]">
                 <div className="basis-[30%] font-Hauora p-6 ">
                     <aside className="mb-4 hidden md:block">
-                        <h1 className=" text-5xl p-2">Contact us</h1>
+                        <h1 className="font-bold sm:text-[24px] md:text-5xl p-2">Contact us</h1>
                         <p className="">Got any concerns you want us to sort out for you?</p>
                     </aside>
                     <aside className="mb-4">
