@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals.js';
 import './index.css';
 import App from './App';
 
-atatus.config('2633350d639c4095ba4d068ad167d5b3').install();
+atatus.config('ef7c4c980d4b454f9beae7ad07ee545c').install();
 atatus.notify(new Error('Test Atatus Setup'));
 
 Sentry.init({
