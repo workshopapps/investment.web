@@ -34,6 +34,7 @@ export default function Newsletter({ trigger, onClose }) {
         if (res.status === 200) {
           onClose();
           toast.success("Subscribed successfully!");
+          sessionStorage.setItem("subscribed", true);
         } else {
           toast.error("Failed to subscribe");
         }
@@ -44,13 +45,6 @@ export default function Newsletter({ trigger, onClose }) {
         toast.error("Failed to subscribe");
       });
   };
-
-  useEffect(() => {
-    document.body.style.overflowY = "hidden";
-    return () => {
-      document.body.style.overflowY = "scroll";
-    };
-  }, []);
 
   return (
     <Transition.Root show={trigger} as={Fragment}>
