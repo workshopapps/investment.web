@@ -13,10 +13,7 @@ const Goals = () => {
                     Company with a difference. Innovation.
                 </h3>
                 <p className="text-[#66717E] text-xs md:text-sm text-center md:text-left">
-                    At Yieldvest we use proprietary tech mixed with finacne give you listings of
-                    top 10 stocks so you know the best for you at first glance. A company makes it
-                    to our list after it passes through our analysis and we`ve ensured it is the
-                    best choice for you.
+                    At Yieldvest we use proprietary tech mixed with finance to give you listings of the top 10 stocks so you know the best for you at first glance. A company makes it to our list after it passes through our analysis and we have ensured it is the best choice for you.
                 </p>
             </div>
 

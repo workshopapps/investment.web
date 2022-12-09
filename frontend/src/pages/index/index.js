@@ -157,21 +157,6 @@ const IndexPage = () => {
             )}
             <ToastContainer />
             <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
-                {/* <div className="w-fit h-[300px] lg:h-[516px] flex flex-col justify-center m-aut sm:px-10 xl:p-20 px-[16px] md:px-[20px] ">
-                    <h1
-                        className="max-w-[792px] text-left text-xl sm:text-3xl xl:text-[70px] xl:leading-[50px] font-bol text-white mb-5 lg:mb-11"
-                        style={{
-                            paddingRight: '50px',
-                            lineHeight: '65px'
-                        }}>
-                        We Track, Analyse & Recommend the best stocks for you.
-                    </h1>
-                    <p className="max-w-[792px] text-xs sm:text-base lg:text-xl text-white mb-[34px] md:mb-0">
-                        We provide well curated information to make smarter investment
-                        <br />
-                        decisions based on Fundamental Analysis{' '}
-                    </p>
-                </div> */}
                 <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
                     <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
                         <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
@@ -185,13 +170,15 @@ const IndexPage = () => {
                             </span>
                         </p>
                     </div>
-                    <div className="flex justify-start items-center md:hidden">
-                        <button
-                            onClick={() => navigate('/signup')}
-                            className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
-                            Get Started
-                        </button>
-                    </div>
+                    {!isLoggedIn && (
+                        <div className="flex justify-start items-center md:hidden">
+                            <button
+                                onClick={() => navigate('/signup')}
+                                className="bg-[#1BD47B] py-[8px] px-[20px] rounded-[8px] inline-block font-[600] text-[13px] text-[#1F2226] leading-[20px]">
+                                Get Started
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
             <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
@@ -248,48 +235,6 @@ const IndexPage = () => {
                                         </option>
                                     ))}
                                 </select>
-                                {/* <Select
-                                    options={[
-                                        {
-                                            value: 'All Caps',
-                                            label: 'All Caps',
-                                            jsx: <span>All Caps</span>
-                                        },
-                                        {
-                                            value: 'Large Cap',
-                                            label: 'Large Cap',
-                                            jsx: <span>Large Cap</span>
-                                        },
-                                        {
-                                            value: 'Small Cap',
-                                            label: 'Small Cap',
-                                            jsx: <span>Mid Cap</span>
-                                        },
-                                        {
-                                            value: 'Small Cap',
-                                            label: 'Small Cap',
-                                            jsx: <span>Small Cap</span>
-                                        }
-                                    ]}
-                                    onChange={(e) => console.log(e)}
-                                    name="Caps"
-                                    defaultValue="All Caps"
-                                    // disabled={false}
-                                    // required={false}
-                                    placeholder="Filter by Caps"
-                                    className="form-control w-[236px] h-[48px] py-3 px-4 border-2 border-[#00000020] rounded"
-                                    listStyle={{
-                                        backgroundColor: 'white',
-                                        border: '2px solid rgba(0, 0, 0, 0.2)'
-                                    }}
-                                    activeItemStyle={{ backgroundColor: '#49dd95' }}
-                                    iconWidth="40"
-                                    iconStyle={{
-                                        fontSize: '26px',
-                                        borderRadius: '0 5px 5px 0',
-                                        color: '#49dd95'
-                                    }}
-                                /> */}
                             </div>
                         </div>
 
@@ -316,7 +261,6 @@ const IndexPage = () => {
 
                         {stocks && stocks.length === 0 && (
                             <div
-                                //className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10"
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
@@ -378,7 +322,7 @@ const IndexPage = () => {
                     <Newsletter />
                 </div>
             </section>
-            <div>
+            <div className="mx-7 p-5">
                 <NewsletterModal trigger={popup} setTrigger={setPopup} />
             </div>
         </PageLayout>

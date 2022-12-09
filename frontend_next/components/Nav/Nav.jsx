@@ -26,6 +26,7 @@ const Nav = ({ openMenu }) => {
     background: `#1BD47B`,
     padding: "12px 16px",
     border: "none",
+    borderRadius: "8px",
     display: "inline-block",
   };
 
@@ -60,7 +61,7 @@ const Nav = ({ openMenu }) => {
               <button
                 type="button"
                 style={btnStyle}
-                className="rounded text-[#1F2226] font-[400]"
+                className="rounded text-[#1F2226] font-[300]"
               >
                 Get Started
               </button>

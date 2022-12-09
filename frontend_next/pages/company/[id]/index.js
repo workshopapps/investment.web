@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
-import Layout from "../../components/Layout";
-import AboutCompanyCard from "../../components/CompanyProfile/AboutCompany";
-import UpIcon from "../../assets/landingPage/icons/up.svg";
-import DownIcon from "../../assets/landingPage/icons/down.svg";
-import shareIcon from "../../assets/company-profile/share.svg";
-import rankIcon from "../../assets/company-profile/ranking.svg";
-import OverviewCard from "../../components/CompanyProfile/OverviewCard";
-import VisualcompanyCard from "../../components/CompanyProfile/AnalysisCard";
+import React from "react";
+import Layout from "../../../components/Layout";
+import AboutCompanyCard from "../../../components/CompanyProfile/AboutCompany";
+import UpIcon from "../../../assets/landingPage/icons/up.svg";
+import DownIcon from "../../../assets/landingPage/icons/down.svg";
+import shareIcon from "../../../assets/company-profile/share.svg";
+import rankIcon from "../../../assets/company-profile/ranking.svg";
+import OverviewCard from "../../../components/CompanyProfile/OverviewCard";
+import VisualcompanyCard from "../../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
@@ -36,7 +36,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3 className="text-2xl md:text-2xl text-[#5C5A5A] pt-10">
+                <h3
+                  className="text-1xl md:text-1xl text-[#5C5A5A] pt-10"
+                  style={{ fontSize: "1.3rem" }}
+                >
                   {company.name} Stock Fundamentals
                 </h3>
                 <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
@@ -51,7 +54,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                 >
                   <span className="hidden md:block">View Ranking History </span>
                   <img
-                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
                     src={rankIcon.src}
                     alt="open"
                   />
@@ -59,7 +62,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                 <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
                   <span className="hidden md:block">Share This Stock </span>
                   <img
-                    className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
+                    className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
                     src={shareIcon.src}
                     alt="open"
                   />
@@ -84,7 +87,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow-xl">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
                     className="p-2 cursor-pointer border bg-[#E8FBF2] rounded-full"
@@ -125,6 +128,14 @@ export async function getServerSideProps({ query }) {
     } catch (err) {
       //console.log(err);
       console.log("Fetch failed for company: " + companyId);
+      // return {
+      //   redirect: {
+      //     destination: "/login",
+      //   },
+      //   props: {
+      //     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+      //   },
+      // };
     }
   }
 
