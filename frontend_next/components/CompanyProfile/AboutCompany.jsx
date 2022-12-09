@@ -8,13 +8,16 @@ const AboutCompanyCard = ({ description }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <div className="bg-white md:border rounded-xl my-2 hover:shadow-xl">
-      <p className="md:text-base text-justify text-xs font-semibold text-[#8A8D95] px-2 md:px-5 py-6">
-        {description.slice(0, 750)}...
+    <div className="bg-white rounded-md my-2">
+      <p
+        className="md:text-base text-xs font-regular text-[#8A8D95] px-2 md:px-5 py-6"
+        style={{ lineHeight: "30px" }}
+      >
+        {description.slice(0, 600)}...
         <br />
         <br />
         <span
-          className=" text-[#0F7544] cursor-pointer"
+          className=" text-[#0F7544] underline cursor-pointer"
           onClick={() => setIsOpen(true)}
         >
           Read more
@@ -30,7 +33,7 @@ const AboutCompanyCard = ({ description }) => {
                 About
               </Dialog.Title>
 
-              <p className="md:text-base text-justify text-xs mt-5 font-semibold text-[#8A8D95]">
+              <p className="md:text-base text-xs mt-5 font-semibold text-[#8A8D95]">
                 {description}
               </p>
             </Dialog.Panel>

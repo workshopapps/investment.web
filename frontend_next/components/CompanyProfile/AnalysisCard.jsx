@@ -24,7 +24,7 @@ const VisualDataCard = () => {
     showIncome: true,
     showExpenses: true,
     showProfit: true,
-    value: "2022",
+    value: new Date().getFullYear(),
     position: 0,
   });
 
@@ -112,14 +112,25 @@ const VisualDataCard = () => {
         </div>
 
         <div className="relative inline-block">
-          <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-2 md:py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10">
+          <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-2 md:py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-[3rem]">
             {state.value}{" "}
-            <img
-              className="p-2 ml-3 md:m-auto h-6 md:h-auto border bg-[#E8FBF2] rounded-full"
-              src={(state.show ? UpIcon : DownIcon).src}
-              onClick={() => setState({ ...state, show: !state.show })}
-              alt="open"
-            />
+            <div
+              className="ml-3 md:m-auto py-[.55rem] px-[.5rem]"
+              style={{
+                borderRadius: "50%",
+                background: "rgba(232, 251, 242, 1)",
+              }}
+            >
+              <img
+                src={(state.show ? UpIcon : DownIcon).src}
+                onClick={() => setState({ ...state, show: !state.show })}
+                style={{
+                  filter:
+                    "invert(58%) sepia(88%) saturate(404%) hue-rotate(99deg) brightness(96%) contrast(93%)",
+                }}
+                alt="open"
+              />
+            </div>
           </button>
 
           {state.show && (
@@ -322,15 +333,15 @@ const VisualDataCard = () => {
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-0 md:my-5 flex text-sm md:text-lg font-HauoraBold font-bold flex-row justify-between">
-        <h2 className="opacity-50 pl-4">Key Metric</h2>
-        <h2 className="opacity-50 pl-0 md:pl-20">USD ({state.value})</h2>
-        <h2 className="opacity-50 pl-4">% Change</h2>
+      <div className="mt-0 md:my-5 flex text-xs md:text-[.9rem] font-Hauora font-semibold flex-row justify-between">
+        <h2 className="pl-4">Key Metric</h2>
+        <h2 className="pl-0 md:pl-10">USD ({state.value})</h2>
+        <h2 className="pl-4">% Change</h2>
       </div>
 
       {data.length > 0 ? (
         <>
-          <div className="mt-6 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -361,7 +372,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -394,7 +405,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -425,7 +436,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="my-3 mr-5 flex text-sm md:text-lg font-Hauora font-normal flex-row justify-between">
+          <div className="my-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
