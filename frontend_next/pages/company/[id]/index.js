@@ -15,7 +15,7 @@ import NotSubscribedModal from "../../../components/subscription/NotSubscribedMo
 import { useRouter } from "next/router";
 
 const CompanyProfilePage = ({ company, companyId }) => {
-  const [showAbout, setShowAbout] = React.useState(true);
+  const [showAbout, setShowAbout] = React.useState(false);
   const router = useRouter();
 
   if (!company) {
@@ -110,7 +110,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   About{" "}
                   <img
                     className="cursor-pointer"
-                    src={(showAbout ? DownIcon : UpIcon).src}
+                    src={(showAbout ? UpIcon : DownIcon).src}
                     alt="open"
                     onClick={() => setShowAbout(!showAbout)}
                   />

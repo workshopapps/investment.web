@@ -1,18 +1,45 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ThreeDots } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 export default function Newsletter() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
+    setIsLoading(true);
 
-    reset();
+    axios
+      .post(
+        "https://api.yieldvest.hng.tech/newsletter-subscription",
+        {},
+        {
+          params: {
+            user_email: data.email,
+          },
+        }
+      )
+      .then((res) => {
+        setIsLoading(false);
+
+        if (res.status === 200) {
+          toast.success("Subscribed successfully!");
+          sessionStorage.setItem("subscribed", true);
+        } else {
+          toast.error("Failed to subscribe");
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+        setIsLoading(false);
+        toast.error("Failed to subscribe");
+      });
   };
 
   return (
@@ -40,11 +67,33 @@ export default function Newsletter() {
             />
 
             <button className="w-full hover:scale-90 transition duration-500 h-[60px] md:mt-0 md:w-[160px] md:h-[100%]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
-              Keep me updated
+              {isLoading ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <ThreeDots
+                    height="30"
+                    width="50"
+                    radius="9"
+                    color="#fff"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClassName=""
+                    visible={true}
+                  />
+                </div>
+              ) : (
+                "Keep me updated"
+              )}
             </button>
           </form>
           {errors.email && (
-            <span className="flex text-red-500">Email is required</span>
+            <div className="mt-1" style={{ width: "100%", textAlign: "left" }}>
+              <span className="text-red-500">Email is required</span>
+            </div>
           )}
         </div>
       </div>

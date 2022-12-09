@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "../components/Layout";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import axios from "axios";
 import CapCard from "../components/CapCard";
 import dateFormat from "dateformat";
@@ -30,6 +30,8 @@ const Index = () => {
 
   const { isLoggedIn } = useContext(AuthContext);
 
+  let timeoutId = useRef();
+
   const handleMarketCap = (e) => {
     e.preventDefault();
     setMarketCap(e.target.value);
@@ -51,9 +53,16 @@ const Index = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setPopup(true);
-    }, 15000);
+    if (sessionStorage.getItem("subscribed")) {
+      if (timeoutId.current) {
+        clearTimeout(timeoutId);
+      }
+    } else {
+      const id = setTimeout(() => {
+        setPopup(true);
+      }, 15000);
+      timeoutId.current = id;
+    }
   }, []);
 
   useEffect(() => {

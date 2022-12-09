@@ -13,6 +13,7 @@ import AuthContext from "./auth/AuthContext";
 import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
 import MiniBarChartCard from "./Charts/MiniBarChart";
+import { useRouter } from "next/router";
 
 const CapCard = ({
   logo,
@@ -32,8 +33,10 @@ const CapCard = ({
   const [hoverPrice, setHoverPrice] = useState(false);
   const [isInWatchlist, setInWatchlist] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
+  const router = useRouter();
 
   const handlePriceModal = () => {
     setPriceModal(!priceModal);
@@ -101,7 +104,13 @@ const CapCard = ({
             </div>
             <div className="">
               <p className="text-[#333946] font-normal text-lg">{abbr}</p>
-              <p className="text-[#139757] font-normal text-sm">{name}</p>
+              <p
+                className="text-[#139757] font-normal text-sm"
+                style={{ cursor: "pointer" }}
+                onClick={() => router.push(link)}
+              >
+                {name}
+              </p>
               <p className="text-[#545964] font-semibold text-sm">{sector}</p>
             </div>
           </div>
