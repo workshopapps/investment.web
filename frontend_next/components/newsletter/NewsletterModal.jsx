@@ -1,20 +1,48 @@
-import React, { useEffect } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Dialog, Transition } from "@headlessui/react";
+import Cancel from "../../assets/cancel.svg";
+import { toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
+import axios from "axios";
 
-import { AiOutlineCloseCircle } from "react-icons/ai";
-
-export default function Newsletter(props) {
+export default function Newsletter({ trigger, onClose }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
-    console.log(data);
+    setIsLoading(true);
 
-    reset();
+    axios
+      .post(
+        "https://api.yieldvest.hng.tech/newsletter-subscription",
+        {},
+        {
+          params: {
+            user_email: data.email,
+          },
+        }
+      )
+      .then((res) => {
+        setIsLoading(false);
+
+        if (res.status === 200) {
+          onClose();
+          toast.success("Subscribed successfully!");
+        } else {
+          toast.error("Failed to subscribe");
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+        setIsLoading(false);
+        toast.error("Failed to subscribe");
+      });
   };
 
   useEffect(() => {
@@ -24,59 +52,105 @@ export default function Newsletter(props) {
     };
   }, []);
 
-  // pop up form
-
-  return props.trigger ? (
-    <div className="flex flex-col justify-center items-center fixed top-0 left-0 w-full h-[100vh] bg-[rgba(0, 0, 0, 0.3)]">
-      <div className="flex flex-col items-center justify-center  bg-[#ffffff] rounded-lg border-2 border-[#fffff] z-[999]">
-        <AiOutlineCloseCircle
-          className="flex w-8 h-8 m-2 hover:scale-[150%] transition duration-500 items-center justify-center ml-auto  cursor-pointer border-2 border-[#fffff] rounded-full"
-          onClick={() => props.setTrigger(false)}
-        />
-        <div
-          className="flex md:px-[150px] pt-[10px] pb-10 items-center text-[#000718
-] "
+  return (
+    <Transition.Root show={trigger} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          <div className="flex flex-col justify-center items-center ">
-            <h1
-              className="flex pt-2 font-semibold text-2xl text-[#000718
-]"
+          <div className="fixed inset-0 bg-[#0a0b0d] bg-opacity-75 transition-opacity" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 z-10 overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              Don’t miss out !
-            </h1>
+              <Dialog.Panel className="relative w-full transform overflow-hidden shadow-xl transition-all flex justify-center items-center">
+                <div className="flex justify-center items-center flex-col">
+                  <div
+                    className="mb-[8px] flex justify-end items-center rounded-lg w-full"
+                    onClick={onClose}
+                  >
+                    <img
+                      src={Cancel.src}
+                      alt="Close"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </div>
 
-            <p className="flex pt-4 text-center font-normal text-base md:w-[504px] md:px-8">
-              Subscribe to our weekly Email Newsletter to receive stock tips and
-              recommendations
-            </p>
+                  <div className="bg-white max-w-[784px] flex flex-col items-center justify-start rounded-[8px] px-[54px] pt-[60px] pb-[34px]">
+                    <h1 className="flex pt-2 font-semibold text-2xl text-[#000718]">
+                      Don’t miss out !
+                    </h1>
 
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col md:flex-row md:w-[506px]  h-[110px] md:h-[56px] mt-4 border p-1 border-[#A3AAB2] rounded-lg"
-            >
-              <input
-                type="email"
-                className="flex w-full md:w-4/5 h-full px-2 text-base text-[#000718] border-none focus:outline-none focus:border-none bg-[#ffffff]"
-                placeholder="Enter email address"
-                {...register("email", { required: true })}
-              />
+                    <p className="flex pt-4 text-center font-normal text-base md:px-[5rem] text-[#000718]">
+                      Subscribe to our weekly Email Newsletter to receive stock
+                      tips and recommendations
+                    </p>
 
-              <button className="w-full hover:scale-90 transition duration-500 h-[60px] mt-1 md:mt-0 md:w-[160px] md:h-[48px]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
-                Keep me updated
-              </button>
-            </form>
-            {errors.email && (
-              <span className="flex text-red-500">Email is required</span>
-            )}
+                    <form
+                      onSubmit={handleSubmit(onSubmit)}
+                      className="flex flex-col md:flex-row md:w-[100%]  h-[110px] md:h-[56px] mt-4 border p-1 border-[#A3AAB2] rounded-lg"
+                    >
+                      <input
+                        type="email"
+                        className="flex w-full md:w-4/5 h-full px-2 text-base text-[#000718] border-none focus:outline-none focus:border-none bg-[#ffffff]"
+                        placeholder="Enter email address"
+                        {...register("email", { required: true })}
+                      />
+
+                      <button className="w-full  h-[60px] mt-1 md:mt-0 md:w-[160px] md:h-[48px]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
+                        {isLoading ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <ThreeDots
+                              height="30"
+                              width="50"
+                              radius="9"
+                              color="#fff"
+                              ariaLabel="three-dots-loading"
+                              wrapperStyle={{}}
+                              wrapperClassName=""
+                              visible={true}
+                            />
+                          </div>
+                        ) : (
+                          "Keep me updated"
+                        )}
+                      </button>
+                    </form>
+                    {errors.email && (
+                      <div
+                        className="mt-1"
+                        style={{ width: "100%", textAlign: "left" }}
+                      >
+                        <span className="text-red-500">Email is required</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
         </div>
-      </div>
-      <div
-        className="bg-transparent absolute inset-0 z-[9] backdrop-blur-sm"
-        onClick={() => props.setTrigger(false)}
-      ></div>
-    </div>
-  ) : (
-    ""
+      </Dialog>
+    </Transition.Root>
   );
 }

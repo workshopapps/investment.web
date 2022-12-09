@@ -153,7 +153,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
                   className="flex justify-between p-2 bg-white my-[1rem] px-[1rem] py-[1rem]"
                 >
                   <p className="font-regular">
-                    {dateformat(ranking.date, "mmm dd")}
+                    {dateformat(ranking.date, "mmm dd, yyyy")}
                   </p>
                   <p>
                     <img src={arrowup.src} alt="" />

@@ -7,15 +7,15 @@ export const freeMonthly = {
 
 export const premiumMonthly = {
     amount: `5000`,
-    content: `For Premium Users new . Get access to our Premium features and invest with more precision`,
-    typeOfSubscription: 'Premium',
+    content: `For Standard Users new . Get access to our Standard features and invest with more precision`,
+    typeOfSubscription: 'Standard',
     subTime: `month`
 };
 
 export const premiumMaxMonthly = {
     amount: `20,000`,
     content: `For Professional Users . Get access to our Professional features and invest with more precision`,
-    typeOfSubscription: 'Premium Max',
+    typeOfSubscription: 'Standard Max',
     subTime: `month`
 };
 
@@ -28,14 +28,14 @@ export const freeYearly = {
 
 export const premiumYearly = {
     amount: `60,000`,
-    content: `For Premium Users new . Get access to our Premium features and invest with more precision`,
-    typeOfSubscription: 'Premium',
+    content: `For Standard Users new . Get access to our Standard features and invest with more precision`,
+    typeOfSubscription: 'Standard',
     subTime: `year`
 };
 
 export const premiumMaxYearly = {
     amount: `240,000`,
     content: `For Professional Users . Get access to our Professional features and invest with more precision`,
-    typeOfSubscription: 'Premium Max',
+    typeOfSubscription: 'Standard Max',
     subTime: `year`
 };

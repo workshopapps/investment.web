@@ -92,7 +92,7 @@ const Subscription = () => {
               discount="0.00"
               type="month"
               target="For basic users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -100,9 +100,9 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={freeMonthly}
               buttonText="Get Started"
-              destination={`${isLoggedIn ? "/" : "/login"}`}
+              content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
+              destination="/login"
             />
 
             <SubscribeCard
@@ -111,7 +111,7 @@ const Subscription = () => {
               discount="25"
               type="month"
               target="For power users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -120,8 +120,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
             />
 
@@ -131,7 +131,7 @@ const Subscription = () => {
               discount="50"
               type="month"
               target="For advanced users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -140,22 +140,22 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination="/payment"
             />
           </div>
         </div>
       ) : subType === 2 ? (
         <div className="w-full flex justify-center font-Hauora">
-          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[80px] lg:mx-[5em] p-0 md:px-[2em] w-full gap-10">
             <SubscribeCard
               name="Basic"
               price=""
               discount="0.00"
               type="year"
               target="For basic users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -163,8 +163,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={freeMonthly}
               buttonText="Get Started"
+              content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
               destination="/login"
             />
 
@@ -174,7 +174,7 @@ const Subscription = () => {
               discount="300"
               type="year"
               target="For power users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -183,8 +183,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
             />
 
@@ -194,7 +194,7 @@ const Subscription = () => {
               discount="600"
               type="year"
               target="For advanced users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -203,8 +203,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination="/payment"
             />
           </div>

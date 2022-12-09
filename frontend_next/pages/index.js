@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopup(true);
-    }, 15000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -243,7 +243,7 @@ const Index = () => {
                   onChange={handleMarketCap}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Cap</option>
+                  <option value="all">All Market Caps</option>
                   <option value="high_market_cap_category">Large Cap </option>
                   <option value="mid_market_cap_category">Mid Cap </option>
                   <option value="low_market_cap_category">Small Cap </option>
@@ -266,7 +266,7 @@ const Index = () => {
                   value={industry}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Industry</option>
+                  <option value="all">All Industries</option>
                   {industries.map((industry, index) => (
                     <option value={industry.industry_id} key={index}>
                       {industry.industry}
@@ -373,8 +373,8 @@ const Index = () => {
         </div>
       </section>
       {popup && (
-        <div className="mx-7 p-5 ">
-          <NewsletterModal trigger={popup} setTrigger={setPopup} />
+        <div>
+          <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
         </div>
       )}
     </Layout>
