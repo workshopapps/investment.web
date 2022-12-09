@@ -310,3 +310,4 @@ function App() {
 }
 
 export default Sentry.withProfiler(App);
+atatus.notify(new Error('Test Atatus Setup'));
