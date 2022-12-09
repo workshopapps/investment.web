@@ -15,7 +15,7 @@ import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
 
-const Subscription = () => {
+const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
   const { isLoggedIn } = useContext(AuthContext);
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
@@ -24,12 +24,10 @@ const Subscription = () => {
   const handleSubType = (theSub) => {
     if (theSub === "monthly") {
       setSubType(1);
-      console.log(subType);
     }
 
     if (theSub === "yearly") {
       setSubType(2);
-      console.log(subType);
     }
   };
 
@@ -92,7 +90,7 @@ const Subscription = () => {
               discount="0.00"
               type="month"
               target="For basic users"
-              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
+              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -102,7 +100,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/login"
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -111,7 +109,7 @@ const Subscription = () => {
               discount="25"
               type="month"
               target="For power users"
-              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
+              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -131,7 +129,7 @@ const Subscription = () => {
               discount="50"
               type="month"
               target="For advanced users"
-              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
+              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -155,7 +153,7 @@ const Subscription = () => {
               discount="0.00"
               type="year"
               target="For basic users"
-              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
+              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -165,7 +163,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/login"
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -174,7 +172,7 @@ const Subscription = () => {
               discount="300"
               type="year"
               target="For power users"
-              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
+              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -194,7 +192,7 @@ const Subscription = () => {
               discount="600"
               type="year"
               target="For advanced users"
-              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
+              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -217,5 +215,15 @@ const Subscription = () => {
     </Layout>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      BASIC_PRICE_ID: process.env.BASIC_PRICE_ID,
+      PRO_PRICE_ID: process.env.PRO_PRICE_ID,
+      PREMIUM_PRICE_ID: process.env.PREMIUM_PRICE_ID,
+    },
+  };
+}
 
 export default Subscription;

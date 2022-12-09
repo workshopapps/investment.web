@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopup(true);
-    }, 3000);
+    }, 15000);
   }, []);
 
   useEffect(() => {
