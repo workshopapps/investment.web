@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { useRouter } from "next/router";
 
-const MenuLink = ({ link, url, icon, dropItems }) => {
+const MenuLink = ({ link, url, icon, dropItems, margin }) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const pathname = useRouter().pathname;
@@ -19,17 +19,18 @@ const MenuLink = ({ link, url, icon, dropItems }) => {
   return (
     <li className="relative h-full" onMouseEnter={() => setShowDropDown(true)}>
       <NavLink
+        margin={margin}
         href={url}
         style={isActive ? activeStyle : {}}
-        className="flex items-center justify-between gap-[10px] mx-2 h-full"
+        className={`flex items-center justify-between gap-[10px] mx-2 h-full hover:text-[#1BD47B] pr-[${margin}] ${url=="/help" && showDropDown ? "text-[#1BD47B]": "text-white"} transition duration-500`}
       >
         {link}
         {icon && (
           <span>
             {showDropDown ? (
-              <BiChevronUp className="text-white text-[16px]" />
+              <BiChevronUp className="text-[#1BD47B] text-[16px]" />
             ) : (
-              <BiChevronDown className="text-white text-[16px]" />
+              <BiChevronDown className="text-white text-[16px] hover:text-[#1BD47B]" />
             )}
           </span>
         )}
@@ -46,7 +47,7 @@ const MenuLink = ({ link, url, icon, dropItems }) => {
               <NavLink
                 href={url}
                 key={index}
-                className="text-white text-[16px]"
+                className={`text-white text-[16px] hover:text-[#1BD47B] transition duration-500`}
               >
                 {link}
               </NavLink>

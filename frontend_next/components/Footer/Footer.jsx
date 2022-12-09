@@ -72,13 +72,13 @@ const Footer = () => {
           </div>
           <div className="flex gap-3 items-center">
             <Link href="https://twitter.com/YieldVest">
-              <img src={twitter.src} alt="" />
+              <img src={twitter.src} alt="twitter" className="hover:scale-[150%] transition duration-500" />
             </Link>
             <Link href="https://www.linkedin.com/company/yieldvest/">
-              <img src={linkedin.src} alt="" />
+              <img src={linkedin.src} alt="linkedin" className="hover:scale-[150%] transition duration-500" />
             </Link>
             <Link href="https://www.reddit.com/user/Yieldvest">
-              <img src={reddit.src} alt="" />
+              <img src={reddit.src} alt="reddit" className="hover:scale-[150%] transition duration-500" />
             </Link>
           </div>
         </div>

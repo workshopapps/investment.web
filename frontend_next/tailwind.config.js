@@ -31,6 +31,7 @@ module.exports = {
         shade100: "#E0E2E5",
         shadeBlue: "#CCE3FF",
         primary104: "#1F2226",
+        modalBackground: "rgba(0, 0, 0, .6)",
       },
       width: {
         210: "300px",
