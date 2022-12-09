@@ -15,8 +15,8 @@ const SubscribeCard = ({
   target,
   priceId,
   features,
-  payload,
   buttonText,
+  content,
   destination,
 }) => {
   return (
@@ -69,10 +69,15 @@ const SubscribeCard = ({
       </ul>
       <div className="absolute bottom-0 left-1 right-1 mt-[6em] mb-10 flex justify-center">
         <Link
-          href={destination}
-          state={{
-            state: payload,
-            priceId: priceId,
+          href={{
+            pathname: destination,
+            query: {
+              priceId: priceId,
+              subName: name,
+              type: type,
+              price: discount,
+              content: content
+            }
           }}
           className="w-[80%] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] group-hover:bg-white text-white font-bold py-4 px-6 rounded"
         >
@@ -93,7 +98,6 @@ SubscribeCard.propTypes = {
   target: PropTypes.string,
   priceId: PropTypes.string,
   features: PropTypes.array,
-  payload: PropTypes.object,
   buttonText: PropTypes.string,
   destination: PropTypes.string,
 };

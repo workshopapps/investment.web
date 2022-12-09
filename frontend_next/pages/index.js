@@ -176,7 +176,7 @@ const Index = () => {
 
       <ToastContainer />
 
-      <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
+      <section className="bg-hero-desktop bg-cover bg-center relative">
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
           <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
             <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">

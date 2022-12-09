@@ -46,6 +46,7 @@ import TermsAndConditionPage from './pages/terms-of-use';
 import Subscription from './pages/subscriptionPage/Subscription';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import EmailVerification from './pages/Auth/EmailVerification/EmailVerification.jsx';
 import ResetPassword from './pages/Auth/ResetPassword/ResetPassword';
 import ForgotPassword from './pages/Auth/ForgotPwd/ForgotPassword';
 import Success from './pages/successPayment/Success';
@@ -153,6 +154,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/subscription',
+        element: <Subscription />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/payment',
         element: <Payment />,
         errorElement: <ErrorPage />
@@ -234,11 +240,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: '/subscription',
-        element: <Subscription />,
-        errorElement: <ErrorPage />
-    },
-    {
         path: '/login',
         element: <Login />,
         errorElement: <ErrorPage />
@@ -246,6 +247,11 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <Signup />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/verification',
+        element: <EmailVerification />,
         errorElement: <ErrorPage />
     },
     {
