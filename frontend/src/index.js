@@ -25,4 +25,4 @@ root.render(
     </React.StrictMode>
 );
 reportWebVitals();
-atatus.notify(new Error('Test Atatus Setup'));
+
