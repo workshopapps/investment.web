@@ -35,7 +35,6 @@ const Payment = () => {
   const [customerId, setCustomerId] = useState("")
   const router = useRouter();
   const data = router.query;
-  console.trace(data)
   const { priceId, subName, type, price, content } = data
   const apiService = authHooks.useApiService();
 
