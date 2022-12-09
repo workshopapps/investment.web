@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { faqDatas } from './FaqContent';
 import '../../assets/paymentpage/css/style.css';
 import Shield from '../../assets/paymentpage/icons/shield-tick.png';
-import Stripe from '../../assets/paymentpage/icons/stripe.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
@@ -244,7 +243,6 @@ const Payment = () => {
 
                     <div className="flex w-full justify-center items-center mb-10">
                         <p className="text-[0.7em]">Secured by </p>
-                        <img className="w-20 h-10 ml-1" alt="stripe-logo" src={Stripe} />
                         <img className="w-6 h-6" alt="stripe-logo" src={Shield} />
                     </div>
                 </div>
