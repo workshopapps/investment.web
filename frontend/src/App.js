@@ -153,6 +153,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
+        path: '/subscription',
+        element: <Subscription />,
+        errorElement: <ErrorPage />
+    },
+    {
         path: '/payment',
         element: <Payment />,
         errorElement: <ErrorPage />
@@ -231,11 +236,6 @@ const router = createBrowserRouter([
     {
         path: '/Midcap',
         element: <MidCap />,
-        errorElement: <ErrorPage />
-    },
-    {
-        path: '/subscription',
-        element: <Subscription />,
         errorElement: <ErrorPage />
     },
     {
