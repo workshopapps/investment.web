@@ -29,12 +29,23 @@ const CompanyIndexerPage = ({ indexer, data }) => {
 
           <span>Browse By:</span>
           <div className="flex flex-auto md:flex-row gap-2 md:gap-5">
+            <Link
+              href={`/directory`}
+              className={`${
+                indexer === ""
+                  ? "border-b-2 border-[#1BD47B] text-[#1BD47B]"
+                  : ""
+              }`}
+            >
+              All
+            </Link>
+
             {alphabets.map((letter, key) => {
               switch (letter) {
                 case indexer?.toUpperCase():
                   return (
                     <span
-                      className="cursor-pointer border-b-2 border-[#1BD47B]"
+                      className="cursor-pointer border-b-2 border-[#1BD47B] text-[#1BD47B]"
                       key={key}
                     >
                       {letter}
@@ -42,15 +53,13 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                   );
                 default:
                   return (
-                    <span
-                      onClick={() =>
-                        Router.push(`/directory?substring=${letter}`)
-                      }
+                    <Link
+                      href={`/directory?initials=${letter}`}
                       className="cursor-pointer"
                       key={key}
                     >
                       {letter}
-                    </span>
+                    </Link>
                   );
               }
             })}
@@ -74,12 +83,11 @@ const CompanyIndexerPage = ({ indexer, data }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const indexer = query.substring || "";
-  console.log(indexer);
+  const indexer = query.initials || "";
   let data = [];
   try {
     const res = await axios.get(
-      `https://api.yieldvest.hng.tech/companies?substring=${indexer}`
+      `https://api.yieldvest.hng.tech/companies?initials=${indexer}`
     );
     if (res.status === 200) {
       data = [...res.data];

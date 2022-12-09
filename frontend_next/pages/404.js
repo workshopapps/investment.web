@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import saturn from "../assets/error/moon 1.svg";
 import Layout from "../components/Layout";
 
 const ErrorPage = () => {
+  const router = useRouter();
+
   return (
     <Layout>
       <span className="align-center justify-center font-HauoraBold text-center text-8xl">
@@ -18,8 +21,11 @@ const ErrorPage = () => {
                 been removed or temporarily unavailable.
               </p>
               <div className="flex flex-col w-full gap-4 md:flex-row md:justify-center">
-                <button className="bg-green-500 text-base h-12 rounded-md flex items-center justify-center font-HauoraBold md:w-56">
-                  <Link href={"/"}>Go back</Link>
+                <button
+                  className="bg-green-500 text-base h-12 rounded-md flex items-center justify-center font-HauoraBold md:w-56"
+                  onClick={() => router.back()}
+                >
+                  Go back
                 </button>
               </div>
             </div>

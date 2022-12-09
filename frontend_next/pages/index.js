@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopup(true);
-    }, 15000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -176,7 +176,7 @@ const Index = () => {
 
       <ToastContainer />
 
-      <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
+      <section className="bg-hero-desktop bg-cover bg-center relative">
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
           <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
             <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
@@ -243,7 +243,7 @@ const Index = () => {
                   onChange={handleMarketCap}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Cap</option>
+                  <option value="all">All Market Caps</option>
                   <option value="high_market_cap_category">Large Cap </option>
                   <option value="mid_market_cap_category">Mid Cap </option>
                   <option value="low_market_cap_category">Small Cap </option>
@@ -266,7 +266,7 @@ const Index = () => {
                   value={industry}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Industry</option>
+                  <option value="all">All Industries</option>
                   {industries.map((industry, index) => (
                     <option value={industry.industry_id} key={index}>
                       {industry.industry}
@@ -315,7 +315,7 @@ const Index = () => {
             )}
 
             {stocks && stocks.length !== 0 && (
-              <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+              <div className="lg:bg-white lg:border-2 lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
                 {stocks.map((item, index) => (
                   <CapCard
                     key={index}
@@ -373,8 +373,8 @@ const Index = () => {
         </div>
       </section>
       {popup && (
-        <div className="mx-7 p-5 ">
-          <NewsletterModal trigger={popup} setTrigger={setPopup} />
+        <div>
+          <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
         </div>
       )}
     </Layout>

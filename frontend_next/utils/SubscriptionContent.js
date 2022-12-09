@@ -6,14 +6,14 @@ export const freeMonthly = {
 };
 
 export const premiumMonthly = {
-    amount: `5000`,
+    amount: `25`,
     content: `For Premium Users new . Get access to our Premium features and invest with more precision`,
     typeOfSubscription: 'Premium',
     subTime: `month`
 };
 
 export const premiumMaxMonthly = {
-    amount: `20,000`,
+    amount: `50`,
     content: `For Professional Users . Get access to our Professional features and invest with more precision`,
     typeOfSubscription: 'Premium Max',
     subTime: `month`

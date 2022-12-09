@@ -11,14 +11,33 @@ import VisualcompanyCard from "../../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
+import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
+import { useRouter } from "next/router";
 
 const CompanyProfilePage = ({ company, companyId }) => {
-  const [show, setShow] = React.useState(true);
+  const [showAbout, setShowAbout] = React.useState(true);
+  const router = useRouter();
+
+  if (!company) {
+    return (
+      <Layout>
+        <Head>
+          <title>Small Cap Stock Fundamentals</title>
+          <meta
+            name="description"
+            content="Get up to date recommendations on the best stocks to buy"
+          />
+        </Head>
+
+        <NotSubscribedModal isOpen={true} onClose={() => router.back()} />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Head>
-        <title>{company.name} Stock Fundamentals</title>
+        {company && <title>{company.name} Stock Fundamentals</title>}
         <meta
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
@@ -50,7 +69,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
               <div className="flex flex-row mt-auto gap-2">
                 <Link
                   href={`/company/${companyId}/history`}
-                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md"
+                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md"
                 >
                   <span className="hidden md:block">View Ranking History </span>
                   <img
@@ -59,7 +78,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-10 hover:shadow-md">
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md">
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
@@ -87,16 +106,18 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-md align-middle text-[#5C5A5A] px-2 md:px-5 py-3 flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
-                    className="p-2 cursor-pointer border bg-[#E8FBF2] rounded-full"
-                    src={(show ? DownIcon : UpIcon).src}
+                    className="cursor-pointer"
+                    src={(showAbout ? DownIcon : UpIcon).src}
                     alt="open"
-                    onClick={() => setShow(!show)}
+                    onClick={() => setShowAbout(!showAbout)}
                   />
                 </h5>
-                {show && <AboutCompanyCard description={company.description} />}
+                {showAbout && (
+                  <AboutCompanyCard description={company.description} />
+                )}
 
                 <br />
               </div>
@@ -115,7 +136,8 @@ const CompanyProfilePage = ({ company, companyId }) => {
 
 export async function getServerSideProps({ query }) {
   const companyId = query.id;
-  let company = {};
+  let company = null;
+  let isSmallCap = false;
 
   if (companyId) {
     try {
@@ -126,16 +148,13 @@ export async function getServerSideProps({ query }) {
         company = res.data;
       }
     } catch (err) {
-      //console.log(err);
+      try {
+        if (err.response.status === 401) {
+          isSmallCap = true;
+        }
+      } catch (e) {}
+
       console.log("Fetch failed for company: " + companyId);
-      // return {
-      //   redirect: {
-      //     destination: "/login",
-      //   },
-      //   props: {
-      //     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-      //   },
-      // };
     }
   }
 
@@ -143,6 +162,7 @@ export async function getServerSideProps({ query }) {
     props: {
       companyId: companyId,
       company: company,
+      isSmallCap: isSmallCap,
     },
   };
 }

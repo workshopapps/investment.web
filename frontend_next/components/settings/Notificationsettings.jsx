@@ -99,13 +99,49 @@ export default function Notificationsettings({ notifications }) {
         <div className="flex flex-col  h-full items-center py-5">
           <div className="flex flex-col w-full h-full py-2 font-semibold text-base text-black max-w-[1028px]">
             <div className="flex w-full justify-between items-center  px-6 py-4">
-              <h2 className="text-xl font-normal">Enable email notification</h2>
+              <h2 className="text-xl font-normal">
+                Enable email notifications
+              </h2>
               <div style={{ paddingRight: "2rem" }} />
               {notificationsEnabled ? (
                 <img src={toggleOn.src} onClick={handleChecked} alt="toggle" />
               ) : (
                 <img src={toggleOff.src} onClick={handleChecked} alt="toggle" />
               )}
+            </div>
+            <div>
+              {/* radio buttons*/}
+              <div className="flex ">
+                <div className="flex flex-col font-normal text-base md:ml-[60px] ml-2 pb-5">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio1"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio1">Daily</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio2"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio2">Weekly</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio3"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio3">Monthly</label>
+                  </div>
+                </div>
+              </div>
             </div>
             <hr className="w-full border" />
             <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-#0A0B0D ">
