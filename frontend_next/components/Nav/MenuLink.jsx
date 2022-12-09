@@ -21,7 +21,7 @@ const MenuLink = ({ link, url, icon, dropItems }) => {
       <NavLink
         href={url}
         style={isActive ? activeStyle : {}}
-        className="flex items-center justify-between gap-[10px] mx-2 h-full"
+        className="flex items-center justify-evenly gap-[10px] pr-[30px] mx-2 h-full"
       >
         {link}
         {icon && (
