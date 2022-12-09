@@ -44,7 +44,7 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                   return (
                     <span
                       onClick={() =>
-                        Router.push(`/companies?substring=${letter}`)
+                        Router.push(`/directory?substring=${letter}`)
                       }
                       className="cursor-pointer"
                       key={key}
