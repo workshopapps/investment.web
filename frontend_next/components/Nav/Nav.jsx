@@ -16,16 +16,15 @@ const Nav = ({ openMenu }) => {
     color: "white",
   };
   const loginStyle = {
-    background: `transparent`,
     padding: "12px 16px",
     border: "none",
-    display: "inline-block",
-    color: `white`,
+    display: "inline-block"
   };
   const btnStyle = {
     background: `#1BD47B`,
     padding: "12px 16px",
     border: "none",
+    borderRadius: "8px",
     display: "inline-block",
   };
 
@@ -46,12 +45,12 @@ const Nav = ({ openMenu }) => {
         </div>
         <MenuLinks />
         {!isLoggedIn && (
-          <div className=" justify-between items-center gap-4 nav-btns hidden md:flex">
+          <div className=" justify-between items-center nav-btns hidden md:flex">
             <Link href="/login">
               <button
                 type="button"
                 style={loginStyle}
-                className="rounded text-white"
+                className="rounded text-white hover:text-[#1BD47B] transition duration-500"
               >
                 Login
               </button>
@@ -60,7 +59,7 @@ const Nav = ({ openMenu }) => {
               <button
                 type="button"
                 style={btnStyle}
-                className="rounded text-[#1F2226] font-[400]"
+                className="rounded text-[#1F2226] font-normal hover:scale-90 transition duration-500"
               >
                 Get Started
               </button>

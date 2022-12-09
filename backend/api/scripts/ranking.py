@@ -65,8 +65,9 @@ def rank_companies():
         ranking_score = (total_score / 11) * 10
         ranking_score = round(ranking_score, 5)
 
-        latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id) \
-            .order_by(Ranking.created_at.desc()).first()
+        # get the latest ranking for the day
+        latest_ranking = db.query(Ranking).filter(Ranking.company == company.company_id,
+                                                  Ranking.created_at >= datetime.date.today()).first()
 
         if latest_ranking and str(latest_ranking.score) == str(ranking_score):
             latest_ranking.updated_at = datetime.datetime.now()

@@ -7,18 +7,22 @@ const MenuLinks = () => {
     {
       link: "Home",
       url: "/",
+      margin: "15px"
     },
     {
       link: "About",
       url: "/about",
+      margin: "15px"
     },
     {
       link: "Pricing",
       url: "/subscription",
+      margin: "15px"
     },
     {
       link: `Help `,
       url: "/help",
+      margin: "0px",
       icon: true,
       dropItems: [
         {
@@ -47,9 +51,9 @@ const MenuLinks = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
+    <ul className={`w-full hidden md:flex h-full gap-[30px] justify-between items center ${isLoggedIn ? `max-w-[480px]`: `max-w-[410px]`}`}>
       {navLinks.map((item, index) => {
-        const { link, url, icon, dropItems } = item;
+        const { link, url, icon, dropItems, margin } = item;
         return (
           <MenuLink
             link={link}
@@ -57,6 +61,7 @@ const MenuLinks = () => {
             key={index}
             icon={icon}
             dropItems={dropItems}
+            margin={margin}
           />
         );
       })}

@@ -30,13 +30,16 @@ const ResetModal = ({ close, status = '' }) => {
                 <p className="text-[#545964]">
                     A link has been sent to your email address to reset your password
                 </p>
-                <button
-                    className="bg-[#1BD47B] text-sm w-[344px] h-[52px] rounded-lg"
+                <a
+                    href="https://mail.google.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-[#1BD47B] text-sm w-[344px] h-[52px] rounded-lg flex justify-center items-center"
                     onClick={() => {
                         close();
                     }}>
                     Go To Mail
-                </button>
+                </a>
             </div>
         </div>
     );

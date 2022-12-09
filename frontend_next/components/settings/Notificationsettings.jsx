@@ -93,102 +93,140 @@ export default function Notificationsettings({ notifications }) {
   }
 
   return (
-    <div className="flex mt-3 md:px-[220px]">
-      <ToastContainer />
-      <div className="flex flex-col  h-full items-center py-5">
-        <div className="flex flex-col w-full h-full py-2 font-semibold text-base text-black max-w-[1028px]">
-          <div className="flex w-full justify-between items-center  px-6 py-4">
-            <h2 className="text-xl font-normal">Enable email notification</h2>
-            <div style={{ paddingRight: "2rem" }} />
-            {notificationsEnabled ? (
-              <img src={toggleOn.src} onClick={handleChecked} alt="toggle" />
-            ) : (
-              <img src={toggleOff.src} onClick={handleChecked} alt="toggle" />
-            )}
-          </div>
-          <hr className="w-full border" />
-          <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-#0A0B0D ">
-            <div className="flex justify-between items-center px-6 py-6">
-              <h2 className="text-l text-#0A0B0D font-normal">
-                Receive notifications about small cap stocks to invest in{" "}
+    <div className="flex mt-3 justify-center items-center px-[17px]">
+      <div className="max-w-[1024px] w-full">
+        <ToastContainer />
+        <div className="flex flex-col  h-full items-center py-5">
+          <div className="flex flex-col w-full h-full py-2 font-semibold text-base text-black max-w-[1028px]">
+            <div className="flex w-full justify-between items-center  px-6 py-4">
+              <h2 className="text-xl font-normal">
+                Enable email notifications
               </h2>
-              <div style={{ width: "200px" }} />
-              {smallCapsEnabled ? (
-                <img
-                  src={toggleOn.src}
-                  onClick={handleCheckedTwo}
-                  alt="toggle"
-                />
+              <div style={{ paddingRight: "2rem" }} />
+              {notificationsEnabled ? (
+                <img src={toggleOn.src} onClick={handleChecked} alt="toggle" />
               ) : (
-                <img
-                  src={toggleOff.src}
-                  onClick={handleCheckedTwo}
-                  alt="toggle"
-                />
+                <img src={toggleOff.src} onClick={handleChecked} alt="toggle" />
               )}
             </div>
-
-            <div className="flex justify-between items-center px-6 py-6">
-              <h2 className="text-l text-#0A0B0D font-normal">
-                Receive notifications about large cap stocks to invest in{" "}
-              </h2>
-              {midCapsEnabled ? (
-                <img
-                  src={toggleOn.src}
-                  onClick={handleCheckedThree}
-                  alt="toggle"
-                />
-              ) : (
-                <img
-                  src={toggleOff.src}
-                  onClick={handleCheckedThree}
-                  alt="toggle"
-                />
-              )}
-            </div>
-
-            <div className="flex justify-between items-center px-6 py-6">
-              <h2 className="text-l text-#0A0B0D font-normal">
-                Receive notifications about mid cap stocks to invest in{" "}
-              </h2>
-              {highCapsEnabled ? (
-                <img
-                  src={toggleOn.src}
-                  onClick={handleCheckedFour}
-                  alt="toggle"
-                />
-              ) : (
-                <img
-                  src={toggleOff.src}
-                  onClick={handleCheckedFour}
-                  alt="toggle"
-                />
-              )}
-            </div>
-          </div>
-          <div className="flex flex-col md:ml-auto mr-4 mt-[70px]">
-            <button
-              className="bg-[#19C170] text-black  font-semibold text-base py-3 px-6  w-[200px] h-[50px] rounded-md"
-              disabled={isLoading}
-              onClick={patchSettings}
-            >
-              {isLoading ? (
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <ThreeDots
-                    height="30"
-                    width="50"
-                    radius="9"
-                    color="#fff"
-                    ariaLabel="three-dots-loading"
-                    wrapperStyle={{}}
-                    wrapperClassName=""
-                    visible={true}
-                  />
+            <div>
+              {/* radio buttons*/}
+              <div className="flex ">
+                <div className="flex flex-col font-normal text-base md:ml-[60px] ml-2 pb-5">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio1"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio1">Daily</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio2"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio2">Weekly</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="radio"
+                      id="radio3"
+                      className="ml-4 mr-2"
+                    />
+                    <label htmlFor="radio3">Monthly</label>
+                  </div>
                 </div>
-              ) : (
-                "Update Changes"
-              )}
-            </button>
+              </div>
+            </div>
+            <hr className="w-full border" />
+            <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-#0A0B0D ">
+              <div className="flex justify-between items-center px-6 py-6">
+                <h2 className="text-l text-#0A0B0D font-normal">
+                  Receive notifications about small cap stocks to invest in{" "}
+                </h2>
+                <div style={{ width: "200px" }} />
+                {smallCapsEnabled ? (
+                  <img
+                    src={toggleOn.src}
+                    onClick={handleCheckedTwo}
+                    alt="toggle"
+                  />
+                ) : (
+                  <img
+                    src={toggleOff.src}
+                    onClick={handleCheckedTwo}
+                    alt="toggle"
+                  />
+                )}
+              </div>
+
+              <div className="flex justify-between items-center px-6 py-6">
+                <h2 className="text-l text-#0A0B0D font-normal">
+                  Receive notifications about large cap stocks to invest in{" "}
+                </h2>
+                {midCapsEnabled ? (
+                  <img
+                    src={toggleOn.src}
+                    onClick={handleCheckedThree}
+                    alt="toggle"
+                  />
+                ) : (
+                  <img
+                    src={toggleOff.src}
+                    onClick={handleCheckedThree}
+                    alt="toggle"
+                  />
+                )}
+              </div>
+
+              <div className="flex justify-between items-center px-6 py-6">
+                <h2 className="text-l text-#0A0B0D font-normal">
+                  Receive notifications about mid cap stocks to invest in{" "}
+                </h2>
+                {highCapsEnabled ? (
+                  <img
+                    src={toggleOn.src}
+                    onClick={handleCheckedFour}
+                    alt="toggle"
+                  />
+                ) : (
+                  <img
+                    src={toggleOff.src}
+                    onClick={handleCheckedFour}
+                    alt="toggle"
+                  />
+                )}
+              </div>
+            </div>
+            <div className="flex flex-col md:ml-auto mr-4 mt-[70px]">
+              <button
+                className="bg-[#19C170] text-black  font-semibold text-base py-3 px-6  w-[200px] h-[50px] rounded-md"
+                disabled={isLoading}
+                onClick={patchSettings}
+              >
+                {isLoading ? (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <ThreeDots
+                      height="30"
+                      width="50"
+                      radius="9"
+                      color="#fff"
+                      ariaLabel="three-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClassName=""
+                      visible={true}
+                    />
+                  </div>
+                ) : (
+                  "Update Changes"
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>

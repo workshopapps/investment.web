@@ -13,6 +13,8 @@ import NotFoundImage from "../assets/images/not_found.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import NewsletterModal from "../components/newsletter/NewsletterModal";
+import Newsletter from "../components/newsletter/Newsletter";
 
 const Index = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
@@ -24,6 +26,7 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -46,6 +49,12 @@ const Index = () => {
   const formatLastUpdateDate = (date) => {
     return dateFormat(date + "Z", "mmmm dS, yyyy hh:MM:ss TT");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPopup(true);
+    }, 3000);
+  }, []);
 
   useEffect(() => {
     axios
@@ -167,7 +176,7 @@ const Index = () => {
 
       <ToastContainer />
 
-      <section className="bg-hero-mobile md:bg-hero-desktop bg-cover bg-center relative">
+      <section className="bg-hero-desktop bg-cover bg-center relative">
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
           <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
             <h1 className="text-[20px] font-[600] leading-[28px] mb-[8px] max-w-[400px] sm:max-w-[623px] lg:max-w-[986px] w-full md:text-[57px] md:font-[400] md:leading-[64px] md:mb-[24px] ">
@@ -199,7 +208,10 @@ const Index = () => {
 
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#5c5a5a] text-base lg:text-2xl font-bold mb-4 md:mb-14 space-y-[10px]">
+          <p
+            className="text-[#5c5a5a] text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
+            style={{ fontWeight: 300 }}
+          >
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
               <span
@@ -218,7 +230,10 @@ const Index = () => {
           <div className="space-y-6 ">
             <div className="flex flex-col md:flex-row items-left md:items-center">
               <div className="flex mb-3 md:mb-0">
-                <h3 className="text-sm lg:text-2xl font-semibold text-[#66717e] pr-8">
+                <h3
+                  className="text-sm lg:text-2xl text-[#66717e] pr-8"
+                  style={{ fontWeight: 300 }}
+                >
                   Filter by:
                 </h3>
               </div>
@@ -228,7 +243,7 @@ const Index = () => {
                   onChange={handleMarketCap}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Cap</option>
+                  <option value="all">All Market Caps</option>
                   <option value="high_market_cap_category">Large Cap </option>
                   <option value="mid_market_cap_category">Mid Cap </option>
                   <option value="low_market_cap_category">Small Cap </option>
@@ -251,7 +266,7 @@ const Index = () => {
                   value={industry}
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
-                  <option value="all">All Industry</option>
+                  <option value="all">All Industries</option>
                   {industries.map((industry, index) => (
                     <option value={industry.industry_id} key={index}>
                       {industry.industry}
@@ -300,7 +315,7 @@ const Index = () => {
             )}
 
             {stocks && stocks.length !== 0 && (
-              <div className="lg:bg-white lg:border lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
+              <div className="lg:bg-white lg:border-2 lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
                 {stocks.map((item, index) => (
                   <CapCard
                     key={index}
@@ -351,6 +366,17 @@ const Index = () => {
           <Link href="/cookies">Check cookies policy.</Link>
         </span>
       </CookieConsent>
+
+      <section className="xl:py-14 sm:px-1  p-5 bg-[#F5F5F5]">
+        <div className="flex justify-center items-center">
+          <Newsletter />
+        </div>
+      </section>
+      {popup && (
+        <div>
+          <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
+        </div>
+      )}
     </Layout>
   );
 };

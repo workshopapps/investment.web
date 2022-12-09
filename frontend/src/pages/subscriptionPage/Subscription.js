@@ -72,7 +72,7 @@ const Subscription = () => {
                         price="0.00"
                         type="month"
                         target="For Basic Users"
-                        priceId="price_1M84ELE0pPf6mXoCmP61VmyL"
+                        priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
                         features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                         payload={freeMonthly}
                         buttonText="Subscribe"
@@ -84,7 +84,7 @@ const Subscription = () => {
                         price="5,000"
                         type="month"
                         target="For Power Users"
-                        priceId="price_1M84FHE0pPf6mXoCaZEdZHgv"
+                        priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
                         features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
                         payload={premiumMonthly}
                         buttonText="Subscribe"
@@ -103,7 +103,7 @@ const Subscription = () => {
                             price="0.00"
                             type="year"
                             target="For Basic Users"
-                            priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
+                            priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
                             features={["Stock Information", "Share a stock", "Company Fundamentals", "Access to only 12 stock recommendation"]}
                             payload={freeYearly}
                             buttonText="Subscribe"
@@ -115,7 +115,7 @@ const Subscription = () => {
                             price="60,000"
                             type="year"
                             target="For Power Users"
-                            priceId="price_1M84H0E0pPf6mXoC4hpx6xfA"
+                            priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
                             features={["Unlimited stock recommendation", "Share a stock", "Add to watchlist", "Email notifications", "Access to small cap stocks"]}
                             payload={premiumYearly}
                             buttonText="Subscribe"

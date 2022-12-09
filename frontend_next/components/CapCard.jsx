@@ -12,6 +12,7 @@ import "tippy.js/dist/tippy.css";
 import AuthContext from "./auth/AuthContext";
 import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
+import MiniBarChartCard from "./Charts/MiniBarChart";
 
 const CapCard = ({
   logo,
@@ -88,7 +89,7 @@ const CapCard = ({
   }, [accessToken, isLoggedIn]);
 
   return (
-    <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+    <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
           {index + 1}
@@ -261,7 +262,7 @@ const CapCard = ({
           </div>
         </div>
         <Link href={link}>
-          <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center">
+          <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline underline-offset-2 text-center hover:underline-offset-4 transition duration-500">
             See Company Profile
           </div>
         </Link>
@@ -277,12 +278,16 @@ const CapCard = ({
                         <p className="text-[#66717E] font-normal">Stock Price </p>
                         <p className="text-[#333946] text-semibold">${stockPrice.toFixed(2)}</p>
                     </div> */}
-          <div className="flex text-center text-xs lg:text-base mt-2">
-            <img
+          <div
+            className="flex text-center text-xs lg:text-base mt-2 w-full"
+            style={{ justifyContent: "center" }}
+          >
+            {/* <img
               src={Graph.src}
               alt="fundamentals chart"
               className="h-[170px] w-full"
-            />
+            /> */}
+            N/A
           </div>
           <Link href={link}>
             <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
@@ -296,24 +301,41 @@ const CapCard = ({
           passedFunc={fundamentalModal}
           setPassedFunc={setFundamentalModal}
         >
-          {/* <div>
-                        <p className="text-[#B0B2B7] font-normal pl-2 pb-6 text-xs lg:text-base">
-                            FUNDAMENTALS{' '}
-                        </p>
-                    </div>
-                    <div className="flex justify-between text-xs lg:text-base">
-                        <p className="text-[#66717E] font-normal">Market Cap </p>
-                        <p className="text-[#333946] text-semibold">
-                            ${(marketCap / 1000000000).toFixed(2)}B
-                        </p>
-                    </div> */}
-          <div className="flex text-center text-xs lg:text-base mt-2">
-            <img
-              src={Chart.src}
-              alt="fundamentals chart"
-              className="h-[170px] w-full"
-            />
+          <div>
+            <p className="text-[#B0B2B7] font-normal pb-2 text-xs lg:text-sm">
+              FUNDAMENTALS{" "}
+            </p>
           </div>
+          <div className="flex justify-between text-xs lg:text-sm">
+            <p className="text-[#66717E] font-normal">Market Cap </p>
+            <p className="text-[#333946] text-semibold">
+              ${(marketCap / 1000000000).toFixed(2)}B
+            </p>
+          </div>
+          <hr className="mt-2" />
+          <div className="flex h-10 flex-row text-left text-xs pt-4 gap-x-2">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#1BD47B" />
+            </svg>
+            Profit($bn)
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#000000" />
+            </svg>
+            Income($bn)
+          </div>
+          <MiniBarChartCard companyId={abbr} />
           <Link href={link}>
             <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
               See Company Profile

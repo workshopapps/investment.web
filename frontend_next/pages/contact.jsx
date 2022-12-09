@@ -13,7 +13,7 @@ const Contact = () => {
       </Head>
 
       <section className="  min-h-fit justify-around p-5 flex md:p-12 flex-col-reverse md:flex-row ">
-        <div className="basis-[30%] font-Hauora ">
+        <div className="basis-[30%] font-Hauora p-6">
           <aside className="mb-4 hidden md:block">
             <h1 className=" text-5xl">Contact us</h1>
             <p className="text-[#545964]">
@@ -42,7 +42,7 @@ const Contact = () => {
               Follow us on all our social pages
             </h2>
 
-            <aside className="flex">
+            <aside className="flex mt-6 gap-2">
               <BsFacebook className="text-3xl" />
               <AiFillInstagram className="mx-4 text-3xl" />
               <BsTwitter className="text-3xl" />
