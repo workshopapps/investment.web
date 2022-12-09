@@ -28,7 +28,7 @@ const Layout = ({
   }, [pathName]);
 
   return (
-    <div className="flex flex-col h-screen relative ">
+    <div className="flex flex-col h-screen relative">
       {showNavBar && (
         <>
           <div className="nav-bar flex-none">
