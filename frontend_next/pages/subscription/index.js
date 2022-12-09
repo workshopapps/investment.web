@@ -90,7 +90,7 @@ const Subscription = () => {
               discount="0.00"
               type="month"
               target="For basic users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -109,7 +109,7 @@ const Subscription = () => {
               discount="25"
               type="month"
               target="For power users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -129,7 +129,7 @@ const Subscription = () => {
               discount="50"
               type="month"
               target="For advanced users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -153,7 +153,7 @@ const Subscription = () => {
               discount="0.00"
               type="year"
               target="For basic users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChFWCCH5YrTF3caAGEm6Pq"
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -172,7 +172,7 @@ const Subscription = () => {
               discount="300"
               type="year"
               target="For power users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChCsCCH5YrTF3cLhphD30I"
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -192,7 +192,7 @@ const Subscription = () => {
               discount="600"
               type="year"
               target="For advanced users"
-              priceId="price_1MAIf4CCH5YrTF3cxPcAaOKR"
+              priceId="price_1MChDzCCH5YrTF3cNVToGEN1"
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",

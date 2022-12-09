@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import Footer from "../../components/Footer/Footer";
 import { faqDatas } from "../../utils/Payment/FaqContent";
 import "../../assets/paymentpage/css/style.module.css";
 import Shield from "../../assets/paymentpage/icons/shield-tick.png";
 import Stripe from '../../assets/paymentpage/icons/stripe.svg';
-import { FaPlus, FaStripe, FaMinus, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
