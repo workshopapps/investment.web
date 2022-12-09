@@ -11,9 +11,30 @@ import VisualcompanyCard from "../../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
+import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
+import { useRouter } from "next/router";
 
-const CompanyProfilePage = ({ company, companyId }) => {
+const CompanyProfilePage = ({ company, companyId, isSmallCap }) => {
   const [show, setShow] = React.useState(true);
+  const router = useRouter();
+
+  if (!company) {
+    if (isSmallCap) {
+      return (
+        <Layout>
+          <Head>
+            <title>Small Cap Stock Fundamentals</title>
+            <meta
+              name="description"
+              content="Get up to date recommendations on the best stocks to buy"
+            />
+          </Head>
+
+          <NotSubscribedModal isOpen={true} onClose={() => router.back()} />
+        </Layout>
+      );
+    }
+  }
 
   return (
     <Layout>
@@ -115,7 +136,8 @@ const CompanyProfilePage = ({ company, companyId }) => {
 
 export async function getServerSideProps({ query }) {
   const companyId = query.id;
-  let company = {};
+  let company = null;
+  let isSmallCap = false;
 
   if (companyId) {
     try {
@@ -126,16 +148,13 @@ export async function getServerSideProps({ query }) {
         company = res.data;
       }
     } catch (err) {
-      //console.log(err);
+      try {
+        if (err.response.status === 401) {
+          isSmallCap = true;
+        }
+      } catch (e) {}
+
       console.log("Fetch failed for company: " + companyId);
-      // return {
-      //   redirect: {
-      //     destination: "/login",
-      //   },
-      //   props: {
-      //     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-      //   },
-      // };
     }
   }
 
@@ -143,6 +162,7 @@ export async function getServerSideProps({ query }) {
     props: {
       companyId: companyId,
       company: company,
+      isSmallCap: isSmallCap,
     },
   };
 }

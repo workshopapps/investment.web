@@ -72,7 +72,7 @@ export default function Newsletter(props) {
         </div>
       </div>
       <div
-        className="bg-transparent absolute inset-0 z-[9] backdrop-blur-sm"
+        className="bg-transparent absolute inset-0 z-[9] bg-modalBackground"
         onClick={() => props.setTrigger(false)}
       ></div>
     </div>
