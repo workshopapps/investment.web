@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import * as atatus from 'atatus-spa';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import reportWebVitals from './reportWebVitals.js';
 import './index.css';
 import App from './App';
-import * as atatus from 'atatus-spa';
+
 atatus.config('2633350d639c4095ba4d068ad167d5b3').install();
 atatus.notify(new Error('Test Atatus Setup'));
 
