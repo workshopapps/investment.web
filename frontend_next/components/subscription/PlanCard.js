@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import Image from "../../assets/subscriptionPage/images/banner.svg";
 import Image2 from "../../assets/subscriptionPage/images/banner-white.svg";
+import { useRouter } from "next/router";
 
 const SubscribeCard = ({
   name,
@@ -19,6 +20,20 @@ const SubscribeCard = ({
   content,
   destination,
 }) => {
+  const router = useRouter();
+
+  const handleSubscription = () => {
+    const data = {
+      priceId: priceId,
+      subName: name,
+      type: type,
+      price: discount,
+      content: content,
+    };
+    sessionStorage.setItem("subscriptionData", JSON.stringify(data));
+    router.push(destination);
+  };
+
   return (
     <div className="group hover:scale-90 transition duration-500 relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] max-w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0">
       {price !== "" && (
@@ -68,23 +83,14 @@ const SubscribeCard = ({
         ))}
       </ul>
       <div className="absolute bottom-0 left-1 right-1 mt-[6em] mb-10 flex justify-center">
-        <Link
-          href={{
-            pathname: destination,
-            query: {
-              priceId: priceId,
-              subName: name,
-              type: type,
-              price: discount,
-              content: content
-            }
-          }}
+        <div
           className="w-[80%] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] group-hover:bg-white text-white font-bold py-4 px-6 rounded"
+          onClick={handleSubscription}
         >
           <button className="flex rounded" type="button">
             <span className="text-[#1F2226] align-middle">{buttonText}</span>
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   );
