@@ -57,7 +57,7 @@ const Cookies = () => {
           <p>
             {" "}
             We may use use cookies, web beacons, tracking pixels, and other
-            tracking technologies when you visit our website Yieldvest.com
+            tracking technologies when you visit our website Yieldvest.hng.tech
             including any other media form, media channel, mobile website, or
             mobile application related or connected Yieldvest to help customize
             the Site and improve your experience.
