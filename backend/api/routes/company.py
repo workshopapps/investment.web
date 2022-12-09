@@ -299,9 +299,9 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
         # Get the current matching ranking of all the companies
         rankings: List[Ranking] = []
         for company in companies:
-            date: datetime = company_rank.updated_at
+            date: datetime = company_rank.created_at
             rank = db.query(Ranking).filter(Ranking.company == company.company_id,
-                                            Ranking.updated_at >= date) \
+                                            Ranking.created_at <= date) \
                 .order_by(Ranking.created_at.desc()).first()
             if rank:
                 rankings.append(rank)
@@ -325,7 +325,7 @@ async def get_company_ranking_history(company_id: str, restrict_to_category: boo
             data = {
                 'position': position,
                 'score': current_rank.score,
-                'companies_compared_with': len(rankings) - 1,
+                'companies_compared_with': len(rankings),
                 'date': current_rank.updated_at,
             }
             response.append(data)
