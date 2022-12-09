@@ -22,20 +22,20 @@ const Contact = () => {
           </aside>
           <aside className="mb-4">
             <h2 className="font-bold text-xl">For general Enquiries</h2>
-            <p>support@yieldvest.com</p>
+            <p>support@Yieldvest.hng.tech</p>
           </aside>
           <aside className="mb-4">
             <h2 className="font-bold text-xl">Mailing Address</h2>
             <p className="text-[#545964]">
               Plot 1b, industrial avenue, Apapa. Lagos +2348100123456
-              enquiries@yieldvest.com
+              enquiries@Yieldvest.hng.tech
             </p>
           </aside>
           <aside className="mb-4">
             <h2 className="font-bold text-xl">
               For Media, Business development and partnerships:
             </h2>
-            <p className="text-[#545964]">business@yieldvest.com</p>
+            <p className="text-[#545964]">business@Yieldvest.hng.tech</p>
           </aside>
           <aside className="mb-4">
             <h2 className="font-bold text-xl">

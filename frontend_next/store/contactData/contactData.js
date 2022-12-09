@@ -21,18 +21,18 @@ export const contactData = [
         text1: 'Plot 1b, industrial avenue,',
         text2: 'Apapa. Lagos',
         text3: '+2348100123456',
-        text4: 'enquiries@Yieldvest.com'
+        text4: 'enquiries@Yieldvest.hng.tech'
     },
     {
         key: 'cd2',
         title: 'For general enquiries',
-        text1: 'support@Yieldvest.com'
+        text1: 'support@Yieldvest.hng.tech'
     },
     {
         key: 'cd3',
         title: 'Media, Business development',
         title2: 'and partnerships:',
-        text1: 'business@Yieldvest.com'
+        text1: 'business@Yieldvest.hng.tech'
     }
 ];
 export const socialData = [
