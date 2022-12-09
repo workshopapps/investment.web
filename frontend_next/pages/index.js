@@ -53,7 +53,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setPopup(true);
-    }, 15000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -373,8 +373,8 @@ const Index = () => {
         </div>
       </section>
       {popup && (
-        <div className="mx-7 p-5 ">
-          <NewsletterModal trigger={popup} setTrigger={setPopup} />
+        <div>
+          <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
         </div>
       )}
     </Layout>
