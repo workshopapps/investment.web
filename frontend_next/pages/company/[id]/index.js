@@ -36,7 +36,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3 className="text-2xl md:text-2xl text-[#5C5A5A] pt-10">
+                <h3
+                  className="text-1xl md:text-1xl text-[#5C5A5A] pt-10"
+                  style={{ fontSize: "1.3rem" }}
+                >
                   {company.name} Stock Fundamentals
                 </h3>
                 <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
@@ -84,7 +87,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow-xl">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-2 md:px-5 py-3 border flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
                     className="p-2 cursor-pointer border bg-[#E8FBF2] rounded-full"

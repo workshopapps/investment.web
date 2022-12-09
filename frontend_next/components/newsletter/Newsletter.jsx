@@ -39,7 +39,7 @@ export default function Newsletter() {
               {...register("email", { required: true })}
             />
 
-            <button className="w-full  h-[60px] mt-1 md:mt-0 md:w-[160px] md:h-[48px]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
+            <button className="w-full  h-[60px] md:mt-0 md:w-[160px] md:h-[100%]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
               Keep me updated
             </button>
           </form>

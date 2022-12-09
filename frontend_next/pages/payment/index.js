@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import { faqDatas } from "../../utils/Payment/FaqContent";
 import "../../assets/paymentpage/css/style.module.css";
@@ -10,6 +10,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Head from "next/head";
+import authHooks from "../../components/auth/AuthHooks";
+import AuthContext from "../../components/auth/AuthContext";
 
 let stripeTestPromise;
 
@@ -26,10 +28,12 @@ const getStripe = () => {
 const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
-
   let location = { state: { state: {} } }; // TODO: Update this React Router doesn't work here @Codefred
-  const router = useRouter();
   const [clicked, setClicked] = useState(false);
+
+  const { accessToken } = useContext(AuthContext);
+  const router = useRouter();
+  const apiService = authHooks.useApiService();
 
   const toggle = (index) => {
     if (clicked === index) {
@@ -66,6 +70,14 @@ const Payment = () => {
   if (stripeError) {
     alert(stripeError);
   }
+
+  useEffect(() => {
+    apiService(accessToken)
+      .get("https://api.yieldvest.hng.tech/user/profile")
+      .then();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
+
   return (
     <Layout>
       <Head>

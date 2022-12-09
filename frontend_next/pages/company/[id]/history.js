@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/Layout";
 import shareIcon from "../../../assets/company-profile/share.svg";
@@ -51,6 +52,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
   useEffect(() => {
     getRankingHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restrictToCategory, restrictToSector, restrictToIndustry]);
 
   return (
