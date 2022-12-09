@@ -308,5 +308,5 @@ function App() {
         </React.Fragment>
     );
 }
-
-export default Sentry.withProfiler(App);
+export default App;
+// export default Sentry.withProfiler(App);
