@@ -89,7 +89,7 @@ const CapCard = ({
   }, [accessToken, isLoggedIn]);
 
   return (
-    <div className="border border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+    <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
           {index + 1}

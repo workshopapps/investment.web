@@ -20,7 +20,7 @@ const SubscribeCard = ({
   destination,
 }) => {
   return (
-    <div className="group relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0">
+    <div className="group hover:scale-90 transition duration-500 relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] max-w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0">
       {price !== "" && (
         <div>
           <img
