@@ -7,13 +7,11 @@ import ContactForm from './ContactForm';
 const Contact = () => {
     return (
         <PageLayout>
-            <section className="  min-h-fit justify-around p-5 flex md:p-12 flex-col-reverse md:flex-row ">
+            <section className="  min-h-fit justify-around p-5 flex md:p-12 flex-col-reverse md:flex-row bg-[#F4F5F6] text-[#525A65]">
                 <div className="basis-[30%] font-Hauora p-6 ">
                     <aside className="mb-4 hidden md:block">
                         <h1 className=" text-5xl">Contact us</h1>
-                        <p className="text-[#545964]">
-                            Got any concerns you want us to sort out for you?
-                        </p>
+                        <p className="">Got any concerns you want us to sort out for you?</p>
                     </aside>
                     <aside className="mb-4">
                         <h2 className="font-bold text-xl">For general Enquiries</h2>
