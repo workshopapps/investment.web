@@ -98,8 +98,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={freeMonthly}
               buttonText="Get Started"
+              content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
               destination="/login"
             />
 
@@ -118,8 +118,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
             />
 
@@ -138,15 +138,15 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination="/payment"
             />
           </div>
         </div>
       ) : subType === 2 ? (
         <div className="w-full flex justify-center font-Hauora">
-          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[100px] lg:mx-[10em] p-0 md:px-[2em] w-full gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 place-items-center mx-10 md:mx-[80px] lg:mx-[5em] p-0 md:px-[2em] w-full gap-10">
             <SubscribeCard
               name="Basic"
               price=""
@@ -161,8 +161,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={freeMonthly}
               buttonText="Get Started"
+              content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
               destination="/login"
             />
 
@@ -181,8 +181,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
             />
 
@@ -201,8 +201,8 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              payload={premiumMonthly}
               buttonText="Subscribe"
+              content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination="/payment"
             />
           </div>
