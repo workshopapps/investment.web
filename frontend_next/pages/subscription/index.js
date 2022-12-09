@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../components/auth/AuthContext";
 
 import "../../assets/subscriptionPage/css/style.module.css";
 import Spring from "../../assets/subscriptionPage/images/spring.png";
@@ -15,6 +16,7 @@ import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
 
 const Subscription = () => {
+  const { isLoggedIn } = useContext(AuthContext);
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
 
@@ -100,7 +102,7 @@ const Subscription = () => {
               ]}
               payload={freeMonthly}
               buttonText="Get Started"
-              destination="/login"
+              destination={`${isLoggedIn ? "/" : "/login"}`}
             />
 
             <SubscribeCard

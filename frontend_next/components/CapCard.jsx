@@ -262,7 +262,7 @@ const CapCard = ({
           </div>
         </div>
         <Link href={link}>
-          <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline text-center">
+          <div className="text-[#0F7544] mt-7 font-semibold cursor-pointer underline underline-offset-2 text-center hover:underline-offset-4 transition duration-500">
             See Company Profile
           </div>
         </Link>

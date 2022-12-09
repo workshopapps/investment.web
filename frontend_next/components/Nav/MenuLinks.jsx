@@ -51,7 +51,7 @@ const MenuLinks = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <ul className="w-full hidden md:flex h-full gap-[30px] max-w-[410px] justify-between items center">
+    <ul className={`w-full hidden md:flex h-full gap-[30px] justify-between items center ${isLoggedIn ? `max-w-[480px]`: `max-w-[410px]`}`}>
       {navLinks.map((item, index) => {
         const { link, url, icon, dropItems, margin } = item;
         return (
@@ -65,7 +65,7 @@ const MenuLinks = () => {
           />
         );
       })}
-      {isLoggedIn && <MenuLink link={"Watchlist"} url={"/watchlist"} margin={margin} />}
+      {isLoggedIn && <MenuLink link={"Watchlist"} url={"/watchlist"} />}
     </ul>
   );
 };

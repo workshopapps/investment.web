@@ -19,7 +19,7 @@ const MenuLink = ({ link, url, icon, dropItems, margin }) => {
   return (
     <li className="relative h-full" onMouseEnter={() => setShowDropDown(true)}>
       <NavLink
-        data-text
+        margin={margin}
         href={url}
         style={isActive ? activeStyle : {}}
         className={`flex items-center justify-between gap-[10px] mx-2 h-full hover:text-[#1BD47B] pr-[${margin}] ${url=="/help" && showDropDown ? "text-[#1BD47B]": "text-white"} transition duration-500`}
