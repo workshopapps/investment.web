@@ -39,7 +39,7 @@ export default function SubPlan() {
   };
 
   React.useEffect(() => {
-    if (subscription) {
+    if (subscription && subscription.isActive) {
       if (subscription.type.startsWith("pro")) {
         setPlan(standardsub.src);
       }
