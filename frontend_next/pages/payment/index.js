@@ -83,11 +83,11 @@ const Payment = () => {
             <p className="text-[#1BD47B] text-md md:text-lg pl-6 py-2">
               Payment
             </p>
-            <h1 className="text-3xl lg:text-5xl mb-2 completePayment pl-6 py-2">
+            <h1 className="text-2xl lg:text-3xl text-primaryGray mb-2 pl-6 py-2">
               Complete Payment
             </h1>
 
-            <ul className="hidden md:block m-[1em] pl-6 pr-6">
+            <ul className="hidden md:block m-[1em] pl-6 md:pl-0 pr-6">
               {faqDatas?.map((faqs, index) => {
                 return (
                   <li
@@ -99,9 +99,9 @@ const Payment = () => {
                       <span className="text-xl md:text-lg">{faqs.title}</span>
                       <span>
                         {clicked === index ? (
-                          <IoIosArrowDown />
-                        ) : (
                           <IoIosArrowUp />
+                        ) : (
+                          <IoIosArrowDown />
                         )}
                       </span>
                     </h2>
@@ -119,7 +119,7 @@ const Payment = () => {
           </div>
 
           <div className=" w-full lg:w-1/2 flex flex-col justify-center items-center mt-5 md:mt-16">
-            <div className="w-[90%] md:w-[95%] gap-0 md:gap-[10em] relative p-10 mt-0 md:mt-10 border-[#1BD47B] border-solid border rounded-[2em] flex justify-around items-center">
+            <div className="w-[90%] md:w-[95%] gap-0 md:gap-[10em] relative p-10 mt-0 md:mt-10 border-[#1BD47B] border-solid border rounded-[8px] flex justify-around items-center">
               <div className="ml-10">
                 <input
                   type="radio"
@@ -144,12 +144,12 @@ const Payment = () => {
               </div>
             </div>
 
-            <div className="w-full rounded-md flex mt-8 ">
+            <div className="w-full flex mt-8 ">
               <form className="flex w-full">
                 <div className="flex items-center justify-center w-full">
                   <div className="mt-2 w-full flex items-center justify-center">
                     <button
-                      className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-4 px-4 rounded-lg font-regular mb-5"
+                      className="w-full mx-5 flex justify-center shadow bg-[#1BD47B] py-4 px-4 rounded-lg font-regular mb-5"
                       type="button"
                       disabled={isLoading}
                       onClick={initCheckoutSession}

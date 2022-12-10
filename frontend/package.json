@@ -5,6 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "@fontsource/hauora-sans": "^4.5.3",
+        "atatus-spa": "^4.5.0",
         "@sentry/react": "^7.23.0",
         "@sentry/tracing": "^7.23.0",
         "@headlessui/react": "^1.7.4",

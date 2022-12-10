@@ -25,7 +25,7 @@ const FeatureSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-20">
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               {/* <FaWeixin fill="white" /> */}
               <img src={Icon1.src} alt="icon1" />
             </div>
@@ -36,7 +36,7 @@ const FeatureSection = () => {
           </div>
 
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               <img src={Icon4.src} alt="icon2" />
             </div>
             <h1 className="mt-2 py-2">Analytics</h1>
@@ -46,7 +46,7 @@ const FeatureSection = () => {
           </div>
 
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               <img src={Icon5.src} alt="icon3" />
             </div>
             <h1 className="mt-2 py-2">Unlimited stock categories</h1>
@@ -56,7 +56,7 @@ const FeatureSection = () => {
           </div>
 
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               <img src={Icon6.src} alt="icon3" />
             </div>
             <h1 className="mt-2 py-2"> Never miss an update</h1>
@@ -67,7 +67,7 @@ const FeatureSection = () => {
           </div>
 
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               <img src={Icon3.src} alt="icon4" />
             </div>
             <h1 className="mt-2 py-2">View ranking history</h1>
@@ -77,7 +77,7 @@ const FeatureSection = () => {
           </div>
 
           <div>
-            <div className="h-10 w-10 rounded-full bg-[#525A65] flex justify-center items-center">
+            <div className="h-10 w-10 rounded-full bg-primaryGray flex justify-center items-center">
               <img src={Icon2.src} alt="icon5" />
             </div>
             <h1 className="mt-2 py-2">Save your favourite stocks</h1>
