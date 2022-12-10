@@ -67,7 +67,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
       <div className="bg-[#F5F5F5] h-full px-[1em] md:px-[100px]">
         <Link href="/">
-          <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md">
+          <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md">
             Stock <span className="inline-flex mx-2 ">&gt; </span>Company
             Profile <span className="inline-flex mx-2 ">&gt; </span> Ranking
             History
@@ -116,25 +116,22 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
         <div className="mt-[3.5rem]">
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToCategory ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToCategory ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToCategory(!restrictToCategory)}
           >
             Market Cap
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToSector ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToSector ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToSector(!restrictToSector)}
           >
             Sector
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToIndustry ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToIndustry ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToIndustry(!restrictToIndustry)}
           >
             Industry
