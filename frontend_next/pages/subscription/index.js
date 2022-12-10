@@ -25,6 +25,7 @@ const Subscription = () => {
   };
 
   const hasActiveSubscription = () => {
+    console.log(subscription);
     return isLoggedIn && subscription && subscription.isActive;
   };
 
@@ -96,7 +97,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -115,7 +116,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -134,7 +135,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
           </div>
         </div>
@@ -156,7 +157,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -175,7 +176,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -194,7 +195,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination={hasActiveSubscription ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
           </div>
         </div>
