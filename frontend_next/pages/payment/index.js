@@ -17,7 +17,6 @@ const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [customerId, setCustomerId] = useState(null);
   const [subscriptionData, setSubscriptionData] = useState(null);
 
   const { accessToken } = useContext(AuthContext);
@@ -34,7 +33,16 @@ const Payment = () => {
     setIsLoading(true);
 
     await apiService(accessToken)
-      .post(`/subscription/checkout_session`)
+      .post(
+        `/subscription/checkout_session`,
+        {},
+        {
+          params: {
+            subscription_type:
+              `${subscriptionData.subName}_${subscriptionData.type}ly`.toLowerCase(),
+          },
+        }
+      )
       .then(() => {
         setIsLoading(false);
       })
