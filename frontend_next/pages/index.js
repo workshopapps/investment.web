@@ -29,7 +29,7 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
@@ -89,10 +89,13 @@ const Index = () => {
   }, [sector]);
 
   useEffect(() => {
-    if (marketCap === "low_market_cap_category") {
+    if (
+      marketCap === "low_market_cap_category" &&
+      !subscription.canViewSmallCaps
+    ) {
       setShowNotSubscribedModal(true);
     }
-  }, [marketCap]);
+  }, [marketCap, subscription.canViewSmallCaps]);
 
   useEffect(() => {
     reloadRankedCompanies();
@@ -118,12 +121,14 @@ const Index = () => {
         params: params,
       })
       .then((res) => {
-        setStocks(res.data);
+        if (res.status === 200) {
+          setStocks(res.data);
 
-        if (res.data) {
-          setLastUpdateDate(
-            formatLastUpdateDate(res.data[0].current_ranking.updated_at)
-          );
+          if (res.data) {
+            setLastUpdateDate(
+              formatLastUpdateDate(res.data[0].current_ranking.updated_at)
+            );
+          }
         }
       })
       .catch((err) => console.log(err));
@@ -178,12 +183,10 @@ const Index = () => {
         />
       </Head>
 
-      {!isLoggedIn && (
-        <NotSubscribedModal
-          isOpen={showNotSubscribedModal}
-          onClose={() => setShowNotSubscribedModal(false)}
-        />
-      )}
+      <NotSubscribedModal
+        isOpen={showNotSubscribedModal}
+        onClose={() => setShowNotSubscribedModal(false)}
+      />
 
       <ToastContainer />
 
