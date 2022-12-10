@@ -313,9 +313,9 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
     subscription_type = subscription_status[0]
     if subscription_type.startswith('pro'):
         max_result = 50
-    if subscription_type.startswith('basic'):
+    if subscription_type.startswith('basic') or not can_view_small_caps:
         max_result = 12
-
+    
     response = []
     top_rankings = []
     if max_result:

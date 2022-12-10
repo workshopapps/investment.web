@@ -76,20 +76,20 @@ const CapCard = ({
       });
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      apiService(accessToken)
-        .get(`/user/in_watchlist/${abbr}`)
-        .then((res) => {
-          if (res.status === 200) {
-            setInWatchlist(true);
-          } else {
-            setInWatchlist(false);
-          }
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     apiService(accessToken)
+  //       .get(`/user/in_watchlist/${abbr}`)
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           setInWatchlist(true);
+  //         } else {
+  //           setInWatchlist(false);
+  //         }
+  //       });
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [accessToken, isLoggedIn]);
 
   return (
     <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
