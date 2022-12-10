@@ -2,7 +2,7 @@ import React from "react";
 import contactInsta from "../../assets/contact/contactInsta.svg";
 import contactLinkedIn from "../../assets/contact/contactLinkedIn.svg";
 import contactTwitter from "../../assets/contact/contactTwitter.svg";
-import PageLayout from "../layout";
+import PageLayout from "../../components/Layout";
 import ContactForm from "./ContactForm";
 
 const contact = () => {
@@ -49,20 +49,20 @@ const contact = () => {
             <aside className="flex mt-3 my-auto">
               <a href="https://www.instagram.com">
                 <img
-                  src={contactInsta}
+                  src={contactInsta.src}
                   className="text-3xl w-[20px] md:w-[40px]"
                 />
               </a>
               <a href="#">
                 <img
-                  src={contactLinkedIn}
+                  src={contactLinkedIn.src}
                   className="mx-4 text-3xl w-[20px] md:w-[40px]"
                 />
               </a>
               <a href="https://twitter.com/mechteamplug?t=Axl-sd4ytSaCoV8bYlj-SA&s=08">
                 {" "}
                 <img
-                  src={contactTwitter}
+                  src={contactTwitter.src}
                   className="text-3xl w-[20px] md:w-[40px] pt-1"
                 />
               </a>
