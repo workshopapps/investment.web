@@ -12,13 +12,14 @@ const Share = ({close, currentStock}) => {
       }, []);
   return (
     <div className='absolute inset-0 flex justify-center items-center'>
-        <div className="z-[999999999] bg-white  p-[20px] text-white rounded-[8px]" onClick={() => close(false)}>
-            <div className="flex flex-col justify-between items-center gap-[31px]" >
+        <div className="z-[999999999] bg-white w-[183px] p-[20px] text-white rounded-[8px]" onClick={() => close(false)}>
+            <div className="flex flex-col gap-[31px]" >
                 <WhatsappShareButton
                     url={url}
                     title={`Hey 👋
                     I found this interesting stock on Yieldvest, check it out!
                      Link: ${currentStock}`}
+                    className="w-full"
                 >
                     <div className="flex justify-start items-center gap-[12px]">
                         <IoLogoWhatsapp className='text-[#40C351] text-[32px]' />
@@ -27,7 +28,7 @@ const Share = ({close, currentStock}) => {
                 </WhatsappShareButton>
                 <TwitterShareButton
                     url={url}
-                    className="flex justify-start items-center gap-[12px]"
+                    className="w-full"
                     title={`Hey 👋
                     I found this interesting stock on Yieldvest, check it out!
                      Link ${currentStock}`}
@@ -39,7 +40,7 @@ const Share = ({close, currentStock}) => {
                 </TwitterShareButton>
                 <LinkedinShareButton
                     url={url}
-                    className="flex justify-start items-center gap-[12px]"
+                    className="w-full"
                     title={`Hey 👋
                     I found this interesting stock on Yieldvest, check it out!
                      Link ${currentStock}`}
@@ -49,7 +50,7 @@ const Share = ({close, currentStock}) => {
                         <span className="text-black">LinkedIn</span>
                     </div>
                 </LinkedinShareButton>
-                <button className="flex justify-start items-center gap-[12px]" 
+                <button className="flex justify-start items-center gap-[12px] w-full" 
                     onClick={() => {
                         navigator.clipboard.writeText(currentStock)
                         toast.success("Copied to clickboard")

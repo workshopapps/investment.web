@@ -25,7 +25,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
   const router = useRouter();
   const apiService = authHooks.useApiService();
   const { isLoggedIn, accessToken } = useContext(AuthContext);
-
+  const currentStock = `http://yieldvest.hng.tech/company/${companyId}`
   React.useEffect(() => {
     if (isLoggedIn) {
       apiService(accessToken, isLoggedIn)
