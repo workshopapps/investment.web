@@ -32,7 +32,7 @@ const Payment = () => {
   const initCheckoutSession = async () => {
     setIsLoading(true);
 
-    await apiService(accessToken)
+    apiService(accessToken)
       .post(
         `/subscription/checkout_session`,
         {},
