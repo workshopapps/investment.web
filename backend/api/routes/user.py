@@ -20,19 +20,40 @@ router = APIRouter()
 
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
 stripe.api_key = os.getenv("STRIPE_API_KEY")
+BASIC_PLAN_MONTHLY_PRICE_ID = os.getenv('BASIC_PLAN_MONTHLY_PRICE_ID')
+PRO_PLAN_MONTHLY_PRICE_ID = os.getenv('PRO_PLAN_MONTHLY_PRICE_ID')
+PREMIUM_PLAN_MONTHLY_PRICE_ID = os.getenv('PREMIUM_PLAN_MONTHLY_PRICE_ID')
+BASIC_PLAN_YEARLY_PRICE_ID = os.getenv('BASIC_PLAN_YEARLY_PRICE_ID')
+PRO_PLAN_YEARLY_PRICE_ID = os.getenv('PRO_PLAN_YEARLY_PRICE_ID')
+PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 
 @router.get('/profile', tags=['User'])
 async def get_user_profile(user: User = Depends(get_current_user)):
     subscription = user.customer[0]
+    pricing_id = subscription.current_pricing_id
+
+    subscription_type = None
+    if pricing_id == BASIC_PLAN_MONTHLY_PRICE_ID:
+        subscription_type = 'basic_monthly'
+    if pricing_id == BASIC_PLAN_YEARLY_PRICE_ID:
+        subscription_type = 'basic_yearly'
+    if pricing_id == PRO_PLAN_MONTHLY_PRICE_ID:
+        subscription_type = 'pro_monthly'
+    if pricing_id == PRO_PLAN_YEARLY_PRICE_ID:
+        subscription_type = 'pro_yearly'
+    if pricing_id == PREMIUM_PLAN_MONTHLY_PRICE_ID:
+        subscription_type = 'premium_monthly'
+    if pricing_id == PREMIUM_PLAN_YEARLY_PRICE_ID:
+        subscription_type = 'premium_yearly'
 
     return {
         'id': user.id,
         'email': user.email,
         'name': user.name,
-        'subscription_status': {
+        'subscription': {
             'status': subscription.subscription_status,
-            'pricing_id': subscription.current_pricing_id,
+            'type': subscription_type,
             'updated_at': subscription.updated_at
         },
     }
