@@ -73,7 +73,7 @@ const Contact = () => {
                 </div>
                 <aside className="mb-2 block md:hidden">
                     <h1 className=" text-2xl font-bold">Contact us</h1>
-                    <p className="text-[#525A65] text-sm">
+                    <p className="text-primaryGray text-sm">
                         Got any concerns you want us to sort out for you?
                     </p>
                 </aside>

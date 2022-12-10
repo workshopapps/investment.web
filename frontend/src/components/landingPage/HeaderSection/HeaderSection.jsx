@@ -26,7 +26,7 @@ const HeaderSection = () => {
                         investment guidance.
                     </span>
 
-                    <button className="rounded-[8px] text-[16px] lg:w-1/5 w-2/4 md:ml-0 mx-[25%] font-semibold bg-[#1BD47B] p-4 font-Hauora">
+                    <button className="rounded-[8px] text-primary104 text-[16px] lg:w-1/5 w-2/4 md:ml-0 mx-[25%] font-semibold bg-[#1BD47B] p-4 font-Hauora">
                         Get Started
                     </button>
                 </div>
