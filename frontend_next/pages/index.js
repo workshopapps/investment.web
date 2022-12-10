@@ -7,6 +7,7 @@ import dateFormat from "dateformat";
 import NotSubscribedModal from "../components/subscription/NotSubscribedModal";
 import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../components/auth/AuthContext";
+import authHooks from "../components/auth/AuthHooks";
 import { ThreeDots } from "react-loader-spinner";
 import CookieConsent from "react-cookie-consent";
 import NotFoundImage from "../assets/images/not_found.svg";
@@ -28,7 +29,8 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
 
@@ -111,8 +113,8 @@ const Index = () => {
       params[query["key"]] = query["value"];
     });
 
-    axios
-      .get(`${baseUrl}/company/ranking`, {
+    apiService(accessToken, isLoggedIn)
+      .get(`/company/ranking`, {
         params: params,
       })
       .then((res) => {

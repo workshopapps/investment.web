@@ -9,6 +9,12 @@ const AuthProvider = ({ children }) => {
     email: "",
     name: "",
   });
+  const [subscription, setSubscription] = useState({
+    isActive: false,
+    type: "",
+    canViewSmallCaps: false,
+  });
+
   const router = useRouter();
 
   const logout = () => {
@@ -16,21 +22,6 @@ const AuthProvider = ({ children }) => {
     sessionStorage.removeItem("accessToken");
     setAccessToken(null);
   };
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     setTimeout(() => {
-  //       if (sessionStorage.getItem("destination")) {
-  //         const destination = sessionStorage.getItem("destination");
-  //         sessionStorage.removeItem("destination");
-  //         router.push(destination);
-  //       } else {
-  //         router.push("/");
-  //       }
-  //     }, 1500);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider
@@ -40,7 +31,9 @@ const AuthProvider = ({ children }) => {
         setAccessToken: setAccessToken,
         setIsLoggedIn: setIsLoggedIn,
         user: user,
+        subscription: subscription,
         setUser: setUser,
+        setSubscription: setSubscription,
         logout: logout,
       }}
     >

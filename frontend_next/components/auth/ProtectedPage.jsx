@@ -4,7 +4,7 @@ import React, { useEffect, useContext } from "react";
 import AuthContext from "./AuthContext";
 
 const ProtectedPage = ({ children, strict = true }) => {
-  const { logout, setIsLoggedIn, setAccessToken, setUser } =
+  const { logout, setIsLoggedIn, setAccessToken, setUser, setSubscription } =
     useContext(AuthContext);
   const router = useRouter();
 
@@ -36,6 +36,13 @@ const ProtectedPage = ({ children, strict = true }) => {
             setUser({
               email: res.data.email,
               name: res.data.name,
+            });
+
+            const sub = res.data.subscription;
+            setSubscription({
+              isActive: sub.status == "active",
+              type: sub.type,
+              canViewSmallCaps: sub.can_view_small_caps,
             });
           }
         })
