@@ -109,7 +109,7 @@ export default function Notificationsettings({ notifications }) {
               )}
             </div>
             <div>
-              {/* radio buttons*/}
+              {/* radio button*/}
               <div className="flex ">
                 <div className="flex flex-col font-normal text-base md:ml-[60px] ml-2 pb-5">
                   <div className="flex">
