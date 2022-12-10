@@ -15,8 +15,6 @@ const AuthProvider = ({ children }) => {
     canViewSmallCaps: false,
   });
 
-  const router = useRouter();
-
   const logout = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("accessToken");
