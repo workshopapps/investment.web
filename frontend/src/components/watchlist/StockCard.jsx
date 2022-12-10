@@ -28,7 +28,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                             <h2 className="font-[400] text-[18px] text-[#333946] ">
                                 {name.split(' ')[0]}
                             </h2>
-                            <p className="font-[400] text-[#139757] mb-[5x] capitalize">
+                            <p className="font-[400] text-primary102 mb-[5x] capitalize">
                                 {`${name.substring(0, 15)}`}
                             </p>
                             <p className="font-[600] text-[#545964] mb-[5x]">
@@ -49,7 +49,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                 <div className="flex justify-center items-center">
                     <div className="mb-[28px] max-w-[242px] w-full">
                         <div className="mb-[24px] border-b-[2px]">
-                            <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E] flex justify-start items-center">
+                            <h3 className="mb-[24px] text:xl md:text-lg font-[400] text-[#66717E] flex justify-start items-center">
                                 PRICE
                                 <span className="ml-[10px]">
                                     <FiEye className="text-[#8A8D95] " />
@@ -62,7 +62,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                         </div>
                         <div>
                             <h3 className="mb-[24px] text-[16px] font-[400] text-[#66717E] flex justify-start items-center">
-                                FUNAMENTALS
+                                FUNDAMENTALS
                                 <span className="ml-[10px]">
                                     <FiEye className="text-[#8A8D95] " />
                                 </span>
