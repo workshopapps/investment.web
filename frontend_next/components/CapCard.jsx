@@ -143,11 +143,11 @@ const CapCard = ({
         </div>
         <div className="space-y-2">
           {/* Desktop view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
-                onMouseEnter={handlePriceHover}
-                onMouseLeave={handlePriceHover}
+                // onMouseEnter={handlePriceHover}
+                // onMouseLeave={handlePriceHover}
                 className={
                   !hoverPrice
                     ? `text-[#B0B2B7] font-normal pr-4`
@@ -156,7 +156,7 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <Tippy
                   content={<span className="">See details</span>}
                   placement="bottom"
@@ -173,11 +173,11 @@ const CapCard = ({
                     }}
                   />
                 </Tippy>
-              </p>
+              </p> */}
             </div>
           </span>
           {/* Mobile view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
                 className={
@@ -188,13 +188,13 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <img
                   src={hoverPrice ? Eye.src : inactiveEye.src}
                   alt="eye"
                   className="w-5 h-6"
                 />
-              </p>
+              </p> */}
             </div>
           </span>
           <div className="flex justify-between text-xs lg:text-base">
