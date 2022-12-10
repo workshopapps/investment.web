@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -10,6 +11,10 @@ const ErrorPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Page Not Found</title>
+      </Head>
+
       <span className="align-center justify-center font-HauoraBold text-center text-8xl">
         <div className="h-screen flex flex-col items-center justify-center">
           <div className="flex flex-col items-center justify-center w-full">
@@ -22,7 +27,7 @@ const ErrorPage = () => {
               </p>
               <div className="flex flex-col w-full gap-4 md:flex-row md:justify-center">
                 <button
-                  className="bg-green-500 text-base h-12 rounded-md flex items-center justify-center font-HauoraBold md:w-56"
+                  className="bg-[#1BD47B] text-base h-12 rounded-md flex items-center justify-center font-HauoraBold md:w-[50%]"
                   onClick={() => router.back()}
                 >
                   Go back
