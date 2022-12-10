@@ -49,7 +49,7 @@ const MenuLinks = () => {
     ];
     const { isLoggedIn } = useContext(AuthContext);
     return (
-        <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
+        <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[400px] justify-between items center">
             {navLinks.map((item, index) => {
                 const { link, url, icon, dropItems, linkIcon } = item;
                 return (
