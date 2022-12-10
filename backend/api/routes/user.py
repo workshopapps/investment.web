@@ -46,6 +46,8 @@ async def get_user_profile(user: User = Depends(get_current_user)):
         if pricing_id == PREMIUM_PLAN_YEARLY_PRICE_ID:
             subscription_type = 'premium_yearly'
 
+    can_view_small_caps = (subscription_type == 'pro_monthly' or subscription_type == 'pro_yearly' or
+                           subscription_type == 'premium_monthly' or subscription_type == 'premium_yearly')
     return {
         'id': user.id,
         'email': user.email,
@@ -53,6 +55,7 @@ async def get_user_profile(user: User = Depends(get_current_user)):
         'subscription': {
             'status': subscription.subscription_status if subscription else None,
             'type': subscription_type,
+            'can_view_small_caps': can_view_small_caps,
             'updated_at': subscription.updated_at if subscription else None
         },
     }
