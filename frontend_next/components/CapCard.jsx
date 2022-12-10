@@ -92,15 +92,15 @@ const CapCard = ({
   // }, [accessToken, isLoggedIn]);
 
   return (
-    <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+    <div className="border-2 border-primaryGray border-opacity-30 hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
           {index + 1}
         </div>
         <div className="flex gap-5 mb-6 justify-between">
           <div className="flex gap-5">
-            <div className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]">
-              <img src={logo} alt={abbr} />
+            <div className=" h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px]">
+              <img src={logo} alt={abbr} className="rounded-[50%] justify-center" />
             </div>
             <div className="">
               <p className="text-[#333946] font-normal text-lg">{abbr}</p>

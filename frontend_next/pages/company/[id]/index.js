@@ -25,7 +25,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
   const router = useRouter();
   const apiService = authHooks.useApiService();
   const { isLoggedIn, accessToken } = useContext(AuthContext);
-  const currentStock = `http://yieldvest.hng.tech/company/${companyId}`
+  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`
   React.useEffect(() => {
     if (isLoggedIn) {
       apiService(accessToken, isLoggedIn)
@@ -102,12 +102,11 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
             <div className="w-full flex flex-row justify-between">
               <div>
                 <h3
-                  className="text-1xl md:text-1xl text-[#5C5A5A] pt-10"
-                  style={{ fontSize: "1.3rem" }}
+                  className="text-lg text-primaryGray pt-10 md:text-2xl"
                 >
                   {company.name} Stock Fundamentals
                 </h3>
-                <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
+                <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
                   Overview
                 </p>
               </div>
@@ -115,7 +114,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
               <div className="flex flex-row mt-auto gap-2">
                 <Link
                   href={`/company/${companyId}/history`}
-                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md"
+                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md"
                 >
                   <span className="hidden md:block">View Ranking History </span>
                   <img
@@ -124,7 +123,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md" onClick={() => setShowShare(true)}>
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md" onClick={() => setShowShare(true)}>
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
