@@ -90,7 +90,7 @@ const Index = () => {
 
   useEffect(() => {
     if (
-      marketCap === "low_market_cap_category" &&
+      marketCap === "low_market_cap_category" ||
       !subscription.canViewSmallCaps
     ) {
       setShowNotSubscribedModal(true);

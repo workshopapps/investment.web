@@ -41,7 +41,6 @@ export default function ProfileSection() {
   return (
     <div className="flex justify-center items-center  mt-3 ">
       <div className="max-w-[1024px] w-full">
-        <ToastContainer />
         <div className="flex flex-col md:flex-col w-full h-full md:pt-[56px] pb-[70px]">
           <div
             className="flex flex-col md:flex-row"
@@ -102,7 +101,9 @@ export default function ProfileSection() {
                     disabled={isLoading}
                   >
                     {isLoading ? (
-                      <div style={{ display: "flex", justifyContent: "center" }}>
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
                         <ThreeDots
                           height="30"
                           width="50"
