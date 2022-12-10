@@ -4,14 +4,14 @@ import React from "react";
 import Payment from ".";
 import PaymentModal from "../../components/Modal/PaymentModal";
 
-const Cancel = () => {
-  return (
-    <div>
-      <Payment />
+const Success = () => {
+    return (
+        <div>
+            <Payment />
 
-      <PaymentModal status={false} />
-    </div>
-  );
+            <PaymentModal status={true} />
+        </div>
+    );
 };
 
-export default Cancel;
+export default Success;

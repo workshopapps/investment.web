@@ -76,20 +76,20 @@ const CapCard = ({
       });
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      apiService(accessToken)
-        .get(`/user/in_watchlist/${abbr}`)
-        .then((res) => {
-          if (res.status === 200) {
-            setInWatchlist(true);
-          } else {
-            setInWatchlist(false);
-          }
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     apiService(accessToken)
+  //       .get(`/user/in_watchlist/${abbr}`)
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           setInWatchlist(true);
+  //         } else {
+  //           setInWatchlist(false);
+  //         }
+  //       });
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [accessToken, isLoggedIn]);
 
   return (
     <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
@@ -143,11 +143,11 @@ const CapCard = ({
         </div>
         <div className="space-y-2">
           {/* Desktop view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
-                onMouseEnter={handlePriceHover}
-                onMouseLeave={handlePriceHover}
+                // onMouseEnter={handlePriceHover}
+                // onMouseLeave={handlePriceHover}
                 className={
                   !hoverPrice
                     ? `text-[#B0B2B7] font-normal pr-4`
@@ -156,7 +156,7 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <Tippy
                   content={<span className="">See details</span>}
                   placement="bottom"
@@ -173,11 +173,11 @@ const CapCard = ({
                     }}
                   />
                 </Tippy>
-              </p>
+              </p> */}
             </div>
           </span>
           {/* Mobile view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
                 className={
@@ -188,19 +188,19 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <img
                   src={hoverPrice ? Eye.src : inactiveEye.src}
                   alt="eye"
                   className="w-5 h-6"
                 />
-              </p>
+              </p> */}
             </div>
           </span>
           <div className="flex justify-between text-xs lg:text-base">
             <p className="text-[#66717E] font-normal">Stock Price </p>
             <p className="text-[#333946] text-semibold">
-              ${stockPrice.toFixed(2)}
+              ${stockPrice ? stockPrice.toFixed(2) : "N/A"}
             </p>
           </div>
           <div className="p-2">

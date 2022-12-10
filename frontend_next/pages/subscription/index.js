@@ -1,24 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useContext } from "react";
-import AuthContext from "../../components/auth/AuthContext";
-
+import React, { useState } from "react";
 import "../../assets/subscriptionPage/css/style.module.css";
 import Spring from "../../assets/subscriptionPage/images/spring.png";
-import {
-  freeMonthly,
-  premiumMonthly,
-  freeYearly,
-  premiumYearly,
-} from "../../utils/SubscriptionContent";
 import Layout from "../../components/Layout";
 import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
+import AuthContext from "../../components/auth/AuthContext";
 
-const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
-  const { isLoggedIn } = useContext(AuthContext);
+const Subscription = () => {
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
+  const { isLoggedIn, subscription } = React.useContext(AuthContext);
 
   // handles chnaing from monthly subscription to yearly Subscription
   const handleSubType = (theSub) => {
@@ -29,6 +22,10 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
     if (theSub === "yearly") {
       setSubType(2);
     }
+  };
+
+  const hasActiveSubscription = () => {
+    return isLoggedIn && subscription && subscription.isActive;
   };
 
   return (
@@ -90,7 +87,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="0.00"
               type="month"
               target="For basic users"
-              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -100,7 +96,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -109,7 +105,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="25"
               type="month"
               target="For power users"
-              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -120,7 +115,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -129,7 +124,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="50"
               type="month"
               target="For advanced users"
-              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -140,7 +134,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
           </div>
         </div>
@@ -153,7 +147,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="0.00"
               type="year"
               target="For basic users"
-              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -163,7 +156,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -172,7 +165,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="300"
               type="year"
               target="For power users"
-              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -183,7 +175,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -192,7 +184,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="600"
               type="year"
               target="For advanced users"
-              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -203,7 +194,7 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription() ? "/settings" : "/payment"}
             />
           </div>
         </div>
@@ -215,15 +206,5 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
     </Layout>
   );
 };
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      BASIC_PRICE_ID: process.env.BASIC_PRICE_ID,
-      PRO_PRICE_ID: process.env.PRO_PRICE_ID,
-      PREMIUM_PRICE_ID: process.env.PREMIUM_PRICE_ID,
-    },
-  };
-}
 
 export default Subscription;

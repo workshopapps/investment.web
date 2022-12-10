@@ -15,8 +15,9 @@ import UpIcon from "../../assets/landingPage/icons/up.svg";
 import greenArrow from "../../assets/company-profile/green.svg";
 import redArrow from "../../assets/company-profile/red.svg";
 import { useRouter } from "next/router";
+import authHooks from "../auth/AuthHooks";
 
-const VisualDataCard = () => {
+const VisualDataCard = ({ isLoggedIn, accessToken }) => {
   const { id: companyId } = useRouter().query;
   const [state, setState] = React.useState({
     show: false,
@@ -29,6 +30,7 @@ const VisualDataCard = () => {
   });
 
   const [data, setData] = React.useState([]);
+  const apiService = authHooks.useApiService();
 
   const getStartDate = () => {
     const year = parseInt(state.value) - 5;
@@ -55,9 +57,9 @@ const VisualDataCard = () => {
   };
 
   React.useEffect(() => {
-    axios
+    apiService(accessToken, isLoggedIn)
       .get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/interval?startDate=${getStartDate()}&endDate=${getEndDate()}`
+        `/company/${companyId}/interval?startDate=${getStartDate()}&endDate=${getEndDate()}`
       )
       .then((res) => {
         const raw = res.data["financials"];

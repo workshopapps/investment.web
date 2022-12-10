@@ -66,7 +66,7 @@ Commit messages should include concise messages about what was done and what has
     -   Make sure your branch is up to date with the main branch and without conflicts before making your pull request, if not your PR may not be merged
     -   Push your code as soon as you can [ASAP]
     -   Link whatever issue it is that you worked on to your pull request
-    -   Add all other neccessary links you may have to your pull request inluding the link to the design
+    -   Add all other neccessary links you may have to your pull request including the link to the design
     -   In the comment section of the pull request, document your work thoroughly(a helpful description)
     -   In a situation where you work on functional parts add a show `what it does` video if you can
     -   Do `git fetch` at least twice a day to be up to date with the repo

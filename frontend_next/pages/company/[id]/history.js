@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../../components/Layout";
 import shareIcon from "../../../assets/company-profile/share.svg";
 import rankIcon2 from "../../../assets/company-profile/ranked.svg";
@@ -13,6 +13,8 @@ import dateformat from "dateformat";
 import { ordinalSuffixOf } from "../../../utils/helpers";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import authHooks from "../../../components/auth/AuthHooks";
+import AuthContext from "../../../components/auth/AuthContext";
 
 const History = ({ company, companyId, rankings: rnks }) => {
   const [restrictToCategory, setRestrictToCategory] = useState(false);
@@ -20,21 +22,20 @@ const History = ({ company, companyId, rankings: rnks }) => {
   const [restrictToIndustry, setRestrictToIndustry] = useState(false);
   const [rankings, setRankings] = useState(rnks);
   const [isLoading, setIsLoading] = useState(false);
+  const apiService = authHooks.useApiService();
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
 
   const getRankingHistory = () => {
     setIsLoading(true);
 
-    axios
-      .get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/ranking/history`,
-        {
-          params: {
-            restrict_to_category: restrictToCategory,
-            restrict_to_sector: restrictToSector,
-            restrict_to_industry: restrictToIndustry,
-          },
-        }
-      )
+    apiService(accessToken, isLoggedIn)
+      .get(`/company/${companyId}/ranking/history`, {
+        params: {
+          restrict_to_category: restrictToCategory,
+          restrict_to_sector: restrictToSector,
+          restrict_to_industry: restrictToIndustry,
+        },
+      })
       .then((res) => {
         setIsLoading(false);
         if (res.status === 200) {
@@ -66,7 +67,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
       <div className="bg-[#F5F5F5] h-full px-[1em] md:px-[100px]">
         <Link href="/">
-          <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md">
+          <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md">
             Stock <span className="inline-flex mx-2 ">&gt; </span>Company
             Profile <span className="inline-flex mx-2 ">&gt; </span> Ranking
             History
@@ -115,25 +116,22 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
         <div className="mt-[3.5rem]">
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToCategory ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToCategory ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToCategory(!restrictToCategory)}
           >
             Market Cap
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToSector ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToSector ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToSector(!restrictToSector)}
           >
             Sector
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToIndustry ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToIndustry ? "bg-[#66E2A7]" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToIndustry(!restrictToIndustry)}
           >
             Industry

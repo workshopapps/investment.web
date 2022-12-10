@@ -1,34 +1,3 @@
-/* @media screen and (min-width: 320px) and (max-width: 768px) {
-    .theLeftSide {
-        position: relative;
-    }
-
-    .upperLeftSide {
-        position: absolute;
-        top: -2em;
-    }
-
-    .theFaqHolder {
-        position: absolute;
-        top: 37em;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .mainHolder {
-        position: relative;
-    }
-    .theRightSide {
-        position: absolute;
-        top: 5em;
-    }
-
-    .footerHolder {
-        margin-top: 57em;
-    }
-} */
-
 
 .FormGroup{
     margin: 0 15px 20px;

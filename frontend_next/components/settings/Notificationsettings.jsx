@@ -95,7 +95,6 @@ export default function Notificationsettings({ notifications }) {
   return (
     <div className="flex mt-3 justify-center items-center px-[17px]">
       <div className="max-w-[1024px] w-full">
-        <ToastContainer />
         <div className="flex flex-col  h-full items-center py-5">
           <div className="flex flex-col w-full h-full py-2 font-semibold text-base text-black max-w-[1028px]">
             <div className="flex w-full justify-between items-center  px-6 py-4">
