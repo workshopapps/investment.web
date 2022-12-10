@@ -200,7 +200,7 @@ const CapCard = ({
           <div className="flex justify-between text-xs lg:text-base">
             <p className="text-[#66717E] font-normal">Stock Price </p>
             <p className="text-[#333946] text-semibold">
-              ${stockPrice.toFixed(2)}
+              ${stockPrice ? stockPrice.toFixed(2) : "N/A"}
             </p>
           </div>
           <div className="p-2">

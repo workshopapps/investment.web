@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+from typing import List
 from uuid import uuid4
 
 from dotenv import load_dotenv
@@ -397,7 +399,10 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
 
 
 @router.get('/company/{company_id}/ranking/history', tags=["User"])
-async def get_company_ranking_history(company_id: str, db: Session = Depends(get_db),
+async def get_company_ranking_history(company_id: str, restrict_to_category: bool = False,
+                                      restrict_to_sector: bool = False,
+                                      restrict_to_industry: bool = False,
+                                      db: Session = Depends(get_db),
                                       user: User = Depends(get_current_user)):
     subscription_status = get_subscription_status(user)
     can_view_small_caps = subscription_status[1]
@@ -410,16 +415,68 @@ async def get_company_ranking_history(company_id: str, db: Session = Depends(get
         raise HTTPException(status_code=401,
                             detail="You must be subscribed to view low market cap stocks")
 
-    if company.category == low_cap_category_id:
-        raise HTTPException(status_code=401,
-                            detail="Please use the authenticated version of this route to "
-                                   "access low market cap stocks")
+    company_rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
+        models.Ranking.updated_at.desc()).all()
 
-    rankings = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
-        models.Ranking.created_at.desc()).all()
-    db.close()
+    filters = []
+    if restrict_to_category:
+        filters.append(models.Company.category == company.category)
+    if restrict_to_sector:
+        filters.append(models.Company.sector == company.sector)
+    if restrict_to_industry:
+        filters.append(models.Company.industry == company.industry)
 
-    return rankings
+    # Get all companies matching the filters
+    companies = db.query(models.Company).filter(*filters).all()
+
+    # remove all companies under low market cap if the user isn't subscribed to at least Pro
+    used = []
+    for comp in companies:
+        if comp.category != low_cap_category_id or can_view_small_caps:
+            used.append(comp)
+
+    companies = used
+
+    response = []
+
+    # For each ranking, get the rankings for other companies and figure out the position of
+    # the current company
+    for company_rank in company_rankings:
+        # Get the current matching ranking of all the companies
+        rankings: List[Ranking] = []
+        for company in companies:
+            date: datetime = company_rank.created_at
+            rank = db.query(Ranking).filter(Ranking.company == company.company_id,
+                                            Ranking.created_at <= date) \
+                .order_by(Ranking.created_at.desc()).first()
+            if rank:
+                rankings.append(rank)
+
+        # sort rankings by score (descending)
+        def get_ranking_sort_key(inner_rank: Ranking):
+            return inner_rank.score
+
+        rankings.sort(key=get_ranking_sort_key, reverse=True)
+
+        # get the position of this company
+        position = 0
+        current_rank = None
+        for rank in rankings:
+            position += 1
+            if rank.company == company_id:
+                current_rank = rank
+                break
+
+        if current_rank:
+            data = {
+                'position': position,
+                'score': current_rank.score,
+                'companies_compared_with': len(rankings),
+                'date': current_rank.updated_at,
+            }
+            response.append(data)
+
+    return response
 
 
 @router.get('/company/ranks/{category}', tags=["User"], )
