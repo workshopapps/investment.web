@@ -17,7 +17,6 @@ const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [customerId, setCustomerId] = useState(null);
   const [subscriptionData, setSubscriptionData] = useState(null);
 
   const { accessToken } = useContext(AuthContext);

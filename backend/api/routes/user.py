@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, get_company
 from api.models import models
+from api.payment_gte.subscription_scripts import get_subscription_status
 from api.routes.auth import get_current_user
 from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking, Customer
 from api.scripts.email import send_email
@@ -29,25 +30,10 @@ PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 @router.get('/profile', tags=['User'])
 async def get_user_profile(user: User = Depends(get_current_user)):
     subscription = user.customer[0] if user.customer else None
-    pricing_id = subscription.current_pricing_id if subscription else None
+    subscription_status = get_subscription_status(user)
+    subscription_type = subscription_status[0]
+    can_view_small_caps = subscription_status[1]
 
-    subscription_type = None
-    if pricing_id:
-        if pricing_id == BASIC_PLAN_MONTHLY_PRICE_ID:
-            subscription_type = 'basic_monthly'
-        if pricing_id == BASIC_PLAN_YEARLY_PRICE_ID:
-            subscription_type = 'basic_yearly'
-        if pricing_id == PRO_PLAN_MONTHLY_PRICE_ID:
-            subscription_type = 'pro_monthly'
-        if pricing_id == PRO_PLAN_YEARLY_PRICE_ID:
-            subscription_type = 'pro_yearly'
-        if pricing_id == PREMIUM_PLAN_MONTHLY_PRICE_ID:
-            subscription_type = 'premium_monthly'
-        if pricing_id == PREMIUM_PLAN_YEARLY_PRICE_ID:
-            subscription_type = 'premium_yearly'
-
-    can_view_small_caps = (subscription_type == 'pro_monthly' or subscription_type == 'pro_yearly' or
-                           subscription_type == 'premium_monthly' or subscription_type == 'premium_yearly')
     return {
         'id': user.id,
         'email': user.email,
@@ -238,14 +224,14 @@ def get_company_metrics_for_interval(company_id: str, startDate: str, endDate: s
     """
     db: Session = next(get_db())
 
-    # TODO: Validate and ensure the user has active subscription for a low cap company
-    is_user_subscribed = False
+    subscription_status = get_subscription_status(user)
+    can_view_small_caps = subscription_status[1]
 
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
 
-    if company.category == low_cap_category_id and not is_user_subscribed:
+    if company.category == low_cap_category_id and not can_view_small_caps:
         raise HTTPException(status_code=401,
                             detail="You must be subscribed before you can access low cap companies")
 
@@ -284,18 +270,18 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
                                  user: User = Depends(get_current_user)):
     db: Session = next(get_db())
 
-    # TODO: Validate and ensure the user has active subscription for a low cap company
-    is_user_subscribed = False
+    subscription_status = get_subscription_status(user)
+    can_view_small_caps = subscription_status[1]
 
     filters = []
 
     if category:
-        if category == low_cap_category_id and not is_user_subscribed:
+        if category == low_cap_category_id and not can_view_small_caps:
             raise HTTPException(status_code=401,
                                 detail='You must be subscribed to view low market cap stocks')
         else:
             filters.append(models.Company.category == category)
-    else:
+    elif not can_view_small_caps:
         filters.append(models.Company.category != low_cap_category_id)
 
     if sector:
@@ -321,13 +307,23 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
     rankings.sort(key=get_ranking_sort_key, reverse=True)
 
     # create the response list
+    max_result = None
+    subscription_type = subscription_status[0]
+    if subscription_type.startswith('pro'):
+        max_result = 50
+    if subscription_type.startswith('basic'):
+        max_result = 12
+
     response = []
     top_rankings = []
-    for ranking in rankings:
-        if len(top_rankings) == 12:
-            break
+    if max_result:
+        for ranking in rankings:
+            if len(top_rankings) == max_result:
+                break
 
-        top_rankings.append(ranking)
+            top_rankings.append(ranking)
+    else:
+        top_rankings = rankings
 
     for ranking in top_rankings:
         comp: models.Company = ranking.comp_ranks
@@ -364,11 +360,15 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 @router.get('/company/{company_id}', tags=["User"])
 async def get_company_profile(company_id: str, db: Session = Depends(get_db),
                               user: User = Depends(get_current_user)):
-    is_user_subscribed = False
+    subscription_status = get_subscription_status(user)
+    can_view_small_caps = subscription_status[1]
 
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
+    if company.category == low_cap_category_id and not can_view_small_caps:
+        raise HTTPException(status_code=401,
+                            detail="You must be subscribed to view low market cap stocks")
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()
@@ -399,13 +399,14 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db),
 @router.get('/company/{company_id}/ranking/history', tags=["User"])
 async def get_company_ranking_history(company_id: str, db: Session = Depends(get_db),
                                       user: User = Depends(get_current_user)):
-    is_user_subscribed = False
+    subscription_status = get_subscription_status(user)
+    can_view_small_caps = subscription_status[1]
 
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
 
-    if company.category == low_cap_category_id and not is_user_subscribed:
+    if company.category == low_cap_category_id and not can_view_small_caps:
         raise HTTPException(status_code=401,
                             detail="You must be subscribed to view low market cap stocks")
 
@@ -428,10 +429,10 @@ def get_company_category(category: str, user: User = Depends(get_current_user)):
     """
     db: Session = next(get_db())
 
-    # TODO: Validate and ensure the user has active subscription for a low cap company
-    is_user_subscribed = False
+    subscription_status = get_subscription_status(user)
+    can_view_small_caps = subscription_status[1]
 
-    if category == low_cap_category_id and not is_user_subscribed:
+    if category == low_cap_category_id and not can_view_small_caps:
         raise HTTPException(status_code=401,
                             detail="You must be subscribed before you can access low cap companies")
     # get companies
