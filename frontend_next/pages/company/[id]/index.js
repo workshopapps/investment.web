@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../../components/Layout";
 import AboutCompanyCard from "../../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../../assets/landingPage/icons/up.svg";
@@ -13,12 +13,32 @@ import Link from "next/link";
 import Head from "next/head";
 import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
 import { useRouter } from "next/router";
+import authHooks from "../../../components/auth/AuthHooks";
+import AuthContext from "../../../components/auth/AuthContext";
+import { ThreeDots } from "react-loader-spinner";
 
-const CompanyProfilePage = ({ company, companyId }) => {
+const CompanyProfilePage = ({ company: comp, companyId }) => {
   const [showAbout, setShowAbout] = React.useState(false);
+  const [company, setCompany] = React.useState(comp);
   const router = useRouter();
+  const apiService = authHooks.useApiService();
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
 
-  if (!company) {
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      apiService(accessToken, isLoggedIn)
+        .get(`/company/${companyId}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setCompany(res.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken, isLoggedIn]);
+
+  if (!company && !isLoggedIn) {
     return (
       <Layout>
         <Head>
@@ -31,6 +51,30 @@ const CompanyProfilePage = ({ company, companyId }) => {
 
         <NotSubscribedModal isOpen={true} onClose={() => router.back()} />
       </Layout>
+    );
+  }
+
+  if (isLoggedIn && !company) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          marginTop: "30px",
+          marginBottom: "30px",
+        }}
+      >
+        <ThreeDots
+          height="80"
+          width="80"
+          color="#49dd95"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
     );
   }
 
@@ -123,7 +167,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
               </div>
 
               <div className="md:w-2/3 w-full">
-                <VisualcompanyCard />
+                <VisualcompanyCard
+                  isLoggedIn={isLoggedIn}
+                  accessToken={accessToken}
+                />
                 <br />
               </div>
             </div>
