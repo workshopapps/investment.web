@@ -89,11 +89,9 @@ const Index = () => {
   }, [sector]);
 
   useEffect(() => {
-    if (
-      marketCap === "low_market_cap_category" ||
-      !subscription.canViewSmallCaps
-    ) {
-      setShowNotSubscribedModal(true);
+    if (marketCap === "low_market_cap_category") {
+      if (subscription && !subscription.canViewSmallCaps)
+        setShowNotSubscribedModal(true);
     }
   }, [marketCap, subscription]);
 
