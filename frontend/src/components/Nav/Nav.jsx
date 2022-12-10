@@ -55,7 +55,7 @@ const Nav = ({ openMenu }) => {
                             <button
                                 type="button"
                                 style={btnStyle}
-                                className="rounded text-[#1F2226] font-[400]">
+                                className="rounded text-primary104 font-[400]">
                                 Get Started
                             </button>
                         </Link>
