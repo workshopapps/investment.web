@@ -13,9 +13,12 @@ import Link from "next/link";
 import Head from "next/head";
 import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
 import { useRouter } from "next/router";
+import Share from "../../../components/CompanyProfile/Share";
 
 const CompanyProfilePage = ({ company, companyId }) => {
-  const [showAbout, setShowAbout] = React.useState(false);
+  const [showAbout, setShowAbout] = React.useState(true);
+  const [showShare, setShowShare] = React.useState(false);
+  const currentStock = `https://yieldvest.hng.tech/${companyId}`
   const router = useRouter();
 
   if (!company) {
@@ -43,7 +46,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
           content="Get up to date recommendations on the best stocks to buy"
         />
       </Head>
-
+      {showShare && <Share close={setShowShare} currentStock={currentStock}/>}
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
@@ -78,7 +81,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md">
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md" onClick={() => setShowShare(true)}>
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
@@ -110,7 +113,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   About{" "}
                   <img
                     className="cursor-pointer"
-                    src={(showAbout ? UpIcon : DownIcon).src}
+                    src={(showAbout ? DownIcon : UpIcon).src}
                     alt="open"
                     onClick={() => setShowAbout(!showAbout)}
                   />
