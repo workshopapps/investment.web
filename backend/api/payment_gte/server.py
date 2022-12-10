@@ -113,7 +113,7 @@ def create_checkout_session(subscription_type: str, user: User = Depends(get_cur
         raise HTTPException(status_code=500, detail="An internal error occurred")
 
 
-@router.post('/subscription/portal', tags=["Subscription"], )
+@router.get('/subscription/portal', tags=["Subscription"], )
 def get_customer_subscription_portal(user: User = Depends(get_current_user)):
     try:
         # get or create customer object

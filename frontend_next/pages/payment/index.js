@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { faqDatas } from "../../utils/Payment/FaqContent";
 import "../../assets/paymentpage/css/style.module.css";
 import Shield from "../../assets/paymentpage/icons/shield-tick.png";
 import Stripe from "../../assets/paymentpage/icons/stripe.svg";
 import { FaArrowRight } from "react-icons/fa";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { loadStripe } from "@stripe/stripe-js";
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import authHooks from "../../components/auth/AuthHooks";
@@ -14,14 +13,14 @@ import AuthContext from "../../components/auth/AuthContext";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 
-const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
+const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const [clicked, setClicked] = useState(false);
   const [customerId, setCustomerId] = useState(null);
   const [subscriptionData, setSubscriptionData] = useState(null);
 
-  const { user, accessToken } = useContext(AuthContext);
+  const { accessToken } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
 
   const toggle = (index) => {
@@ -31,61 +30,19 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
     setClicked(index);
   };
 
-  const fetchCustomerId = async () => {
+  const initCheckoutSession = async () => {
+    setIsLoading(true);
+
     await apiService(accessToken)
-      .post(`/create-customer-object`)
-      .then((res) => {
-        const data = res.data;
-        setCustomerId(data["customerId"]);
-        return;
+      .post(`/subscription/checkout_session`)
+      .then(() => {
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         console.log(err);
         toast.error("Something went wrong");
       });
-  };
-
-  const getStripe = () => {
-    let stripeTestPromise;
-    if (!stripeTestPromise) {
-      stripeTestPromise = loadStripe(STRIPE_SECRET_KEY);
-    }
-
-    return stripeTestPromise;
-  };
-
-  const redirectToCheckout = async () => {
-    const checkoutOptions = {
-      lineItems: [
-        {
-          price: subscriptionData.priceId,
-          quantity: 1,
-        },
-      ],
-      mode: "subscription",
-      clientReferenceId: customerId,
-      successUrl: `${APP_URL}/payment/success`,
-      cancelUrl: `${APP_URL}/payment/cancel`,
-      customerEmail: user.email,
-    };
-
-    setIsLoading(true);
-
-    const stripe = await getStripe();
-
-    try {
-      const { error } = await stripe.redirectToCheckout(checkoutOptions);
-
-      setIsLoading(false);
-      if (error) {
-        setStripeError(error.message);
-      } else {
-        sessionStorage.removeItem("subscriptionData");
-      }
-    } catch (err) {
-      setIsLoading(false);
-      setStripeError(error.message);
-    }
   };
 
   useEffect(() => {
@@ -97,13 +54,6 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
       toast.error("Subscription payment failed");
     }
   }, [stripeError]);
-
-  useEffect(() => {
-    if (accessToken && !customerId) {
-      fetchCustomerId();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken]);
 
   return (
     <Layout>
@@ -185,13 +135,34 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
                 <div className="flex items-center justify-center w-full">
                   <div className="mt-2 w-full flex items-center justify-center">
                     <button
-                      className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-4 px-4 rounded-lg font-bold mb-5"
+                      className="w-full mx-10 flex justify-center shadow bg-[#1BD47B] py-4 px-4 rounded-lg font-regular mb-5"
                       type="button"
                       disabled={isLoading}
-                      onClick={redirectToCheckout}
+                      onClick={initCheckoutSession}
                     >
                       <span>
-                        {isLoading ? "Loading..." : "Pay using Stripe"}
+                        {isLoading ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              width: "100%",
+                              marginTop: "30px",
+                            }}
+                          >
+                            <ThreeDots
+                              height="80"
+                              width="80"
+                              color="#49dd95"
+                              ariaLabel="bars-loading"
+                              wrapperStyle={{}}
+                              wrapperClass=""
+                              visible={true}
+                            />
+                          </div>
+                        ) : (
+                          "Pay using Stripe"
+                        )}
                       </span>
                       <FaArrowRight className="w-5 mt-2 h-3  ml-1" />
                     </button>
@@ -234,14 +205,5 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
     </Layout>
   );
 };
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-      APP_URL: process.env.APP_URL,
-    },
-  };
-}
 
 export default Payment;
