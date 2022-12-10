@@ -311,9 +311,12 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
     # create the response list
     max_result = None
     subscription_type = subscription_status[0]
-    if subscription_type.startswith('pro'):
-        max_result = 50
-    if subscription_type.startswith('basic') or not can_view_small_caps:
+    if subscription_type:
+        if subscription_type.startswith('pro'):
+            max_result = 50
+        if subscription_type.startswith('basic') or not can_view_small_caps:
+            max_result = 12
+    else:
         max_result = 12
     
     response = []
