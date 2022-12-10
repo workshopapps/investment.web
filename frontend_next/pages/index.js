@@ -95,12 +95,12 @@ const Index = () => {
     ) {
       setShowNotSubscribedModal(true);
     }
-  }, [marketCap, subscription.canViewSmallCaps]);
+  }, [marketCap, subscription]);
 
   useEffect(() => {
     reloadRankedCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketCap, sector, industry]);
+  }, [marketCap, sector, industry, isLoggedIn]);
 
   const reloadRankedCompanies = () => {
     setStocks(null);

@@ -38,12 +38,14 @@ const ProtectedPage = ({ children, strict = true }) => {
               name: res.data.name,
             });
 
-            const sub = res.data.subscription;
-            setSubscription({
-              isActive: sub.status == "active",
-              type: sub.type,
-              canViewSmallCaps: sub.can_view_small_caps,
-            });
+            if (setSubscription) {
+              const sub = res.data.subscription;
+              setSubscription({
+                isActive: sub.status == "active",
+                type: sub.type,
+                canViewSmallCaps: sub.can_view_small_caps,
+              });
+            }
           }
         })
         .catch((err) => {
