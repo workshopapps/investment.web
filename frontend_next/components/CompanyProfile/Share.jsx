@@ -1,34 +1,63 @@
-import React from 'react';
-import { IoLogoTwitter, IoLogoLinkedin, IoLogoReddit } from 'react-icons/io';
-import { TwitterShareButton, LinkedinShareButton, RedditShareButton} from 'next-share';
-
+import React, {useEffect} from 'react';
+import { IoLogoTwitter, IoLogoLinkedin, IoLogoWhatsapp, IoMdCopy } from 'react-icons/io';
+import { TwitterShareButton, LinkedinShareButton, WhatsappShareButton} from 'next-share';
+import { toast } from 'react-toastify';
 const Share = ({close, currentStock}) => {
     const url = 'https://yieldvest.hng.tech'
+    useEffect(() => {
+        document.body.style.overflowY = "hidden";
+        return () => {
+          document.body.style.overflowY = "scroll";
+        };
+      }, []);
   return (
     <div className='absolute inset-0 flex justify-center items-center'>
-        <div className="z-[999999999] bg-black  p-[20px] text-white">
-            <div className="text-[21px] mb-[20px] text-center">
-                Share this on socials
-            </div>
-            <div className="flex justify-between items-center gap-[20px] " >
+        <div className="z-[999999999] bg-white  p-[20px] text-white rounded-[8px]" onClick={() => close(false)}>
+            <div className="flex flex-col justify-between items-center gap-[31px]" >
+                <WhatsappShareButton
+                    url={url}
+                    title={`Hey 👋
+                    I found this interesting stock on Yieldvest, check it out!
+                     Link: ${currentStock}`}
+                >
+                    <div className="flex justify-start items-center gap-[12px]">
+                        <IoLogoWhatsapp className='text-[#40C351] text-[32px]' />
+                        <span className="text-black">Whatsapp</span>
+                    </div>
+                </WhatsappShareButton>
                 <TwitterShareButton
                     url={url}
-                    title={`Share this on twiiter now ${currentStock}`}
+                    className="flex justify-start items-center gap-[12px]"
+                    title={`Hey 👋
+                    I found this interesting stock on Yieldvest, check it out!
+                     Link ${currentStock}`}
                 >
-                    <IoLogoTwitter className='text-white text-[32px]' />
+                    <div className="flex justify-start items-center gap-[12px]">
+                        <IoLogoTwitter className='text-[#03A9F4] text-[32px]' />
+                        <span className="text-black">Whatsapp</span>
+                    </div>
                 </TwitterShareButton>
                 <LinkedinShareButton
                     url={url}
-                    title={'Share this stock on linkedin'}
+                    className="flex justify-start items-center gap-[12px]"
+                    title={`Hey 👋
+                    I found this interesting stock on Yieldvest, check it out!
+                     Link ${currentStock}`}
                 >
-                    <IoLogoLinkedin className='text-white text-[32px]' />
+                    <div className="flex justify-start items-center gap-[12px]">
+                        <IoLogoLinkedin className='text-[#0288D1] text-[32px]' />
+                        <span className="text-black">LinkedIn</span>
+                    </div>
                 </LinkedinShareButton>
-                <RedditShareButton
-                    url={url}
-                    title={'Share this on Linkedin'}
+                <button className="flex justify-start items-center gap-[12px]" 
+                    onClick={() => {
+                        navigator.clipboard.writeText(currentStock)
+                        toast.success("Copied to clickboard")
+                    }}
                 >
-                    <IoLogoReddit className='text-white text-[32px]' />
-                </RedditShareButton>
+                    <IoMdCopy className="text-black text-[32px]" />
+                    <span className="text-black">Copy Link</span>
+                </button>
             </div>
         </div>
         <div className='absolute inset-0 bg-black opacity-60 z-[99999999]' onClick={() => close(false)}></div>
