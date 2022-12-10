@@ -18,7 +18,7 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const [clicked, setClicked] = useState(false);
-  const [customerId, setCustomerId] = useState("");
+  const [customerId, setCustomerId] = useState(null);
   const [subscriptionData, setSubscriptionData] = useState(null);
 
   const { user, accessToken } = useContext(AuthContext);
@@ -31,7 +31,7 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
     setClicked(index);
   };
 
-  const fetchCustomerId = useCallback(async () => {
+  const fetchCustomerId = async () => {
     await apiService(accessToken)
       .post(`/create-customer-object`)
       .then((res) => {
@@ -39,8 +39,11 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
         setCustomerId(data["customerId"]);
         return;
       })
-      .catch((err) => console.log(err));
-  }, [accessToken, apiService]);
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong");
+      });
+  };
 
   const getStripe = () => {
     let stripeTestPromise;
@@ -96,8 +99,11 @@ const Payment = ({ STRIPE_SECRET_KEY, APP_URL }) => {
   }, [stripeError]);
 
   useEffect(() => {
-    fetchCustomerId();
-  }, [fetchCustomerId]);
+    if (accessToken && !customerId) {
+      fetchCustomerId();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken]);
 
   return (
     <Layout>

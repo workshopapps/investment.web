@@ -4,25 +4,39 @@ from uuid import uuid4
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Form
 from sqlalchemy.orm import Session
+from starlette.responses import RedirectResponse
 
 from api.crud.base import get_db, get_company
 from api.models import models
+from api.payment_gte.sub_status import get_subscription_status
 from api.routes.auth import get_current_user
-from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking
+from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking, Customer
 from api.scripts.email import send_email
+import stripe
 
 load_dotenv()
 
 router = APIRouter()
 
 low_cap_category_id = os.getenv('LOW_MARKET_CAP_CATEGORY_ID')
+stripe.api_key = os.getenv("STRIPE_API_KEY")
 
 
 @router.get('/profile', tags=['User'])
-def get_user_profile(user: User = Depends(get_current_user)):
-    del user.password
-    return user
-    
+async def get_user_profile(user: User = Depends(get_current_user)):
+    subscription = user.customer[0]
+
+    return {
+        'id': user.id,
+        'email': user.email,
+        'name': user.name,
+        'subscription_status': {
+            'status': subscription.subscription_status,
+            'pricing_id': subscription.current_pricing_id,
+            'updated_at': subscription.updated_at
+        },
+    }
+
 
 @router.post("/contact_us/", tags=["User"])
 async def contact_us(name: str = Form(), email: str = Form(), msg: str = Form()):
