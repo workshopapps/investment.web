@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import MenuLink from './MenuLink';
 import AuthContext from '../../auth/AuthContext';
+import { IoMdHelpCircle } from 'react-icons/io';
 
 const MenuLinks = () => {
     const navLinks = [
@@ -18,9 +19,10 @@ const MenuLinks = () => {
             url: '/subscription'
         },
         {
-            link: `Help `,
+            link: `Help`,
             url: '/help',
             icon: true,
+            linkIcon: <IoMdHelpCircle />,
             dropItems: [
                 {
                     link: 'How it Works',
@@ -49,9 +51,9 @@ const MenuLinks = () => {
     return (
         <ul className="w-full hidden md:flex h-full gap-[5px] max-w-[328px] justify-between items center">
             {navLinks.map((item, index) => {
-                const { link, url, icon, dropItems } = item;
+                const { link, url, icon, dropItems, linkIcon } = item;
                 return (
-                    <MenuLink link={link} url={url} key={index} icon={icon} dropItems={dropItems} />
+                    <MenuLink linkicon={linkIcon} link={link} url={url} key={index} icon={icon} dropItems={dropItems} />
                 );
             })}
             {isLoggedIn && <MenuLink link={'Watchlist'} url={'/watchlist'} />}
