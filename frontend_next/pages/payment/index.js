@@ -17,6 +17,7 @@ const Payment = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [stripeError, setStripeError] = useState(null);
   const [clicked, setClicked] = useState(false);
+  const [customerId, setCustomerId] = useState(null);
   const [subscriptionData, setSubscriptionData] = useState(null);
 
   const { accessToken } = useContext(AuthContext);
@@ -43,8 +44,14 @@ const Payment = () => {
           },
         }
       )
-      .then(() => {
+      .then((res) => {
         setIsLoading(false);
+
+        if (res.status === 200) {
+          window.location = res.data.checkout_url;
+        } else {
+          toast.error("Something went wrong");
+        }
       })
       .catch((err) => {
         setIsLoading(false);
@@ -155,13 +162,12 @@ const Payment = () => {
                               display: "flex",
                               justifyContent: "center",
                               width: "100%",
-                              marginTop: "30px",
                             }}
                           >
                             <ThreeDots
-                              height="80"
-                              width="80"
-                              color="#49dd95"
+                              height="25"
+                              width="30"
+                              color="#fff"
                               ariaLabel="bars-loading"
                               wrapperStyle={{}}
                               wrapperClass=""
@@ -172,7 +178,9 @@ const Payment = () => {
                           "Pay using Stripe"
                         )}
                       </span>
-                      <FaArrowRight className="w-5 mt-2 h-3  ml-1" />
+                      {!isLoading && (
+                        <FaArrowRight className="w-5 mt-2 h-3  ml-1" />
+                      )}
                     </button>
                   </div>
                 </div>
