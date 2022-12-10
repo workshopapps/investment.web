@@ -14,7 +14,6 @@ from google.auth.transport import requests
 import stripe
 import os
 
-
 load_dotenv()
 
 app = FastAPI()
@@ -27,51 +26,43 @@ stripe.api_key = os.getenv("STRIPE_API_KEY")
 @router.get('/product-info', tags=['Customer'])
 async def product_info(request: Request):
     db: Session = next(get_db())
-    product_info = db.query(Product).all()
+    product = db.query(Product).all()
     return {
-        "Product": product_info
+        "Product": product
     }
 
 
 # create customer profile
-@router.post('/create-customer-object/', tags=["Checkout"],)
-async def create_customer_object(request: Request, user: User=Depends(get_current_user)):
+@router.post('/create-customer-object/', tags=["Checkout"], )
+async def create_customer_object(request: Request, user: User = Depends(get_current_user)):
     if request:
         # get the current user
         db: Session = next(get_db())
-        id = user.id
-        CUSTOMER_EMAIL = user.email
-        CUSTOMER_NAME = user.name
+        user_id = user.id
+        customer_email = user.email
+        customer_name = user.name
 
         try:
-            # create customer_id for the current user
-            customer = stripe.Customer.create(
-                email=CUSTOMER_EMAIL,
-                name=CUSTOMER_NAME,
-            )
-            
-            users = db.query(Customer).filter(Customer.user_id == id).first()
-            if users is None:
-              insert_customer = Customer(user_id=id, customer_id=customer['id'])
-              db.add(insert_customer)
-              db.commit()
-              db.refresh(insert_customer)
-            else:
-                users.customer_id = customer['id']
-                db.add(users)
-                db.flush()
-                db.commit()
-                db.refresh(users)
+            customer = db.query(Customer).filter(Customer.user_id == user_id).first()
 
-            return {"customerID": customer['id']}
-        except:
-          return HTTPException(status_code=403, detail="could not create customer")
-    return HTTPException(status_code=401, detail="could not create connection")
-    
+            if customer is None:
+                # create customer_id for the current user
+                new_customer = stripe.Customer.create(
+                    email=customer_email,
+                    name=customer_name)
+                customer = Customer(user_id=user_id, customer_id=new_customer['id'])
+                db.add(customer)
+                db.commit()
+                db.refresh(customer)
+
+            return {"customerID": customer.customer_id}
+        except Exception:
+            return HTTPException(status_code=403, detail="could not create customer")
+
 
 # create a checkout session
-@router.post('/create-checkout-session/', tags=["Checkout"],)
-async def create_session(request: Request, price_id: str, user: User=Depends(get_current_user)):
+@router.post('/create-checkout-session/', tags=["Checkout"], )
+async def create_session(request: Request, price_id: str, user: User = Depends(get_current_user)):
     if request:
         # get the current user
         try:
@@ -84,17 +75,17 @@ async def create_session(request: Request, price_id: str, user: User=Depends(get
 
         try:
             check_session = stripe.checkout.Session.create(
-            customer=CUSTOMER_ID,
-            success_url="http://yieldvest.hng.tech/success/?session_id={sessionID}}",
-            cancel_url="http://yieldvest.hng.tech/cancel",
-            payment_method_collection= "if_required",
-            mode="subscription",
-            payment_method_types=["card"],
-            line_items=[{
-                "price": price_id,
-                "quantity": 1
-            }]
-        )
+                customer=CUSTOMER_ID,
+                success_url="http://yieldvest.hng.tech/success/?session_id={sessionID}}",
+                cancel_url="http://yieldvest.hng.tech/cancel",
+                payment_method_collection="if_required",
+                mode="subscription",
+                payment_method_types=["card"],
+                line_items=[{
+                    "price": price_id,
+                    "quantity": 1
+                }]
+            )
             users = db.query(Customer).filter(Customer.user_id == id).first()
             if users:
                 users.session_id = check_session['id']
@@ -104,7 +95,7 @@ async def create_session(request: Request, price_id: str, user: User=Depends(get
                 db.refresh(users)
             else:
                 return HTTPException(status_code=403, detail="Customer does not exist")
-            
+
             return {"SessionID": check_session["id"], "sessionurl": check_session["url"]}
 
         except Exception as e:
@@ -112,9 +103,10 @@ async def create_session(request: Request, price_id: str, user: User=Depends(get
 
     return HTTPException(status_code=401, detail="could not create a connection")
 
+
 # Create customer portal to manage subscription billing
-@router.post('/customer-portal/', tags=["Checkout"],)
-async def customer_portal(request: Request, user: User=Depends(get_current_user)):
+@router.post('/customer-portal/', tags=["Checkout"], )
+async def customer_portal(request: Request, user: User = Depends(get_current_user)):
     if request:
         # get user customer ID
         try:
@@ -127,9 +119,9 @@ async def customer_portal(request: Request, user: User=Depends(get_current_user)
 
         try:
             session = stripe.billing_portal.Session.create(
-            customer=CUSTOMER_ID,
-            return_url='http://yieldvest.hng.tech'
-        )
+                customer=CUSTOMER_ID,
+                return_url='http://yieldvest.hng.tech'
+            )
             return {"status_code": 303, "Session_url": session.url}
 
         except:

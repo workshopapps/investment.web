@@ -7,6 +7,7 @@ import dateFormat from "dateformat";
 import NotSubscribedModal from "../components/subscription/NotSubscribedModal";
 import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../components/auth/AuthContext";
+import authHooks from "../components/auth/AuthHooks";
 import { ThreeDots } from "react-loader-spinner";
 import CookieConsent from "react-cookie-consent";
 import NotFoundImage from "../assets/images/not_found.svg";
@@ -28,7 +29,8 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
+  const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
 
@@ -87,15 +89,18 @@ const Index = () => {
   }, [sector]);
 
   useEffect(() => {
-    if (marketCap === "low_market_cap_category") {
+    if (
+      marketCap === "low_market_cap_category" ||
+      !subscription.canViewSmallCaps
+    ) {
       setShowNotSubscribedModal(true);
     }
-  }, [marketCap]);
+  }, [marketCap, subscription]);
 
   useEffect(() => {
     reloadRankedCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketCap, sector, industry]);
+  }, [marketCap, sector, industry, isLoggedIn]);
 
   const reloadRankedCompanies = () => {
     setStocks(null);
@@ -111,17 +116,19 @@ const Index = () => {
       params[query["key"]] = query["value"];
     });
 
-    axios
-      .get(`${baseUrl}/company/ranking`, {
+    apiService(accessToken, isLoggedIn)
+      .get(`/company/ranking`, {
         params: params,
       })
       .then((res) => {
-        setStocks(res.data);
+        if (res.status === 200) {
+          setStocks(res.data);
 
-        if (res.data) {
-          setLastUpdateDate(
-            formatLastUpdateDate(res.data[0].current_ranking.updated_at)
-          );
+          if (res.data) {
+            setLastUpdateDate(
+              formatLastUpdateDate(res.data[0].current_ranking.updated_at)
+            );
+          }
         }
       })
       .catch((err) => console.log(err));
@@ -176,12 +183,10 @@ const Index = () => {
         />
       </Head>
 
-      {!isLoggedIn && (
-        <NotSubscribedModal
-          isOpen={showNotSubscribedModal}
-          onClose={() => setShowNotSubscribedModal(false)}
-        />
-      )}
+      <NotSubscribedModal
+        isOpen={showNotSubscribedModal}
+        onClose={() => setShowNotSubscribedModal(false)}
+      />
 
       <ToastContainer />
 
