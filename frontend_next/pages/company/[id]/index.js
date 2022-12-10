@@ -151,7 +151,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-md align-middle text-[#5C5A5A] px-2 md:px-5 py-3 flex flex-row font-regular justify-between hover:shadow">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-md align-middle text-[#5C5A5A] px-2 md:px-8 py-3 flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
                     className="cursor-pointer"
