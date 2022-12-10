@@ -30,72 +30,6 @@ PRO_PLAN_YEARLY_PRICE_ID = os.getenv('PRO_PLAN_YEARLY_PRICE_ID')
 PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 
-# get all info for product
-@router.get('/product-info', tags=['Customer'])
-async def product_info(request: Request):
-    db: Session = next(get_db())
-    product = db.query(Product).all()
-    return {
-        "Product": product
-    }
-
-
-# create customer profile
-@router.post('/create-subscription/', tags=["Customer"], )
-async def create_subscription(request: Request, price_id: str, user: User = Depends(get_current_user)):
-    if request:
-        # get the current user
-        db: Session = next(get_db())
-        id = user.id
-        CUSTOMER_EMAIL = user.email
-        CUSTOMER_NAME = user.name
-
-        try:
-            # create customer_id for the current user
-            customer = stripe.Customer.create(
-                email=CUSTOMER_EMAIL,
-                name=CUSTOMER_NAME,
-            )
-        except:
-            return HTTPException(status_code=403, detail="could not create customer")
-
-        try:
-            subscription = stripe.Subscription.create(
-                customer=customer['id'],
-                items=[{
-                    "price": price_id
-                }],
-                payment_behavior="default_incomplete",
-                payment_settings={"save_default_payment_method": "on_subscription"},
-                expand=["latest_invoice.payment_intent"]
-            )
-
-            users = db.query(Customer).filter(Customer.user_id == id).first()
-            if users is None:
-                insert_customer = Customer(user_id=id, customer_id=customer['id'], subscription_id=subscription.id,
-                                           subscription_status=subscription.status)
-                db.add(insert_customer)
-                db.commit()
-                db.refresh(insert_customer)
-            else:
-                users.subscription_id = subscription.id
-                users.subscription_status = subscription.status
-                db.add(users)
-                db.flush()
-                db.commit()
-                db.refresh(users)
-
-            return {
-                "subscriptionId": subscription.id,
-                "clientSecret": subscription.latest_invoice.payment_intent.client_secret
-            }
-
-        except Exception as e:
-            return HTTPException(status_code=403, detail="could not create subscription")
-
-    return HTTPException(status_code=401, detail="Could not create connection")
-
-
 # cancel subscription
 @router.post('/cancel-subscription/', tags=["Customer"], )
 async def cancel_subscription(request: Request, user: User = Depends(get_current_user)):
@@ -129,17 +63,6 @@ async def cancel_subscription(request: Request, user: User = Depends(get_current
             return HTTPException(status_code=403, detail="users subscription unavailable")
 
     return HTTPException(status_code=401, detail="could not create connection")
-
-
-@router.get('/model-info', tags=["Customer"], )
-async def model_info(request: Request, user: User = Depends(get_current_user)):
-    if request:
-        # get current user
-        id = user.id
-        db: Session = next(get_db())
-        users_customer = db.query(Customer).all()
-
-        return users_customer
 
 
 @router.post('/subscription/checkout_session', tags=["Subscription"], )
@@ -211,7 +134,7 @@ def get_customer_subscription_portal(user: User = Depends(get_current_user)):
             return_url=f'{app_url}/settings'
         )
 
-        return {"status_code": 303, "Session_url": session.url}
+        return RedirectResponse(session.url, status_code=303)
     except Exception:
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail="An internal error occurred")
