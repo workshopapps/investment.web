@@ -25,7 +25,6 @@ const Subscription = () => {
   };
 
   const hasActiveSubscription = () => {
-    console.log(subscription);
     return isLoggedIn && subscription && subscription.isActive;
   };
 
