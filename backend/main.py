@@ -38,7 +38,6 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 app.include_router(auth.router, prefix='/auth')
 app.include_router(user.router, prefix='/user')
 app.include_router(company.router)
-app.include_router(session.router)
 app.include_router(newsletter.router)
 app.include_router(server.router)
 
