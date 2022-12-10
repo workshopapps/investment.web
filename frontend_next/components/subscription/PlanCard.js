@@ -14,7 +14,6 @@ const SubscribeCard = ({
   price,
   type,
   target,
-  priceId,
   features,
   buttonText,
   content,
@@ -24,7 +23,6 @@ const SubscribeCard = ({
 
   const handleSubscription = () => {
     const data = {
-      priceId: priceId,
       subName: name,
       type: type,
       price: discount,
@@ -102,7 +100,6 @@ SubscribeCard.propTypes = {
   price: PropTypes.string,
   type: PropTypes.string,
   target: PropTypes.string,
-  priceId: PropTypes.string,
   features: PropTypes.array,
   buttonText: PropTypes.string,
   destination: PropTypes.string,

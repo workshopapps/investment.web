@@ -15,7 +15,6 @@
     "@sentry/react": "^7.23.0",
     "@sentry/tracing": "^7.23.0",
     "@stripe/react-stripe-js": "^1.15.0",
-    "@stripe/stripe-js": "^1.44.1",
     "@tippyjs/react": "^4.2.6",
     "axios": "^1.2.0",
     "classnames": "^2.3.2",

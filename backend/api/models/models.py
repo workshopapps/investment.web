@@ -161,9 +161,11 @@ class Customer(Base):
 
     user_id = Column(String(64), ForeignKey("user.user_id"))
     customer_id = Column(String(64), primary_key=True, index=True, default=str(uuid4))
-    session_id = Column(String(200), nullable=True)
-    subscription_id = Column(String(64))
-    subscription_status = Column(String(64))
+    subscription_id = Column(String(64), nullable=True)
+    subscription_status = Column(String(64), nullable=True)
+    current_pricing_id = Column(String(64), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user_value = relationship("User", back_populates="customer")
 
@@ -205,12 +207,14 @@ class WatchlistItem(Base):
 
     company = relationship("Company")
 
+
 class NewsLetter(Base):
     __tablename__ = "newsletter"
 
     id = Column("newletter_id", Integer, primary_key=True, index=True, autoincrement=True)
     email = Column(String(64))
     subscribed = Column(Boolean, default=False)
+
 
 class UpdateNotificationSettingsModel(BaseModel):
     notifications_enabled: bool = None
