@@ -1,22 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useContext } from "react";
-import AuthContext from "../../components/auth/AuthContext";
-
+import React, { useState } from "react";
 import "../../assets/subscriptionPage/css/style.module.css";
 import Spring from "../../assets/subscriptionPage/images/spring.png";
-import {
-  freeMonthly,
-  premiumMonthly,
-  freeYearly,
-  premiumYearly,
-} from "../../utils/SubscriptionContent";
 import Layout from "../../components/Layout";
 import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
 
-const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
-  const { isLoggedIn } = useContext(AuthContext);
+const Subscription = () => {
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
 
@@ -90,7 +81,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="0.00"
               type="month"
               target="For basic users"
-              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -109,7 +99,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="25"
               type="month"
               target="For power users"
-              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -129,7 +118,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="50"
               type="month"
               target="For advanced users"
-              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -153,7 +141,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="0.00"
               type="year"
               target="For basic users"
-              priceId={BASIC_PRICE_ID}
               features={[
                 "12 stock recommendation",
                 "Weekly email notification for large & mid-cap stocks only",
@@ -172,7 +159,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="300"
               type="year"
               target="For power users"
-              priceId={PRO_PRICE_ID}
               features={[
                 "50 stock recommendations",
                 "Weekly email notification for all market caps",
@@ -192,7 +178,6 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
               discount="600"
               type="year"
               target="For advanced users"
-              priceId={PREMIUM_PRICE_ID}
               features={[
                 "Unlimited stock recommendation",
                 "Customized email notification for all market caps",
@@ -215,15 +200,5 @@ const Subscription = ({ BASIC_PRICE_ID, PRO_PRICE_ID, PREMIUM_PRICE_ID }) => {
     </Layout>
   );
 };
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      BASIC_PRICE_ID: process.env.BASIC_PRICE_ID,
-      PRO_PRICE_ID: process.env.PRO_PRICE_ID,
-      PREMIUM_PRICE_ID: process.env.PREMIUM_PRICE_ID,
-    },
-  };
-}
 
 export default Subscription;
