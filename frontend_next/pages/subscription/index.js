@@ -6,10 +6,12 @@ import Layout from "../../components/Layout";
 import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
+import AuthContext from "../../components/auth/AuthContext";
 
 const Subscription = () => {
   // state to set change the type of subscription yearly or monthly
   const [subType, setSubType] = useState(1);
+  const { isLoggedIn, subscription } = React.useContext(AuthContext);
 
   // handles chnaing from monthly subscription to yearly Subscription
   const handleSubType = (theSub) => {
@@ -20,6 +22,10 @@ const Subscription = () => {
     if (theSub === "yearly") {
       setSubType(2);
     }
+  };
+
+  const hasActiveSubscription = () => {
+    return isLoggedIn && subscription && subscription.isActive;
   };
 
   return (
@@ -90,7 +96,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -109,7 +115,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -128,7 +134,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
           </div>
         </div>
@@ -150,7 +156,7 @@ const Subscription = () => {
               ]}
               buttonText="Get Started"
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -169,7 +175,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
 
             <SubscribeCard
@@ -188,7 +194,7 @@ const Subscription = () => {
               ]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination="/payment"
+              destination={hasActiveSubscription ? "/settings" : "/payment"}
             />
           </div>
         </div>

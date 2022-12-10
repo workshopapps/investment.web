@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../../components/Layout";
 import AboutCompanyCard from "../../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../../assets/landingPage/icons/up.svg";
@@ -13,12 +13,34 @@ import Link from "next/link";
 import Head from "next/head";
 import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
 import { useRouter } from "next/router";
+import authHooks from "../../../components/auth/AuthHooks";
+import AuthContext from "../../../components/auth/AuthContext";
+import { ThreeDots } from "react-loader-spinner";
+import Share from "../../../components/CompanyProfile/Share";
 
-const CompanyProfilePage = ({ company, companyId }) => {
+const CompanyProfilePage = ({ company: comp, companyId }) => {
   const [showAbout, setShowAbout] = React.useState(false);
+  const [company, setCompany] = React.useState(comp);
+  const [showShare, setShowShare] = React.useState(false);
   const router = useRouter();
+  const apiService = authHooks.useApiService();
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const currentStock = `http://yieldvest.hng.tech/company/${companyId}`
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      apiService(accessToken, isLoggedIn)
+        .get(`/company/${companyId}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setCompany(res.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken, isLoggedIn]);
 
-  if (!company) {
+  if (!company && !isLoggedIn) {
     return (
       <Layout>
         <Head>
@@ -34,6 +56,30 @@ const CompanyProfilePage = ({ company, companyId }) => {
     );
   }
 
+  if (isLoggedIn && !company) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          marginTop: "30px",
+          marginBottom: "30px",
+        }}
+      >
+        <ThreeDots
+          height="80"
+          width="80"
+          color="#49dd95"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+  }
+
   return (
     <Layout>
       <Head>
@@ -43,7 +89,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
           content="Get up to date recommendations on the best stocks to buy"
         />
       </Head>
-
+      {showShare && <Share close={setShowShare} currentStock={currentStock}/>}
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
@@ -78,7 +124,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md">
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md" onClick={() => setShowShare(true)}>
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
@@ -110,7 +156,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   About{" "}
                   <img
                     className="cursor-pointer"
-                    src={(showAbout ? UpIcon : DownIcon).src}
+                    src={(showAbout ? DownIcon : UpIcon).src}
                     alt="open"
                     onClick={() => setShowAbout(!showAbout)}
                   />
@@ -123,7 +169,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
               </div>
 
               <div className="md:w-2/3 w-full">
-                <VisualcompanyCard />
+                <VisualcompanyCard
+                  isLoggedIn={isLoggedIn}
+                  accessToken={accessToken}
+                />
                 <br />
               </div>
             </div>

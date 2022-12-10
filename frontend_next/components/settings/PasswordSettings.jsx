@@ -52,7 +52,6 @@ export default function PasswordSettings() {
   return (
     <div className="flex justify-center items-center mt-[44px] px-[17px]">
       <div className="max-w-[1024px] w-full">
-        <ToastContainer />
         <div className="md:flex justify-start items-start gap-[48px]">
           <div
             className="hidden md:flex"
@@ -68,8 +67,8 @@ export default function PasswordSettings() {
                 Change a strong password and don’t reuse it for other accounts{" "}
               </h1>
               <p className="text-sm font-normal text-[#525A65]">
-                Changing your password will sign you out on your devices with some
-                exceptions
+                Changing your password will sign you out on your devices with
+                some exceptions
               </p>
             </div>
             <div className="flex flex-col md:flex-row">
@@ -169,7 +168,9 @@ export default function PasswordSettings() {
                       type="submit"
                     >
                       {isLoading ? (
-                        <div style={{ display: "flex", justifyContent: "center" }}>
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
                           <ThreeDots
                             height="30"
                             width="50"
