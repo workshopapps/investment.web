@@ -107,7 +107,7 @@ def create_checkout_session(subscription_type: str, user: User = Depends(get_cur
             }],
         )
 
-        return RedirectResponse(session.url, status_code=303)
+        return {'checkout_url': session.url}
     except Exception:
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail="An internal error occurred")
@@ -134,7 +134,7 @@ def get_customer_subscription_portal(user: User = Depends(get_current_user)):
             return_url=f'{app_url}/settings'
         )
 
-        return RedirectResponse(session.url, status_code=303)
+        return {'portal_url': session.url}
     except Exception:
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail="An internal error occurred")
