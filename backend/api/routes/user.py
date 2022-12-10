@@ -4,11 +4,9 @@ from uuid import uuid4
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Form
 from sqlalchemy.orm import Session
-from starlette.responses import RedirectResponse
 
 from api.crud.base import get_db, get_company
 from api.models import models
-from api.payment_gte.sub_status import get_subscription_status
 from api.routes.auth import get_current_user
 from api.models.models import User, UpdateNotificationSettingsModel, NotificationSettings, Ranking, Customer
 from api.scripts.email import send_email
@@ -30,31 +28,32 @@ PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 @router.get('/profile', tags=['User'])
 async def get_user_profile(user: User = Depends(get_current_user)):
-    subscription = user.customer[0]
-    pricing_id = subscription.current_pricing_id
+    subscription = user.customer[0] if user.customer else None
+    pricing_id = subscription.current_pricing_id if subscription else None
 
     subscription_type = None
-    if pricing_id == BASIC_PLAN_MONTHLY_PRICE_ID:
-        subscription_type = 'basic_monthly'
-    if pricing_id == BASIC_PLAN_YEARLY_PRICE_ID:
-        subscription_type = 'basic_yearly'
-    if pricing_id == PRO_PLAN_MONTHLY_PRICE_ID:
-        subscription_type = 'pro_monthly'
-    if pricing_id == PRO_PLAN_YEARLY_PRICE_ID:
-        subscription_type = 'pro_yearly'
-    if pricing_id == PREMIUM_PLAN_MONTHLY_PRICE_ID:
-        subscription_type = 'premium_monthly'
-    if pricing_id == PREMIUM_PLAN_YEARLY_PRICE_ID:
-        subscription_type = 'premium_yearly'
+    if pricing_id:
+        if pricing_id == BASIC_PLAN_MONTHLY_PRICE_ID:
+            subscription_type = 'basic_monthly'
+        if pricing_id == BASIC_PLAN_YEARLY_PRICE_ID:
+            subscription_type = 'basic_yearly'
+        if pricing_id == PRO_PLAN_MONTHLY_PRICE_ID:
+            subscription_type = 'pro_monthly'
+        if pricing_id == PRO_PLAN_YEARLY_PRICE_ID:
+            subscription_type = 'pro_yearly'
+        if pricing_id == PREMIUM_PLAN_MONTHLY_PRICE_ID:
+            subscription_type = 'premium_monthly'
+        if pricing_id == PREMIUM_PLAN_YEARLY_PRICE_ID:
+            subscription_type = 'premium_yearly'
 
     return {
         'id': user.id,
         'email': user.email,
         'name': user.name,
         'subscription': {
-            'status': subscription.subscription_status,
+            'status': subscription.subscription_status if subscription else None,
             'type': subscription_type,
-            'updated_at': subscription.updated_at
+            'updated_at': subscription.updated_at if subscription else None
         },
     }
 
