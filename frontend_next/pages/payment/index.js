@@ -118,8 +118,8 @@ const Payment = () => {
             </ul>
           </div>
 
-          <div className=" w-full lg:w-1/2 flex flex-col justify-center theRightSide items-center md:w-1 sm:w-1 mt-16">
-            <div className="w-[95%] relative p-10 mt-0 md:mt-10 border-[#1BD47B] border-solid border rounded-[2em] flex justify-around items-center">
+          <div className=" w-full lg:w-1/2 flex flex-col justify-center items-center mt-5 md:mt-16">
+            <div className="w-[90%] md:w-[95%] gap-0 md:gap-[10em] relative p-10 mt-0 md:mt-10 border-[#1BD47B] border-solid border rounded-[2em] flex justify-around items-center">
               <div className="ml-10">
                 <input
                   type="radio"
@@ -138,13 +138,13 @@ const Payment = () => {
                 </p>
               </div>
 
-              <div className="ml-3 absolute left-[15em] md:left-[20em] lg:left-[30em] top-[20px] text-lg">
+              <div className="absolute right-10 top-[20px] text-lg">
                 <span>$ {subscriptionData.price} </span>
                 <span className="text-[0.7em]">/{subscriptionData.type}</span>
               </div>
             </div>
 
-            <div className="w-[95%] rounded-md flex mt-8 ">
+            <div className="w-full rounded-md flex mt-8 ">
               <form className="flex w-full">
                 <div className="flex items-center justify-center w-full">
                   <div className="mt-2 w-full flex items-center justify-center">
@@ -186,7 +186,7 @@ const Payment = () => {
               </form>
             </div>
 
-            <div className="flex w-full justify-center items-center mb-10">
+            <div className="flex w-full justify-center items-center mb-5 md:mb-10">
               <p className="text-[0.7em]">Secured by </p>
               <img
                 className="w-20 h-10 ml-1"
@@ -195,6 +195,36 @@ const Payment = () => {
               />
               <img className="w-6 h-6" alt="stripe-logo" src={Shield.src} />
             </div>
+
+            <ul className="block md:hidden mb-10 w-full px-6">
+              {faqDatas?.map((faqs, index) => {
+                return (
+                  <li
+                    key={faqs.id}
+                    className="my-2"
+                    onClick={() => toggle(index)}
+                  >
+                    <h2 className="flex flex-row justify-between items-center p-3 cursor-pointer">
+                      <span className="text-md">{faqs.title}</span>
+                      <span>
+                        {clicked === index ? (
+                          <IoIosArrowDown />
+                        ) : (
+                          <IoIosArrowUp />
+                        )}
+                      </span>
+                    </h2>
+                    {clicked === index ? (
+                      <div className=" overflow-hidden">
+                        <p className="p-3 text-md text-gray-900">
+                          {faqs.content}
+                        </p>
+                      </div>
+                    ) : null}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
       ) : (
