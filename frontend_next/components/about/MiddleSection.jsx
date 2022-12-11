@@ -12,10 +12,10 @@ import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#D9D9D9] p-5 md:p-10 w-full">
+      <div id="gray" className="bg-[#FAFAFF] p-5 md:p-5 w-full">
         <div
           id="white"
-          className="w-full bg-[#FFFFFF] mx-auto flex-col gap-14 p-3 md:p-12"
+          className="w-full bg-[#FFFFFF] md:w-[1240px]  mx-auto flex-col gap-14 p-3 md:p-6"
         >
           <div className="w-full gap-2  md:p-6  md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
@@ -65,48 +65,47 @@ export const Section = () => {
                 decisions at first glance.
               </p>
             </div>
-            <div className="flex flex-col-reverse my-6 md:w-1/2 md:flex-col">
+            <div className="flex flex-col-reverse my-4 md:w-1/2 md:flex-col">
               <img src={whatWeDo.src} className="w-[424px] md:w-[560px]" />
             </div>
           </div>
-          <h3 className="text-[#455A64] text-center font-normal ml-[0px] text-lg py-2 md:text-2xl">
-              Why Choose Us
-            </h3>
-          <div
-            id="WhyChooseUs"
-            className="w-full md:w-[1200px] bg-blue-300 gap-2  md:p-6  md:flex justify-center items-center"
-          >
-            
-            <div className="md:flex-col md:w-564px">
-              <img src={WhyChooseUs.src} className="w-[424px] md:w-[564px]" />
-            </div>
-            <div>
-              <div>
-                <h3 className="text-[#455A64] font-normal text-sm py-2 md:text-xl">
-                  Stock recommendations
-                </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[615px]">
-                  Stock recommendations with listings of the top 12 stocks so
-                  you know the best for you at first glance.
-                </p>
+
+          <div className="mt-6">
+            <div
+              id="WhyChooseUs"
+              className="w-full md:w-[1240px] md:py-10 flex flex-col-reverse md:flex"
+            >
+              <div className="md:flex-col  md:w-[564px]">
+                <img src={WhyChooseUs.src} className="" />
               </div>
-              <div>
-                <h3 className="text-[#455A64] font-normal text-sm py-2 md:text-xl">
-                  Stock Categories
-                </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[615px]">
-                  Stock recommendations with listings of the top 12 stocks so
-                  you know the best for you at first glance.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-[#455A64] font-normal text-sm py-2 md:text-xl">
-                  Company Profile
-                </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[615px]">
-                  Company overview, charts, and key metrics are provided to help
-                  validate your decision.
-                </p>
+              <div className="md:w-[250px] md:mt-0 mx-auto">
+                <div className="md:w-[250px]">
+                  <h3 className="text-[#455A64] font-normal text-sm py-1 md:text-xl">
+                    Stock recommendations
+                  </h3>
+                  <p className="text-sm md:text-sm font-normal text-[#8A8D95] md:w-[250px]">
+                    Stock recommendations with listings of the top 12 stocks so
+                    you know the best for you at first glance.
+                  </p>
+                </div>
+                <div className="md:ml-14 md:mt-4 w-[250px]">
+                  <h3 className="text-[#455A64] font-normal text-sm py-2 md:text-xl">
+                    Stock Categories
+                  </h3>
+                  <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                    Stock recommendations with listings of the top 12 stocks so
+                    you know the best for you at first glance.
+                  </p>
+                </div>
+                <div className="md:ml-24 md:mt-2 w-[250px]">
+                  <h3 className="text-[#455A64] font-normal text-xs py-2 md:text-xl">
+                    Company Profile
+                  </h3>
+                  <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                    Company overview, charts, and key metrics are provided to
+                    help validate your decision.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

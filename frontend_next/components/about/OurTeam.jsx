@@ -22,13 +22,13 @@ const OurTeam = (props) => {
       <h1 className="font-normal md:font-semibold text-center mb-8 pt-0 md:pt-12 text-2xl md:text-4xl">
         Meet The Team
       </h1>
-      <div className="flex gap-6">
+      {/* <div className="flex gap-6">
         <p>All Teams</p>
         <p>Management team</p>
         <p>Design</p>
         <p>Engineering</p>
         <p>Marketing</p>
-      </div>
+      </div> */}
       <div className="flex flex-col w-full p-10  mx-auto md:flex-row justify-center gap-8 md:justify-around m-10 md:-20">
         <div className="">
           <img
