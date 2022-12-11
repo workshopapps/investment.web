@@ -201,15 +201,6 @@ const Index = () => {
             <p className="text-[13px] font-[400] leading-[18px] mb-[8px] md:max-w-[520px] lg:max-w-[600px] w-full md:text-[16px] md:leading-[24px]">
               We provide well curated information to help you make smarter
               <br />
-	  <button
-	    type="button"
-	    onClick={() => {
-		        throw new Error("Sentry Frontend Error");
-		      }}
-	  >
-	    Throw error
-	  </button>
-
 
               investment decisions based on{" "}
               <span style={{ color: "#1BD47B", fontWeight: "bold" }}>
