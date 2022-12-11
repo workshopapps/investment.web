@@ -35,7 +35,7 @@ const MobileMenu = ({ toggleMenu }) => {
     };
   }, []);
   return (
-    <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30 z-10">
+    <div className="fixed top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30 z-10">
       <div
         className="absolute top-0 bottom-0 left-0 right-0 bg-transparent"
         onClick={() => toggleMenu(false)}
@@ -50,7 +50,7 @@ const MobileMenu = ({ toggleMenu }) => {
               <img src={Close.src} alt="" className="w-7 h-7" />
             </div>
           </div>
-          <ul className="uppercase flex-col gap-4 w-full flex justify-center items-left mb-10 font-[600]">
+          <ul className="uppercase flex-col gap-4 w-full flex justify-center items-left mb-10 font-[600] text-black">
             {navLinks.map((item, index) => {
               const { link, url } = item;
               return <MenuLink link={link} url={url} key={index} />;
