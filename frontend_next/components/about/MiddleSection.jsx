@@ -12,10 +12,10 @@ import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#FAFAFF] p-5 md:p-5 w-full">
+      <div id="gray" className="bg-[#FAFAFF] p-5 md:p-10 w-full">
         <div
           id="white"
-          className="w-full bg-[#FFFFFF] md:w-[1240px]  mx-auto flex-col gap-14 p-3 md:p-6"
+          className="w-full bg-[#FFFFFF]   mx-auto flex-col gap-14 p-3 md:p-6"
         >
           <div className="w-full gap-2  md:p-6  md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
@@ -73,12 +73,12 @@ export const Section = () => {
           <div className="mt-6">
             <div
               id="WhyChooseUs"
-              className="w-full md:w-[1240px] md:py-10 flex flex-col-reverse md:flex"
+              className="w-full md:w-[1240px]  bg-indigo-500 md:py-10 flex flex-col-reverse md:flex"
             >
-              <div className="md:flex-col  md:w-[564px]">
+              <div className="md:flex-col bg-yellow-400 md:w-[564px]">
                 <img src={WhyChooseUs.src} className="" />
               </div>
-              <div className="md:w-[250px] md:mt-0 mx-auto">
+              <div className="md:w-[250px] md:mt-0 bg-pink-200 mx-auto">
                 <div className="md:w-[250px]">
                   <h3 className="text-[#455A64] font-normal text-sm py-1 md:text-xl">
                     Stock recommendations
