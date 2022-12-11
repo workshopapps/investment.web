@@ -221,8 +221,7 @@ const Index = () => {
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
           <p
-            className="text-[#5c5a5a] text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
-            style={{ fontWeight: 300 }}
+            className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
           >
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
@@ -379,7 +378,7 @@ const Index = () => {
         </span>
       </CookieConsent>
 
-      <section className="xl:py-14 sm:px-1  p-5 bg-[#F5F5F5]">
+      <section className="xl:py-14 sm:px-1 p-5 bg-[#F5F5F5]">
         <div className="flex justify-center items-center">
           <Newsletter />
         </div>

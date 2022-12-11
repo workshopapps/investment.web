@@ -27,7 +27,7 @@ const Accordian = ({ data }) => {
             <button
                 type="button"
                 id={data.id}
-                className={`button-${data.id} flex items-center justify-between w-full p-4 font-[400] text-left text-[#525A65] text-[20px] border border-[#525A65] rounded-[8px]`}
+                className={`button-${data.id} flex items-center justify-between w-full p-4 font-[400] text-left text-primaryGray text-[20px] border border-primaryGray rounded-[8px]`}
                 onClick={habdleDropDown}
             >
                 <span className="max-sm:text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]">

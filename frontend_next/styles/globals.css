@@ -71,3 +71,8 @@ select {
   border-radius: 5px !important;
 }
 
+@media (max-width: 768px) {
+  select {
+    background-size: 24px;
+  }
+}
