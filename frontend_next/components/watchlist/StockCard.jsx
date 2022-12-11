@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useContext } from "react";
-import { FiTrash, FiEye } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 // import WatchListContext from "../../store/watchList/WatchlistContext";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
@@ -33,7 +33,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
       });
   };
   return (
-    <div className="max-w-[408px] w-full rounded-[8px] p-[28px] bg-white">
+    <div className="max-w-[408px] w-full rounded-[8px] p-[28px] bg-white hover:border border-[#1BD47B]">
       <div>
         <div className="flex justify-between items-start mb-[24px]">
           <div className="flex h-5 items-center">
@@ -69,7 +69,6 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
               }, 1000);
             }}
           >
-            <FiTrash className="text-[21px]" />
           </div>
         </div>
         <div className="flex justify-center items-center">
