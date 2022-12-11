@@ -300,7 +300,7 @@ async def send_verify_email(email:List[str], instance: User):
         "id": instance.id,
         "email": instance.email,
     }
-    token = jwt.encode(token_data, JWT_SECRET,)
+    token = jwt.encode(token_data, JWT_SECRET, algorithm='HS256')
     app_url = os.getenv('API_URL')
     verify_url = f"{app_url}/verify_token?token={token}"
 
@@ -362,7 +362,7 @@ def _create_token(
 # Decodes JWT token
 async def verify_token(token:str):
     try: 
-        payload = jwt.decode(token, JWT_SECRET)
+        payload = jwt.decode(token, JWT_SECRET, algorithm='HS256')
         user = await User.get(id=payload.get("id"))
     except:
         raise HTTPException(
