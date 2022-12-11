@@ -7,6 +7,7 @@ import img3 from "../../assets/about/tick-circle.png";
 import img4 from "../../assets/about/mobile.svg";
 import whoWeAreImg from "../../assets/about/whoWeAreImg.svg";
 import whatWeDo from "../../assets/about/WhatWeDo.svg";
+import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 
 export const Section = () => {
   return (
@@ -55,6 +56,26 @@ export const Section = () => {
             </div>
             <div className="w-1/2">
               <img src={whatWeDo.src} className="w-[424px]" />
+            </div>
+          </div>
+          <div id="WhyChooseUs" className="md:flex">
+            <div>
+              <img src={WhyChooseUs.src} />
+            </div>
+            <div>
+            <h3>Why Choose Us</h3>
+              <div>
+                <h3>Stock recommendations</h3>
+                <p>Stock recommendations with listings of the top 12 stocks so you know the best for you at first glance.</p>
+              </div>
+              <div>
+                <h3>Stock Categories</h3>
+                <p>Stock recommendations with listings of the top 12 stocks so you know the best for you at first glance.</p>
+              </div>
+              <div>
+                <h3>Company Profile</h3>
+                <p>Company overview, charts, and key metrics are provided to help validate your decision.</p>
+              </div>
             </div>
           </div>
         </div>
