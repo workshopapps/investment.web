@@ -42,10 +42,10 @@ const Layout = ({
 
       {isProtected ? (
         <ProtectedPage strict={!disableStrictProtection}>
-          <div className="page-content grow">{children}</div>
+          <div className="page-content grow mt-[78px]">{children}</div>
         </ProtectedPage>
       ) : (
-        <div className="page-content grow">{children}</div>
+        <div className="page-content grow mt-[78px]">{children}</div>
       )}
 
       {showFooter && (

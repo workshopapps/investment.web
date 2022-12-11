@@ -33,7 +33,7 @@ const Nav = ({ openMenu }) => {
   return (
     <nav
       style={navStyle}
-      className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px]"
+      className="flex justify-center items-center h-[78px] px-[16px] lg:px-[100px] fixed top-0 left-0 right-0 z-[9]"
     >
       <div className="w-full flex items-center justify-between">
         <div
