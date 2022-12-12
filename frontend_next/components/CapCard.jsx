@@ -26,6 +26,7 @@ const CapCard = ({
   sector,
   onSuccess,
   onFailure,
+  onInform
 }) => {
   const [fundamentalModal, setFundamentalModal] = useState(false);
   const [priceModal, setPriceModal] = useState(false);
@@ -66,12 +67,11 @@ const CapCard = ({
           onSuccess();
           setInWatchlist(true);
         } else {
-          onFailure();
+          onInform();
         }
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error);
         onFailure();
       });
   };
@@ -117,7 +117,7 @@ const CapCard = ({
           {!isInWatchlist && (
             <div
               className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
-              onClick={() => addToWatchList(abbr, onSuccess, onFailure)}
+              onClick={() => addToWatchList(abbr, onSuccess, onFailure, onInform)}
             >
               {isLoading ? (
                 <TailSpin

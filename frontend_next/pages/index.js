@@ -172,6 +172,10 @@ const Index = () => {
     toast.error("Failed to add to the list");
   };
 
+  const onInform = () => {
+    toast.info("Item already on your watchlist");
+  }
+
   const navigate = useRouter().push;
 
   return (
@@ -345,6 +349,7 @@ const Index = () => {
                     link={`/company/${item.company_id}`}
                     onSuccess={onSuccess}
                     onFailure={onFailure}
+                    onInform={onInform}
                   />
                 ))}
               </div>
