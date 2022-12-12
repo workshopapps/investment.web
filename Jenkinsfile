@@ -10,7 +10,7 @@ pipeline {
 
 			steps {
 				sh "cd frontend_next"
-				sh "cd frontend_next && yarn install && CI=false yarn build"
+				sh "cd frontend_next && yarn install && CI=false yarn run build"
 			} 
                 } 
         	stage("build backend"){
