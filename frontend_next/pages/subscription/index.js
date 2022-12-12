@@ -25,6 +25,8 @@ const Subscription = () => {
   };
 
   const hasActiveSubscription = () => {
+    console.log(isLoggedIn);
+    console.log(subscription);
     return isLoggedIn && subscription && subscription.isActive;
   };
 
@@ -94,9 +96,9 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              buttonText="Get Started"
+              buttonText={isLoggedIn ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination={isLoggedIn ? "/" : "/signup"}
             />
 
             <SubscribeCard
@@ -154,9 +156,9 @@ const Subscription = () => {
                 "View company fundamentals",
                 "View ranking history",
               ]}
-              buttonText="Get Started"
+              buttonText={hasActiveSubscription() ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/" : "/signup"}
             />
 
             <SubscribeCard
