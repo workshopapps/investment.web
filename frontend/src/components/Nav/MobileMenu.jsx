@@ -14,7 +14,6 @@ import { RiLoginCircleFill } from 'react-icons/ri';
 import { IoMdHelpCircle } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
 
-
 // eslint-disable-next-line react/prop-types
 const MobileMenu = ({ toggleMenu, openMobileMenu }) => {
     const { isLoggedIn } = useContext(AuthContext);
