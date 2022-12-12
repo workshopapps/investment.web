@@ -1,5 +1,9 @@
 import Link from "next/link";
 import React, { useCallback } from "react";
+import Basicsub from "../../assets/settings/basicsub.svg";
+import basicmobile from "../../assets/settings/mobileplan.svg";
+import standardsub from "../../assets/settings/standardsub.svg";
+import premsub from "../../assets/settings/premsub.svg";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
@@ -17,6 +21,10 @@ export default function SubPlan() {
     target: "",
     features: []
   })
+
+  const redirectToSubscription = () => {
+    window.location = `https://yieldvest.hng.tech/subscription`
+  }
 
   const apiService = authHooks.useApiService();
   const { accessToken, subscription } = React.useContext(AuthContext);
@@ -66,7 +74,7 @@ export default function SubPlan() {
   }, [data, subscriptionData]);
 
   const subTypeButtons = () => {
-    if (data.name === "Premier") {
+    if (data.name === "Premium") {
       return (
         <button
           className="text-black bg-primary102 text-base py-4 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
@@ -97,7 +105,7 @@ export default function SubPlan() {
           <button
             className="text-primary102 border-primary102 text-base py-4 mr-5 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
             disabled={isLoading}
-            onClick={() => router.push("/subscription")}
+            onClick={redirectToSubscription}
           >
             {isLoading ? (
               <div style={{ display: "flex", justifyContent: "center" }}>
@@ -145,7 +153,7 @@ export default function SubPlan() {
         <button
           className="text-black bg-primary102 text-base py-4 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
           disabled={isLoading}
-          onClick={() => router.push("/subscription")}
+          onClick={redirectToSubscription}
         >
           {isLoading ? (
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -217,12 +225,6 @@ export default function SubPlan() {
                 </li>
               ))}
             </div>
-          </div>
-
-          <div className="bg-primary102 text-white rounded-lg p-6">
-            <h1 className="text-4xl">Basic</h1>
-            <p>For basic users</p>
-            <hr className="h-2" />
           </div>
 
           <div>
