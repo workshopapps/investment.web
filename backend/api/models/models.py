@@ -151,6 +151,7 @@ class User(Base):
     email = Column(String(30))
     name = Column(String(30))
     password = Column(String(100))
+    is_verified = Column(Boolean, default=False)
 
     customer = relationship("Customer", back_populates="user_value")
     notifications_settings_value = relationship("NotificationSettings", back_populates="user_value")
@@ -183,6 +184,7 @@ class CreateUserModel(BaseModel):
     email: str
     name: str
     password: str
+    is_verified: bool = None
 
 
 class NotificationSettings(Base):

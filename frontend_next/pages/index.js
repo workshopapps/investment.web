@@ -165,11 +165,11 @@ const Index = () => {
   };
 
   const onSuccess = () => {
-    toast.success("Added to watch list");
+    toast.success("Added to Watchlist");
   };
 
   const onFailure = () => {
-    toast.error("Failed to add to the list");
+    toast.error("Already added to Watchlist");
   };
 
   const onInform = () => {

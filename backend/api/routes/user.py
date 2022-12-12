@@ -192,30 +192,26 @@ def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
     }
 
 
-@router.delete("/watchlist/{company_id}", tags=["User"])
-def remove_from_watchlist(company_id: str, user: User = Depends(get_current_user)):
+@router.delete("/watchlist/", tags=["User"])
+def remove_from_watchlist(company_id: list[str], user: User = Depends(get_current_user)):
     """
     removes a company to the watchlist
     """
     db: Session = next(get_db())
 
-    company = db.query(models.Company).filter(models.Company.company_id == company_id).first()
-    if not company:
-        raise HTTPException(status_code=404, detail="A company with this id doesn't exist")
+    for company_ids in company_id:
+        company = db.query(models.Company).filter(models.Company.company_id == company_ids).first()
+        if not company:
+            raise HTTPException(status_code=404, detail="A company with this id doesn't exist")
+            
+        item = db.query(models.WatchlistItem).filter(models.WatchlistItem.user_id == user.id,
+                                                    models.WatchlistItem.company_id == company_ids).first()
+        if not item:
+            raise HTTPException(status_code=400, detail="This company is not in your watchlist")
 
-    item = db.query(models.WatchlistItem).filter(models.WatchlistItem.user_id == user.id,
-                                                 models.WatchlistItem.company_id == company_id).first()
-    if not item:
-        raise HTTPException(status_code=400, detail="This company is not in your watchlist")
-
-    db.delete(item)
-    db.commit()
-    db.close()
-
-    return {
-        "code": "success",
-        "message": "Company removed from watchlist"
-    }
+        db.delete(item)
+        db.commit()
+        d
 
 
 @router.get('/company/{company_id}/interval', tags=["User"], )

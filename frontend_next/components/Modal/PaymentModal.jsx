@@ -58,7 +58,7 @@ const PaymentModal = ({ status }) => {
                                             </div>
                                             <div>
                                                 <button
-                                                    className="rounded-[8px] bg-[#1BD47B] text-[#1F2226] p-2 px-4"
+                                                    className="rounded-[8px] bg-[#1BD47B] border-none text-[#1F2226] p-2 px-4"
                                                     onClick={() => navigate("/settings")}
                                                 >
                                                     Back to Home
