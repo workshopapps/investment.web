@@ -1,9 +1,5 @@
 import Link from "next/link";
 import React, { useCallback } from "react";
-import Basicsub from "../../assets/settings/basicsub.svg";
-import basicmobile from "../../assets/settings/mobileplan.svg";
-import standardsub from "../../assets/settings/standardsub.svg";
-import premsub from "../../assets/settings/premsub.svg";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
@@ -221,6 +217,12 @@ export default function SubPlan() {
                 </li>
               ))}
             </div>
+          </div>
+
+          <div className="bg-primary102 text-white rounded-lg p-6">
+            <h1 className="text-4xl">Basic</h1>
+            <p>For basic users</p>
+            <hr className="h-2" />
           </div>
 
           <div>
