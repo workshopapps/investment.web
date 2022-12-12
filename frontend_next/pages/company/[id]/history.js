@@ -62,7 +62,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
   return (
     <Layout>
       <Head>
-        <title>{company.name} Ranking History</title>
+        <title>{`${company.name} Ranking History`}</title>
         <meta name="description" content={`${company.name} Ranking History`} />
       </Head>
 
