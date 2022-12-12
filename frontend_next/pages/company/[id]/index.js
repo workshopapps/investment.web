@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../../components/Layout";
 import AboutCompanyCard from "../../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../../assets/landingPage/icons/up.svg";
@@ -13,12 +13,34 @@ import Link from "next/link";
 import Head from "next/head";
 import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
 import { useRouter } from "next/router";
+import authHooks from "../../../components/auth/AuthHooks";
+import AuthContext from "../../../components/auth/AuthContext";
+import { ThreeDots } from "react-loader-spinner";
+import Share from "../../../components/CompanyProfile/Share";
 
-const CompanyProfilePage = ({ company, companyId }) => {
-  const [showAbout, setShowAbout] = React.useState(true);
+const CompanyProfilePage = ({ company: comp, companyId }) => {
+  const [showAbout, setShowAbout] = React.useState(false);
+  const [company, setCompany] = React.useState(comp);
+  const [showShare, setShowShare] = React.useState(false);
   const router = useRouter();
+  const apiService = authHooks.useApiService();
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      apiService(accessToken, isLoggedIn)
+        .get(`/company/${companyId}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setCompany(res.data);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken, isLoggedIn]);
 
-  if (!company) {
+  if (!company && !isLoggedIn) {
     return (
       <Layout>
         <Head>
@@ -34,6 +56,30 @@ const CompanyProfilePage = ({ company, companyId }) => {
     );
   }
 
+  if (isLoggedIn && !company) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+          marginTop: "30px",
+          marginBottom: "30px",
+        }}
+      >
+        <ThreeDots
+          height="80"
+          width="80"
+          color="#49dd95"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+  }
+
   return (
     <Layout>
       <Head>
@@ -43,11 +89,11 @@ const CompanyProfilePage = ({ company, companyId }) => {
           content="Get up to date recommendations on the best stocks to buy"
         />
       </Head>
-
+      {showShare && <Share close={setShowShare} currentStock={currentStock} />}
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
-            <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md mx-[1em] md:mx-[100px]">
+            <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
               Stock <span className="inline-flex mx-2 ">&gt; </span>Company
               Profile
             </div>
@@ -56,12 +102,11 @@ const CompanyProfilePage = ({ company, companyId }) => {
             <div className="w-full flex flex-row justify-between">
               <div>
                 <h3
-                  className="text-1xl md:text-1xl text-[#5C5A5A] pt-10"
-                  style={{ fontSize: "1.3rem" }}
+                  className="text-lg text-primaryGray pt-10 md:text-2xl"
                 >
                   {company.name} Stock Fundamentals
                 </h3>
-                <p className="text-xl md:text-1xl text-[#5C5A5A] pt-0">
+                <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
                   Overview
                 </p>
               </div>
@@ -69,7 +114,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
               <div className="flex flex-row mt-auto gap-2">
                 <Link
                   href={`/company/${companyId}/history`}
-                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md"
+                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md"
                 >
                   <span className="hidden md:block">View Ranking History </span>
                   <img
@@ -78,7 +123,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md">
+                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md" onClick={() => setShowShare(true)}>
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
@@ -106,7 +151,7 @@ const CompanyProfilePage = ({ company, companyId }) => {
                   }
                 />
 
-                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-md align-middle text-[#5C5A5A] px-2 md:px-5 py-3 flex flex-row font-regular justify-between hover:shadow">
+                <h5 className="text-md md:text-xl bg-[#FFFFFF] rounded-md align-middle text-[#5C5A5A] px-2 md:px-8 py-3 flex flex-row font-regular justify-between hover:shadow">
                   About{" "}
                   <img
                     className="cursor-pointer"
@@ -123,7 +168,10 @@ const CompanyProfilePage = ({ company, companyId }) => {
               </div>
 
               <div className="md:w-2/3 w-full">
-                <VisualcompanyCard />
+                <VisualcompanyCard
+                  isLoggedIn={isLoggedIn}
+                  accessToken={accessToken}
+                />
                 <br />
               </div>
             </div>
@@ -152,7 +200,7 @@ export async function getServerSideProps({ query }) {
         if (err.response.status === 401) {
           isSmallCap = true;
         }
-      } catch (e) {}
+      } catch (e) { }
 
       console.log("Fetch failed for company: " + companyId);
     }

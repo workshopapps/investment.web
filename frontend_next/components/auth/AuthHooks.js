@@ -5,9 +5,9 @@ const useApiService = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
   const router = useRouter();
 
-  return (accessToken) => {
+  return (accessToken, isLoggedIn = false) => {
     const service = axios.create({
-      baseURL: baseUrl,
+      baseURL: `${baseUrl}${isLoggedIn ? "/user" : ""}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

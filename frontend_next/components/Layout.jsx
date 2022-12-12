@@ -28,7 +28,7 @@ const Layout = ({
   }, [pathName]);
 
   return (
-    <div className="flex flex-col h-screen relative ">
+    <div className="flex flex-col h-screen relative">
       {showNavBar && (
         <>
           <div className="nav-bar flex-none">
@@ -42,10 +42,10 @@ const Layout = ({
 
       {isProtected ? (
         <ProtectedPage strict={!disableStrictProtection}>
-          <div className="page-content grow">{children}</div>
+          <div className="page-content grow mt-[78px]">{children}</div>
         </ProtectedPage>
       ) : (
-        <div className="page-content grow">{children}</div>
+        <div className="page-content grow mt-[78px]">{children}</div>
       )}
 
       {showFooter && (

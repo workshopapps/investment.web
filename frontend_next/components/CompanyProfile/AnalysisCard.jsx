@@ -15,8 +15,9 @@ import UpIcon from "../../assets/landingPage/icons/up.svg";
 import greenArrow from "../../assets/company-profile/green.svg";
 import redArrow from "../../assets/company-profile/red.svg";
 import { useRouter } from "next/router";
+import authHooks from "../auth/AuthHooks";
 
-const VisualDataCard = () => {
+const VisualDataCard = ({ isLoggedIn, accessToken }) => {
   const { id: companyId } = useRouter().query;
   const [state, setState] = React.useState({
     show: false,
@@ -29,6 +30,7 @@ const VisualDataCard = () => {
   });
 
   const [data, setData] = React.useState([]);
+  const apiService = authHooks.useApiService();
 
   const getStartDate = () => {
     const year = parseInt(state.value) - 5;
@@ -55,9 +57,9 @@ const VisualDataCard = () => {
   };
 
   React.useEffect(() => {
-    axios
+    apiService(accessToken, isLoggedIn)
       .get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/interval?startDate=${getStartDate()}&endDate=${getEndDate()}`
+        `/company/${companyId}/interval?startDate=${getStartDate()}&endDate=${getEndDate()}`
       )
       .then((res) => {
         const raw = res.data["financials"];
@@ -103,16 +105,16 @@ const VisualDataCard = () => {
   };
 
   return (
-    <div className="h-auto flex flex-col bg-white text-[#5C5A5A] md:border rounded-lg px-2 md:px-6 py-0 md:py-4 font-HauoraLight">
+    <div className="h-auto flex flex-col bg-white text-primaryGray md:border rounded-lg px-2 md:px-6 py-0 md:py-4 font-HauoraLight">
       <div className="flex flex-row justify-between">
-        <div className="flex flex-row text-xs md:text-lg font-HauoraBold font-bold text-[#5C5A5A] border-b-2 border-[#1BD47B] px-1">
+        <div className="flex flex-row text-xs md:text-lg font-HauoraBold font-bold border-b-2 border-[#1BD47B] px-1">
           <button className="text-[#1BD47B] rounded-lg">
             Income Statement
           </button>
         </div>
 
         <div className="relative inline-block">
-          <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle text-[#5C5A5A] px-4 py-2 md:py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-[3rem]">
+          <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl align-middle px-4 py-2 md:py-3 border flex flex-row font-semibold justify-between gap-0 md:gap-[3rem]">
             {state.value}{" "}
             <div
               className="ml-3 md:m-auto py-[.55rem] px-[.5rem]"
@@ -146,7 +148,7 @@ const VisualDataCard = () => {
                   <a
                     href="#"
                     key={key}
-                    className="text-gray-700 hover:bg-gray-700 hover:text-white block px-4 py-2"
+                    className="text-primaryGray hover:bg-gray-700 hover:text-white block px-4 py-2"
                     role="menuitem"
                     onClick={() =>
                       setState({ ...state, show: false, value: each })
@@ -164,16 +166,17 @@ const VisualDataCard = () => {
       </div>
 
       <div className="h-100 my-10 w-full border-0 md:border md:border-1px rounded-lg bg-transparent">
-        <div className="flex flex-col md:flex-row justify-between text-xl md:text-1xl font-semibold pt-0 md:pt-6 pl-0 md:pl-5 gap-2">
+        <div className="flex flex-col md:flex-row justify-between text-base md:text-xl font-semibold pt-0 md:pt-6 pl-0 md:pl-5 gap-2">
           {companyId} Chart
-          <div className="flex flex-row justify-end text-xs md:text-md py-2 gap-2 mr-5">
+          <div className="flex flex-row justify-end text-[8px] md:text-xs md:text-md py-2 gap-4 mr-5">
             {state.showRevenue && (
-              <>
+              <div className="flex flex-row gap-1">
                 <svg
-                  width="17"
-                  height="17"
+                  width="12"
+                  height="12"
                   viewBox="0 0 17 17"
                   fill="none"
+                  className="my-auto"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <circle
@@ -184,15 +187,16 @@ const VisualDataCard = () => {
                   />
                 </svg>
                 Total Revenue
-              </>
+              </div>
             )}
             {state.showIncome && (
-              <>
+              <div className="flex flex-row gap-1">
                 <svg
-                  width="17"
-                  height="17"
+                  width="12"
+                  height="12"
                   viewBox="0 0 17 17"
                   fill="none"
+                  className="my-auto"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <circle
@@ -203,15 +207,16 @@ const VisualDataCard = () => {
                   />
                 </svg>
                 Net Income
-              </>
+              </div>
             )}
             {state.showExpenses && (
-              <>
+              <div className="flex flex-row gap-1">
                 <svg
-                  width="17"
-                  height="17"
+                  width="12"
+                  height="12"
                   viewBox="0 0 17 17"
                   fill="none"
+                  className="my-auto"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <circle
@@ -222,15 +227,16 @@ const VisualDataCard = () => {
                   />
                 </svg>
                 Operating expenses
-              </>
+              </div>
             )}
             {state.showProfit && (
-              <>
+              <div className="flex flex-row gap-1">
                 <svg
-                  width="17"
-                  height="17"
+                  width="12"
+                  height="12"
                   viewBox="0 0 17 17"
                   fill="none"
+                  className="my-auto"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <circle
@@ -241,7 +247,7 @@ const VisualDataCard = () => {
                   />
                 </svg>
                 Gross Profit
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -334,14 +340,14 @@ const VisualDataCard = () => {
       </div>
 
       <div className="mt-0 md:my-5 flex text-xs md:text-[.9rem] font-Hauora font-semibold flex-row justify-between">
-        <h2 className="pl-4">Key Metric</h2>
-        <h2 className="pl-0 md:pl-10">USD ({state.value})</h2>
+        <h2 className="pl-5 md:pl-10">Key Metric</h2>
+        <h2 className="pl-0 md:pl-20">USD ({state.value})</h2>
         <h2 className="pl-4">% Change</h2>
       </div>
 
       {data.length > 0 ? (
         <>
-          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 flex text-xs md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -351,9 +357,9 @@ const VisualDataCard = () => {
                   setState({ ...state, showRevenue: !state.showRevenue })
                 }
               />
-              <p className="pl-5">Revenue</p>
+              <p className="pl-2 md:pl-5">Revenue</p>
             </span>
-            <p className="text-left pr-10">{`${data[data.length - 1][
+            <p className="text-left pr-0 md:pr-10">{`${data[data.length - 1][
               "total_revenue"
             ].toFixed(2)}B`}</p>
             <p className="flex flex-row gap-2">
@@ -364,7 +370,7 @@ const VisualDataCard = () => {
                     : greenArrow
                   ).src
                 }
-                className="block mt-2 h-2"
+                className="block mt-2 h-[5px] md:h-2"
                 alt="loss"
               />
               {`${Math.abs(
@@ -372,7 +378,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 flex text-xs md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -382,7 +388,8 @@ const VisualDataCard = () => {
                   setState({ ...state, showExpenses: !state.showExpenses })
                 }
               />
-              <p className="pl-5">Operating expenses</p>
+              <p className="pl-5 hidden md:block">Operating expenses</p>
+              <p className="pl-2 md:pl-5 block md:hidden">Operating exp.</p>
             </span>
             <p className="text-left pr-10">{`${data[data.length - 1][
               "operating_expenses"
@@ -397,7 +404,7 @@ const VisualDataCard = () => {
                     : greenArrow
                   ).src
                 }
-                className="block mt-2 h-2"
+                className="block mt-2 h-[5px] md:h-2"
                 alt="loss"
               />
               {`${Math.abs(
@@ -405,7 +412,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="mt-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
+          <div className="mt-3 flex text-xs md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -415,9 +422,9 @@ const VisualDataCard = () => {
                   setState({ ...state, showProfit: !state.showProfit })
                 }
               />
-              <p className="pl-5">Gross Profit</p>
+              <p className="pl-2 md:pl-5">Gross Profit</p>
             </span>
-            <p className="text-left pr-10">{`${Math.abs(
+            <p className="text-left pr-5 md:pr-10">{`${Math.abs(
               data[data.length - 1]["gross_profit"].toFixed(2)
             )}B`}</p>
             <p className="flex flex-row gap-2">
@@ -428,7 +435,7 @@ const VisualDataCard = () => {
                     : greenArrow
                   ).src
                 }
-                className="block mt-2 h-2"
+                className="block mt-2 h-[5px] md:h-2"
                 alt="loss"
               />
               {`${Math.abs(
@@ -436,7 +443,7 @@ const VisualDataCard = () => {
               )}%`}
             </p>
           </div>
-          <div className="my-3 mr-5 flex text-sm md:text-[1rem] font-Hauora font-normal flex-row justify-between">
+          <div className="my-3 flex text-xs md:text-[1rem] font-Hauora font-normal flex-row justify-between">
             <span className="flex flex-row md:w-1/4">
               <input
                 className="text-[#1BD47B]"
@@ -446,9 +453,9 @@ const VisualDataCard = () => {
                   setState({ ...state, showIncome: !state.showIncome })
                 }
               />
-              <p className="pl-5">Net Income</p>
+              <p className="pl-2 md:pl-5">Net Income</p>
             </span>
-            <p className="text-left pr-10">{`${data[data.length - 1][
+            <p className="text-left pr-5 md:pr-10">{`${data[data.length - 1][
               "net_income"
             ].toFixed(2)}B`}</p>
             <p className="flex flex-row gap-2">
@@ -459,7 +466,7 @@ const VisualDataCard = () => {
                     : greenArrow
                   ).src
                 }
-                className="block mt-2 h-2"
+                className="block mt-2 h-[5px] md:h-2"
                 alt="loss"
               />
               {`${Math.abs(

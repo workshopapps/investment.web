@@ -13,6 +13,7 @@ import AuthContext from "./auth/AuthContext";
 import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
 import MiniBarChartCard from "./Charts/MiniBarChart";
+import { useRouter } from "next/router";
 
 const CapCard = ({
   logo,
@@ -32,8 +33,10 @@ const CapCard = ({
   const [hoverPrice, setHoverPrice] = useState(false);
   const [isInWatchlist, setInWatchlist] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
+  const router = useRouter();
 
   const handlePriceModal = () => {
     setPriceModal(!priceModal);
@@ -73,35 +76,41 @@ const CapCard = ({
       });
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      apiService(accessToken)
-        .get(`/user/in_watchlist/${abbr}`)
-        .then((res) => {
-          if (res.status === 200) {
-            setInWatchlist(true);
-          } else {
-            setInWatchlist(false);
-          }
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, isLoggedIn]);
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     apiService(accessToken)
+  //       .get(`/user/in_watchlist/${abbr}`)
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           setInWatchlist(true);
+  //         } else {
+  //           setInWatchlist(false);
+  //         }
+  //       });
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [accessToken, isLoggedIn]);
 
   return (
-    <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+    <div className="border-2 border-primaryGray border-opacity-30 hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
           {index + 1}
         </div>
         <div className="flex gap-5 mb-6 justify-between">
           <div className="flex gap-5">
-            <div className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]">
-              <img src={logo} alt={abbr} />
+            <div className=" h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px]">
+              <img src={logo} alt={abbr} className="rounded-[50%] justify-center" />
             </div>
             <div className="">
               <p className="text-[#333946] font-normal text-lg">{abbr}</p>
-              <p className="text-[#139757] font-normal text-sm">{name}</p>
+              <p
+                className="text-[#139757] font-normal text-sm"
+                style={{ cursor: "pointer" }}
+                onClick={() => router.push(link)}
+              >
+                {name}
+              </p>
               <p className="text-[#545964] font-semibold text-sm">{sector}</p>
             </div>
           </div>
@@ -134,11 +143,11 @@ const CapCard = ({
         </div>
         <div className="space-y-2">
           {/* Desktop view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
-                onMouseEnter={handlePriceHover}
-                onMouseLeave={handlePriceHover}
+                // onMouseEnter={handlePriceHover}
+                // onMouseLeave={handlePriceHover}
                 className={
                   !hoverPrice
                     ? `text-[#B0B2B7] font-normal pr-4`
@@ -147,7 +156,7 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <Tippy
                   content={<span className="">See details</span>}
                   placement="bottom"
@@ -164,11 +173,11 @@ const CapCard = ({
                     }}
                   />
                 </Tippy>
-              </p>
+              </p> */}
             </div>
           </span>
           {/* Mobile view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
                 className={
@@ -179,19 +188,19 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <img
                   src={hoverPrice ? Eye.src : inactiveEye.src}
                   alt="eye"
                   className="w-5 h-6"
                 />
-              </p>
+              </p> */}
             </div>
           </span>
           <div className="flex justify-between text-xs lg:text-base">
             <p className="text-[#66717E] font-normal">Stock Price </p>
             <p className="text-[#333946] text-semibold">
-              ${stockPrice.toFixed(2)}
+              ${stockPrice ? stockPrice.toFixed(2) : "N/A"}
             </p>
           </div>
           <div className="p-2">

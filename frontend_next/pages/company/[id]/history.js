@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../../components/Layout";
 import shareIcon from "../../../assets/company-profile/share.svg";
 import rankIcon2 from "../../../assets/company-profile/ranked.svg";
@@ -13,6 +13,9 @@ import dateformat from "dateformat";
 import { ordinalSuffixOf } from "../../../utils/helpers";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import authHooks from "../../../components/auth/AuthHooks";
+import AuthContext from "../../../components/auth/AuthContext";
+import Share from "../../../components/CompanyProfile/Share";
 
 const History = ({ company, companyId, rankings: rnks }) => {
   const [restrictToCategory, setRestrictToCategory] = useState(false);
@@ -20,21 +23,22 @@ const History = ({ company, companyId, rankings: rnks }) => {
   const [restrictToIndustry, setRestrictToIndustry] = useState(false);
   const [rankings, setRankings] = useState(rnks);
   const [isLoading, setIsLoading] = useState(false);
+  const apiService = authHooks.useApiService();
+  const { isLoggedIn, accessToken } = useContext(AuthContext);
+  const [showShare, setShowShare] = React.useState(false);
+  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`
 
   const getRankingHistory = () => {
     setIsLoading(true);
 
-    axios
-      .get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/ranking/history`,
-        {
-          params: {
-            restrict_to_category: restrictToCategory,
-            restrict_to_sector: restrictToSector,
-            restrict_to_industry: restrictToIndustry,
-          },
-        }
-      )
+    apiService(accessToken, isLoggedIn)
+      .get(`/company/${companyId}/ranking/history`, {
+        params: {
+          restrict_to_category: restrictToCategory,
+          restrict_to_sector: restrictToSector,
+          restrict_to_industry: restrictToIndustry,
+        },
+      })
       .then((res) => {
         setIsLoading(false);
         if (res.status === 200) {
@@ -62,11 +66,12 @@ const History = ({ company, companyId, rankings: rnks }) => {
         <meta name="description" content={`${company.name} Ranking History`} />
       </Head>
 
+      {showShare && <Share close={setShowShare} currentStock={currentStock} />}
       <ToastContainer />
 
       <div className="bg-[#F5F5F5] h-full px-[1em] md:px-[100px]">
         <Link href="/">
-          <div className="flex mt-0 pt-5 text-[#525A65] text-sm md:text-md">
+          <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md">
             Stock <span className="inline-flex mx-2 ">&gt; </span>Company
             Profile <span className="inline-flex mx-2 ">&gt; </span> Ranking
             History
@@ -75,21 +80,18 @@ const History = ({ company, companyId, rankings: rnks }) => {
         <div className="flex flex-col md:flex-col gap-5 ">
           <div className="w-full flex flex-row justify-between">
             <div>
-              <h3 className="text-2xl md:text-2xl text-[#5C5A5A] pt-10">
+              <h3
+                className="text-sm text-primaryGray pt-10 md:text-xl"
+              >
                 Ranking History
               </h3>
-              <p
-                className="text-xl md:text-1xl text-[#5C5A5A] pt-0"
-                style={{
-                  textTransform: "uppercase",
-                }}
-              >
+              <p className="text-lg md:text-2xl text-[#5C5A5A] pt-2">
                 {company.name}
               </p>
             </div>
 
             <div className="flex flex-row mt-auto gap-2 ">
-              <div className="text-left text-xs md:text-lg rounded-xl text-[#000718] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 bg-[#1BD47B]">
+              <div className="text-left text-xs md:text-lg rounded-lg text-primary104 px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 bg-primary102">
                 <span className="hidden md:block">View Ranking History </span>
                 <img
                   className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-[none]"
@@ -97,7 +99,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
                   alt="open"
                 />
               </div>
-              <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md">
+              <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-primaryGray px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md" onClick={() => setShowShare(true)}>
                 <span className="hidden md:block">Share This Stock </span>
                 <img
                   className="m-auto w-[10em] md:w-auto h-10 md:h-auto bg-none"
@@ -115,25 +117,22 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
         <div className="mt-[3.5rem]">
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToCategory ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToCategory ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToCategory(!restrictToCategory)}
           >
             Market Cap
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToSector ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToSector ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToSector(!restrictToSector)}
           >
             Sector
           </button>
           <button
-            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${
-              restrictToIndustry ? "bg-[#66E2A7]" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 rounded-md mr-4 ${restrictToIndustry ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToIndustry(!restrictToIndustry)}
           >
             Industry
