@@ -42,7 +42,7 @@ const Share = ({ close, currentStock }) => {
 
           <div className="text-md md:text-lg w-full text-center">Share This Stock</div>
 
-          <div className="flex flex-row justify-center gap-4">
+          <div className="flex flex-row justify-center gap-8">
             <WhatsappShareButton
               url={url}
               title={`Hey 👋
@@ -50,7 +50,7 @@ const Share = ({ close, currentStock }) => {
                         Link: ${currentStock}`}
               className="w-full"
             >
-              <div className="flex justify-start border border-primaryGray p-[1em] rounded-[50%] items-center">
+              <div className="flex justify-start border border-[#A3AAB2] p-[1em] rounded-[50%] items-center">
                 <IoLogoWhatsapp className="text-[#40C351] text-lg md:text-2xl" />
               </div>
             </WhatsappShareButton>
@@ -61,7 +61,7 @@ const Share = ({ close, currentStock }) => {
                         I found this interesting stock on Yieldvest, check it out!
                          Link ${currentStock}`}
             >
-              <div className="flex justify-start border border-primaryGray p-[1em] rounded-[50%] items-center">
+              <div className="flex justify-start border border-[#A3AAB2] p-[1em] rounded-[50%] items-center">
                 <IoLogoTwitter className="text-[#03A9F4] text-lg md:text-2xl" />
               </div>
             </TwitterShareButton>
@@ -72,7 +72,7 @@ const Share = ({ close, currentStock }) => {
                         I found this interesting stock on Yieldvest, check it out!
                          Link ${currentStock}`}
             >
-              <div className="flex justify-start border border-primaryGray p-[1em] rounded-[50%] items-center">
+              <div className="flex justify-start border border-[#A3AAB2] p-[1em] rounded-[50%] items-center">
                 <IoLogoLinkedin className="text-[#0288D1] text-lg md:text-2xl" />
               </div>
             </LinkedinShareButton>
@@ -80,7 +80,7 @@ const Share = ({ close, currentStock }) => {
 
           <div className="text-xs md:text-md mt-2 w-full text-center">Or copy link</div>
 
-          <div className="flex flex-row align-middle border border-primaryGray p-2 rounded-lg justify-between text-primaryGray text-xs gap-2">
+          <div className="flex flex-row align-middle border border-[#545964] p-2 rounded-lg justify-between text-primaryGray text-xs gap-2">
             <span className="py-2">
               {currentStock}
             </span>
@@ -91,7 +91,7 @@ const Share = ({ close, currentStock }) => {
                 toast.success("Copied to clickboard");
               }}
             >
-              Copy
+              Copy Link
             </button>
           </div>
 
