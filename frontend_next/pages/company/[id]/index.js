@@ -96,7 +96,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
-            <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
+            <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
               Stock <span className="inline-flex mx-2 ">&gt; </span>Company
               Profile
             </div>
@@ -204,7 +204,7 @@ export async function getServerSideProps({ query }) {
         if (err.response.status === 401) {
           isSmallCap = true;
         }
-      } catch (e) {}
+      } catch (e) { }
 
       console.log("Fetch failed for company: " + companyId);
     }
