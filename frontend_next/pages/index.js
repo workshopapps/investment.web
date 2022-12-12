@@ -202,6 +202,15 @@ const Index = () => {
               We provide well curated information to help you make smarter
               <br />
 
+              <button
+                type="button"
+                onClick={() => {
+                throw new Error("Sentry Frontend Error");
+                }}
+              >
+                Throw error
+              </button>
+              
               investment decisions based on{" "}
               <span style={{ color: "#1BD47B", fontWeight: "bold" }}>
                 Fundamental Analysis
