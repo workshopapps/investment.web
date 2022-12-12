@@ -1,20 +1,42 @@
 pipeline {
 
-	agent any	
+	agent any
 	stages {
-
-		stage("run script"){
+		
+		
+		
+					
+		stage("build frontend"){
 
 			steps {
-
-				sh "bash deploy.sh"
-
-
-
+				sh "cd frontend_next"
+				sh "cd frontend_next && yarn install && CI=false yarn build"
 			} 
+                } 
+        	stage("build backend"){
 
-        }
+			steps {
+				sh "cd backend"
+				sh "cd backend && python3 -m pip install --upgrade pip"
+				sh "cd backend && pip3 install -r requirements.txt --force"
+			} 
+        	}
+		stage("deploy") {
+		
+			steps {
 
-     }
+				sh "sudo pm2 delete main"
+				sh "sudo pm2 delete yieldvest"
+				sh "sudo pm2 start backend/main.py --name main --interpreter python3"
+				sh "cd frontend_next && pm2 start 'yarn start' --name 'yieldvest'"
+				sh "sudo pm2 save"
+			}
+			
+		}
+
+
+        }	
+
+
 
 }
