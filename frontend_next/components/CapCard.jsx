@@ -114,32 +114,30 @@ const CapCard = ({
               <p className="text-[#545964] font-semibold text-sm">{sector}</p>
             </div>
           </div>
-          {!isInWatchlist && (
-            <div
-              className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
-              onClick={() => addToWatchList(abbr, onSuccess, onFailure)}
-            >
-              {isLoading ? (
-                <TailSpin
-                  height="40"
-                  width="40"
-                  color="#4fa94d"
-                  ariaLabel="tail-spin-loading"
-                  radius="1"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  visible={true}
-                />
-              ) : (
-                <Tippy
-                  content={<span className="">Add to watchlist</span>}
-                  placement="bottom"
-                >
-                  <span>+</span>
-                </Tippy>
-              )}
-            </div>
-          )}
+          <div
+            className="bg-[#B8F2D650] hover:bg-[#B8F2D6] text-[#292D32] font-normal text-2xl rounded-full cursor-pointer w-11 h-11 items-center flex justify-center"
+            onClick={() => addToWatchList(abbr, onSuccess, onFailure)}
+          >
+            {isLoading ? (
+              <TailSpin
+                height="40"
+                width="40"
+                color="#4fa94d"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            ) : (
+              <Tippy
+                content={<span className="">Add to watchlist</span>}
+                placement="bottom"
+              >
+                <span>+</span>
+              </Tippy>
+            )}
+          </div>
         </div>
         <div className="space-y-2">
           {/* Desktop view */}
