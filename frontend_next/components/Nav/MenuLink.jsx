@@ -14,7 +14,7 @@ const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMe
             href={url}
             // style={({ isActive }) => (isActive ? activeStyle : undefined)}
             className={openMobileMenu === true ? "flex items-center gap-[10px] h-full tracking-wider capitalize px-[5px] py-1 rounded-md hover:bg-green-100 transition ease-in-out delay-100" : "flex items-center gap-[10px] h-full tracking-wider hover:text-green-300 transition ease-in-out delay-100"}>
-            {linkicon && <i className="mr-2">{linkicon}</i>}
+            {linkicon && <i className="mr-2 text-[16px]">{linkicon}</i>}
             {link}
             {icon && (
                 <span>
@@ -30,7 +30,7 @@ const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMe
               <ul
                   onMouseEnter={() => setShowDropDown(true)}
                   onMouseLeave={() => setShowDropDown(false)}
-                  className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg ">
+                  className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg capitalize">
                   {dropItems.map((item, index) => {
                       const { link, url } = item;
                       return (
@@ -52,7 +52,7 @@ const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMe
             onClick={() => setShowDropDown((prev) => !prev)}
             className={openMobileMenu ? "flex items-center justify-between gap-[10px] h-full capitalize cursor-pointer px-2 py-1 rounded-md hover:bg-green-100 transition ease-in-out delay-100" : "flex items-center justify-between gap-[10px] h-full" }>
             <div className='flex flex-row gap-3 items-center'>
-                {linkicon && <i className="mr-2">{linkicon}</i>}
+                {linkicon && <i className="mr-2 text-[16px]">{linkicon}</i>}
                 {link}
             </div>
             {icon && (
@@ -66,7 +66,7 @@ const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMe
             )}
           </div>
           {dropItems && showDropDown && (
-              <ul className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg ">
+              <ul className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg capitalize ml-[21px] ">
                   {dropItems.map((item, index) => {
                       const { link, url } = item;
                       return (

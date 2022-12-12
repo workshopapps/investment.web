@@ -66,7 +66,7 @@ const MobileMenu = ({ toggleMenu, openMobileMenu }) => {
     };
   }, []);
   return (
-    <div className="fixed top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30 z-[9999999999999]">
+    <div className="fixed md:hidden top-0 bottom-0 right-0 left-0 backdrop-blur-sm bg-white/30 z-[9999999999999]">
       <div
         className="absolute top-0 bottom-0 left-0 right-0 bg-transparent"
         onClick={() => toggleMenu(false)}
