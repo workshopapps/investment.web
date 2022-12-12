@@ -38,6 +38,113 @@ export default function SubPlan() {
       });
   };
 
+  const subTypeButtons = () => {
+    console.log(subscription)
+    if (subscription && subscription.isActive) {
+      if (subscription.type.startsWith("prem")) {
+        return (
+          <button
+            className="text-primaryGray bg-primary102  font-semibold text-base py-4 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
+            disabled={isLoading}
+            onClick={openPortal}
+          >
+            {isLoading ? (
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <ThreeDots
+                  height="18"
+                  width="auto"
+                  radius="5"
+                  color="#ffffff"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </div>
+            ) : (
+              "Manage Subscription"
+            )}
+          </button>
+        )
+      }
+      if (subscription.type.startsWith("pro")) {
+        return (
+          <React.Fragment>
+            <button
+              className="text-primary102 border-primary102 font-semibold text-base py-4 mr-5 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
+              disabled={isLoading}
+              onClick={openPortal}
+            >
+              {isLoading ? (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <ThreeDots
+                    height="18"
+                    width="auto"
+                    radius="5"
+                    color="#ffffff"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClassName=""
+                    visible={true}
+                  />
+                </div>
+              ) : (
+                "Upgrade Plan"
+              )}
+            </button>
+            <button
+              className="text-primaryGray bg-primary102  font-semibold text-base py-4 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
+              disabled={isLoading}
+              onClick={openPortal}
+            >
+              {isLoading ? (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <ThreeDots
+                    height="18"
+                    width="auto"
+                    radius="5"
+                    color="#ffffff"
+                    ariaLabel="three-dots-loading"
+                    wrapperStyle={{}}
+                    wrapperClassName=""
+                    visible={true}
+                  />
+                </div>
+              ) : (
+                "Manage Subscription"
+              )}
+            </button>
+          </React.Fragment>
+        )
+      }
+    } else {
+      return (
+        <button
+          className="text-primaryGray bg-primary102 font-semibold text-base py-4 px-[45px] border-[1px] rounded-lg hover:shadow-lg"
+          disabled={isLoading}
+          onClick={openPortal}
+        >
+          {isLoading ? (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <ThreeDots
+                height="18"
+                width="auto"
+                radius="5"
+                color="#ffffff"
+                ariaLabel="three-dots-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            </div>
+          ) : (
+            "Upgrade Plan"
+          )}
+        </button>
+      )
+    }
+  }
+
   React.useEffect(() => {
     if (subscription && subscription.isActive) {
       if (subscription.type.startsWith("pro")) {
@@ -74,7 +181,7 @@ export default function SubPlan() {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col mt-1 mb-[140px]">
+    <div className="flex justify-center items-center font-Haoura flex-col mt-1 mb-[140px]">
       <div className="max-w-[1024px] w-full">
         <div className="mb-6">
           <h1 className="text-4xl">Your Plan </h1>
@@ -90,30 +197,15 @@ export default function SubPlan() {
             />
           </picture>
 
+          <div className="bg-primary102 text-white rounded-lg p-6">
+            <h1 className="text-4xl">Basic</h1>
+            <p>For basic users</p>
+            <hr className="h-2" />
+          </div>
+
           <div>
-            <div className="mt-3" style={{ textAlign: "right" }}>
-              <button
-                className="text-[#19C170]  font-semibold text-base py-4 px-[45px] border-[1px] border-[#1BD47B] rounded-md"
-                disabled={isLoading}
-                onClick={openPortal}
-              >
-                {isLoading ? (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <ThreeDots
-                      height="18"
-                      width="180"
-                      radius="5"
-                      color="#19C170"
-                      ariaLabel="three-dots-loading"
-                      wrapperStyle={{}}
-                      wrapperClassName=""
-                      visible={true}
-                    />
-                  </div>
-                ) : (
-                  "Manage Subscription"
-                )}
-              </button>
+            <div className="flex flex-row justify-end mt-3" style={{ textAlign: "right" }}>
+              {subTypeButtons()}
             </div>
           </div>
         </div>
