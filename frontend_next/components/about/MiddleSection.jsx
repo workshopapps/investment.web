@@ -23,7 +23,7 @@ export const Section = () => {
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
                 Who we are
               </h2>
-              <img src={whoWeAreImg.src} className="w-[560px]" />
+              <img src={whoWeAreImg.src} className="w-[560px]" />  
             </div>
             <div className="md:w-1/2">
               <div>
