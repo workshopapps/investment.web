@@ -24,11 +24,14 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
   const [showShare, setShowShare] = React.useState(false);
   const router = useRouter();
   const apiService = authHooks.useApiService();
-  const { isLoggedIn, accessToken } = useContext(AuthContext);
-  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`
+  const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
+  const currentStock = `http://yieldvest.hng.tech/company/${companyId}`;
   React.useEffect(() => {
     if (isLoggedIn) {
-      apiService(accessToken, isLoggedIn)
+      apiService(
+        accessToken,
+        isLoggedIn && subscription && subscription.canViewSmallCaps
+      )
         .get(`/company/${companyId}`)
         .then((res) => {
           if (res.status === 200) {
@@ -38,7 +41,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
         .catch((err) => console.log(err));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, isLoggedIn]);
+  }, [accessToken, isLoggedIn, subscription]);
 
   if (!company && !isLoggedIn) {
     return (
@@ -101,9 +104,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3
-                  className="text-lg text-primaryGray pt-10 md:text-2xl"
-                >
+                <h3 className="text-lg text-primaryGray pt-10 md:text-2xl">
                   {company.name} Stock Fundamentals
                 </h3>
                 <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
@@ -123,7 +124,10 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
                     alt="open"
                   />
                 </Link>
-                <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-lg text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-2 hover:shadow-md" onClick={() => setShowShare(true)}>
+                <button
+                  className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md"
+                  onClick={() => setShowShare(true)}
+                >
                   <span className="hidden md:block">Share This Stock </span>
                   <img
                     className="m-auto w-[5em] md:w-auto h-5 md:h-auto bg-none"
@@ -200,7 +204,7 @@ export async function getServerSideProps({ query }) {
         if (err.response.status === 401) {
           isSmallCap = true;
         }
-      } catch (e) { }
+      } catch (e) {}
 
       console.log("Fetch failed for company: " + companyId);
     }

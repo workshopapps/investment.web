@@ -114,7 +114,10 @@ const Index = () => {
       params[query["key"]] = query["value"];
     });
 
-    apiService(accessToken, isLoggedIn)
+    apiService(
+      accessToken,
+      isLoggedIn && subscription && subscription.canViewSmallCaps
+    )
       .get(`/company/ranking`, {
         params: params,
       })
