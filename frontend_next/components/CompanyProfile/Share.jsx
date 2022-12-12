@@ -88,7 +88,7 @@ const Share = ({ close, currentStock }) => {
               className="bg-primary102 text-primary104 rounded-lg px-4 py-2"
               onClick={() => {
                 navigator.clipboard.writeText(currentStock);
-                toast.success("Copied to clickboard");
+                toast.success("Copied to clipboard");
               }}
             >
               Copy Link
