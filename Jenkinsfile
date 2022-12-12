@@ -4,7 +4,6 @@ pipeline {
 	stages {
 		
 		
-		
 					
 		stage("Deploy Frontend"){
 
