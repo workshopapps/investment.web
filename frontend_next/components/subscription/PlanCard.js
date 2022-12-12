@@ -71,11 +71,13 @@ const SubscribeCard = ({
       <ul className="w-full theListing list-inside pl-6 pt-4 mb-[8em] md:mb-0">
         {features.map((element, index) => (
           <li key={index} className="flex items-center py-2">
-            <FaCheckCircle
-              fill="#1BD47B"
-              className="group-hover:hidden block"
-            />
-            <FaCheckCircle fill="white" className="group-hover:block hidden" />
+            <div>
+              <FaCheckCircle
+                fill="#1BD47B"
+                className="group-hover:hidden block"
+                />
+              <FaCheckCircle fill="white" className="group-hover:block hidden" />
+            </div>
             <p className="pl-3">{element}</p>
           </li>
         ))}
