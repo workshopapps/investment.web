@@ -27,7 +27,7 @@ pipeline {
 
 				//sh "sudo pm2 delete main"
 				sh "sudo pm2 delete yieldvest"
-				sh "sudo pm2 restart backend/main.py --name main --interpreter python3"
+				sh "sudo pm2 restart main"
 				sh "cd frontend_next &&  sudo pm2 start 'yarn start' --name 'yieldvest'"
 				sh "sudo pm2 save"
 			}
