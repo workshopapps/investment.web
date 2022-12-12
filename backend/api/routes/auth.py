@@ -189,11 +189,18 @@ async def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password))
-        await send_verify_email([user.email], User)
-        db.add(db_user)
-        db.commit()
-        db.close()
+        try:
+            db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password), is_verified=False)
+            db.add(db_user)
+            db.commit()
+            db.close()
+            await send_verify_email([user.email], user)
+
+        except Exception as e:
+            raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, 
+            detail="Invalid token received",
+        )
 
     return {"message": "Account created successfully"}
 
@@ -201,16 +208,23 @@ async def signup(user: CreateUserModel):
 @router.get("/verify_token", tags=['Auth'])
 async def email_verification(request:Request, token:str):
     """Checks if the token is valid"""
+    db: Session = next(get_db())
     user = await verify_token(token)
-    if user and not user.is_verified:
-        user.is_verified = True
-        await user.save()
-        return {"request": request, "email": user.email}
+    existing_user: User = db.query(User).filter(User.email == user).first()
 
-    raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Invalid token",
-        )
+    try:
+        if existing_user and not existing_user.is_verified:
+            existing_user.is_verified = True
+            db.commit()
+    
+
+    except Exception:
+        raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED, 
+                detail="Invalid token",
+            )
+
+    return {"message": "Account verified successfully"}
 
 
 @router.post("/init_password_reset", tags=['Auth'])
@@ -295,14 +309,13 @@ async def send_password_reset_request_email(email: str, code: str):
     await send_email("Reset your YieldVest Password", [email], body)
 
 
-async def send_verify_email(email:List[str], instance: User):
+async def send_verify_email(email, instance: User):
     token_data = {
-        "id": instance.id,
         "email": instance.email,
     }
     token = jwt.encode(token_data, JWT_SECRET, algorithm='HS256')
     app_url = os.getenv('API_URL')
-    verify_url = f"{app_url}/verify_token?token={token}"
+    verify_url = f"{app_url}/auth/verify_token?token={token}"
 
     body = "<html> <body><h4>Hello,</h4>"
     body += "<p>Please verify your email on YieldVest</p>"
@@ -311,7 +324,7 @@ async def send_verify_email(email:List[str], instance: User):
     body += "<br/><br/><strong>If you didn't register on Yieldvest please ignore this email and nothing will happen."
     body += "</strong><br/></body></html>"
 
-    await send_email("Verify your Email", [email], body)
+    await send_email("Verify your Email", email, body)
 
 
 def authenticate(
@@ -362,12 +375,12 @@ def _create_token(
 # Decodes JWT token
 async def verify_token(token:str):
     try: 
-        payload = jwt.decode(token, JWT_SECRET, algorithm='HS256')
-        user = await User.get(id=payload.get("id"))
+        payload = jwt.decode(token, JWT_SECRET, algorithms='HS256')
+        
     except:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
             detail="Invalid token",
             headers={"WWW-Authenticate": "Bearer"}
         )
-    return user
+    return payload.get("email")
