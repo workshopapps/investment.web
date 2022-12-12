@@ -92,15 +92,15 @@ const CapCard = ({
   // }, [accessToken, isLoggedIn]);
 
   return (
-    <div className="border-2 border-[#B0B2B7] hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
+    <div className="border-2 border-primaryGray border-opacity-30 hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
           {index + 1}
         </div>
         <div className="flex gap-5 mb-6 justify-between">
           <div className="flex gap-5">
-            <div className="bg-[#E8FBF2] rounded-full h-6 lg:h-[50px] w-6 lg:w-[50px]">
-              <img src={logo} alt={abbr} />
+            <div className=" h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px]">
+              <img src={logo} alt={abbr} className="rounded-[50%] justify-center" />
             </div>
             <div className="">
               <p className="text-[#333946] font-normal text-lg">{abbr}</p>
@@ -143,11 +143,11 @@ const CapCard = ({
         </div>
         <div className="space-y-2">
           {/* Desktop view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="hidden lg:flex font-semibold text-[#66717E] w-fit text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
-                onMouseEnter={handlePriceHover}
-                onMouseLeave={handlePriceHover}
+                // onMouseEnter={handlePriceHover}
+                // onMouseLeave={handlePriceHover}
                 className={
                   !hoverPrice
                     ? `text-[#B0B2B7] font-normal pr-4`
@@ -156,7 +156,7 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <Tippy
                   content={<span className="">See details</span>}
                   placement="bottom"
@@ -173,11 +173,11 @@ const CapCard = ({
                     }}
                   />
                 </Tippy>
-              </p>
+              </p> */}
             </div>
           </span>
           {/* Mobile view */}
-          <span onClick={handlePriceModal}>
+          <span>
             <div className="flex lg:hidden font-semibold text-[#66717E] text-xs lg:text-base mb-6 items-center cursor-pointer">
               <p
                 className={
@@ -188,13 +188,13 @@ const CapCard = ({
               >
                 PRICE{" "}
               </p>
-              <p className="cursor-pointer">
+              {/* <p className="cursor-pointer">
                 <img
                   src={hoverPrice ? Eye.src : inactiveEye.src}
                   alt="eye"
                   className="w-5 h-6"
                 />
-              </p>
+              </p> */}
             </div>
           </span>
           <div className="flex justify-between text-xs lg:text-base">

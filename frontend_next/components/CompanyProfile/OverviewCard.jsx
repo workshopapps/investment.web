@@ -15,7 +15,7 @@ const OverviewCard = ({
   return (
     <div className="flex flex-col text-[#5C5A5A] bg-white rounded-xl md:border justify-center px-2 md:px-5 py-5 mb-6 font-Hauora">
       <div className="flex-row flex align-middle justify-between gap-1">
-        <span className="text-lg md:text-xl font-sans font-bold pt-2">
+        <span className="text-[16px] md:text-xl font-sans font-bold pt-2">
           {name}
         </span>
         <button className="text-sm md:text-base p-3 px-7 bg-[#D9D9D9] rounded-xl h-fit">

@@ -43,7 +43,7 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="flex items-center justify-center  bg-[#000718] rounded-lg">
+    <div className="flex items-center justify-center  bg-[#000718] rounded-lg px-[12px] md:px-0">
       <div className="flex md:px-[150px] py-[60px] items-center text-white ">
         <div className="flex flex-col justify-center items-center ">
           <h1 className="flex pt-2 font-semibold text-2xl text-[#E8FBF2]">
@@ -57,16 +57,16 @@ export default function Newsletter() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col md:flex-row md:w-[506px]  h-[110px] md:h-[56px] mt-4 border p-1 border-[#A3AAB2] rounded-lg"
+            className="flex flex-col w-full md:flex-row  md:w-[506px] md:h-[56px] mt-4 md:border p-1 md:border-[#A3AAB2] border-none md:border-solid  rounded-lg"
           >
             <input
               type="email"
-              className="flex w-full md:w-4/5 h-full px-2 text-base text-white border-none focus:outline-none focus:border-none bg-[#000718]"
+              className="flex w-full md:w-4/5 h-[52px] md:h-full px-2 text-base text-white border-[1px] border-[#A3AAB2] rounded-lg mb-[16px] md:border-none focus:outline-none focus:border-none bg-[#000718]"
               placeholder="Enter email address"
               {...register("email", { required: true })}
             />
 
-            <button className="w-full hover:scale-90 transition duration-500 h-[60px] md:mt-0 md:w-[160px] md:h-[100%]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
+            <button className="w-full hover:scale-90 text-[14px] md:text-[16px] transition duration-500 h-[52px] md:mt-0 md:w-[160px] md:h-[100%]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto inline-block">
               {isLoading ? (
                 <div
                   style={{

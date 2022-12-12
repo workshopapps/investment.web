@@ -85,7 +85,7 @@ export default function Newsletter({ trigger, onClose }) {
                     />
                   </div>
 
-                  <div className="bg-white max-w-[784px] flex flex-col items-center justify-start rounded-[8px] px-[54px] pt-[60px] pb-[34px]">
+                  <div className="bg-white max-w-[784px] flex flex-col items-center justify-start rounded-[8px] px-[12px] md:px-[54px] pt-[60px] pb-[34px]">
                     <h1 className="flex pt-2 font-semibold text-2xl text-[#000718]">
                       Don’t miss out !
                     </h1>
@@ -97,16 +97,16 @@ export default function Newsletter({ trigger, onClose }) {
 
                     <form
                       onSubmit={handleSubmit(onSubmit)}
-                      className="flex flex-col md:flex-row md:w-[100%]  h-[110px] md:h-[56px] mt-4 border p-1 border-[#A3AAB2] rounded-lg"
+                      className="flex flex-col w-full md:flex-row md:w-[100%] md:h-[56px] mt-4 md:border p-1 md:border-[#A3AAB2] rounded-lg"
                     >
                       <input
                         type="email"
-                        className="flex w-full md:w-4/5 h-full px-2 text-base text-[#000718] border-none focus:outline-none focus:border-none bg-[#ffffff]"
+                        className="flex w-full md:w-4/5 mb-[16px] md:mb-0 h-[52px] md:h-auto px-2 text-base text-[#000718] border border-[#A3AAB2] rounded-lg md:border-none focus:outline-none focus:border-none bg-[#ffffff]"
                         placeholder="Enter email address"
                         {...register("email", { required: true })}
                       />
 
-                      <button className="w-full  h-[60px] mt-1 md:mt-0 md:w-[160px] md:h-[48px]  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
+                      <button className="w-full h-[52px] mt-1 md:mt-0 md:w-[160px] md:h-full  text-sm font-normal text-black bg-[#1BD47B] border rounded-lg border-none focus:outline-none focus:border-none ml-auto">
                         {isLoading ? (
                           <div
                             style={{
