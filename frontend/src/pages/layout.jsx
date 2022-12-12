@@ -16,6 +16,7 @@ const PageLayout = ({
     disableStrictProtection = false
 }) => {
     const [openMobileMenu, setOpenMobileMenu] = useState(false);
+    console.log(openMobileMenu);
     const pathName = useLocation();
 
     useEffect(() => {
@@ -38,7 +39,12 @@ const PageLayout = ({
                             <Nav openMenu={setOpenMobileMenu} />
                         </ProtectedPage>
                     </div>
-                    {openMobileMenu && <MobileMenu toggleMenu={setOpenMobileMenu} />}
+                    {openMobileMenu && (
+                        <MobileMenu
+                            openMobileMenu={openMobileMenu}
+                            toggleMenu={setOpenMobileMenu}
+                        />
+                    )}
                 </>
             )}
 

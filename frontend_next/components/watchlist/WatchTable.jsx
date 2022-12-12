@@ -45,7 +45,7 @@ const WatchTable = ({ onSuccess, onFailure }) => {
 
   return (
     <div>
-      <div className="flex justify-around items-center gap-x-[8px] gap-y-[24px] flex-wrap">
+      <div className="flex justify-start items-center gap-2 flex-wrap">
         {loading && (
           <div className="h-[50px] flex justify-center items-center w-full bg-white">
             <ThreeDots
