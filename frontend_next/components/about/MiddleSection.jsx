@@ -8,16 +8,17 @@ import img4 from "../../assets/about/mobile.svg";
 import whoWeAreImg from "../../assets/about/whoWeAreImg.svg";
 import whatWeDo from "../../assets/about/WhatWeDo.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
+import OurTeam from "./OurTeam";
 
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#FAFAFF] p-5 md:p-10 w-full">
+      <div id="gray" className="bg-[#FAFAFF] md:w-full py-5 md:p-10  w-full">
         <div
           id="white"
-          className="w-full bg-[#FFFFFF]   mx-auto flex-col gap-14 p-3 md:p-6"
+          className="w-full bg-[#FFFFFF] md:w-[1240px]  mx-auto flex-col gap-14 p-3"
         >
-          <div className="w-full gap-2  md:p-6  md:flex justify-center items-center">
+          <div className="w-full gap-2 md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
                 Who we are
@@ -48,12 +49,12 @@ export const Section = () => {
               </div>
             </div>
           </div>
-          <div className="w-full gap-2 md:p-6  md:flex justify-center items-center">
-            <div className="md:w-1/2">
+          <div className="w-full gap-2  md:px-4 mt-5  md:flex justify-between items-center">
+            <div className="md:w-1/2  my-6">
               <h3 className="text-[#455A64] font-normal text-lg py-2 md:text-2xl">
                 What we do
               </h3>
-              <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[615px] leading-6">
+              <p className="text-sm md:text-base  font-normal text-[#8A8D95] leading-6">
                 We saw that most stock investment analysis tools are not
                 user-friendly and quite daunting. Therefore we decided to create
                 an analysis tool with the customer in mind. Our desire to aid
@@ -65,22 +66,22 @@ export const Section = () => {
                 decisions at first glance.
               </p>
             </div>
-            <div className="flex flex-col-reverse my-4 md:w-1/2 md:flex-col">
-              <img src={whatWeDo.src} className="w-[424px] md:w-[560px]" />
+            <div className="flex flex-col-reverse my-4 md:w-[534px] md:flex-col">
+              <img src={whatWeDo.src} className="w-[424px] md:w-[415px]" />
             </div>
           </div>
 
-          <div className="mt-6">
+          {/* <div className="w-full gap-2 mt-10 md:mt-5 md:flex justify-center items-center"> */}
             <div
               id="WhyChooseUs"
-              className="w-full md:w-[1240px]  bg-indigo-500 md:py-10 flex flex-col-reverse md:flex"
+              className="md:flex w-full md:w-[1240px] md:py-10"
             >
-              <div className="md:flex-col bg-yellow-400 md:w-[564px]">
-                <img src={WhyChooseUs.src} className="" />
+              <div className="hidden md:block md:w-[564px]">
+                <img src={WhyChooseUs.src} className="mt-10 md:w-[564px]" />
               </div>
-              <div className="md:w-[250px] md:mt-0 bg-pink-200 mx-auto">
-                <div className="md:w-[250px]">
-                  <h3 className="text-[#455A64] font-normal text-sm py-1 md:text-xl">
+              <div className="w-full md:w-[250px]">
+                <div className="w-full md:w-[250px] my-2">
+                  <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                     Stock recommendations
                   </h3>
                   <p className="text-sm md:text-sm font-normal text-[#8A8D95] md:w-[250px]">
@@ -88,8 +89,8 @@ export const Section = () => {
                     you know the best for you at first glance.
                   </p>
                 </div>
-                <div className="md:ml-14 md:mt-4 w-[250px]">
-                  <h3 className="text-[#455A64] font-normal text-sm py-2 md:text-xl">
+                <div className="w-full md:ml-14 my-2 md:mt-4">
+                  <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                     Stock Categories
                   </h3>
                   <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
@@ -97,8 +98,8 @@ export const Section = () => {
                     you know the best for you at first glance.
                   </p>
                 </div>
-                <div className="md:ml-24 md:mt-2 w-[250px]">
-                  <h3 className="text-[#455A64] font-normal text-xs py-2 md:text-xl">
+                <div className="w-full md:ml-24 md:mt-2">
+                  <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
                     Company Profile
                   </h3>
                   <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
@@ -106,9 +107,13 @@ export const Section = () => {
                     help validate your decision.
                   </p>
                 </div>
+                <div className="md:hidden md:w-[564px]">
+                <img src={WhyChooseUs.src} className="mt-10 md:w-[564px]" />
+              </div>
               </div>
             </div>
-          </div>
+          {/* </div> */}
+          <OurTeam />
         </div>
       </div>
     </div>

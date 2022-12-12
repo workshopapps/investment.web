@@ -22,7 +22,7 @@ const AboutPage = () => {
       <AboutNav />
       <Section />
       {/* <Goals /> */}
-      <OurTeam />
+      {/* <OurTeam /> */}
     </Layout>
   );
 };
