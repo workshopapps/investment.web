@@ -5094,6 +5094,11 @@ at-least-node@^1.0.0:
   resolved "https://registry.npmjs.org/at-least-node/-/at-least-node-1.0.0.tgz"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
+atatus-spa@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/atatus-spa/-/atatus-spa-4.5.0.tgz#eee94d1a17128480d6c3e20768070c5c2bf7d1e9"
+  integrity sha512-xtYa7riEi8OuR3cEVeSji9AzLCGlORx251XvMyBg8ss3DkW5lqkP+Yc503k+wZS0ACjqFx9DGqM7rYnKC3sxkw==
+
 atob@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/atob/-/atob-2.1.2.tgz"

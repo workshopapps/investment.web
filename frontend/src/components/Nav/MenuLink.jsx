@@ -69,7 +69,7 @@ const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMe
                 )}
             </div>
             {dropItems && showDropDown && (
-                <ul className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg ">
+                <ul className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg capitalize ">
                     {dropItems.map((item, index) => {
                         const { link, url } = item;
                         return (

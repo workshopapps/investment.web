@@ -1,62 +1,88 @@
+import React,{ useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
-import { useEffect, useState } from "react";
 import NavLink from "./NavLink";
-import { useRouter } from "next/router";
 
-const MenuLink = ({ link, url, icon, dropItems, margin }) => {
+const MenuLink = ({ link, url, icon, dropItems, disabled, linkicon, openMobileMenu }) => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const pathname = useRouter().pathname;
-
   const activeStyle = {
-    color: "#1BD47B",
+      color: '#1BD47B'
   };
 
-  useEffect(() => {
-    setIsActive(pathname === url);
-  }, [pathname, url]);
-
-  return (
-    <li className="relative h-full" onMouseEnter={() => setShowDropDown(true)}>
-      <NavLink
-        margin={margin}
-        href={url}
-        style={isActive ? activeStyle : {}}
-        className={`flex items-center justify-between gap-[10px] mx-2 h-full hover:text-[#1BD47B] pr-[${margin}] ${url=="/help" && showDropDown ? "text-[#1BD47B]": "text-white"} transition duration-500`}
-      >
-        {link}
-        {icon && (
-          <span>
-            {showDropDown ? (
-              <BiChevronUp className="text-[#1BD47B] text-[16px]" />
-            ) : (
-              <BiChevronDown className="text-white text-[16px] hover:text-[#1BD47B]" />
+  const activeMenuLink = (
+      <li className="relative h-full" onMouseEnter={() => setShowDropDown(true)}>
+          <NavLink
+            href={url}
+            // style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            className={openMobileMenu === true ? "flex items-center gap-[10px] h-full tracking-wider capitalize px-[5px] py-1 rounded-md hover:bg-green-100 transition ease-in-out delay-100" : "flex items-center gap-[10px] h-full tracking-wider hover:text-green-300 transition ease-in-out delay-100"}>
+            {linkicon && <i className="mr-2 text-[16px]">{linkicon}</i>}
+            {link}
+            {icon && (
+                <span>
+                    {showDropDown ? (
+                        <BiChevronUp className="text-black md:text-white text-[16px]" />
+                    ) : (
+                        <BiChevronDown className="text-black md:text-white text-[16px]" />
+                    )}
+                </span>
             )}
-          </span>
-        )}
-      </NavLink>
-      {dropItems && showDropDown && (
-        <ul
-          onMouseEnter={() => setShowDropDown(true)}
-          onMouseLeave={() => setShowDropDown(false)}
-          className="w-[176px] rounded-[8px] bg-[#000718] py-[14px] px-[28px] flex gap-[20px] flex-col absolute z-10 bottom-[-240px] shadow-lg "
-        >
-          {dropItems.map((item, index) => {
-            const { link, url } = item;
-            return (
-              <NavLink
-                href={url}
-                key={index}
-                className={`text-white text-[16px] hover:text-[#1BD47B] transition duration-500`}
-              >
-                {link}
-              </NavLink>
-            );
-          })}
-        </ul>
-      )}
-    </li>
+          </NavLink>
+          {dropItems && showDropDown && (
+              <ul
+                  onMouseEnter={() => setShowDropDown(true)}
+                  onMouseLeave={() => setShowDropDown(false)}
+                  className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg capitalize">
+                  {dropItems.map((item, index) => {
+                      const { link, url } = item;
+                      return (
+                        <NavLink
+                            href={url}
+                            key={index}
+                            className="text-black md:text-white text-[14px] md:text-[16px] ml-2">
+                            {link}
+                        </NavLink>
+                      );
+                  })}
+              </ul>
+          )}
+      </li>
   );
+  const disabledMenuLink = (
+      <li className="relative h-full">
+          <div
+            onClick={() => setShowDropDown((prev) => !prev)}
+            className={openMobileMenu ? "flex items-center justify-between gap-[10px] h-full capitalize cursor-pointer px-2 py-1 rounded-md hover:bg-green-100 transition ease-in-out delay-100" : "flex items-center justify-between gap-[10px] h-full" }>
+            <div className='flex flex-row gap-3 items-center'>
+                {linkicon && <i className="mr-2 text-[16px]">{linkicon}</i>}
+                {link}
+            </div>
+            {icon && (
+                <span>
+                    {showDropDown ? (
+                        <BiChevronUp className="text-black md:text-white text-[16px]" />
+                    ) : (
+                        <BiChevronDown className="text-black md:text-white text-[16px]" />
+                    )}
+                </span>
+            )}
+          </div>
+          {dropItems && showDropDown && (
+              <ul className="w-[176px] md:rounded-[8px] md:bg-[#000718] mt-[20px] md:mt-0 md:py-[14px] md:px-[28px] flex gap-[20px] flex-col md:absolute z-10 bottom-[-240px] md:shadow-lg capitalize ml-[21px] ">
+                  {dropItems.map((item, index) => {
+                      const { link, url } = item;
+                      return (
+                          <NavLink
+                              href={url}
+                              key={index}
+                              className="text-black md:text-white text-[14px] md:text-[16px]">
+                              {link}
+                          </NavLink>
+                      );
+                  })}
+              </ul>
+          )}
+      </li>
+  );
+  return <React.Fragment>{disabled ? disabledMenuLink : activeMenuLink}</React.Fragment>;
 };
 
 export default MenuLink;
