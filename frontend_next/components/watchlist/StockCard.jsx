@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FiTrash, FiEye } from "react-icons/fi";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
@@ -11,7 +11,7 @@ import Tippy from "@tippyjs/react";
 const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const [fundamentals, setFundamentals] = useState({
-    show: false,
+    show: true,
     hover: false
   });
 
@@ -50,15 +50,6 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
     <div className="max-w-[396px] w-full rounded-[8px] p-[28px] bg-white border border-white transition duration-500 hover:border-[#1BD47B]">
       <div>
         <div className="flex justify-start items-start mb-[24px]">
-          {/* <div className="flex h-5 items-center mr-5">
-            <input
-              id="comments"
-              aria-describedby="comments-description"
-              name="comments"
-              type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            />
-          </div> */}
           <div className="w-full flex justify-start items-start uppercase gap-[10px]">
             <div className="stock-logo h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px] mr-4">
               <img src={profile_image} alt="" />
@@ -99,9 +90,10 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
             </div>
             <div>
               <h3
-                className="mb-[24px] text-[16px] font-[400] hover:text-[#49DD95] text-[#B0B2B7] flex justify-start items-center"
+                className="mb-[24px] cursor-pointer text-[16px] font-[400] hover:text-[#49DD95] text-[#B0B2B7] flex justify-start items-center"
                 onMouseEnter={handleFundamentalHover}
                 onMouseLeave={handleFundamentalHover}
+                onClick={handleFundamentalModal}
               >
                 FUNDAMENTALS
                 <span className="ml-[10px]">
@@ -112,7 +104,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                     <FiEye
                       onMouseEnter={handleFundamentalHover}
                       onMouseLeave={handleFundamentalHover}
-                      className="text-[#8A8D95] hover:text-[#49DD95]" />
+                    />
                   </Tippy>
                 </span>
               </h3>
@@ -129,7 +121,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                 <div className="flex justify-between text-xs lg:text-sm">
                   <p className="text-[#66717E] font-normal">Market Cap </p>
                   <p className="text-[#333946] text-semibold">
-                    ${(marketCap / 1000000000).toFixed(2)}B
+                    ${(market_cap / 1000000000).toFixed(2)}B
                   </p>
                 </div>
                 <hr className="mt-2" />
@@ -155,8 +147,8 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                   </svg>
                   Income($bn)
                 </div>
-                <MiniBarChartCard companyId={abbr} />
-                <Link href={`/company/${abbr}`}>
+                <MiniBarChartCard companyId={company_id} />
+                <Link href={`/company/${company_id}`}>
                   <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
                     See Company Profile
                   </div>
