@@ -184,7 +184,6 @@ class CreateUserModel(BaseModel):
     email: str
     name: str
     password: str
-    is_verified: bool = None
 
 
 class NotificationSettings(Base):
