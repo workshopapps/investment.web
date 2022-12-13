@@ -141,21 +141,20 @@ async def authentication(token: str):
             return generate_token(current_user.id)
 
         # add new user to database
-        db_user: User = User(id=str(uuid4()), email=email, name=name,
+        user_id = str(uuid4())
+        db_user: User = User(id=user_id, email=email, name=name,
                              is_verified=True, password=hash_password(str(uuid4())))
         db.add(db_user)
         db.commit()
 
         await resolve_password_reset_request(email, db)
-        return generate_token(db_user.id)
+        return generate_token(user_id)
 
     except ValueError:
-        db.close()
         raise HTTPException(status_code=401, detail='Invalid token')
     except HTTPException as e:
         raise e
     except Exception:
-        db.close()
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail='Internal Server Error')
 
