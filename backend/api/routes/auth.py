@@ -126,10 +126,10 @@ async def authentication(token: str):
 
         current_user: User = db.query(models.User).filter(models.User.email == email).first()
 
-        def generate_token(user_id: str):
+        def generate_token(sub: str):
             return {
-                "access_token": create_access_token(sub=user_id),
-                "refresh_token": create_refresh_token(sub=user_id),
+                "access_token": create_access_token(sub=sub),
+                "refresh_token": create_refresh_token(sub=sub),
                 "token_type": "Bearer",
             }
 
