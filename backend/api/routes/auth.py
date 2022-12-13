@@ -2,9 +2,10 @@ import os
 import traceback
 from datetime import timedelta, datetime
 from typing import Any, Optional, MutableMapping, Union, List
+from uuid import uuid4
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter, HTTPException, Request, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from google.auth.transport import requests
 from google.oauth2 import id_token
@@ -13,11 +14,10 @@ from sqlalchemy.orm import Session
 
 from api.crud.base import get_db, verify_password, hash_password
 from api.models import models
-from api.models.models import User, CreateUserModel, UpdatePasswordModel, UpdateEmailModel
+from api.models.models import UpdatePasswordModel, UpdateEmailModel
 from api.models.models import User, CreateUserModel, InitPasswordResetModel, PasswordResetRequest, \
     FinalizePasswordResetModel
 from api.scripts.email import send_email
-from uuid import uuid4
 
 load_dotenv()
 
@@ -135,23 +135,26 @@ async def authentication(token: str):
 
         # check whether the user already exist
         if current_user:
+            if not current_user.is_verified:
+                raise HTTPException(status_code=401,
+                                    detail="This account is not verified yet. Please check your email")
             return generate_token(current_user.id)
 
         # add new user to database
-        db_user: User = User(id=str(uuid4()), email=email, name=name,
-                             password=hash_password(str(uuid4())))
+        user_id = str(uuid4())
+        db_user: User = User(id=user_id, email=email, name=name,
+                             is_verified=True, password=hash_password(str(uuid4())))
         db.add(db_user)
         db.commit()
 
         await resolve_password_reset_request(email, db)
-        db.close()
-        return generate_token(db_user.id)
+        return generate_token(user_id)
 
     except ValueError:
-        db.close()
         raise HTTPException(status_code=401, detail='Invalid token')
+    except HTTPException as e:
+        raise e
     except Exception:
-        db.close()
         print(traceback.print_exc())
         raise HTTPException(status_code=500, detail='Internal Server Error')
 
@@ -166,6 +169,9 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
     if not user:
         db.close()
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    if not user.is_verified:
+        raise HTTPException(status_code=401,
+                            detail="This account is not verified yet. Please check your email")
 
     data = {
         "access_token": create_access_token(sub=user.id),
@@ -178,7 +184,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()
 
 
 @router.post("/signup", tags=['Auth'])
-def signup(user: CreateUserModel):
+async def signup(user: CreateUserModel):
     db: Session = next(get_db())
     existing_user: User = db.query(User).filter(User.email == user.email).first()
 
@@ -189,12 +195,42 @@ def signup(user: CreateUserModel):
             detail="This email is already registered"
         )
     else:
-        db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password))
-        db.add(db_user)
-        db.commit()
-        db.close()
+        try:
+            db_user = User(id=str(uuid4()), email=user.email, name=user.name, password=hash_password(user.password),
+                           is_verified=False)
+            db.add(db_user)
+            db.commit()
+            db.close()
+            await send_verify_email([user.email], user)
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token received",
+            )
 
     return {"message": "Account created successfully"}
+
+
+@router.get("/verify_token", tags=['Auth'])
+async def email_verification(token: str):
+    """Checks if the token is valid"""
+    db: Session = next(get_db())
+    user = await verify_token(token)
+    existing_user: User = db.query(User).filter(User.email == user).first()
+
+    try:
+        if existing_user and not existing_user.is_verified:
+            existing_user.is_verified = True
+            db.commit()
+
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token",
+        )
+
+    return {"message": "Account verified successfully"}
 
 
 @router.post("/init_password_reset", tags=['Auth'])
@@ -279,6 +315,24 @@ async def send_password_reset_request_email(email: str, code: str):
     await send_email("Reset your YieldVest Password", [email], body)
 
 
+async def send_verify_email(email, user: User):
+    token_data = {
+        "email": user.email,
+    }
+    token = jwt.encode(token_data, JWT_SECRET, algorithm='HS256')
+    app_url = os.getenv('APP_URL')
+    verify_url = f"{app_url}/auth/verify_token?token={token}"
+
+    body = f"<html> <body><h4>Hello {user.name},</h4>"
+    body += "<p>Please verify your email on Yieldvest</p>"
+    body += f"<p>Click <a href=\"{verify_url}\">here</a> to verify your email or copy "
+    body += f"this link to your browser to verify your email: {verify_url}</p>"
+    body += "<br/><br/><strong>If you didn't register on Yieldvest please ignore this email and nothing will happen."
+    body += "</strong><br/></body></html>"
+
+    await send_email("Verify your Email", email, body)
+
+
 def authenticate(
         *,
         email: str,
@@ -323,3 +377,16 @@ def _create_token(
     payload["sub"] = str(sub)
 
     return jwt.encode(payload, JWT_SECRET, algorithm='HS256')
+
+
+# Decodes JWT token
+async def verify_token(token: str):
+    try:
+        payload = jwt.decode(token, JWT_SECRET, algorithms='HS256')
+    except Exception:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token",
+            headers={"WWW-Authenticate": "Bearer"}
+        )
+    return payload.get("email")

@@ -7,6 +7,7 @@ import FeatureSection from "../../components/subscription/FeatureSection";
 import SubscribeCard from "../../components/subscription/PlanCard";
 import Head from "next/head";
 import AuthContext from "../../components/auth/AuthContext";
+import { subscriptionData } from "../../store/subscriptionData/subData";
 
 const Subscription = () => {
   // state to set change the type of subscription yearly or monthly
@@ -25,6 +26,8 @@ const Subscription = () => {
   };
 
   const hasActiveSubscription = () => {
+    console.log(isLoggedIn);
+    console.log(subscription);
     return isLoggedIn && subscription && subscription.isActive;
   };
 
@@ -86,17 +89,11 @@ const Subscription = () => {
               price=""
               discount="0.00"
               type="month"
-              target="For basic users"
-              features={[
-                "12 stock recommendation",
-                "Weekly email notification for large & mid-cap stocks only",
-                "Access to large-cap and mid-cap categories",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
-              buttonText="Get Started"
+              target={subscriptionData["Basic"]["target"]}
+              features={subscriptionData["Basic"]["features"]}
+              buttonText={isLoggedIn ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination={isLoggedIn ? "/" : "/signup"}
             />
 
             <SubscribeCard
@@ -104,15 +101,8 @@ const Subscription = () => {
               price="50"
               discount="25"
               type="month"
-              target="For power users"
-              features={[
-                "50 stock recommendations",
-                "Weekly email notification for all market caps",
-                "Access to all categories",
-                "Add only 5 stocks to your watchlist",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
+              target={subscriptionData["Pro"]["target"]}
+              features={subscriptionData["Pro"]["features"]}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination={hasActiveSubscription() ? "/settings" : "/payment"}
@@ -123,15 +113,8 @@ const Subscription = () => {
               price="100"
               discount="50"
               type="month"
-              target="For advanced users"
-              features={[
-                "Unlimited stock recommendation",
-                "Customized email notification for all market caps",
-                "Access to all categories",
-                "Add unlimited stocks to your watchlist",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
+              target={subscriptionData["Premium"]["target"]}
+              features={subscriptionData["Premium"]["features"]}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination={hasActiveSubscription() ? "/settings" : "/payment"}
@@ -146,17 +129,11 @@ const Subscription = () => {
               price=""
               discount="0.00"
               type="year"
-              target="For basic users"
-              features={[
-                "12 stock recommendation",
-                "Weekly email notification for large & mid-cap stocks only",
-                "Access to large-cap and mid-cap categories",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
-              buttonText="Get Started"
+              target={subscriptionData["Basic"]["target"]}
+              features={subscriptionData["Basic"]['features']}
+              buttonText={hasActiveSubscription() ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination={hasActiveSubscription() ? "/" : "/signup"}
             />
 
             <SubscribeCard
@@ -164,15 +141,8 @@ const Subscription = () => {
               price="600"
               discount="300"
               type="year"
-              target="For power users"
-              features={[
-                "50 stock recommendations",
-                "Weekly email notification for all market caps",
-                "Access to all categories",
-                "Add only 5 stocks to your watchlist",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
+              target={subscriptionData["Pro"]["target"]}
+              features={subscriptionData["Pro"]['features']}
               buttonText="Subscribe"
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination={hasActiveSubscription() ? "/settings" : "/payment"}
@@ -183,15 +153,8 @@ const Subscription = () => {
               price="1200"
               discount="600"
               type="year"
-              target="For advanced users"
-              features={[
-                "Unlimited stock recommendation",
-                "Customized email notification for all market caps",
-                "Access to all categories",
-                "Add unlimited stocks to your watchlist",
-                "View company fundamentals",
-                "View ranking history",
-              ]}
+              target={subscriptionData["Premium"]["target"]}
+              features={subscriptionData["Premium"]['features']}
               buttonText="Subscribe"
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination={hasActiveSubscription() ? "/settings" : "/payment"}

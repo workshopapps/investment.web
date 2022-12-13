@@ -1,20 +1,23 @@
 pipeline {
 
-	agent any	
+	agent any
 	stages {
-
-		stage("run script"){
+		
+					
+		stage("Deploy Frontend"){
 
 			steps {
-
-				sh "bash deploy.sh"
-
-
-
+				sh "sudo systemctl restart yieldvest-frontend.service"
 			} 
+                } 
+        	stage("Deploy backend"){
 
-        }
+			steps {
+				sh "sudo systemctl restart yieldvest-api.service"
+			} 
+        	}
 
-     }
+
+	}
 
 }
