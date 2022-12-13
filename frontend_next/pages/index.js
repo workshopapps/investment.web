@@ -5,7 +5,7 @@ import axios from "axios";
 import CapCard from "../components/CapCard";
 import dateFormat from "dateformat";
 import NotSubscribedModal from "../components/subscription/NotSubscribedModal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import AuthContext from "../components/auth/AuthContext";
 import authHooks from "../components/auth/AuthHooks";
 import { ThreeDots } from "react-loader-spinner";
@@ -142,11 +142,13 @@ const Index = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          setStocks(res.data);
+          setStocks(res.data.records);
 
-          if (res.data) {
+          if (res.data.records) {
             setLastUpdateDate(
-              formatLastUpdateDate(res.data[0].current_ranking.updated_at)
+              formatLastUpdateDate(
+                res.data.records[0].current_ranking.updated_at
+              )
             );
           }
         }
@@ -349,24 +351,26 @@ const Index = () => {
 
             {stocks && stocks.length !== 0 && (
               <div className="lg:bg-white lg:border-2 lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                {stocks.map((item, index) => (
-                  <CapCard
-                    key={index}
-                    logo={item.profile_image}
-                    abbr={item.company_id}
-                    name={item.name}
-                    PERatio={item.dividend_yield}
-                    marketCap={item.market_cap}
-                    stockPrice={item.stock_price}
-                    rank={item.category}
-                    index={index}
-                    sector={item.industry}
-                    link={`/company/${item.company_id}`}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                    onInform={onInform}
-                  />
-                ))}
+                {stocks &&
+                  stocks.length !== 0 &&
+                  stocks.map((item, index) => (
+                    <CapCard
+                      key={index}
+                      logo={item.profile_image}
+                      abbr={item.company_id}
+                      name={item.name}
+                      PERatio={item.dividend_yield}
+                      marketCap={item.market_cap}
+                      stockPrice={item.stock_price}
+                      rank={item.category}
+                      index={index}
+                      sector={item.industry}
+                      link={`/company/${item.company_id}`}
+                      onSuccess={onSuccess}
+                      onFailure={onFailure}
+                      onInform={onInform}
+                    />
+                  ))}
               </div>
             )}
           </div>

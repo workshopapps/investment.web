@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AuthContext from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
-  const [baseApiUrl, setBaseApiUrl] = useState(process.env.NEXT_PUBLIC_API_URL);
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -25,7 +23,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        baseApiUrl: baseApiUrl,
+        baseApiUrl: process.env.NEXT_PUBLIC_API_URL,
         lowMarketCapCategoryId:
           process.env.NEXT_PUBLIC_LOW_MARKET_CAP_CATEGORY_ID,
         midMarketCapCategoryId:
