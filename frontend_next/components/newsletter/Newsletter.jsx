@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import AuthContext from "../auth/AuthContext";
 
 export default function Newsletter() {
   const {
@@ -11,13 +12,14 @@ export default function Newsletter() {
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const { baseApiUrl } = React.useContext(AuthContext);
 
   const onSubmit = (data) => {
     setIsLoading(true);
 
     axios
       .post(
-        "https://api.yieldvest.hng.tech/newsletter-subscription",
+        `${baseApiUrl}/newsletter-subscription`,
         {},
         {
           params: {

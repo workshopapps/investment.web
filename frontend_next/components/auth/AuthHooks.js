@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useRouter } from "next/router";
+import AuthContext from "./AuthContext";
+import { useContext } from "react";
 
 const useApiService = () => {
-  const baseUrl = "https://api.yieldvest.hng.tech";
+  const { baseApiUrl } = useContext(AuthContext);
   const router = useRouter();
 
   return (accessToken, isLoggedIn = false) => {
     const service = axios.create({
-      baseURL: `${baseUrl}${isLoggedIn ? "/user" : ""}`,
+      baseURL: `${baseApiUrl}${isLoggedIn ? "/user" : ""}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

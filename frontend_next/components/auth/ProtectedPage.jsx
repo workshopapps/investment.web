@@ -4,8 +4,14 @@ import React, { useEffect, useContext } from "react";
 import AuthContext from "./AuthContext";
 
 const ProtectedPage = ({ children, strict = true }) => {
-  const { logout, setIsLoggedIn, setAccessToken, setUser, setSubscription } =
-    useContext(AuthContext);
+  const {
+    logout,
+    setIsLoggedIn,
+    setAccessToken,
+    setUser,
+    setSubscription,
+    baseApiUrl,
+  } = useContext(AuthContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -13,7 +19,7 @@ const ProtectedPage = ({ children, strict = true }) => {
 
     if (localToken) {
       axios
-        .get("https://api.yieldvest.hng.tech/user/profile", {
+        .get(`${baseApiUrl}/user/profile`, {
           headers: {
             Authorization: `Bearer ${localToken}`,
           },

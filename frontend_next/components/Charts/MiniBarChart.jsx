@@ -10,14 +10,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { ThreeDots } from "react-loader-spinner";
+import AuthContext from "../auth/AuthContext";
 
 const MiniBarChartCard = ({ companyId }) => {
   const [state, setState] = useState([]);
+  const { baseApiUrl } = React.useContext(AuthContext);
 
   const fetchData = useCallback(async () => {
     await axios
       .get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/interval?startDate=2019-12-31&endDate=2022-12-31`
+        `${baseApiUrl}/company/${companyId}/interval?startDate=2019-12-31&endDate=2022-12-31`
       )
       .then((res) => {
         const raw = res.data["financials"];

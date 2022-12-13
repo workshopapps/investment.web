@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import AuthContext from "../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
@@ -12,8 +12,6 @@ import Head from "next/head";
 
 const Login = ({ GOOGLE_CLIENT_ID }) => {
   const Inner = () => {
-    const baseUrl = "https://api.yieldvest.hng.tech/auth/login";
-
     const navigate = useRouter();
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
@@ -21,7 +19,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     const [redirected, setRedirected] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
+    const { setAccessToken, setIsLoggedIn, baseApiUrl } =
+      useContext(AuthContext);
 
     //form
     const [loginForm, setLoginForm] = useState({
@@ -68,9 +67,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
       setIsLoading(true);
 
       axios
-        .get(
-          `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-        )
+        .get(`${baseApiUrl}/auth/google_auth?token=${tokenResponse.credential}`)
         .then((res) => {
           if (res.status === 200) {
             toast.success("Login successful");
@@ -101,14 +98,15 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
       const config = {
         headers: {
-          accept: "application / json",
+          accept: "application/json",
           "content-type": "application/x-www-form-urlencoded",
         },
+        validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500,
       };
 
       axios
         .post(
-          baseUrl,
+          `${baseApiUrl}/auth/login`,
           {
             grant_type: "",
             username: loginForm.email,
@@ -128,15 +126,16 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
             setInterval(() => {
               setTimeout(true);
             }, 1500);
+          } else if (response.status === 401) {
+            toast.error(response.data.detail);
           } else {
-            toast.error("login failed");
+            toast.error("Login failed");
           }
-          console.log(response);
         })
         .catch((err) => {
           setIsLoading(false);
           console.log(err);
-          toast.error("Invalid username or password");
+          toast.error("Login failed");
         });
     };
 
@@ -188,8 +187,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
     return (
       <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
-        <ToastContainer />
-
         <div className="w-full p-5 md:flex md:flex-col md:justify-center md:items-center md:w-520 md:bg-white md:rounded-lg md:px-8">
           <div className="flex flex-col text-center px-10 md:w-full md:px-1 md:items-center">
             <h1 className="font-HauoraBold text-xl mb-5 md:text-2xl">

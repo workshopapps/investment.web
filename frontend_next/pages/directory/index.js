@@ -83,12 +83,12 @@ const CompanyIndexerPage = ({ indexer, data }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const indexer = query.initials || "";
+  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const initials = query.initials || "";
   let data = [];
+
   try {
-    const res = await axios.get(
-      `https://api.yieldvest.hng.tech/companies?initials=${indexer}`
-    );
+    const res = await axios.get(`${baseApiUrl}/companies?initials=${initials}`);
     if (res.status === 200) {
       data = [...res.data];
     }
@@ -99,7 +99,7 @@ export async function getServerSideProps({ query }) {
 
   return {
     props: {
-      indexer: indexer,
+      indexer: initials,
       data: data,
     },
   };

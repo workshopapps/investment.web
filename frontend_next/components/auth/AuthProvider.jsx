@@ -5,6 +5,7 @@ import AuthContext from "./AuthContext";
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
+  const [baseApiUrl, setBaseApiUrl] = useState(process.env.NEXT_PUBLIC_API_URL);
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -24,6 +25,13 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        baseApiUrl: baseApiUrl,
+        lowMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_LOW_MARKET_CAP_CATEGORY_ID,
+        midMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_MID_MARKET_CAP_CATEGORY_ID,
+        highMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_HIGH_MARKET_CAP_CATEGORY_ID,
         isLoggedIn: isLoggedIn,
         accessToken: accessToken,
         setAccessToken: setAccessToken,

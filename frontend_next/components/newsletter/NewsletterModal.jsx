@@ -6,6 +6,7 @@ import Cancel from "../../assets/cancel.svg";
 import { toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 import axios from "axios";
+import AuthContext from "../auth/AuthContext";
 
 export default function Newsletter({ trigger, onClose }) {
   const {
@@ -14,13 +15,14 @@ export default function Newsletter({ trigger, onClose }) {
     formState: { errors },
   } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const { baseApiUrl } = React.useContext(AuthContext);
 
   const onSubmit = (data) => {
     setIsLoading(true);
 
     axios
       .post(
-        "https://api.yieldvest.hng.tech/newsletter-subscription",
+        `${baseApiUrl}/newsletter-subscription`,
         {},
         {
           params: {
