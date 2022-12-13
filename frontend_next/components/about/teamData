@@ -116,7 +116,7 @@ const teamData = [
   {
     id: 20,
     name: "Chioma Ubaezuonu",
-    role: "DevOps",
+    role: "Frontend",
     img: "./aboutImages/chioma.png",
   },
   {
@@ -153,7 +153,7 @@ const teamData = [
     id: 26,
     name: "Dolapo Ogunfowora",
     role: "Frontend",
-    img: "./aboutImages/alfred.png",
+    img: "./aboutImages/dolapo.png",
   },
   {
     id: 27,
@@ -207,7 +207,7 @@ const teamData = [
     id: 35,
     name: "Ezeugwu Chukwuemeka",
     role: "Frontend Team",
-    img: "./aboutImages/jerry.png",
+    img: "./aboutImages/romeo.jpg",
   },
   {
     id: 36,
