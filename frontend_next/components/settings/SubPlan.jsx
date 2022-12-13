@@ -23,7 +23,7 @@ export default function SubPlan() {
   });
 
   const redirectToSubscription = () => {
-    router.push("https://yieldvest.hng.tech/subscription");
+    router.push("/subscription");
   };
 
   const apiService = authHooks.useApiService();

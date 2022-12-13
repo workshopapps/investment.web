@@ -18,6 +18,7 @@ const SubscribeCard = ({
   buttonText,
   content,
   destination,
+  disabled = false,
 }) => {
   const router = useRouter();
 
@@ -75,8 +76,11 @@ const SubscribeCard = ({
               <FaCheckCircle
                 fill="#1BD47B"
                 className="group-hover:hidden block"
-                />
-              <FaCheckCircle fill="white" className="group-hover:block hidden" />
+              />
+              <FaCheckCircle
+                fill="white"
+                className="group-hover:block hidden"
+              />
             </div>
             <p className="pl-3">{element}</p>
           </li>
@@ -86,8 +90,11 @@ const SubscribeCard = ({
         <div
           className="w-[80%] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] group-hover:bg-white text-white font-bold py-4 px-6 rounded"
           onClick={handleSubscription}
+          style={{
+            background: disabled ? "gray" : "#1BD47B",
+          }}
         >
-          <button className="flex rounded" type="button">
+          <button className="flex rounded" type="button" disabled={disabled}>
             <span className="text-[#1F2226] align-middle">{buttonText}</span>
           </button>
         </div>
@@ -105,6 +112,7 @@ SubscribeCard.propTypes = {
   features: PropTypes.array,
   buttonText: PropTypes.string,
   destination: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default SubscribeCard;
