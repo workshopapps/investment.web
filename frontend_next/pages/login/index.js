@@ -188,8 +188,6 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
     return (
       <div className="flex flex-col items-center justify-center w-full h-full pb-5 md:flex-col md:bg-desk-signup md:justify-center md:gap-4">
-        <ToastContainer />
-
         <div className="w-full p-5 md:flex md:flex-col md:justify-center md:items-center md:w-520 md:bg-white md:rounded-lg md:px-8">
           <div className="flex flex-col text-center px-10 md:w-full md:px-1 md:items-center">
             <h1 className="font-HauoraBold text-xl mb-5 md:text-2xl">

@@ -14,7 +14,7 @@ export default function Notifications() {
   const getSettingsNotifications = () => {
     if (!accessToken) return;
     apiService(accessToken)
-      .get(`/user/notification_settings/`)
+      .get(`/user/notification_settings`)
       .then((res) => {
         setNotificationSettings(res.data);
       })
