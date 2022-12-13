@@ -74,10 +74,10 @@ export const Section = () => {
           {/* <div className="w-full gap-2 mt-10 md:mt-5 md:flex justify-center items-center"> */}
             <div
               id="WhyChooseUs"
-              className="md:flex w-full md:w-[1240px] md:py-10"
+              className="md:flex w-full mt-8 md:w-[1240px] md:py-10"
             >
               <div className="hidden md:block md:w-[564px]">
-                <img src={WhyChooseUs.src} className="mt-10 md:w-[564px]" />
+                <img src={WhyChooseUs.src} className="mt-5 md:w-[564px]" />
               </div>
               <div className="w-full md:w-[250px]">
                 <div className="w-full md:w-[250px] my-2">
@@ -108,7 +108,7 @@ export const Section = () => {
                   </p>
                 </div>
                 <div className="md:hidden md:w-[564px]">
-                <img src={WhyChooseUs.src} className="mt-10 md:w-[564px]" />
+                <img src={WhyChooseUs.src} className="mt-6 md:w-[564px]" />
               </div>
               </div>
             </div>
