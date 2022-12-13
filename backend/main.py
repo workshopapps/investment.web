@@ -69,10 +69,12 @@ async def get_root():
         "message": "YieldVest API v1",
     }
 
+
 @app.get("/sentry-debug")
 async def trigger_error():
     division_by_zero = 1 / 0
     return {"message": "Error"}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", port=int(os.getenv('BACKEND_PORT')), reload=True)
+# DO NOT REMOVE THIS COMMENT, RUN THE APP VIA THE TERMINAL
+# if __name__ == "__main__":
+#     uvicorn.run("main:app", port=int(os.getenv('BACKEND_PORT')), reload=True)
