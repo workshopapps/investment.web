@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 const authStructure = {
+  baseApiUrl: "",
   isLoggedIn: false,
   accessToken: null,
   user: {

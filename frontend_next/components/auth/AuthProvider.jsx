@@ -5,6 +5,9 @@ import AuthContext from "./AuthContext";
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
+  const [baseApiUrl, setBaseApiUrl] = useState(
+    "https://api.yieldvest.hng.tech"
+  );
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -24,6 +27,7 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        baseApiUrl: baseApiUrl,
         isLoggedIn: isLoggedIn,
         accessToken: accessToken,
         setAccessToken: setAccessToken,

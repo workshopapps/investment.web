@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import AuthContext from "../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
@@ -101,9 +101,10 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
       const config = {
         headers: {
-          accept: "application / json",
+          accept: "application/json",
           "content-type": "application/x-www-form-urlencoded",
         },
+        validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500,
       };
 
       axios
@@ -128,15 +129,16 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
             setInterval(() => {
               setTimeout(true);
             }, 1500);
+          } else if (response.status === 401) {
+            toast.error(response.data.detail);
           } else {
-            toast.error("login failed");
+            toast.error("Login failed");
           }
-          console.log(response);
         })
         .catch((err) => {
           setIsLoading(false);
           console.log(err);
-          toast.error("Invalid username or password");
+          toast.error("Login failed");
         });
     };
 
