@@ -14,17 +14,17 @@ import { subscriptionData } from "../../store/subscriptionData/subData";
 import { useRouter } from "next/router";
 
 export default function SubPlan() {
-  const router = useRouter()
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
   const [data, setData] = React.useState({
     name: "",
     target: "",
-    features: []
-  })
+    features: [],
+  });
 
   const redirectToSubscription = () => {
-    window.location = `https://yieldvest.hng.tech/subscription`
-  }
+    router.push("/subscription");
+  };
 
   const apiService = authHooks.useApiService();
   const { accessToken, subscription } = React.useContext(AuthContext);
@@ -51,27 +51,26 @@ export default function SubPlan() {
   };
 
   const fetchData = useCallback(() => {
-    console.log(subscription, "SUB")
     if (subscription.type && subscription.type.startsWith("prem")) {
       setData({
         name: "Premium",
-        target: subscriptionData['Premium']['target'],
-        features: [...subscriptionData['Premium']['features']]
-      })
+        target: subscriptionData["Premium"]["target"],
+        features: [...subscriptionData["Premium"]["features"]],
+      });
     } else if (subscription.type && subscription.type.startsWith("pro")) {
       setData({
         name: "Pro",
-        target: subscriptionData['Pro']['target'],
-        features: [...subscriptionData['Pro']['features']]
-      })
+        target: subscriptionData["Pro"]["target"],
+        features: [...subscriptionData["Pro"]["features"]],
+      });
     } else {
       setData({
         name: "Basic",
-        target: subscriptionData['Basic']['target'],
-        features: [...subscriptionData['Basic']['features']]
-      })
+        target: subscriptionData["Basic"]["target"],
+        features: [...subscriptionData["Basic"]["features"]],
+      });
     }
-  }, [data, subscriptionData]);
+  }, [subscription]);
 
   const subTypeButtons = () => {
     if (data.name === "Premium") {
@@ -98,7 +97,7 @@ export default function SubPlan() {
             "Manage Subscription"
           )}
         </button>
-      )
+      );
     } else if (data.name === "Pro") {
       return (
         <React.Fragment>
@@ -147,7 +146,7 @@ export default function SubPlan() {
             )}
           </button>
         </React.Fragment>
-      )
+      );
     } else {
       return (
         <button
@@ -172,12 +171,12 @@ export default function SubPlan() {
             "Upgrade Plan"
           )}
         </button>
-      )
+      );
     }
-  }
+  };
 
   React.useEffect(() => {
-    fetchData()
+    fetchData();
   }, [fetchData]);
 
   if (!subscription) {
@@ -211,7 +210,6 @@ export default function SubPlan() {
           <h1 className="text-4xl">Your Plan </h1>
         </div>
         <div className="flex flex-col w-full h-full mt-6">
-
           <div className="bg-primary102 text-white rounded-lg p-6 hover:shadow-md">
             <div className="flex flex-col justify-left gap-4 border-b-2 border-white">
               <h1 className="text-4xl">{data.name}</h1>
@@ -219,7 +217,10 @@ export default function SubPlan() {
             </div>
             <div className="mt-6 grid grid-rows-1 md:grid-cols-2">
               {data.features.map((element, index) => (
-                <li key={index} className="text-md flex flex-row items-left py-2">
+                <li
+                  key={index}
+                  className="text-md flex flex-row items-left py-2"
+                >
                   <FaCheckCircle fill="white" className="mt-1" />
                   <p className="pl-3">{element}</p>
                 </li>
@@ -228,7 +229,10 @@ export default function SubPlan() {
           </div>
 
           <div>
-            <div className="flex flex-row justify-end mt-3" style={{ textAlign: "right" }}>
+            <div
+              className="flex flex-row justify-end mt-3"
+              style={{ textAlign: "right" }}
+            >
               {subTypeButtons()}
             </div>
           </div>

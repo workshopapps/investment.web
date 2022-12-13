@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import contactInsta from "../../assets/contact/contactInsta.svg";
 import contactLinkedIn from "../../assets/contact/contactLinkedIn.svg";
@@ -51,12 +52,14 @@ const contact = () => {
                 <img
                   src={contactInsta.src}
                   className="text-3xl w-[20px] md:w-[40px]"
+                  alt="Instagram"
                 />
               </a>
               <a href="#">
                 <img
                   src={contactLinkedIn.src}
                   className="mx-4 text-3xl w-[20px] md:w-[40px]"
+                  alt="Linkedin"
                 />
               </a>
               <a href="https://twitter.com/mechteamplug?t=Axl-sd4ytSaCoV8bYlj-SA&s=08">
@@ -64,6 +67,7 @@ const contact = () => {
                 <img
                   src={contactTwitter.src}
                   className="text-3xl w-[20px] md:w-[40px] pt-1"
+                  alt="Twitter"
                 />
               </a>
             </aside>

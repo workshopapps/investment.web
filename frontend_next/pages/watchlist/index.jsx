@@ -2,7 +2,7 @@ import React from "react";
 import WatchHead from "../../components/watchlist/WatchHead";
 import WatchTable from "../../components/watchlist/WatchTable";
 import Layout from "../../components/Layout";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Head from "next/head";
 
 const Watchlist = () => {
@@ -11,7 +11,7 @@ const Watchlist = () => {
   };
 
   const onFailure = () => {
-    toast.error("Something went wrong");
+    toast.error();
   };
 
   return (
@@ -20,7 +20,6 @@ const Watchlist = () => {
         <title>Yieldvest - Watchlist</title>
       </Head>
 
-      <ToastContainer />
       <div className="w-full flex justify-center items-center px-[16px] py-[56px] bg-[#F5F5F5]">
         <div className="max-w-[1240px] w-full">
           {/* Watch list */}

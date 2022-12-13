@@ -9,11 +9,12 @@ import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import SuccessModal from "../../components/Password/ForgotPwd/SuccessModal";
 
 const Signup = ({ GOOGLE_CLIENT_ID }) => {
-  const Inner = () => {
-    const baseUrl = "https://api.yieldvest.hng.tech/auth/signup";
+  const [showModal, setShowModal] = useState(false);
 
+  const Inner = () => {
     const navigate = useRouter().push;
     const [passwordType, setPasswordType] = useState("password");
     const [signupForm, setSignUpForm] = useState({
@@ -28,7 +29,8 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
     const [timeOutGoogle, setTimeoutGoogle] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
+    const { setAccessToken, setIsLoggedIn, baseApiUrl } =
+      useContext(AuthContext);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -53,7 +55,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
       setIsLoading(true);
 
       axios
-        .post(baseUrl, {
+        .post(`${baseApiUrl}/auth/signup`, {
           email: signupForm.email,
           name: signupForm.name,
           password: signupForm.password,
@@ -62,6 +64,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
           setIsLoading(false);
 
           if (response.status === 200) {
+            setShowModal(true);
             toast.success("Signed up successfully");
             setInterval(() => {
               setTimeout(true);
@@ -90,9 +93,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
       setGoogleUserToken(tokenResponse);
 
       axios
-        .get(
-          `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-        )
+        .get(`${baseApiUrl}/auth/google_auth?token=${tokenResponse.credential}`)
         .then((res) => {
           setIsLoading(false);
 
@@ -172,8 +173,6 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
 
     return (
       <div className="mb-12 md:overflow-hidden h-full md:mb-0 md:bg-desk-signup md:flex md:flex-col md:justify-center md:items-center md:gap-4 md:pb-12">
-        <ToastContainer />
-
         <div className="flex flex-col justify-center items-center md:flex-row-reverse md:items-start md:bg-white md:w-520 md:rounded-md md:pb-8">
           <div className="w-5/6 mt-8 flex flex-col gap-3 md:gap-2 lg:px-5 lg:gap-3 lg:w-full">
             <h1 className="font-HauoraBold text-xl text-center tracking-wide">
@@ -320,13 +319,27 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
 
   return (
     <Layout showFooter={false}>
-      <Head>
-        <title>Yieldvest - My Account</title>
-      </Head>
+      <div className="h-full relative sm:static ">
+        <Head>
+          <title>Yieldvest - My Account</title>
+        </Head>
 
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <Inner />
-      </GoogleOAuthProvider>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          <Inner />
+        </GoogleOAuthProvider>
+        {showModal && (
+          <SuccessModal
+            title={"Check your Email  for account verification"}
+            message={
+              "A link  has been sent to your email address to verify your account"
+            }
+            status={"success"}
+            close={() => {
+              setShowModal(false);
+            }}
+          />
+        )}
+      </div>
     </Layout>
   );
 };

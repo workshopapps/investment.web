@@ -18,7 +18,6 @@ import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
 
 const Index = () => {
-  const baseUrl = "https://api.yieldvest.hng.tech";
   const [stocks, setStocks] = useState(null);
   const [marketCap, setMarketCap] = useState("all");
   const [sector, setSector] = useState("all");
@@ -29,7 +28,15 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
+  const {
+    isLoggedIn,
+    accessToken,
+    subscription,
+    baseApiUrl,
+    lowMarketCapCategoryId,
+    midMarketCapCategoryId,
+    highMarketCapCategoryId,
+  } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
@@ -69,7 +76,7 @@ const Index = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/company/sectors`)
+      .get(`${baseApiUrl}/company/sectors`)
       .then((res) => {
         setSectors(res.data);
         loadAllIndustries();
@@ -89,10 +96,11 @@ const Index = () => {
   }, [sector]);
 
   useEffect(() => {
-    if (marketCap === "low_market_cap_category") {
+    if (marketCap === lowMarketCapCategoryId) {
       if (subscription && !subscription.canViewSmallCaps)
         setShowNotSubscribedModal(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketCap, subscription]);
 
   useEffect(() => {
@@ -172,6 +180,10 @@ const Index = () => {
     toast.error("Already added to Watchlist");
   };
 
+  const onInform = () => {
+    toast.info("Item already on your watchlist");
+  };
+
   const navigate = useRouter().push;
 
   return (
@@ -188,8 +200,6 @@ const Index = () => {
         isOpen={showNotSubscribedModal}
         onClose={() => setShowNotSubscribedModal(false)}
       />
-
-      <ToastContainer />
 
       <section className="bg-hero-desktop bg-cover bg-center relative">
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
@@ -223,9 +233,7 @@ const Index = () => {
 
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
-          <p
-            className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
-          >
+          <p className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]">
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
               <span
@@ -258,9 +266,9 @@ const Index = () => {
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
                   <option value="all">All Market Caps</option>
-                  <option value="high_market_cap_category">Large Cap </option>
-                  <option value="mid_market_cap_category">Mid Cap </option>
-                  <option value="low_market_cap_category">Small Cap </option>
+                  <option value={highMarketCapCategoryId}>Large Cap </option>
+                  <option value={midMarketCapCategoryId}>Mid Cap </option>
+                  <option value={lowMarketCapCategoryId}>Small Cap </option>
                 </select>
                 <select
                   name="sector"
@@ -345,6 +353,7 @@ const Index = () => {
                     link={`/company/${item.company_id}`}
                     onSuccess={onSuccess}
                     onFailure={onFailure}
+                    onInform={onInform}
                   />
                 ))}
               </div>

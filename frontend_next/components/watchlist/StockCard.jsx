@@ -1,13 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React, { useContext } from "react";
-import { FiEye } from "react-icons/fi";
-// import WatchListContext from "../../store/watchList/WatchlistContext";
+import { FiTrash, FiEye } from "react-icons/fi";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
 
 const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
-  // const { deleteFromWatchList } = useContext(WatchListContext);
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
   const { name, profile_image, sector, stock_price, market_cap, company_id } = stock;
@@ -36,7 +34,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
     <div className="max-w-[396px] w-full rounded-[8px] p-[28px] bg-white border border-white transition duration-500 hover:border-[#1BD47B]">
       <div>
         <div className="flex justify-start items-start mb-[24px]">
-          <div className="flex h-5 items-center mr-5">
+          {/* <div className="flex h-5 items-center mr-5">
             <input
               id="comments"
               aria-describedby="comments-description"
@@ -44,7 +42,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
               type="checkbox"
               className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             />
-          </div>
+          </div> */}
           <div className="w-full flex justify-start items-start uppercase gap-[10px]">
             <div className="stock-logo h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px] mr-4">
               <img src={profile_image} alt="" />
@@ -69,9 +67,10 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
               }, 1000);
             }}
           >
+            <FiTrash />
           </div>
         </div>
-        <div className="flex justify-end items-center">
+        <div className="flex items-center">
           <div className="mb-[28px] max-w-[calc(100%_-_30px)] w-full">
             <div className="mb-[24px] border-b-[2px]">
               <h3 className="mb-[24px] text-[16px] font-[400] text-[#B0B2B7] flex justify-start items-center">

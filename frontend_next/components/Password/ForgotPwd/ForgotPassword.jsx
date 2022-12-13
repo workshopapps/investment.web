@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Layout from "../../Layout";
 import ResetModal from "./SuccessModal";
 import axios from "axios";
+import AuthContext from "../../auth/AuthContext";
 
 const ForgotPassword = () => {
   const [showModal, setShowModal] = useState(false);
   const [status, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [touched, setTouched] = useState(false);
+  const { baseApiUrl } = React.useContext(AuthContext);
 
   const formHandler = async (e) => {
     e.preventDefault();
@@ -16,7 +18,7 @@ const ForgotPassword = () => {
     try {
       response = await axios({
         method: "post",
-        url: `https://api.yieldvest.hng.tech/auth/init_password_reset`,
+        url: `${baseApiUrl}/auth/init_password_reset`,
         data: {
           email,
         },

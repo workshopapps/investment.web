@@ -1,12 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import img0 from "../../assets/about/vline.png";
-import img1 from "../../assets/about/line.png";
-import img2 from "../../assets/about/desk-frame1.png";
-import img3 from "../../assets/about/tick-circle.png";
-import img4 from "../../assets/about/mobile.svg";
-import whoWeAreImg from "../../assets/about/whoWeAreImg.svg";
-import whatWeDo from "../../assets/about/WhatWeDo.svg";
+import whoWeAreImg from "../../assets/about/whoweAreImg.svg";
+import whatWeDo from "../../assets/about/whatWeDo.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 import OurTeam from "./OurTeam";
 
@@ -23,7 +18,11 @@ export const Section = () => {
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
                 Who we are
               </h2>
-              <img src={whoWeAreImg.src} className="w-[560px]" />  
+              <img
+                src={whoWeAreImg.src}
+                alt="Illustration"
+                className="w-[560px]"
+              />
             </div>
             <div className="md:w-1/2">
               <div>
@@ -67,7 +66,11 @@ export const Section = () => {
               </p>
             </div>
             <div className="flex flex-col-reverse my-4 md:w-[534px] md:flex-col">
-              <img src={whatWeDo.src} className="w-[424px] md:w-[415px]" />
+              <img
+                src={whatWeDo.src}
+                alt="Illustration"
+                className="w-[424px] md:w-[415px]"
+              />
             </div>
           </div>
 
@@ -110,8 +113,24 @@ export const Section = () => {
                 <div className="md:hidden md:w-[564px]">
                 <img src={WhyChooseUs.src} className="mt-6 md:w-[564px]" />
               </div>
+              <div className="w-full md:ml-24 md:mt-2">
+                <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
+                  Company Profile
+                </h3>
+                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                  Company overview, charts, and key metrics are provided to help
+                  validate your decision.
+                </p>
+              </div>
+              <div className="md:hidden md:w-[564px]">
+                <img
+                  src={WhyChooseUs.src}
+                  alt="Illustration"
+                  className="mt-10 md:w-[564px]"
+                />
               </div>
             </div>
+          </div>
           {/* </div> */}
           <OurTeam />
         </div>

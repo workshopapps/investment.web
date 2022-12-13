@@ -96,7 +96,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
           <Link href="/">
-            <div className="flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
+            <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
               Stock <span className="inline-flex mx-2 ">&gt; </span>Company
               Profile
             </div>
@@ -187,15 +187,14 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
 };
 
 export async function getServerSideProps({ query }) {
+  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
   const companyId = query.id;
   let company = null;
   let isSmallCap = false;
 
   if (companyId) {
     try {
-      const res = await axios.get(
-        `https://api.yieldvest.hng.tech/company/${companyId}`
-      );
+      const res = await axios.get(`${baseApiUrl}/company/${companyId}`);
       if (res.status === 200) {
         company = res.data;
       }

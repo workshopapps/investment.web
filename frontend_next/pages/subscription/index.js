@@ -14,7 +14,7 @@ const Subscription = () => {
   const [subType, setSubType] = useState(1);
   const { isLoggedIn, subscription } = React.useContext(AuthContext);
 
-  // handles chnaing from monthly subscription to yearly Subscription
+  // handles changing from monthly subscription to yearly Subscription
   const handleSubType = (theSub) => {
     if (theSub === "monthly") {
       setSubType(1);
@@ -25,10 +25,8 @@ const Subscription = () => {
     }
   };
 
-  const hasActiveSubscription = () => {
-    console.log(isLoggedIn);
-    console.log(subscription);
-    return isLoggedIn && subscription && subscription.isActive;
+  const isCurrentPlan = (plan) => {
+    return subscription && subscription.type === plan;
   };
 
   return (
@@ -93,7 +91,7 @@ const Subscription = () => {
               features={subscriptionData["Basic"]["features"]}
               buttonText={isLoggedIn ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={isLoggedIn ? "/" : "/signup"}
+              destination={isLoggedIn ? "/" : "/login"}
             />
 
             <SubscribeCard
@@ -103,9 +101,11 @@ const Subscription = () => {
               type="month"
               target={subscriptionData["Pro"]["target"]}
               features={subscriptionData["Pro"]["features"]}
-              buttonText="Subscribe"
+              buttonText={
+                isCurrentPlan("pro_monthly") ? "Current" : "Subscribe"
+              }
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -115,9 +115,11 @@ const Subscription = () => {
               type="month"
               target={subscriptionData["Premium"]["target"]}
               features={subscriptionData["Premium"]["features"]}
-              buttonText="Subscribe"
+              buttonText={
+                isCurrentPlan("premium_monthly") ? "Current" : "Subscribe"
+              }
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination="/payment"
             />
           </div>
         </div>
@@ -130,10 +132,10 @@ const Subscription = () => {
               discount="0.00"
               type="year"
               target={subscriptionData["Basic"]["target"]}
-              features={subscriptionData["Basic"]['features']}
-              buttonText={hasActiveSubscription() ? "Continue" : "Get Started"}
+              features={subscriptionData["Basic"]["features"]}
+              buttonText={isLoggedIn ? "Continue" : "Get Started"}
               content="For Basic Users new to investing. Get access to our basic features and invest with more precision"
-              destination={hasActiveSubscription() ? "/" : "/signup"}
+              destination={isLoggedIn ? "/" : "/login"}
             />
 
             <SubscribeCard
@@ -142,10 +144,10 @@ const Subscription = () => {
               discount="300"
               type="year"
               target={subscriptionData["Pro"]["target"]}
-              features={subscriptionData["Pro"]['features']}
-              buttonText="Subscribe"
+              features={subscriptionData["Pro"]["features"]}
+              buttonText={isCurrentPlan("pro_yearly") ? "Current" : "Subscribe"}
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination="/payment"
             />
 
             <SubscribeCard
@@ -154,10 +156,12 @@ const Subscription = () => {
               discount="600"
               type="year"
               target={subscriptionData["Premium"]["target"]}
-              features={subscriptionData["Premium"]['features']}
-              buttonText="Subscribe"
+              features={subscriptionData["Premium"]["features"]}
+              buttonText={
+                isCurrentPlan("premium_yearly") ? "Current" : "Subscribe"
+              }
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
-              destination={hasActiveSubscription() ? "/settings" : "/payment"}
+              destination="/payment"
             />
           </div>
         </div>
