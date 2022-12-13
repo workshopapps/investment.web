@@ -2,7 +2,7 @@ import React from "react";
 
 const Pagination = ({ currentPage, totalPages, handlePaginationClick }) => {
   return (
-    <div className="flex justify-center mt-10 gap-3 ">
+    <div className="flex justify-center mt-9 gap-3 ">
       <button
         className="cursor-pointer font-normal text-base text-gray-900"
         onClick={() => handlePaginationClick("prev")}
