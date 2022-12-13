@@ -117,7 +117,7 @@ const teamData = [
     id: 20,
     name: "Chioma Ubaezuonu",
     role: "Frontend",
-    img: "./aboutImages/chioma.png",
+    img: "./aboutImages/chioma2.jpeg",
   },
   {
     id: 21,
