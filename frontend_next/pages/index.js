@@ -16,6 +16,7 @@ import Link from "next/link";
 import Head from "next/head";
 import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
+import Pagination from "../components/pagination/Pagination";
 
 const Index = () => {
   const baseUrl = "https://api.yieldvest.hng.tech";
@@ -27,6 +28,16 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePagintionClick = (direction) => {
+    if (direction === "prev") {
+      setCurrentPage(currentpage - 1);
+    } else {
+      setCurrentPage(currentpage + 1);
+    }
+  };
+
   const [popup, setPopup] = useState(false);
 
   const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
@@ -174,7 +185,7 @@ const Index = () => {
 
   const onInform = () => {
     toast.info("Item already on your watchlist");
-  }
+  };
 
   const navigate = useRouter().push;
 
@@ -227,9 +238,7 @@ const Index = () => {
 
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
-          <p
-            className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
-          >
+          <p className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]">
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
               <span
@@ -355,6 +364,11 @@ const Index = () => {
               </div>
             )}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={1}
+            handlePaginationClick={handlePagintionClick}
+          />
         </div>
       </section>
 
