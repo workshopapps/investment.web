@@ -147,7 +147,6 @@ async def authentication(token: str):
         db.commit()
 
         await resolve_password_reset_request(email, db)
-        db.close()
         return generate_token(db_user.id)
 
     except ValueError:

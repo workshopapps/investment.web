@@ -72,22 +72,34 @@ export default function Index() {
               <span className="flex text-[#0A0B0D] font-normal text-xl md:text-3xl ">
                 Settings
               </span>
-              <Link
-                href="/"
+              <div
+                onClick={() => {
+                  logout();
+                  navigate.push("/");
+                }}
+                style={{
+                  cursor: "pointer",
+                }}
                 className="flex md:hidden flex-row items-center  h-full  text-base font-semibold"
               >
-                <img src={logouticon.src} alt="settingsicon" className="w-5 h-5" />
+                <img
+                  src={logouticon.src}
+                  alt="settingsicon"
+                  className="w-5 h-5"
+                />
                 <h1 className="font-normal text-base md:flex ml-4 text-[#E84E4E]">
                   Logout
                 </h1>
-              </Link>
+              </div>
             </div>
             <div className="md:hidden">
               <div className="flex w-auto justify-center items-center mb-[38px]">
                 <SidebarMobile />
               </div>
               <div className="mb-[24px] text-center">
-                <h2 className="text-[20px] font-[400] leading-[28px] text-[#0A0B0D]">Profile</h2>
+                <h2 className="text-[20px] font-[400] leading-[28px] text-[#0A0B0D]">
+                  Profile
+                </h2>
               </div>
               <div className=" flex justify-center items-center">
                 <div className=" justify-between items-center gap-4 nav-btns flex ">
@@ -95,13 +107,13 @@ export default function Index() {
                     href="/settings"
                     className={`rounded-full text-white bg-gray-400 flex justify-center items-center`}
                     style={{
-                      width: '100px',
-                      height: '100px',
+                      width: "100px",
+                      height: "100px",
                     }}
                   >
                     <h1
                       className={`text-white uppercase font-[700]`}
-                      style={{ fontSize: '32px' }}
+                      style={{ fontSize: "32px" }}
                     >
                       {user.name.slice(0, 2)}
                     </h1>
