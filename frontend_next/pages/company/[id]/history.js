@@ -26,7 +26,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
   const apiService = authHooks.useApiService();
   const { isLoggedIn, accessToken } = useContext(AuthContext);
   const [showShare, setShowShare] = React.useState(false);
-  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`
+  const currentStock = `https://yieldvest.hng.tech/company/${companyId}`;
 
   const getRankingHistory = () => {
     setIsLoading(true);
@@ -80,9 +80,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
         <div className="flex flex-col md:flex-col gap-5 ">
           <div className="w-full flex flex-row justify-between">
             <div>
-              <h3
-                className="text-lg text-primaryGray pt-10 md:text-2xl"
-              >
+              <h3 className="text-lg text-primaryGray pt-10 md:text-2xl">
                 Ranking History
               </h3>
               <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
@@ -99,7 +97,10 @@ const History = ({ company, companyId, rankings: rnks }) => {
                   alt="open"
                 />
               </div>
-              <button className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md" onClick={() => setShowShare(true)}>
+              <button
+                className="text-left text-xs md:text-lg bg-[#FFFFFF] rounded-xl text-[#5C5A5A] px-4 py-3 border flex flex-row font-regular justify-between gap-0 md:gap-10 hover:shadow-md"
+                onClick={() => setShowShare(true)}
+              >
                 <span className="hidden md:block">Share This Stock </span>
                 <img
                   className="m-auto w-5 md:w-auto h-5 md:h-auto bg-none"
@@ -115,22 +116,25 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
         <div className="mt-10 flex flex-row gap-2">
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToCategory ? "bg-primary102" : "bg-white"
-              } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
+              restrictToCategory ? "bg-primary102" : "bg-white"
+            } w-[180px]`}
             onClick={() => setRestrictToCategory(!restrictToCategory)}
           >
             Market Cap
           </button>
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToSector ? "bg-primary102" : "bg-white"
-              } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
+              restrictToSector ? "bg-primary102" : "bg-white"
+            } w-[180px]`}
             onClick={() => setRestrictToSector(!restrictToSector)}
           >
             Sector
           </button>
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToIndustry ? "bg-primary102" : "bg-white"
-              } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
+              restrictToIndustry ? "bg-primary102" : "bg-white"
+            } w-[180px]`}
             onClick={() => setRestrictToIndustry(!restrictToIndustry)}
           >
             Industry
@@ -197,21 +201,20 @@ const History = ({ company, companyId, rankings: rnks }) => {
 };
 
 export async function getServerSideProps({ query }) {
+  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
   const companyId = query.id;
   let company = {};
   let rankings = [];
 
   if (companyId) {
     try {
-      let res = await axios.get(
-        `https://api.yieldvest.hng.tech/company/${companyId}`
-      );
+      let res = await axios.get(`${baseApiUrl}/company/${companyId}`);
       if (res.status === 200) {
         company = res.data;
       }
 
       res = await axios.get(
-        `https://api.yieldvest.hng.tech/company/${companyId}/ranking/history`
+        `${baseApiUrl}/company/${companyId}/ranking/history`
       );
       if (res.status === 200) {
         rankings = res.data;

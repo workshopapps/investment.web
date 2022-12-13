@@ -2,9 +2,10 @@ import React from "react";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
+import AuthContext from "../auth/AuthContext";
 
 const ContactForm = () => {
-  const url = "https://api.yieldvest.hng.tech/user/contact_us";
+  const { baseApiUrl } = React.useContext(AuthContext);
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -27,7 +28,7 @@ const ContactForm = () => {
     setIsLoading(true);
     axios
       .post(
-        url,
+        `${baseApiUrl}/user/contact_us`,
         {
           name: formData.name,
           email: formData.email,

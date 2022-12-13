@@ -12,8 +12,6 @@ import Head from "next/head";
 
 const Login = ({ GOOGLE_CLIENT_ID }) => {
   const Inner = () => {
-    const baseUrl = "https://api.yieldvest.hng.tech/auth/login";
-
     const navigate = useRouter();
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setisSubmit] = useState(false);
@@ -21,7 +19,8 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
     const [redirected, setRedirected] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
+    const { setAccessToken, setIsLoggedIn, baseApiUrl } =
+      useContext(AuthContext);
 
     //form
     const [loginForm, setLoginForm] = useState({
@@ -68,9 +67,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
       setIsLoading(true);
 
       axios
-        .get(
-          `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-        )
+        .get(`${baseApiUrl}/auth/google_auth?token=${tokenResponse.credential}`)
         .then((res) => {
           if (res.status === 200) {
             toast.success("Login successful");
@@ -109,7 +106,7 @@ const Login = ({ GOOGLE_CLIENT_ID }) => {
 
       axios
         .post(
-          baseUrl,
+          `${baseApiUrl}/auth/login`,
           {
             grant_type: "",
             username: loginForm.email,

@@ -187,15 +187,14 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
 };
 
 export async function getServerSideProps({ query }) {
+  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
   const companyId = query.id;
   let company = null;
   let isSmallCap = false;
 
   if (companyId) {
     try {
-      const res = await axios.get(
-        `https://api.yieldvest.hng.tech/company/${companyId}`
-      );
+      const res = await axios.get(`${baseApiUrl}/company/${companyId}`);
       if (res.status === 200) {
         company = res.data;
       }
@@ -204,7 +203,7 @@ export async function getServerSideProps({ query }) {
         if (err.response.status === 401) {
           isSmallCap = true;
         }
-      } catch (e) { }
+      } catch (e) {}
 
       console.log("Fetch failed for company: " + companyId);
     }

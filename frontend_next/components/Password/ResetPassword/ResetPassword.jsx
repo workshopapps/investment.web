@@ -3,6 +3,7 @@ import Layout from "../../Layout";
 import ResetModal from "./SuccessModal";
 import axios from "axios";
 import { useRouter } from "next/router";
+import AuthContext from "../../auth/AuthContext";
 
 const ResetPassword = () => {
   const [showModal, setShowModal] = useState(false);
@@ -10,6 +11,7 @@ const ResetPassword = () => {
   const [newPwd, setNewPwd] = useState("");
   const [oldPwd, setOldPwd] = useState("");
   const [pwdTouched, setPwdTouched] = useState(false);
+  const { baseApiUrl } = React.useContext(AuthContext);
 
   const { code } = useRouter().query;
 
@@ -23,7 +25,7 @@ const ResetPassword = () => {
     });
     try {
       const response = await axios.post(
-        "https://api.yieldvest.hng.tech/auth/finalize_password_reset/",
+        `${baseApiUrl}/auth/finalize_password_reset`,
         body,
         {
           headers: {
@@ -41,6 +43,7 @@ const ResetPassword = () => {
       setStatus("error");
     }
   };
+
   return (
     <div className="relative">
       <Layout showFooter={false}>

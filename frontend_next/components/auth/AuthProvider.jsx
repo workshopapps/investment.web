@@ -5,9 +5,7 @@ import AuthContext from "./AuthContext";
 const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
-  const [baseApiUrl, setBaseApiUrl] = useState(
-    "https://api.yieldvest.hng.tech"
-  );
+  const [baseApiUrl, setBaseApiUrl] = useState(process.env.NEXT_PUBLIC_API_URL);
   const [user, setUser] = useState({
     email: "",
     name: "",

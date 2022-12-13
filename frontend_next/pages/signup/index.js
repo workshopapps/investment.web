@@ -15,8 +15,6 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
   const [showModal, setShowModal] = useState(false);
 
   const Inner = () => {
-    const baseUrl = "https://api.yieldvest.hng.tech/auth/signup";
-
     const navigate = useRouter().push;
     const [passwordType, setPasswordType] = useState("password");
     const [signupForm, setSignUpForm] = useState({
@@ -31,7 +29,8 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
     const [timeOutGoogle, setTimeoutGoogle] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { setAccessToken, setIsLoggedIn } = useContext(AuthContext);
+    const { setAccessToken, setIsLoggedIn, baseApiUrl } =
+      useContext(AuthContext);
 
     //tracking form changes
     const handleChange = (event) => {
@@ -56,7 +55,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
       setIsLoading(true);
 
       axios
-        .post(baseUrl, {
+        .post(`${baseApiUrl}/auth/signup`, {
           email: signupForm.email,
           name: signupForm.name,
           password: signupForm.password,
@@ -94,9 +93,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
       setGoogleUserToken(tokenResponse);
 
       axios
-        .get(
-          `https://api.yieldvest.hng.tech/auth/google_auth?token=${tokenResponse.credential}`
-        )
+        .get(`${baseApiUrl}/auth/google_auth?token=${tokenResponse.credential}`)
         .then((res) => {
           setIsLoading(false);
 

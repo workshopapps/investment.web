@@ -18,7 +18,6 @@ import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
 
 const Index = () => {
-  const baseUrl = "https://api.yieldvest.hng.tech";
   const [stocks, setStocks] = useState(null);
   const [marketCap, setMarketCap] = useState("all");
   const [sector, setSector] = useState("all");
@@ -29,7 +28,8 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
+  const { isLoggedIn, accessToken, subscription, baseApiUrl } =
+    useContext(AuthContext);
   const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
@@ -69,7 +69,7 @@ const Index = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/company/sectors`)
+      .get(`${baseApiUrl}/company/sectors`)
       .then((res) => {
         setSectors(res.data);
         loadAllIndustries();
@@ -174,7 +174,7 @@ const Index = () => {
 
   const onInform = () => {
     toast.info("Item already on your watchlist");
-  }
+  };
 
   const navigate = useRouter().push;
 
@@ -227,9 +227,7 @@ const Index = () => {
 
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
-          <p
-            className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]"
-          >
+          <p className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]">
             Recommended Stocks to Invest in Today
             {lastUpdateDate != null && (
               <span
