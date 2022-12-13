@@ -71,7 +71,6 @@ const ContactForm = () => {
   };
   return (
     <div>
-      <ToastContainer />
       <form
         onSubmit={submit}
         action=""

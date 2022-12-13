@@ -28,8 +28,15 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [popup, setPopup] = useState(false);
 
-  const { isLoggedIn, accessToken, subscription, baseApiUrl } =
-    useContext(AuthContext);
+  const {
+    isLoggedIn,
+    accessToken,
+    subscription,
+    baseApiUrl,
+    lowMarketCapCategoryId,
+    midMarketCapCategoryId,
+    highMarketCapCategoryId,
+  } = useContext(AuthContext);
   const apiService = authHooks.useApiService();
 
   let timeoutId = useRef();
@@ -89,7 +96,7 @@ const Index = () => {
   }, [sector]);
 
   useEffect(() => {
-    if (marketCap === "low_market_cap_category") {
+    if (marketCap === lowMarketCapCategoryId) {
       if (subscription && !subscription.canViewSmallCaps)
         setShowNotSubscribedModal(true);
     }
@@ -193,8 +200,6 @@ const Index = () => {
         onClose={() => setShowNotSubscribedModal(false)}
       />
 
-      <ToastContainer />
-
       <section className="bg-hero-desktop bg-cover bg-center relative">
         <div className="px-[17px] text-white lg:px-[100px] pt-[7px] pb-[34px] md:py-[125px]">
           <div className="mb-[34px] md:mb-0 max-w-[321px] w-full sm:max-w-max">
@@ -260,9 +265,9 @@ const Index = () => {
                   className="py-2 px-2 md:py-3 md:px-4 border-[#00000020] border-2 w-full md:w-[236px] rounded"
                 >
                   <option value="all">All Market Caps</option>
-                  <option value="high_market_cap_category">Large Cap </option>
-                  <option value="mid_market_cap_category">Mid Cap </option>
-                  <option value="low_market_cap_category">Small Cap </option>
+                  <option value={highMarketCapCategoryId}>Large Cap </option>
+                  <option value={midMarketCapCategoryId}>Mid Cap </option>
+                  <option value={lowMarketCapCategoryId}>Small Cap </option>
                 </select>
                 <select
                   name="sector"

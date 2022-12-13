@@ -2,6 +2,9 @@ import { createContext } from "react";
 
 const authStructure = {
   baseApiUrl: "",
+  lowMarketCapCategoryId: "",
+  midMarketCapCategoryId: "",
+  highMarketCapCategoryId: "",
   isLoggedIn: false,
   accessToken: null,
   user: {

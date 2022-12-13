@@ -26,6 +26,12 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         baseApiUrl: baseApiUrl,
+        lowMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_LOW_MARKET_CAP_CATEGORY_ID,
+        midMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_MID_MARKET_CAP_CATEGORY_ID,
+        highMarketCapCategoryId:
+          process.env.NEXT_PUBLIC_HIGH_MARKET_CAP_CATEGORY_ID,
         isLoggedIn: isLoggedIn,
         accessToken: accessToken,
         setAccessToken: setAccessToken,

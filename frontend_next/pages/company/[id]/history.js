@@ -67,7 +67,6 @@ const History = ({ company, companyId, rankings: rnks }) => {
       </Head>
 
       {showShare && <Share close={setShowShare} currentStock={currentStock} />}
-      <ToastContainer />
 
       <div className="bg-white md:bg-[#F5F5F5] font-Hauora h-full px-[1em] md:px-[100px]">
         <Link href="/">
