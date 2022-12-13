@@ -26,6 +26,7 @@ const CapCard = ({
   sector,
   onSuccess,
   onFailure,
+  onInform
 }) => {
   const [fundamentalModal, setFundamentalModal] = useState(false);
   const [priceModal, setPriceModal] = useState(false);
@@ -66,12 +67,11 @@ const CapCard = ({
           onSuccess();
           setInWatchlist(true);
         } else {
-          onFailure();
+          onInform();
         }
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error);
         onFailure();
       });
   };

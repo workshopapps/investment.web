@@ -11,7 +11,7 @@ const Watchlist = () => {
   };
 
   const onFailure = () => {
-    toast.error("Something went wrong");
+    toast.error();
   };
 
   return (
