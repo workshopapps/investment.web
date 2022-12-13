@@ -353,7 +353,7 @@ def create_access_token(*, sub: str) -> str:
 def create_refresh_token(*, sub: str) -> str:
     return _create_token(
         token_type="refresh_token",
-        lifetime=timedelta(days=float(ACCESS_TOKEN_EXPIRE_DAYS * 7)),
+        lifetime=timedelta(days=float(ACCESS_TOKEN_EXPIRE_DAYS * 3)),
         sub=sub,
     )
 
