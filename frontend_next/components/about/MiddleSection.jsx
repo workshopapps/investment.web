@@ -80,7 +80,7 @@ export const Section = () => {
               className="md:flex w-full mt-8 md:w-[1240px] md:py-10"
             >
               <div className="hidden md:block md:w-[564px]">
-                <img src={WhyChooseUs.src} className="mt-5 md:w-[564px]" />
+                <img src={WhyChooseUs.src} alt="whyChooseUs-img" className="mt-5 md:w-[564px]" />
               </div>
               <div className="w-full md:w-[250px]">
                 <div className="w-full md:w-[250px] my-2">
@@ -111,7 +111,7 @@ export const Section = () => {
                   </p>
                 </div>
                 <div className="md:hidden md:w-[564px]">
-                <img src={WhyChooseUs.src} className="mt-6 md:w-[564px]" />
+                <img src={WhyChooseUs.src} alt="whyChooseUs-img" className="mt-6 md:w-[564px]" />
               </div>
               <div className="w-full md:ml-24 md:mt-2">
                 <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
