@@ -18,13 +18,13 @@ const Layout = ({
 
   const size = useWindowSize();
 
-  useEffect(() => {
-    scrollToTop();
-  }, []);
-  
+  // useEffect(() => {
+  //   scrollToTop();
+  // }, []);
+
   useEffect(() => {
     setOpenMobileMenu(false);
-    if(size >= 768) {
+    if (size >= 768) {
       setOpenMobileMenu(false);
     }
     return () => {
@@ -32,7 +32,7 @@ const Layout = ({
     };
   }, [pathName, size]);
 
-  const mobileMenu = <MobileMenu toggleMenu={setOpenMobileMenu} />
+  const mobileMenu = <MobileMenu toggleMenu={setOpenMobileMenu} />;
 
   return (
     <div className="flex flex-col h-screen relative">
@@ -84,13 +84,13 @@ function useWindowSize() {
         height: window.innerHeight,
       });
     }
-    
+
     // Add event listener
     window.addEventListener("resize", handleResize);
-     
+
     // Call handler right away so state gets updated with initial window size
     handleResize();
-    
+
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []); // Empty array ensures that effect is only run on mount

@@ -5,7 +5,7 @@ import axios from "axios";
 import CapCard from "../components/CapCard";
 import dateFormat from "dateformat";
 import NotSubscribedModal from "../components/subscription/NotSubscribedModal";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import AuthContext from "../components/auth/AuthContext";
 import authHooks from "../components/auth/AuthHooks";
 import { ThreeDots } from "react-loader-spinner";
@@ -16,6 +16,7 @@ import Link from "next/link";
 import Head from "next/head";
 import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
+import Pagination from "../components/pagination/Pagination";
 
 const Index = () => {
   const [stocks, setStocks] = useState(null);
@@ -26,6 +27,21 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const handlePaginationClick = (direction) => {
+    if (direction === "prev") {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    } else {
+      if (currentPage + 1 <= totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    }
+  };
+
   const [popup, setPopup] = useState(false);
 
   const {
@@ -106,11 +122,14 @@ const Index = () => {
   useEffect(() => {
     reloadRankedCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketCap, sector, industry, isLoggedIn]);
+  }, [marketCap, sector, industry, isLoggedIn, currentPage]);
 
   const reloadRankedCompanies = () => {
     setStocks(null);
-    const queries = [];
+    const queries = [
+      { key: "page", value: currentPage },
+      { key: "rows", value: 12 },
+    ];
 
     if (marketCap !== "all")
       queries.push({ key: "category", value: marketCap });
@@ -131,11 +150,14 @@ const Index = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          setStocks(res.data);
+          const data = res.data;
+          setStocks(data.records);
+          setCurrentPage(data.page);
+          setTotalPages(data.pages);
 
-          if (res.data) {
+          if (data.records) {
             setLastUpdateDate(
-              formatLastUpdateDate(res.data[0].current_ranking.updated_at)
+              formatLastUpdateDate(data.records[0].current_ranking.updated_at)
             );
           }
         }
@@ -338,27 +360,34 @@ const Index = () => {
 
             {stocks && stocks.length !== 0 && (
               <div className="lg:bg-white lg:border-2 lg:border-[#49dd95] lg:rounded-[15px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:p-10">
-                {stocks.map((item, index) => (
-                  <CapCard
-                    key={index}
-                    logo={item.profile_image}
-                    abbr={item.company_id}
-                    name={item.name}
-                    PERatio={item.dividend_yield}
-                    marketCap={item.market_cap}
-                    stockPrice={item.stock_price}
-                    rank={item.category}
-                    index={index}
-                    sector={item.industry}
-                    link={`/company/${item.company_id}`}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                    onInform={onInform}
-                  />
-                ))}
+                {stocks &&
+                  stocks.length !== 0 &&
+                  stocks.map((item, index) => (
+                    <CapCard
+                      key={index}
+                      logo={item.profile_image}
+                      abbr={item.company_id}
+                      name={item.name}
+                      PERatio={item.dividend_yield}
+                      marketCap={item.market_cap}
+                      stockPrice={item.stock_price}
+                      rank={item.category}
+                      index={index}
+                      sector={item.industry}
+                      link={`/company/${item.company_id}`}
+                      onSuccess={onSuccess}
+                      onFailure={onFailure}
+                      onInform={onInform}
+                    />
+                  ))}
               </div>
             )}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePaginationClick={handlePaginationClick}
+          />
         </div>
       </section>
 

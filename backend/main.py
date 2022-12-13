@@ -1,7 +1,6 @@
 import os
-import sentry_sdk
 
-import uvicorn
+import sentry_sdk
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,8 +9,8 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from api.database import database
 from api.database.database import engine
+from api.payment_gte import server
 from api.routes import company, auth, user, newsletter
-from api.payment_gte import session, server
 from api.scripts.ranking import run_process_scripts
 
 load_dotenv()
@@ -74,6 +73,7 @@ async def get_root():
 async def trigger_error():
     division_by_zero = 1 / 0
     return {"message": "Error"}
+
 
 # DO NOT REMOVE THIS COMMENT, RUN THE APP VIA THE TERMINAL
 # if __name__ == "__main__":
