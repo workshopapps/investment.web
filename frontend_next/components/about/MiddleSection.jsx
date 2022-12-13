@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import whoWeAreImg from "../../assets/about/whoWeAreImg.svg";
-import whatWeDo from "../../assets/about/WhatWeDo.svg";
+import whatWeDo from "../../assets/about/whatWeDo.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 import OurTeam from "./OurTeam";
 
