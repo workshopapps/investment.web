@@ -1,62 +1,43 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import img1 from "../../assets/about/team-1.png";
-import img2 from "../../assets/about/team-2.png";
-import img3 from "../../assets/about/team-3.png";
-import Divine from "../../assets/about/divine.png";
-import Imran from "../../assets/about/imran.png";
-import Ayobami from "../../assets/about/ayobami.png";
+import teamData from "./teamData";
 
-const OurTeam = () => {
+const OurTeam = (props) => {
   return (
     <div
       id="team"
       data-testid="the-team"
-      className="bg-[#fafaff] p-5 md:pl-[50px] md:pr-[50px] lg:pl-[100px] lg:pr-[100px]"
+      className="w-full md:w-full mt-8"
     >
-      <h1 className="font-normal md:font-semibold text-center mb-8 pt-0 md:pt-12 text-2xl md:text-4xl">
-        Meet Our Team
-      </h1>
-      <div className="flex flex-col md:flex-row justify-center gap-8 md:justify-between m-10 md:-20">
-        <div className="">
-          <img
-            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
-            src={Ayobami.src}
-            alt="team member"
-          />
-          <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-            <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-              Ayobami Isreal
-            </p>
-            <p className="text-xs">Product Designer</p>
-          </div>
+      <div>
+        <h1 className="font-normal md:font-normal  mx-auto text-center text-xl md:text-4xl">
+          Meet The Team
+        </h1>
+        <div className="flex gap-3 text-center md:text-xl text-xs font-normal w-full justify-center">
+          <p>All Teams</p>
+          <p>Management team</p>
+          <p>Design</p>
+          <p>Engineering</p>
+          <p>Marketing</p>
         </div>
-        <div className="">
-          <img
-            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
-            src={Divine.src}
-            alt="team member"
-          />
-          <div className="md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-            <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-              Divine Uzodinma
-            </p>
-            <p className="text-xs">Product manager</p>
+      </div>
+      <div className="grid grid-cols-2 mx-auto  md:w-[1219px] w-full py-6 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-[73px]">
+        {teamData.map((team) => (
+          <div className="mx-auto" key={team.id}>
+            <img
+              className="w-[184px] h-[184px] md:w-[250px]  md:h-[250px]  rounded-t-lg"
+              src={team.img}
+            />
+            <div className="bg-[#ECECEC] md:w-[250px] text-center p-2 rounded-b-lg">
+              <p className="font-semibold text-[11px] md:text-[#455A64]">
+                {team.name}
+              </p>
+              <p className="text-[9px] text-[#455A64] font-normal">
+                {team.role}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="">
-          <img
-            className="w-full md:w-[25vw] h-[30vh] md:h-[50vh] rounded-t-lg"
-            src={Imran.src}
-            alt="team member"
-          />
-          <div className=" md:bg-[#ECECEC] text-center p-4 rounded-b-lg bg-[#E8FBF2]">
-            <p className="font-semibold md:text-[#455A64] text-[#1BD47B]">
-              Imran Abdulmalik
-            </p>
-            <p className="text-xs">Tech Lead</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
