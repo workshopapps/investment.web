@@ -2,8 +2,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import Eye from "../assets/index/eye.svg";
-import Chart from "../assets/index/fundamentals-chart.svg";
-import Graph from "../assets/index/stock-price-graph.svg";
 import inactiveEye from "../assets/index/default-eye.svg";
 import Modal from "./Modal";
 import Tippy from "@tippyjs/react";
@@ -14,6 +12,7 @@ import { TailSpin } from "react-loader-spinner";
 import Link from "next/link";
 import MiniBarChartCard from "./Charts/MiniBarChart";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 const CapCard = ({
   logo,
@@ -26,7 +25,7 @@ const CapCard = ({
   sector,
   onSuccess,
   onFailure,
-  onInform
+  onInform,
 }) => {
   const [fundamentalModal, setFundamentalModal] = useState(false);
   const [priceModal, setPriceModal] = useState(false);
@@ -66,30 +65,33 @@ const CapCard = ({
         if (res.status === 200) {
           onSuccess();
           setInWatchlist(true);
+        } else if (res.status === 401) {
+          toast.info("Please login to use the watchlist feature!");
         } else {
-          onInform();
+          onFailure();
         }
       })
       .catch((error) => {
+        console.log(error);
         setIsLoading(false);
         onFailure();
       });
   };
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     apiService(accessToken)
-  //       .get(`/user/in_watchlist/${abbr}`)
-  //       .then((res) => {
-  //         if (res.status === 200) {
-  //           setInWatchlist(true);
-  //         } else {
-  //           setInWatchlist(false);
-  //         }
-  //       });
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [accessToken, isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      apiService(accessToken)
+        .get(`/user/in_watchlist/${abbr}`)
+        .then((res) => {
+          if (res.status === 200) {
+            setInWatchlist(true);
+          } else {
+            setInWatchlist(false);
+          }
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accessToken, isLoggedIn]);
 
   return (
     <div className="border-2 border-primaryGray border-opacity-30 hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
@@ -100,7 +102,11 @@ const CapCard = ({
         <div className="flex gap-5 mb-6 justify-between">
           <div className="flex gap-5">
             <div className=" h-6 lg:h-[50px] rounded-[50%] w-6 lg:w-[50px]">
-              <img src={logo} alt={abbr} className="rounded-[50%] justify-center" />
+              <img
+                src={logo}
+                alt={abbr}
+                className="rounded-[50%] justify-center"
+              />
             </div>
             <div className="">
               <p className="text-[#333946] font-normal text-lg">{abbr}</p>
