@@ -100,6 +100,7 @@ const Index = () => {
       if (subscription && !subscription.canViewSmallCaps)
         setShowNotSubscribedModal(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketCap, subscription]);
 
   useEffect(() => {

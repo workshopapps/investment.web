@@ -34,6 +34,7 @@ const VerifyToken = () => {
         console.log(err);
         toast.error("Email verification failed");
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!verified) {
