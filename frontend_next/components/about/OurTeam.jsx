@@ -4,11 +4,7 @@ import teamData from "./teamData";
 
 const OurTeam = (props) => {
   return (
-    <div
-      id="team"
-      data-testid="the-team"
-      className="w-full md:w-full mt-8"
-    >
+    <div id="team" data-testid="the-team" className="w-full md:w-full mt-8">
       <div>
         <h1 className="font-normal md:font-normal  mx-auto text-center text-xl md:text-4xl">
           Meet The Team
@@ -27,6 +23,7 @@ const OurTeam = (props) => {
             <img
               className="w-[184px] h-[184px] md:w-[250px]  md:h-[250px]  rounded-t-lg"
               src={team.img}
+              alt={team.name}
             />
             <div className="bg-[#ECECEC] md:w-[250px] text-center p-2 rounded-b-lg">
               <p className="font-semibold text-[11px] md:text-[#455A64]">
