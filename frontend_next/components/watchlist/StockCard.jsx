@@ -11,7 +11,7 @@ import Tippy from "@tippyjs/react";
 const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const [fundamentals, setFundamentals] = useState({
-    show: true,
+    show: false,
     hover: false
   });
 
