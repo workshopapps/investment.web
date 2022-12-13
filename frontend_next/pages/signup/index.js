@@ -9,8 +9,11 @@ import { ThreeDots } from "react-loader-spinner";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import SuccessModal from "../../components/Password/ForgotPwd/SuccessModal";
 
 const Signup = ({ GOOGLE_CLIENT_ID }) => {
+  const [showModal, setShowModal] = useState(false);
+
   const Inner = () => {
     const baseUrl = "https://api.yieldvest.hng.tech/auth/signup";
 
@@ -62,6 +65,7 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
           setIsLoading(false);
 
           if (response.status === 200) {
+            setShowModal(true);
             toast.success("Signed up successfully");
             setInterval(() => {
               setTimeout(true);
@@ -318,13 +322,27 @@ const Signup = ({ GOOGLE_CLIENT_ID }) => {
 
   return (
     <Layout showFooter={false}>
-      <Head>
-        <title>Yieldvest - My Account</title>
-      </Head>
+      <div className="h-full relative sm:static ">
+        <Head>
+          <title>Yieldvest - My Account</title>
+        </Head>
 
-      <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-        <Inner />
-      </GoogleOAuthProvider>
+        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+          <Inner />
+        </GoogleOAuthProvider>
+        {showModal && (
+          <SuccessModal
+            title={"Check your Email  for account verification"}
+            message={
+              "A link  has been sent to your email address to verify your account"
+            }
+            status={"success"}
+            close={() => {
+              setShowModal(false);
+            }}
+          />
+        )}
+      </div>
     </Layout>
   );
 };
