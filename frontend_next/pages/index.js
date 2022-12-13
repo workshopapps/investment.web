@@ -28,12 +28,17 @@ const Index = () => {
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const handlePagintionClick = (direction) => {
+  const handlePaginationClick = (direction) => {
     if (direction === "prev") {
-      setCurrentPage(currentpage - 1);
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
     } else {
-      setCurrentPage(currentpage + 1);
+      if (currentPage + 1 <= totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
     }
   };
 
@@ -117,11 +122,14 @@ const Index = () => {
   useEffect(() => {
     reloadRankedCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketCap, sector, industry, isLoggedIn]);
+  }, [marketCap, sector, industry, isLoggedIn, currentPage]);
 
   const reloadRankedCompanies = () => {
     setStocks(null);
-    const queries = [];
+    const queries = [
+      { key: "page", value: currentPage },
+      { key: "rows", value: 12 },
+    ];
 
     if (marketCap !== "all")
       queries.push({ key: "category", value: marketCap });
@@ -142,13 +150,14 @@ const Index = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          setStocks(res.data.records);
+          const data = res.data;
+          setStocks(data.records);
+          setCurrentPage(data.page);
+          setTotalPages(data.pages);
 
-          if (res.data.records) {
+          if (data.records) {
             setLastUpdateDate(
-              formatLastUpdateDate(
-                res.data.records[0].current_ranking.updated_at
-              )
+              formatLastUpdateDate(data.records[0].current_ranking.updated_at)
             );
           }
         }
@@ -376,8 +385,8 @@ const Index = () => {
           </div>
           <Pagination
             currentPage={currentPage}
-            totalPages={1}
-            handlePaginationClick={handlePagintionClick}
+            totalPages={totalPages}
+            handlePaginationClick={handlePaginationClick}
           />
         </div>
       </section>
