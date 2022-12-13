@@ -16,6 +16,7 @@ import Link from "next/link";
 import Head from "next/head";
 import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
+import Pagination from "../components/pagination/Pagination";
 
 const Index = () => {
   const [stocks, setStocks] = useState(null);
@@ -26,6 +27,16 @@ const Index = () => {
   const [industries, setIndustries] = useState([]);
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePagintionClick = (direction) => {
+    if (direction === "prev") {
+      setCurrentPage(currentpage - 1);
+    } else {
+      setCurrentPage(currentpage + 1);
+    }
+  };
+
   const [popup, setPopup] = useState(false);
 
   const {
@@ -359,6 +370,11 @@ const Index = () => {
               </div>
             )}
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={1}
+            handlePaginationClick={handlePagintionClick}
+          />
         </div>
       </section>
 
