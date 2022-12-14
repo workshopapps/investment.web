@@ -5,14 +5,14 @@ import { FiTrash, FiEye } from "react-icons/fi";
 import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
 import MiniBarChartCard from "../Charts/MiniBarChart";
-import Modal from "../Modal"
+import Modal from "../Modal";
 import Tippy from "@tippyjs/react";
 
 const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
   const { accessToken, isLoggedIn } = useContext(AuthContext);
   const [fundamentals, setFundamentals] = useState({
     show: false,
-    hover: false
+    hover: false,
   });
 
   const handleFundamentalModal = () => {
@@ -24,11 +24,12 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
   };
 
   const apiService = authHooks.useApiService();
-  const { name, profile_image, sector, stock_price, market_cap, company_id } = stock;
+  const { name, profile_image, sector, stock_price, market_cap, company_id } =
+    stock;
 
   const deleteFromWatchList = (id, onSuccess, onFailure) => {
     apiService(accessToken)
-      .delete(`/user/watchlist/${id}`)
+      .post(`/user/watchlist/`, [id])
       .then((res) => {
         if (res.status === 200) {
           // Notify user it has been deleted
@@ -46,6 +47,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
         console.log(error);
       });
   };
+
   return (
     <div className="max-w-[396px] w-full rounded-[8px] p-[28px] bg-white border border-white transition duration-500 hover:border-[#1BD47B]">
       <div>
@@ -73,6 +75,7 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                 reload();
               }, 1000);
             }}
+            className="cursor-pointer"
           >
             <FiTrash />
           </div>
@@ -109,51 +112,62 @@ const StockCard = ({ stock, reload, onSuccess, onFailure }) => {
                 </span>
               </h3>
 
-              {fundamentals.show && (<Modal
-                passedFunc={fundamentals.show}
-                setPassedFunc={handleFundamentalModal}
-              >
-                <div>
-                  <p className="text-[#B0B2B7] font-normal pb-2 text-xs lg:text-sm">
-                    FUNDAMENTALS{" "}
-                  </p>
-                </div>
-                <div className="flex justify-between text-xs lg:text-sm">
-                  <p className="text-[#66717E] font-normal">Market Cap </p>
-                  <p className="text-[#333946] text-semibold">
-                    ${(market_cap / 1000000000).toFixed(2)}B
-                  </p>
-                </div>
-                <hr className="mt-2" />
-                <div className="flex h-10 flex-row text-left text-xs pt-4 gap-x-2">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#1BD47B" />
-                  </svg>
-                  Profit($bn)
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#000000" />
-                  </svg>
-                  Income($bn)
-                </div>
-                <MiniBarChartCard companyId={company_id} />
-                <Link href={`/company/${company_id}`}>
-                  <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
-                    See Company Profile
+              {fundamentals.show && (
+                <Modal
+                  passedFunc={fundamentals.show}
+                  setPassedFunc={handleFundamentalModal}
+                >
+                  <div>
+                    <p className="text-[#B0B2B7] font-normal pb-2 text-xs lg:text-sm">
+                      FUNDAMENTALS{" "}
+                    </p>
                   </div>
-                </Link>
-              </Modal>
+                  <div className="flex justify-between text-xs lg:text-sm">
+                    <p className="text-[#66717E] font-normal">Market Cap </p>
+                    <p className="text-[#333946] text-semibold">
+                      ${(market_cap / 1000000000).toFixed(2)}B
+                    </p>
+                  </div>
+                  <hr className="mt-2" />
+                  <div className="flex h-10 flex-row text-left text-xs pt-4 gap-x-2">
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="8.50032"
+                        cy="8.33333"
+                        r="8.33333"
+                        fill="#1BD47B"
+                      />
+                    </svg>
+                    Profit($bn)
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="8.50032"
+                        cy="8.33333"
+                        r="8.33333"
+                        fill="#000000"
+                      />
+                    </svg>
+                    Income($bn)
+                  </div>
+                  <MiniBarChartCard companyId={company_id} />
+                  <Link href={`/company/${company_id}`}>
+                    <div className="text-[#0F7544] mt-2 font-semibold cursor-pointer underline text-center text-xs lg:text-base">
+                      See Company Profile
+                    </div>
+                  </Link>
+                </Modal>
               )}
 
               <div className="flex justify-between items-center text-[16px] font-[400] text-[#545964] ">
