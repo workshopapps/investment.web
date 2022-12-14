@@ -7,6 +7,7 @@ import { BsFillInfoCircleFill } from 'react-icons/bs';
 import { ImPriceTags } from 'react-icons/im';
 import { RiLoginCircleFill } from 'react-icons/ri';
 import { IoMdHelpCircle } from 'react-icons/io';
+import { IoListCircle } from 'react-icons/io5'
 import { FaUserCircle } from 'react-icons/fa';
 import AuthContext from './../../components/auth/AuthContext';
 
@@ -87,7 +88,12 @@ const MobileMenu = ({ toggleMenu, openMobileMenu }) => {
               return <MenuLink link={link} url={url} key={index} disabled={disabled} icon={icon} dropItems={dropItems} linkicon={linkicon} openMobileMenu={openMobileMenu} />;
             })}
             {
-              isLoggedIn ? <MenuLink link={'Profile'} url={'/settings'} openMobileMenu={openMobileMenu} linkicon={ <FaUserCircle/> } /> : <MenuLink link={'Login'} url={'/login'} linkicon={ <RiLoginCircleFill/> } openMobileMenu={openMobileMenu}/>
+              isLoggedIn ? 
+              <>
+                <MenuLink link={'Profile'} url={'/settings'} openMobileMenu={openMobileMenu} linkicon={ <FaUserCircle/> } />
+                <MenuLink link={'Watchlist'} url={'/watchlist'} openMobileMenu={openMobileMenu} linkicon={ <IoListCircle /> } />
+              </>
+              : <MenuLink link={'Login'} url={'/login'} linkicon={ <RiLoginCircleFill/> } openMobileMenu={openMobileMenu}/>
             }
           </ul>
         </div>
