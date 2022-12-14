@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiTrash, FiSearch } from 'react-icons/fi';
 
-const WatchHead = () => {
+const WatchHead = ({deleteWatchItems, deleteItems, setSelectAll, selectAll }) => {
     return (
         <div className="mb-[32px] py-[16px] border-b-[2px] border-gray-200">
             <div className="flex justify-start md:justify-between flex-col md:flex-row items-start md:items-center">
@@ -15,11 +15,14 @@ const WatchHead = () => {
                     <FiSearch className="text-[#66717E] text-2xl absolute top-3 right-3" />
                 </div> */}
             </div>
-            {/* <div className="flex justify-between mt-12 px-4">
-                <button className="text-[#139757] font-semibold text-lg">Select All</button>
-                <button disabled={true} className="flex text-lg items-center font-medium disabled:opacity-50"><FiTrash className="text-xl text-[#A1A4B6] mr-3" />Delete</button>
+            <div className="flex justify-between mt-12 px-4">
+                <button className="text-[#139757] font-semibold text-lg" onClick={() => {
+                    setSelectAll(prev => !prev);
+                    // setTimeout(() => console.log(deleteItems),2000);
+                }}>{selectAll ? "Unselect All": "Select All"}</button>
+                <button onClick={() => deleteWatchItems(deleteItems)} className="flex text-lg items-center font-medium disabled:opacity-50"><FiTrash className="text-xl text-[#A1A4B6] mr-3" />Delete</button>
             </div>
-            <div className="h-[2px] bg-[#66717E] mt-3"></div> */}
+            <div className="h-[2px] bg-[#66717E] mt-3"></div>
         </div>
     );
 };

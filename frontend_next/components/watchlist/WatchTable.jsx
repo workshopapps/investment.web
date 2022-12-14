@@ -4,7 +4,7 @@ import authHooks from "../auth/AuthHooks";
 import AuthContext from "../auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 
-const WatchTable = ({ onSuccess, onFailure }) => {
+const WatchTable = ({ onSuccess, onFailure, add, remove, selectAll }) => {
   const [watchlist, setWatchlist] = useState([]);
   const { accessToken } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,9 @@ const WatchTable = ({ onSuccess, onFailure }) => {
         reload={fetchWatchList}
         onSuccess={onSuccess}
         onFailure={onFailure}
+        add={add}
+        remove={remove}
+        selectAll={selectAll}
       />
     );
   });
