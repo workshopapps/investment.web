@@ -8,10 +8,10 @@ import OurTeam from "./OurTeam";
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#FAFAFF] md:w-full py-5 md:p-10  w-full">
+      <div id="gray" className="bg-[#FAFAFF] md:w-full flex justify-center items-center py-5 md:p-10  w-full">
         <div
           id="white"
-          className="w-full bg-[#FFFFFF] md:w-[1240px]  mx-auto flex-col gap-14 p-3"
+          className="w-full bg-[#FFFFFF] justify-center items-center md:w-[1240px]  mx-auto flex-col gap-14 p-3"
         >
           <div className="w-full gap-2 md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
