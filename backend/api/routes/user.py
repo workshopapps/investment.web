@@ -213,6 +213,11 @@ def remove_from_watchlist(company_id: list[str], user: User = Depends(get_curren
         db.delete(item)
         db.commit()
         db.close()
+        
+        return {
+            "code": "success",
+            "message": "Company removed from watchlist"
+        }
 
 
 @router.get('/company/{company_id}/interval', tags=["User"], )
