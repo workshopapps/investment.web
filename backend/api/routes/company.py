@@ -5,6 +5,7 @@ from typing import List
 from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from fastapi_pagination import Page, paginate
 
 from api.crud.base import get_db, get_company
 from api.models import models
@@ -90,7 +91,9 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 
         top_rankings.append(ranking)
 
+    position = 0
     for ranking in top_rankings:
+        position += 1
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
         industry: models.Industry = comp.industry_value
@@ -111,6 +114,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
+                'position': position,
                 'created_at': ranking.created_at,
                 'updated_at': ranking.updated_at,
             }
@@ -118,7 +122,12 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         response.append(data)
 
     db.close()
-    return response
+    return {
+        'records': response,
+        'total': 12,
+        'page': 1,
+        'pages': 1,
+    }
 
 
 @router.get('/company/ranks/{category}', tags=["Company"], )
