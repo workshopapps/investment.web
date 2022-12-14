@@ -18,7 +18,7 @@ import AuthContext from "../../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import Share from "../../../components/CompanyProfile/Share";
 
-const CompanyProfilePage = ({ company: comp, companyId }) => {
+const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
   const [showAbout, setShowAbout] = React.useState(false);
   const [company, setCompany] = React.useState(comp);
   const [showShare, setShowShare] = React.useState(false);
@@ -26,11 +26,13 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
   const apiService = authHooks.useApiService();
   const { isLoggedIn, accessToken, subscription } = useContext(AuthContext);
   const currentStock = `http://yieldvest.hng.tech/company/${companyId}`;
+
   React.useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && subscription && isSmallCap) {
       apiService(
         accessToken,
-        isLoggedIn && subscription && subscription.canViewSmallCaps
+        isLoggedIn && subscription && subscription.canViewSmallCaps,
+        false
       )
         .get(`/company/${companyId}`)
         .then((res) => {
@@ -43,7 +45,10 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, isLoggedIn, subscription]);
 
-  if (!company && !isLoggedIn) {
+  if (
+    (!company && !isLoggedIn) ||
+    (subscription && !subscription.canViewSmallCaps && isSmallCap)
+  ) {
     return (
       <Layout>
         <Head>
@@ -159,7 +164,7 @@ const CompanyProfilePage = ({ company: comp, companyId }) => {
                   About{" "}
                   <img
                     className="cursor-pointer"
-                    src={(showAbout ? DownIcon : UpIcon).src}
+                    src={(!showAbout ? DownIcon : UpIcon).src}
                     alt="open"
                     onClick={() => setShowAbout(!showAbout)}
                   />

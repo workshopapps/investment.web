@@ -26,7 +26,8 @@ const Subscription = () => {
   };
 
   const isCurrentPlan = (plan) => {
-    return subscription && subscription.type === plan;
+    console.log(subscription);
+    return isLoggedIn && subscription && subscription.type === plan;
   };
 
   return (

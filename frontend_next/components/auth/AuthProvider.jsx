@@ -18,6 +18,11 @@ const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("accessToken");
     setAccessToken(null);
+    setSubscription({
+      isActive: false,
+      type: "",
+      canViewSmallCaps: false,
+    });
   };
 
   return (

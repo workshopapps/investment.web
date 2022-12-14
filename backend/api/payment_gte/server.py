@@ -188,8 +188,8 @@ async def webhook(request: Request):
         customer = db.query(Customer).filter(Customer.customer_id == customer_id).first()
         if customer:
             customer.subscription_status = 'cancelled'
-            customer.subscription_id = BASIC_PLAN_MONTHLY_PRICE_ID
-            customer.current_pricing_id = data['plan']['id']
+            customer.subscription_id = None
+            customer.current_pricing_id = BASIC_PLAN_MONTHLY_PRICE_ID
             customer.updated_at = datetime.datetime.now()
             db.add(customer)
             db.commit()

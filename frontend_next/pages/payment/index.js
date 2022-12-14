@@ -64,6 +64,13 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
+    apiService(accessToken)
+      .get("/user/profile")
+      .then(() => {})
+      .catch(() => {});
+  }, [accessToken, apiService]);
+
+  useEffect(() => {
     if (stripeError) {
       toast.error("Subscription payment failed");
     }
