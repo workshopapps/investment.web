@@ -32,8 +32,8 @@ PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 @router.get('/profile', tags=['User'])
 async def get_user_profile(user: User = Depends(get_current_user)):
+    subscription = user.customer[0] if user.customer else None
     subscription_status = get_subscription_status(user)
-    subscription = subscription_status[2]
     subscription_type = subscription_status[0]
     can_view_small_caps = subscription_status[1]
 
@@ -213,11 +213,6 @@ def remove_from_watchlist(company_id: list[str], user: User = Depends(get_curren
         db.delete(item)
         db.commit()
         db.close()
-        
-        return {
-            "code": "success",
-            "message": "Company removed from watchlist"
-        }
 
 
 @router.get('/company/{company_id}/interval', tags=["User"], )
@@ -338,9 +333,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         top_rankings = rankings
 
     total = len(top_rankings)
-    position = 0
     for ranking in top_rankings:
-        position += 1
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
         industry: models.Industry = comp.industry_value
@@ -362,7 +355,6 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
-                'position': position,
                 'created_at': ranking.created_at,
                 'updated_at': ranking.updated_at,
             }
