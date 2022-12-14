@@ -15,11 +15,11 @@ const VerifyToken = () => {
 
   React.useEffect(() => {
     const token = router.query.token;
-
+    if(!token) return;
     axios
       .get(`${baseApiUrl}/auth/verify_token`, {
         params: {
-          token,
+          token: token,
         },
         validateStatus: (statusCode) => statusCode >= 200 && statusCode <= 500,
       })
@@ -35,7 +35,7 @@ const VerifyToken = () => {
         toast.error("Email verification failed");
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router]);
 
   if (!verified) {
     return (

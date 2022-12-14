@@ -106,6 +106,7 @@ const Subscription = () => {
               }
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
+              disabled={isCurrentPlan("pro_monthly")}
             />
 
             <SubscribeCard
@@ -120,6 +121,7 @@ const Subscription = () => {
               }
               content="For Premium Users new . Get access to our Premium features and invest with more precision"
               destination="/payment"
+              disabled={isCurrentPlan("premium_monthly")}
             />
           </div>
         </div>
@@ -148,6 +150,7 @@ const Subscription = () => {
               buttonText={isCurrentPlan("pro_yearly") ? "Current" : "Subscribe"}
               content="For Pro Users new . Get access to our Pro features and invest with more precision"
               destination="/payment"
+              disabled={isCurrentPlan("pro_yearly")}
             />
 
             <SubscribeCard
@@ -157,6 +160,7 @@ const Subscription = () => {
               type="year"
               target={subscriptionData["Premium"]["target"]}
               features={subscriptionData["Premium"]["features"]}
+              disabled={isCurrentPlan("premium_yearly")}
               buttonText={
                 isCurrentPlan("premium_yearly") ? "Current" : "Subscribe"
               }

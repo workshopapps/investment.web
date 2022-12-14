@@ -32,8 +32,8 @@ PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 @router.get('/profile', tags=['User'])
 async def get_user_profile(user: User = Depends(get_current_user)):
-    subscription = user.customer[0] if user.customer else None
     subscription_status = get_subscription_status(user)
+    subscription = subscription_status[2]
     subscription_type = subscription_status[0]
     can_view_small_caps = subscription_status[1]
 
@@ -52,14 +52,13 @@ async def get_user_profile(user: User = Depends(get_current_user)):
 
 @router.post("/contact_us/", tags=["User"])
 async def contact_us(name: str = Form(), email: str = Form(), msg: str = Form()):
-    
     body = f"<html><body><h4>{name}</h4>"
     body += f"<p>{email}</p>"
     body += f"<p>{msg}</p>"
     body += "</body></html>"
 
-    await send_email('New Customer Suggestion/Complaints', ['yieldvesttech@gmail.com',], body)
-    
+    await send_email('New Customer Suggestion/Complaints', ['yieldvesttech@gmail.com', ], body)
+
     return {'Email successfully sent'}
 
 
@@ -156,8 +155,8 @@ def verify_watchlist_item(company_id: str, user: User = Depends(get_current_user
     """
     db: Session = next(get_db())
 
-    watchlist = db.query(models.WatchlistItem)\
-        .filter(models.WatchlistItem.user_id == user.id, models.WatchlistItem.company_id == company_id)\
+    watchlist = db.query(models.WatchlistItem) \
+        .filter(models.WatchlistItem.user_id == user.id, models.WatchlistItem.company_id == company_id) \
         .first()
     if watchlist:
         return {"message": "This company is in your watchlist"}
@@ -193,7 +192,7 @@ def add_to_watchlist(company_id: str, user: User = Depends(get_current_user)):
     }
 
 
-@router.delete("/watchlist/", tags=["User"])
+@router.post("/watchlist/", tags=["User"])
 def remove_from_watchlist(company_id: list[str], user: User = Depends(get_current_user)):
     """
     removes a company to the watchlist
@@ -204,15 +203,20 @@ def remove_from_watchlist(company_id: list[str], user: User = Depends(get_curren
         company = db.query(models.Company).filter(models.Company.company_id == company_ids).first()
         if not company:
             raise HTTPException(status_code=404, detail="A company with this id doesn't exist")
-            
+
         item = db.query(models.WatchlistItem).filter(models.WatchlistItem.user_id == user.id,
-                                                    models.WatchlistItem.company_id == company_ids).first()
+                                                     models.WatchlistItem.company_id == company_ids).first()
         if not item:
             raise HTTPException(status_code=400, detail="This company is not in your watchlist")
 
         db.delete(item)
         db.commit()
         db.close()
+
+        return {
+            "code": "success",
+            "message": "Company removed from watchlist"
+        }
 
 
 @router.get('/company/{company_id}/interval', tags=["User"], )
@@ -320,7 +324,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
             max_result = 12
     else:
         max_result = 12
-    
+
     response = []
     top_rankings = []
     if max_result:
@@ -333,7 +337,9 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
         top_rankings = rankings
 
     total = len(top_rankings)
+    position = 0
     for ranking in top_rankings:
+        position += 1
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
         industry: models.Industry = comp.industry_value
@@ -355,6 +361,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
+                'position': position,
                 'created_at': ranking.created_at,
                 'updated_at': ranking.updated_at,
             }
