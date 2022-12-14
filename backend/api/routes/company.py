@@ -91,7 +91,9 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
 
         top_rankings.append(ranking)
 
+    position = 0
     for ranking in top_rankings:
+        position += 1
         comp: models.Company = ranking.comp_ranks
         sector: models.Sector = comp.sect_value
         industry: models.Industry = comp.industry_value
@@ -112,6 +114,7 @@ def get_list_of_ranked_companies(category: str = None, sector: str = None, indus
             'exchange_platform': comp.ticker_value.exchange_name,
             'current_ranking': {
                 'score': ranking.score,
+                'position': position,
                 'created_at': ranking.created_at,
                 'updated_at': ranking.updated_at,
             }
