@@ -37,7 +37,7 @@ export default function Notificationsettings({ notifications }) {
     };
 
     apiService(accessToken)
-      .patch(`/user/notification_settings/`, data)
+      .patch(`/user/notification_settings`, data)
       .then((res) => {
         setIsLoading(false);
 
@@ -108,8 +108,7 @@ export default function Notificationsettings({ notifications }) {
                 <img src={toggleOff.src} onClick={handleChecked} alt="toggle" />
               )}
             </div>
-            <div>
-              {/* radio button*/}
+            {/* <div>
               <div className="flex ">
                 <div className="flex flex-col font-normal text-base md:ml-[60px] ml-2 pb-5">
                   <div className="flex">
@@ -141,7 +140,7 @@ export default function Notificationsettings({ notifications }) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <hr className="w-full border" />
             <div className="flex flex-col w-full h-full py-4 font-semibold text-base text-#0A0B0D ">
               <div className="flex justify-between items-center px-6 py-6">
