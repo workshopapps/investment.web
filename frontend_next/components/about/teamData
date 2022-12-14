@@ -146,84 +146,86 @@ const teamData = [
   },
   {
     id: 24,
-    name: "Kaleem",
-    role: "Marketing Team",
-    img: "./aboutImages/david.png",
+    name: "Nafiu Taiwo Solomon",
+    role: "Fullstack",
+    img: "./aboutImages/taiwo.jpeg",
   },
- 
   {
     id: 25,
-    name: "Gabriel Isuekebho",
-    role: "Backend",
-    img: "./aboutImages/simon.png",
+    name: "Bright Efuet",
+    role: "Marketing Team",
+    img: "./aboutImages/bright.jpg",
   },
   {
     id: 26,
-    name: "Bright Efuet",
+    name: "Kaleem",
     role: "Marketing Team",
-    img: "./aboutImages/bright.png",
+    img:"",
   },
+ 
   {
     id: 27,
-    name: "Blossom Ezenwaka",
-    role: "Marketing Team",
-    img: "./aboutImages/blossom.png",
+    name: "Gabriel Isuekebho",
+    role: "Backend",
+    img: "",
   },
+  
   {
     id: 28,
-    name: "Ruth Soneye",
-    role: "Design Team",
-    img: "./aboutImages/ayomide.png",
+    name: "Blossom Ezenwaka",
+    role: "Marketing Team",
+    img: "",
   },
   {
     id: 29,
-    name: "Peter Osas",
-    role: "Mobile Team",
-    img: "./aboutImages/david.png",
+    name: "Ruth Soneye",
+    role: "Design Team",
+    img: "",
   },
   {
     id: 30,
-    name: "David Orakpo",
+    name: "Peter Osas",
     role: "Mobile Team",
-    img: "./aboutImages/bright.png",
+    img: "",
   },
- 
- 
   {
     id: 31,
-    name: "Ohiocheoya Emmanuel",
+    name: "David Orakpo",
     role: "Mobile Team",
-    img: "./aboutImages/david.png",
+    img: "",
   },
+ 
+ 
   {
     id: 32,
-    name: "Olagunju Oluwakolade",
-    role: "Frontend Team",
-    img: "./aboutImages/david.png",
+    name: "Ohiocheoya Emmanuel",
+    role: "Mobile Team",
+    img: "",
   },
   {
     id: 33,
-    name: "Nafiu Taiwo Solomon",
-    role: "Fullstack",
-    img: "./aboutImages/simon.png",
+    name: "Olagunju Oluwakolade",
+    role: "Frontend Team",
+    img: "",
   },
+ 
   {
     id: 34,
     name: "Sulaimon Afarait",
     role: "Frontend Team",
-    img: "./aboutImages/david.png",
+    img: "",
   },
   {
     id: 35,
     name: "Simon Singlad",
     role: "Mobile Team",
-    img: "./aboutImages/simon.png",
+    img: "",
   },
   {
     id: 36,
     name: "Lilian Wanjiku",
     role: "Backend",
-    img: "./aboutImages/blossom.png",
+    img: "",
   },
 ];
 //<img src={require("folder/image.format")} alt="image not found" />
