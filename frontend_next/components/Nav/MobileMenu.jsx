@@ -37,6 +37,10 @@ const MobileMenu = ({ toggleMenu, openMobileMenu }) => {
         linkicon: <IoMdHelpCircle />,
         dropItems: [
           {
+            link: "FAQ",
+            url: "/help",
+          },
+          {
               link: 'How it Works',
               url: '/how-it-works'
           },
