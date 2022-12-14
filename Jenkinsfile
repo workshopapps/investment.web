@@ -4,8 +4,9 @@ pipeline {
 	stages {
 		stage('Pull changes') {
             steps {
-                sh 'sudo cd /home/aybims/investment.web && sudo git pull origin staging'
-                sh 'sudo cd /home/aybims/investment.web/frontend_next && sudo yarn install && sudo yarn build'
+                sh 'sudo su'
+                sh 'cd /home/aybims/investment.web && sudo git pull origin staging'
+                sh 'cd /home/aybims/investment.web/frontend_next && sudo yarn install && sudo yarn build'
             }
         }
 					
