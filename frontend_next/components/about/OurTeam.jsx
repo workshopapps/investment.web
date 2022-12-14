@@ -9,7 +9,7 @@ const OurTeam = (props) => {
         <h1 className="font-normal md:font-normal  mx-auto text-center text-xl md:text-4xl">
           Meet The Team
         </h1>
-        <div className="flex gap-6 text-center md:text-xl text-xs font-normal w-full justify-center">
+        <div className="flex gap-3 text-center md:text-xl text-xs font-normal w-full justify-center">
           <p>All Teams</p>
           <p>Management team</p>
           <p>Design</p>

@@ -34,28 +34,16 @@ const SubscribeCard = ({
   };
 
   return (
-    <div
-      className={`group ${
-        disabled ? "" : "hover:scale-90"
-      } transition duration-500 relative ${
-        disabled ? "" : "hover:bg-[#1BD47B]"
-      } bg-white text-[#0A0B0D] ${
-        disabled ? "" : "hover:text-white"
-      } rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] max-w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0`}
-    >
+    <div className="group hover:scale-90 transition duration-500 relative hover:bg-[#1BD47B] bg-white text-[#0A0B0D] hover:text-white rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] max-w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0">
       {price !== "" && (
         <div>
           <img
-            className={`${
-              disabled ? "" : "group-hover:hidden"
-            } flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white`}
+            className="group-hover:hidden flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white "
             src={Image.src}
             alt="image"
           />
           <img
-            className={`hidden ${
-              disabled ? "" : "group-hover:flex"
-            } absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white`}
+            className="hidden group-hover:flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white "
             src={Image2.src}
             alt="image"
           />
@@ -65,19 +53,11 @@ const SubscribeCard = ({
       <div className="flex flex-row md:flex-col justify-between">
         <p className="text-[24px] pl-6 pt-8 pb-10 w-full text-center">{name}</p>
         <h1 className="px-4 md:pl-6 py-2 pt-10 md:pt-0">
-          <span
-            className={`text-[#1BD47B] ${
-              disabled ? "" : "group-hover:text-white"
-            } text-xl md:text-6xl mr-2 md:mr-5`}
-          >
+          <span className="text-[#1BD47B] group-hover:text-white text-xl md:text-6xl mr-2 md:mr-5">
             ${discount}
           </span>
           <span className="opacity-60">
-            <span
-              className={`text-[#1BD47B] ${
-                disabled ? "" : "group-hover:text-white"
-              } line-through`}
-            >
+            <span className="text-[#1BD47B] group-hover:text-white line-through">
               {price !== "" && `$${price}`}
             </span>
             /{type}
@@ -86,11 +66,7 @@ const SubscribeCard = ({
       </div>
       <p className="pt-3 pl-6 pb-5 basicTextHolder">{target}</p>
       <div className="w-full flex justify-center mb-3">
-        <hr
-          className={`w-0 md:w-full mx-5 sm:border-[white] md:border-[white] lg:border-[#0a0b0d2b] ${
-            disabled ? "" : "group-hover:border-white"
-          }`}
-        />
+        <hr className="w-0 md:w-full mx-5 sm:border-[white] md:border-[white] lg:border-[#0a0b0d2b] group-hover:border-white" />
       </div>
 
       <ul className="w-full theListing list-inside pl-6 pt-4 mb-[8em] md:mb-0">
@@ -99,11 +75,11 @@ const SubscribeCard = ({
             <div>
               <FaCheckCircle
                 fill="#1BD47B"
-                className={`${disabled ? "" : "group-hover:hidden"} block`}
+                className="group-hover:hidden block"
               />
               <FaCheckCircle
                 fill="white"
-                className={`${disabled ? "" : "group-hover:block"} hidden`}
+                className="group-hover:block hidden"
               />
             </div>
             <p className="pl-3">{element}</p>
@@ -115,7 +91,7 @@ const SubscribeCard = ({
           className="w-[80%] flex justify-around md:justify-around lg:justify-center shadow bg-[#1BD47B] group-hover:bg-white text-white font-bold py-4 px-6 rounded"
           onClick={handleSubscription}
           style={{
-            background: disabled ? "#E0E2E5" : "#1BD47B",
+            background: disabled ? "gray" : "#1BD47B",
           }}
         >
           <button className="flex rounded" type="button" disabled={disabled}>

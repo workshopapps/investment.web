@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 
 const CapCard = ({
-  position,
   logo,
   abbr,
   name,
@@ -98,7 +97,7 @@ const CapCard = ({
     <div className="border-2 border-primaryGray border-opacity-30 hover:border-[#96ebc2] rounded-[10px] p-6 h-full font-Hauora">
       <div>
         <div className="-mt-6 -ml-6 rounded-tl-lg rounded-br-lg flex justify-center items-center bg-[#1F2226] w-8 h-8 text-white text-xl font-Hauora font-bold">
-          {position}
+          {index + 1}
         </div>
         <div className="flex gap-5 mb-6 justify-between">
           <div className="flex gap-5">

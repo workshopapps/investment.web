@@ -12,7 +12,7 @@ const index = ({ children, passedFunc, setPassedFunc }) => {
                     <Tippy content={<span className="">Close</span>} placement="bottom">
                         <div
                             onClick={() => setPassedFunc(!passedFunc)}
-                            className="w-7 h-7 flex justify-center text-base items-center border-[#545964] text-[#545964] border rounded-full -mt-3 cursor-pointer">
+                            className="w-7 h-7 flex justify-center items-center border-[#545964] text-[#545964] border rounded-full -mt-3 cursor-pointer">
                             &times;
                         </div>
                     </Tippy>

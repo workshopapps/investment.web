@@ -2,9 +2,6 @@ import os
 from typing import Tuple
 
 import stripe
-from sqlalchemy.orm import Session
-
-from api.crud.base import get_db
 from api.models.models import User, Customer
 
 stripe.api_key = os.getenv("STRIPE_API_KEY")
@@ -17,10 +14,8 @@ PREMIUM_PLAN_YEARLY_PRICE_ID = os.getenv('PREMIUM_PLAN_YEARLY_PRICE_ID')
 
 
 # Get the subscription status
-def get_subscription_status(usr: User) -> Tuple[str, bool, Customer]:
+def get_subscription_status(user: User) -> Tuple[str, bool]:
     """ Get the subscription status of current user"""
-    db: Session = next(get_db())
-    user: User = db.query(User).filter(User.id == usr.id).first()
     subscription: Customer = user.customer[0] if user.customer else None
     pricing_id = subscription.current_pricing_id if subscription else None
 
@@ -43,4 +38,4 @@ def get_subscription_status(usr: User) -> Tuple[str, bool, Customer]:
                 subscription_type == 'pro_monthly' or subscription_type == 'pro_yearly' or
                 subscription_type == 'premium_monthly' or subscription_type == 'premium_yearly')
 
-    return subscription_type, can_view_small_caps, user.customer[0] if user.customer else None
+    return subscription_type, can_view_small_caps
