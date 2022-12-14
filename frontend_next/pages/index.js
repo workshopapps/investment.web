@@ -17,6 +17,8 @@ import Head from "next/head";
 import NewsletterModal from "../components/newsletter/NewsletterModal";
 import Newsletter from "../components/newsletter/Newsletter";
 import Pagination from "../components/pagination/Pagination";
+import { Element } from "react-scroll";
+import { scrollToElement } from "../utils/scroll";
 
 const Index = () => {
   const [stocks, setStocks] = useState(null);
@@ -29,6 +31,7 @@ const Index = () => {
   const [showNotSubscribedModal, setShowNotSubscribedModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [shouldScroll, setShouldScroll] = useState(false);
 
   const handlePaginationClick = (direction) => {
     if (direction === "prev") {
@@ -57,20 +60,29 @@ const Index = () => {
 
   let timeoutId = useRef();
 
+  const resetPagination = () => {
+    setShouldScroll(true);
+    setTotalPages(0);
+    setCurrentPage(1);
+  };
+
   const handleMarketCap = (e) => {
     e.preventDefault();
     setMarketCap(e.target.value);
+    resetPagination();
   };
 
   const handleSector = (e) => {
     e.preventDefault();
     setSector(e.target.value);
     setIndustry("all");
+    resetPagination();
   };
 
   const handleIndustry = (e) => {
     e.preventDefault();
     setIndustry(e.target.value);
+    resetPagination();
   };
 
   const formatLastUpdateDate = (date) => {
@@ -125,7 +137,14 @@ const Index = () => {
   }, [marketCap, sector, industry, isLoggedIn, currentPage]);
 
   const reloadRankedCompanies = () => {
-    setStocks(null);
+    if (shouldScroll) {
+      scrollToElement("rankings");
+    }
+
+    setTimeout(() => {
+      setStocks(null);
+    }, 300);
+
     const queries = [
       { key: "page", value: currentPage },
       { key: "rows", value: 12 },
@@ -253,6 +272,7 @@ const Index = () => {
         </div>
       </section>
 
+      <Element name="rankings" />
       <section className="xl:py-14 sm:px-10  p-5 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto">
           <p className="text-primaryGray text-base lg:text-2xl mb-4 md:mb-14 space-y-[10px]">
@@ -365,6 +385,7 @@ const Index = () => {
                   stocks.map((item, index) => (
                     <CapCard
                       key={index}
+                      position={item.current_ranking.position}
                       logo={item.profile_image}
                       abbr={item.company_id}
                       name={item.name}
