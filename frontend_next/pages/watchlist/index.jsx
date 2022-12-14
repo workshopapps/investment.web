@@ -34,7 +34,7 @@ const Watchlist = () => {
 
   const deleteFromWatchList = (data) => {
     apiService(accessToken)
-      .post(`/user/watchlist`, data)
+      .delete(`/user/watchlist/`, data)
       .then((res) => {
         if (res.status === 200) {
           // Notify user it has been deleted
