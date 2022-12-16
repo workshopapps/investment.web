@@ -2,7 +2,13 @@ pipeline {
 
 	agent any
 	stages {
-					
+		
+		stage("Pull changes"){
+
+			steps {
+				sh "sudo bash /home/aybims/investment.web/gitpull.sh"
+			} 
+                } 			
 		stage("Deploy Frontend"){
 
 			steps {
