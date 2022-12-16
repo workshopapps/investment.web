@@ -6,6 +6,7 @@ pipeline {
 		stage("Pull changes"){
 
 			steps {
+				sh "sudo git config --global --add safe.directory /home/aybims/investment.web"
 				sh "sudo bash /home/aybims/investment.web/gitpull.sh"
 			} 
                 } 			
