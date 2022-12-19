@@ -28,7 +28,9 @@ database.Base.metadata.create_all(bind=engine)
 origins = [
     "http://localhost:3000",
     "https://yieldvest.hng.tech",
-    "https://mystockplug-demo.vercel.app"
+    "https://mystockplug-demo.vercel.app",
+    "https://www.yieldvest.app",
+    "https://yieldvest.app"
 ]
 
 app = FastAPI()
