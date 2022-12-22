@@ -18,9 +18,9 @@ const Layout = ({
 
   const size = useWindowSize();
 
-  // useEffect(() => {
-  //   scrollToTop();
-  // }, []);
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   useEffect(() => {
     setOpenMobileMenu(false);
