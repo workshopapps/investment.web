@@ -235,6 +235,10 @@ const Index = () => {
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
         />
+        <meta
+          name="google-site-verification"
+          content="STiM0BrfMrGLnWuBiVdJKriSPBDSwoWUebVcPB_Gfec"
+        />
       </Head>
 
       <NotSubscribedModal
@@ -261,8 +265,7 @@ const Index = () => {
               </span>
             </p>
           </div>
-          {
-            !isLoggedIn && 
+          {!isLoggedIn && (
             <div className="flex justify-start items-center md:hidden">
               <button
                 onClick={() => navigate("/signup")}
@@ -271,7 +274,7 @@ const Index = () => {
                 Get Started
               </button>
             </div>
-          }
+          )}
         </div>
       </section>
 
@@ -448,11 +451,11 @@ const Index = () => {
           <Newsletter />
         </div>
       </section>
-      {popup && (
+      {/* {popup && (
         <div>
           <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
         </div>
-      )}
+      )} */}
     </Layout>
   );
 };
