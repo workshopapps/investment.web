@@ -235,6 +235,10 @@ const Index = () => {
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
         />
+        <meta
+          name="google-site-verification"
+          content="STiM0BrfMrGLnWuBiVdJKriSPBDSwoWUebVcPB_Gfec"
+        />
       </Head>
 
       <NotSubscribedModal
