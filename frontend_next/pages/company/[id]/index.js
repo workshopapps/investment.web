@@ -45,26 +45,26 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, isLoggedIn, subscription]);
 
-  if (
-    (!company && !isLoggedIn) ||
-    (subscription && !subscription.canViewSmallCaps && isSmallCap)
-  ) {
-    return (
-      <Layout>
-        <Head>
-          <title>Small Cap Stock Fundamentals</title>
-          <meta
-            name="description"
-            content="Get up to date recommendations on the best stocks to buy"
-          />
-        </Head>
+  // if (
+  //   (!company && !isLoggedIn) ||
+  //   (subscription && !subscription.canViewSmallCaps && isSmallCap)
+  // ) {
+  //   return (
+  //     <Layout>
+  //       <Head>
+  //         <title>Small Cap Stock Fundamentals</title>
+  //         <meta
+  //           name="description"
+  //           content="Get up to date recommendations on the best stocks to buy"
+  //         />
+  //       </Head>
 
-        <NotSubscribedModal isOpen={true} onClose={() => router.back()} />
-      </Layout>
-    );
-  }
+  //       <NotSubscribedModal isOpen={true} onClose={() => router.back()} />
+  //     </Layout>
+  //   );
+  // }
 
-  if (isLoggedIn && !company) {
+  if (/*isLoggedIn &&*/ !company) {
     return (
       <div
         style={{
@@ -109,9 +109,9 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
-                <h3 className="text-lg text-primaryGray pt-10 md:text-2xl">
+                <h1 className="text-lg text-primaryGray pt-10 md:text-2xl">
                   {company.name} Stock Fundamentals
-                </h3>
+                </h1>
                 <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
                   Overview
                 </p>
@@ -193,7 +193,7 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
 
 export async function getServerSideProps({ query }) {
   const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const companyId = query.id;
+  const companyId = query.id.toUpperCase();
   let company = null;
   let isSmallCap = false;
 

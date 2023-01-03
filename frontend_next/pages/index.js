@@ -261,8 +261,7 @@ const Index = () => {
               </span>
             </p>
           </div>
-          {
-            !isLoggedIn && 
+          {!isLoggedIn && (
             <div className="flex justify-start items-center md:hidden">
               <button
                 onClick={() => navigate("/signup")}
@@ -271,7 +270,7 @@ const Index = () => {
                 Get Started
               </button>
             </div>
-          }
+          )}
         </div>
       </section>
 
@@ -448,11 +447,11 @@ const Index = () => {
           <Newsletter />
         </div>
       </section>
-      {popup && (
+      {/* {popup && (
         <div>
           <NewsletterModal trigger={popup} onClose={() => setPopup(false)} />
         </div>
-      )}
+      )} */}
     </Layout>
   );
 };
