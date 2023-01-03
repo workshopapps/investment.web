@@ -4,4 +4,3 @@ cd /home/aybims/investment.web/frontend
 sudo pwd
 sudo yarn install
 sudo yarn build
-sudo yarn start
