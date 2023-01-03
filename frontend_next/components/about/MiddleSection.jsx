@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import whoWeAreImg from "../../assets/about/whoweAreImg.svg";
-import whatWeDo from "../../assets/about/whatWeDo.svg";
+import whatWeDo from "../../assets/about/whatwedo.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 import OurTeam from "./OurTeam";
 
@@ -11,17 +11,17 @@ export const Section = () => {
       <div id="gray" className="bg-[#FAFAFF] md:w-full flex justify-center items-center py-5 md:p-10  w-full">
         <div
           id="white"
-          className="w-full bg-[#FFFFFF] justify-center items-center md:w-[1240px]  mx-auto flex-col gap-14 p-3"
+          className="w-full bg-[#FFFFFF] justify-center items-center mx-5 md:mx-[100px] flex-col gap-10 py-5 px-5 md:px-10 rounded-lg font-Hauora"
         >
-          <div className="w-full gap-2 md:flex justify-center items-center">
+          <div className="w-full gap-2 md:gap-10 md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
-                Who we are
+                Who We Are
               </h2>
               <img
                 src={whoWeAreImg.src}
                 alt="Illustration"
-                className="w-[560px]"
+                className="w-full rounded-lg"
               />
             </div>
             <div className="md:w-1/2">
@@ -48,85 +48,66 @@ export const Section = () => {
               </div>
             </div>
           </div>
-          <div className="w-full gap-2  md:px-4 mt-5  md:flex justify-between items-center">
+          <div className="w-full gap-2 md:gap-10  md:px-4 my-20  md:flex justify-between items-center">
             <div className="md:w-1/2  my-6">
-              <h3 className="text-[#455A64] font-normal text-lg py-2 md:text-2xl">
-                What we do
-              </h3>
+              <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
+                What We Do
+              </h2>
               <p className="text-sm md:text-base  font-normal text-[#8A8D95] leading-6">
-                We saw that most stock investment analysis tools are not
-                user-friendly and quite daunting. Therefore we decided to create
-                an analysis tool with the customer in mind. Our desire to aid
-                users in making smart investment decisions without all the
-                complications associated with other analysis tools. So we
-                created Yieldvest, an analysis tool with a difference. Yieldvest
-                is straightforward and simple to use, and more importantly, you
-                can get the useful information you need to make smart investment
-                decisions at first glance.
+                We saw that most stock investment analysis tools are not user-friendly and quite daunting. Therefore we decided to create an analysis tool with the customer in mind.
+                Our desire to aid users in making smart investment decisions without all the complications associated with other analysis tools.
+                So we created Yieldvest, an analysis tool with a difference. Yieldvest is straightforward and simple to use, and more importantly, you can get the useful information you need to make smart investment decisions at first glance.
               </p>
             </div>
             <div className="flex flex-col-reverse my-4 md:w-[534px] md:flex-col">
               <img
                 src={whatWeDo.src}
                 alt="Illustration"
-                className="w-[424px] md:w-[415px]"
+                className="w-full rounded-lg"
               />
             </div>
           </div>
 
-          {/* <div className="w-full gap-2 mt-10 md:mt-5 md:flex justify-center items-center"> */}
+          <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center block font-semibold">
+            Why Choose Us
+          </h2>
           <div
-            id="WhyChooseUs"
-            className="md:flex w-full mt-8 md:w-[1240px] md:py-10"
+            className="w-full gap-2 md:gap-10  md:px-4 my-10  md:flex justify-between items-center"
           >
-            <div className="hidden md:block md:w-[564px]">
+            <div className="block w-full md:w-1/2">
               <img
                 src={WhyChooseUs.src}
                 alt="whyChooseUs-img"
-                className="mt-5 md:w-[564px]"
+                className="mt-5 w-full"
               />
             </div>
-            <div className="w-full md:w-[250px]">
-              <div className="w-full md:w-[250px] my-2">
+            <div className="w-full md:w-1/2 flex flex-col gap-2 text-left">
+              <div className="w-full md:w-2/3 mb-2">
                 <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                   Stock recommendations
                 </h3>
-                <p className="text-sm md:text-sm font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-base w-full md:w-2/3 font-normal text-[#8A8D95] leading-6">
                   Stock recommendations with listings of the top 12 stocks so
                   you know the best for you at first glance.
                 </p>
               </div>
-              <div className="w-full md:ml-14 my-2 md:mt-4">
+              <div className="w-full md:w-2/3 md:ml-[30%] my-2 md:mt-4">
                 <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                   Stock Categories
                 </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-base w-full md:w-2/3 font-normal text-[#8A8D95] leading-6">
                   Stock recommendations with listings of the top 12 stocks so
                   you know the best for you at first glance.
                 </p>
               </div>
-              <div className="w-full md:ml-24 md:mt-2">
+              <div className="w-full md:w-2/3 md:ml-[60%] md:mt-4">
                 <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
                   Company Profile
                 </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-base w-full md:w-2/3 font-normal text-[#8A8D95] leading-6">
                   Company overview, charts, and key metrics are provided to help
                   validate your decision.
                 </p>
-              </div>
-              <div className="md:hidden md:w-[564px]">
-                <img
-                  src={WhyChooseUs.src}
-                  alt="whyChooseUs-img"
-                  className="mt-6 md:w-[564px]"
-                />
-              </div>
-              <div className="md:hidden md:w-[564px]">
-                <img
-                  src={WhyChooseUs.src}
-                  alt="Illustration"
-                  className="mt-10 md:w-[564px]"
-                />
               </div>
             </div>
           </div>
