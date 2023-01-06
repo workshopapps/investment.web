@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import whoWeAreImg from "../../assets/about/whoweAreImg.svg";
-import whatWeDo from "../../assets/about/whatwedo.svg";
+import whatWeDo from "../../assets/about/whatWeDo.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 import OurTeam from "./OurTeam";
 
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#FAFAFF] md:w-full flex justify-center items-center py-5 md:p-10  w-full">
+      <div
+        id="gray"
+        className="bg-[#FAFAFF] md:w-full flex justify-center items-center py-5 md:p-10  w-full"
+      >
         <div
           id="white"
           className="w-full bg-[#FFFFFF] justify-center items-center mx-5 md:mx-[100px] flex-col gap-10 py-5 px-5 md:px-10 rounded-lg font-Hauora"
@@ -54,9 +57,15 @@ export const Section = () => {
                 What We Do
               </h2>
               <p className="text-sm md:text-base  font-normal text-[#8A8D95] leading-6">
-                We saw that most stock investment analysis tools are not user-friendly and quite daunting. Therefore we decided to create an analysis tool with the customer in mind.
-                Our desire to aid users in making smart investment decisions without all the complications associated with other analysis tools.
-                So we created Yieldvest, an analysis tool with a difference. Yieldvest is straightforward and simple to use, and more importantly, you can get the useful information you need to make smart investment decisions at first glance.
+                We saw that most stock investment analysis tools are not
+                user-friendly and quite daunting. Therefore we decided to create
+                an analysis tool with the customer in mind. Our desire to aid
+                users in making smart investment decisions without all the
+                complications associated with other analysis tools. So we
+                created Yieldvest, an analysis tool with a difference. Yieldvest
+                is straightforward and simple to use, and more importantly, you
+                can get the useful information you need to make smart investment
+                decisions at first glance.
               </p>
             </div>
             <div className="flex flex-col-reverse my-4 md:w-[534px] md:flex-col">
@@ -71,9 +80,7 @@ export const Section = () => {
           <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center block font-semibold">
             Why Choose Us
           </h2>
-          <div
-            className="w-full gap-2 md:gap-10  md:px-4 my-10  md:flex justify-between items-center"
-          >
+          <div className="w-full gap-2 md:gap-10  md:px-4 my-10  md:flex justify-between items-center">
             <div className="block w-full md:w-1/2">
               <img
                 src={WhyChooseUs.src}
