@@ -36,25 +36,25 @@ const SubscribeCard = ({
   return (
     <div
       className={`group ${
-        disabled ? "" : "hover:scale-90"
+        disabled ? "" : "hover:scale-[1.06]"
       } transition duration-500 relative ${
-        disabled ? "" : "hover:bg-[#1BD47B]"
+        disabled ? "" : "hover:border-[#1BD47B] hover:border-[3px]"
       } bg-white text-[#0A0B0D] ${
-        disabled ? "" : "hover:text-white"
+        disabled ? "" : "hover:text-black"
       } rounded-2xl border-[1px] border-[rgba(141, 141, 141, 0.2)] max-w-[20em] md:w-[25em] h-auto md:h-[42em] mb-5 md:mb-5 lg:mb-0 hover:shadow-md p-2 pt-[5em] md:pt-0`}
     >
       {price !== "" && (
         <div>
           <img
             className={`${
-              disabled ? "" : "group-hover:hidden"
+              disabled ? "" : "group-hover:block"
             } flex absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white`}
             src={Image.src}
             alt="image"
           />
           <img
             className={`hidden ${
-              disabled ? "" : "group-hover:flex"
+              disabled ? "" : "group-hover:hidden"
             } absolute left-[-2.5em] top-[-1.3em] overflow-scroll px-10 py-5 text-white`}
             src={Image2.src}
             alt="image"
@@ -67,7 +67,7 @@ const SubscribeCard = ({
         <h1 className="px-4 md:pl-6 py-2 pt-10 md:pt-0">
           <span
             className={`text-[#1BD47B] ${
-              disabled ? "" : "group-hover:text-white"
+              disabled ? "" : "group-hover:text-[#1BD47B]"
             } text-xl md:text-6xl mr-2 md:mr-5`}
           >
             ${discount}
@@ -75,7 +75,7 @@ const SubscribeCard = ({
           <span className="opacity-60">
             <span
               className={`text-[#1BD47B] ${
-                disabled ? "" : "group-hover:text-white"
+                disabled ? "" : "group-hover:text-[#1BD47B]"
               } line-through`}
             >
               {price !== "" && `$${price}`}
@@ -102,7 +102,7 @@ const SubscribeCard = ({
                 className={`${disabled ? "" : "group-hover:hidden"} block`}
               />
               <FaCheckCircle
-                fill="white"
+                fill="#1BD47B"
                 className={`${disabled ? "" : "group-hover:block"} hidden`}
               />
             </div>
