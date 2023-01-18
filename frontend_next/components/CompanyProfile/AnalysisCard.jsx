@@ -18,7 +18,7 @@ import { useRouter } from "next/router";
 import authHooks from "../auth/AuthHooks";
 
 const VisualDataCard = ({ isLoggedIn, accessToken }) => {
-  const { id: companyId } = useRouter().query;
+  let { id: companyId } = useRouter().query;
   const [state, setState] = React.useState({
     show: false,
     showRevenue: true,
@@ -28,6 +28,8 @@ const VisualDataCard = ({ isLoggedIn, accessToken }) => {
     value: new Date().getFullYear(),
     position: 0,
   });
+
+  companyId = companyId.toUpperCase();
 
   const [data, setData] = React.useState([]);
   const apiService = authHooks.useApiService();

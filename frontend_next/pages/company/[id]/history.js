@@ -201,7 +201,7 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
 export async function getServerSideProps({ query }) {
   const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const companyId = query.id;
+  const companyId = query.id.toUpperCase();
   let company = {};
   let rankings = [];
 

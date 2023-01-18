@@ -3,7 +3,13 @@ pipeline {
 	agent any
 	stages {
 		
-					
+		stage("Pull changes"){
+
+			steps {
+				sh "sudo git config --global --add safe.directory /home/aybims/investment.web"
+				sh "sudo bash /home/aybims/investment.web/gitpull.sh"
+			} 
+                } 			
 		stage("Deploy Frontend"){
 
 			steps {
@@ -16,7 +22,6 @@ pipeline {
 				sh "sudo systemctl restart yieldvest-api.service"
 			} 
         	}
-
 
 	}
 

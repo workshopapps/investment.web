@@ -14,12 +14,12 @@ export const Section = () => {
       >
         <div
           id="white"
-          className="w-full bg-[#FFFFFF] justify-center items-center md:w-[1240px]  mx-auto flex-col gap-14 p-3"
+          className="w-full bg-[#FFFFFF] justify-center items-center mx-5 md:mx-[100px] flex-col gap-10 py-5 px-5 md:px-10 rounded-lg font-Hauora"
         >
-          <div className="w-full gap-2 md:flex justify-center items-center">
+          <div className="w-full gap-2 md:gap-10 md:flex justify-center items-center">
             <div className="md:w-1/2 md:flex-col">
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
-                Who we are
+                Who We Are
               </h2>
               <img
                 src={whoWeAreImg.src}
@@ -51,11 +51,11 @@ export const Section = () => {
               </div>
             </div>
           </div>
-          <div className="w-full gap-2  md:px-4 mt-5  md:flex justify-between items-center">
+          <div className="w-full gap-2 md:gap-10  md:px-4 my-20  md:flex justify-between items-center">
             <div className="md:w-1/2  my-6">
-              <h3 className="text-[#455A64] font-normal text-lg py-2 md:text-2xl">
-                What we do
-              </h3>
+              <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
+                What We Do
+              </h2>
               <p className="text-sm md:text-base  font-normal text-[#8A8D95] leading-6">
                 We saw that most stock investment analysis tools are not
                 user-friendly and quite daunting. Therefore we decided to create
@@ -72,7 +72,7 @@ export const Section = () => {
               <img
                 src={whatWeDo.src}
                 alt="Illustration"
-                className="w-[424px] md:w-[415px]"
+                className="w-full rounded-lg"
               />
             </div>
           </div>
@@ -99,7 +99,7 @@ export const Section = () => {
                   you know the best for you at first glance.
                 </p>
               </div>
-              <div className="w-full md:ml-14 my-2 md:mt-4">
+              <div className="w-full md:w-2/3 md:ml-[30%] my-2 md:mt-4">
                 <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                   Stock Categories
                 </h3>
@@ -108,7 +108,7 @@ export const Section = () => {
                   you know the best for you at first glance.
                 </p>
               </div>
-              <div className="w-full md:ml-24 md:mt-2">
+              <div className="w-full md:w-2/3 md:ml-[60%] md:mt-4">
                 <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
                   Company Profile
                 </h3>
