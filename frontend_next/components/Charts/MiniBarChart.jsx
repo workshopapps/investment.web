@@ -83,8 +83,8 @@ const MiniBarChartCard = ({ companyId }) => {
         }}
         className="text-xs"
       >
-        <Bar dataKey="net_income" fill="#000000" />
-        <Bar dataKey="gross_profit" fill="#1BD47B" />
+        <Bar dataKey="net_income" fill="#1BD47B" />
+        <Bar dataKey="total_revenue" fill="#000000" />
         <XAxis dataKey="date" />
       </BarChart>
     </ResponsiveContainer>
