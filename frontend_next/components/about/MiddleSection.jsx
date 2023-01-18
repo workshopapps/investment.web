@@ -7,7 +7,7 @@ import OurTeam from "./OurTeam";
 
 export const Section = () => {
   return (
-    <div id="services" data-testid="middle-section">
+    <div id="services" data-testid="middle-section" className="w-full">
       <div
         id="gray"
         className="bg-[#FAFAFF] md:w-full flex justify-center items-center px-6 py-5 md:p-10  w-full"
