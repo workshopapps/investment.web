@@ -339,7 +339,7 @@ const CapCard = ({
             >
               <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#1BD47B" />
             </svg>
-            Profit($bn)
+            Net Profit($bn)
             <svg
               width="17"
               height="17"
@@ -349,7 +349,7 @@ const CapCard = ({
             >
               <circle cx="8.50032" cy="8.33333" r="8.33333" fill="#000000" />
             </svg>
-            Income($bn)
+            Total Revenue($bn)
           </div>
           <MiniBarChartCard companyId={abbr} />
           <Link href={link}>
