@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-	  siteUrl: 'https://www.yieldvest.app',
+	  siteUrl: 'https://yieldvest.app',
 	  generateRobotsTxt: true,
 	  }
