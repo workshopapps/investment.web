@@ -1,14 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import whoWeAreImg from "../../assets/about/whoweAreImg.svg";
-import whatWeDo from "../../assets/about/whatWeDo.svg";
+import whatWeDo from "../../assets/download/Mac Book Pro 16_ Mockup.svg";
 import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
 import OurTeam from "./OurTeam";
 
 export const Section = () => {
   return (
     <div id="services" data-testid="middle-section">
-      <div id="gray" className="bg-[#FAFAFF] md:w-full flex justify-center items-center py-5 md:p-10  w-full">
+      <div
+        id="gray"
+        className="bg-[#FAFAFF] md:w-full flex justify-center items-center px-6 py-5 md:p-10  w-full"
+      >
         <div
           id="white"
           className="w-full bg-[#FFFFFF] justify-center items-center md:w-[1240px]  mx-auto flex-col gap-14 p-3"
@@ -21,7 +24,7 @@ export const Section = () => {
               <img
                 src={whoWeAreImg.src}
                 alt="Illustration"
-                className="w-[560px]"
+                className="w-[560px] object-cover"
               />
             </div>
             <div className="md:w-1/2">
@@ -77,21 +80,21 @@ export const Section = () => {
           {/* <div className="w-full gap-2 mt-10 md:mt-5 md:flex justify-center items-center"> */}
           <div
             id="WhyChooseUs"
-            className="md:flex w-full mt-8 md:w-[1240px] md:py-10"
+            className="md:flex justify-center gap-[2%] w-full mt-8  md:py-10"
           >
-            <div className="hidden md:block md:w-[564px]">
+            <div className="hidden md:block basis-[49%]">
               <img
                 src={WhyChooseUs.src}
                 alt="whyChooseUs-img"
-                className="mt-5 md:w-[564px]"
+                className="mt-5 md:w-[90%] "
               />
             </div>
-            <div className="w-full md:w-[250px]">
+            <div className="w-full basis-[49%]">
               <div className="w-full md:w-[250px] my-2">
                 <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                   Stock recommendations
                 </h3>
-                <p className="text-sm md:text-sm font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-sm font-normal mb-[2rem] text-[#8A8D95] md:w-[350px]">
                   Stock recommendations with listings of the top 12 stocks so
                   you know the best for you at first glance.
                 </p>
@@ -100,7 +103,7 @@ export const Section = () => {
                 <h3 className="text-[#455A64] font-normal text-lg md:text-xl">
                   Stock Categories
                 </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-base font-normal mb-[2rem] text-[#8A8D95] md:w-[350px]">
                   Stock recommendations with listings of the top 12 stocks so
                   you know the best for you at first glance.
                 </p>
@@ -109,12 +112,12 @@ export const Section = () => {
                 <h3 className="text-[#455A64] font-normal text-lg  md:text-xl">
                   Company Profile
                 </h3>
-                <p className="text-sm md:text-base font-normal text-[#8A8D95] md:w-[250px]">
+                <p className="text-sm md:text-base font-normal text-[#8A8D95] mb-[2rem] md:w-[350px]">
                   Company overview, charts, and key metrics are provided to help
                   validate your decision.
                 </p>
               </div>
-              <div className="md:hidden md:w-[564px]">
+              <div className="md:hidden">
                 <img
                   src={WhyChooseUs.src}
                   alt="whyChooseUs-img"
