@@ -35,7 +35,7 @@ const Layout = ({
   const mobileMenu = <MobileMenu toggleMenu={setOpenMobileMenu} />;
 
   return (
-    <div className="flex flex-col h-screen relative">
+    <div className="flex flex-col h-screen w-screen overflow-x-hidden relative">
       {showNavBar && (
         <>
           <div className="nav-bar flex-none">
