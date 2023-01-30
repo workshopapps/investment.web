@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import teamData from "./teamData";
+import {teamData} from "./teamData";
 
 const OurTeam = (props) => {
   const [active, setActive] = React.useState("all");

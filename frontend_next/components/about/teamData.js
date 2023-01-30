@@ -1,4 +1,4 @@
-const teamData = [
+export const teamData = [
   {
     id: 1,
     name: "Divine Uzodimma",
@@ -28,10 +28,17 @@ const teamData = [
     type: "marketing",
   },
   {
-    id: 5,
-    name: "Ayomide Opeyemi",
-    role: "DevOps",
-    img: "/aboutImages/ayomide.png",
+    id: 12,
+    name: "Abdrahman Oladimeji",
+    role: "Frontend Lead",
+    img: "/aboutImages/rahmlad.jpg",
+    type: "engineering",
+  },
+  {
+    id: 13,
+    name: "Serah Nwoke",
+    role: "Backend Lead",
+    img: "/aboutImages/sarah.png",
     type: "engineering",
   },
   {
@@ -47,6 +54,13 @@ const teamData = [
     role: "Design Sub-Lead",
     img: "/aboutImages/rose.png",
     type: "design",
+  },
+  {
+    id: 5,
+    name: "Ayomide Opeyemi",
+    role: "DevOps",
+    img: "/aboutImages/ayomide.png",
+    type: "engineering",
   },
   {
     id: 8,
@@ -75,21 +89,6 @@ const teamData = [
     role: "Design Team",
     img: "/aboutImages/arashad.png",
     type: "design",
-  },
-  
-  {
-    id: 12,
-    name: "Abdrahman Oladimeji",
-    role: "Frontend Lead",
-    img: "/aboutImages/rhamlad.png",
-    type: "engineering",
-  },
-  {
-    id: 13,
-    name: "Serah Nwoke",
-    role: "Backend Lead",
-    img: "/aboutImages/sarah.png",
-    type: "engineering",
   },
   {
     id: 14,
