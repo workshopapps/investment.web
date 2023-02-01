@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import whoWeAreImg from "../../assets/about/whoweAreImg.svg";
-import whatWeDo from "../../assets/download/Mac Book Pro 16_ Mockup.svg";
-import WhyChooseUs from "../../assets/about/whyChooseUs.svg";
+import whoweareimg from "../../public/about/whoweareimg.svg";
+import whatWeDo from "../../public/about/macbookpro.svg";
+import WhyChooseUs from "../../public/about/whychooseus.svg";
 import OurTeam from "./OurTeam";
+import Image from "next/image";
 
 export const Section = () => {
   return (
@@ -21,11 +22,13 @@ export const Section = () => {
               <h2 className="text-2xl text-[#455A64]  md:text-3xl text-center md:text-left md:py-[14px] block font-semibold">
                 Who We Are
               </h2>
-              <img
-                src={whoWeAreImg.src}
+              {/* <img
+                src={`/about/whoweAreImg.svg`}
+                // src={whoWeAreImg.src}
                 alt="Illustration"
                 className="w-[560px] object-cover"
-              />
+              /> */}
+              <Image src={whoweareimg} alt="" />
             </div>
             <div className="md:w-1/2">
               <div>

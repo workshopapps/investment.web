@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Layout from "../components/Layout";
-import lead from "../assets/download/Mac Book Pro 16_ Mockup.svg";
+import lead from "../public/about/macbookpro.svg";
 import download from "../assets/download/Vector.svg";
 import download2 from "../assets/download/Vector (1).svg";
 import bg from "../assets/download/bg.svg";

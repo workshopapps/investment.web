@@ -2,8 +2,10 @@
 import React from "react";
 import {teamData} from "./teamData";
 
-const OurTeam = (props) => {
+
+const OurTeam = () => {
   const [active, setActive] = React.useState("all");
+  
   return (
     <div
       id="team"
@@ -91,8 +93,12 @@ const TeamMember = ({ id, img, name, role }) => {
     <div className="mx-auto" key={id}>
       <img
         className="w-[164px] h-[164px] md:w-[250px]  md:h-[250px]  rounded-t-lg"
-        src={img}
+        // src={`${img}`}
+        src={img.src}
         alt={name}
+        // height={100}
+        // width={100}
+        // fill
       />
       <div className="bg-[#FFFFFF] md:w-[250px]">
         <p className="font-semibold text-[11px] md:text-base md:text-[#455A64]">

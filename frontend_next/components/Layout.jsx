@@ -17,6 +17,9 @@ const Layout = ({
   const pathName = useRouter().pathname;
 
   const size = useWindowSize();
+   
+
+  
 
   useEffect(() => {
     scrollToTop();
