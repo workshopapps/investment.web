@@ -9,7 +9,7 @@ import Stephen from "../../public/aboutImages/stephen.png";
 import francis from "../../public/aboutImages/francis.png";
 import ono from "../../public/aboutImages/ono.png";
 import Arashad from "../../public/aboutImages/arashad.png";
-import rhamlad from "../../public/aboutImages/rhamlad.png";
+import rhamlad from "../../public/aboutImages/rahmlad.jpg";
 import sarah from "../../public/aboutImages/sarah.png";
 import mayowa from "../../public/aboutImages/mayowa.png";
 import owen from "../../public/aboutImages/owen.png";
@@ -25,6 +25,7 @@ import odinaka from "../../public/aboutImages/odinaka.png";
 import taiwo from "../../public/aboutImages/taiwo.jpeg";
 import romeo from "../../public/aboutImages/romeo.jpg";
 import bright from "../../public/aboutImages/bright.jpg";
+
 export const teamData = [
   {
     id: 1,
@@ -59,8 +60,8 @@ export const teamData = [
     name: "Ayomide Opeyemi",
     role: "DevOps",
     img: Ayomide,
-    type: "engineering",
   },
+ 
   {
     id: 6,
     name: "Alfred Emmanuel",
@@ -75,6 +76,7 @@ export const teamData = [
     img: rose,
     type: "design",
   },
+   
   {
     id: 8,
     name: "Steven Okosieme",
@@ -103,7 +105,7 @@ export const teamData = [
     img: Arashad,
     type: "design",
   },
-
+ 
   {
     id: 12,
     name: "Abdrahman Oladimeji",
@@ -120,53 +122,54 @@ export const teamData = [
   },
   {
     id: 14,
+    name: "Ubon-Abasi Edet Ekong",
+    role: "Frontend",
+    img: ubon,
+    type: "engineering",
+  },
+  {
+    id: 15,
     name: "Kolawole Mayowa",
     role: "Frontend",
     img: mayowa,
     type: "engineering",
   },
   {
-    id: 15,
+    id: 16,
     name: "Owen Adoga",
     role: "Designer",
     img: owen,
     type: "design",
   },
   {
-    id: 16,
+    id: 17,
     name: "Oyeniyi Jerry",
     role: "Design Team",
     img: jerry,
     type: "design",
   },
   {
-    id: 17,
+    id: 18,
     name: "Hameed Osilaja",
     role: "Backend",
     img: hameed,
     type: "engineering",
   },
   {
-    id: 18,
+    id: 19,
     name: "Ayanda Jeremiah Ayoku",
     role: "Backend",
     img: jeremiah,
     type: "engineering",
   },
   {
-    id: 19,
+    id: 20,
     name: "Chioma Ubaezuonu",
     role: "Frontend",
     img: chioma2,
     type: "engineering",
   },
-  {
-    id: 20,
-    name: "Ubon-Abasi Edet Ekong",
-    role: "Frontend",
-    img: ubon,
-    type: "engineering",
-  },
+ 
   {
     id: 21,
     name: "Dolapo Ogunfowora",

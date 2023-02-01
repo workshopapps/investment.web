@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { teamData } from "./teamData";
-// import Image from "next/image";
+import {teamData} from "./teamData";
 
 
 const OurTeam = () => {
