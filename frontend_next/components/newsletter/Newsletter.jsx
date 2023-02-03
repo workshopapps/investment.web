@@ -48,9 +48,9 @@ export default function Newsletter() {
     <div className="flex items-center justify-center  bg-[#000718] rounded-lg px-[12px] md:px-0">
       <div className="flex md:px-[150px] py-[60px] items-center text-white ">
         <div className="flex flex-col justify-center items-center ">
-          <h1 className="flex pt-2 font-semibold text-2xl text-[#E8FBF2]">
+          <div className="flex pt-2 font-semibold text-2xl text-[#E8FBF2]">
             Don’t miss out !
-          </h1>
+          </div>
 
           <p className="flex pt-4 text-center font-normal text-base md:w-[504px] md:px-8">
             Subscribe to our weekly Email Newsletter to receive stock tips and

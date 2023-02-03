@@ -54,7 +54,7 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                 default:
                   return (
                     <Link
-                      href={`/directory?initials=${letter}`}
+                      href={`/directory?initials=${letter.toLowerCase()}`}
                       className="cursor-pointer"
                       key={key}
                     >
