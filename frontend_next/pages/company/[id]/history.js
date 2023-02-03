@@ -76,7 +76,9 @@ const History = ({ company, companyId, rankings: rnks }) => {
             <span className="hover:text-primary102">Stock</span>
           </Link>
           <Image src={breadcrumbIcon.src} alt="breadcrumb" width={20} height={20} />
-          <span className="hover:text-primary102 cursor-pointer" onClick={() => router.back()}>Company Profile</span>
+          <Link href={`/company/${companyId}`}>
+            <span className="hover:text-primary102">Company Profile</span>
+          </Link>
           <Image src={breadcrumbIcon.src} alt="breadcrumb" width={20} height={20} />
 
           <span>Ranking History</span>
