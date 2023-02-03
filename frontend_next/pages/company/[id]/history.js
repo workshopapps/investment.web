@@ -3,11 +3,11 @@ import React, { useEffect, useState, useContext } from "react";
 import Layout from "../../../components/Layout";
 import shareIcon from "../../../assets/company-profile/share.svg";
 import rankIcon from "../../../assets/company-profile/ranked.svg";
-import arrow2 from "../../../assets/company-profile/arrow-2.svg";
 import arrowup from "../../../assets/company-profile/arrow-up.svg";
-import arrowdown from "../../../assets/company-profile/arrow-down.svg";
+import breadcrumbIcon from "../../../assets/breadcrumb.svg";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 import axios from "axios";
 import dateformat from "dateformat";
 import { ordinalSuffixOf } from "../../../utils/helpers";
@@ -16,8 +16,10 @@ import { ToastContainer, toast } from "react-toastify";
 import authHooks from "../../../components/auth/AuthHooks";
 import AuthContext from "../../../components/auth/AuthContext";
 import Share from "../../../components/CompanyProfile/Share";
+import { useRouter } from "next/router";
 
 const History = ({ company, companyId, rankings: rnks }) => {
+  const router = useRouter()
   const [restrictToCategory, setRestrictToCategory] = useState(false);
   const [restrictToSector, setRestrictToSector] = useState(false);
   const [restrictToIndustry, setRestrictToIndustry] = useState(false);
@@ -62,20 +64,24 @@ const History = ({ company, companyId, rankings: rnks }) => {
   return (
     <Layout>
       <Head>
-        <title>{`${company.name} Ranking History`}</title>
+        {company && <title>{company.name} Ranking History</title>}
         <meta name="description" content={`${company.name} Ranking History`} />
       </Head>
 
       {showShare && <Share close={setShowShare} currentStock={currentStock} />}
 
       <div className="bg-white md:bg-[#F5F5F5] font-Hauora h-full px-[1em] md:px-[100px]">
-        <Link href="/">
-          <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md">
-            Stock <span className="inline-flex mx-2 ">&gt; </span>Company
-            Profile <span className="inline-flex mx-2 ">&gt; </span> Ranking
-            History
-          </div>
-        </Link>
+        <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md space-x-1">
+          <Link href="/">
+            <span className="hover:text-primary102">Stock</span>
+          </Link>
+          <Image src={breadcrumbIcon.src} alt="breadcrumb" width={20} height={20} />
+          <span className="hover:text-primary102 cursor-pointer" onClick={() => router.back()}>Company Profile</span>
+          <Image src={breadcrumbIcon.src} alt="breadcrumb" width={20} height={20} />
+
+          <span>Ranking History</span>
+
+        </div>
         <div className="flex flex-col md:flex-col gap-5 ">
           <div className="w-full flex flex-row justify-between">
             <div>
@@ -115,25 +121,22 @@ const History = ({ company, companyId, rankings: rnks }) => {
 
         <div className="mt-10 flex flex-row gap-2">
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
-              restrictToCategory ? "bg-primary102" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToCategory ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToCategory(!restrictToCategory)}
           >
             Market Cap
           </button>
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
-              restrictToSector ? "bg-primary102" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToSector ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToSector(!restrictToSector)}
           >
             Sector
           </button>
           <button
-            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${
-              restrictToIndustry ? "bg-primary102" : "bg-white"
-            } w-[180px]`}
+            className={`md:px-6 px-3 py-3 text-sm md:text-base hover:shadow rounded-md mr-0 md:mr-4 ${restrictToIndustry ? "bg-primary102" : "bg-white"
+              } w-[180px]`}
             onClick={() => setRestrictToIndustry(!restrictToIndustry)}
           >
             Industry

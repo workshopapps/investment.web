@@ -5,11 +5,13 @@ import AboutCompanyCard from "../../../components/CompanyProfile/AboutCompany";
 import UpIcon from "../../../assets/landingPage/icons/up.svg";
 import DownIcon from "../../../assets/landingPage/icons/down.svg";
 import shareIcon from "../../../assets/company-profile/share.svg";
+import breadcrumbIcon from "../../../assets/breadcrumb.svg";
 import rankIcon from "../../../assets/company-profile/ranking.svg";
 import OverviewCard from "../../../components/CompanyProfile/OverviewCard";
 import VisualcompanyCard from "../../../components/CompanyProfile/AnalysisCard";
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image"
 import Head from "next/head";
 import NotSubscribedModal from "../../../components/subscription/NotSubscribedModal";
 import { useRouter } from "next/router";
@@ -17,6 +19,7 @@ import authHooks from "../../../components/auth/AuthHooks";
 import AuthContext from "../../../components/auth/AuthContext";
 import { ThreeDots } from "react-loader-spinner";
 import Share from "../../../components/CompanyProfile/Share";
+
 
 const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
   const [showAbout, setShowAbout] = React.useState(false);
@@ -100,12 +103,14 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
       {showShare && <Share close={setShowShare} currentStock={currentStock} />}
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
         <div>
-          <Link href="/">
-            <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px]">
-              Stock <span className="inline-flex mx-2 ">&gt; </span>Company
-              Profile
-            </div>
-          </Link>
+
+          <div className="hidden md:flex mt-0 pt-5 text-primaryGray text-sm md:text-md mx-[1em] md:mx-[100px] space-x-1">
+            <Link href="/">
+              <span className="hover:text-primary102">Stock</span>
+            </Link>
+            <Image src={breadcrumbIcon.src} alt="breadcrumb" width={20} height={20} />
+            <span>Company Profile</span>
+          </div>
           <div className="flex flex-col md:flex-col md:px-[100px] px-[1rem] gap-5 ">
             <div className="w-full flex flex-row justify-between">
               <div>
@@ -208,7 +213,7 @@ export async function getServerSideProps({ query }) {
         if (err.response.status === 401) {
           isSmallCap = true;
         }
-      } catch (e) {}
+      } catch (e) { }
 
       console.log("Fetch failed for company: " + companyId);
     }
