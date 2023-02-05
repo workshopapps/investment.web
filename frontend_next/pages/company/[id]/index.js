@@ -64,6 +64,22 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
   //   );
   // }
 
+  // this is the implementation of schema.org
+  // https://schema.org/Corporation
+  const schema = {
+    "@context": "https://schema.org/",
+    "@type": "Corporation",
+    "name" : company.name,
+    "tickerSymbol" : company.company_id,
+    "url": `https://yieldvest.app/company/${companyId}/`,
+    "department": company.industry.industry,
+    "logo": {
+      "@type": "ImageObject",
+      "url": company.profile_image
+      },
+  };
+
+
   if (/*isLoggedIn &&*/ !company) {
     return (
       <div
@@ -96,6 +112,9 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
         />
+        <script type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
       </Head>
       {showShare && <Share close={setShowShare} currentStock={currentStock} />}
       <div className="bg-white md:bg-[#f5f5f5] font-Hauora">
