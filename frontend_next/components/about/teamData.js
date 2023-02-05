@@ -1,14 +1,14 @@
 import divine from "../../public/aboutImages/divine.png";
 import imran from "../../public//aboutImages/imran.png";
 import ayobami from "../../public/aboutImages/ayobami.png";
-import Chika from "../../public/aboutImages/chika.png";
-import Ayomide from "../../public/aboutImages/ayomide.png";
+import Chika from "../../public/aboutImages/Chika.png";
+import Ayomide from "../../public/aboutImages/Ayomide.png";
 import alfred from "../../public/aboutImages/alfred.png";
 import rose from "../../public/aboutImages/rose.png";
-import Stephen from "../../public/aboutImages/stephen.png";
+import Stephen from "../../public/aboutImages/Stephen.png";
 import francis from "../../public/aboutImages/francis.png";
 import ono from "../../public/aboutImages/ono.png";
-import Arashad from "../../public/aboutImages/arashad.png";
+import Arashad from "../../public/aboutImages/Arashad.png";
 import rhamlad from "../../public/aboutImages/rahmlad.jpg";
 import sarah from "../../public/aboutImages/sarah.png";
 import mayowa from "../../public/aboutImages/mayowa.png";
@@ -57,7 +57,7 @@ export const teamData = [
   },
   {
     id: 5,
-    name: "Ayomide Opeyemi",
+    name: "Ayomide Adeshina",
     role: "DevOps",
     img: Ayomide,
   },
