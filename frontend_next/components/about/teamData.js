@@ -1,14 +1,14 @@
 import divine from "../../public/aboutImages/divine.png";
 import imran from "../../public//aboutImages/imran.png";
 import ayobami from "../../public/aboutImages/ayobami.png";
-import Chika from "../../public/aboutImages/Chika.png";
-import Ayomide from "../../public/aboutImages/Ayomide.png";
+import chika from "../../public/aboutImages/Chika.png";
+import ayomide from "../../public/aboutImages/Ayomide.png";
 import alfred from "../../public/aboutImages/alfred.png";
 import rose from "../../public/aboutImages/rose.png";
-import Stephen from "../../public/aboutImages/Stephen.png";
+import stephen from "../../public/aboutImages/Stephen.png";
 import francis from "../../public/aboutImages/francis.png";
 import ono from "../../public/aboutImages/ono.png";
-import Arashad from "../../public/aboutImages/Arashad.png";
+import arashad from "../../public/aboutImages/Arashad.png";
 import rhamlad from "../../public/aboutImages/rahmlad.jpg";
 import sarah from "../../public/aboutImages/sarah.png";
 import mayowa from "../../public/aboutImages/mayowa.png";
@@ -52,14 +52,14 @@ export const teamData = [
     id: 4,
     name: "Precious Chika-Ugada",
     role: "Marketing Lead",
-    img: Chika,
+    img: chika,
     type: "marketing",
   },
   {
     id: 5,
     name: "Ayomide Adeshina",
     role: "DevOps",
-    img: Ayomide,
+    img: ayomide,
   },
  
   {
@@ -81,7 +81,7 @@ export const teamData = [
     id: 8,
     name: "Steven Okosieme",
     role: "Product Manager",
-    img: Stephen,
+    img: stephen,
     type: "management",
   },
   {
@@ -102,7 +102,7 @@ export const teamData = [
     id: 11,
     name: "Abdulrasheed Shuaib",
     role: "Design Team",
-    img: Arashad,
+    img: arashad,
     type: "design",
   },
  
