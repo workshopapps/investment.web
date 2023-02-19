@@ -300,12 +300,12 @@ const Index = () => {
           <div className="space-y-6 ">
             <div className="flex flex-col md:flex-row items-left md:items-center">
               <div className="flex mb-3 md:mb-0">
-                <h3
+                <span
                   className="text-sm lg:text-2xl text-[#66717e] pr-8"
                   style={{ fontWeight: 300 }}
                 >
                   Filter by:
-                </h3>
+                </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 filter-category">
                 <select

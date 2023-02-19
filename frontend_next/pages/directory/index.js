@@ -35,8 +35,7 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                 indexer === ""
                   ? "border-b-2 border-[#1BD47B] text-[#1BD47B]"
                   : ""
-              }`}
-            >
+              }`}>
               All
             </Link>
 
@@ -46,18 +45,16 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                   return (
                     <span
                       className="cursor-pointer border-b-2 border-[#1BD47B] text-[#1BD47B]"
-                      key={key}
-                    >
+                      key={key}>
                       {letter}
                     </span>
                   );
                 default:
                   return (
                     <Link
-                      href={`/directory?initials=${letter}`}
+                      href={`/directory?initials=${letter.toLowerCase()}`}
                       className="cursor-pointer"
-                      key={key}
-                    >
+                      key={key}>
                       {letter}
                     </Link>
                   );
@@ -68,7 +65,9 @@ const CompanyIndexerPage = ({ indexer, data }) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 w-full my-10 gap-x-[3em] gap-y-5">
             {data.map((company, key) => {
               return (
-                <Link href={`/company/${company.ticker}`} key={key}>
+                <Link
+                  href={`/company/${company.ticker.toLowerCase()}`}
+                  key={key}>
                   <p style={{ fontSize: ".8rem", color: "#0F7544" }}>
                     {company.name}
                   </p>
