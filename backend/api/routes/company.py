@@ -233,10 +233,10 @@ async def get_company_profile(company_id: str, db: Session = Depends(get_db)):
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
-    if company.category == low_cap_category_id:
-        raise HTTPException(status_code=401,
-                            detail="Please use the authenticated version of this route to "
-                                   "access low market cap stocks")
+    # if company.category == low_cap_category_id:
+    #     raise HTTPException(status_code=401,
+    #                         detail="Please use the authenticated version of this route to "
+    #                                "access low market cap stocks")
 
     ranking = db.query(models.Ranking).filter(models.Ranking.company == company_id).order_by(
         models.Ranking.created_at.desc()).first()

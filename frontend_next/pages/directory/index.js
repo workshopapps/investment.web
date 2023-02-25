@@ -21,9 +21,9 @@ const CompanyIndexerPage = ({ indexer, data }) => {
         <br />
 
         <div className="flex flex-col text-left md:flex-col md:px-[100px] px-[1rem] mt-5 gap-5 ">
-          <h3 className="text-2xl md:text-4xl text-[#5C5A5A] pt-10">
+          <h1 className="text-2xl md:text-4xl text-[#5C5A5A] pt-10">
             Stock Directory
-          </h3>
+          </h1>
 
           <hr className="md:w-full mx-2 mb-10 opacity-40 border-[#0A0B0D] group-hover:border-white" />
 
@@ -35,7 +35,8 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                 indexer === ""
                   ? "border-b-2 border-[#1BD47B] text-[#1BD47B]"
                   : ""
-              }`}>
+              }`}
+            >
               All
             </Link>
 
@@ -45,7 +46,8 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                   return (
                     <span
                       className="cursor-pointer border-b-2 border-[#1BD47B] text-[#1BD47B]"
-                      key={key}>
+                      key={key}
+                    >
                       {letter}
                     </span>
                   );
@@ -54,7 +56,8 @@ const CompanyIndexerPage = ({ indexer, data }) => {
                     <Link
                       href={`/directory?initials=${letter.toLowerCase()}`}
                       className="cursor-pointer"
-                      key={key}>
+                      key={key}
+                    >
                       {letter}
                     </Link>
                   );
@@ -67,7 +70,8 @@ const CompanyIndexerPage = ({ indexer, data }) => {
               return (
                 <Link
                   href={`/company/${company.ticker.toLowerCase()}`}
-                  key={key}>
+                  key={key}
+                >
                   <p style={{ fontSize: ".8rem", color: "#0F7544" }}>
                     {company.name}
                   </p>
