@@ -194,10 +194,10 @@ async def get_company_metrics_for_interval(company_id: str, startDate: str, endD
     company: models.Company = get_company(db, company_id=company_id)
     if company is None:
         raise HTTPException(status_code=404, detail="Company info not available")
-    if company.category == low_cap_category_id:
-        raise HTTPException(status_code=401,
-                            detail="Please use the authenticated version of this route to "
-                                   "access low market cap stocks")
+    # if company.category == low_cap_category_id:
+    #     raise HTTPException(status_code=401,
+    #                         detail="Please use the authenticated version of this route to "
+    #                                "access low market cap stocks")
 
     stock_prices = db.query(models.StockPrice).filter(models.StockPrice.company == company_id,
                                                       models.StockPrice.date >= startDate,
