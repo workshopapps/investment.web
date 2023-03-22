@@ -6,8 +6,6 @@ from api.models import models
 
 PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-PWD_CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 
 def get_db():
     """Gets the database from the local session"""
