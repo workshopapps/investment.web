@@ -109,7 +109,7 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
   return (
     <Layout>
       <Head>
-        {company && <title>{company.name} Stock Fundamentals</title>}
+        {company && <title>{company.name} Stock Analysis</title>}
         <meta
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
@@ -129,7 +129,7 @@ const CompanyProfilePage = ({ company: comp, companyId, isSmallCap }) => {
             <div className="w-full flex flex-row justify-between">
               <div>
                 <h1 className="text-lg text-primaryGray pt-10 md:text-2xl">
-                  {company.name} Stock Fundamentals
+                  {company.name} Stock Analysis
                 </h1>
                 <p className="text-sm md:text-xl text-[#5C5A5A] pt-2">
                   Overview
