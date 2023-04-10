@@ -25,6 +25,7 @@ import odinaka from "../../public/aboutImages/odinaka.png";
 import taiwo from "../../public/aboutImages/taiwo.jpeg";
 import romeo from "../../public/aboutImages/romeo.jpg";
 import bright from "../../public/aboutImages/bright.jpg";
+import gabriel from "../../public/aboutImages/gabriel.jpg";
 
 export const teamData = [
   {
@@ -220,6 +221,13 @@ export const teamData = [
     img: bright,
     type: "marketing",
   },
+  {
+    id:28,
+    name: "Gabriel Isuekebho",
+    role: "Backend",
+    img: gabriel,
+    type: "engineering",
+  }
 ];
 //<img src={require("folder/image.format")} alt="image not found" />
 // export default teamData;
