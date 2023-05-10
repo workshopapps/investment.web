@@ -231,6 +231,11 @@ const Index = () => {
     <Layout isProtected disableStrictProtection>
       <Head>
         <title>Yieldvest - Top Recommended Stocks</title>
+        <link
+          rel="canonical"
+          href="https://yieldvest.app/"
+          key="canonical"
+        />
         <meta
           name="description"
           content="Get up to date recommendations on the best stocks to buy"
