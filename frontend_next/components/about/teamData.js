@@ -26,7 +26,7 @@ import taiwo from "../../public/aboutImages/taiwo.jpeg";
 import romeo from "../../public/aboutImages/romeo.jpg";
 import bright from "../../public/aboutImages/bright.jpg";
 import gabriel from "../../public/aboutImages/gabriel.jpg";
-
+import favour from "../../public/aboutImages/favour.jpg"
 export const teamData = [
   {
     id: 1,
@@ -226,6 +226,13 @@ export const teamData = [
     name: "Gabriel Isuekebho",
     role: "Backend",
     img: gabriel,
+    type: "engineering",
+  },
+  {
+    id:29,
+    name: "Favour Okoh",
+    role: "Frontend Engineer",
+    img: favour,
     type: "engineering",
   }
 ];
